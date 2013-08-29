@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:bibo="http://purl.org/ontology/bibo/"
+    xmlns:doap="http://usefulinc.com/doap/">
+    
+    <!-- Tools -->
+    <rdf:Description rdf:about="http://tools.dasish.eu/tool/ToolID">
+        <rdf:type rdf:resource="http://schema.org/SoftwareApplication"/>
+        <dc:title>Tool.name</dc:title>
+        <dc:description>Tool.description</dc:description>
+
+        <doap:revision>Tool.version</doap:revision>
+        
+        <foaf:homepage rdf:resource="http://Tool.homepage"/>
+        <dcterms:available>Tool.available_from</dcterms:available>
+        <dcterms:created>Tool.registred</dcterms:created>
+
+        <!-- Relation to Keyword -->
+        <dcterms:subject rdf:resource="http://tools.dasish.eu/keyword/KeywordID"/>
+
+        <!-- Relation to Provider -->
+        <dcterms:creator rdf:resource="http://tools.dasish.eu/provider/ProviderID"/>
+        
+        <!-- Relation to Developer -->
+        <foaf:Person rdf:resource="http://tools.dasish.eu/developer/DeveloperID"/>
+        
+        <!-- Reference to Publication -->
+        <bibo:Article rdf:resource="http://reference.to.publication"/>
+        
+        <!-- Reference to Project -->
+        <doap:Project rdf:resource="http://tools.dasish.eu/project/ProjectID"/>
+        
+        <!-- Reference to Platform -->
+        <doap:platform rdf:resource="http://tools.dasish.eu/platform/PlatformID"/>
+        
+        <!-- Reference to Tool_type -->
+        <dc:type rdf:resource="http://tools.dasish.eu/tool-type/ToolTypeID"/>
+        
+        <!--Reference to Application_type -->
+        <dc:type rdf:resource="http://tools.dasish.eu/application-type/ApplicationTypeID"/>
+        
+        <!-- Reference to Feature-->
+        <doap:implements rdf:resource="http://tools.dasish.eu/feature/FeatureID"/>
+
+        <!-- Reference to Standard-->
+        <doap:implements rdf:resource="http://tools.dasish.eu/standard/StandardID"/>
+        
+        <!-- Reference to Suite -->
+        <dcterms:isPartOf rdf:resource="http://tools.dasish.eu/suite/SuiteID"/>
+        
+        <!-- Reference to License -->
+        <dcterms:license rdf:resource="http://tools.dasish.eu/license/LicenseID"/>        
+    </rdf:Description>
+    
+    <!-- Providers -->
+    <foaf:Organization rdf:about="http://tools.dasish.eu/provider/ProviderID">
+        <foaf:name>Provider.name</foaf:name>
+        <foaf:homepage rdf:resource="http://Provider.homepage"/>
+    </foaf:Organization>
+    
+    <!-- Developers -->
+    <foaf:Person rdf:about="http://tools.dasish.eu/developer/DeveloperID">
+        <foaf:name>Developer.name</foaf:name>
+        <foaf:homepage rdf:resource="http://Developer.contact"/>
+    </foaf:Person>
+    
+    <!-- Keywords -->
+    <rdf:Property rdf:about="http://tools.dasish.eu/keyword/KeywordID">
+        <rdfs:type rdf:resource="http://isocat.org/datcat/DC-278"/>
+        <rdfs:label>Keyword.name</rdfs:label>
+    </rdf:Property>
+    
+    <!-- Platforms -->
+    <rdf:Property rdf:about="http://tools.dasish.eu/platform/PlatformID">
+        <rdf:type rdf:resource="http://isocat.org/datcat/DC-2572"/>
+        <rdfs:label>Platform.name</rdfs:label>
+    </rdf:Property>   
+    
+    <!-- Tool types -->
+    <rdf:Property rdf:about="http://tools.dasish.eu/tool-type/ToolTypeID">
+        <rdf:type rdf:resource="http://isocat.org/datcat/DC-3786"/>
+        <rdfs:label>Tool_type.name</rdfs:label>
+    </rdf:Property>       
+    
+    <!-- Application types -->
+    <rdf:Property rdf:about="http://tools.dasish.eu/application-type/ApplicationTypeID">
+        <rdf:type rdf:resource="http://isocat.org/datcat/DC-3810"/>
+        <rdfs:label>Application_type.name</rdfs:label>
+    </rdf:Property>      
+    
+    <!-- Features -->
+    <rdf:Description rdf:about="http://tools.dasish.eu/feature/FeatureID">
+        <rdfs:label>Feature.name</rdfs:label>
+        <dc:description>Fature.description</dc:description>
+    </rdf:Description>
+    
+    <!-- Projects -->
+    <doap:Project rdf:about="http://tools.dasish.eu/project/ProjectID">
+        <doap:name>Project.title</doap:name>
+        <doap:description>Project.description</doap:description>
+        <doap:homepage rdf:resource="http://Project.contact" />
+    </doap:Project>
+    
+    <!-- Standards -->
+    <doap:Project rdf:about="http://tools.dasish.eu/standard/StandardID">
+        <doap:name>Standard.title</doap:name>
+        <doap:revision>Standard.version</doap:revision>
+        <doap:homepage rdf:resource="http://Standard.source" />
+    </doap:Project>    
+    
+    <!-- Suites -->
+    <rdf:Property rdf:about="http://tools.dasish.eu/suite/SuiteID">
+        <rdfs:label>Suite.name</rdfs:label>
+        
+        <!-- Reference to Provider -->
+        <dcterms:publisher rdf:resource="http://tools.dasish.eu/provider/ProviderID"/>
+    </rdf:Property>
+    
+    <!-- Licences -->
+    <rdf:Property rdf:about="http://tools.dasish.eu/license/LicenseID">
+        <rdfs:label>Licence.text</rdfs:label>
+        
+        <!-- Reference to Provider -->
+        <dcterms:publisher rdf:resource="http://tools.dasish.eu/provider/ProviderID"/>
+        
+        <!-- Reference to Licence type -->
+        <dc:type rdf:resource="http://tools.dasish.eu/licence-type/LicenceTypeID"/>        
+    </rdf:Property>    
+    
+    <!-- Licence types -->
+    <rdf:Property rdf:about="http://tools.dasish.eu/licence-type/LicenceTypeID">
+        <rdf:type rdf:resource="http://isocat.org/datcat/DC-3800"/>
+        <rdfs:label>Licence_type.name</rdfs:label>
+        <foaf:homepage rdf:resource="http://Licence_type.homepage"/>
+    </rdf:Property>   
+</rdf:RDF>
