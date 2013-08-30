@@ -34,8 +34,12 @@ In your terminal, do :
 Then we need to configure your apache
 
 	cd /etc/apache2/sites-enabled
-	curl https://raw.github.com/PonteIneptique/DASISHT23/master/www/API.config > /etc/apache2/sites-enabled/API
+	sudo cp ~/dev/DASISHT23/www/API.config ./api
+	sudo rm 000-default
 
-**Then edit the API config file in apache2 (/etc/apache2/sites-enabled/API) so your username is used (Change {{USERNAME}} to your actual username on this machine)**
+**Then edit the API config file in apache2 (/etc/apache2/sites-enabled/API) so your username is used (Change {{USERNAME}} to your actual username on this machine). Use nano ./api or gedit ./api or any ssh ftp system **
 	
+Then restart your apache2 Server
+
+	/etc/init.d/apache2 restart
 ----------------------------------------    
