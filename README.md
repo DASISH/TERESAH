@@ -41,5 +41,7 @@ Then we need to configure your apache
 	
 Then restart your apache2 Server
 
-	/etc/init.d/apache2 restart
+	sudo /etc/init.d/apache2 restart
+	
+If your server doesn't start and you get an arror about 127.0.1.1 (Read that)[http://ze-soft.blogspot.co.uk/2011/10/solved-could-not-reliably-determine.html]
 ----------------------------------------    
