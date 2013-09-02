@@ -45,10 +45,19 @@ def getObjects(path):
 dic, ids = getObjects("./output/bamboodirt.xml")
 
 #This synonym Table is used for external/relative entries such as keywords or platform (Tool > has_XYZ > XIZ)
-table = {"tags" : "Keyword", "developer" : "Developer", "platform" : "Platform"}
-#status,description,license,tags,webpage,costbracket,name,platform,cost,dependson,page,categories,developer}
+tableNID = {"tags" : "Keyword", "platform" : "Platform", "categories" : "Tool_type"} # Without int UID stuff
+tableWID = {"developer" : "Developer"} #With int UID Stuff
+#status,description,license,tags,webpage,costbracket,name,platform,cost,dependson,page,categories,developer
+#status,description,license,tags,webpage,costbracket,name,platform,cost,dependson,page,categories,developer
 
 for T in dic:
-	if T in table:
-	
-		print T;
+	if T in tableNID:
+		for E in dic[T]:
+			print "INSERT INTO " + tableNID[T] + " VALUES ('" + E + "')"
+	elif T in tableWID:
+		for E in dic[T]:
+			#print dic[T]
+			print "INSERT INTO " + tableWID[T] + " VALUES ('" + str(dic[T][E]) + "', '" + E + "')"
+	else:
+		pass
+		#print T;
