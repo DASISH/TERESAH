@@ -12,7 +12,7 @@ First we need to install a wamp solution on your machine
     sudo apt-get install php5
     sudo apt-get install mysql-server
 
-Last line will ask you to set a password at some point, please remind it or use "root" as password, so you wont need to change any configuration file on your local machine.
+Last line will ask you to set a password at some point, **please remind it or use "root" as password**, so you wont need to change any configuration file on your local machine.
 
 **If you need to access this machine from outside, install ssh**
 
@@ -44,3 +44,11 @@ Then restart your apache2 Server
 	sudo /etc/init.d/apache2 restart
 	
 If your server doesn't start and you get an arror about 127.0.1.1 http://ze-soft.blogspot.co.uk/2011/10/solved-could-not-reliably-determine.html
+
+### Install the database
+
+In your terminal, follow these steps :
+
+	cd ~/dev/DASISHT23/
+	mysql --user=root --password=root < ./DataModel/sql/install.sql 
+	mysql --user=root --password=root DASISH < ./DataModel/sql/scheme.sql 
