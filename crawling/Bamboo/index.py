@@ -123,12 +123,13 @@ def convertXML(obj):
 		print o
 		f.write("\t<element>\n")
 		for key in o:
+			keyz = key.strip().replace(":", "").replace(" ", "")
 			if isinstance(o[key], list):
 				for oz in o[key]:
-					str = "\t\t<"+key+">"+oz+"</"+key+">\n"
+					str = "\t\t<"+keyz+">"+oz+"</"+keyz+">\n"
 					f.write(str.encode("utf-8"))
 			else:
-				str = "\t\t<"+key+">"+o[key]+"</"+key+">\n"
+				str = "\t\t<"+keyz+">"+o[key]+"</"+keyz+">\n"
 				f.write(str.encode("utf-8"))
 		f.write("\t</element>\n")
 	f.write("</data>\n")
