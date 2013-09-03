@@ -93,8 +93,15 @@ def parsePage(html, page):
 					dic[te] = []
 					for li in v.find_all("li"):
 						dic[te].append(li.get_text().strip())
+						
+				elif te.count("Platform") > 0:
+					dic[te] = []
+					for li in v.find_all("div"):
+						dic[te].append(li.get_text().strip())
+						
 				else:
 					dic[te] = v.get_text()
+					
 	return dic
 
 def parseContent(l):

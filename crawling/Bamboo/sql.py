@@ -64,7 +64,7 @@ def checkWrite(dic, ids, rev):
 	f.write(json.dumps(ids))
 	f.close()
 	
-#checkWrite(dic, ids, rev)
+checkWrite(dic, ids, rev)
 
 def prs(str):
 	if not str is None:
@@ -80,8 +80,10 @@ def sqlify(dic, ids, rev):
 	tableWID = {"developer" : "Developer"} #With int UID Stuff
 	#status,description,license,tags,webpage,costbracket,name,platform,cost,dependson,page,categories,developer
 	#status,description,license,tags,webpage,costbracket,name,platform,cost,dependson,page,categories,developer
+	
 	NID = list()
 	WID = list()
+	connect = list()
 	
 	for T in dic:
 		if T in tableNID:
@@ -142,9 +144,17 @@ def sqlify(dic, ids, rev):
 			
 		ins.append(s+");")
 	
-	fSQL = io.open("./sql/descriptions.sql", "wt", encoding='utf-8')
-	fSQL.write("\n".join(ins))
-	fSQL.close()
+		if "developer" in ids[E]:
+			for dev in ids[E]["developer"]:
+				connect.append("INSERT INTO Tool_has_Developer VALUES ("+str(E)+", "+str(dev)+")")
+				
+		#tableNID = {"tags" : "Keyword", "platform" : "Platform", "categories" : "Tool_type"} # Without int UID stuff
+		if "platform" in ids[E]:
+			for dev in ids[E]["platform"]:
+				connect.append("INSERT INTO Tool_has_Platform VALUES ("+str(E)+", '"+prs(rev["platform"][dev])+"')")
+		if "tags" in ids[E]:
+			for dev in ids[E]["tags"]:
+				connect.append("INSERT INTO Tool_has_Keyword VALUES ("+str(E)+", '"+prs(rev["tags"][dev])+"')")
 	
 	fSQL = io.open("./sql/NID.sql", "wt", encoding='utf-8')
 	fSQL.write("\n".join(NID))
@@ -156,5 +166,13 @@ def sqlify(dic, ids, rev):
 	
 	fSQL = io.open("./sql/tool.sql", "wt", encoding='utf-8')
 	fSQL.write("\n".join(tool))
+	fSQL.close()
+	
+	fSQL = io.open("./sql/descriptions.sql", "wt", encoding='utf-8')
+	fSQL.write("\n".join(ins))
+	fSQL.close()
+	
+	fSQL = io.open("./sql/connect.sql", "wt", encoding='utf-8')
+	fSQL.write("\n".join(connect))
 	fSQL.close()
 sqlify(dic, ids, rev)
