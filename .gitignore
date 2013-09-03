@@ -1,3 +1,5 @@
 /crawling/Bamboo/output
 /crawling/Bamboo/raw
+/crawling/Bamboo/sql
+/crawling/Bamboo/tests
 *.pyc
