@@ -52,3 +52,8 @@ In your terminal, follow these steps :
 	cd ~/dev/DASISHT23/
 	mysql --user=root --password=root < ./DataModel/sql/install.sql 
 	mysql --user=root --password=root < ./DataModel/sql/scheme.sql 
+	
+### Using Crawling data
+
+** Before using any date issued by /crawling/Bamboo/sql.py ** , please use this command as well
+	mysql --user=root --password=root tools_registry < ./DataModel/sql/nobug.sql 
