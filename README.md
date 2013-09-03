@@ -51,4 +51,4 @@ In your terminal, follow these steps :
 
 	cd ~/dev/DASISHT23/
 	mysql --user=root --password=root < ./DataModel/sql/install.sql 
-	mysql --user=root --password=root DASISH < ./DataModel/sql/scheme.sql 
+	mysql --user=root --password=root < ./DataModel/sql/scheme.sql 

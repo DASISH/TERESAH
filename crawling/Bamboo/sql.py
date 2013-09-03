@@ -84,15 +84,22 @@ def sqlify(dic, ids, rev):
 	NID = list()
 	WID = list()
 	connect = list()
+	licence = list()
 	
 	for T in dic:
 		if T in tableNID:
 			for E in dic[T]:
-				NID.append("INSERT INTO " + tableNID[T] + " VALUES ('" + prs(E) + "');")
+				NID.append("INSERT IGNORE INTO " + tableNID[T] + " VALUES ('" + prs(E) + "');")
 		elif T in tableWID: 
 			for E in dic[T]:
 				#print dic[T]
-				WID.append("INSERT INTO " + tableWID[T] + " VALUES ('" + str(dic[T][E]) + "', '" + prs(E) + "');")
+				if T == "developer":
+					WID.append("INSERT IGNORE INTO " + tableWID[T] + " VALUES ('" + str(dic[T][E]) + "', '" + prs(E) + "', '');")
+				else:
+					WID.append("INSERT IGNORE INTO " + tableWID[T] + " VALUES ('" + str(dic[T][E]) + "', '" + prs(E) + "');")
+		elif T == "license":
+			for E in dic[T]:
+				licence.append("INSERT IGNORE INTO Licence VALUES ('" + str(dic[T][E]) + "', '" + prs(E) + "', 1 , 'NOBUG');")
 		else:
 			pass
 			#print T;
@@ -101,8 +108,9 @@ def sqlify(dic, ids, rev):
 	ins = list()
 	tool = list()
 	for E in ids:
-		tool.append("INSERT INTO Tool VALUES ('"+str(E)+"', '"+ prs(rev["name"][ids[E]["name"][0]]) +"')")
-		s = u"INSERT INTO Description VALUES ('', '"+ prs(rev["name"][ids[E]["name"][0]]) +"', "
+		name = prs(rev["name"][ids[E]["name"][0]])
+		tool.append("INSERT IGNORE INTO Tool VALUES ('"+str(E)+"', '"+ name[:80] +"');")
+		s = u"INSERT IGNORE  INTO Description VALUES ('', '"+ prs(rev["name"][ids[E]["name"][0]]) +"', "
 		
 		if "description" in ids[E] and ids[E]["description"][0] in rev["description"]:
 		
@@ -123,38 +131,38 @@ def sqlify(dic, ids, rev):
 			s += " '', "
 			
 		#No availableFrom in BambooDirt
-		s += " '', "
-		s += " 'DATE', 'USER_UID', 'author',  "
+		s += " CURDATE(), "
+		s += " CURDATE(), 1, 1,  "
 		
 		if "license" in ids[E]:
-			s += " '"+ prs(rev["license"][ids[E]["license"][0]]) +"', "
+			s += " '"+ str(ids[E]["license"][0]) +"', "
 		else:
-			s += " '', "
+			s += " NULL, "
 			
 		if "categories" in ids[E]:
 			s += " '"+ prs(rev["categories"][ids[E]["categories"][0]]) +"', "
 		else:
-			s += " '', "
+			s += " NULL, "
 			
 		#No Application_type in BambooDirt
-		s += " '', "
+		s += " 'Harvested', "
 		
 		#TOOL UID +  USERS_UID
-		s += str(E) + ", 'USER_UID' "
+		s += str(E) + ", 1 "
 			
 		ins.append(s+");")
 	
 		if "developer" in ids[E]:
 			for dev in ids[E]["developer"]:
-				connect.append("INSERT INTO Tool_has_Developer VALUES ("+str(E)+", "+str(dev)+")")
+				connect.append("INSERT IGNORE INTO Tool_has_Developer VALUES ("+str(E)+", "+str(dev)+");")
 				
 		#tableNID = {"tags" : "Keyword", "platform" : "Platform", "categories" : "Tool_type"} # Without int UID stuff
 		if "platform" in ids[E]:
 			for dev in ids[E]["platform"]:
-				connect.append("INSERT INTO Tool_has_Platform VALUES ("+str(E)+", '"+prs(rev["platform"][dev])+"')")
+				connect.append("INSERT IGNORE INTO Tool_has_Platform VALUES ("+str(E)+", '"+prs(rev["platform"][dev])+"');")
 		if "tags" in ids[E]:
 			for dev in ids[E]["tags"]:
-				connect.append("INSERT INTO Tool_has_Keyword VALUES ("+str(E)+", '"+prs(rev["tags"][dev])+"')")
+				connect.append("INSERT IGNORE INTO Tool_has_Keyword VALUES ("+str(E)+", '"+prs(rev["tags"][dev])+"');")
 	
 	fSQL = io.open("./sql/NID.sql", "wt", encoding='utf-8')
 	fSQL.write("\n".join(NID))
@@ -174,5 +182,9 @@ def sqlify(dic, ids, rev):
 	
 	fSQL = io.open("./sql/connect.sql", "wt", encoding='utf-8')
 	fSQL.write("\n".join(connect))
+	fSQL.close()
+	
+	fSQL = io.open("./sql/licence.sql", "wt", encoding='utf-8')
+	fSQL.write("\n".join(licence))
 	fSQL.close()
 sqlify(dic, ids, rev)
