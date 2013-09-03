@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from bs4 import BeautifulSoup
-
+import io
 def getObjects(path):
-	f = open(path)
+	f = io.open(path, "rt", encoding='utf-8')
 	R = f.read()
 	f.close()
 
@@ -48,63 +48,113 @@ def getObjects(path):
 	
 dic, ids, rev = getObjects("./output/bamboodirt.xml")
 
-#This synonym Table is used for external/relative entries such as keywords or platform (Tool > has_XYZ > XIZ)
-tableNID = {"tags" : "Keyword", "platform" : "Platform", "categories" : "Tool_type"} # Without int UID stuff
-tableWID = {"developer" : "Developer"} #With int UID Stuff
-#status,description,license,tags,webpage,costbracket,name,platform,cost,dependson,page,categories,developer
-#status,description,license,tags,webpage,costbracket,name,platform,cost,dependson,page,categories,developer
+#This function dumps our dictionnary into json to check their usability
+def checkWrite(dic, ids, rev):
+	import json
+	
+	f = open("./tests/dic", "wt")
+	f.write(json.dumps(dic))
+	f.close()
+	
+	f = open("./tests/rev", "wt")
+	f.write(json.dumps(rev))
+	f.close()
+	
+	f = open("./tests/ids", "wt")
+	f.write(json.dumps(ids))
+	f.close()
+	
+#checkWrite(dic, ids, rev)
 
-for T in dic:
-	if T in tableNID:
-		for E in dic[T]:
-			print "INSERT INTO " + tableNID[T] + " VALUES ('" + E + "');"
-	elif T in tableWID:
-		for E in dic[T]:
-			#print dic[T]
-			print "INSERT INTO " + tableWID[T] + " VALUES ('" + str(dic[T][E]) + "', '" + E + "');"
+def prs(str):
+	if not str is None:
+		if "'" in str:
+			str = str.replace("'", "\\'")
+		return str
 	else:
-		pass
-		#print T;
+		return u""
 
-for E in ids:
-	print "INSERT INTO Tool VALUES ("+str(E)+", '"+ rev["name"][ids[E]["name"][0]] +"')"
-	s = "INSERT INTO Description VALUES ('', '"+ rev["name"][ids[E]["name"][0]] +"', "
+def sqlify(dic, ids, rev):
+	#This synonym Table is used for external/relative entries such as keywords or platform (Tool > has_XYZ > XIZ)
+	tableNID = {"tags" : "Keyword", "platform" : "Platform", "categories" : "Tool_type"} # Without int UID stuff
+	tableWID = {"developer" : "Developer"} #With int UID Stuff
+	#status,description,license,tags,webpage,costbracket,name,platform,cost,dependson,page,categories,developer
+	#status,description,license,tags,webpage,costbracket,name,platform,cost,dependson,page,categories,developer
+	NID = list()
+	WID = list()
 	
-	if "description" in ids[E] and ids[E]["description"][0] in rev["description"]:
-		print ids[E]["description"][0]
+	for T in dic:
+		if T in tableNID:
+			for E in dic[T]:
+				NID.append("INSERT INTO " + tableNID[T] + " VALUES ('" + prs(E) + "');")
+		elif T in tableWID: 
+			for E in dic[T]:
+				#print dic[T]
+				WID.append("INSERT INTO " + tableWID[T] + " VALUES ('" + str(dic[T][E]) + "', '" + prs(E) + "');")
+		else:
+			pass
+			#print T;
 	
-		s += " '"+ str(rev["description"][ids[E]["description"][0]]) +"', "
-	else:
-		s += " '', "
 	
-	#No version in BambooDirt
-	s += " '', "
-	
-	
-	if "webpage" in ids[E]:
-		s += " '"+ rev["webpage"][ids[E]["webpage"][0]] +"', "
-	else:
+	ins = list()
+	tool = list()
+	for E in ids:
+		tool.append("INSERT INTO Tool VALUES ('"+str(E)+"', '"+ prs(rev["name"][ids[E]["name"][0]]) +"')")
+		s = u"INSERT INTO Description VALUES ('', '"+ prs(rev["name"][ids[E]["name"][0]]) +"', "
+		
+		if "description" in ids[E] and ids[E]["description"][0] in rev["description"]:
+		
+			desc = prs(rev["description"][ids[E]["description"][0]])
+			s += " '"
+			s += desc 
+			s += "', "
+		else:
+			s += " '', "
+		
+		#No version in BambooDirt
 		s += " '', "
 		
-	#No availableFrom in BambooDirt
-	s += " '', "
-	s += " 'DATE', 'USER_UID', 'author',  "
-	
-	if "license" in ids[E]:
-		s += " '"+ rev["license"][ids[E]["license"][0]] +"', "
-	else:
+		
+		if "webpage" in ids[E]:
+			s += " '"+ prs(rev["webpage"][ids[E]["webpage"][0]]) +"', "
+		else:
+			s += " '', "
+			
+		#No availableFrom in BambooDirt
+		s += " '', "
+		s += " 'DATE', 'USER_UID', 'author',  "
+		
+		if "license" in ids[E]:
+			s += " '"+ prs(rev["license"][ids[E]["license"][0]]) +"', "
+		else:
+			s += " '', "
+			
+		if "categories" in ids[E]:
+			s += " '"+ prs(rev["categories"][ids[E]["categories"][0]]) +"', "
+		else:
+			s += " '', "
+			
+		#No Application_type in BambooDirt
 		s += " '', "
 		
-	if "categories" in ids[E]:
-		s += " '"+ rev["categories"][ids[E]["categories"][0]] +"', "
-	else:
-		s += " '', "
-		
-	#No Application_type in BambooDirt
-	s += " '', "
+		#TOOL UID +  USERS_UID
+		s += str(E) + ", 'USER_UID' "
+			
+		ins.append(s+");")
 	
-	#TOOL UID +  USERS_UID
-	print E
-	s += str(E) + ", 'USER_UID' "
-		
-	print s+");"
+	fSQL = io.open("./sql/descriptions.sql", "wt", encoding='utf-8')
+	fSQL.write("\n".join(ins))
+	fSQL.close()
+	
+	fSQL = io.open("./sql/NID.sql", "wt", encoding='utf-8')
+	fSQL.write("\n".join(NID))
+	fSQL.close()
+	
+	fSQL = io.open("./sql/WID.sql", "wt", encoding='utf-8')
+	fSQL.write("\n".join(WID))
+	fSQL.close()
+	
+	fSQL = io.open("./sql/tool.sql", "wt", encoding='utf-8')
+	fSQL.write("\n".join(tool))
+	fSQL.close()
+sqlify(dic, ids, rev)
