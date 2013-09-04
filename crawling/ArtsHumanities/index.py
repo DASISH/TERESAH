@@ -67,20 +67,58 @@ def init():
 	return page
 
 #print init()
-
+def die(error_message):
+    raise Exception(error_message)
+	
 #Return content from a class
 def parseClass(BS, claSS, obj, name):
 	
 	feature = BS.find("div", {"class": claSS})
 	if feature:
-		itemFeat = feature.find_all("p")
-		if itemFeat:
-			strFeat = ""
-			for p in itemFeat:
-				strFeat += p.get_text()
+		fieldItem = feature.find_all("div", {"class" : "field-item"})
+		if len(fieldItem) > 1:
+			if name == "features":
+				die("in fieldItem")
+			strFeat= list()
+			for div in fieldItem:
+				strFeat.append(div.get_text())
+			#TEST
 		else:
-			itemFeat = feature.find("div", {"class" : "field-items"})
-			strFeat = itemFeat.get_text()
+			itemFeat = feature.find_all("p")
+			
+			if itemFeat:
+				#Split on \n AND \u2022 for features only
+				if name == "features" and len(itemFeat) == 1:
+					
+					strFeat = itemFeat[0].get_text()
+					if strFeat.count(u'\u2022') > 0 :
+						strFeat = strFeat.replace(u"\n", "").replace(u"\t", "")
+						tmp = strFeat.split(u"\u2022")
+					else:
+						strFeat = strFeat.replace(u"*", "")
+						tmp = strFeat.split(u"\n")
+					
+					strFeat = list()
+					for i in tmp:
+						if len(i) > 2:
+							strFeat.append(i)
+							
+				else:
+					strFeat = ""
+					for p in itemFeat:
+						strFeat += p.get_text()
+			else:
+				if name == "features":
+					strFeat = list()
+					#print fieldItem[0].find_all("li")
+					for i in fieldItem[0].find_all("li"):
+						strFeat.append(i.get_text())
+					#print strFeat
+					#print BS.prettify()
+					#die(claSS + "not in itemFeat")
+				else:
+					itemFeat = feature.find("div", {"class" : "field-items"})
+					strFeat = itemFeat.get_text()
 		obj[name] = strFeat
 		
 	return obj
@@ -100,7 +138,6 @@ def parsePage(html, page):
 	n = BS.find("div", {"id": "branding"})
 	
 	
-	print n
 	dic["name"] = n.get_text()
 	dic["page"] = page
 	
@@ -108,34 +145,17 @@ def parsePage(html, page):
 	dic = parseClass(BS, "field-name-field-tool-features", dic, "features")
 	dic = parseClass(BS, "field-name-field-tool-creator", dic, "creator")
 	dic = parseClass(BS, "field-name-field-tool-publisher", dic, "publisher")
+	#Taxonomies
+	dic = parseClass(BS, "field-name-taxonomy-vocabulary-31", dic, "specifications")
+	dic = parseClass(BS, "field-name-taxonomy-vocabulary-5", dic, "tags")
+	dic = parseClass(BS, "field-name-taxonomy-vocabulary-32", dic, "platform")
+	dic = parseClass(BS, "field-name-taxonomy-vocabulary-33", dic, "licence")
 	
-	"""
-	pan = BS.find("fieldset", {"id":"node_item_full_group_description"})
+	dic = parseClass(BS, "field-name-taxonomy-vocabulary-10", dic, "dataCapture")
+	dic = parseClass(BS, "field-name-taxonomy-vocabulary-14", dic, "practice")
+	dic = parseClass(BS, "field-name-taxonomy-vocabulary-11", dic, "dataEnhancement")
+	dic = parseClass(BS, "field-name-taxonomy-vocabulary-29", dic, "lifeCycle")
 	
-	#S = BeautifulSoup(pan)
-	if pan:
-		#fields = pan.findAll("section", {"class" : "field"})
-		if pan.findAll("section"):
-			for field in pan.findAll("section"):
-				#print field
-				t = field.find("h2", {"class" : "field-label"})
-				te = t.get_text()#.replace(":", "").strip()
-				
-				v = field.find(True, {"class" : "field-items"})
-				
-				if v.name == "ul":
-					dic[te] = []
-					for li in v.find_all("li"):
-						dic[te].append(li.get_text().strip())
-						
-				elif te.count("Platform") > 0:
-					dic[te] = []
-					for li in v.find_all("div"):
-						dic[te].append(li.get_text().strip())
-						
-				else:
-					dic[te] = v.get_text()
-	"""	
 	return dic
 
 #Get every page
@@ -143,7 +163,6 @@ def parseContent(l):
 	extracted = []
 	for parent in l:
 		for page in parent:
-			print page
 			path = "./raw/" + page.replace("/", "-") + ".html"
 			f = open(path, "rt")
 			html = f.read()
@@ -156,27 +175,28 @@ def parseContent(l):
 content = getContents(init(), True)
 #print content
 parsed = parseContent(content)
-print parsed
-"""
+
 def convertXML(obj):
-	f = open("./output/bamboodirt.xml", "wt")
+	f = open("./output/A&H.xml", "wt")
 	f.write("<?xml version=\"1.0\"?>\n")
 	
 	f.write("<data>\n")
 	for o in obj:
-		print o
+		#print o
 		f.write("\t<element>\n")
 		for key in o:
-			keyz = key.strip().replace(":", "").replace(" ", "")
+			keyz = key.strip().replace(" ", "")
 			if isinstance(o[key], list):
 				for oz in o[key]:
+					oz = oz.strip()
 					str = "\t\t<"+keyz+">"+oz+"</"+keyz+">\n"
 					f.write(str.encode("utf-8"))
 			else:
-				str = "\t\t<"+keyz+">"+o[key]+"</"+keyz+">\n"
+				oz = o[key]
+				oz = oz.strip()
+				str = "\t\t<"+keyz+">"+oz+"</"+keyz+">\n"
 				f.write(str.encode("utf-8"))
 		f.write("\t</element>\n")
 	f.write("</data>\n")
 	
 convertXML(parsed)
-"""

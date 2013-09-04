@@ -4,5 +4,6 @@
 /crawling/Bamboo/tests
 
 /crawling/ArtsHumanities/raw
+/crawling/ArtsHumanities/output
 
 *.pyc
