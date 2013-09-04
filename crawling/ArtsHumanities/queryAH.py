@@ -16,8 +16,7 @@ def queryAH(url, data = ""):
 		code = f.read()
 		f.close()
 	else:
-		print data
-		url_STRING = "http://www.arts-humanities.net/tools"+url
+		url_STRING = "http://www.arts-humanities.net/tools/"+url
 		#url_STRING = "http://algorythme.net/post.php"
 		code = getURL(url_STRING, data, "GET")
 		code = code.read()

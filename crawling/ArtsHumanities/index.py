@@ -7,28 +7,35 @@ import re
 
 BeautifulSoup = bs4.BeautifulSoup
 
+#Get content of a page
 def getContents(page, query=False):
 	ret = []
 	
+	#If it is a list : list is used for getting indexpage
 	if isinstance(page, list):
 		for p in page:
 			ret.append(getContents(p, query))
 		return ret
 	else:
 		BS = BeautifulSoup(page)
-		tbody = BS.find_all("tbody")
+		div = BS.find("div", attrs={"class" : "view-icttools"})
+		tbody = div.find_all("tbody")
 		
 			
 		for tr in tbody[0].find_all("tr"):
 			a = tr.find("a")
 			
-			ret.append(a["href"])
+			hr = a["href"]
+			hr = hr.replace("/tools/", "")
+			
+			ret.append(hr)
 			
 			if query:
-				queryBamboo(a['href'])
+				queryAH(hr)
 		
 		return ret
-	
+
+#Get int representation of second and last page
 def getPager(page):
 	BS = BeautifulSoup(page)
 	
@@ -46,7 +53,8 @@ def getPager(page):
 	last_r = reg.search(last)
 		
 	return int(sec_r.group("int")), int(last_r.group("int"))
-	
+
+#Get all index pages
 def init():
 	firstURL = ""
 	page = [queryAH(firstURL, "page=0")]
@@ -54,29 +62,56 @@ def init():
 	sec, last = getPager(page[0])
 	
 	for i in range(sec, last+1):
-		print  "field_categories_tid=All&tid=All&sort_by=title&sort_order=ASC&page="+ str(i)
 		p = queryAH("", "page="+ str(i))
 		page.append(p)
 	return page
 
-print init()
+#print init()
 
-"""
+#Get contents from a description page
 def parsePage(html, page):
 	
+	#PreParse html for avoiding issue
+	style = re.compile("<style( .*)/style>")
+	html = style.sub("", html)
 	BS = BeautifulSoup(html)
+	#print(BS.prettify(formatter="html"))
 	dic = {}
 	
-	n = BS.find("div", {"property": "dc:title"})
-	d = BS.find("div", {"property": "content:encoded"})
+	#print BS
+	
+	#print BS.findAll("h1", {"id": "title"})
+	n = BS.find("div", {"id": "branding"})
 	
 	
-	
+	print n
 	dic["name"] = n.get_text()
 	dic["page"] = page
-	if d:
-		dic["description"] = d.get_text()
 	
+	d = BS.find("div", {"class": "field-name-field-short-description"})
+	if d:
+		itemDesc = d.find_all("p")
+		strDesc = ""
+		print itemDesc
+		for p in itemDesc:
+			strDesc += p.get_text()
+		print strDesc
+		
+		dic["description"] = strDesc
+		
+	feature = BS.find("div", {"class": "field-name-field-tool-features"})
+	if feature:
+		itemFeat = feature.find("div", {"class" : "field-items"})
+		dic["feature"] = itemFeat.get_text()
+		"""
+		itemFeat = feature.find("p")
+		strFeat = ""
+		for p in itemFeat:
+			strFeat += p.get_text()
+		dic["feature"] = strFeat
+		"""
+	
+	"""
 	pan = BS.find("fieldset", {"id":"node_item_full_group_description"})
 	
 	#S = BeautifulSoup(pan)
@@ -102,9 +137,10 @@ def parsePage(html, page):
 						
 				else:
 					dic[te] = v.get_text()
-					
+	"""	
 	return dic
 
+#Get every page
 def parseContent(l):
 	extracted = []
 	for parent in l:
@@ -114,13 +150,16 @@ def parseContent(l):
 			f = open(path, "rt")
 			html = f.read()
 			f.close()
-			extracted.append(parsePage(html, "http://dirt.projectbamboo.org"+page))
+			extracted.append(parsePage(html, "http://www.arts-humanities.net"+page))
+			
 	return extracted
 
-
+#print init()
 content = getContents(init(), True)
-
+#print content
 parsed = parseContent(content)
+print parsed
+"""
 def convertXML(obj):
 	f = open("./output/bamboodirt.xml", "wt")
 	f.write("<?xml version=\"1.0\"?>\n")
