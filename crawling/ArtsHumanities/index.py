@@ -68,6 +68,22 @@ def init():
 
 #print init()
 
+#Return content from a class
+def parseClass(BS, claSS, obj, name):
+	
+	feature = BS.find("div", {"class": claSS})
+	if feature:
+		itemFeat = feature.find_all("p")
+		if itemFeat:
+			strFeat = ""
+			for p in itemFeat:
+				strFeat += p.get_text()
+		else:
+			itemFeat = feature.find("div", {"class" : "field-items"})
+			strFeat = itemFeat.get_text()
+		obj[name] = strFeat
+		
+	return obj
 #Get contents from a description page
 def parsePage(html, page):
 	
@@ -88,28 +104,10 @@ def parsePage(html, page):
 	dic["name"] = n.get_text()
 	dic["page"] = page
 	
-	d = BS.find("div", {"class": "field-name-field-short-description"})
-	if d:
-		itemDesc = d.find_all("p")
-		strDesc = ""
-		print itemDesc
-		for p in itemDesc:
-			strDesc += p.get_text()
-		print strDesc
-		
-		dic["description"] = strDesc
-		
-	feature = BS.find("div", {"class": "field-name-field-tool-features"})
-	if feature:
-		itemFeat = feature.find("div", {"class" : "field-items"})
-		dic["feature"] = itemFeat.get_text()
-		"""
-		itemFeat = feature.find("p")
-		strFeat = ""
-		for p in itemFeat:
-			strFeat += p.get_text()
-		dic["feature"] = strFeat
-		"""
+	dic = parseClass(BS, "field-name-field-short-description", dic, "description")
+	dic = parseClass(BS, "field-name-field-tool-features", dic, "features")
+	dic = parseClass(BS, "field-name-field-tool-creator", dic, "creator")
+	dic = parseClass(BS, "field-name-field-tool-publisher", dic, "publisher")
 	
 	"""
 	pan = BS.find("fieldset", {"id":"node_item_full_group_description"})
