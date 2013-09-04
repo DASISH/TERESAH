@@ -2,4 +2,7 @@
 /crawling/Bamboo/raw
 /crawling/Bamboo/sql
 /crawling/Bamboo/tests
+
+/crawling/ArtsHumanities/raw
+
 *.pyc
