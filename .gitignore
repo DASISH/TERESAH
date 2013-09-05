@@ -8,4 +8,7 @@
 
 /crawling/Synonyms/output
 
+/crawling/HistoryOnline/output
+/crawling/HistoryOnline/raw
+
 *.pyc
