@@ -6,4 +6,6 @@
 /crawling/ArtsHumanities/raw
 /crawling/ArtsHumanities/output
 
+/crawling/Synonyms/output
+
 *.pyc
