@@ -56,7 +56,7 @@ def synXML(igns):
 	f.write(u"<data>\n")
 	
 	for lis in igns:
-		f.write(u"\n\t<element>\n\t\t<ignore>"+ lis.replace(u"\n", "")+"</ignore>\n\t</element>")
+		f.write(u"<ignore>"+ lis.replace(u"\n", "")+"</ignore>\n")
 	
 	
 	f.write(u"</data>\n")
