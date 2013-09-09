@@ -13,4 +13,6 @@
 /crawling/HistoryOnline/output
 /crawling/HistoryOnline/raw
 
+/crawling/SQL/tests
+
 *.pyc

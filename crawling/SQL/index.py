@@ -22,19 +22,47 @@ Then these data can be put into sql values
 
 from bs4 import BeautifulSoup
 import io
+#For test purposes :
+import json
 
-#Usefull functions
+#######################################################
+#
+#
+#
+#				MINOR FUNCTIONS
+#
+#
+#
+#######################################################
+
 def noNT(str):
 	return str.replace(u"\n", u"").replace(u"\t", u"")
 
 def shortName(str):
-	str = noNT(str.replace(u" ", u"-"))
+	str = noNT(str.replace(u" ", u"-")).lower()
 	return str[:79]
 
+def turnToJson(obj):
+	f = io.open("./tests/export.json", "wt", encoding='utf-8')
+	str = json.dumps(obj, sort_keys=True, indent=4)
+	f.write(unicode(str))
+	f.close()
+	
+	
+	
+#######################################################
+#
+#
+#
+#				CORE FUNCTIONS
+#
+#
+#
+#######################################################
 #We need to get an ignore list first
 def getIgnore():
 	#We read and store the file contents
-	file = io.open("../Ignore/output/ignore.xml")
+	file = io.open("../Ignore/output/ignore.xml", "rt")
 	xml = file.read()
 	file.close()
 	
@@ -53,7 +81,7 @@ def getIgnore():
 #We then need a dictionnary of synonyms:
 def getSynonym():
 	#We read and store the file contents
-	file = io.open("../Synonyms/output/synonyms.xml")
+	file = io.open("../Synonyms/output/synonyms.xml", "rt")
 	xml = file.read()
 	file.close()
 	
@@ -151,4 +179,7 @@ ignoredList = getIgnore()
 synonymList = getSynonym()
 #print synonymList
 
-print getObj(ignoredList, synonymList)
+finalObject = getObj(ignoredList, synonymList)
+
+turnToJson(finalObject)
+print len(finalObject)
