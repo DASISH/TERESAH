@@ -4,6 +4,7 @@
 from bs4 import BeautifulSoup
 from difflib import get_close_matches
 import io
+
 def getNames():
 	files = {}
 	names = list()
@@ -24,7 +25,7 @@ def getNames():
 	return files, names
 	
 #files, names = getNames()
-
+"""
 def largeSynonyms(names):
 	f = io.open("./output/large.csv", "wt", encoding='utf-8')
 	for word in names:
@@ -47,7 +48,7 @@ def largeSynonyms(names):
 		else:
 			f.write(word+"\n")
 	f.close()
-
+"""
 
 #largeSynonyms(names)
 
@@ -105,4 +106,23 @@ levs = getLevs(syns)
 def avgMinMax(levs):
 	return min(levs), max(levs), float(sum(levs) / len(levs))
 
+#Write an XML files from synonyms list
+def synXML(syns):
+	included = list()
+	str = u""
+	
+	
+	f = open("./output/synonyms.xml", "wt")
+	f.write(u"<?xml version=\"1.0\"?>\n")
+	
+	f.write(u"<data>\n")
+	
+	for lis in syns:
+		f.write(u"\n\t<element name='"+lis[0]+"'>\n\t\t<synonym>" + "</synonym>\n\t\t<synonym>".join(lis) + "</synonym>\n\t</element>")
+	
+	
+	f.write(u"</data>\n")
+	
+	
 print avgMinMax(levs)
+print synXML(syns)
