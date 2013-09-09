@@ -167,7 +167,7 @@ def parseContent(l):
 			f = open(path, "rt")
 			html = f.read()
 			f.close()
-			extracted.append(parsePage(html, "http://www.arts-humanities.net/tools/"+page))
+			extracted.append(parsePage(html, "http://www.arts-humanities.net"+page))
 			
 	return extracted
 
