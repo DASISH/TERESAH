@@ -1,0 +1,17 @@
+{
+	"BambooDirt" : {
+		'status' : "Keyword", 
+		'costbracket' : "Keyword", 
+		'name', 
+		'license' : "Licence", 
+		'tags' : "Keyword", 
+		'webpage', 
+		'description' : "registryDescription", 
+		'platform' : "platform", 
+		'cost' : "Keyword", 
+		'dependson' : "Keyword", 
+		'page', 
+		'categories' : "Tool_type", 
+		'developer' : "Developer"
+	}
+}

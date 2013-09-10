@@ -1,0 +1,12 @@
+{
+	"BambooDirt" : {
+		"costbracket" : "/cost",
+		"status" : "/tool-status",
+		"platform" : "/",
+		"cost" : "/",
+		"tags" : "/tags".
+		"webpage" : "/",
+		"categories" : "/categories",
+		"license" : "/license",
+	}
+}
