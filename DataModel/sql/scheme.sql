@@ -164,9 +164,11 @@ CREATE INDEX `fk_Tool_has_Platform_Tool1_idx` ON `tools_registry`.`Tool_has_Plat
 DROP TABLE IF EXISTS `tools_registry`.`Keyword` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`Keyword` (
+  `keyword_uid` INT NOT NULL AUTO_INCREMENT ,
   `keyword` VARCHAR(255) NOT NULL ,
   `sourceURI` VARCHAR(255) NULL ,
-  PRIMARY KEY (`keyword`) )
+  `sourceTaxonomy` VARCHAR(255) NULL ,
+  PRIMARY KEY (`keyword_uid`) )
 ENGINE = InnoDB;
 
 
@@ -177,21 +179,21 @@ DROP TABLE IF EXISTS `tools_registry`.`Tool_has_Keyword` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`Tool_has_Keyword` (
   `Tool_UID` INT NOT NULL ,
-  `Keyword_keyword` VARCHAR(255) NOT NULL ,
-  PRIMARY KEY (`Tool_UID`, `Keyword_keyword`) ,
+  `Keyword_UID` INT NOT NULL ,
+  PRIMARY KEY (`Tool_UID`, `Keyword_UID`) ,
   CONSTRAINT `fk_Tool_has_Keyword_Tool1`
     FOREIGN KEY (`Tool_UID` )
     REFERENCES `tools_registry`.`Tool` (`UID` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tool_has_Keyword_Keyword1`
-    FOREIGN KEY (`Keyword_keyword` )
-    REFERENCES `tools_registry`.`Keyword` (`keyword` )
+    FOREIGN KEY (`Keyword_UID` )
+    REFERENCES `tools_registry`.`Keyword` (`keyword_uid` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Tool_has_Keyword_Keyword1_idx` ON `tools_registry`.`Tool_has_Keyword` (`Keyword_keyword` ASC) ;
+CREATE INDEX `fk_Tool_has_Keyword_Keyword1_idx` ON `tools_registry`.`Tool_has_Keyword` (`Keyword_UID` ASC) ;
 
 CREATE INDEX `fk_Tool_has_Keyword_Tool1_idx` ON `tools_registry`.`Tool_has_Keyword` (`Tool_UID` ASC) ;
 
@@ -650,11 +652,11 @@ CREATE INDEX `fk_Alternative_Title_Description1_idx` ON `tools_registry`.`Altern
 
 
 -- -----------------------------------------------------
--- Table `tools_registry`.`Description_has_Tool_type`
+-- Table `tools_registry`.`Tool_has_Tool_type`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `tools_registry`.`Description_has_Tool_type` ;
+DROP TABLE IF EXISTS `tools_registry`.`Tool_has_Tool_type` ;
 
-CREATE  TABLE IF NOT EXISTS `tools_registry`.`Description_has_Tool_type` (
+CREATE  TABLE IF NOT EXISTS `tools_registry`.`Tool_has_Tool_type` (
   `Tool_type_tool_type` VARCHAR(255) NOT NULL ,
   `Tool_UID` INT NOT NULL ,
   PRIMARY KEY (`Tool_type_tool_type`, `Tool_UID`) ,
@@ -670,15 +672,15 @@ CREATE  TABLE IF NOT EXISTS `tools_registry`.`Description_has_Tool_type` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Description_has_Tool_type_Tool1_idx` ON `tools_registry`.`Description_has_Tool_type` (`Tool_UID` ASC) ;
+CREATE INDEX `fk_Description_has_Tool_type_Tool1_idx` ON `tools_registry`.`Tool_has_Tool_type` (`Tool_UID` ASC) ;
 
 
 -- -----------------------------------------------------
--- Table `tools_registry`.`Description_has_Application_type`
+-- Table `tools_registry`.`Tool_has_Application_type`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `tools_registry`.`Description_has_Application_type` ;
+DROP TABLE IF EXISTS `tools_registry`.`Tool_has_Application_type` ;
 
-CREATE  TABLE IF NOT EXISTS `tools_registry`.`Description_has_Application_type` (
+CREATE  TABLE IF NOT EXISTS `tools_registry`.`Tool_has_Application_type` (
   `Application_type_application_type` VARCHAR(255) NOT NULL ,
   `Tool_UID` INT NOT NULL ,
   PRIMARY KEY (`Application_type_application_type`, `Tool_UID`) ,
@@ -694,9 +696,9 @@ CREATE  TABLE IF NOT EXISTS `tools_registry`.`Description_has_Application_type` 
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Description_has_Application_type_Application_type1_idx` ON `tools_registry`.`Description_has_Application_type` (`Application_type_application_type` ASC) ;
+CREATE INDEX `fk_Description_has_Application_type_Application_type1_idx` ON `tools_registry`.`Tool_has_Application_type` (`Application_type_application_type` ASC) ;
 
-CREATE INDEX `fk_Description_has_Application_type_Tool1_idx` ON `tools_registry`.`Description_has_Application_type` (`Tool_UID` ASC) ;
+CREATE INDEX `fk_Description_has_Application_type_Tool1_idx` ON `tools_registry`.`Tool_has_Application_type` (`Tool_UID` ASC) ;
 
 
 -- -----------------------------------------------------

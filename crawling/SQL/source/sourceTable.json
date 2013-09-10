@@ -1,7 +1,7 @@
 {
 	"BambooDirt" : {
-		"webpage" : "", 
-		"name" : "", 
+		"webpage" : "webpage", 
+		"name" : "name", 
 		"page" : "", 
 		
 		"status" : "Keyword", 
@@ -19,7 +19,7 @@
 	},
 	"ArtsHumanities" : {
 		"publisher" : "Organization", 
-		"name" : "", 
+		"name" : "name", 
 		"creator" : "Developer", 
 		"specifications" : "Keyword", 
 		"description" : "", 

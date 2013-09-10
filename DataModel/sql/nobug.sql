@@ -1,4 +1,3 @@
-INSERT INTO `tools_registry`.`Provider` (`name`) VALUES ('Bamboo');
-INSERT INTO `tools_registry`.`Users` (`Name`) VALUES ('Bot');
-INSERT INTO `tools_registry`.`Application_type` (`application_type`) VALUES ('Harvested');
-INSERT INTO `tools_registry`.`Licence_type` (`licence_type`) VALUES ('NOBUG');
+INSERT INTO `tools_registry`.`Licence_type` (`licence_type`) VALUES ('Unknown');
+INSERT INTO `tools_registry`.`Users` (`UID`, `Name`, `Mail`, `Login`, `Password`) VALUES (0, 'Bot', 'dasish@dasish.com', '00--DASISH----BOT--00', '123456789');
+
