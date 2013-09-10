@@ -16,5 +16,21 @@
 		"platform" : "Platform", 
 		"categories" : "Tool_type", 
 		"developer" : "Developer"
+	},
+	"ArtsHumanities" : {
+		"publisher" : "Organization", 
+		"name" : "", 
+		"creator" : "Developer", 
+		"specifications" : "Keyword", 
+		"description" : "", 
+		"practice" : "Keyword", 
+		"lifecycle" : "Keyword", 
+		"platform" : "Platform", 
+		"datacapture" : "Keyword", 
+		"licence" : "Licence", 
+		"dataenhancement" : "Keyword", 
+		"page" : "", 
+		"tags" : "Keyword", 
+		"features" : "Feature"
 	}
 }

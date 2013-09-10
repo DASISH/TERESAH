@@ -46,6 +46,7 @@ def F2Json(path):	#We need the object which has been translated to json in index
 #######################################	
 	
 def createInsert(obj, host, key, request):
+	host = "Dasish"
 	if not key in obj[host]:
 		obj[host][key] = {};
 		
@@ -136,7 +137,7 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 
 def filterObject(data):#We need to
 	s = set()
-	ins = { "BambooDirt" : {}, "Dasish" : { "Tool" : {}}}
+	ins = { "BambooDirt" : {}, "ArtsHumanities" : {}, "Dasish" : { "Tool" : {}}}
 	
 	ids = {} # ids[Bamboo][License] = 1
 	
@@ -159,17 +160,18 @@ def filterObject(data):#We need to
 		###
 		#		BAMBOO
 		###
-		if "BambooDirt" in tmp:
-			for key in tmp["BambooDirt"]:
-				for el in tmp["BambooDirt"][key]:
-					r = getRequest(conv["BambooDirt"][key], str(tmp["id"]), el, "BambooDirt", key)
-					
-					#If we actually use it :
-					if r:
-						ins, id = createInsert (ins, "BambooDirt", key, r)
+		for host in tmp:
+			if host in conv:
+				for key in tmp[host]:
+					for el in tmp[host][key]:
+						r = getRequest(conv[host][key], str(tmp["id"]), el, host, key)
 						
-						#We need to create the connection
-						ins = createConnection(str(tmp["id"]), conv["BambooDirt"][key], id, el, "BambooDirt", ins)
+						#If we actually use it :
+						if r:
+							ins, id = createInsert (ins, host, key, r)
+							
+							#We need to create the connection
+							ins = createConnection(str(tmp["id"]), conv[host][key], id, el, host, ins)
 				
 	return ins, s
 
@@ -190,3 +192,4 @@ data = F2Json("./tests/export.json")
 data, s = filterObject(data)
 
 index.turnToJson(data, "./tests/sql.json")
+print s
