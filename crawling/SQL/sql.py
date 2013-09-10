@@ -75,6 +75,9 @@ def getRequest(t, i, v, h, k): # table, tool_uid, value, host, host key
 	elif t == "Platform":
 		req = "INSERT INTO Platform VALUES ('"+v+"');"
 		
+	elif t == "Developer":
+		req = "INSERT INTO Developer VALUES (#id#, '"+v+"', NULL);"
+		
 	elif t == "registryDescription":
 		if v:
 			req = "INSERT INTO External_Description (#id#, '"+v+"', '"+uri+"')"
@@ -108,6 +111,10 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 	elif t == "Platform":
 		key = "Tool_has_Platform"
 		req = "INSERT INTO Tool_has_Platform VALUES ('"+u+"', '"+v+"');"
+		
+	elif t == "Developer":
+		key = "Tool_has_Developer"
+		req = "INSERT INTO Tool_has_Developer VALUES ('"+u+"', '"+str(i)+"');"
 		
 	elif t == "registryDescription":
 		key = "Tool_has_External_Description"
