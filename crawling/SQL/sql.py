@@ -74,6 +74,7 @@ def getRequest(t, i, v, h, k): # table, tool_uid, value, host, host key
 		req = "INSERT INTO Tool_type VALUES ('"+v+"', '"+uri+"');"
 		
 	elif t == "Platform":
+		v = OS[v]
 		req = "INSERT INTO Platform VALUES ('"+v+"');"
 		
 	elif t == "Developer":
@@ -111,6 +112,7 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 		
 	elif t == "Platform":
 		key = "Tool_has_Platform"
+		v = OS[v]
 		req = "INSERT INTO Tool_has_Platform VALUES ('"+u+"', '"+v+"');"
 		
 	elif t == "Developer":
@@ -186,7 +188,7 @@ def filterObject(data):#We need to
 ######################################
 
 srcURI = F2Json("./source/sourceUri.json")
-
+OS = F2Json("./source/ossize.json")
 data = F2Json("./tests/export.json")
 
 data, s = filterObject(data)

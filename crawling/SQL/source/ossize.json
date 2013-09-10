@@ -13,7 +13,7 @@
 	"Debian" : "Linux", 
 	"Eclipse" : "Other", 
 	"Fedora" : "Linux", 
-	"FreeBSD" : ""Linux, 
+	"FreeBSD" : "Linux", 
 	"HP-UX" : "Other", 
 	"IIS" : "Other", 
 	"IRIX" : "Other", 
