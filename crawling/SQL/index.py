@@ -42,8 +42,8 @@ def shortName(str):
 	str = noNT(str.replace(u" ", u"-")).lower()
 	return str[:79]
 
-def turnToJson(obj):
-	f = io.open("./tests/export.json", "wt", encoding='utf-8')
+def turnToJson(obj, path):
+	f = io.open(path, "wt", encoding='utf-8')
 	str = json.dumps(obj, sort_keys=True, indent=4)
 	f.write(unicode(str))
 	f.close()
@@ -120,6 +120,8 @@ def getObj(ign, syn): # Take ignored list and synonym dictionnary as parameters
 	
 	translatePath = {"../Bamboo/output/bamboodirt.xml" : "BambooDirt", "../ArtsHumanities/output/A&H.xml" : "ArtsHumanities", "../HistoryOnline/output/HistoryOnline.xml" : "HistoryOnline"}
 	
+	#We create an INT id
+	id = 1
 	for path in dir:
 		#Open the file
 		F = open(path, "rt")
@@ -128,8 +130,6 @@ def getObj(ign, syn): # Take ignored list and synonym dictionnary as parameters
 		#Close a file
 		F.close()
 		
-		#We create an INT id
-		id = 1
 		
 		#host name
 		hostName = translatePath[path]
@@ -172,7 +172,7 @@ def getObj(ign, syn): # Take ignored list and synonym dictionnary as parameters
 #
 #
 ####################################################
-
+"""
 ignoredList = getIgnore()
 #print ignoredList
 
@@ -181,5 +181,6 @@ synonymList = getSynonym()
 
 finalObject = getObj(ignoredList, synonymList)
 
-turnToJson(finalObject)
+turnToJson(finalObject, "./tests/export.json")
 print len(finalObject)
+"""

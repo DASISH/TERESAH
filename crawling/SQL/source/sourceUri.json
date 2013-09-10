@@ -1,12 +1,22 @@
 {
 	"BambooDirt" : {
+		"webpage" : "/", 
+		"name" : "/", 
+		"page" : "/", 
+		"description" : "/", 
+		"dependson" : "/", 
+		
 		"costbracket" : "/cost",
 		"status" : "/tool-status",
 		"platform" : "/",
 		"cost" : "/",
-		"tags" : "/tags".
+		"tags" : "/tags",
 		"webpage" : "/",
 		"categories" : "/categories",
 		"license" : "/license",
+		"developer" : "/developer"
+	},
+	"URI" : {
+		"BambooDirt" : "http://dirt.projectbamboo.org"
 	}
 }
