@@ -8,7 +8,7 @@ import io
 def getNames():
 	files = {}
 	names = list()
-	dir = ["../Bamboo/output/bamboodirt.xml", "../ArtsHumanities/output/A&H.xml"]
+	dir = ["../Bamboo/output/bamboodirt.xml", "../ArtsHumanities/output/A&H.xml",  "../HistoryOnline/output/HistoryOnline.xml"]
 	for path in dir:
 		#Open the file
 		F = open(path, "rt")
@@ -26,8 +26,12 @@ def getNames():
 	
 #files, names = getNames()
 def largeSynonyms(names):
-	f = io.open("./output/large.csv", "wt", encoding='utf-8')
-	for word in names:
+	f = io.open("./output/large.csv", "a", encoding='utf-8')
+	
+	names = set(names)
+	names = list(names)
+	if len(names) > 1:
+		word = names[0]
 		#We create a filtered list so this word is not in the list we compare it with
 		names_filtered = [w for w in names if w != word]
 		close = get_close_matches(word, names_filtered)
@@ -46,6 +50,8 @@ def largeSynonyms(names):
 				f.write(word+";"+";".join(syn_validated)+"\n")
 		else:
 			f.write(word+"\n")
+				
+	largeSynonyms([w for w in names if w != word])
 	f.close()
 
 
@@ -116,9 +122,9 @@ def synXML(syns):
 	
 	f.write(u"</data>\n")
 	
-files, names = getNames();
+#files, names = getNames();
 
-largeSynonyms(names)
+#largeSynonyms(names)
 
 syns = getSyn("./output/large.csv")
 	

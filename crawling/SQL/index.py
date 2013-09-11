@@ -91,12 +91,14 @@ def getSynonym():
 	
 	#We get every group of synonym
 	for el in BS.findAll("element"):
+		
 		ref = noNT(el["name"])
 		#We get every element in this group of synonym
 		for syn in el.findAll("synonym"):
-			str = noNT(syn.string)
-			if str != ref:
-				l[str] = ref
+			if syn.string:
+				str = noNT(syn.string)
+				if str != ref:
+					l[str] = ref
 			
 	#We return the dictionnary
 	return l
@@ -174,10 +176,10 @@ def getObj(ign, syn): # Take ignored list and synonym dictionnary as parameters
 ####################################################
 """
 ignoredList = getIgnore()
-#print ignoredList
+print ignoredList
 
 synonymList = getSynonym()
-#print synonymList
+print synonymList
 
 finalObject = getObj(ignoredList, synonymList)
 
