@@ -96,7 +96,7 @@ def getRequest(t, i, v, h, k): # table, tool_uid, value, host, host key
 		
 	elif t == "registryDescription":
 		if v:
-			req = "INSERT INTO External_Description ("+str(i)+", '"+v+"', '"+uri+"')"
+			req = "INSERT INTO External_Description VALUES ('', "+str(i)+", '"+v+"', '"+uri+"', '"+h+"');"
 		else:
 			pass
 			
@@ -107,7 +107,7 @@ def getRequest(t, i, v, h, k): # table, tool_uid, value, host, host key
 		add = v
 		
 	elif t == "Licence":
-		req = "INSERT INTO Licence (#id#, '"+v+"', NULL, 'Unknown');"
+		req = "INSERT INTO Licence VALUES (#id#, '"+v+"', NULL, 'Unknown');"
 		add = "#id#"
 		
 	else:
@@ -126,7 +126,7 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 		
 	elif t == "Tool_type":
 		key = "Tool_has_Tool_type"
-		req = "INSERT INTO Tool_has_Tool_type VALUES ('"+u+"', '"+v+"');"
+		req = "INSERT INTO Tool_has_Tool_type VALUES ('"+v+"', '"+u+"');"
 		
 		
 	elif t == "Platform":

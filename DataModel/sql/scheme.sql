@@ -711,7 +711,7 @@ CREATE INDEX `fk_Description_has_Application_type_Tool1_idx` ON `tools_registry`
 DROP TABLE IF EXISTS `tools_registry`.`External_Description` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`External_Description` (
-  `UID` INT NOT NULL ,
+  `UID` INT NOT NULL AUTO_INCREMENT ,
   `Tool_UID` INT NOT NULL ,
   `description` TEXT NULL ,
   `sourceURI` VARCHAR(255) NULL ,
