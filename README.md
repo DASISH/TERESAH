@@ -9,7 +9,7 @@ This readme is only written for Ubuntu/Debian machine. It has been tested on a V
 First we need to install a wamp solution on your machine
 
     sudo apt-get install apache2
-    sudo apt-get install php5
+    sudo apt-get install php5 php5-common php5-mysql
     sudo apt-get install mysql-server
 
 Last line will ask you to set a password at some point, **please remind it or use "root" as password**, so you wont need to change any configuration file on your local machine.
