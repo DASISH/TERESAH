@@ -1,4 +1,4 @@
-<?php
+<pre><?php
 	define("DASISH", true);
 	 
 	#Require configuration, frameworks, assets 
@@ -8,7 +8,10 @@
 	require_once './assets/index.php';
 	require_once './classes/index.php';
 
-	
+	#json Print_R
+	function jP($array) {
+		print_r(json_encode($array));#, JSON_PRETTY_PRINT));
+	}
 	#Start the framework
 	\Slim\Slim::registerAutoloader();
 	$app = new \Slim\Slim();
@@ -26,3 +29,4 @@
 	require_once './routes/index.php';
 	
 	$app->run();
+?></pre>
