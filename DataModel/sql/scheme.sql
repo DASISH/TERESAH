@@ -164,11 +164,14 @@ CREATE INDEX `fk_Tool_has_Platform_Tool1_idx` ON `tools_registry`.`Tool_has_Plat
 DROP TABLE IF EXISTS `tools_registry`.`Keyword` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`Keyword` (
+  `keyword_uid` INT NOT NULL AUTO_INCREMENT ,
   `keyword` VARCHAR(255) NOT NULL ,
   `sourceURI` VARCHAR(255) NULL ,
   `sourceTaxonomy` VARCHAR(255) NULL ,
-  PRIMARY KEY (`keyword`) )
+  PRIMARY KEY (`keyword_uid`) )
 ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `UNIQ` ON `tools_registry`.`Keyword` (`keyword` ASC, `sourceURI` ASC, `sourceTaxonomy` ASC) ;
 
 
 -- -----------------------------------------------------
@@ -178,23 +181,25 @@ DROP TABLE IF EXISTS `tools_registry`.`Tool_has_Keyword` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`Tool_has_Keyword` (
   `Tool_UID` INT NOT NULL ,
-  `Keyword_keyword` VARCHAR(255) NOT NULL ,
-  PRIMARY KEY (`Tool_UID`, `Keyword_keyword`) ,
+  `Keyword_id` INT NOT NULL ,
+  PRIMARY KEY (`Tool_UID`, `Keyword_id`) ,
   CONSTRAINT `fk_Tool_has_Keyword_Tool1`
     FOREIGN KEY (`Tool_UID` )
     REFERENCES `tools_registry`.`Tool` (`UID` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tool_has_Keyword_Keyword1`
-    FOREIGN KEY (`Keyword_keyword` )
-    REFERENCES `tools_registry`.`Keyword` (`keyword` )
+    FOREIGN KEY (`Keyword_id` )
+    REFERENCES `tools_registry`.`Keyword` (`keyword_uid` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Tool_has_Keyword_Keyword1_idx` ON `tools_registry`.`Tool_has_Keyword` (`Keyword_keyword` ASC) ;
-
 CREATE INDEX `fk_Tool_has_Keyword_Tool1_idx` ON `tools_registry`.`Tool_has_Keyword` (`Tool_UID` ASC) ;
+
+CREATE INDEX `fk_Tool_has_Keyword_Keyword1_idx` ON `tools_registry`.`Tool_has_Keyword` (`Keyword_id` ASC) ;
+
+CREATE UNIQUE INDEX `UNIQ` ON `tools_registry`.`Tool_has_Keyword` (`Tool_UID` ASC, `Keyword_id` ASC) ;
 
 
 -- -----------------------------------------------------
