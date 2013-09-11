@@ -54,6 +54,40 @@
 			$ret["description"] = $desc;
 			return $ret;
 		}
+		
+		function insertDescription($toolUID, $data) {
+			$ret = "Nothing happends";
+			if(isset($data["provider"])) {
+				#If we have a Data Provider, it is an external Description
+				$req = "INSERT INTO External_Description VALUES ('', ?, ?, ?, ?); ";
+				$req = $this->DB->prepare($req);
+				try {
+					#echo "hi";
+					#print_r($data);
+					$ret = $req->execute(array($toolUID, $data["description"], $data["source"], $data["provider"]));
+					#print ($req);
+					#return $ret->rowCount ();
+				} catch(Exception $e) {
+					echo "Erreur";
+					$erreure = 'Erreur : '.$e->getMessage().'<br />';
+					$erreure .= 'N° : '.$e->getCode();
+					return $erreure;
+				}
+			
+			} else {
+				#Else, it is a simple description
+				$req = "INSERT INTO Description VALUES ('', ?, ?, ?, ?, ?, CURDATE(), NULL, ?,?,?); ";
+				$req = $this->DB->prepare($req);
+				try {
+					$ret = $req->execute(array($data["title"], $data["description"], $data["version"], $data["homepage"],  $data["available_from"],  $data["licence_UID"], $toolUID, 0));
+				} catch(Exception $e) {
+					$erreure = 'Erreur : '.$e->getMessage().'<br />';
+					$erreure .= 'N° : '.$e->getCode();
+					return $erreure;
+				}
+			}
+			return $ret;
+		}
 	}
 	$tool = new Tool();
 ?>
