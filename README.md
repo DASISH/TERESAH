@@ -36,6 +36,7 @@ Then we need to configure your apache
 	cd /etc/apache2/sites-enabled
 	sudo cp ~/dev/DASISHT23/www/API.config ./api
 	sudo rm 000-default
+	sudo ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
 
 **Then edit the API config file in apache2 (/etc/apache2/sites-enabled/API) so your username is used (Change {{USERNAME}} to your actual username on this machine). Use nano ./api or gedit ./api or any ssh ftp system **
 	
