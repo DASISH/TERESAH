@@ -25,7 +25,6 @@ def getNames():
 	return files, names
 	
 #files, names = getNames()
-"""
 def largeSynonyms(names):
 	f = io.open("./output/large.csv", "wt", encoding='utf-8')
 	for word in names:
@@ -48,9 +47,7 @@ def largeSynonyms(names):
 		else:
 			f.write(word+"\n")
 	f.close()
-"""
 
-#largeSynonyms(names)
 
 #http://hetland.org/coding/python/levenshtein.py
 def levenshtein(a,b):
@@ -83,8 +80,6 @@ def getSyn(path):
 	return z
 	
 
-syns = getSyn("./output/large.csv")
-
 def getLevs(synList):
 	levs = list()
 	for syns in synList:
@@ -101,8 +96,6 @@ def getLevs(synList):
 				levs.append(levRatio)
 	return levs
 	
-levs = getLevs(syns)
-
 def avgMinMax(levs):
 	return min(levs), max(levs), float(sum(levs) / len(levs))
 
@@ -123,6 +116,13 @@ def synXML(syns):
 	
 	f.write(u"</data>\n")
 	
+files, names = getNames();
+
+largeSynonyms(names)
+
+syns = getSyn("./output/large.csv")
 	
+levs = getLevs(syns)
+
 print avgMinMax(levs)
 print synXML(syns)
