@@ -160,10 +160,10 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 
 def mainDescription(u, o):
 	# User(UID=0) = BOT
-	r = "INSERT INTO Description ('', '"
+	r = "INSERT INTO Description VALUES ('', '"
 	
 	if "name" in o:
-		r += o["name"]
+		r += prs(o["name"])
 		
 	r += "', '&nbsp;', '', '"#description, version
 	
@@ -172,7 +172,7 @@ def mainDescription(u, o):
 	else:
 		r += "Unknown"
 		
-	r += "', CURDATE(), NULL, "#registered, registered_by
+	r += "', NULL, CURDATE(), NULL, "#registered, registered_by
 	
 	if "licence" in o:
 		r += str(o["licence"])
@@ -236,8 +236,8 @@ def filterObject(data):#We need to
 								kkey = conv[host][key]
 								kkey = kkey.lower()
 								desc[kkey] = prs(add)
-				
-		ins["Dasish"]["Description"][mainDescription(str(tmp["id"]), desc)] = True
+		print desc
+		ins, id = createInsert(ins, "Dasish", "Description", mainDescription(str(tmp["id"]), desc))
 	return ins, s
 
 	
@@ -268,6 +268,8 @@ def mergeSQL(obj, path):
 	file.write(O2SQL(obj["Tool_type"]))
 	print "Tool_type written"
 	
+	file.write(O2SQL(obj["Description"]))
+	print "Tool_type written"
 	##
 	#
 	#	Connected Data
@@ -279,7 +281,7 @@ def mergeSQL(obj, path):
 	file.write(O2SQL(obj["Tool_has_Platform"]))
 	print "Tool_has_Platform written"
 	
-	print O2SQL(obj["Tool_has_Developer"])
+	#print O2SQL(obj["Tool_has_Developer"])
 	file.write(O2SQL(obj["Tool_has_Developer"]))
 	print "Tool_has_Developer written"
 	
@@ -311,5 +313,5 @@ data, s = filterObject(data)
 index.turnToJson(data, "./tests/sql.json")
 
 mergeSQL(data, "./tests/insert.sql")
-print s
+#print s
 
