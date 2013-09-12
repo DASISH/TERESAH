@@ -102,15 +102,21 @@ def getSynonym():
 			
 	#We return the dictionnary
 	return l
-	
+
+def turnA(BS):
+	if BS.get("href"):
+		return {"href" : BS["href"], "value" : BS.string}
+	else:
+		return BS.string
 #Function to turn xml to object :
 def turnObj(BS):
 	obj = {}
 	for child in BS.findChildren():
+		ret = turnA(child)
 		if child.name in obj:
-			obj[child.name].append(child.string)
+			obj[child.name].append(ret)
 		else:
-			obj[child.name]  = [child.string]
+			obj[child.name]  = [ret]
 	return obj
 	
 	
@@ -174,7 +180,7 @@ def getObj(ign, syn): # Take ignored list and synonym dictionnary as parameters
 #
 #
 ####################################################
-"""
+
 ignoredList = getIgnore()
 print ignoredList
 
@@ -185,4 +191,3 @@ finalObject = getObj(ignoredList, synonymList)
 
 turnToJson(finalObject, "./tests/export.json")
 print len(finalObject)
-"""

@@ -77,10 +77,13 @@ def createInsert(obj, host, key, request):
 
 def getRequest(t, i, v, h, k, p): # table, tool_uid, value, host, host key
 	#uri :
-	uri = srcURI["URI"][h] + srcURI[h][k] +"/"+ v
+	uri = srcURI["URI"][h]
 	req = False
 	add = False
-	
+	if isinstance(v, dict):
+		uri = srcURI["URI"][h] + v["href"]
+		v = prs(v["value"])
+		
 	if t == "Keyword":
 		req = "INSERT INTO Keyword VALUES (#id#, '"+v+"', '"+uri+"', '"+k+"');"
 		
@@ -120,6 +123,9 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 	#uri :
 	req = False
 	
+	if isinstance(v, dict):
+		v = prs(v["value"])
+		
 	if t == "Keyword":
 		key = "Tool_has_Keyword"
 		req = "INSERT INTO Tool_has_Keyword VALUES ("+u+", '"+str(i)+"');"
