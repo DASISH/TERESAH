@@ -6,7 +6,30 @@ from queryBamboo import queryBamboo
 import re
 
 BeautifulSoup = bs4.BeautifulSoup
-
+#########
+#
+#
+#	SIDE FUNCTIONS
+#
+#
+#########
+#Return {href, value} or value directly from an field-item
+def getA(BS):
+	a = BS.find("a")
+	
+	if(a):
+		print a["href"]
+		data = {"href" : a["href"], "value" : a.get_text().strip()}
+	else:
+		data = BS.get_text().strip()
+	return data
+	
+##########
+#
+#
+#	CORE FUNCTIONS
+#
+##########
 def getContents(page, query=False):
 	ret = []
 	
@@ -54,12 +77,10 @@ def init():
 	sec, last = getPager(page[0])
 	
 	for i in range(sec, last+1):
-		print  "field_categories_tid=All&tid=All&sort_by=title&sort_order=ASC&page="+ str(i)
 		p = queryBamboo("/all", "field_categories_tid=All&tid=All&sort_by=title&sort_order=ASC&page="+ str(i))
 		page.append(p)
 		
 	return page
-#init()
 
 def parsePage(html, page):
 	
@@ -85,22 +106,17 @@ def parsePage(html, page):
 			for field in pan.findAll("section"):
 				#print field
 				t = field.find("h2", {"class" : "field-label"})
-				te = t.get_text()#.replace(":", "").strip()
+				te = t.get_text()
+				te = te.replace(u":", "")
 				
-				v = field.find(True, {"class" : "field-items"})
+				v = field.findAll(True, {"class" : "field-item"})
 				
-				if v.name == "ul":
+				if v:
 					dic[te] = []
-					for li in v.find_all("li"):
-						dic[te].append(li.get_text().strip())
-						
-				elif te.count("Platform") > 0:
-					dic[te] = []
-					for li in v.find_all("div"):
-						dic[te].append(li.get_text().strip())
-						
+					for item in v:
+						dic[te] = getA(item)
 				else:
-					dic[te] = v.get_text()
+					dic[te] =  getA(item)
 					
 	return dic
 
@@ -108,7 +124,6 @@ def parseContent(l):
 	extracted = []
 	for parent in l:
 		for page in parent:
-			print page
 			path = "./raw/" + page.replace("/", "-") + ".html"
 			f = open(path, "rt")
 			html = f.read()
@@ -117,28 +132,47 @@ def parseContent(l):
 	return extracted
 
 
-content = getContents(init(), True)
-
-parsed = parseContent(content)
-
 def convertXML(obj):
 	f = open("./output/bamboodirt.xml", "wt")
 	f.write("<?xml version=\"1.0\"?>\n")
 	
 	f.write("<data>\n")
 	for o in obj:
-		print o
+		#print o
 		f.write("\t<element>\n")
 		for key in o:
-			keyz = key.strip().replace(":", "").replace(" ", "")
+			keyz = key.strip().replace(" ", "")
 			if isinstance(o[key], list):
 				for oz in o[key]:
-					str = "\t\t<"+keyz+">"+oz+"</"+keyz+">\n"
-					f.write(str.encode("utf-8"))
+					if isinstance(oz, dict):
+						oz["value"] = oz["value"].strip()
+						str = "\t\t<"+keyz+" href=\""+oz["href"]+"\">"+oz["value"]+"</"+keyz+">\n"
+						f.write(str.encode("utf-8"))
+					else:
+						oz = oz.strip()
+						str = "\t\t<"+keyz+">"+oz+"</"+keyz+">\n"
+						f.write(str.encode("utf-8"))
 			else:
-				str = "\t\t<"+keyz+">"+o[key]+"</"+keyz+">\n"
+				oz = o[key]
+				if isinstance(oz, dict):
+					oz["value"] = oz["value"].strip()
+					str = "\t\t<"+keyz+" href=\""+oz["href"]+"\">"+oz["value"]+"</"+keyz+">\n"
+				else:
+					oz = oz.strip()
+					str = "\t\t<"+keyz+">"+oz+"</"+keyz+">\n"
 				f.write(str.encode("utf-8"))
 		f.write("\t</element>\n")
 	f.write("</data>\n")
 	
+#######################
+#
+#
+#		EXECUTION
+#
+#
+#######################
+
+#init()
+content = getContents(init(), True)
+parsed = parseContent(content)
 convertXML(parsed)
