@@ -8,5 +8,8 @@ if(!defined("DASISH")) {
 	die("Not authorized access");
 }
 
-require_once("./assets/sql.php")
+require_once("./assets/sql.php");
+
+ require_once("./assets/PieChart/index.php");
+
 ?>
