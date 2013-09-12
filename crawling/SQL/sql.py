@@ -88,7 +88,7 @@ def getRequest(t, i, v, h, k, p): # table, tool_uid, value, host, host key
 		req = "INSERT INTO Keyword VALUES (#id#, '"+v+"', '"+uri+"', '"+k+"');"
 		
 	elif t == "Tool_type":
-		req = "INSERT INTO Tool_type VALUES ('"+v+"', '"+uri+"');"
+		req = "INSERT INTO Tool_type VALUES ('#id#', '"+v+"', '"+uri+"');"
 		
 	elif t == "Platform":
 		v = OS[v]
@@ -132,7 +132,7 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 		
 	elif t == "Tool_type":
 		key = "Tool_has_Tool_type"
-		req = "INSERT INTO Tool_has_Tool_type VALUES ('"+v+"', '"+u+"');"
+		req = "INSERT INTO Tool_has_Tool_type VALUES ('"+str(i)+"', '"+u+"');"
 		
 		
 	elif t == "Platform":

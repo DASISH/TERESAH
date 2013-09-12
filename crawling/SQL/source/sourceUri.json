@@ -34,6 +34,7 @@
 	},
 	"URI" : {
 		"BambooDirt" : "http://dirt.projectbamboo.org",
-		"ArtsHumanities" : "http://www.arts-humanities.net"
+		"ArtsHumanities" : "http://www.arts-humanities.net",
+		"HistoryOnline" : "http://www.history.ac.uk/history-online/"
 	}
 }

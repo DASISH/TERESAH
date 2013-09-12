@@ -180,7 +180,7 @@ def getObj(ign, syn): # Take ignored list and synonym dictionnary as parameters
 #
 #
 ####################################################
-
+"""
 ignoredList = getIgnore()
 print ignoredList
 
@@ -190,4 +190,4 @@ print synonymList
 finalObject = getObj(ignoredList, synonymList)
 
 turnToJson(finalObject, "./tests/export.json")
-print len(finalObject)
+print len(finalObject)"""

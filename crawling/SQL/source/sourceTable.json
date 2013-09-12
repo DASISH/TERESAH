@@ -32,5 +32,23 @@
 		"page" : "", 
 		"tags" : "Keyword", 
 		"features" : "Feature"
+	},
+	"HistoryOnline" : {
+		"name" : "name",
+		"description" : "registryDescription",
+		"page" : "",
+		
+		"category" : "Tool_type",
+		"homepage" : "webpage",
+		"os" : "platform",
+		
+		"usercommunity" : "",
+		"othersoftware" : "",
+		
+		"price" : "Keyword",
+		"advanced" : "Keyword",
+		"purpose" : "Keyword",
+		"availability" : "Keyword",
+		"development" : "Keyword"
 	}
 }
