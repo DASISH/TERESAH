@@ -75,7 +75,7 @@ def createInsert(obj, host, key, request):
 	
 	return obj, id
 
-def getRequest(t, i, v, h, k): # table, tool_uid, value, host, host key
+def getRequest(t, i, v, h, k, p): # table, tool_uid, value, host, host key
 	#uri :
 	uri = srcURI["URI"][h] + srcURI[h][k]
 	req = False
@@ -96,7 +96,7 @@ def getRequest(t, i, v, h, k): # table, tool_uid, value, host, host key
 		
 	elif t == "registryDescription":
 		if v:
-			req = "INSERT INTO External_Description VALUES ('', "+str(i)+", '"+v+"', '"+uri+"', '"+h+"');"
+			req = "INSERT INTO External_Description VALUES ('', "+str(i)+", '"+v+"', '"+p+"', '"+h+"');"
 		else:
 			pass
 			
@@ -216,10 +216,10 @@ def filterObject(data):#We need to
 		for host in tmp:
 		
 			if host in conv:
-			
+				#desc["page"] = tmp[host]["page"]
 				for key in tmp[host]:
 					for el in tmp[host][key]:
-						r, add = getRequest(conv[host][key], str(tmp["id"]), prs(el), host, key)
+						r, add = getRequest(conv[host][key], str(tmp["id"]), prs(el), host, key,tmp[host]["page"][0])
 						
 						#If we actually use it :
 						if r:

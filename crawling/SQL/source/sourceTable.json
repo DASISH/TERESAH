@@ -22,7 +22,7 @@
 		"name" : "name", 
 		"creator" : "Developer", 
 		"specifications" : "Keyword", 
-		"description" : "", 
+		"description" : "registryDescription", 
 		"practice" : "Keyword", 
 		"lifecycle" : "Keyword", 
 		"platform" : "Platform", 
