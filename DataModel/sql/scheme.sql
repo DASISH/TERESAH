@@ -77,9 +77,10 @@ CREATE INDEX `fk_Licence_Licence_type1_idx` ON `tools_registry`.`Licence` (`type
 DROP TABLE IF EXISTS `tools_registry`.`Tool_type` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`Tool_type` (
-  `tool_type` VARCHAR(255) NOT NULL ,
+  `tool_type_uid` INT NOT NULL AUTO_INCREMENT ,
+  `tool_type` VARCHAR(255) NULL ,
   `sourceURI` VARCHAR(255) NULL ,
-  PRIMARY KEY (`tool_type`) )
+  PRIMARY KEY (`tool_type_uid`) )
 ENGINE = InnoDB;
 
 
@@ -661,12 +662,12 @@ CREATE INDEX `fk_Alternative_Title_Description1_idx` ON `tools_registry`.`Altern
 DROP TABLE IF EXISTS `tools_registry`.`Tool_has_Tool_type` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`Tool_has_Tool_type` (
-  `Tool_type_tool_type` VARCHAR(255) NOT NULL ,
+  `tool_type_uid` INT NOT NULL ,
   `Tool_UID` INT NOT NULL ,
-  PRIMARY KEY (`Tool_type_tool_type`, `Tool_UID`) ,
+  PRIMARY KEY (`tool_type_uid`, `Tool_UID`) ,
   CONSTRAINT `fk_Description_has_Tool_type_Tool_type1`
-    FOREIGN KEY (`Tool_type_tool_type` )
-    REFERENCES `tools_registry`.`Tool_type` (`tool_type` )
+    FOREIGN KEY (`tool_type_uid` )
+    REFERENCES `tools_registry`.`Tool_type` (`tool_type_uid` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Description_has_Tool_type_Tool1`
@@ -677,6 +678,8 @@ CREATE  TABLE IF NOT EXISTS `tools_registry`.`Tool_has_Tool_type` (
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_Description_has_Tool_type_Tool1_idx` ON `tools_registry`.`Tool_has_Tool_type` (`Tool_UID` ASC) ;
+
+CREATE INDEX `fk_Description_has_Tool_type_Tool_type1_idx` ON `tools_registry`.`Tool_has_Tool_type` (`tool_type_uid` ASC) ;
 
 
 -- -----------------------------------------------------
