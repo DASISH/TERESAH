@@ -150,7 +150,7 @@
 			#
 			#	MODES :
 			#
-			#		* Reverse = gets ToolType 							id is either null (List of ToolType) or (int() or varchar)
+			#		* Reverse = gets ToolType 							id is either null (List of ToolType) or int()
 			#		* ReverseAdvanced = gets Tools from ToolType		id cant be null
 			#		* Default = gets ToolType from Tool					id cant be null
 			#
@@ -162,7 +162,7 @@
 			if($mode == "Default") {
 			
 				#In default mode, $id is an int
-				$req = "SELECT t.tool_type as type, t.sourceURI as uri FROM Tool_type t, Tool_has_Tool_type tt WHERE tt.Tool_type_tool_type = t.Tool_type AND tt.Tool_UID = ?";
+				$req = "SELECT t.tool_type as type, t.sourceURI as uri FROM Tool_type t, Tool_has_Tool_type tt WHERE tt.Tool_type_uid = t.tool_type_uid AND tt.Tool_UID = ?";
 				$req = $this->DB->prepare($req);
 				$req->execute(array($id));
 				
