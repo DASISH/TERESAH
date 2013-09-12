@@ -77,7 +77,7 @@ def createInsert(obj, host, key, request):
 
 def getRequest(t, i, v, h, k, p): # table, tool_uid, value, host, host key
 	#uri :
-	uri = srcURI["URI"][h] + srcURI[h][k]
+	uri = srcURI["URI"][h] + srcURI[h][k] +"/"+ v
 	req = False
 	add = False
 	
