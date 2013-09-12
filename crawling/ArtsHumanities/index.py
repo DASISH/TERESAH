@@ -70,10 +70,20 @@ def init():
 def die(error_message):
     raise Exception(error_message)
 	
+#Return {href, value} or value directly from an field-item
+def getA(BS):
+	a = BS.find("a")
+	if(a):
+		data = {"href" : a["href"], "value" : a.get_text()}
+	else:
+		data = BS.get_text()
+	return data
+
 #Return content from a class
 def parseClass(BS, claSS, obj, name):
 	
 	feature = BS.find("div", {"class": claSS})
+	
 	if feature:
 		fieldItem = feature.find_all("div", {"class" : "field-item"})
 		if len(fieldItem) > 1:
@@ -81,7 +91,7 @@ def parseClass(BS, claSS, obj, name):
 				die("in fieldItem")
 			strFeat= list()
 			for div in fieldItem:
-				strFeat.append(div.get_text())
+				strFeat.append(getA(div))
 			#TEST
 		else:
 			itemFeat = feature.find_all("p")
@@ -118,7 +128,7 @@ def parseClass(BS, claSS, obj, name):
 					#die(claSS + "not in itemFeat")
 				else:
 					itemFeat = feature.find("div", {"class" : "field-items"})
-					strFeat = itemFeat.get_text()
+					strFeat = getA(itemFeat)
 		obj[name] = strFeat
 		
 	return obj
@@ -188,13 +198,22 @@ def convertXML(obj):
 			keyz = key.strip().replace(" ", "")
 			if isinstance(o[key], list):
 				for oz in o[key]:
-					oz = oz.strip()
-					str = "\t\t<"+keyz+">"+oz+"</"+keyz+">\n"
-					f.write(str.encode("utf-8"))
+					if isinstance(oz, dict):
+						oz["value"] = oz["value"].strip()
+						str = "\t\t<"+keyz+" href=\""+oz["href"]+"\">"+oz["value"]+"</"+keyz+">\n"
+						f.write(str.encode("utf-8"))
+					else:
+						oz = oz.strip()
+						str = "\t\t<"+keyz+">"+oz+"</"+keyz+">\n"
+						f.write(str.encode("utf-8"))
 			else:
 				oz = o[key]
-				oz = oz.strip()
-				str = "\t\t<"+keyz+">"+oz+"</"+keyz+">\n"
+				if isinstance(oz, dict):
+					oz["value"] = oz["value"].strip()
+					str = "\t\t<"+keyz+" href=\""+oz["href"]+"\">"+oz["value"]+"</"+keyz+">\n"
+				else:
+					oz = oz.strip()
+					str = "\t\t<"+keyz+">"+oz+"</"+keyz+">\n"
 				f.write(str.encode("utf-8"))
 		f.write("\t</element>\n")
 	f.write("</data>\n")
