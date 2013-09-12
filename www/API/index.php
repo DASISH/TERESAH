@@ -1,4 +1,4 @@
-<pre><?php
+<?php
 	define("DASISH", true);
 	 
 	#Require configuration, frameworks, assets 
@@ -29,4 +29,4 @@
 	require_once './routes/index.php';
 	
 	$app->run();
-?></pre>
+?>
