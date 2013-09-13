@@ -32,17 +32,19 @@
 			#
 			###########
 			
-			$req = "SELECT d.title, t.UID, t.shortname
-					FROM Description d, Tool t, 
-					(SELECT tk.Tool_UID FROM Keyword k, Tool_has_Keyword tk WHERE tk.Keyword_id = k.keyword_uid AND k.keyword LIKE CONCAT('%', ?, '%') ".$sensitivity.") tk,
-					(SELECT d.Tool_UID FROM External_Description d WHERE d.description LIKE CONCAT('%', ?, '%') ".$sensitivity.") ED
-					WHERE d.Tool_UID = t.UID
-					AND (tk.Tool_UID = t.UID OR ED.Tool_UID = t.UID)
-					GROUP BY t.UID
-					ORDER BY t.shortname
-					LIMIT ".$options["start"]." , ".$options["limit"];
+			$req = "SELECT d.title, t.UID, t.shortname FROM Description d 
+						INNER JOIN Tool t ON t.UID = d.Tool_UID 
+						RIGHT OUTER JOIN Tool_has_Keyword tk ON tk.Tool_UID = t.UID
+						RIGHT OUTER JOIN Keyword k ON k.keyword_uid = tk.keyword_id
+						RIGHT OUTER JOIN External_Description ED ON ED.Tool_UID = t.UID
+					WHERE 
+						k.keyword LIKE CONCAT('%', ? , '%') ".$sensitivity." OR
+						d.description LIKE CONCAT('%', ? , '%') ".$sensitivity." OR
+						ED.description LIKE CONCAT('%', ? , '%') ".$sensitivity."  
+					GROUP BY d.Tool_UID
+					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
 			$req = $this->DB->prepare($req);
-			$req->execute(array($reqWord, $reqWord));
+			$req->execute(array($reqWord, $reqWord, $reqWord));
 			
 			
 			$options["results"] = $req->rowCount();
