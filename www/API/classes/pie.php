@@ -25,7 +25,6 @@
 			$req = $this->DB->prepare($req);
 			$req->execute();
 			
-			$counter = 0;
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
 			
 			#Input the data in some array
@@ -37,6 +36,21 @@
 				#print $chart->addSlice($provider["name"], (float) $counter, $this->colors[$counter]);
 			}
 			
+			$req = "SELECT count(UID) as number FROM Description WHERE description != \"&nbsp;\"";
+			$req = $this->DB->prepare($req);
+			$req->execute();
+			$data = $req->fetch(PDO::FETCH_ASSOC);
+			
+			
+				$ints[] = (int) $data["number"];
+				$label[] = "DASISH";
+			
+			####
+			#
+			#	GRAPH
+			#
+			####
+		
 			#Number of non empty descriptions from our registry
 			#print_r($ints);
 			#print_r($label);
