@@ -16,35 +16,58 @@
 		function ppie($myPicture,$MyData) {
 			return new pPie($myPicture,$MyData);
 		}
-		function descriptions() {
-		
-			
-			
-			#Getting number of descriptions following Provider
-			$req = "SELECT count(UID) as number, registry_name as name FROM External_Description GROUP BY registry_name";
-			$req = $this->DB->prepare($req);
-			$req->execute();
-			
-			$data = $req->fetchAll(PDO::FETCH_ASSOC);
-			
-			#Input the data in some array
-			$ints = array();
-			$label = array();
-			foreach($data as $provider) {
-				$ints[] = (int) $provider["number"];
-				$label[] = $provider["name"];
-				#print $chart->addSlice($provider["name"], (float) $counter, $this->colors[$counter]);
-			}
-			
-			$req = "SELECT count(UID) as number FROM Description WHERE description != \"&nbsp;\"";
-			$req = $this->DB->prepare($req);
-			$req->execute();
-			$data = $req->fetch(PDO::FETCH_ASSOC);
-			
-			
+		function descriptions($mode = "Default") {
+			###
+			#
+			#	Default : Get descriptions by repository
+			#	ByTool : Get amount of descriptions by tool
+			#
+			###
+			if ($mode == "Default") {
+				$legend = "Representation of Registries in Descriptions";
+				#Getting number of descriptions following Provider
+				$req = "SELECT count(UID) as number, registry_name as name FROM External_Description GROUP BY registry_name";
+				$req = $this->DB->prepare($req);
+				$req->execute();
+				
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
+				
+				#Input the data in some array
+				$ints = array();
+				$label = array();
+				foreach($data as $provider) {
+					$ints[] = (int) $provider["number"];
+					$label[] = $provider["name"];
+					#print $chart->addSlice($provider["name"], (float) $counter, $this->colors[$counter]);
+				}
+				
+				$req = "SELECT count(UID) as number FROM Description WHERE description != \"&nbsp;\"";
+				$req = $this->DB->prepare($req);
+				$req->execute();
+				$data = $req->fetch(PDO::FETCH_ASSOC);
+				
+				
 				$ints[] = (int) $data["number"];
 				$label[] = "DASISH";
-			
+			} elseif($mode == "ByTool") {
+				$legend = "Amount of Ext. Descriptions by Tool";
+				$req = "SELECT count(*) as amount, number as legend FROM (SELECT count(*) as number FROM External_Description GROUP BY Tool_UID) A GROUP BY number";
+				$req = $this->DB->prepare($req);
+				$req->execute();
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
+				
+				#Input the data in some array
+				$ints = array();
+				$label = array();
+				foreach($data as $provider) {
+					$ints[] = (int) $provider["amount"];
+					if((int) $provider["legend"] > 1) {
+						$label[] = $provider["legend"] . " Descriptions";
+					} else {
+						$label[] = $provider["legend"] . " Description";
+					}
+				}
+			}
 			####
 			#
 			#	GRAPH
@@ -64,7 +87,7 @@
 			$myPicture = new pImage(500,400,$MyData);
 			
 			$myPicture->setFontProperties(array("FontName"=>"./assets/PieChart/fonts/Oswald/Oswald-Regular.ttf","FontSize"=>20));
-			$myPicture->drawText(20,40,"Representation of Registry in Descriptions",array("R"=>0,"G"=>0,"B"=>0));
+			$myPicture->drawText(20,40,$legend,array("R"=>0,"G"=>0,"B"=>0));
 			
 			
 			$PieChart = new pPie($myPicture,$MyData);
