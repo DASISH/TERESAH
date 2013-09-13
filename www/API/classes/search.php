@@ -19,11 +19,11 @@
 			#####
 			//Default research search in keyword, description AND external Description AND Application_Type
 			$options = array();
-			if(!isset($get["request"])) { return array("error" => "No request given"); }
+			if(!isset($get["request"])) { return array("error" => "No request given"); } else { $options["request"] = $get["request"];}
 			if(!isset($get["case_insensitivity"])) { $options["case_insensitivity"] = false; $sensitivity = ""; } else {$options["case_insensitivity"] = true; $sensitivity = "COLLATE utf8_general_ci"; }
 			if(!isset($get["limit"]) || intval($get["limit"]) > 50) { $options["limit"] = 20; } else { $options["limit"] = (int) $get["limit"]; }
 			if(!isset($get["start"])) { $options["start"] = 0; } else { $options["start"] = (int) $get["start"]; }
-			$reqWord = "xml";
+			#$reqWord = "xml";
 			// $reqWord = "%".$reqWord."%";
 			
 			###########
@@ -44,7 +44,7 @@
 					GROUP BY d.Tool_UID
 					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
 			$req = $this->DB->prepare($req);
-			$req->execute(array($reqWord, $reqWord, $reqWord));
+			$req->execute(array($options["request"], $options["request"], $options["request"]));
 			
 			
 			$options["results"] = $req->rowCount();
