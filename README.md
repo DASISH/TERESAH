@@ -4,7 +4,7 @@ DASISHT23
 ### Warning
 This readme is only written for Ubuntu/Debian machine. It has been tested on a VM using Ubuntu 12.10
 
-### Install WAMP
+### Install LAMP
 
 First we need to install a wamp solution on your machine
 
@@ -56,5 +56,5 @@ In your terminal, follow these steps :
 	
 ### Using Crawling data
 
-** Before using any date issued by /crawling/Bamboo/sql.py ** , please use this command as well
+** Before using any data issued by /crawling/Bamboo/sql.py ** , please use this command as well
 	mysql --user=root --password=root tools_registry < ./DataModel/sql/nobug.sql 
