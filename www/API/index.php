@@ -4,13 +4,15 @@
 	#Require configuration, frameworks, assets 
 	require_once "./conf/config.php";
 	
-	require 'Slim/Slim.php';
-	require_once './assets/index.php';
+	require_once '../common/Slim/Slim.php';
+	require_once '../common/PieChart/index.php';
+	require_once '../common/SQL.PDO.php';
+	
 	require_once './classes/index.php';
 
 	#json Print_R
 	function jP($array) {
-		print_r(json_encode($array));#, JSON_PRETTY_PRINT));
+		print(json_encode($array));#, JSON_PRETTY_PRINT));
 	}
     
 	#Start the framework
