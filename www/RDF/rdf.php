@@ -9,9 +9,7 @@ class Rdf {
     }
 
     function all() {
-
         $rdfXML = $this->_rdf();
-        $namespace = $this->_namespaces();
 
         $this->_tool($rdfXML);
         $this->_keyword($rdfXML);
