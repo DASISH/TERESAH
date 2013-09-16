@@ -23,7 +23,7 @@ class Rdf {
     function _tool($id = null) {
         $tools = array();
 
-        $query = "SELECT t.UID, t.shortname, d.description, d.title, d.homepage FROM Tool t
+        $query = "SELECT t.UID, t.shortname, d.description, d.title, d.homepage, d.available_from, d.registered FROM Tool t
                       INNER JOIN Description d ON t.UID = d.Tool_UID";
 
         if ($id) {
