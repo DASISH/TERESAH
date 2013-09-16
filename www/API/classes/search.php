@@ -221,7 +221,7 @@
 
 					} else {
 						if(isset($o["optionnal"])) {
-							$joinText = "RIGHT OUTER JOIN";
+							$joinText = "LEFT OUTER JOIN";
 						} else {
 							$joinText = "INNER JOIN";
 						}
