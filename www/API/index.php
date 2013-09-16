@@ -12,6 +12,12 @@
 	function jP($array) {
 		print_r(json_encode($array));#, JSON_PRETTY_PRINT));
 	}
+        
+        function xmlP($xml){
+            $app = \Slim\Slim::getInstance();
+            $app->response->headers->set('Content-Type', 'text/xml');
+            print $xml->asXML();
+        }
 	#Start the framework
 	\Slim\Slim::registerAutoloader();
 	$app = new \Slim\Slim();
