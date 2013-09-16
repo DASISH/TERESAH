@@ -8,15 +8,13 @@ class Rdf {
         $this->DB = $DB;
     }
 
-    function general($get) {
+    function all() {
 
         $rdfXML = $this->_rdf();
         $namespace = $this->_namespaces();
-        
-        $this->_tool($rdfXML);
-        
-        $this->_keyword($rdfXML);
 
+        $this->_tool($rdfXML);
+        $this->_keyword($rdfXML);
 
         return $rdfXML;
     }
@@ -45,26 +43,26 @@ class Rdf {
             'doap' => 'http://usefulinc.com/doap/',
         );
     }
-    
-    function _prefix(){
+
+    function _prefix() {
         return 'http://tools.dasish.eu/';
     }
 
     function _tool(&$rdfXML, $id = null) {
         $namespace = $this->_namespaces();
-        
+
         $query = "SELECT t.UID, t.shortname, d.description, d.title, d.homepage FROM Tool t
                       INNER JOIN Description d ON t.UID = d.Tool_UID";
 
-        if($id){
+        if ($id) {
             $query .= " WHERE t.UID = ?";
             $req = $this->DB->prepare($query);
             $req->execute(array($id));
-        }else{
+        } else {
             $req = $this->DB->prepare($query);
-            $req->execute();            
+            $req->execute();
         }
-        
+
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as &$row) {
@@ -97,10 +95,10 @@ class Rdf {
             }
         }
     }
-    
-    function _keyword(&$rdfXML){
+
+    function _keyword(&$rdfXML) {
         $namespace = $this->_namespaces();
-        
+
         $query = "SELECT * FROM keyword";
         $req = $this->DB->prepare($query);
         $req->execute();
@@ -114,8 +112,9 @@ class Rdf {
                 $sameAs = $keyword->addChild('sameAs', null, $namespace['owl']);
                 $sameAs->addAttribute('rdf:resource', $row['sourceURI'], $namespace['rdf']);
             }
-        }        
+        }
     }
+
 }
 
 $rdf = new Rdf();
