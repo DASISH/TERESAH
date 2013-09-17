@@ -14,7 +14,7 @@ class Rdf {
         return array_merge(
                     $this->_tool(), 
                     $this->_keyword()
-                );
+               );
     }
 
     function _prefix() {
@@ -24,7 +24,7 @@ class Rdf {
     function _tool($id = null) {
         $result = array();
 
-        $query = "SELECT t.UID, t.shortname, d.description, d.title, d.homepage, d.available_from, d.registered FROM Tool t
+        $query = "SELECT t.UID, t.shortname, d.description, d.title, d.homepage, d.available_from, d.registered, d.Licence_UID FROM Tool t
                       INNER JOIN Description d ON t.UID = d.Tool_UID";
 
         if ($id) {
@@ -65,6 +65,9 @@ class Rdf {
             
             foreach ($keywords as &$keyword) {
                 $result[$uri][$this->_pre('dcterms').'subject'][] = $this->_val($this->_pre('dasish').'keyword/'.$keyword['Keyword_id'], 'uri');
+                if($id){
+                    $result = array_merge($result, $this->_keyword($keyword['Keyword_id']));
+                }
             }
             
             //hasType
@@ -111,8 +114,14 @@ class Rdf {
         $result = array();
         
         $query = "SELECT * FROM keyword";
-        $req = $this->DB->prepare($query);
-        $req->execute();
+        if ($id) {
+            $query .= " WHERE keyword_uid = ?";
+            $req = $this->DB->prepare($query);
+            $req->execute(array($id));
+        } else {
+            $req = $this->DB->prepare($query);
+            $req->execute();
+        }
         
         $keywords = $req->fetchAll(PDO::FETCH_ASSOC);
         foreach ($keywords as &$keyword) {
