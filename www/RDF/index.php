@@ -1,4 +1,5 @@
 <?php
+
 define("DASISH", true);
 
 #Require configuration, frameworks, assets 
@@ -11,23 +12,13 @@ require '../common/EasyRdf/EasyRdf.php';
 #classes
 require_once './rdf.php';
 
-function render_ttl($data) {
-    $app = \Slim\Slim::getInstance();
-    $app->response->headers->set('Content-Type', 'text/plain');
-    
-    ob_start();
-    include_once("templates/rdf.php");    
-    $xml = ob_get_contents();
-    ob_end_clean();
-        
-    
+function output_rdf($data, $format){
     $graph = new EasyRdf_Graph('http://tools.dasish.eu');
-    $graph->parse($xml, 'rdfxml', 'http://tools.dasish.eu');
-    
-    $format = EasyRdf_Format::getFormat('turtle');
-    
-    print $graph->serialise($format);
-    
+    $graph->parse($data, 'php', 'http://tools.dasish.eu');
+
+    $output_format = EasyRdf_Format::getFormat($format);
+
+    print $graph->serialise($output_format);        
 }
 
 #Start the framework
