@@ -30,6 +30,6 @@
  */
 
 	require_once './routes/index.php';
-	
+	header('Content-Type: application/json');
 	$app->run();
 ?>
