@@ -6,6 +6,15 @@ class Rdf {
         #Gettings globals
         global $DB;
         $this->DB = $DB;
+        
+        $this->pre = array(
+            'dasish'    => 'http://tools.dasish.eu/',
+            'rdf'       => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+            'rdfs'      => 'http://www.w3.org/2000/01/rdf-schema#',
+            'dcterms'   => 'http://purl.org/dc/terms/',
+            'foaf'      => 'http://xmlns.com/foaf/0.1/',
+            'owl'       => 'http://www.w3.org/2002/07/owl#'
+        );
     }
 
     function all() {
@@ -39,22 +48,22 @@ class Rdf {
         $tools = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($tools as &$tool) {
-            $uri = $this->_pre('dasish').'tool/'.$tool['UID'];
+            $uri = $this->pre['dasish'].'tool/'.$tool['UID'];
             
-            $result[$uri][$this->_pre('rdf').'type'][]        = $this->_val('http://schema.org/SoftwareApplication', 'uri');
-            $result[$uri][$this->_pre('dcterms').'identifier'][] = $this->_val($tool['shortname']);
-            $result[$uri][$this->_pre('dcterms').'title'][]   = $this->_val(htmlspecialchars($tool['title']));
-            $result[$uri][$this->_pre('dcterms').'created'][] = $this->_val($tool['registered']);
+            $result[$uri][$this->pre['rdf'].'type'][]        = $this->_val('http://schema.org/SoftwareApplication', 'uri');
+            $result[$uri][$this->pre['dcterms'].'identifier'][] = $this->_val($tool['shortname']);
+            $result[$uri][$this->pre['dcterms'].'title'][]   = $this->_val(htmlspecialchars($tool['title']));
+            $result[$uri][$this->pre['dcterms'].'created'][] = $this->_val($tool['registered']);
             
             if($tool['homepage'] != 'Unknown'){
-                $result[$uri][$this->_pre('foaf').'homepage'][] = $this->_val($tool['homepage'], 'uri');
+                $result[$uri][$this->pre['foaf'].'homepage'][] = $this->_val($tool['homepage'], 'uri');
             }
             
             if($tool['available_from']){  
-                $result[$uri][$this->_pre('dcterms').'available'][]   = $this->_val(htmlspecialchars($tool['available_from']));
+                $result[$uri][$this->pre['dcterms'].'available'][]   = $this->_val(htmlspecialchars($tool['available_from']));
             }
             if($tool['description'] != '&nbsp;'){  
-                $result[$uri][$this->_pre('dcterms').'description'][]   = $this->_val(htmlspecialchars($tool['description']));
+                $result[$uri][$this->pre['dcterms'].'description'][]   = $this->_val(htmlspecialchars($tool['description']));
             }
             
             //hasKeyword
@@ -64,7 +73,7 @@ class Rdf {
             $keywords = $keywordQuery->fetchAll(PDO::FETCH_ASSOC);
             
             foreach ($keywords as &$keyword) {
-                $result[$uri][$this->_pre('dcterms').'subject'][] = $this->_val($this->_pre('dasish').'keyword/'.$keyword['Keyword_id'], 'uri');
+                $result[$uri][$this->pre['dcterms'].'subject'][] = $this->_val($this->pre['dasish'].'keyword/'.$keyword['Keyword_id'], 'uri');
                 if($id){
                     $result = array_merge($result, $this->_keyword($keyword['Keyword_id']));
                 }
@@ -76,8 +85,8 @@ class Rdf {
             $toolTypeQuery->execute(array($tool['UID']));
             $tool_types = $toolTypeQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($tool_types as &$tool_type) {
-                $result[$uri][$this->_pre('rdf').'type'][] = $this->_val($tool_type['sourceURI'], 'uri');
-                $result[$uri][$this->_pre('rdf').'type'][] = $this->_val($this->_pre('dasish').'tool_type/'.$tool_type['tool_type_uid'], 'uri');
+                $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($tool_type['sourceURI'], 'uri');
+                $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($this->pre['dasish'].'tool_type/'.$tool_type['tool_type_uid'], 'uri');
             }
             
             //hasPlatform (using dbpedia)
@@ -89,7 +98,7 @@ class Rdf {
                 if($platform['Platform_platform'] == 'osX'){
                     $platform['Platform_platform'] = 'OS_X';
                 }
-                $result[$uri][$this->_pre('dcterms').'requires'][] = $this->_val('http://dbpedia.org/page/'.$platform['Platform_platform'], 'uri');
+                $result[$uri][$this->pre['dcterms'].'requires'][] = $this->_val('http://dbpedia.org/page/'.$platform['Platform_platform'], 'uri');
             }
             
             //externalDescription (blank node)
@@ -98,11 +107,11 @@ class Rdf {
             $external_descriptionQuery->execute(array($tool['UID']));
             $external_descriptions = $external_descriptionQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($external_descriptions as &$external_description) {
-                $result[$uri][$this->_pre('owl').'sameAs'][]            = $this->_val($external_description['sourceURI'], 'uri');
-                $result[$uri][$this->_pre('dcterms').'description'][]   = $this->_val('_:'.$external_description['UID'], 'bnode');
+                $result[$uri][$this->pre['owl'].'sameAs'][]            = $this->_val($external_description['sourceURI'], 'uri');
+                $result[$uri][$this->pre['dcterms'].'description'][]   = $this->_val('_:'.$external_description['UID'], 'bnode');
                 
-                $result['_:'.$external_description['UID']][$this->_pre('dcterms').'description'][] = $this->_val($external_description['description']);
-                $result['_:'.$external_description['UID']][$this->_pre('dcterms').'source'][] = $this->_val($external_description['sourceURI'], 'uri');
+                $result['_:'.$external_description['UID']][$this->pre['dcterms'].'description'][] = $this->_val($external_description['description']);
+                $result['_:'.$external_description['UID']][$this->pre['dcterms'].'source'][] = $this->_val($external_description['sourceURI'], 'uri');
             }
         }
         return $result;
@@ -125,31 +134,18 @@ class Rdf {
         
         $keywords = $req->fetchAll(PDO::FETCH_ASSOC);
         foreach ($keywords as &$keyword) {
-            $uri = $this->_pre('dasish').'keyword/'.$keyword['keyword_uid'];
+            $uri = $this->pre['dasish'].'keyword/'.$keyword['keyword_uid'];
             
-            $result[$uri][$this->_pre('rdf').'type'][]      = $this->_val('http://isocat.org/datcat/DC-278', 'uri');
-            $result[$uri][$this->_pre('dcterms').'type'][]  = $this->_val($keyword['sourceTaxonomy']);
-            $result[$uri][$this->_pre('rdfs').'label'][]    = $this->_val(htmlspecialchars($keyword['keyword']));
-            $result[$uri][$this->_pre('owl').'sameAs'][]    = $this->_val($keyword['sourceURI'], 'uri');
+            $result[$uri][$this->pre['rdf'].'type'][]      = $this->_val('http://isocat.org/datcat/DC-278', 'uri');
+            $result[$uri][$this->pre['dcterms'].'type'][]  = $this->_val($keyword['sourceTaxonomy']);
+            $result[$uri][$this->pre['rdfs'].'label'][]    = $this->_val(htmlspecialchars($keyword['keyword']));
+            $result[$uri][$this->pre['owl'].'sameAs'][]    = $this->_val($keyword['sourceURI'], 'uri');
         }
         
         return $result;
     }
         
-    function _pre($id){
-        $namespaces = array(
-            'dasish'    =>'http://tools.dasish.eu/',
-            'rdf'       => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-            'rdfs'      => 'http://www.w3.org/2000/01/rdf-schema#',
-            'dcterms'   => 'http://purl.org/dc/terms/',
-            'foaf'      => 'http://xmlns.com/foaf/0.1/',
-            'owl'       => 'http://www.w3.org/2002/07/owl#'
-        );
-        
-        return $namespaces[$id];
-    }
-    
-    function _val($value, $type='literal'){
+    function _val($value, $type = 'literal'){
         return array('type' => $type, 'value' => $value);
     }
 }
