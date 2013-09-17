@@ -46,7 +46,7 @@ class Rdf {
             $result[$uri][$this->_pre('dcterms').'created'][] = $this->_val($tool['registered']);
             
             if($tool['homepage'] != 'Unknown'){
-                $result[$uri][$this->_pre('foaf').'homepage'][] = $this->_val($tool['homepage']);
+                $result[$uri][$this->_pre('foaf').'homepage'][] = $this->_val($tool['homepage'], 'uri');
             }
             
             if($tool['available_from']){  
@@ -76,12 +76,15 @@ class Rdf {
                 $result[$uri][$this->_pre('rdf').'type'][] = $this->_val($this->_pre('dasish').'tool_type/'.$tool_type['tool_type_uid'], 'uri');
             }
             
-            //hasPlatform
+            //hasPlatform (using dbpedia)
             $platformSQL = "SELECT * FROM tool_has_platform WHERE Tool_UID = ?;";
             $platformQuery = $this->DB->prepare($platformSQL);
             $platformQuery->execute(array($tool['UID']));
             $platforms = $platformQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($platforms as &$platform) {
+                if($platform['Platform_platform'] == 'osX'){
+                    $platform['Platform_platform'] = 'OS_X';
+                }
                 $result[$uri][$this->_pre('dcterms').'requires'][] = $this->_val('http://dbpedia.org/page/'.$platform['Platform_platform'], 'uri');
             }
         }
@@ -100,7 +103,7 @@ class Rdf {
             $uri = $this->_pre('dasish').'keyword/'.$keyword['keyword_uid'];
             
             $result[$uri][$this->_pre('rdf').'type'][]      = $this->_val('http://isocat.org/datcat/DC-278', 'uri');
-            $result[$uri][$this->_pre('rdf').'type'][]      = $this->_val($keyword['sourceTaxonomy']);
+            $result[$uri][$this->_pre('dcterms').'type'][]  = $this->_val($keyword['sourceTaxonomy']);
             $result[$uri][$this->_pre('rdfs').'label'][]    = $this->_val(htmlspecialchars($keyword['keyword']));
             $result[$uri][$this->_pre('owl').'sameAs'][]    = $this->_val($keyword['sourceURI'], 'uri');
         }
@@ -110,12 +113,12 @@ class Rdf {
         
     function _pre($id){
         $namespaces = array(
-            'dasish'=>'http://tools.dasish.eu/',
-            'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-            'rdfs'=> 'http://www.w3.org/2000/01/rdf-schema#',
-            'dcterms' => 'http://purl.org/dc/terms/',
-            'foaf' => 'http://xmlns.com/foaf/0.1/',
-            'owl' => 'http://www.w3.org/2002/07/owl#'
+            'dasish'    =>'http://tools.dasish.eu/',
+            'rdf'       => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+            'rdfs'      => 'http://www.w3.org/2000/01/rdf-schema#',
+            'dcterms'   => 'http://purl.org/dc/terms/',
+            'foaf'      => 'http://xmlns.com/foaf/0.1/',
+            'owl'       => 'http://www.w3.org/2002/07/owl#'
         );
         
         return $namespaces[$id];
