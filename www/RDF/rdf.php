@@ -9,11 +9,12 @@ class Rdf {
     }
 
     function all() {
-        $result = array();
-        $result = $this->_tool();
-        $result = array_merge($this->_keyword(), $result);
-
-        return $result;
+        ini_set('max_execution_time', 120);
+        
+        return array_merge(
+                    $this->_tool(), 
+                    $this->_keyword()
+                );
     }
 
     function _prefix() {
@@ -67,7 +68,7 @@ class Rdf {
             }
             
             //hasType
-            $toolTypeSQL = "SELECT * FROM tool_type tt INNER JOIN tool_has_tool_type th ON tt.tool_type_uid = th.tool_type_uid WHERE th.Tool_UID = ?;";
+            $toolTypeSQL = "SELECT * FROM tool_type tt INNER JOIN tool_has_tool_type th ON tt.tool_type_uid = th.tool_type_uid WHERE th.Tool_UID = ?";
             $toolTypeQuery = $this->DB->prepare($toolTypeSQL);
             $toolTypeQuery->execute(array($tool['UID']));
             $tool_types = $toolTypeQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -87,9 +88,24 @@ class Rdf {
                 }
                 $result[$uri][$this->_pre('dcterms').'requires'][] = $this->_val('http://dbpedia.org/page/'.$platform['Platform_platform'], 'uri');
             }
+            
+            //externalDescription (blank node)
+            $external_descriptionSQL = "SELECT * FROM external_description WHERE Tool_UID = ?;";
+            $external_descriptionQuery = $this->DB->prepare($external_descriptionSQL);
+            $external_descriptionQuery->execute(array($tool['UID']));
+            $external_descriptions = $external_descriptionQuery->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($external_descriptions as &$external_description) {
+                $result[$uri][$this->_pre('owl').'sameAs'][]            = $this->_val($external_description['sourceURI'], 'uri');
+                $result[$uri][$this->_pre('dcterms').'description'][]   = $this->_val('_:'.$external_description['UID'], 'bnode');
+                
+                $result['_:'.$external_description['UID']][$this->_pre('dcterms').'description'][] = $this->_val($external_description['description']);
+                $result['_:'.$external_description['UID']][$this->_pre('dcterms').'source'][] = $this->_val($external_description['sourceURI'], 'uri');
+            }
         }
         return $result;
     }
+    
+    
 
     function _keyword($id = null) {
         $result = array();
