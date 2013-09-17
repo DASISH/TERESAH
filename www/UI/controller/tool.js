@@ -1,22 +1,30 @@
 var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($scope, $ui, $item) {
 	console.log("Hello from tool")
-	$scope.item = { 
-		raw : $item.data,
-		desc : {
-			name : "Test"
+	console.log($item.data)
+	$scope.item = $item.data;
+	
+	//Will change
+	if($scope.item.descriptions.description[0]) {
+		$scope.item.desc = $scope.item.descriptions.description[0];
+	}
+	$scope.ui = {
+		changeDesc : function(provider) {
+			if(typeof provider == "string") {
+			} else {
+				$scope.item.desc = provider;
+			}
 		}
 	};
 	
-	$scope.ui = { 
-	};
+	$ui.title("Tool | " + $scope.item.descriptions.title);
 	
-	$ui.title("Tool | " + $scope.item.desc.name);
+	//exec
 }]);
 Tool.resolveTool = {
 	itemData: function($route, Item) {
 		console.log($route.current.params.toolId);
-		var result = Item.query($route.current.params.toolId);
-		return result;
+		this.data = Item.query($route.current.params.toolId);
+		return this.data;
 	},
 	delay: function($q, $timeout) {
 		var delay = $q.defer();

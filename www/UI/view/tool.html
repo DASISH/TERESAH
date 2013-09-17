@@ -1,1 +1,33 @@
-{{item.raw}}
+
+<div class="row"><h1>{{item.descriptions.title}}</div>
+<div class="row">
+
+	<div class="col-lg-8">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>{{item.desc.provider}}</h2>
+				<p>Source : <a href="{{item.desc.uri}}">{{item.desc.uri}}</a></p>
+				<p>{{item.desc.text}}</p>
+			</div>
+			<div class="col-lg-12">
+				<h2>Keyword</h2>
+				<ul  class="list-inline">
+					<li ng-repeat="kw in item.keyword" >{{kw.keyword}}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<a class="btn btn-primary btn-lg btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)">{{desc.provider}}</a>
+		<p>&nbsp;</p>
+		<h2 class="btn btn-success btn-lg btn-block">Informations</h2>
+		<dl>
+			<dt>Licence</dt>
+			<dd>{{item.descriptions.licence.name}}</dd>
+			<dt>Licence Type</dt>
+			<dd>{{item.descriptions.licence.type}}</dd>
+			<dt>Homepage</dt>
+			<dd><a href="{{item.descriptions.homepage}}">{{item.descriptions.homepage}}</a></dd>
+		</dl>
+	</div>
+</div>

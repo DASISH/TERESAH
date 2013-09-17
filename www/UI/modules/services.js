@@ -1,6 +1,6 @@
 portal.factory("ui", function($window, $rootScope) {
 	var ui = {
-		title : function(title) { $window.document.title = "EHRI Portal | " + title; },
+		title : function(title) { $window.document.title = "DASISH Tool Registry | " + title; },
 		bookmark : {
 			//Inspired by http://www.quirksmode.org/js/cookies.html
 			create : function(name,value, days) {
@@ -69,10 +69,9 @@ portal.factory("ui", function($window, $rootScope) {
 }).factory('Item', function($resource){
 	
 	var Item = {
-		resrce : $resource("http://192.168.56.101\\:8080/tool/:itemID", {itemID : "@itemID"}, { query:  {method: 'GET', isArray: true} }),
+		resrce : $resource("http://192.168.56.101\\:8080/tool/:itemID?keyword", {itemID : "@itemID"}, { query:  {method: 'GET'} }),
 		query : function(item) {
-			data = this.resrce.query({itemID : item}, function(u) { console.log(u); }); 
-			console.log(data);
+			this.resrce.query({itemID : item}, function(u) { Item.data = u; return u; }); 
 		}
 	}
 	
