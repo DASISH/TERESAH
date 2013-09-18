@@ -11,6 +11,17 @@
 		
 	});
 
+	$app->get('/search/all', function () use ($search, $app) { 
+		$data = $search->all($app->request->get()); 
+		
+		if(isset($data["Error"])) {
+			$app->response()->status(400);
+		} else {
+			return jP($data); 
+		}
+		
+	});
+
 	$app->post('/search/general', function () use ($search, $app) { 
 		$data = $search->general($app->request->post()); 
 		

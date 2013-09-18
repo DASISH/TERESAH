@@ -6,6 +6,12 @@
 			$this->DB = $DB;
 			
 		}
+		function nbrTotal() {
+			$req = $this->DB->prepare("SELECT COUNT(*) as cnt FROM Tool USE INDEX(PRIMARY)");
+			$req->execute();
+			$data = $req->fetch(PDO::FETCH_ASSOC);
+			return $data["cnt"];
+		}
 		function options($get, $queryNeeded = False) {
 			$options = array();
 			
@@ -44,6 +50,58 @@
 			}
 			
 			return array($options, $sensitivity);
+		}
+		function all($get) {
+			#####
+			#
+			#
+			#	Params (lowercase) :
+			#		* LIMIT (INT) : limit of results (50 is the maximum)
+			#		* START (INT) : index of first result
+			#		* CASE_INSENSITIVITY (true)
+			#
+			#
+			#####
+			//Default research search in keyword, description AND external Description AND Application_Type
+			$opt = $this->options($get);
+			$options = $opt[0];
+			#$reqWord = "xml";
+			// $reqWord = "%".$reqWord."%";
+			
+			###########
+			#
+			#	Keyword Research
+			#
+			###########
+			
+			$req = "SELECT d.title, t.UID, t.shortname, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription FROM Description d 
+						INNER JOIN Tool t ON t.UID = d.Tool_UID 
+						LEFT OUTER JOIN External_Description ED ON ED.Tool_UID = t.UID
+					GROUP BY d.Tool_UID
+					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
+			$req = $this->DB->prepare($req);
+			$req->execute(array($options["request"], $options["request"], $options["request"]));
+			
+			
+			$options["results"] = $req->rowCount();
+			$data = $req->fetchAll(PDO::FETCH_ASSOC);
+			$ret = array("response" => array(), "parameters" => $options);
+			foreach($data as &$answer) {
+				if($answer["InnerDescription"] == "&nbsp;") {
+					$desc = substr($answer["ExternalDescription"], 0, 140)."...";
+					$provider = $answer["Provider"];
+				} elseif($answer["InnerDescription"] != Null) {
+					$desc = substr($answer["InnerDescription"], 0, 140)."...";
+					$provider = "DASISH";
+				} else {
+					$desc = "";
+					$provider = "";
+				}
+				$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
+			}
+			
+			$ret["parameters"]["total"] = $this->nbrTotal();
+			return $ret;
 		}
 		function general($get) {
 			#####

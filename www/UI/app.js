@@ -10,7 +10,7 @@ portal.
 	config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
 		when('/tool/:toolId', {templateUrl: '/view/tool.html', controller:"ToolCtrl", reloadOnSearch: false, resolve: Tool.resolveTool}).
-		// when('/', {templateUrl: ANGULAR_ROOT + '/view/controller-view/search.html', controller:"BrowseCtrl", reloadOnSearch: false}).
+		when('/', {templateUrl: '/view/home.html' , controller:"HomeCtrl", reloadOnSearch: false, resolve: Home.resolveHome}).
 		otherwise({redirectTo: '/'});
 }]);
 

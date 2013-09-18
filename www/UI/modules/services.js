@@ -70,8 +70,20 @@ portal.factory("ui", function($window, $rootScope) {
 	
 	var Item = {
 		resrce : $resource("http://"+document.domain+"\\:8080/tool/:itemID?keyword", {itemID : "@itemID"}, { query:  {method: 'GET'} }),
+		all : $resource("http://"+document.domain+"\\:8080/search/all?:options", {options : "@options"}, { query:  {method: 'GET'} }),
 		query : function(item) {
 			this.resrce.query({itemID : item}, function(u) { Item.data = u; return u; }); 
+		},
+		search : function(opt) {
+			opt = {}
+			if(opt.page) {
+				opt.start = opt.page * 20 - 20;
+			}
+			str = [];
+			angular.forEach(opt, function(value, key){
+				str.push(key+"="+value);
+			});
+			return this.all.query({options : str.join("&")}, function(u) { Item.data = u; return u; });
 		}
 	}
 	
