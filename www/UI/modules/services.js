@@ -69,7 +69,7 @@ portal.factory("ui", function($window, $rootScope) {
 }).factory('Item', function($resource){
 	
 	var Item = {
-		resrce : $resource("http://192.168.56.101\\:8080/tool/:itemID?keyword", {itemID : "@itemID"}, { query:  {method: 'GET'} }),
+		resrce : $resource("http://"+document.domain+"\\:8080/tool/:itemID?keyword", {itemID : "@itemID"}, { query:  {method: 'GET'} }),
 		query : function(item) {
 			this.resrce.query({itemID : item}, function(u) { Item.data = u; return u; }); 
 		}
