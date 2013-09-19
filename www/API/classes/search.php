@@ -6,11 +6,15 @@
 			$this->DB = $DB;
 			
 		}
-		function nbrTotal() {
-			$req = $this->DB->prepare("SELECT COUNT(*) as cnt FROM Tool USE INDEX(PRIMARY)");
-			$req->execute();
-			$data = $req->fetch(PDO::FETCH_ASSOC);
-			return $data["cnt"];
+		function nbrTotal($req = "FROM Tool USE INDEX(PRIMARY)", $params = array(), $rowCount = false) {
+			$req = $this->DB->prepare("SELECT COUNT(*) as cnt ".$req);
+			$req->execute($params);
+			if($rowCount) {
+				return $req->rowCount();
+			} else {
+				$data = $req->fetch(PDO::FETCH_ASSOC);
+				return $data["cnt"];
+			}
 		}
 		function options($get, $queryNeeded = False) {
 			$options = array();
@@ -366,6 +370,7 @@
 			#We fetch the data
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
 			
+			
 			#We create our own return array
 			$ret = array("response" => array(), "parameters" => $options);
 			#For each answer we format it
@@ -373,6 +378,8 @@
 				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
 			}
 			#We return
+			$ret["parameters"]["total"] = $this->nbrTotal("FROM Description d INNER JOIN Tool t ON t.UID = d.Tool_UID ".implode($joins, " ")." ".$where." GROUP BY d.Tool_UID", $exec, true);
+			
 			return $ret;
 		}
 		function getFacets() {

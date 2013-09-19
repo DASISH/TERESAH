@@ -7,10 +7,9 @@
 					<p class="list-group-item-text"><span ng-repeat="option in ui.facets.used[facet.facetParam].possibilities | filter:{active:true}" class="badge" ng-click="ui.facets.del(facet.facetParam, option.id)">{{option.name}}</span></p>
 				</a>
 			</div>
+			<p></p>
 			<button ng-click="ui.facets.submit()" class="btn btn-primary btn-lg btn-block">Submit</button>
 			
-			<ul class="list-inline">
-			</ul>
 		</div>
 		<div class="col-lg-9">
 			<div class="container">
@@ -37,6 +36,9 @@
 							</li>
 						</ul>
 				</div>
+				<div class="row">
+					<pagination total-items="ui.pages.totalItem" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+				</div>
 				<div class="row" ng-repeat="item in results.items">
 					<div class="media col-lg-12" >
 						<a class="pull-left" href="#">
@@ -47,6 +49,9 @@
 							<span class="label label-default">{{item.description.provider}}</span> {{item.description.text}}
 						</div>
 					</div>
+				</div>
+				<div class="row">
+					<pagination total-items="ui.pages.totalItem" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
 				</div>
 			</div>
 		</div>
