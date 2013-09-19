@@ -1,0 +1,19 @@
+<div class="row">
+	<h1>Welcome on DASISH Tool Registry</h1>
+	<p>Tools from {{ui.parameters.start + 1}} to {{ui.parameters.limit + ui.parameters.start}} on {{ui.parameters.total}} available</p>
+    <pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+</div>
+<div class="row" ng-repeat="item in results.items">
+	<div class="media col-lg-12" >
+		<a class="pull-left" href="#">
+			<img class="media-object" src="./assets/img/computer.png" alt="a">
+		</a>
+		<div class="media-body">
+			<h4 class="media-heading"><a href="#/tool/{{item.identifiers.shortname}}">{{item.title}}</a></h4>
+			<span class="label label-default">{{item.description.provider}}</span> {{item.description.text}}
+		</div>
+	</div>
+</div>
+<div class="row">
+    <pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+</div>

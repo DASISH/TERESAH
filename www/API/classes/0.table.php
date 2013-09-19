@@ -5,7 +5,7 @@
 			#option value	=> Table Name, Text field (if many = array with [0] as title for it), PKey, Table for join (false if not), fields for joint (tool,item)
 			,
 		);
-	*/
+	*/	
 		function getTable($k) {
 			$dict = array(
 				#option value	=> Table Name, Text field (if many = array with [0] as title for it), PKey, Table for join (false if not), fields for joint (tool,item)
@@ -38,6 +38,32 @@
 			} else {
 				return array("Error" => "Unknown ".$k." facet");
 			}
+		}
+		function getFacets() {
+			$dict = array(
+				#option value	=> Table Name, Legend
+				"Suite" => array("Suite", "Suite"),
+				"Feature" => array("Feature", "Feature"),
+				"Platform" => array("Platform", "Platform"),
+				"Project" => array("Project", "Projects"),
+				"Standard" => array("Standard", "Standard"),
+				"Keyword" => array("Keyword", "Keyword"),
+				"Publication" => array("Publication", "Publication"),
+				"Developer" => array("Developer", "Developers"),
+				"ApplicationType" => array("Application_type", "Application Type"),
+				"ToolType" => array("Tool_type", "Tool type"),
+				"Organization" => array("Organization", "Organization"),
+				"LicenceType" => array("Licence_type", "Licence Type"),
+				"Licence" => array("Licence", "Licence")
+			);
+			$return = array();
+			foreach($dict as $key => &$value) {
+				$return[$value[0]] = array(
+					"facetParam" => $key,
+					"facetLegend" => $value[1]
+				);
+			}
+			return $return;
 		}
 	}
 ?>

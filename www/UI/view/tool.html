@@ -18,7 +18,9 @@
 		</div>
 	</div>
 	<div class="col-lg-4">
-		<a class="btn btn-primary btn-lg btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)">{{desc.provider}}</a>
+		<div class="btn-group-vertical btn-block">
+			<a class="btn btn-primary btn-lg btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)">{{desc.provider}}</a>
+		</div>
 		<p>&nbsp;</p>
 		<h2 class="btn btn-success btn-lg btn-block">Informations</h2>
 		<dl>
@@ -28,6 +30,8 @@
 			<dd>{{item.descriptions.licence.type}}</dd>
 			<dt>Homepage</dt>
 			<dd><a href="{{item.descriptions.homepage}}">{{item.descriptions.homepage}}</a></dd>
+			<dt>Platform(s)</dt>
+			<dd ng-repeat="os in item.platform">{{os}}</dd>
 		</dl>
 	</div>
 </div>

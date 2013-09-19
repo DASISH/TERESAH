@@ -6,6 +6,12 @@
 			$this->DB = $DB;
 			
 		}
+		function nbrTotal() {
+			$req = $this->DB->prepare("SELECT COUNT(*) as cnt FROM Tool USE INDEX(PRIMARY)");
+			$req->execute();
+			$data = $req->fetch(PDO::FETCH_ASSOC);
+			return $data["cnt"];
+		}
 		function options($get, $queryNeeded = False) {
 			$options = array();
 			
@@ -44,6 +50,58 @@
 			}
 			
 			return array($options, $sensitivity);
+		}
+		function all($get) {
+			#####
+			#
+			#
+			#	Params (lowercase) :
+			#		* LIMIT (INT) : limit of results (50 is the maximum)
+			#		* START (INT) : index of first result
+			#		* CASE_INSENSITIVITY (true)
+			#
+			#
+			#####
+			//Default research search in keyword, description AND external Description AND Application_Type
+			$opt = $this->options($get);
+			$options = $opt[0];
+			#$reqWord = "xml";
+			// $reqWord = "%".$reqWord."%";
+			
+			###########
+			#
+			#	Keyword Research
+			#
+			###########
+			
+			$req = "SELECT d.title, t.UID, t.shortname, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription FROM Description d 
+						INNER JOIN Tool t ON t.UID = d.Tool_UID 
+						LEFT OUTER JOIN External_Description ED ON ED.Tool_UID = t.UID
+					GROUP BY d.Tool_UID
+					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
+			$req = $this->DB->prepare($req);
+			$req->execute(array($options["request"], $options["request"], $options["request"]));
+			
+			
+			$options["results"] = $req->rowCount();
+			$data = $req->fetchAll(PDO::FETCH_ASSOC);
+			$ret = array("response" => array(), "parameters" => $options);
+			foreach($data as &$answer) {
+				if($answer["InnerDescription"] == "&nbsp;") {
+					$desc = substr($answer["ExternalDescription"], 0, 140)."...";
+					$provider = $answer["Provider"];
+				} elseif($answer["InnerDescription"] != Null) {
+					$desc = substr($answer["InnerDescription"], 0, 140)."...";
+					$provider = "DASISH";
+				} else {
+					$desc = "";
+					$provider = "";
+				}
+				$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
+			}
+			
+			$ret["parameters"]["total"] = $this->nbrTotal();
+			return $ret;
 		}
 		function general($get) {
 			#####
@@ -115,8 +173,10 @@
 			#		*	Licence
 			#
 			##########
-			
-			if(isset($this->dict[$fieldType])) {
+			$dic = parent::getTable($fieldType);
+			if(array_key_exists("Error", $dic)) {
+				return $dic;
+			} else {
 				#Get Options
 				$opt = $this->options($get);
 				$options = $opt[0];
@@ -124,7 +184,6 @@
 				#Set special option
 				$options["field"] = $fieldType;
 				
-				$sql = $this->dict[$fieldType];
 				
 				#Setting SQL Request:
 				#Setting var we will use :
@@ -132,33 +191,34 @@
 				$exec = array();
 				
 				#If we got more than one field to search
-				if (is_array($sql[1])) {
-					$retField =  $sql[1][0];
+				if (is_array($dic["table"]["where"])) {
+					$retField =  $dic["table"]["where"][0];
 					if($options["request"] != Null) {
 						$where = array();
-						foreach($sql[1][0] as &$value) {
+						foreach($dic["table"]["where"] as &$value) {
 							$where[] = " ".$value." LIKE CONCAT('%', ? , '%') ".$sensitivity. " ";
 							$exec[] = $options["request"];
 						}
-						$where = "WHERE "+implode($where, ",");
+						
+						$where = "WHERE ".implode(" OR ", $where);
 					}
 					
 				} else {
-					$retField = $sql[1];
+					$retField = $dic["table"]["where"];
 					if($options["request"] != Null) {
-						$where = "WHERE ".$sql[1]." LIKE CONCAT('%', ? , '%') ".$sensitivity. " ";
+						
+						$where = "WHERE ".$dic["table"]["where"]." LIKE CONCAT('%', ? , '%') ".$sensitivity. " ";
 						$exec[] = $options["request"];
 					}
 				}
-				$ret = $retField." as name, ".$sql[2]." as id";
+				$ret = $retField." as name, ".$dic["table"]["id"]." as id";
 				
-				$req = "SELECT " . $ret . " FROM " . $sql[0] . " " .$where ." LIMIT ".$options["start"]." , ".$options["limit"];
+				$req = "SELECT " . $ret . " FROM " . $dic["table"]["name"] . " " .$where ." LIMIT ".$options["start"]." , ".$options["limit"];
 				// return $req;
 				$req = $this->DB->prepare($req);
 				$req->execute($exec);
-				return $req->fetchAll(PDO::FETCH_ASSOC);
-			} else {
-				return array("Error" => "Field doesn't exist");
+				$facets = $req->fetchAll(PDO::FETCH_ASSOC);
+				return array("facets" => $facets, "params" => $options);
 			}
 		}
 		function faceted($get) {
@@ -207,7 +267,7 @@
 						#If facets = "description"
 						if($dic["link"]["name"] == "Description") {
 							#We create our request
-							$where[] = " d.".$dic["link"]["tool"]." IN (".$inQuery.") ";
+							$where[] = " d.".$dic["link"]["item"]." IN (".$inQuery.") ";
 							
 							#For each value we add it to our exec end array which will be added to exec array (used in ->execute(array()))
 							#We do so because WHERE normal parameters are at the end of the request
@@ -294,7 +354,7 @@
 					".$where."
 					GROUP BY d.Tool_UID
 					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
-					
+			#print($req);
 			#We execute it
 			$req = $this->DB->prepare($req);
 			$req->execute($exec);
@@ -314,6 +374,24 @@
 			}
 			#We return
 			return $ret;
+		}
+		function getFacets() {
+			$dict = parent::getFacets();
+			$return = array();
+			foreach($dict as $tableName => &$vals) {
+				$req = "SELECT COUNT(*) as total FROM ".$tableName;
+				$req = $this->DB->prepare($req);
+				$req->execute();
+				$data = $req->fetch(PDO::FETCH_ASSOC);
+				if(intval($data["total"]) > 0) {
+					$return[] = array(
+						"facetParam" => $vals["facetParam"],
+						"facetLegend" => $vals["facetLegend"],
+						"facetTotal" => intval($data["total"])
+					);
+				}
+			}
+			return $return;
 		}
 	}
 	$search = new Search();
