@@ -1,15 +1,16 @@
 <form>
 	<div class="row">
 		<div class="col-lg-3" id="facetList">
-			<ul class="nav nav-pills nav-stacked">
-				<li ng-repeat="facet in ui.facets.facets" ng-class="{'active' : facet.active }" ng-click="facet.active = !facet.active;">
-					<a>
-						<span class="badge pull-right">{{facet.facetTotal}}</span>
-						{{facet.facetLegend}}
-					</a>
-				</li>
-			</ul>
+			<div class="list-group">
+				<a class="list-group-item" ng-repeat="facet in ui.facets.facets" ng-class="{'active' : facet.active }">
+					<h4 ng-click="facet.active = !facet.active;" class="list-group-item-heading"><span class="badge pull-right">{{facet.facetTotal}}</span>{{facet.facetLegend}}</h4>
+					<p class="list-group-item-text"><span ng-repeat="option in ui.facets.used[facet.facetParam].possibilities | filter:{active:true}" class="badge" ng-click="ui.facets.del(facet.facetParam, option.id)">{{option.name}}</span></p>
+				</a>
+			</div>
 			<button ng-click="ui.facets.submit()" class="btn btn-primary btn-lg btn-block">Submit</button>
+			
+			<ul class="list-inline">
+			</ul>
 		</div>
 		<div class="col-lg-9">
 			<div class="container">
@@ -24,9 +25,9 @@
 									<div class="panel-body">
 										<input type="text" class="form-control" ng-model="facet.filter" placeholder="Filter your {{facet.facetLegend}}" ng-change="facet.possibilities = ui.facets.search(facet)"/>
 										<div style="max-height:200px; overflow:auto;">
-											<div class="checkbox" ng-repeat="keyword in facet.possibilities.facets">
+											<div class="checkbox" ng-repeat="keyword in facet.possibilities.facets" ng-click="ui.facets.select(facet, keyword)">
 												<label>
-													<input type="checkbox" id="{{facet.facetParam}}-{{keyword.id}}" ng-model="keyword.active" value="{{keyword.id}}"> {{keyword.name}}
+													<input type="checkbox" id="{{facet.facetParam}}-{{keyword.id}}" ng-model="keyword.active" value="{{keyword.id}}" /> {{keyword.name}}
 												</label>
 											</div>
 										</div>

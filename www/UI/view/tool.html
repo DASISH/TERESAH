@@ -30,6 +30,8 @@
 			<dd>{{item.descriptions.licence.type}}</dd>
 			<dt>Homepage</dt>
 			<dd><a href="{{item.descriptions.homepage}}">{{item.descriptions.homepage}}</a></dd>
+			<dt>Platform(s)</dt>
+			<dd ng-repeat="os in item.platform">{{os}}</dd>
 		</dl>
 	</div>
 </div>

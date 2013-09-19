@@ -17,12 +17,12 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 			},
 			submit : function() {
 				constructor = {};
-				angular.forEach($scope.ui.facets.facets, function(val) {
+				angular.forEach($scope.ui.facets.used, function(val) {
 					if(val.active) {
 						constructor[val.facetParam] = {"request" : []};
 						
 						//Wont work if keyword list is reloaded
-						angular.forEach(val.possibilities.facets, function(opt) {
+						angular.forEach(val.possibilities, function(opt) {
 							if(opt.active) {
 								constructor[val.facetParam]["request"].push(opt.id);
 							}
@@ -38,7 +38,21 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				}, function errorCallback() {
 					alert("Oops error from server :(");
 				});
-			}
+			},
+			select : function(facet, keyword) {
+				if(!$scope.ui.facets.used[facet.facetParam]) {
+					$scope.ui.facets.used[facet.facetParam] = { "facetParam" : facet.facetParam, "facetLegend" : facet.facetLegend, active: true, "possibilities" : {} }
+				} 
+				if(keyword.active == false) {
+					delete $scope.ui.facets.used[facet.facetParam].possibilities[keyword.id];
+				} else {
+					$scope.ui.facets.used[facet.facetParam].possibilities[keyword.id] = keyword;
+				}
+			},
+			del : function (par, key) {
+				delete $scope.ui.facets.used[par].possibilities[key];
+			},
+			used : {}
 		}
 		
 	};

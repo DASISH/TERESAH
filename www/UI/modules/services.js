@@ -78,7 +78,7 @@ portal.factory("ui", function($window, $rootScope) {
 				return str.join("&");
 				},
 		//Ressource part
-		resrce : $resource("http://"+document.domain+"\\:8080/tool/:itemID?keyword", {itemID : "@itemID"}, { query:  {method: 'GET'} }),
+		resrce : $resource("http://"+document.domain+"\\:8080/tool/:itemID?keyword&platform", {itemID : "@itemID"}, { query:  {method: 'GET'} }),
 		all : $resource("http://"+document.domain+"\\:8080/search/all?:options", {options : "@options"}, { query:  {method: 'GET'} }),
 		fct : $resource("http://"+document.domain+"\\:8080/search/facetList", { query : {method: 'GET'}}),
 		fctSearch : $resource("http://"+document.domain+"\\:8080/search/facet/:field?:options", {field : "@field", options : "@options"}, { query : {method: 'GET',
