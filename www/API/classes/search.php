@@ -373,6 +373,24 @@
 			#We return
 			return $ret;
 		}
+		function getFacets() {
+			$dict = parent::getFacets();
+			$return = array();
+			foreach($dict as $tableName => &$vals) {
+				$req = "SELECT COUNT(*) as total FROM ".$tableName;
+				$req = $this->DB->prepare($req);
+				$req->execute();
+				$data = $req->fetch(PDO::FETCH_ASSOC);
+				if(intval($data["total"]) > 0) {
+					$return[] = array(
+						"facetParam" => $vals["facetParam"],
+						"facetLegend" => $vals["facetLegend"],
+						"facetTotal" => intval($data["total"])
+					);
+				}
+			}
+			return $return;
+		}
 	}
 	$search = new Search();
 ?>

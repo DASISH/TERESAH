@@ -50,4 +50,13 @@
 			return jP($data); 
 		}
 	});
+	
+	$app->get('/search/facetList/', function () use ($search) {
+		$data = $search->getFacets();
+		if(isset($data["Error"])) {
+			$app->response()->status(400);
+		} else {
+			return jP($data); 
+		}
+	});
 ?>
