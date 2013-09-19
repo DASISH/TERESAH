@@ -51,6 +51,25 @@
 		}
 	});
 	
+	$app->post('/search/faceted', function () use ($search, $app) {
+	
+		if(count($app->request->post()) > 0) {
+			$input = $app->request->post();
+		} elseif(count($app->request()->getBody()) > 0) {
+			$input = $app->request()->getBody();
+		} else {
+			$input = array();
+		}
+		
+		$data = $search->faceted($input);
+		if(isset($data["Error"])) {
+			return jP($data);
+			//$app->response()->status(400);
+		} else {
+			return jP($data); 
+		}
+	});
+	
 	$app->get('/search/facetList/', function () use ($search) {
 		$data = $search->getFacets();
 		if(isset($data["Error"])) {

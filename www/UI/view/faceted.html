@@ -1,0 +1,53 @@
+<form>
+	<div class="row">
+		<div class="col-lg-3" id="facetList">
+			<ul class="nav nav-pills nav-stacked">
+				<li ng-repeat="facet in ui.facets.facets" ng-class="{'active' : facet.active }" ng-click="facet.active = !facet.active;">
+					<a>
+						<span class="badge pull-right">{{facet.facetTotal}}</span>
+						{{facet.facetLegend}}
+					</a>
+				</li>
+			</ul>
+			<button ng-click="ui.facets.submit()" class="btn btn-primary btn-lg btn-block">Submit</button>
+		</div>
+		<div class="col-lg-9">
+			<div class="container">
+				<div class="row">
+						<ul class="list-inline">
+							<li ng-repeat="facet in ui.facets.facets | filter:{active:true}" class="col-lg-3">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">{{facet.facetLegend}}</h3>
+										<a ng-click="facet.option.case_insensitivity = !facet.option.case_insensitivity; facet.possibilities = ui.facets.search(facet)"><span class="glyphicon glyphicon-font"></span></a>
+									</div>
+									<div class="panel-body">
+										<input type="text" class="form-control" ng-model="facet.filter" placeholder="Filter your {{facet.facetLegend}}" ng-change="facet.possibilities = ui.facets.search(facet)"/>
+										<div style="max-height:200px; overflow:auto;">
+											<div class="checkbox" ng-repeat="keyword in facet.possibilities.facets">
+												<label>
+													<input type="checkbox" id="{{facet.facetParam}}-{{keyword.id}}" ng-model="keyword.active" value="{{keyword.id}}"> {{keyword.name}}
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</li>
+						</ul>
+				</div>
+				<div class="row" ng-repeat="item in results.items">
+					<div class="media col-lg-12" >
+						<a class="pull-left" href="#">
+							<img class="media-object" src="./assets/img/computer.png" alt="a">
+						</a>
+						<div class="media-body">
+							<h4 class="media-heading"><a href="#/tool/{{item.identifiers.shortname}}">{{item.title}}</a></h4>
+							<span class="label label-default">{{item.description.provider}}</span> {{item.description.text}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

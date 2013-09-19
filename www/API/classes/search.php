@@ -173,8 +173,10 @@
 			#		*	Licence
 			#
 			##########
-			
-			if(isset($this->dict[$fieldType])) {
+			$dic = parent::getTable($fieldType);
+			if(array_key_exists("Error", $dic)) {
+				return $dic;
+			} else {
 				#Get Options
 				$opt = $this->options($get);
 				$options = $opt[0];
@@ -182,7 +184,6 @@
 				#Set special option
 				$options["field"] = $fieldType;
 				
-				$sql = $this->dict[$fieldType];
 				
 				#Setting SQL Request:
 				#Setting var we will use :
@@ -190,33 +191,34 @@
 				$exec = array();
 				
 				#If we got more than one field to search
-				if (is_array($sql[1])) {
-					$retField =  $sql[1][0];
+				if (is_array($dic["table"]["where"])) {
+					$retField =  $dic["table"]["where"][0];
 					if($options["request"] != Null) {
 						$where = array();
-						foreach($sql[1][0] as &$value) {
+						foreach($dic["table"]["where"] as &$value) {
 							$where[] = " ".$value." LIKE CONCAT('%', ? , '%') ".$sensitivity. " ";
 							$exec[] = $options["request"];
 						}
-						$where = "WHERE "+implode($where, ",");
+						
+						$where = "WHERE ".implode(" OR ", $where);
 					}
 					
 				} else {
-					$retField = $sql[1];
+					$retField = $dic["table"]["where"];
 					if($options["request"] != Null) {
-						$where = "WHERE ".$sql[1]." LIKE CONCAT('%', ? , '%') ".$sensitivity. " ";
+						
+						$where = "WHERE ".$dic["table"]["where"]." LIKE CONCAT('%', ? , '%') ".$sensitivity. " ";
 						$exec[] = $options["request"];
 					}
 				}
-				$ret = $retField." as name, ".$sql[2]." as id";
+				$ret = $retField." as name, ".$dic["table"]["id"]." as id";
 				
-				$req = "SELECT " . $ret . " FROM " . $sql[0] . " " .$where ." LIMIT ".$options["start"]." , ".$options["limit"];
+				$req = "SELECT " . $ret . " FROM " . $dic["table"]["name"] . " " .$where ." LIMIT ".$options["start"]." , ".$options["limit"];
 				// return $req;
 				$req = $this->DB->prepare($req);
 				$req->execute($exec);
-				return $req->fetchAll(PDO::FETCH_ASSOC);
-			} else {
-				return array("Error" => "Field doesn't exist");
+				$facets = $req->fetchAll(PDO::FETCH_ASSOC);
+				return array("facets" => $facets, "params" => $options);
 			}
 		}
 		function faceted($get) {
@@ -265,7 +267,7 @@
 						#If facets = "description"
 						if($dic["link"]["name"] == "Description") {
 							#We create our request
-							$where[] = " d.".$dic["link"]["tool"]." IN (".$inQuery.") ";
+							$where[] = " d.".$dic["link"]["item"]." IN (".$inQuery.") ";
 							
 							#For each value we add it to our exec end array which will be added to exec array (used in ->execute(array()))
 							#We do so because WHERE normal parameters are at the end of the request
@@ -352,7 +354,7 @@
 					".$where."
 					GROUP BY d.Tool_UID
 					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
-					
+			#print($req);
 			#We execute it
 			$req = $this->DB->prepare($req);
 			$req->execute($exec);

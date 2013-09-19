@@ -6,4 +6,7 @@
 			require_once $filename;
 		}
 	}
+	$app->map('/:x+', function($x) {
+		http_response_code(200);
+	})->via('OPTIONS');
 ?>

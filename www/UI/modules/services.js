@@ -69,21 +69,48 @@ portal.factory("ui", function($window, $rootScope) {
 }).factory('Item', function($resource){
 	
 	var Item = {
+		//Serialize function
+		serialize : function(opt) {
+				str = [];
+				angular.forEach(opt, function(value, key){
+					str.push(key+"="+value);
+				});
+				return str.join("&");
+				},
+		//Ressource part
 		resrce : $resource("http://"+document.domain+"\\:8080/tool/:itemID?keyword", {itemID : "@itemID"}, { query:  {method: 'GET'} }),
 		all : $resource("http://"+document.domain+"\\:8080/search/all?:options", {options : "@options"}, { query:  {method: 'GET'} }),
+		fct : $resource("http://"+document.domain+"\\:8080/search/facetList", { query : {method: 'GET'}}),
+		fctSearch : $resource("http://"+document.domain+"\\:8080/search/facet/:field?:options", {field : "@field", options : "@options"}, { query : {method: 'GET',
+            params: {field : "@field", options : "@options"}}}),
+		//Return Part
 		query : function(item) {
 			this.resrce.query({itemID : item}, function(u) { Item.data = u; return u; }); 
+		},
+		facets : function(key, option) {
+			if(key) {
+				console.log(key);
+				console.log(option);
+				if(option) {
+					console.log("Got option");
+					str = this.serialize(option);
+					return this.fctSearch.query({field : key, options : str}, function (u) { Item.data = u; return u;});
+				} else {
+					console.log("Got key");
+					return this.fctSearch.query({field : key}, function(u) {  Item.data = u; return u; }); 
+				}
+			} else {
+				console.log("Got nothing");
+				return this.fct.query(function(u) { Item.data = u; return u; }); 
+			}
 		},
 		search : function(opt) {
 			opt = {}
 			if(opt.page) {
 				opt.start = opt.page * 20 - 20;
 			}
-			str = [];
-			angular.forEach(opt, function(value, key){
-				str.push(key+"="+value);
-			});
-			return this.all.query({options : str.join("&")}, function(u) { Item.data = u; return u; });
+			str = this.serialize(opt);
+			return this.all.query({options : str}, function(u) { Item.data = u; return u; });
 		}
 	}
 	
