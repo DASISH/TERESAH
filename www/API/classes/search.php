@@ -22,7 +22,7 @@
 			#Query
 			if(!isset($get["request"])) {
 				if($queryNeeded) {
-					return array("error" => "No request given"); 
+					return array("Error" => "No request given"); 
 				} else {
 					$options["request"] = Null;
 				}
@@ -31,7 +31,7 @@
 			}
 			
 			#CASE
-			if(!isset($get["case_insensitivity"])) { 
+			if(!isset($get["case_insensitivity"]) || $get["case_insensitivity"] == false || $get["case_insensitivity"] == "false") { 
 				$options["case_insensitivity"] = false; 
 				$sensitivity = ""; 
 			} else {
@@ -68,6 +68,9 @@
 			#####
 			//Default research search in keyword, description AND external Description AND Application_Type
 			$opt = $this->options($get);
+			if(array_key_exists("Error", $opt)) {
+				return $opt;
+			}
 			$options = $opt[0];
 			#$reqWord = "xml";
 			// $reqWord = "%".$reqWord."%";
@@ -121,6 +124,9 @@
 			#####
 			//Default research search in keyword, description AND external Description AND Application_Type
 			$opt = $this->options($get, $queryNeeded = True);
+			if(array_key_exists("Error", $opt)) {
+				return $opt;
+			}
 			$options = $opt[0];
 			$sensitivity = $opt[1];
 			#$reqWord = "xml";
