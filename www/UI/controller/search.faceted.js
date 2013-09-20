@@ -3,7 +3,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 	
 	$scope.ui = {
 		facets : {
-			Error : false,
+			error : false,
 			facets : $item.data,
 			search : function(facet) {
 				if(facet.option) {
@@ -41,8 +41,13 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 						$scope.ui.facets.error = false;
 					}
 					if(data.response) {
-						$scope.results = { items : data.response }
-						$scope.ui.pages.totalItem = data.parameters.total;
+						if(data.response.length == 0) {
+							$scope.results = false;
+							$scope.ui.facets.error = "No results";
+						} else {
+							$scope.results = { items : data.response }
+							$scope.ui.pages.totalItem = data.parameters.total;
+						}
 					} else {
 						$scope.results = false;
 					}

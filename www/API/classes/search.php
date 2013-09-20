@@ -332,6 +332,13 @@
 			} else {
 				return array("Error" => "No facets given");
 			}
+			
+			#If we have no exec, that means we have no param
+			$cnt = count($exec) + count($execEnd);
+			if($cnt == 0) {
+				return array("Error" => "No facets given");
+			}
+			
 			###########
 			#
 			#	Keyword Research
@@ -345,6 +352,7 @@
 			} else {
 				$where = "";
 			}
+			
 			
 			#We add our value in execEnd in exec now because exec wont change
 			foreach($execEnd as &$id) {
