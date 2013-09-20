@@ -20,7 +20,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				if(!constructor) {
 					constructor = { facets : {}};
 				} else {
-					constructor[facets] = [];
+					constructor["facets"] = {};
 				}
 				angular.forEach($scope.ui.facets.used, function(val) {
 					if(val.active) {
@@ -73,12 +73,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				opt.page = page;
 				opt.start = page * 20 - 20;
 				
-				str = [];
-				angular.forEach(opt, function(value, key){
-					str.push(key+"="+value);
-				});
-				
-				return $item.all.query({options : str.join("&")}, function(u) { $scope.results.items = u.response; return u; });
+				$scope.ui.facets.submit(opt)
 				}
 		}
 	};
