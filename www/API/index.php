@@ -32,7 +32,14 @@
     
 	#Start the framework
 	\Slim\Slim::registerAutoloader();
-	$app = new \Slim\Slim();
+	$app = new \Slim\Slim(array
+							(
+								// Smarty
+								'cookies.secret_key'  => 'afdgvoiugbsoiaewjpocun98u	m2 0938u4rtvrehiu4wbgaic ucmuqx,iwo34 ytvu,wap34udnc74xwh,pcfim#DX,AIUTEYV49Q2MCIOSVM RUMCMIWAUVNR C POMA\LA\CFNJKJHMVZSCEX,RA,OECSX',
+								'cookies.lifetime' => time() + (1 * 24 * 60 * 60), // = 1 day
+								'cookies.cipher' => MCRYPT_RIJNDAEL_256,
+								'cookies.cipher_mode' => MCRYPT_MODE_CBC
+							));
 	$app->add(new \Slim\Middleware\ContentTypes());
 
 

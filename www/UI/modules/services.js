@@ -92,6 +92,9 @@ portal.factory("ui", function($window, $rootScope) {
 			search : {
 				normal : Restangular.one("search/general/"),
 				faceted : Restangular.all("search/faceted/")
+			},
+			user : {
+				signin : Restangular.all("login/")
 			}
 		},
 		
@@ -153,6 +156,15 @@ portal.factory("ui", function($window, $rootScope) {
 						if(callback) { callback(data); }
 						return data;
 					});
+				}
+			},
+			user : {
+				signin : function(obj, callback) {
+					return Item.routes.user.signin.post(obj).then(function(data) {
+						if(callback) { callback(data); }
+						return data;
+					});
+					
 				}
 			}
 		}
