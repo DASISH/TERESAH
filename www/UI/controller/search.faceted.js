@@ -1,8 +1,9 @@
 var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restangular', function($scope, $ui, $item, $rest) {
-	//$scope.results = { items : data.response }
+	$scope.results = false;
 	
 	$scope.ui = {
 		facets : {
+			Error : false,
 			facets : $item.data,
 			search : function(facet) {
 				if(facet.option) {
@@ -34,8 +35,18 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				});
 				
 				$item.resolver.search.faceted(constructor, function(data) {
-					$scope.results = { items : data.response }
-					$scope.ui.pages.totalItem = data.parameters.total;
+					if(data.Error) {
+						$scope.ui.facets.error = data.Error;
+					} else {
+						$scope.ui.facets.error = false;
+					}
+					if(data.response) {
+						$scope.results = { items : data.response }
+						$scope.ui.pages.totalItem = data.parameters.total;
+					} else {
+						$scope.results = false;
+					}
+					
 				});
 				
 			},
@@ -76,7 +87,15 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 }]);
 Faceted.resolveFaceted = {
 	itemData: function($route, Item) {
-		Item.resolver.facets();
+		Item.resolver.facets(false, false, function(data) {
+			x = []
+			angular.forEach(data, function(val) {
+				console.log(val);
+				val["option"] = { case_insensitivity : true };
+				x.push(val);
+			});
+			Item.data = x;
+		});
 		return Item.data;
 	},
 	delay: function($q, $timeout) {

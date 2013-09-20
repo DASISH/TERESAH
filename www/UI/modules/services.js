@@ -103,15 +103,15 @@ portal.factory("ui", function($window, $rootScope) {
 						opt.start = opt.page * 20 - 20;
 					}
 					return Item.routes.tools.all.get(opt).then(function (data) {
-						Item.data = data;
 						if(callback) {	callback(data);	}
+						Item.data = data;
 						return data;
 					});
 				},
 				one : function(item, options = {keyword:true, platform:true}, callback = false) {
 					return Item.routes.tools.one.one(item).get(options).then(function (data) {
-						if(callback) {	callback(data);	}
 						Item.data = data;
+						if(callback) {	callback(data);	}
 						return data;
 					});
 				}
@@ -120,21 +120,21 @@ portal.factory("ui", function($window, $rootScope) {
 				if(key) {
 					if(option) {
 						return Item.routes.facets.search.one(key).get(option).then(function (data) {
-							if(callback) {	callback(data);	}
 							Item.data = data;
+							if(callback) {	callback(data);	}
 							return data;
 						});
 					} else {
 						return Item.routes.facets.search.one(key).getList().then(function (data) {
-							if(callback) {	callback(data);	}
 							Item.data = data;
+							if(callback) {	callback(data);	}
 							return data;
 						});
 					}
 				} else {
 					return Item.routes.facets.list.getList().then(function (data) {
-						if(callback) {	callback(data);	}
 						Item.data = data;
+						if(callback) {	callback(data);	}
 						return data;
 					});
 				}
@@ -142,15 +142,15 @@ portal.factory("ui", function($window, $rootScope) {
 			search : {
 				normal : function(options, callback) {
 					return Item.routes.search.normal.get(options).then(function(data) {
-						if(callback) { callback(data); }
 						Item.data = data;
+						if(callback) { callback(data); }
 						return data;
 					});
 				},
 				faceted : function(options, callback) {
 					return Item.routes.search.faceted.post(options).then(function(data) {
-						if(callback) { callback(data); }
 						Item.data = data;
+						if(callback) { callback(data); }
 						return data;
 					});
 				}
