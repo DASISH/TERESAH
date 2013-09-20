@@ -1,6 +1,6 @@
 <?php
 
-	$app->get('/search/general', function () use ($search, $app) { 
+	$app->get('/search/general/', function () use ($search, $app) { 
 		$data = $search->general($app->request->get()); 
 		
 		if(isset($data["Error"])) {
@@ -11,7 +11,7 @@
 		
 	});
 
-	$app->get('/search/all', function () use ($search, $app) { 
+	$app->get('/search/all/', function () use ($search, $app) { 
 		$data = $search->all($app->request->get()); 
 		
 		if(isset($data["Error"])) {
@@ -22,7 +22,7 @@
 		
 	});
 
-	$app->post('/search/general', function () use ($search, $app) { 
+	$app->post('/search/general/', function () use ($search, $app) { 
 		$data = $search->general($app->request->post()); 
 		
 		if(isset($data["Error"])) {
@@ -33,7 +33,7 @@
 		
 	});
 	
-	$app->get('/search/facet/:field', function ($facet) use ($search, $app) { 
+	$app->get('/search/facet/:field/', function ($facet) use ($search, $app) { 
 		$data = $search->fieldContent($facet, $app->request->get());
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
@@ -51,7 +51,7 @@
 		}
 	});
 	
-	$app->post('/search/faceted', function () use ($search, $app) {
+	$app->post('/search/faceted/', function () use ($search, $app) {
 	
 		if(count($app->request->post()) > 0) {
 			$input = $app->request->post();

@@ -36,7 +36,7 @@
 				</ul>
 				<form class="navbar-form navbar-right ">
 					<div class="input-group">
-						<input type="text" placeholder="Type your research here"  ng-model="ui.search.input" class="form-control col-lg-2" typeahead="answer.identifiers.id as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-on-select="ui.search.select($item)">
+						<input type="text" placeholder="Type your research here"  ng-model="ui.search.input" class="form-control col-lg-2" typeahead-wait-ms="100" typeahead="answer.identifiers.shortname as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-loading="true" typeahead-on-select="ui.search.select($item)">
 						<span class="input-group-btn">
 							<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
 						</span>
@@ -59,7 +59,6 @@
 
     <!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="./assets/js/angular.min.js"></script>
-	<script type="text/javascript" src="./assets/js/angular.resource.min.js"></script>
 	<script type="text/javascript" src="./assets/js/angular.bootstrap.tpls.min.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.0.0/lodash.js"></script>
 	<script type="text/javascript" src="//cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script>

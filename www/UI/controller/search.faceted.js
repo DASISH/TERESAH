@@ -12,9 +12,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				}
 				option["request"] = facet.filter;
 				
-				return $item.fctSearch.query({field : facet.facetParam, options : $item.serialize(option)}, function (u) { 
-					 return u.facets;
-				});
+				return $item.resolver.facets(facet.facetParam, option)
 			},
 			submit : function(constructor) {
 				if(!constructor) {
@@ -35,15 +33,9 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 					}
 				});
 				
-				var facetRest = $rest.all('search/faceted');
-				
-				
-				facetRest.post(constructor).then(function (data) {
+				$item.resolver.search.faceted(constructor, function(data) {
 					$scope.results = { items : data.response }
-					console.log(data);
 					$scope.ui.pages.totalItem = data.parameters.total;
-				}, function errorCallback() {
-					alert("Oops error from server :(");
 				});
 				
 			},
@@ -84,7 +76,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 }]);
 Faceted.resolveFaceted = {
 	itemData: function($route, Item) {
-		Item.facets();
+		Item.resolver.facets();
 		return Item.data;
 	},
 	delay: function($q, $timeout) {

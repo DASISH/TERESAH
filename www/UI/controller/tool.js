@@ -23,8 +23,8 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 Tool.resolveTool = {
 	itemData: function($route, Item) {
 		console.log($route.current.params.toolId);
-		this.data = Item.query($route.current.params.toolId);
-		return this.data;
+		this.data = Item.resolver.tools.one($route.current.params.toolId);
+		return Item.data;
 	},
 	delay: function($q, $timeout) {
 		var delay = $q.defer();

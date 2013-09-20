@@ -1,16 +1,14 @@
-var Top = portal.controller('TopCtrl', ['$scope', "$http", "$location", "$route", function($scope, $http, $location, $route) {
+var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "Item", function($scope, $q, $location, $route, $item) {
 	$scope.ui = {
 		search : {
 			typeahead : function(str) {
-					return $http({
-						url: "http://"+document.domain+":8080/search/general", 
-						method: "GET",
-						params: {request : str, limit : 5}
-					 }).
-					then(function(data) {
-						return data.data.response;
-					});
+				var defer = $q.defer();
+				$item.resolver.search.normal({request : str, limit : 5, case_insensitivity : true}, function(data) {
+					defer.resolve(data.response);
+				});
+				return defer.promise;
 			},
+			results : [],
 			input : undefined,
 			select : function(item) {
 				$location.path('/tool/'+item.identifiers.shortname)

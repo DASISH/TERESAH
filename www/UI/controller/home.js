@@ -12,17 +12,12 @@ var Home = portal.controller('HomeCtrl', ['$scope', 'ui',  'Item', function($sco
 			itemPerPage : 20,
 			change : function(page) {
 				
-				opt = {}
-				opt.page = page;
-				opt.start = page * 20 - 20;
-				
-				str = [];
-				angular.forEach(opt, function(value, key){
-					str.push(key+"="+value);
+				$item.resolver.tools.all({'page': page}, function(data) {
+					console.log(data);
+					$scope.results.items = data.response;
+					$scope.ui.parameters = data.parameters;
 				});
-				
-				return $item.all.query({options : str.join("&")}, function(u) { $scope.results.items = u.response; return u; });
-				}
+			}
 		}
 	};
 	
@@ -32,7 +27,7 @@ var Home = portal.controller('HomeCtrl', ['$scope', 'ui',  'Item', function($sco
 }]);
 Home.resolveHome = {
 	itemData: function($route, Item) {
-		this.data = Item.search({page: 1});
+		this.data = Item.resolver.tools.all({'page': 1});
 		return this.data;
 	},
 	delay: function($q, $timeout) {
