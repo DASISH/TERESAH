@@ -11,6 +11,10 @@ $app->get('/dump.n3', function () use ($rdf, $app) {
     $app->response->headers->set('Content-Type', 'text/plain');
     output_rdf($rdf->all(),  'n3');
 });    
+$app->get('/dump.ntriples', function () use ($rdf, $app) {
+    $app->response->headers->set('Content-Type', 'text/plain');
+    output_rdf($rdf->all(),  'ntriples');
+});  
 $app->get('/dump.rdfjson', function () use ($rdf, $app) {
     $app->response->headers->set('Content-Type', 'application/json');
     output_rdf($rdf->all(), 'json');
@@ -21,21 +25,25 @@ $app->get('/dump', function () use ($rdf, $app) {
     print_r($rdf->all());
 });
 
-$app->get('/tool/:tool_id(/:format)', function ($tool_id, $format='rdfxml') use ($rdf, $app) { 
+$app->get('/tool/:tool_id(/:format)', function ($tool_id, $format='turtle') use ($rdf, $app) { 
     switch($format){
-        case 'turtle':
         case 'n3':
+        case 'ntriples':
             $app->response->headers->set('Content-Type', 'text/plain');
-            output_rdf($rdf->_tool($tool_id), $format);
             break;
         case 'json':
             $app->response->headers->set('Content-Type', 'application/json');
-            output_rdf($rdf->_tool($tool_id), $format);
-            break;        
-        default:
+            break;  
+        case 'xml':
+        case 'rdfxml':
             $app->response->headers->set('Content-Type', 'text/xml');
-            output_rdf($rdf->_tool($tool_id), 'rdfxml');
+            $format = 'rdfxml';  
+            break;
+        default:
+            $app->response->headers->set('Content-Type', 'text/plain');
+            $format = 'turtle';
     }
+    output_rdf($rdf->tool($tool_id), $format);
 });
 
 ?>

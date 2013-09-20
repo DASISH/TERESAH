@@ -7,8 +7,9 @@ class Rdf {
         global $DB;
         $this->DB = $DB;
         
+        #prefixes used for rdf
         $this->pre = array(
-            'dasish'    => 'http://tools.dasish.eu/',
+            'dasish'    => 'http://tools.dasish.eu/#/',
             'rdf'       => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
             'rdfs'      => 'http://www.w3.org/2000/01/rdf-schema#',
             'dcterms'   => 'http://purl.org/dc/terms/',
@@ -21,23 +22,19 @@ class Rdf {
         ini_set('max_execution_time', 120);
         
         return array_merge(
-                    $this->_tool(), 
-                    $this->_keyword()
+                    $this->tool(), 
+                    $this->keyword()
                );
     }
 
-    function _prefix() {
-        return 'http://tools.dasish.eu/';
-    }
-
-    function _tool($id = null) {
+    function tool($id = null) {
         $result = array();
 
         $query = "SELECT t.UID, t.shortname, d.description, d.title, d.homepage, d.available_from, d.registered, d.Licence_UID FROM Tool t
                       INNER JOIN Description d ON t.UID = d.Tool_UID";
 
         if ($id) {
-            $query .= " WHERE t.UID = ?";
+            $query .= " WHERE t.shortname = ?";
             $req = $this->DB->prepare($query);
             $req->execute(array($id));
         } else {
@@ -48,22 +45,22 @@ class Rdf {
         $tools = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($tools as &$tool) {
-            $uri = $this->pre['dasish'].'tool/'.$tool['UID'];
+            $uri = $this->pre['dasish'].'tool/'.$tool['shortname'];
             
-            $result[$uri][$this->pre['rdf'].'type'][]        = $this->_val('http://schema.org/SoftwareApplication', 'uri');
+            $result[$uri][$this->pre['rdf'].'type'][]           = $this->_val('http://schema.org/SoftwareApplication', 'uri');
             $result[$uri][$this->pre['dcterms'].'identifier'][] = $this->_val($tool['shortname']);
-            $result[$uri][$this->pre['dcterms'].'title'][]   = $this->_val(htmlspecialchars($tool['title']));
-            $result[$uri][$this->pre['dcterms'].'created'][] = $this->_val($tool['registered']);
+            $result[$uri][$this->pre['dcterms'].'title'][]      = $this->_val(htmlspecialchars($tool['title']));
+            $result[$uri][$this->pre['dcterms'].'created'][]    = $this->_val($tool['registered']);
             
             if($tool['homepage'] != 'Unknown'){
                 $result[$uri][$this->pre['foaf'].'homepage'][] = $this->_val($tool['homepage'], 'uri');
             }
             
             if($tool['available_from']){  
-                $result[$uri][$this->pre['dcterms'].'available'][]   = $this->_val(htmlspecialchars($tool['available_from']));
+                $result[$uri][$this->pre['dcterms'].'available'][] = $this->_val(htmlspecialchars($tool['available_from']));
             }
             if($tool['description'] != '&nbsp;'){  
-                $result[$uri][$this->pre['dcterms'].'description'][]   = $this->_val(htmlspecialchars($tool['description']));
+                $result[$uri][$this->pre['dcterms'].'description'][] = $this->_val(htmlspecialchars($tool['description']));
             }
             
             //hasKeyword
@@ -75,7 +72,7 @@ class Rdf {
             foreach ($keywords as &$keyword) {
                 $result[$uri][$this->pre['dcterms'].'subject'][] = $this->_val($this->pre['dasish'].'keyword/'.$keyword['Keyword_id'], 'uri');
                 if($id){
-                    $result = array_merge($result, $this->_keyword($keyword['Keyword_id']));
+                    $result = array_merge($result, $this->keyword($keyword['Keyword_id']));
                 }
             }
             
@@ -110,8 +107,8 @@ class Rdf {
                 $result[$uri][$this->pre['owl'].'sameAs'][]            = $this->_val($external_description['sourceURI'], 'uri');
                 $result[$uri][$this->pre['dcterms'].'description'][]   = $this->_val('_:'.$external_description['UID'], 'bnode');
                 
-                $result['_:'.$external_description['UID']][$this->pre['dcterms'].'description'][] = $this->_val($external_description['description']);
-                $result['_:'.$external_description['UID']][$this->pre['dcterms'].'source'][] = $this->_val($external_description['sourceURI'], 'uri');
+                $result['_:'.$external_description['UID']][$this->pre['dcterms'].'description'][]   = $this->_val($external_description['description']);
+                $result['_:'.$external_description['UID']][$this->pre['dcterms'].'source'][]        = $this->_val($external_description['sourceURI'], 'uri');
             }
         }
         return $result;
@@ -119,7 +116,7 @@ class Rdf {
     
     
 
-    function _keyword($id = null) {
+    function keyword($id = null) {
         $result = array();
         
         $query = "SELECT * FROM keyword";

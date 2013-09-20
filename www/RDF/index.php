@@ -13,11 +13,11 @@ require '../common/EasyRdf/EasyRdf.php';
 require_once './rdf.php';
 
 function output_rdf($data, $format){
-    $graph = new EasyRdf_Graph('http://tools.dasish.eu');
-    $graph->parse($data, 'php', 'http://tools.dasish.eu');
+    $graph = new EasyRdf_Graph('http://tools.dasish.eu/#/');
+    $graph->parse($data, 'php', 'http://tools.dasish.eu/#/');
     
     $output_format = EasyRdf_Format::getFormat($format);
-    print $graph->serialise($output_format);        
+    print $graph->serialise($output_format);
 }
 
 #Start the framework
