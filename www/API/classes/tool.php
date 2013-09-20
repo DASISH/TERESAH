@@ -7,6 +7,33 @@
 			$this->DB = $DB;
 		}
 		
+		function getDevelopers($toolUID) {
+			$req = "SELECT d.UID, d.name, d.contact FROM Developer d, Tool_has_Developer td WHERE td.Developer_UID = d.UID AND td.Tool_UID = ?";
+			$req = $this->DB->prepare($req);
+			$req->execute(array($toolUID));
+			$data = $req->fetchAll(PDO::FETCH_ASSOC);
+			if($data) {
+				$ret = array();
+				foreach($data as &$keyword) {
+					if($keyword["contact"] != null) {
+						$ret[] = array(
+									"name" => $keyword["name"],
+									"contact" => $keyword["contact"],
+									"identifier" => $keyword["UID"]
+								);
+					}	else {
+						$ret[] = array(
+									"name" => $keyword["name"],
+									"identifier" => $keyword["UID"]
+								);
+					}
+				}
+				return $ret;
+			} else {
+				return false;
+			}
+		}
+		
 		function getDescriptions($toolUID, $external = true, $userName = false) {
 			$userName = true;
 			#We first fetch our description
@@ -253,7 +280,10 @@
 					$ret["platform"] = $this->getPlatform($data["tool_id"]);
 					if(!$ret["platform"]) { unset($ret["platform"]); }
 				}
-				
+				if(isset($options["developer"])) {
+					$ret["developers"] = $this->getDevelopers($data["tool_id"]);
+					if(!$ret["developers"]) { unset($ret["developers"]); }
+				}
 				
 			} else {
 				$ret = array("Error" => "No tool for " + $ref +" identifier");

@@ -108,7 +108,7 @@ portal.factory("ui", function($window, $rootScope) {
 						return data;
 					});
 				},
-				one : function(item, options = {keyword:true, platform:true}, callback = false) {
+				one : function(item, options = {keyword:true, platform:true, developer : true, type:true}, callback = false) {
 					return Item.routes.tools.one.one(item).get(options).then(function (data) {
 						Item.data = data;
 						if(callback) {	callback(data);	}
