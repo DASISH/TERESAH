@@ -10,12 +10,12 @@ portal.config(['$httpProvider', function($httpProvider) {
 portal.
 	config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
-		when('/tool/:toolId', {templateUrl: '/view/tool.html', controller:"ToolCtrl", reloadOnSearch: false, resolve: Tool.resolveTool}).
-		when('/login/', {templateUrl: '/view/login.html', controller:"LoginCtrl"}).
-		when('/search/faceted', {templateUrl: '/view/faceted.html', controller:"FacetedCtrl", reloadOnSearch: false, resolve: Faceted.resolveFaceted}).
-		when('/', {templateUrl: '/view/home.html' , controller:"HomeCtrl", reloadOnSearch: false, resolve: Home.resolveHome}).
-		otherwise({redirectTo: '/'});
+		when('/tool/:toolId', {templateUrl: './view/tool.html', controller:"ToolCtrl", reloadOnSearch: false, resolve: Tool.resolveTool}).
+		when('/login/', {templateUrl: './view/login.html', controller:"LoginCtrl"}).
+		when('/search/faceted', {templateUrl: './view/faceted.html', controller:"FacetedCtrl", reloadOnSearch: false, resolve: Faceted.resolveFaceted}).
+		when('/', {templateUrl: './view/home.html' , controller:"HomeCtrl", reloadOnSearch: false, resolve: Home.resolveHome}).
+		otherwise({redirectTo: './'});
 }]);
 portal.config(function(RestangularProvider) {
-	RestangularProvider.setBaseUrl("http://"+document.domain+":8080");
+	RestangularProvider.setBaseUrl("http://"+document.domain+"/API");
 });

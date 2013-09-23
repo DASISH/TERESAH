@@ -33,17 +33,13 @@
     
 	#Start the framework
 	\Slim\Slim::registerAutoloader();
-	$app = new \Slim\Slim(array
-		(
-			// Smarty
-			'cookies.path' => '/',
-			'cookies.domain' => 'dasishT23.com',
-			'cookie.encrypt' => true,
-			'cookies.secret_key'  => 'qwertyuiopasdfghjklzxcvbnm',
-			'cookies.lifetime' => time() + (1 * 24 * 60 * 60), // = 1 day
-			'cookies.cipher' => MCRYPT_RIJNDAEL_256,
-			'cookies.cipher_mode' => MCRYPT_MODE_CBC
-		));
+	$app = new \Slim\Slim(
+			array(
+		'cookies.encrypt' => true,
+		'cookies.secret_key' => '(ecwccx_)4q8f3q^3vsq)@0l%v=y%r390%ke+l7pjdwj75v8f)fp@ba2#1z7)eyjl!-3y2mb@*euaaf+*5+4r(!9iw2w)o1akx!w+8x^#y+y5kureo5!4q6a8*44_r($plnkqi$d9k-(s@zwlgwa34',
+		'cookies.cipher' => MCRYPT_RIJNDAEL_256,
+		'cookies.cipher_mode' => MCRYPT_MODE_CBC
+	));
 	$app->add(new \Slim\Middleware\ContentTypes());
 	
 	/*

@@ -1,7 +1,13 @@
-<form class="form-signin" ng-submit="ui.login.submit()">
-	<h2 class="form-signin-heading">Please sign in</h2>
-	<input class="form-control" type="text" name="user" ng-model="ui.login.inputs.user" autofocus="" placeholder="Email address">
-	<input class="form-control" type="password" name="password" ng-model="ui.login.inputs.password" placeholder="Password">
-	<label class="checkbox">
-	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-</form>
+<div>
+	<form class="form-signin" ng-submit="ui.login.submit()" ng-show="!$parent.user.signedin">
+		<h2 class="form-signin-heading">Please sign in</h2>
+		<input class="form-control" type="text" name="user" ng-model="ui.login.inputs.user" autofocus="" placeholder="Email address">
+		<input class="form-control" type="password" name="password" ng-model="ui.login.inputs.password" placeholder="Password">
+		<label class="checkbox">
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	</form>
+	<div ng-show="$parent.user.signedin">
+		Test
+		{{$parent.user.name}}
+	</div>
+</div>

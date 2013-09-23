@@ -1,4 +1,4 @@
-var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "Item", function($scope, $q, $location, $route, $item) {
+var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "Item", "$rootScope", function($scope, $q, $location, $route, $item, $root) {
 	$scope.ui = {
 		search : {
 			typeahead : function(str) {

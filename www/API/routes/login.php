@@ -13,8 +13,11 @@
 		if(isset($input["user"]) && isset($input["password"]))
 		{
 			$data = $user->login($input);
+			
+			$app->setCookie('mycookie',$input["password"], "2 days");
 			if($data["signin"] == true) {
-				$app->setCookie('my_cookie',$input["password"]);
+				$app->setEncryptedCookie('t23-p',$input["password"], "2 days");
+				$app->setEncryptedCookie('t23-u',$input["user"], "2 days");
 				return jP($data["data"]);
 			}
 			
@@ -26,7 +29,8 @@
 	})->via('POST')->name('login');
 
 	$app->get('/cookie/', function () use ($app) { 
-		$cookies = $app->getCookie('my_cookie');
+		$cookies = $app->getEncryptedCookie('t23-p');
+		
 		return jP($cookies);
 	} );
 	
