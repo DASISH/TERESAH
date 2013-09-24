@@ -1,4 +1,4 @@
-var portal = angular.module('toolRegistry', ['ngResource', 'ui.bootstrap', 'restangular']);
+var portal = angular.module('toolRegistry', ['ui.bootstrap', 'restangular']);
 
 portal.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
@@ -18,4 +18,3 @@ portal.
 portal.config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl("http://"+document.domain+":8080");
 });
-console.log("HELLO");

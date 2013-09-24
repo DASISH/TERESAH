@@ -6,11 +6,15 @@
 			$this->DB = $DB;
 			
 		}
-		function nbrTotal() {
-			$req = $this->DB->prepare("SELECT COUNT(*) as cnt FROM Tool USE INDEX(PRIMARY)");
-			$req->execute();
-			$data = $req->fetch(PDO::FETCH_ASSOC);
-			return $data["cnt"];
+		function nbrTotal($req = "FROM Tool USE INDEX(PRIMARY)", $params = array(), $rowCount = false) {
+			$req = $this->DB->prepare("SELECT COUNT(*) as cnt ".$req);
+			$req->execute($params);
+			if($rowCount) {
+				return $req->rowCount();
+			} else {
+				$data = $req->fetch(PDO::FETCH_ASSOC);
+				return $data["cnt"];
+			}
 		}
 		function options($get, $queryNeeded = False) {
 			$options = array();
@@ -18,7 +22,7 @@
 			#Query
 			if(!isset($get["request"])) {
 				if($queryNeeded) {
-					return array("error" => "No request given"); 
+					return array("Error" => "No request given"); 
 				} else {
 					$options["request"] = Null;
 				}
@@ -27,7 +31,7 @@
 			}
 			
 			#CASE
-			if(!isset($get["case_insensitivity"])) { 
+			if(!isset($get["case_insensitivity"]) || $get["case_insensitivity"] == false || $get["case_insensitivity"] == "false") { 
 				$options["case_insensitivity"] = false; 
 				$sensitivity = ""; 
 			} else {
@@ -64,6 +68,9 @@
 			#####
 			//Default research search in keyword, description AND external Description AND Application_Type
 			$opt = $this->options($get);
+			if(array_key_exists("Error", $opt)) {
+				return $opt;
+			}
 			$options = $opt[0];
 			#$reqWord = "xml";
 			// $reqWord = "%".$reqWord."%";
@@ -117,6 +124,9 @@
 			#####
 			//Default research search in keyword, description AND external Description AND Application_Type
 			$opt = $this->options($get, $queryNeeded = True);
+			if(array_key_exists("Error", $opt)) {
+				return $opt;
+			}
 			$options = $opt[0];
 			$sensitivity = $opt[1];
 			#$reqWord = "xml";
@@ -328,6 +338,13 @@
 			} else {
 				return array("Error" => "No facets given");
 			}
+			
+			#If we have no exec, that means we have no param
+			$cnt = count($exec) + count($execEnd);
+			if($cnt == 0) {
+				return array("Error" => "No facets given");
+			}
+			
 			###########
 			#
 			#	Keyword Research
@@ -341,6 +358,7 @@
 			} else {
 				$where = "";
 			}
+			
 			
 			#We add our value in execEnd in exec now because exec wont change
 			foreach($execEnd as &$id) {
@@ -366,6 +384,7 @@
 			#We fetch the data
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
 			
+			
 			#We create our own return array
 			$ret = array("response" => array(), "parameters" => $options);
 			#For each answer we format it
@@ -373,6 +392,8 @@
 				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
 			}
 			#We return
+			$ret["parameters"]["total"] = $this->nbrTotal("FROM Description d INNER JOIN Tool t ON t.UID = d.Tool_UID ".implode($joins, " ")." ".$where." GROUP BY d.Tool_UID", $exec, true);
+			
 			return $ret;
 		}
 		function getFacets() {

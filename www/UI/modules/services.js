@@ -66,7 +66,7 @@ portal.factory("ui", function($window, $rootScope) {
 		}
 	};
 	return ui;
-}).factory('Item', function($resource){
+}).factory('Item', function(Restangular){
 	
 	var Item = {
 		//Serialize function
@@ -77,40 +77,84 @@ portal.factory("ui", function($window, $rootScope) {
 				});
 				return str.join("&");
 				},
+		//
 		//Ressource part
-		resrce : $resource("http://"+document.domain+"\\:8080/tool/:itemID?keyword&platform", {itemID : "@itemID"}, { query:  {method: 'GET'} }),
-		all : $resource("http://"+document.domain+"\\:8080/search/all?:options", {options : "@options"}, { query:  {method: 'GET'} }),
-		fct : $resource("http://"+document.domain+"\\:8080/search/facetList", { query : {method: 'GET'}}),
-		fctSearch : $resource("http://"+document.domain+"\\:8080/search/facet/:field?:options", {field : "@field", options : "@options"}, { query : {method: 'GET',
-            params: {field : "@field", options : "@options"}}}),
+		//
+		routes : {
+			tools : {
+				all : Restangular.one("search/all/"),
+				one : Restangular.all("tool")
+			},
+			facets : {
+				list : Restangular.all("search/facetList/"),
+				search : Restangular.all("search/facet")
+			},
+			search : {
+				normal : Restangular.one("search/general/"),
+				faceted : Restangular.all("search/faceted/")
+			}
+		},
+		
 		//Return Part
-		query : function(item) {
-			this.resrce.query({itemID : item}, function(u) { Item.data = u; return u; }); 
-		},
-		facets : function(key, option) {
-			if(key) {
-				console.log(key);
-				console.log(option);
-				if(option) {
-					console.log("Got option");
-					str = this.serialize(option);
-					return this.fctSearch.query({field : key, options : str}, function (u) { Item.data = u; return u;});
-				} else {
-					console.log("Got key");
-					return this.fctSearch.query({field : key}, function(u) {  Item.data = u; return u; }); 
+		resolver : {
+			tools : {
+				all : function(opt = {}, callback = false) {
+					if(opt.page) {
+						opt.start = opt.page * 20 - 20;
+					}
+					return Item.routes.tools.all.get(opt).then(function (data) {
+						if(callback) {	callback(data);	}
+						Item.data = data;
+						return data;
+					});
+				},
+				one : function(item, options = {keyword:true, platform:true, developer : true, type:true}, callback = false) {
+					return Item.routes.tools.one.one(item).get(options).then(function (data) {
+						Item.data = data;
+						if(callback) {	callback(data);	}
+						return data;
+					});
 				}
-			} else {
-				console.log("Got nothing");
-				return this.fct.query(function(u) { Item.data = u; return u; }); 
+			},
+			facets : function(key, option, callback=false) {
+				if(key) {
+					if(option) {
+						return Item.routes.facets.search.one(key).get(option).then(function (data) {
+							Item.data = data;
+							if(callback) {	callback(data);	}
+							return data;
+						});
+					} else {
+						return Item.routes.facets.search.one(key).getList().then(function (data) {
+							Item.data = data;
+							if(callback) {	callback(data);	}
+							return data;
+						});
+					}
+				} else {
+					return Item.routes.facets.list.getList().then(function (data) {
+						Item.data = data;
+						if(callback) {	callback(data);	}
+						return data;
+					});
+				}
+			},
+			search : {
+				normal : function(options, callback) {
+					return Item.routes.search.normal.get(options).then(function(data) {
+						Item.data = data;
+						if(callback) { callback(data); }
+						return data;
+					});
+				},
+				faceted : function(options, callback) {
+					return Item.routes.search.faceted.post(options).then(function(data) {
+						Item.data = data;
+						if(callback) { callback(data); }
+						return data;
+					});
+				}
 			}
-		},
-		search : function(opt) {
-			opt = {}
-			if(opt.page) {
-				opt.start = opt.page * 20 - 20;
-			}
-			str = this.serialize(opt);
-			return this.all.query({options : str}, function(u) { Item.data = u; return u; });
 		}
 	}
 	

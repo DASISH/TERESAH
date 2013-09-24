@@ -22,8 +22,10 @@
 			<a class="btn btn-primary btn-lg btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)">{{desc.provider}}</a>
 		</div>
 		<p>&nbsp;</p>
-		<h2 class="btn btn-success btn-lg btn-block">Informations</h2>
+		<h2 class="btn btn-success btn-lg btn-block">Information</h2>
 		<dl>
+			<dt>Tool Type</dt>
+			<dd ng-repeat="type in item.type" legend="{{tyoe.uri}}">{{type.type}}</dd>
 			<dt>Licence</dt>
 			<dd>{{item.descriptions.licence.name}}</dd>
 			<dt>Licence Type</dt>
@@ -32,6 +34,8 @@
 			<dd><a href="{{item.descriptions.homepage}}">{{item.descriptions.homepage}}</a></dd>
 			<dt>Platform(s)</dt>
 			<dd ng-repeat="os in item.platform">{{os}}</dd>
+			<dt>Developer(s)</dt>
+			<dd ng-repeat="developer in item.developers">{{developer.name}}</dd>
 		</dl>
 	</div>
 </div>
