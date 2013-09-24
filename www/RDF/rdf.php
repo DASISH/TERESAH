@@ -30,8 +30,8 @@ class Rdf {
     function tool($id = null) {
         $result = array();
 
-        $query = "SELECT t.UID, t.shortname, d.description, d.title, d.homepage, d.available_from, d.registered, d.Licence_UID FROM Tool t
-                      INNER JOIN Description d ON t.UID = d.Tool_UID";
+        $query = "SELECT t.tool_uid, t.shortname, d.description, d.title, d.homepage, d.available_from, d.registered, d.licence_uid FROM tool t
+                      INNER JOIN description d ON t.tool_uid = d.tool_uid";
 
         if ($id) {
             $query .= " WHERE t.shortname = ?";
@@ -64,38 +64,38 @@ class Rdf {
             }
             
             //hasKeyword
-            $keywordSQL = "SELECT Tool_UID, Keyword_id FROM tool_has_keyword WHERE Tool_UID =  ?";
+            $keywordSQL = "SELECT tool_uid, keyword_uid FROM tool_has_keyword WHERE tool_uid =  ?";
             $keywordQuery = $this->DB->prepare($keywordSQL);
-            $keywordQuery->execute(array($tool['UID']));
+            $keywordQuery->execute(array($tool['tool_uid']));
             $keywords = $keywordQuery->fetchAll(PDO::FETCH_ASSOC);
             
             foreach ($keywords as &$keyword) {
-                $result[$uri][$this->pre['dcterms'].'subject'][] = $this->_val($this->pre['dasish'].'keyword/'.$keyword['Keyword_id'], 'uri');
+                $result[$uri][$this->pre['dcterms'].'subject'][] = $this->_val($this->pre['dasish'].'keyword/'.$keyword['keyword_uid'], 'uri');
                 if($id){
-                    $result = array_merge($result, $this->keyword($keyword['Keyword_id']));
+                    $result = array_merge($result, $this->keyword($keyword['keyword_uid']));
                 }
             }
             
             //hasType
-            $toolTypeSQL = "SELECT * FROM tool_type tt INNER JOIN tool_has_tool_type th ON tt.tool_type_uid = th.tool_type_uid WHERE th.Tool_UID = ?";
+            $toolTypeSQL = "SELECT * FROM tool_type tt INNER JOIN tool_has_tool_type th ON tt.tool_type_uid = th.tool_type_uid WHERE th.tool_uid = ?";
             $toolTypeQuery = $this->DB->prepare($toolTypeSQL);
-            $toolTypeQuery->execute(array($tool['UID']));
+            $toolTypeQuery->execute(array($tool['tool_uid']));
             $tool_types = $toolTypeQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($tool_types as &$tool_type) {
-                $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($tool_type['sourceURI'], 'uri');
+                $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($tool_type['source_uri'], 'uri');
                 $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($this->pre['dasish'].'tool_type/'.$tool_type['tool_type_uid'], 'uri');
             }
             
             //hasPlatform (using dbpedia)
-            $platformSQL = "SELECT * FROM tool_has_platform WHERE Tool_UID = ?;";
+            $platformSQL = "SELECT * FROM tool_has_platform WHERE tool_uid = ?;";
             $platformQuery = $this->DB->prepare($platformSQL);
-            $platformQuery->execute(array($tool['UID']));
+            $platformQuery->execute(array($tool['tool_uid']));
             $platforms = $platformQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($platforms as &$platform) {
                 if($platform['Platform_platform'] == 'osX'){
                     $platform['Platform_platform'] = 'OS_X';
                 }
-                $result[$uri][$this->pre['dcterms'].'requires'][] = $this->_val('http://dbpedia.org/page/'.$platform['Platform_platform'], 'uri');
+                $result[$uri][$this->pre['dcterms'].'requires'][] = $this->_val('http://dbpedia.org/page/'.$platform['platform_platform'], 'uri');
             }
             
             //externalDescription (blank node)
@@ -107,8 +107,8 @@ class Rdf {
                 $result[$uri][$this->pre['owl'].'sameAs'][]            = $this->_val($external_description['sourceURI'], 'uri');
                 $result[$uri][$this->pre['dcterms'].'description'][]   = $this->_val('_:'.$external_description['UID'], 'bnode');
                 
-                $result['_:'.$external_description['UID']][$this->pre['dcterms'].'description'][]   = $this->_val($external_description['description']);
-                $result['_:'.$external_description['UID']][$this->pre['dcterms'].'source'][]        = $this->_val($external_description['sourceURI'], 'uri');
+                $result['_:'.$external_description['external_description_uid']][$this->pre['dcterms'].'description'][]   = $this->_val($external_description['description']);
+                $result['_:'.$external_description['external_description_uid']][$this->pre['dcterms'].'source'][]        = $this->_val($external_description['source_uri'], 'uri');
             }
         }
         return $result;
@@ -134,9 +134,9 @@ class Rdf {
             $uri = $this->pre['dasish'].'keyword/'.$keyword['keyword_uid'];
             
             $result[$uri][$this->pre['rdf'].'type'][]      = $this->_val('http://isocat.org/datcat/DC-278', 'uri');
-            $result[$uri][$this->pre['dcterms'].'type'][]  = $this->_val($keyword['sourceTaxonomy']);
+            $result[$uri][$this->pre['dcterms'].'type'][]  = $this->_val($keyword['source_taxonomy']);
             $result[$uri][$this->pre['rdfs'].'label'][]    = $this->_val(htmlspecialchars($keyword['keyword']));
-            $result[$uri][$this->pre['owl'].'sameAs'][]    = $this->_val($keyword['sourceURI'], 'uri');
+            $result[$uri][$this->pre['owl'].'sameAs'][]    = $this->_val($keyword['source_uri'], 'uri');
         }
         
         return $result;
