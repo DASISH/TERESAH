@@ -13,9 +13,26 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 			} else {
 				$scope.item.desc = provider;
 			}
+		},
+		comments : {
+			form : {
+				submit : function() {
+					console.log($scope.ui.comments.form.data);
+					$item.resolver.tools.comments.post($scope.item.identifier.id, $scope.ui.comments.form.data, function(data) {
+						console.log(data);					
+					});
+				},
+				data : {}
+			},
+			get : function() {
+				$item.resolver.tools.comments.get($scope.item.identifier.id, function(data) {
+					$scope.ui.comments.list = data.comments;
+				});
+			},
+			list : {}
 		}
 	};
-	
+	$scope.ui.comments.get();
 	$ui.title("Tool | " + $scope.item.descriptions.title);
 	
 	//exec

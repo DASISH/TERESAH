@@ -39,3 +39,39 @@
 		</dl>
 	</div>
 </div>
+<div class="row">
+	<h2>Comments</h2>
+	<div class="containter col-lg-10 col-lg-offset-1" style="margin-bottom:40px;">
+		<div class="row" ng-repeat="comment in ui.comments.list">
+			<div class="container">
+				<div class="col-lg-2">
+					<h4>{{comment.user.name}}</h4>
+					<img src="http://www.gravatar.com/avatar/{{comment.user.mail}}?s=100" alt="..." class="img-circle">
+				</div>
+				<div class="col-lg-10">
+					<h3>{{comment.comment.subject}}</h3>
+					<p>{{comment.comment.text}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<form class="form-horizontal" role="form" ng-submit="ui.comments.form.submit()">
+		<div class="form-group">
+			<label for="title" class="col-lg-2 control-label">Title</label>
+			<div class="col-lg-10">
+				<input type="text" ng-model="ui.comments.form.data.title" class="form-control" id="title" placeholder="Title">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="Message" class="col-lg-2 control-label">Message</label>
+			<div class="col-lg-10">
+				<textarea ng-model="ui.comments.form.data.text" id="Message" class="form-control"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-offset-2 col-lg-10">
+				<button type="submit" class="btn btn-default">Comment</button>
+			</div>
+		</div>
+	</form>
+</div>

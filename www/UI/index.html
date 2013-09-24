@@ -12,6 +12,40 @@
 		<link href="./assets/css/bootstrap.css" rel="stylesheet">
 		<style type="text/css">
 			body { margin-top:70px; }
+.form-signin {
+max-width: 330px;
+padding: 15px;
+margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+margin-bottom: 10px;
+}
+.form-signin .checkbox {
+font-weight: normal;
+}
+.form-signin .form-control {
+position: relative;
+font-size: 16px;
+height: auto;
+padding: 10px;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+z-index: 2;
+}
+.form-signin input[type="text"] {
+margin-bottom: -1px;
+border-bottom-left-radius: 0;
+border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+margin-bottom: 10px;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+}
 		</style>
 	</head>
 
@@ -32,15 +66,16 @@
 				<ul class="nav navbar-nav">
 					<li ng-class="ui.routes.getRoute('HomeCtrl')"><a href="#/">Home</a></li>
 					<li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="#/search/faceted">Faceted search</a></li>
-					<li  ng-class="ui.routes.getRoute('About')"><a href="#contact">About</a></li>
+					<li ng-class="ui.routes.getRoute('About')"><a href="#contact">About</a></li>
 				</ul>
-				<form class="navbar-form navbar-right ">
-					<div class="input-group">
-						<input type="text" placeholder="Type your research here"  ng-model="ui.search.input" class="form-control col-lg-2" typeahead-wait-ms="100" typeahead="answer.identifiers.shortname as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-loading="true" typeahead-on-select="ui.search.select($item)">
-						<span class="input-group-btn">
-							<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-						</span>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="pull-right"><a href="#/login"><span class="glyphicon glyphicon-user"></span> {{ui.user.data.name || "Login"}}</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<input type="text" placeholder="Type your research here"  ng-model="ui.search.input" class="form-control" typeahead-wait-ms="100" typeahead="answer.identifiers.shortname as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-loading="true" typeahead-on-select="ui.search.select($item)">
 					</div>
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
 				</form>
 			</div><!--/.nav-collapse -->
 		</div>

@@ -65,14 +65,24 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 			}
 		},
 		user : {
-			signedin : function() {
-				if($cookies.logged) {
-					Restangular.one("cookie/").get().then( function(data) {
-						ui.user.data = data;
-						console.log(ui.user.data);
-					});
-				} else {
-					ui.user.data = false;
+			data : false,
+			signedin : function(callback) {
+				if(ui.user.data == false) {
+					if($cookies.logged) {
+						Restangular.one("cookie/").get().then( function(data) {
+							data = {name : data.name, id : data.id, mail : data.id }
+							ui.user.data = data;
+							console.log(ui.user.data);
+							if(callback) {
+								return callback(ui.user.data);
+							}
+						});
+					} else {
+						ui.user.data = false;
+						if(callback) {
+							return false;
+						}
+					}
 				}
 			}
 		}
@@ -129,6 +139,22 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 						if(callback) {	callback(data);	}
 						return data;
 					});
+				},
+				comments : {
+					get : function(item, callback = false) {
+						return Item.routes.tools.one.one(item).one("comments").get().then(function (data) {
+							Item.data = data;
+							if(callback) {	callback(data);	}
+							return data;
+						});
+					},
+					post : function(item, options, callback = false) {
+						return Item.routes.tools.one.one(item).all("comments").post(options).then(function (data) {
+							Item.data = data;
+							if(callback) {	callback(data);	}
+							return data;
+						});
+					}
 				}
 			},
 			facets : function(key, option, callback=false) {

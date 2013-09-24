@@ -39,12 +39,16 @@
 		
 		return jP($_SESSION["user"]);
 	} );
-	
 	/*
 	$authAdmin = function  ( $role = 'member') {
 
 		return function () use ( $role ) {
-
+			if($_SESSION["user"]["id"]) {
+				return true;
+			} else {
+				return false;
+			}
+		/*
 			$app = Slim::getInstance('my_cookie');
 
 			// Check for password in the cookie
@@ -53,6 +57,7 @@
 				$app->redirect('/login');
 			}
 		};
+
 	};
 	*/
 ?>
