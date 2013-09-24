@@ -14,11 +14,18 @@
 		{
 			$data = $user->login($input);
 			
-			$app->setCookie('mycookie',$input["password"], "2 days");
 			if($data["signin"] == true) {
-				$app->setEncryptedCookie('t23-p',$input["password"], "2 days");
+				$d = $data["data"];
+				$app->setEncryptedCookie('t23-p', hash("sha256", $input["password"]), "2 days");
 				$app->setEncryptedCookie('t23-u',$input["user"], "2 days");
-				return jP($data["data"]);
+				$app->setEncryptedCookie('t23-i',$d["UID"], "2 days");
+				$app->setCookie('logged',$d["Name"], "20 minutes");
+				
+				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"]);
+				
+				return jP($d);
+			} else {
+				return jP($data);
 			}
 			
 		}
@@ -29,9 +36,8 @@
 	})->via('POST')->name('login');
 
 	$app->get('/cookie/', function () use ($app) { 
-		$cookies = $app->getEncryptedCookie('t23-p');
 		
-		return jP($cookies);
+		return jP($_SESSION["user"]);
 	} );
 	
 	/*

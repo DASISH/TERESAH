@@ -5,11 +5,18 @@ var Login = portal.controller('LoginCtrl', ['$scope', 'ui',  'Item', '$rootScope
 			submit : function() {
 			
 				$item.resolver.user.signin($scope.ui.login.inputs, function(data) {
-					$root.user = {name : data.name, mail: data.mail, signedin : true }
+					o = {name : data.name, mail: data.mail, signedin : true };
+					$root.user = o;
+					$scope.ui.user =  o;
 				});
 				
 			},
 			inputs : {}
+		},
+		user : {
+			name : false,
+			mail : false,
+			signedin : false
 		}
 	};
 	

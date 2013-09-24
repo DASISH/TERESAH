@@ -1,4 +1,6 @@
 <?php
+	session_cache_limiter(false);
+	session_start();
     if (isset($_SERVER['HTTP_ORIGIN'])) {
         header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
         header('Access-Control-Allow-Credentials: true');
@@ -27,7 +29,16 @@
 	require_once './classes/index.php';
 
 	#json Print_R
-	function jP($array) {
+	function jP($array, $session = true) {
+		/*
+		if($session == true) {
+			if(isset($_SESSION["user"])) {
+				$array = array("data" => $array, "user" => $_SESSION["user"]);
+			} else {
+				$array = array("data" => $array, "user" => false);
+			}
+		}
+		*/
 		print(json_encode($array));#, JSON_PRETTY_PRINT));
 	}
     
@@ -40,6 +51,19 @@
 		'cookies.cipher' => MCRYPT_RIJNDAEL_256,
 		'cookies.cipher_mode' => MCRYPT_MODE_CBC
 	));
+	/*
+	$app->add(new \Slim\Middleware\SessionCookie(array(
+		'expires' => '20 minutes',
+		'path' => '/',
+		'domain' => null,
+		'secure' => false,
+		'httponly' => false,
+		'name' => 'slim_session',
+		'secret' => 'zxcvtgbujnmxefvtgbunihjxsrdhnws4e5d6rfthyuj3se5dugbvthyycesvtdrbfyvhrjbdfrtjsxetsyefbybkttf',
+		'cipher' => MCRYPT_RIJNDAEL_256,
+		'cipher_mode' => MCRYPT_MODE_CBC
+	)));
+	*/
 	$app->add(new \Slim\Middleware\ContentTypes());
 	
 	/*

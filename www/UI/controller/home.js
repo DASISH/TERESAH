@@ -21,6 +21,8 @@ var Home = portal.controller('HomeCtrl', ['$scope', 'ui',  'Item', function($sco
 		}
 	};
 	
+	$ui.user.signedin();
+	
 	$ui.title("Home");
 	
 	//exec

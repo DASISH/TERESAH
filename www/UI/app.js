@@ -1,4 +1,4 @@
-var portal = angular.module('toolRegistry', ['ui.bootstrap', 'restangular']);
+var portal = angular.module('toolRegistry', ['ui.bootstrap', 'restangular', 'ngCookies']);
 
 portal.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.useXDomain = true;

@@ -1,4 +1,4 @@
-portal.factory("ui", function($window, $rootScope) {
+portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 	var ui = {
 		title : function(title) { $window.document.title = "DASISH Tool Registry | " + title; },
 		bookmark : {
@@ -62,6 +62,18 @@ portal.factory("ui", function($window, $rootScope) {
 					object.children = object.children + 1;
 				});
 				return object;
+			}
+		},
+		user : {
+			signedin : function() {
+				if($cookies.logged) {
+					Restangular.one("cookie/").get().then( function(data) {
+						ui.user.data = data;
+						console.log(ui.user.data);
+					});
+				} else {
+					ui.user.data = false;
+				}
 			}
 		}
 	};

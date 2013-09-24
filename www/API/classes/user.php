@@ -9,7 +9,7 @@
 		function login($post) {
 			$pw = hash('sha256', $post["password"]);
 			try {
-				$req = $this->DB->prepare("SELECT Name, Mail FROM User WHERE Login = ? AND Password = ?");
+				$req = $this->DB->prepare("SELECT Name, Mail, UID FROM User WHERE Login = ? AND Password = ?");
 				$req->execute(array($post["user"], $pw));    
 			} catch (Exception $e) {
 				Die('Need to handle this error. $e has all the details');
