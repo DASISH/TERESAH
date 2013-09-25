@@ -34,6 +34,33 @@
 			$app->response()->status(401);
 		}
 	})->via('POST')->name('login');
+	
+	$app->map('/signup/', function () use ($app, $user) {
+		// Don't forget to set the correct attributes in your form (name="user" + name="password")
+		
+		if(count($app->request->post()) > 0) {
+			$input = $app->request->post();
+		} elseif(count($app->request()->getBody()) > 0) {
+			$input = $app->request()->getBody();
+		} else {
+			$app->response()->status(400);
+		}
+		
+		if(isset($input["mail"]) && isset($input["password"]) && isset($input["name"]) && isset($input["user"]))
+		{
+			$data = $user->signup($input);
+			
+			if(isset($data["Success"])) {
+				return jP($data);
+			} else {
+				return jP($data);
+			}
+		}
+		else
+		{
+			$app->response()->status(401);
+		}
+	})->via('POST')->name('signup');
 
 	$app->get('/cookie/', function () use ($app) { 
 		if(isset($_SESSION["user"])) {

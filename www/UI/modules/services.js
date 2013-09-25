@@ -134,7 +134,8 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 				faceted : Restangular.all("search/faceted/")
 			},
 			user : {
-				signin : Restangular.all("login/")
+				signin : Restangular.all("login/"),
+				signup : Restangular.all("signup/")
 			}
 		},
 		
@@ -243,6 +244,16 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 						if(typeof(callback)==='undefined') callback = false;
 					
 					return Item.routes.user.signin.post(obj).then(function(data) {
+						if(callback) { callback(data); }
+						return data;
+					});
+					
+				},
+				signup : function(obj, callback) {
+					
+						if(typeof(callback)==='undefined') callback = false;
+					
+					return Item.routes.user.signup.post(obj).then(function(data) {
 						if(callback) { callback(data); }
 						return data;
 					});
