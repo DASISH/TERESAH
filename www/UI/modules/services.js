@@ -70,7 +70,9 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 				if(ui.user.data == false) {
 					if($cookies.logged) {
 						Restangular.one("cookie/").get().then( function(data) {
-							data = {name : data.name, id : data.id, mail : data.id }
+							console.log(data);
+							console.log("ui");
+							data = {name : data.name, id : data.id, mail : data.mail }
 							ui.user.data = data;
 							console.log(ui.user.data);
 							if(callback) {
@@ -83,6 +85,22 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 							return false;
 						}
 					}
+				}
+			},
+			signout : function(callback) {
+				if($cookies.logged) {
+					Restangular.one("signout").get().then(function(data) {
+					
+						if(callback) {
+							return callback(data);
+						}
+						
+						if(data.signedout == true) {
+							return true;
+						} else {
+							return false;
+						}
+					});
 				}
 			}
 		}

@@ -26,8 +26,18 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 			data : false,
 			signedin : function () { $ui.user.signedin(function(data) {
 					o = {name : data.name, mail: data.mail, signedin : true };
+					$root.user = o;
 					$scope.ui.user.data = o;
-					$root.user = o
+				}); 
+			},
+			signout : function () { $ui.user.signout(function(data) {
+					if(data.signedout == false) {
+						$root.user.signedin = false;
+						$scope.ui.user.data.signedin = false;
+					} else {
+						$root.user.signedin = true;
+						$scope.ui.user.data.signedin = true;
+					}
 				}); 
 			}
 		}
@@ -43,6 +53,7 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 	$scope.$watch('user.signedin', function(status) {
 		if(status == true) {
 			$scope.ui.user.data = $root.user;
+			console.log($root.user);
 		}
 	});
 }]);

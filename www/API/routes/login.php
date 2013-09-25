@@ -36,8 +36,20 @@
 	})->via('POST')->name('login');
 
 	$app->get('/cookie/', function () use ($app) { 
-		
-		return jP($_SESSION["user"]);
+		if(isset($_SESSION["user"])) {
+			return jP($_SESSION["user"]);
+		} else {
+			return jP(array("Error" => "Not connected"));
+		}
+	} );
+	
+	$app->get('/signout/', function () use ($app) { 
+		session_destroy();
+		$app->setEncryptedCookie('t23-p', false, "1 second");
+		$app->setEncryptedCookie('t23-u',false, "1 second");
+		$app->setEncryptedCookie('t23-i',false, "1 second");
+		$app->setCookie('logged', false, "1 second");
+		return jP(array("signedout" => false));
 	} );
 	/*
 	$authAdmin = function  ( $role = 'member') {

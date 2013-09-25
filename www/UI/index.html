@@ -69,7 +69,8 @@ border-top-right-radius: 0;
 					<li ng-class="ui.routes.getRoute('About')"><a href="#contact">About</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="pull-right"><a href="#/login"><span class="glyphicon glyphicon-user"></span> {{ui.user.data.name || "Login"}}</a></li>
+					<li class="pull-right" ng-show="ui.user.data.signedin"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> {{ui.user.data.name}}</a></li>
+					<li class="pull-right" ng-show="!ui.user.data.signedin"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
