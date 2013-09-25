@@ -25,13 +25,24 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 		user : {
 			data : false,
 			signedin : function () { $ui.user.signedin(function(data) {
-					$scope.ui.user.data = data;
+					o = {name : data.name, mail: data.mail, signedin : true };
+					$scope.ui.user.data = o;
+					$root.user = o
 				}); 
 			}
 		}
 	}
+	
 	$scope.ui.user.signedin();
+	
 	$scope.$on('$routeChangeStart', function(next, current) { 
 		$scope.ui.routes.active = current.controller;
+	});
+	
+	//Watch for rootscope.user.signedin
+	$scope.$watch('user.signedin', function(status) {
+		if(status == true) {
+			$scope.ui.user.data = $root.user;
+		}
 	});
 }]);
