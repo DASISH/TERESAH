@@ -10,6 +10,11 @@
 		jP(array("comments" => $comment->get($toolUID))); 
 	} );
 	
+	$app->get('/tool/:toolUID/forum', function ($toolUID) use ($comment, $app) { 
+		$app->contentType('application/json');
+		jP(array("comments" => $comment->get($toolUID, 2))); 
+	} );
+	
 	$app->post('/tool/:toolUID/comments', function ($toolUID) use ($comment, $app) { 
 		$app->contentType('application/json');
 		

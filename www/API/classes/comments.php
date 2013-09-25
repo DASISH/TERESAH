@@ -18,27 +18,44 @@
 			}
 		}
 		
-		function get($id) {
-		
-			//Request
-			$req = "SELECT c.Text, c.Date, c.Subject, c.UID , u.Mail, u.Name, ct.Comment_type_name FROM Comment c, User u, Comment_type ct WHERE c.Tool_UID = ? AND u.UID = c.User_UID AND ct.COMMENT_TYPE_UID = c.Comment_type_COMMENT_TYPE_UID";
+		function get($id, $type = 1) {
+			if($type == 2) {
+				//Request
+				$req = "SELECT c.Date, c.Subject, c.UID , u.Mail, u.Name FROM Comment c, User u WHERE c.Tool_UID = ? AND u.UID = c.User_UID AND c.Comment_type_COMMENT_TYPE_UID = ?";
+			} else {
+				//Request
+				$req = "SELECT c.Text, c.Date, c.Subject, c.UID , u.Mail, u.Name, ct.Comment_type_name FROM Comment c, User u, Comment_type ct WHERE c.Tool_UID = ? AND u.UID = c.User_UID AND ct.COMMENT_TYPE_UID = c.Comment_type_COMMENT_TYPE_UID AND c.Comment_type_COMMENT_TYPE_UID = ?";
+			}
 			$req = $this->DB->prepare($req);
-			$req->execute(array($id));
+			$req->execute(array($id, $type));
 			$d = $req->fetchAll(PDO::FETCH_ASSOC) ;
 			//Format
 			$r = array();
 			foreach($d as $com) {
-				$r[$com["UID"]] = array(
-					"identifier" => $com["UID"],
-					"comment" => array(
-						"date" => $com["Date"],
-						"subject" => $com["Subject"],
-						"text" => $com["Text"],
-						"type" => $com["Comment_type_name"]),
-					"user" => array(
-						"name" => $com["Name"],
-						"mail" => md5($com["Mail"]))
-					);
+			
+				if($type == 2) {
+					$r[$com["UID"]] = array(
+						"identifier" => $com["UID"],
+						"comment" => array(
+							"date" => $com["Date"],
+							"subject" => $com["Subject"]),
+						"user" => array(
+							"name" => $com["Name"],
+							"mail" => md5($com["Mail"]))
+						);
+				} else {
+					$r[$com["UID"]] = array(
+						"identifier" => $com["UID"],
+						"comment" => array(
+							"date" => $com["Date"],
+							"subject" => $com["Subject"],
+							"text" => $com["Text"],
+							"type" => $com["Comment_type_name"]),
+						"user" => array(
+							"name" => $com["Name"],
+							"mail" => md5($com["Mail"]))
+						);
+				}
 			}
 			
 			

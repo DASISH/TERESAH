@@ -19,10 +19,17 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 				submit : function() {
 					console.log($scope.ui.comments.form.data);
 					$item.resolver.tools.comments.post($scope.item.identifier.id, $scope.ui.comments.form.data, function(data) {
-						console.log(data);					
+						if(data.Error) {
+							$scope.ui.comments.form.error = data.Error;
+						} else {
+							$scope.ui.comments.form.error = false;
+							$scope.ui.comments.get();
+							$scope.ui.comments.form.active = false;
+						}
 					});
 				},
-				data : {}
+				data : {},
+				error : false
 			},
 			get : function() {
 				$item.resolver.tools.comments.get($scope.item.identifier.id, function(data) {
