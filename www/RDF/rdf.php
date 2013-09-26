@@ -87,13 +87,13 @@ class Rdf {
             }
             
             //hasPlatform (using dbpedia)
-            $platformSQL = "SELECT * FROM tool_has_platform WHERE tool_uid = ?;";
+            $platformSQL = "SELECT * FROM tool_has_platform tp INNER JOIN platform p ON p.platform_uid = tp.platform_id WHERE tool_uid = ?;";
             $platformQuery = $this->DB->prepare($platformSQL);
             $platformQuery->execute(array($tool['tool_uid']));
             $platforms = $platformQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($platforms as &$platform) {
-                if($platform['platform_platform'] == 'osX'){
-                    $platform['platform_platform'] = 'OS_X';
+                if($platform['name'] == 'osX'){
+                    $platform['name'] = 'OS_X';
                 }
                 $result[$uri][$this->pre['dcterms'].'requires'][] = $this->_val('http://dbpedia.org/page/'.$platform['platform_platform'], 'uri');
             }
@@ -101,7 +101,7 @@ class Rdf {
             //externalDescription (blank node)
             $external_descriptionSQL = "SELECT * FROM external_description WHERE tool_uid = ?;";
             $external_descriptionQuery = $this->DB->prepare($external_descriptionSQL);
-            $external_descriptionQuery->execute(array($tool['UID']));
+            $external_descriptionQuery->execute(array($tool['tool_uid']));
             $external_descriptions = $external_descriptionQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($external_descriptions as &$external_description) {
                 $result[$uri][$this->pre['owl'].'sameAs'][]            = $this->_val($external_description['source_uri'], 'uri');
