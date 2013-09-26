@@ -26,7 +26,7 @@
 			if ($mode == "Default") {
 				$legend = "Representation of Registries in Descriptions";
 				#Getting number of descriptions following Provider
-				$req = "SELECT count(UID) as number, registry_name as name FROM external_description GROUP BY registry_name";
+				$req = "SELECT count(external_description_uid) as number, registry_name as name FROM external_description GROUP BY registry_name";
 				$req = $this->DB->prepare($req);
 				$req->execute();
 				
@@ -41,7 +41,7 @@
 					#print $chart->addSlice($provider["name"], (float) $counter, $this->colors[$counter]);
 				}
 				
-				$req = "SELECT count(UID) as number FROM description WHERE description != \"&nbsp;\"";
+				$req = "SELECT count(description_uid) as number FROM description WHERE description != \"&nbsp;\"";
 				$req = $this->DB->prepare($req);
 				$req->execute();
 				$data = $req->fetch(PDO::FETCH_ASSOC);
@@ -86,13 +86,13 @@
 			
 			$myPicture = new pImage(500,400,$MyData);
 			
-			$myPicture->setFontProperties(array("FontName"=>"./assets/PieChart/fonts/Oswald/Oswald-Regular.ttf","FontSize"=>20));
+			$myPicture->setFontProperties(array("FontName"=>"../common/PieChart/fonts/Oswald/Oswald-Regular.ttf","FontSize"=>20));
 			$myPicture->drawText(20,40,$legend,array("R"=>0,"G"=>0,"B"=>0));
 			
 			
 			$PieChart = new pPie($myPicture,$MyData);
 			$PieChart->draw2DPie(150, 200,array("Border"=>TRUE, "Radius" => 130));
-			$myPicture->setFontProperties(array("FontName"=>"./assets/PieChart/fonts/Oswald/Oswald-Regular.ttf","FontSize"=>16));
+			$myPicture->setFontProperties(array("FontName"=>"../common/PieChart/fonts/Oswald/Oswald-Regular.ttf","FontSize"=>16));
 			$PieChart->drawPieLegend(300,80,array("Alpha"=>0, "BoxSize"=>20, "Style" =>"LEGEND_NOBORDER"));
 			#To draw with legend arrowed
 			#$PieChart->draw2DPie(240,120,array("DrawLabels"=>TRUE,"Border"=>TRUE));
