@@ -12,6 +12,40 @@
 		<link href="./assets/css/bootstrap.css" rel="stylesheet">
 		<style type="text/css">
 			body { margin-top:70px; }
+.form-signin {
+max-width: 330px;
+padding: 15px;
+margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+margin-bottom: 10px;
+}
+.form-signin .checkbox {
+font-weight: normal;
+}
+.form-signin .form-control {
+position: relative;
+font-size: 16px;
+height: auto;
+padding: 10px;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+z-index: 2;
+}
+.form-signin input[type="text"] {
+margin-bottom: -1px;
+border-bottom-left-radius: 0;
+border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+margin-bottom: 10px;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+}
 		</style>
 	</head>
 
@@ -32,15 +66,18 @@
 				<ul class="nav navbar-nav">
 					<li ng-class="ui.routes.getRoute('HomeCtrl')"><a href="#/">Home</a></li>
 					<li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="#/search/faceted">Faceted search</a></li>
-					<li  ng-class="ui.routes.getRoute('About')"><a href="#contact">About</a></li>
+					<li ng-class="ui.routes.getRoute('About')"><a href="#contact">About</a></li>
 				</ul>
-				<form class="navbar-form navbar-right ">
-					<div class="input-group">
-						<input type="text" placeholder="Type your research here"  ng-model="ui.search.input" class="form-control col-lg-2" typeahead-wait-ms="100" typeahead="answer.identifiers.shortname as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-loading="true" typeahead-on-select="ui.search.select($item)">
-						<span class="input-group-btn">
-							<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-						</span>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="pull-right" ng-show="ui.user.data.signedin"><a><span class="glyphicon glyphicon-user"></span> {{ui.user.data.name}}</a></li>
+					<li class="pull-right" ng-show="ui.user.data.signedin"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+					<li class="pull-right" ng-show="!ui.user.data.signedin"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<input type="text" placeholder="Type your research here"  ng-model="ui.search.input" class="form-control" typeahead-wait-ms="100" typeahead="answer.identifiers.shortname as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-loading="true" typeahead-on-select="ui.search.select($item)">
 					</div>
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
 				</form>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -59,6 +96,8 @@
 
     <!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="./assets/js/angular.min.js"></script>
+	<script type="text/javascript" src="./assets/js/angular.sanitize.js"></script>
+	<script type="text/javascript" src="./assets/js/angular.cookie.js"></script>
 	<script type="text/javascript" src="./assets/js/angular.bootstrap.tpls.min.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.0.0/lodash.js"></script>
 	<script type="text/javascript" src="//cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script>
@@ -66,11 +105,13 @@
 	<script type="text/javascript" src="./app.js"></script>
 	
 	<script type="text/javascript" src="./modules/services.js"></script>
+	<script type="text/javascript" src="./modules/filter.js"></script>
 	
 	<script type="text/javascript" src="./controller/tool.js"></script>
 	<script type="text/javascript" src="./controller/top.js"></script>
 	<script type="text/javascript" src="./controller/home.js"></script>
 	<script type="text/javascript" src="./controller/search.faceted.js"></script>
+	<script type="text/javascript" src="./controller/login.js"></script>
 	
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
