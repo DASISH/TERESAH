@@ -7,7 +7,7 @@
 			<div class="col-lg-12">
 				<h2>{{item.desc.provider}}</h2>
 				<p>Source : <a href="{{item.desc.uri}}">{{item.desc.uri}}</a></p>
-				<p>{{item.desc.text}}</p>
+				<p ng-bind-html="item.desc.text | newline"></p>
 			</div>
 			<div class="col-lg-12">
 				<h2>Keyword</h2>
@@ -69,7 +69,7 @@
 				</div>
 				<div class="col-lg-10">
 					<h3>{{comment.comment.subject}}</h3>
-					<p>{{comment.comment.text}}</p>
+					<p ng-bind-html="comment.comment.text | newline "></p>
 				</div>
 			</div>
 		</div>
@@ -110,7 +110,7 @@
 				</div>
 				<div class="col-lg-10">
 					<h3>{{comment.comment.subject}}</h3>
-					<p>{{comment.comment.text}}</p>
+					<p ng-bind-html="comment.comment.text | newline "></p>
 				</div>
 			</div>
 		</div>
