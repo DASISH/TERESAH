@@ -23,7 +23,8 @@ class Rdf {
         
         return array_merge(
                     $this->tool(), 
-                    $this->keyword()
+                    $this->keyword(),
+                    $this->developer()
                );
     }
 
@@ -86,6 +87,18 @@ class Rdf {
                 $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($this->pre['dasish'].'tool_type/'.$tool_type['tool_type_uid'], 'uri');
             }
             
+            //hasDeveloper
+            $developerSQL = "SELECT * FROM tool_has_developer WHERE tool_uid = ?";
+            $developerQuery = $this->DB->prepare($developerSQL);
+            $developerQuery->execute(array($tool['tool_uid']));
+            $developers = $developerQuery->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($developers as &$developer) {  
+                $result[$uri][$this->pre['foaf'].'Organization'][] = $this->_val($this->pre['dasish'].'developer/'.$developer['developer_uid'], 'uri');
+                if($id){
+                    $result = array_merge($result, $this->developer($developer['developer_uid']));
+                }
+            }
+            
             //hasPlatform (using dbpedia)
             $platformSQL = "SELECT * FROM tool_has_platform tp INNER JOIN platform p ON p.platform_uid = tp.platform_id WHERE tool_uid = ?;";
             $platformQuery = $this->DB->prepare($platformSQL);
@@ -114,8 +127,6 @@ class Rdf {
         return $result;
     }
     
-    
-
     function keyword($id = null) {
         $result = array();
         
@@ -139,6 +150,27 @@ class Rdf {
             $result[$uri][$this->pre['owl'].'sameAs'][]    = $this->_val($keyword['source_uri'], 'uri');
         }
         
+        return $result;
+    }
+    
+    function developer($id = null){
+        $query = "SELECT * FROM developer";
+        if ($id) {
+            $query .= " WHERE developer_uid = ?";
+            $req = $this->DB->prepare($query);
+            $req->execute(array($id));
+        } else {
+            $req = $this->DB->prepare($query);
+            $req->execute();
+        }
+        
+        $developers = $req->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($developers as &$developer) {
+            $uri = $this->pre['dasish'].'developer/'.$developer['developer_uid'];
+            
+            $result[$uri][$this->pre['rdf'].'type'][]      = $this->_val('http://www.isocat.org/datcat/DC-2459', 'uri');
+            $result[$uri][$this->pre['foaf'].'name'][]      = $this->_val($developer['name']);
+        }       
         return $result;
     }
         
