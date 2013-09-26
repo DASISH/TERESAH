@@ -82,7 +82,7 @@ class Rdf {
             $toolTypeQuery->execute(array($tool['tool_uid']));
             $tool_types = $toolTypeQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($tool_types as &$tool_type) {
-                $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($tool_type['source_uri'], 'uri');
+                $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($tool_type['sourceURI'], 'uri');
                 $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($this->pre['dasish'].'tool_type/'.$tool_type['tool_type_uid'], 'uri');
             }
             
@@ -92,20 +92,20 @@ class Rdf {
             $platformQuery->execute(array($tool['tool_uid']));
             $platforms = $platformQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($platforms as &$platform) {
-                if($platform['Platform_platform'] == 'osX'){
-                    $platform['Platform_platform'] = 'OS_X';
+                if($platform['platform_platform'] == 'osX'){
+                    $platform['platform_platform'] = 'OS_X';
                 }
                 $result[$uri][$this->pre['dcterms'].'requires'][] = $this->_val('http://dbpedia.org/page/'.$platform['platform_platform'], 'uri');
             }
             
             //externalDescription (blank node)
-            $external_descriptionSQL = "SELECT * FROM external_description WHERE Tool_UID = ?;";
+            $external_descriptionSQL = "SELECT * FROM external_description WHERE tool_uid = ?;";
             $external_descriptionQuery = $this->DB->prepare($external_descriptionSQL);
             $external_descriptionQuery->execute(array($tool['UID']));
             $external_descriptions = $external_descriptionQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($external_descriptions as &$external_description) {
-                $result[$uri][$this->pre['owl'].'sameAs'][]            = $this->_val($external_description['sourceURI'], 'uri');
-                $result[$uri][$this->pre['dcterms'].'description'][]   = $this->_val('_:'.$external_description['UID'], 'bnode');
+                $result[$uri][$this->pre['owl'].'sameAs'][]            = $this->_val($external_description['source_uri'], 'uri');
+                $result[$uri][$this->pre['dcterms'].'description'][]   = $this->_val('_:'.$external_description['external_description_uid'], 'bnode');
                 
                 $result['_:'.$external_description['external_description_uid']][$this->pre['dcterms'].'description'][]   = $this->_val($external_description['description']);
                 $result['_:'.$external_description['external_description_uid']][$this->pre['dcterms'].'source'][]        = $this->_val($external_description['source_uri'], 'uri');
