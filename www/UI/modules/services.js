@@ -123,7 +123,8 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 		routes : {
 			tools : {
 				all : Restangular.one("search/all/"),
-				one : Restangular.all("tool")
+				one : Restangular.all("tool"),
+				topic : Restangular.all("topic")
 			},
 			facets : {
 				list : Restangular.all("search/facetList/"),
@@ -187,6 +188,50 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 							if(callback) {	callback(data);	}
 							return data;
 						});
+					}
+				},
+				forum : {
+					get : function(item, callback) {
+					
+						if(typeof(callback)==='undefined') callback = false;
+					
+						return Item.routes.tools.one.one(item).one("forum").get().then(function (data) {
+							Item.data = data;
+							if(callback) {	callback(data);	}
+							return data;
+						});
+					},
+					post : function(item, options, callback) {
+					
+						if(typeof(callback)==='undefined') callback = false;
+					
+						return Item.routes.tools.one.one(item).all("forum").post(options).then(function (data) {
+							Item.data = data;
+							if(callback) {	callback(data);	}
+							return data;
+						});
+					},
+					topic : {
+						get : function(item, callback) {
+						
+							if(typeof(callback)==='undefined') callback = false;
+						
+							return Item.routes.tools.topic.one(item).get().then(function (data) {
+								Item.data = data;
+								if(callback) {	callback(data);	}
+								return data;
+							});
+						},
+						post : function(itemID, topicId, options, callback) {
+						
+							if(typeof(callback)==='undefined') callback = false;
+						
+							return Item.routes.tools.topic.all(itemID).all(topicId).post(options).then(function (data) {
+								Item.data = data;
+								if(callback) {	callback(data);	}
+								return data;
+							});
+						}
 					}
 				}
 			},

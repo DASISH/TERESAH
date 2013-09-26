@@ -28,4 +28,17 @@
 		
 		jP($comment->insert($toolUID, $input)); 
 	} );
+	
+	$app->post('/tool/:toolUID/forum', function ($toolUID) use ($comment, $app) { 
+	
+		if(count($app->request->post()) > 0) {
+			$input = $app->request->post();
+		} elseif(count($app->request()->getBody()) > 0) {
+			$input = $app->request()->getBody();
+		} else {
+			return $app->response()->status(400);
+		}
+		
+		jP($comment->insert($toolUID, $input, 2)); 
+	} );
 ?>

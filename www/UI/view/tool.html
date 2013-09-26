@@ -41,13 +41,26 @@
 </div>
 <div class="row">
 
-<button type="button" class="btn btn-success">Forum</button>
-<button type="button" class="btn btn-warning" ng-click="ui.comments.active = !ui.comments.active">Comments</button>
+	<div class="btn-toolbar">
+		<div class="btn-group">
+			<button type="button" class="btn btn-success" ng-click="ui.forum.activate();">Forum</button>
+			<button type="button" class="btn btn-warning" ng-click="ui.comments.activate();">Comments</button>
+		</div>
+		<div class="btn-group" ng-show="ui.forum.active">
+			<button ng-show="ui.forum.topic.active" ng-click="ui.forum.topic.active = false" class="btn btn-warning">Close topic</button>
+			<button ng-show="ui.forum.active" class="btn btn-primary" ng-click="ui.forum.form.active = !ui.forum.form.active" ng-show="!ui.forum.form.active">New Subject</button>
+		</div>
+		<div class="btn-group" ng-show="ui.comments.active">
+			<button class="btn btn-primary"  ng-click="ui.comments.form.active = true" ng-show="!ui.comments.form.active">New Comment</button>
+			<button class="btn btn-primary"  ng-click="ui.comments.form.active = false" ng-show="ui.comments.form.active">Close form</button>
+		</div>
+	</div>
+
 </div>
 
 <div class="row" ng-show="ui.comments.active">
 	<h2>Comments</h2>
-	<div class="container " style="margin-bottom:40px;" ng-show="ui.comments.list">
+	<div class="container " style="margin-bottom:40px;" ng-show="ui.comments.list && !ui.comments.form.active">
 		<div class="row col-lg-10 col-lg-offset-1" ng-repeat="comment in ui.comments.list">
 			<div class="container">
 				<div class="col-lg-2">
@@ -62,8 +75,8 @@
 		</div>
 	</div>
 	<div class="container">
-		<h2>Post your comment <span class="glyphicon" ng-class="{'glyphicon-minus-sign' : ui.comments.form.active, 'glyphicon-plus-sign' : !ui.comments.form.active}" ng-click="ui.comments.form.active = !ui.comments.form.active"></span></h2>
 		<form class="form-horizontal" role="form" ng-submit="ui.comments.form.submit()" ng-show="ui.comments.form.active">
+			<hr />
 			<div class="alert alert-success" ng-show="ui.comments.form.error">{{ui.comments.form.error}}</div>
 			<div class="form-group">
 				<label for="title" class="col-lg-2 control-label">Title</label>
@@ -86,18 +99,81 @@
 	</div>
 </div>
 
-<div class="row">
-<table class="table table-striped">
-	<thead>
-		<tr><th>Date</th><th>Title</th><th>User</th></tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="topic in ui.forum.list">
-			<td>{{topic}}</td>
-			<td>{{topic}}</td>
-			<td>{{topic}}</td>
-		</tr>
-	</tbody>
-</table>
+<div class="row" ng-show="ui.forum.active">
+	
+	<div class="container " style="margin-bottom:40px;" ng-show="ui.forum.topic.active">
+		<div class="row col-lg-10 col-lg-offset-1" ng-repeat="comment in ui.forum.topic.list" >
+			<div class="container">
+				<div class="col-lg-2" style="text-align:center;">
+					<h4>{{comment.user.name}}</h4>
+					<img src="http://www.gravatar.com/avatar/{{comment.user.mail}}?s=80" alt="..." class="img-circle">
+				</div>
+				<div class="col-lg-10">
+					<h3>{{comment.comment.subject}}</h3>
+					<p>{{comment.comment.text}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row col-lg-10 col-lg-offset-1">
+			<button class="btn btn-primary" ng-click="ui.forum.topic.form.active = !ui.forum.topic.form.active" ng-show="!ui.forum.topic.form.active">Reply</button>
+			<hr />
+			<form class="form-horizontal" role="form" ng-submit="ui.forum.topic.form.submit()" ng-show="ui.forum.topic.form.active">
+				<div class="alert alert-success" ng-show="ui.forum.topic.form.error">{{ui.forum.topic.form.error}}</div>
+				<div class="form-group">
+					<label for="title" class="col-lg-2 control-label">Title</label>
+					<div class="col-lg-10">
+						<input type="text" ng-model="ui.forum.topic.form.data.title" class="form-control" id="title" placeholder="Title">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="Message" class="col-lg-2 control-label">Message</label>
+					<div class="col-lg-10">
+						<textarea ng-model="ui.forum.topic.form.data.text" id="Message" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<button type="submit" class="btn btn-default">Reply</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="row col-lg-10 col-lg-offset-1">
+		<form class="form-horizontal" role="form" ng-submit="ui.forum.form.submit()" ng-show="ui.forum.form.active">
+			<div class="alert alert-success" ng-show="ui.forum.form.error">{{ui.forum.topic.form.error}}</div>
+			<div class="form-group">
+				<label for="title" class="col-lg-2 control-label">Title</label>
+				<div class="col-lg-10">
+					<input type="text" ng-model="ui.forum.form.data.title" class="form-control" id="title" placeholder="Title">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="Message" class="col-lg-2 control-label">Message</label>
+				<div class="col-lg-10">
+					<textarea ng-model="ui.forum.form.data.text" id="Message" class="form-control"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-10">
+					<button type="submit" class="btn btn-default">New topic</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<table class="table table-striped">
+		<thead>
+			<tr><th>Date</th><th>Title</th><th>User</th></tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="topic in ui.forum.list">
+				<td>{{topic.comment.date}}</td>
+				<td><a ng-click="ui.forum.topic.read(topic.identifier)">{{topic.comment.subject}}</a></td>
+				<td>{{topic.user.name}}</td>
+			</tr>
+		</tbody>
+	</table>
 
 </div>

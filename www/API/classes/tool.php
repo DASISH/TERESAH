@@ -77,14 +77,15 @@
 			
 			
 			#We prepare a new array containing our description
-			$desc = array(
-						array(
-							"provider" => "DASISH", 
-							"text" => $ret["description"],
-							"uri" => "/"
-						)
-					);
-					
+			if($ret["description"] != "&nbsp;") {
+				$desc = array(
+					array(
+						"provider" => "DASISH", 
+						"text" => $ret["description"],
+						"uri" => "/"
+					)
+				);
+			} else { $desc = array(); }
 			#Then if needed, we get our external_Description
 			if($external == true) {
 			
@@ -95,11 +96,13 @@
 				#We then process it if > 0
 				if(count($fetched) > 0) {
 					foreach($fetched as &$entry) {
-						$desc[] = array(
-								"provider" => $entry["registry_name"], 
-								"text" => $entry["description"],
-								"uri" => $entry["sourceURI"]
-							);
+						if($entry["description"] != "&nbsp;") {
+							$desc[] = array(
+									"provider" => $entry["registry_name"], 
+									"text" => $entry["description"],
+									"uri" => $entry["sourceURI"]
+								);
+						}
 					}
 				}
 			}
