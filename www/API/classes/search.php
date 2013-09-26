@@ -6,7 +6,7 @@
 			$this->DB = $DB;
 			
 		}
-		function nbrTotal($req = "FROM Tool USE INDEX(PRIMARY)", $params = array(), $rowCount = false) {
+		function nbrTotal($req = "FROM tool USE INDEX(PRIMARY)", $params = array(), $rowCount = false) {
 			$req = $this->DB->prepare("SELECT COUNT(*) as cnt ".$req);
 			$req->execute($params);
 			if($rowCount) {
@@ -81,10 +81,10 @@
 			#
 			###########
 			
-			$req = "SELECT d.title, t.UID, t.shortname, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription FROM Description d 
-						INNER JOIN Tool t ON t.UID = d.Tool_UID 
-						LEFT OUTER JOIN External_Description ED ON ED.Tool_UID = t.UID
-					GROUP BY d.Tool_UID
+			$req = "SELECT d.title, t.tool_uid as UID, t.shortname, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription FROM description d 
+						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
+						LEFT OUTER JOIN external_description ED ON ED.tool_uid = t.tool_uid
+					GROUP BY d.tool_uid
 					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
 			$req = $this->DB->prepare($req);
 			$req->execute(array($options["request"], $options["request"], $options["request"]));
@@ -138,16 +138,16 @@
 			#
 			###########
 			
-			$req = "SELECT d.title, t.UID, t.shortname FROM Description d 
-						INNER JOIN Tool t ON t.UID = d.Tool_UID 
-						RIGHT OUTER JOIN Tool_has_Keyword tk ON tk.Tool_UID = t.UID
-						RIGHT OUTER JOIN Keyword k ON k.keyword_uid = tk.keyword_id
-						RIGHT OUTER JOIN External_Description ED ON ED.Tool_UID = t.UID
+			$req = "SELECT d.title, t.tool_uid as UID, t.shortname FROM description d 
+						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
+						RIGHT OUTER JOIN tool_has_keyword tk ON tk.tool_uid = t.tool_uid
+						RIGHT OUTER JOIN keyword k ON k.keyword_uid = tk.keyword_uid
+						RIGHT OUTER JOIN external_description ED ON ED.tool_uid = t.tool_uid
 					WHERE 
 						k.keyword LIKE CONCAT('%', ? , '%') ".$sensitivity." OR
 						d.description LIKE CONCAT('%', ? , '%') ".$sensitivity." OR
 						ED.description LIKE CONCAT('%', ? , '%') ".$sensitivity."  
-					GROUP BY d.Tool_UID
+					GROUP BY d.tool_uid
 					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
 			$req = $this->DB->prepare($req);
 			$req->execute(array($options["request"], $options["request"], $options["request"]));
@@ -314,7 +314,7 @@
 											WHERE   ".$dic["link"]["item"]." IN (".$inQuery.")
 											GROUP   BY ".$dic["link"]["tool"] . "
 											HAVING  COUNT(DISTINCT ".$dic["link"]["item"].") = ".$i."
-										) ".$dic["link"]["name"]." ON ".$dic["link"]["name"].".".$dic["link"]["tool"] . " = t.UID";
+										) ".$dic["link"]["name"]." ON ".$dic["link"]["name"].".".$dic["link"]["tool"] . " = t.tool_uid";
 								#For each value we add it to our exec array which will be used in ->execute(array())
 								foreach($val as $id) {
 									$exec[]  = $id;
@@ -366,12 +366,14 @@
 			}
 			
 			#We write the request
-			$req = "SELECT d.title, t.UID, t.shortname FROM Description d 
-						INNER JOIN Tool t ON t.UID = d.Tool_UID 
+			$req = "SELECT d.title, t.tool_uid as UID, t.shortname FROM description d 
+						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
 						".implode($joins, " ")."
 					".$where."
-					GROUP BY d.Tool_UID
+					GROUP BY d.tool_uid
 					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
+					// print($req);
+					// print_r($exec);
 			#print($req);
 			#We execute it
 			$req = $this->DB->prepare($req);
@@ -392,7 +394,7 @@
 				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
 			}
 			#We return
-			$ret["parameters"]["total"] = $this->nbrTotal("FROM Description d INNER JOIN Tool t ON t.UID = d.Tool_UID ".implode($joins, " ")." ".$where." GROUP BY d.Tool_UID", $exec, true);
+			$ret["parameters"]["total"] = $this->nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
 			
 			return $ret;
 		}

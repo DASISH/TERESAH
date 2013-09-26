@@ -8,7 +8,7 @@
 		}
 		
 		function getDevelopers($toolUID) {
-			$req = "SELECT d.UID, d.name, d.contact FROM Developer d, Tool_has_Developer td WHERE td.Developer_UID = d.UID AND td.Tool_UID = ?";
+			$req = "SELECT d.developer_uid as UID, d.name, d.contact FROM developer d, tool_has_developer td WHERE td.developer_uid = d.developer_uid AND td.tool_uid = ?";
 			$req = $this->DB->prepare($req);
 			$req->execute(array($toolUID));
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -38,10 +38,10 @@
 			$userName = true;
 			#We first fetch our description
 			
-			$req = "SELECT d.User_UID as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by, l.text, l.type FROM Description d, Licence l WHERE d.Tool_UID = ? AND l.UID = d.Licence_UID ";
+			$req = "SELECT d.user_uid as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by, l.text, l.licence_type_uid as type FROM description d, licence l WHERE d.tool_uid = ? AND l.licence_uid = d.licence_uid ";
 			
 			if($userName) {
-				$req = "SELECT d.User_UID, u.Name as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by, l.text, l.type FROM Description d, Licence l, User u WHERE d.Tool_UID = ? AND l.UID = d.Licence_UID AND u.UID = d.User_UID";
+				$req = "SELECT d.user_uid as User_UID, u.name as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by, l.text, l.licence_type_uid as type FROM description d, licence l, user u WHERE d.tool_uid = ? AND l.licence_uid = d.licence_uid AND u.user_uid = d.user_uid";
 			}
 			
 			$req = $this->DB->prepare($req);
@@ -89,7 +89,7 @@
 			#Then if needed, we get our external_Description
 			if($external == true) {
 			
-				$req = $this->DB->prepare("SELECT description, sourceURI, registry_name FROM External_Description WHERE Tool_UID = ? ");
+				$req = $this->DB->prepare("SELECT description, source_uri as sourceURI, registry_name FROM external_description WHERE tool_uid = ? ");
 				$req->execute(array($toolUID));
 				$fetched = $req->fetchAll(PDO::FETCH_ASSOC);
 				
@@ -115,7 +115,7 @@
 			$ret = "Nothing happends";
 			if(isset($data["provider"])) {
 				#If we have a Data Provider, it is an external Description
-				$req = "INSERT INTO External_Description VALUES ('', ?, ?, ?, ?); ";
+				$req = "INSERT INTO external_description VALUES ('', ?, ?, ?, ?); ";
 				$req = $this->DB->prepare($req);
 				try {
 					#echo "hi";
@@ -132,7 +132,7 @@
 			
 			} else {
 				#Else, it is a simple description
-				$req = "INSERT INTO Description VALUES ('', ?, ?, ?, ?, ?, CURDATE(), NULL, ?,?,?); ";
+				$req = "INSERT INTO description VALUES ('', ?, ?, ?, ?, ?, CURDATE(), NULL, ?,?,?); ";
 				$req = $this->DB->prepare($req);
 				try {
 					$ret = $req->execute(array($data["title"], $data["description"], $data["version"], $data["homepage"],  $data["available_from"],  $data["licence_UID"], $toolUID, 0));
@@ -146,7 +146,7 @@
 		}
 		
 		function getKeywords($tool) {
-			$req = "SELECT k.keyword_uid, k.keyword, k.sourceURI, k.sourceTaxonomy FROM Keyword k, Tool_has_Keyword tk WHERE tk.Keyword_id = k.keyword_uid AND tk.Tool_UID = ?";
+			$req = "SELECT k.keyword_uid, k.keyword, k.source_uri as sourceURI, k.source_taxonomy as sourceTaxonomy FROM keyword k, tool_has_keyword tk WHERE tk.keyword_uid = k.keyword_uid AND tk.tool_uid = ?";
 			$req = $this->DB->prepare($req);
 			$req->execute(array($tool));
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -192,7 +192,7 @@
 			if($mode == "Default") {
 			
 				#In default mode, $id is an int
-				$req = "SELECT t.tool_type as type, t.sourceURI as uri FROM Tool_type t, Tool_has_Tool_type tt WHERE tt.Tool_type_uid = t.tool_type_uid AND tt.Tool_UID = ?";
+				$req = "SELECT t.tool_type as type, t.source_uri as uri FROM tool_type t, tool_has_tool_type tt WHERE tt.tool_type_uid = t.tool_type_uid AND tt.tool_uid = ?";
 				$req = $this->DB->prepare($req);
 				$req->execute(array($id));
 				
@@ -225,7 +225,7 @@
 			
 			if($mode == "Default") {
 				#Request
-				$req = "SELECT tp.Platform_platform as platform FROM Tool_has_Platform tp WHERE tp.Tool_UID = ?";
+				$req = "SELECT p.name as platform FROM Tool_has_Platform tp, platform p WHERE tp.tool_uid = ? AND tp.platform_uid = p.platform_uid";
 				$req = $this->DB->prepare($req);
 				$req->execute(array($id));
 				
@@ -251,9 +251,9 @@
 		function getTool($ref, $options) {
 			#Setting request, following $ref is the id or the shortname
 			if(is_numeric($ref)) {
-				$req = "SELECT UID as tool_id, shortname as tool_shortname FROM Tool WHERE UID = ? LIMIT 1";
+				$req = "SELECT tool_uid as tool_id, shortname as tool_shortname FROM tool WHERE tool_uid = ? LIMIT 1";
 			} else {
-				$req = "SELECT UID as tool_id, shortname as tool_shortname FROM Tool WHERE shortname = ? LIMIT 1";
+				$req = "SELECT tool_uid as tool_id, shortname as tool_shortname FROM tool WHERE shortname = ? LIMIT 1";
 			}
 			
 			#Executing request

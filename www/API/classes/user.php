@@ -9,7 +9,7 @@
 		function login($post) {
 			$pw = hash('sha256', $post["password"]);
 			try {
-				$req = $this->DB->prepare("SELECT Name, Mail, UID FROM User WHERE Login = ? AND Password = ?");
+				$req = $this->DB->prepare("SELECT name as Name, mail as Mail, user_uid as UID FROM user WHERE login = ? AND password = ?");
 				$req->execute(array($post["user"], $pw));    
 			} catch (Exception $e) {
 				Die('Need to handle this error. $e has all the details');
@@ -24,7 +24,7 @@
 		}
 		function signup($post) {
 			if(isset($post["mail"]) && isset($post["password"]) && isset($post["name"]) && isset($post["user"])) {
-				$req = "INSERT INTO User VALUES (NULL, ?, ? , ? , ? )";
+				$req = "INSERT INTO user VALUES (NULL, ?, ? , ? , ? )";
 				$req = $this->DB->prepare($req);
 				$req->execute(array($post["name"], $post["mail"], $post["user"], hash("sha256", $post["password"])));
 				

@@ -85,21 +85,21 @@ def getRequest(t, i, v, h, k, p): # table, tool_uid, value, host, host key
 		v = prs(v["value"])
 		
 	if t == "Keyword":
-		req = "INSERT INTO Keyword VALUES (#id#, '"+v+"', '"+uri+"', '"+k+"');"
+		req = "INSERT INTO keyword VALUES (#id#, '"+v+"', '"+uri+"', '"+k+"');"
 		
 	elif t == "Tool_type":
-		req = "INSERT INTO Tool_type VALUES ('#id#', '"+v+"', '"+uri+"');"
+		req = "INSERT INTO tool_type VALUES ('#id#', '"+v+"', '"+uri+"');"
 		
 	elif t == "Platform":
 		v = OS[v]
-		req = "INSERT INTO Platform VALUES ('"+v+"');"
+		req = "INSERT INTO platform VALUES (#id#, '"+v+"');"
 		
 	elif t == "Developer":
-		req = "INSERT INTO Developer VALUES (#id#, '"+v+"', NULL);"
+		req = "INSERT INTO developer VALUES (#id#, '"+v+"', NULL);"
 		
 	elif t == "registryDescription":
 		if v:
-			req = "INSERT INTO External_Description VALUES ('', "+str(i)+", '"+v+"', '"+p+"', '"+h+"');"
+			req = "INSERT INTO external_description VALUES ('', "+str(i)+", '"+v+"', '"+p+"', '"+h+"');"
 		else:
 			pass
 			
@@ -110,7 +110,7 @@ def getRequest(t, i, v, h, k, p): # table, tool_uid, value, host, host key
 		add = v
 		
 	elif t == "Licence":
-		req = "INSERT INTO Licence VALUES (#id#, '"+v+"', NULL, 'Unknown');"
+		req = "INSERT INTO licence VALUES (#id#, '"+v+"', NULL, 'Unknown');"
 		add = "#id#"
 		
 	else:
@@ -128,21 +128,21 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 		
 	if t == "Keyword":
 		key = "Tool_has_Keyword"
-		req = "INSERT INTO Tool_has_Keyword VALUES ("+u+", '"+str(i)+"');"
+		req = "INSERT INTO tool_has_keyword VALUES ("+u+", '"+str(i)+"');"
 		
 	elif t == "Tool_type":
 		key = "Tool_has_Tool_type"
-		req = "INSERT INTO Tool_has_Tool_type VALUES ('"+str(i)+"', '"+u+"');"
+		req = "INSERT INTO tool_has_tool_type VALUES ('"+str(i)+"', '"+u+"');"
 		
 		
 	elif t == "Platform":
 		key = "Tool_has_Platform"
 		v = OS[v]
-		req = "INSERT INTO Tool_has_Platform VALUES ('"+u+"', '"+v+"');"
+		req = "INSERT INTO tool_has_platform VALUES ('"+u+"', '"+str(i)+"');"
 		
 	elif t == "Developer":
 		key = "Tool_has_Developer"
-		req = "INSERT INTO Tool_has_Developer VALUES ('"+u+"', '"+str(i)+"');"
+		req = "INSERT INTO tool_has_developer VALUES ('"+u+"', '"+str(i)+"');"
 		
 	elif t == "registryDescription":
 		pass
@@ -166,7 +166,7 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 
 def mainDescription(u, o):
 	# User(UID=0) = BOT
-	r = "INSERT INTO Description VALUES ('', '"
+	r = "INSERT INTO description VALUES ('', '"
 	
 	if "name" in o:
 		r += prs(o["name"])
@@ -213,7 +213,7 @@ def filterObject(data):#We need to
 		#		We insert the tool
 		##
 		
-		ins["Dasish"]["Tool"]["INSERT INTO Tool VALUES (" + str(tmp["id"]) + " , '" + prs(tmp["shortname"]) + "');"] = tmp["id"]
+		ins["Dasish"]["Tool"]["INSERT INTO tool VALUES (" + str(tmp["id"]) + " , '" + prs(tmp["shortname"]) + "');"] = tmp["id"]
 		
 		###
 		#		We get every data we have from every host

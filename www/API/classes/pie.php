@@ -26,7 +26,7 @@
 			if ($mode == "Default") {
 				$legend = "Representation of Registries in Descriptions";
 				#Getting number of descriptions following Provider
-				$req = "SELECT count(UID) as number, registry_name as name FROM External_Description GROUP BY registry_name";
+				$req = "SELECT count(UID) as number, registry_name as name FROM external_description GROUP BY registry_name";
 				$req = $this->DB->prepare($req);
 				$req->execute();
 				
@@ -41,7 +41,7 @@
 					#print $chart->addSlice($provider["name"], (float) $counter, $this->colors[$counter]);
 				}
 				
-				$req = "SELECT count(UID) as number FROM Description WHERE description != \"&nbsp;\"";
+				$req = "SELECT count(UID) as number FROM description WHERE description != \"&nbsp;\"";
 				$req = $this->DB->prepare($req);
 				$req->execute();
 				$data = $req->fetch(PDO::FETCH_ASSOC);
@@ -51,7 +51,7 @@
 				$label[] = "DASISH";
 			} elseif($mode == "ByTool") {
 				$legend = "Amount of Ext. Descriptions by Tool";
-				$req = "SELECT count(*) as amount, number as legend FROM (SELECT count(*) as number FROM External_Description GROUP BY Tool_UID) A GROUP BY number";
+				$req = "SELECT count(*) as amount, number as legend FROM (SELECT count(*) as number FROM external_description GROUP BY tool_uid) A GROUP BY number";
 				$req = $this->DB->prepare($req);
 				$req->execute();
 				$data = $req->fetchAll(PDO::FETCH_ASSOC);
