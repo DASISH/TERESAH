@@ -1,11 +1,17 @@
 <div class="row" ng-show="!$parent.user.signedin">
 	<div class="row">
 		<h2>Use your social network :</h2>
-		<ul class="list-unstyled lead">
+		<ul class="list-unstyled list-inline lead">
 			<li>
 				<span class="icon-stack" ng-click="ui.user.oAuth('Facebook')">
 					<i class="icon-check-empty icon-stack-base"></i>
 					<i class="icon-facebook"></i>
+				</span>
+			</li>
+			<li>
+				<span class="icon-stack" ng-click="ui.user.oAuth('Github')">
+					<i class="icon-check-empty icon-stack-base"></i>
+					<i class="icon-github"></i>
 				</span>
 			</li>
 		</ul>

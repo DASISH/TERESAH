@@ -45,6 +45,12 @@
 		function oAuthLogin($data, $provider) {
 			//uid
 			$data = (array) $data;
+			if(!isset($data["name"])) {
+				$data["name"] = $data["nickname"];
+			}
+			if(!isset($data["email"])) {
+				$data["email"] = $data["nickname"];
+			}
 			$req = $this->DB->prepare("SELECT u.name as Name, u.mail as Mail, u.user_uid as UID FROM user_oauth uo, user u WHERE u.user_uid = uo.user_uid AND uo.provider = ? AND uo.oauth_user_uid = ?");
 			$req->execute(array($provider, $data["uid"]));
 			if($req->rowCount() == 1) {
@@ -52,12 +58,12 @@
 				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"]);
 				return array("signin" => true, "data" => $d);
 			} else {
-				$sign = $this->signup(array("mail" => $data["email"], "name" => $data["name"], "user" => $data["email"], "password" => "6514615"), true);
+				$sign = $this->signup(array("mail" => $data["email"], "name" => $data["name"], "user" => $data["email"], "password" => time()), true);
 				if($sign > 0) {
 					$req = $this->DB->prepare("INSERT INTO user_oauth VALUES (NULL, ?, ?, ?)");
 					$req->execute(array($provider, $sign, $data["uid"]));
 					$_SESSION["user"] = array("id" => $sign, "name" => $data["name"], "mail" => $data["email"]);
-					return array("signin" => true, "data" => $d);
+					return array("signin" => true, "data" => array("UID" => $sign, "Name" => $data["name"], "Mail" => $data["email"]));
 				}
 			}
 		}
@@ -76,6 +82,13 @@
 						'clientId'  =>  'OWE5zF6p7HzgnMCzMKI3w',
 						'clientSecret'  =>  'NHFxk3O4lNsi5oTPw5rb68r3SS8FtLeG4DdkOp7yCs',
 						'redirectUri'   =>  'http://debian-machine.com/API/oAuth/Twitter'
+					));
+					break;
+				case "github":
+					$provider = new League\OAuth2\Client\Provider\Github(array(
+						'clientId'  =>  '032cdde9e2dd39d6a957',
+						'clientSecret'  =>  '8aa4bd7bf3271cf5aaa33d32471877b96e6aeac9',
+						'redirectUri'   =>  'http://debian-machine.com/API/oAuth/Github'
 					));
 					break;
 			}
