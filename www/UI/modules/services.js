@@ -137,11 +137,22 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 			user : {
 				signin : Restangular.all("login/"),
 				signup : Restangular.all("signup/")
-			}
+			},
+			oAuth : Restangular.all("oAuth")
 		},
 		
 		//Return Part
 		resolver : {
+			oAuth : function(provider, url, callback) {
+				
+					if(typeof(callback)==='undefined') callback = false;
+					
+					return Item.routes.oAuth.one(provider).get({callback : url}).then(function (data) {
+						if(callback) {	callback(data);	}
+						Item.data = data;
+						return data;
+					});
+				},
 			tools : {
 				all : function(opt, callback) {
 				

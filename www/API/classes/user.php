@@ -22,14 +22,18 @@
 			}
 
 		}
-		function signup($post) {
+		function signup($post, $id = false) {
 			if(isset($post["mail"]) && isset($post["password"]) && isset($post["name"]) && isset($post["user"])) {
 				$req = "INSERT INTO user VALUES (NULL, ?, ? , ? , ? )";
 				$req = $this->DB->prepare($req);
 				$req->execute(array($post["name"], $post["mail"], $post["user"], hash("sha256", $post["password"])));
 				
 				if($req->rowCount() == 1) {
-					return array("Success" => "You have now signed up");
+					if($id == true) {
+						return $this->DB->lastInsertId();
+					} else {
+						return array("Success" => "You have now signed up");
+					}
 				} else {
 					return array("Error" => "Error during signin up. Please contact DASISH or retry.");
 				}
@@ -38,7 +42,27 @@
 			}
 		}
 		
-		function oAuth2($GET, $server) {
+		function oAuthLogin($data, $provider) {
+			//uid
+			$data = (array) $data;
+			$req = $this->DB->prepare("SELECT u.name as Name, u.mail as Mail, u.user_uid as UID FROM user_oauth uo, user u WHERE u.user_uid = uo.user_uid AND uo.provider = ? AND uo.oauth_user_uid = ?");
+			$req->execute(array($provider, $data["uid"]));
+			if($req->rowCount() == 1) {
+				$d = $req->fetch(PDO::FETCH_ASSOC);
+				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"]);
+				return array("signin" => true, "data" => $d);
+			} else {
+				$sign = $this->signup(array("mail" => $data["email"], "name" => $data["name"], "user" => $data["email"], "password" => "6514615"), true);
+				if($sign > 0) {
+					$req = $this->DB->prepare("INSERT INTO user_oauth VALUES (NULL, ?, ?, ?)");
+					$req->execute(array($provider, $sign, $data["uid"]));
+					$_SESSION["user"] = array("id" => $sign, "name" => $data["name"], "mail" => $data["email"]);
+					return array("signin" => true, "data" => $d);
+				}
+			}
+		}
+		
+		function oAuth2($GET, $server, $return = false) {
 			switch($server) {
 				case "facebook":
 					$provider = new League\OAuth2\Client\Provider\Facebook(array(
@@ -59,7 +83,15 @@
 			if ( ! isset($GET['code'])) {
 
 				// If we don't have an authorization code then get one
-				$provider->authorize();
+				if($return == true) {
+					if(isset($GET["callback"])) {
+						$_SESSION["callback"] = $GET["callback"];
+					} else {
+						$_SESSION["callback"] = false;
+					}
+					return array("popup" => $provider->authorize(array(), $return), "callback" => $_SESSION["callback"]);
+				}
+				$provider->authorize(array(), $return);
 
 			} else {
 
@@ -72,10 +104,12 @@
 
 						// We got an access token, let's now get the user's details
 						$userDetails = $provider->getUserDetails($t);
-
-						foreach ($userDetails as $attribute => $value) {
-							var_dump($attribute, $value) . PHP_EOL . PHP_EOL;
+						$d = $this->oAuthLogin($userDetails, $server);
+						if($_SESSION["callback"]) {
+							$d["Location"] = $_SESSION["callback"];
 						}
+						return $d;
+						//return $userDetails;
 
 					} catch (Exception $e) {
 						print $e;

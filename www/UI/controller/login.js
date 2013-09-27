@@ -1,4 +1,4 @@
-var Login = portal.controller('LoginCtrl', ['$scope', 'ui',  'Item', '$rootScope', function($scope, $ui, $item, $root) {
+var Login = portal.controller('LoginCtrl', ['$scope', 'ui',  'Item', '$rootScope', '$window', function($scope, $ui, $item, $root, $window) {
 
 	$scope.ui = {
 		login : {
@@ -35,7 +35,16 @@ var Login = portal.controller('LoginCtrl', ['$scope', 'ui',  'Item', '$rootScope
 		user : {
 			name : false,
 			mail : false,
-			signedin : false
+			signedin : false,
+			oAuth : function(provider) {
+				$item.resolver.oAuth(provider, $window.location.href, function(data) {
+				
+					//var deferred = $q.defer();
+					//resolved = false;
+
+					$window.location.href = data.popup;
+				});
+			}
 		}
 	};
 	

@@ -63,10 +63,15 @@ abstract class IdentityProvider {
         return $this->urlAuthorize().'?'.http_build_query($params);
     }
 
-    public function authorize($options = array())
+    public function authorize($options = array(), $echo = false)
     {
-        header('Location: ' . $this->getAuthorizationUrl($options));
-        exit;
+		if($echo == true) {
+			return $this->getAuthorizationUrl($options);
+		}
+		else {
+			header('Location: ' . $this->getAuthorizationUrl($options));
+			exit;
+		}
     }
 
     public function getAccessToken($grant = 'authorization_code', $params = array())
