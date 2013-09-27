@@ -2,15 +2,23 @@
 
 define("DASISH", true);
 
+define('ARC2_db_host', 'localhost');
+define('ARC2_db_name', 'arc2');
+define('ARC2_db_user', 'arc2');
+define('ARC2_db_pwd', 'hejsan');
+
+
+
 #Require configuration, frameworks, assets 
-require_once "../API/conf/config.php";
-require_once '../common/SQL.PDO.php';
-require '../common/Slim/Slim.php';
-require '../common/ARC2/ARC2.php';
-require '../common/EasyRdf/EasyRdf.php';
+require_once("../API/conf/config.php");
+require_once('../common/SQL.PDO.php');
+require('../common/Slim/Slim.php');
+require('../common/EasyRdf/EasyRdf.php');
+require('../common/ARC2/ARC2.php');
 
 #classes
-require_once './rdf.php';
+require_once('rdf.php');
+require_once('sparql.php');
 
 function output_rdf($data, $format){
     $graph = new EasyRdf_Graph('http://tools.dasish.eu/#/');
@@ -24,7 +32,7 @@ function output_rdf($data, $format){
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
 
-require_once './routes.php';
+require_once('routes.php');
 
 $app->run();
 ?>

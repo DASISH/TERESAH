@@ -20,6 +20,21 @@ $app->get('/dump.rdfjson', function () use ($rdf, $app) {
     output_rdf($rdf->all(), 'json');
 });  
 
+$app->map('/endpoint', function () use ($app) {
+    $sparql = new Sparql();
+    
+            if($_GET['output'] == 'json'){
+                $app->response->headers->set('Content-Type', 'application/json');
+            }
+    
+    $sparql->endpoint();
+})->via('GET', 'POST');
+
+$app->get('/load', function () use ($rdf, $app) {
+    $app->response->headers->set('Content-Type', 'text/plain');
+    print_r($rdf->import_to_endpoint());
+});
+
 $app->get('/dump', function () use ($rdf, $app) {
     $app->response->headers->set('Content-Type', 'text/plain');
     print_r($rdf->all());
