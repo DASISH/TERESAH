@@ -51,7 +51,7 @@
 			if(!isset($data["email"])) {
 				$data["email"] = $data["nickname"];
 			}
-			$req = $this->DB->prepare("SELECT u.name as Name, u.mail as Mail, u.user_uid as UID FROM user_oauth uo, user u WHERE u.user_uid = uo.user_uid AND uo.provider = ? AND uo.oauth_user_uid = ?");
+			$req = $this->DB->prepare("SELECT u.name as Name, u.mail as Mail, u.user_uid as UID FROM user_oauth uo, user u WHERE u.user_uid = uo.user_uid AND uo.provider = ? AND uo.external_uid = ?");
 			$req->execute(array($provider, $data["uid"]));
 			if($req->rowCount() == 1) {
 				$d = $req->fetch(PDO::FETCH_ASSOC);
@@ -61,7 +61,7 @@
 				$sign = $this->signup(array("mail" => $data["email"], "name" => $data["name"], "user" => $data["email"], "password" => time()), true);
 				if($sign > 0) {
 					$req = $this->DB->prepare("INSERT INTO user_oauth VALUES (NULL, ?, ?, ?)");
-					$req->execute(array($provider, $sign, $data["uid"]));
+					$req->execute(array($sign, $provider, $data["uid"]));
 					$_SESSION["user"] = array("id" => $sign, "name" => $data["name"], "mail" => $data["email"]);
 					return array("signin" => true, "data" => array("UID" => $sign, "Name" => $data["name"], "Mail" => $data["email"]));
 				}
