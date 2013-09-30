@@ -111,6 +111,32 @@
 			return $ret;
 		}
 		
+		function getApplicationType($toolUID) {
+			$dictionnary = array(	
+				"localDesktop" => "Desktop application",
+				"other" => "Other",
+				"unknown" => "Unkown",
+				"webApplication" => "Web Application",
+				"webService" => "Web service"
+			);
+			$req = "SELECT d.application_type as UID, d.application_type as name FROM tool_application_type d WHERE d.tool_uid = ? GROUP BY application_type";
+			$req = $this->DB->prepare($req);
+			$req->execute(array($toolUID));
+			$data = $req->fetchAll(PDO::FETCH_ASSOC);
+			if($data) {
+				$ret = array();
+				foreach($data as &$keyword) {
+					$ret[] = array(
+								"name" => $dictionnary[$keyword["name"]],
+								"identifier" => $keyword["UID"]
+							);
+				}
+				return $ret;
+			} else {
+				return false;
+			}
+		}
+		
 		function insertDescription($toolUID, $data) {
 			$ret = "Nothing happends";
 			if(isset($data["provider"])) {
@@ -225,7 +251,7 @@
 			
 			if($mode == "Default") {
 				#Request
-				$req = "SELECT p.name as platform FROM Tool_has_Platform tp, platform p WHERE tp.tool_uid = ? AND tp.platform_uid = p.platform_uid";
+				$req = "SELECT p.name as platform FROM tool_has_platform tp, platform p WHERE tp.tool_uid = ? AND tp.platform_uid = p.platform_uid";
 				$req = $this->DB->prepare($req);
 				$req->execute(array($id));
 				
@@ -286,6 +312,10 @@
 				if(isset($options["developer"])) {
 					$ret["developers"] = $this->getDevelopers($data["tool_id"]);
 					if(!$ret["developers"]) { unset($ret["developers"]); }
+				}
+				if(isset($options["applicationType"])) {
+					$ret["applicationType"] = $this->getApplicationType($data["tool_id"]);
+					if(!$ret["applicationType"]) { unset($ret["applicationType"]); }
 				}
 				
 			} else {

@@ -81,9 +81,10 @@
 			#
 			###########
 			
-			$req = "SELECT d.title, t.tool_uid as UID, t.shortname, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription FROM description d 
+			$req = "SELECT d.title, t.tool_uid as UID, t.shortname, tat.application_type, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription FROM description d 
 						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
 						LEFT OUTER JOIN external_description ED ON ED.tool_uid = t.tool_uid
+						LEFT OUTER JOIN tool_application_type tat ON tat.tool_uid = t.tool_uid
 					GROUP BY d.tool_uid
 					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
 			$req = $this->DB->prepare($req);
@@ -104,7 +105,7 @@
 					$desc = "";
 					$provider = "";
 				}
-				$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
+				$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 			}
 			
 			$ret["parameters"]["total"] = $this->nbrTotal();
@@ -215,8 +216,13 @@
 					
 				} else {
 					$retField = $dic["table"]["where"];
+					if($dic["table"]["name"] == "tool_application_type") {
+						$dic["table"]["name"] = "(SELECT ".$dic["table"]["where"]." FROM ".$dic["table"]["name"]." GROUP BY ".$dic["table"]["where"].") a";
+						$dic["table"]["where"] = "a.".$dic["table"]["where"];
+						$retField = "a.".$retField;
+						$dic["table"]["id"] = "a.".$dic["table"]["id"];
+					}
 					if($options["request"] != Null) {
-						
 						$where = "WHERE ".$dic["table"]["where"]." LIKE CONCAT('%', ? , '%') ".$sensitivity. " ";
 						$exec[] = $options["request"];
 					}
@@ -366,8 +372,9 @@
 			}
 			
 			#We write the request
-			$req = "SELECT d.title, t.tool_uid as UID, t.shortname FROM description d 
+			$req = "SELECT d.title, t.tool_uid as UID, t.shortname, tat.application_type FROM description d 
 						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
+						LEFT OUTER JOIN tool_application_type tat ON tat.tool_uid = t.tool_uid
 						".implode($joins, " ")."
 					".$where."
 					GROUP BY d.tool_uid
@@ -391,7 +398,7 @@
 			$ret = array("response" => array(), "parameters" => $options);
 			#For each answer we format it
 			foreach($data as &$answer) {
-				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
+				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 			}
 			#We return
 			$ret["parameters"]["total"] = $this->nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
@@ -402,7 +409,11 @@
 			$dict = parent::getFacets();
 			$return = array();
 			foreach($dict as $tableName => &$vals) {
-				$req = "SELECT COUNT(*) as total FROM ".$tableName;
+				if($vals["facetEnum"]) { 
+					$req = "SELECT COUNT(a.".$vals["facetEnum"].") as total FROM (SELECT ".$vals["facetEnum"]." from ".$tableName." GROUP BY ".$vals["facetEnum"].") a";
+				} else {
+					$req = "SELECT COUNT(*) as total FROM ".$tableName;
+				}
 				$req = $this->DB->prepare($req);
 				$req->execute();
 				$data = $req->fetch(PDO::FETCH_ASSOC);

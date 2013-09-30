@@ -16,7 +16,28 @@
             header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 
     }
-	
+	/*
+	function find_all_files($dir)
+	{
+		$root = scandir($dir);
+		$result = array();
+		foreach($root as $value)
+		{
+			if($value === '.' || $value === '..') {continue;}
+			if(is_file("$dir/$value")) {$result[]="$dir/$value";continue;}
+			foreach(find_all_files("$dir/$value") as $value)
+			{
+				$result[]=$value;
+			}
+		}
+		return $result;
+	}
+	*/
+	//oAuth
+	require_once('assets/oAuth2/vendor/autoload.php');
+	require_once('assets/oAuth1/vendor/autoload.php');
+	//End oAuth
+		
 	define("DASISH", true);
 	 
 	#Require configuration, frameworks, assets 
