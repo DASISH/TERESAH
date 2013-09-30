@@ -34,8 +34,8 @@
 	}
 	*/
 	//oAuth
-	//require_once('assets/oAuth2/vendor/autoload.php');
-	//require_once('assets/oAuth1/vendor/autoload.php');
+	require_once('assets/oAuth2/vendor/autoload.php');
+	require_once('assets/oAuth1/vendor/autoload.php');
 	//End oAuth
 		
 	define("DASISH", true);

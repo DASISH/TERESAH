@@ -372,8 +372,9 @@
 			}
 			
 			#We write the request
-			$req = "SELECT d.title, t.tool_uid as UID, t.shortname FROM description d 
+			$req = "SELECT d.title, t.tool_uid as UID, t.shortname, tat.application_type FROM description d 
 						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
+						LEFT OUTER JOIN tool_application_type tat ON tat.tool_uid = t.tool_uid
 						".implode($joins, " ")."
 					".$where."
 					GROUP BY d.tool_uid
@@ -397,7 +398,7 @@
 			$ret = array("response" => array(), "parameters" => $options);
 			#For each answer we format it
 			foreach($data as &$answer) {
-				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
+				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 			}
 			#We return
 			$ret["parameters"]["total"] = $this->nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
