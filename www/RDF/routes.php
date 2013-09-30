@@ -1,7 +1,6 @@
 <?php
 $app->get('/', function () use ($rdf, $app) { 
-    $app->response->headers->set('Content-Type', 'text/plain');
-    print file_get_contents("readme.txt");
+    print file_get_contents("readme.html");
 });
 
 $app->get('/dump.rdf', function () use ($rdf, $app) { 
