@@ -23,9 +23,25 @@ $app->get('/dump.rdfjson', function () use ($rdf, $app) {
 $app->map('/endpoint', function () use ($app) {
     $sparql = new Sparql();
     
-            if($_GET['output'] == 'json'){
+    $output         = $app->request->get('output');
+    $show_inline    = $app->request->get('show_inline');
+    if(isset($output) && !$show_inline){
+        switch($output){
+            case 'json':
+            case 'jsonp':
                 $app->response->headers->set('Content-Type', 'application/json');
-            }
+                break;
+            case 'xml':
+            case 'rdfxml':
+                $app->response->headers->set('Content-Type', 'text/xml');
+                break;    
+            case 'htmltab':
+                $app->response->headers->set('Content-Type', 'text/html');
+                break;
+            default:
+                $app->response->headers->set('Content-Type', 'text/plain');
+        }
+    }
     
     $sparql->endpoint();
 })->via('GET', 'POST');
