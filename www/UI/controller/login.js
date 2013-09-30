@@ -38,10 +38,6 @@ var Login = portal.controller('LoginCtrl', ['$scope', 'ui',  'Item', '$rootScope
 			signedin : false,
 			oAuth : function(provider) {
 				$item.resolver.oAuth(provider, $window.location.href, function(data) {
-				
-					//var deferred = $q.defer();
-					//resolved = false;
-
 					$window.location.href = data.popup;
 				});
 			}

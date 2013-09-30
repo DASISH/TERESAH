@@ -118,7 +118,7 @@
 						// We got an access token, let's now get the user's details
 						$userDetails = $provider->getUserDetails($t);
 						$d = $this->oAuthLogin($userDetails, $server);
-						if($_SESSION["callback"]) {
+						if(isset($_SESSION["callback"])) {
 							$d["Location"] = $_SESSION["callback"];
 						}
 						return $d;
