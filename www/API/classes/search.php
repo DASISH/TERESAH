@@ -215,8 +215,13 @@
 					
 				} else {
 					$retField = $dic["table"]["where"];
+					if($dic["table"]["name"] == "tool_application_type") {
+						$dic["table"]["name"] = "(SELECT ".$dic["table"]["where"]." FROM ".$dic["table"]["name"]." GROUP BY ".$dic["table"]["where"].") a";
+						$dic["table"]["where"] = "a.".$dic["table"]["where"];
+						$retField = "a.".$retField;
+						$dic["table"]["id"] = "a.".$dic["table"]["id"];
+					}
 					if($options["request"] != Null) {
-						
 						$where = "WHERE ".$dic["table"]["where"]." LIKE CONCAT('%', ? , '%') ".$sensitivity. " ";
 						$exec[] = $options["request"];
 					}
@@ -402,7 +407,11 @@
 			$dict = parent::getFacets();
 			$return = array();
 			foreach($dict as $tableName => &$vals) {
-				$req = "SELECT COUNT(*) as total FROM ".$tableName;
+				if($vals["facetEnum"]) { 
+					$req = "SELECT COUNT(a.".$vals["facetEnum"].") as total FROM (SELECT ".$vals["facetEnum"]." from ".$tableName." GROUP BY ".$vals["facetEnum"].") a";
+				} else {
+					$req = "SELECT COUNT(*) as total FROM ".$tableName;
+				}
 				$req = $this->DB->prepare($req);
 				$req->execute();
 				$data = $req->fetch(PDO::FETCH_ASSOC);
