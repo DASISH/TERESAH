@@ -1,4 +1,9 @@
 <?php
+$app->get('/', function () use ($rdf, $app) { 
+    $app->response->headers->set('Content-Type', 'text/plain');
+    print file_get_contents("readme.txt");
+});
+
 $app->get('/dump.rdf', function () use ($rdf, $app) { 
     $app->response->headers->set('Content-Type', 'text/xml');
     output_rdf($rdf->all(), 'rdfxml');
@@ -33,6 +38,7 @@ $app->map('/endpoint', function () use ($app) {
                 break;
             case 'xml':
             case 'rdfxml':
+            case '':
                 $app->response->headers->set('Content-Type', 'text/xml');
                 break;    
             case 'htmltab':
