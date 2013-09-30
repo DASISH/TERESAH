@@ -81,9 +81,10 @@
 			#
 			###########
 			
-			$req = "SELECT d.title, t.tool_uid as UID, t.shortname, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription FROM description d 
+			$req = "SELECT d.title, t.tool_uid as UID, t.shortname, tat.application_type, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription FROM description d 
 						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
 						LEFT OUTER JOIN external_description ED ON ED.tool_uid = t.tool_uid
+						LEFT OUTER JOIN tool_application_type tat ON tat.tool_uid = t.tool_uid
 					GROUP BY d.tool_uid
 					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
 			$req = $this->DB->prepare($req);
@@ -104,7 +105,7 @@
 					$desc = "";
 					$provider = "";
 				}
-				$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
+				$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 			}
 			
 			$ret["parameters"]["total"] = $this->nbrTotal();

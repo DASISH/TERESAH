@@ -170,7 +170,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 				},
 				one : function(item, options, callback) {
 				
-					if(typeof(options)==='undefined') options =  {keyword:true, platform:true, developer : true, type:true};
+					if(typeof(options)==='undefined') options =  {keyword:true, platform:true, developer : true, type:true, applicationType: true};
 					if(typeof(callback)==='undefined') callback = false;
 					
 					return Item.routes.tools.one.one(item).get(options).then(function (data) {

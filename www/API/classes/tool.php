@@ -251,7 +251,7 @@
 			
 			if($mode == "Default") {
 				#Request
-				$req = "SELECT p.name as platform FROM Tool_has_Platform tp, platform p WHERE tp.tool_uid = ? AND tp.platform_uid = p.platform_uid";
+				$req = "SELECT p.name as platform FROM tool_has_platform tp, platform p WHERE tp.tool_uid = ? AND tp.platform_uid = p.platform_uid";
 				$req = $this->DB->prepare($req);
 				$req->execute(array($id));
 				
