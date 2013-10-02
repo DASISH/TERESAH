@@ -22,7 +22,7 @@
 <p>
     The tools registry have a <a href="http://www.w3.org/TR/rdf-sparql-query">SPARQL</a> endpoint for direct quries.<br />
     The endpoint uses <a href="http://arc.semsol.org">ARC2</a>.<br />
-    <a href="">http://rdf.wp23.borsna.se/endpoint</a>
+    <a href="http://rdf.wp23.borsna.se/endpoint">http://rdf.wp23.borsna.se/endpoint</a>
 <p>
 
 <h4>Example queries</h4>
@@ -48,12 +48,90 @@ WHERE {
 }
 </code>
 </pre>
-<a href="http://rdf.wp23.borsna.se/endpoint?query=PREFIX+foaf%3A++++%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0APREFIX+rdfs%3A++++%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+isocat%3A++%3Chttp%3A%2F%2Fisocat.org%2Fdatcat%2F%3E%0D%0APREFIX+schema%3A++%3Chttp%3A%2F%2Fschema.org%2F%3E%0D%0A%0D%0ASELECT+%3Ftool+%3Ftitle+%3Fhomepage+%3Fcreated%0D%0AWHERE+{%0D%0A++++%3Ftool+a+schema%3ASoftwareApplication+.%0D%0A++++%3Fkeyword+a+isocat%3ADC-278+%3B%0D%0A++++++++rdfs%3Alabel+%22XML%22+.%0D%0A++++%3Ftool+dcterms%3Asubject+%3Fkeyword+.%0D%0A++++%3Ftool+dcterms%3Atitle+%3Ftitle+.%0D%0A++++%3Ftool+foaf%3Ahomepage+%3Fhomepage+.%0D%0A++++%3Ftool+dcterms%3Acreated+%3Fcreated%0D%0A}&output=htmltab&jsonp=&key=&show_inline=1">Edit/run query</a>
+  <a href="http://rdf.wp23.borsna.se/endpoint?query=PREFIX+foaf%3A++++%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0APREFIX+rdfs%3A++++%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+isocat%3A++%3Chttp%3A%2F%2Fisocat.org%2Fdatcat%2F%3E%0D%0APREFIX+schema%3A++%3Chttp%3A%2F%2Fschema.org%2F%3E%0D%0A%0D%0ASELECT+%3Ftool+%3Ftitle+%3Fhomepage+%3Fcreated%0D%0AWHERE+{%0D%0A++++%3Ftool+a+schema%3ASoftwareApplication+.%0D%0A++++%3Fkeyword+a+isocat%3ADC-278+%3B%0D%0A++++++++rdfs%3Alabel+%22XML%22+.%0D%0A++++%3Ftool+dcterms%3Asubject+%3Fkeyword+.%0D%0A++++%3Ftool+dcterms%3Atitle+%3Ftitle+.%0D%0A++++%3Ftool+foaf%3Ahomepage+%3Fhomepage+.%0D%0A++++%3Ftool+dcterms%3Acreated+%3Fcreated%0D%0A}&output=htmltab&jsonp=&key=&show_inline=1">Edit/run query</a>
 | <a href="http://rdf.wp23.borsna.se/endpoint?query=PREFIX+foaf%3A++++%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0APREFIX+rdfs%3A++++%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+isocat%3A++%3Chttp%3A%2F%2Fisocat.org%2Fdatcat%2F%3E%0D%0APREFIX+schema%3A++%3Chttp%3A%2F%2Fschema.org%2F%3E%0D%0A%0D%0ASELECT+%3Ftool+%3Ftitle+%3Fhomepage+%3Fcreated%0D%0AWHERE+{%0D%0A++++%3Ftool+a+schema%3ASoftwareApplication+.%0D%0A++++%3Fkeyword+a+isocat%3ADC-278+%3B%0D%0A++++++++rdfs%3Alabel+%22XML%22+.%0D%0A++++%3Ftool+dcterms%3Asubject+%3Fkeyword+.%0D%0A++++%3Ftool+dcterms%3Atitle+%3Ftitle+.%0D%0A++++%3Ftool+foaf%3Ahomepage+%3Fhomepage+.%0D%0A++++%3Ftool+dcterms%3Acreated+%3Fcreated%0D%0A}&output=htmltab">html</a>
 | <a href="http://rdf.wp23.borsna.se/endpoint?query=PREFIX+foaf%3A++++%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0APREFIX+rdfs%3A++++%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+isocat%3A++%3Chttp%3A%2F%2Fisocat.org%2Fdatcat%2F%3E%0D%0APREFIX+schema%3A++%3Chttp%3A%2F%2Fschema.org%2F%3E%0D%0A%0D%0ASELECT+%3Ftool+%3Ftitle+%3Fhomepage+%3Fcreated%0D%0AWHERE+{%0D%0A++++%3Ftool+a+schema%3ASoftwareApplication+.%0D%0A++++%3Fkeyword+a+isocat%3ADC-278+%3B%0D%0A++++++++rdfs%3Alabel+%22XML%22+.%0D%0A++++%3Ftool+dcterms%3Asubject+%3Fkeyword+.%0D%0A++++%3Ftool+dcterms%3Atitle+%3Ftitle+.%0D%0A++++%3Ftool+foaf%3Ahomepage+%3Fhomepage+.%0D%0A++++%3Ftool+dcterms%3Acreated+%3Fcreated%0D%0A}&output=json">json</a>
 | <a href="http://rdf.wp23.borsna.se/endpoint?query=PREFIX+foaf%3A++++%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0APREFIX+rdfs%3A++++%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+isocat%3A++%3Chttp%3A%2F%2Fisocat.org%2Fdatcat%2F%3E%0D%0APREFIX+schema%3A++%3Chttp%3A%2F%2Fschema.org%2F%3E%0D%0A%0D%0ASELECT+%3Ftool+%3Ftitle+%3Fhomepage+%3Fcreated%0D%0AWHERE+{%0D%0A++++%3Ftool+a+schema%3ASoftwareApplication+.%0D%0A++++%3Fkeyword+a+isocat%3ADC-278+%3B%0D%0A++++++++rdfs%3Alabel+%22XML%22+.%0D%0A++++%3Ftool+dcterms%3Asubject+%3Fkeyword+.%0D%0A++++%3Ftool+dcterms%3Atitle+%3Ftitle+.%0D%0A++++%3Ftool+foaf%3Ahomepage+%3Fhomepage+.%0D%0A++++%3Ftool+dcterms%3Acreated+%3Fcreated%0D%0A}&output=xml">xml</a>
 | <a href="http://rdf.wp23.borsna.se/endpoint?query=PREFIX+foaf%3A++++%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0APREFIX+rdfs%3A++++%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+isocat%3A++%3Chttp%3A%2F%2Fisocat.org%2Fdatcat%2F%3E%0D%0APREFIX+schema%3A++%3Chttp%3A%2F%2Fschema.org%2F%3E%0D%0A%0D%0ASELECT+%3Ftool+%3Ftitle+%3Fhomepage+%3Fcreated%0D%0AWHERE+{%0D%0A++++%3Ftool+a+schema%3ASoftwareApplication+.%0D%0A++++%3Fkeyword+a+isocat%3ADC-278+%3B%0D%0A++++++++rdfs%3Alabel+%22XML%22+.%0D%0A++++%3Ftool+dcterms%3Asubject+%3Fkeyword+.%0D%0A++++%3Ftool+dcterms%3Atitle+%3Ftitle+.%0D%0A++++%3Ftool+foaf%3Ahomepage+%3Fhomepage+.%0D%0A++++%3Ftool+dcterms%3Acreated+%3Fcreated%0D%0A}&output=tsv">tsv</a>
+
+<br />
+All tools where licence is GNU GPL or BSD and the tool type is Web development:
+<pre>
+<code>
+PREFIX foaf:    &lt;http://xmlns.com/foaf/0.1/&gt;
+PREFIX rdfs:    &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+PREFIX isocat:  &lt;http://isocat.org/datcat/&gt;
+PREFIX schema:  &lt;http://schema.org/&gt;
+
+SELECT ?tool ?title ?homepage ?licence_label ?tool_type_label
+WHERE {
+    ?tool a schema:SoftwareApplication .
+    ?tool dcterms:licence ?licence .
+    ?tool_type a isocat:DC-3786 ;
+        rdfs:label ?tool_type_label .
+    ?tool dcterms:licence ;
+        dcterms:licence ?licence_label .
+    ?tool a ?tool_type.
+    ?tool dcterms:title ?title .
+    ?tool foaf:homepage ?homepage .
+
+    FILTER(?licence_label = "GNU GPL" || ?licence_label = "BSD")
+    FILTER(?tool_type_label = "Web development")
+}    
+</code>
+</pre>
+<br />
+
+Allt tools linked to a keyword containing the string &quot;geo&quot;:
+<pre>
+<code>
+PREFIX foaf:    &lt;http://xmlns.com/foaf/0.1/&gt;
+PREFIX rdfs:    &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+PREFIX isocat:  &lt;http://isocat.org/datcat/&gt;
+PREFIX schema:  &lt;http://schema.org/&gt;
+
+SELECT ?tool ?title ?homepage ?created
+WHERE {
+    ?tool a schema:SoftwareApplication .
+    ?keyword a isocat:DC-278 ;
+        rdfs:label ?keyword_label .
+    ?tool dcterms:subject ?keyword .
+    ?tool dcterms:title ?title .
+    ?tool foaf:homepage ?homepage .
+    ?tool dcterms:created ?created
+    FILTER regex(?keyword_label, "geo", "i")
+}
+GROUP BY ?tool    
+</code>
+</pre>
+<br />
+All tools where the description or external description contains &quot;csv&quot;:
+<pre>
+<code>
+PREFIX foaf:    &lt;http://xmlns.com/foaf/0.1/&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+PREFIX schema:  &lt;http://schema.org/&gt;
+
+SELECT ?tool ?title ?homepage ?created
+WHERE {
+    ?tool a schema:SoftwareApplication .
+    ?tool dcterms:title ?title .
+    ?tool foaf:homepage ?homepage .
+    ?tool dcterms:created ?created .
+    ?tool dcterms:description ?description .
+    ?tool dcterms:description [dcterms:description ?external_description]
+    FILTER(
+      regex(?external_description, "csv", "i") || 
+      regex(?description, "csv", "i")
+    )
+}
+GROUP BY ?tool    
+</code>
+</pre>
 </p>
+
 
 <h3>Get rdf dump of the registry</h3>
 <p>
