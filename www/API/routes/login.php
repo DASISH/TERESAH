@@ -19,7 +19,7 @@
 				$app->setEncryptedCookie('t23-p', hash("sha256", $input["password"]), "2 days");
 				$app->setEncryptedCookie('t23-u',$input["user"], "2 days");
 				$app->setEncryptedCookie('t23-i',$d["UID"], "2 days");
-				$app->setCookie('logged',$d["Name"], "20 minutes");
+				$app->setCookie('logged',$d["Name"], "20 minutes", null,  COOKIE_DOMAIN);
 				
 				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"]);
 				
@@ -72,10 +72,10 @@
 	
 	$app->get('/signout/', function () use ($app) { 
 		session_destroy();
-		$app->setEncryptedCookie('t23-p', false, "1 second");
-		$app->setEncryptedCookie('t23-u',false, "1 second");
-		$app->setEncryptedCookie('t23-i',false, "1 second");
-		$app->setCookie('logged', false, "1 second");
+		$app->setEncryptedCookie('t23-p', false, "1 second", "/",  COOKIE_DOMAIN);
+		$app->setEncryptedCookie('t23-u',false, "1 second", "/",  COOKIE_DOMAIN);
+		$app->setEncryptedCookie('t23-i',false, "1 second", "/",  COOKIE_DOMAIN);
+		$app->setCookie('logged', false, "1 second", "/",  COOKIE_DOMAIN);
 		return jP(array("signedout" => false));
 	} );
 	/*

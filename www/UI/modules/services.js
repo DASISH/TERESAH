@@ -1,67 +1,12 @@
-portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
+portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $location) {
 	var ui = {
 		title : function(title) { $window.document.title = "DASISH Tool Registry | " + title; },
-		bookmark : {
-			//Inspired by http://www.quirksmode.org/js/cookies.html
-			create : function(name,value, days) {
-			
-				//console.log("Array");
-				if(!days) { var days = 365; }
-				var date = new Date();
-				date.setTime(date.getTime()+(days*24*60*60*1000));
-				var expires = "; expires="+date.toGMTString();
-				
-				if(value[0].length > 1)	{
-					console.log(value);
-					angular.forEach(value, function(v,k) {
-						//console.log(v);
-						value[k] = v.join(",");
-					});
-					value = value.join("|");
-					console.log("Cookie array spotted");
-				}
-				
-				document.cookie = name+"="+value+expires+"; path=/";
-				
-				$rootScope.$broadcast('ui.bookmark.update.'+name);
-				
-				
-				//console.log(value);
+		url : {
+			set : function(obj) {
+				$location.search(obj);
 			},
-			read : function(name) {
-				var nameEQ = name + "=";
-				var ca = document.cookie.split(';');
-				for(var i=0;i < ca.length;i++) {
-					var c = ca[i];
-					while (c.charAt(0)==' ') c = c.substring(1,c.length);
-					if (c.indexOf(nameEQ) == 0) return this.format(c.substring(nameEQ.length,c.length));
-				}
-				return null;
-			},
-			format: function(str) {
-				var array = str.split("|");
-				angular.forEach(array, function(v,k) {
-					//console.log(k);
-					array[k] = v.split(",");
-				});
-				return array;
-			},
-			erase : function(name) {
-				this.create(name,"",-1);
-			},
-			object : function (name) {
-				var array = this.read(name);
-				console.log(array);
-				var object = {
-					data : {},
-					children : 0,
-				};
-				angular.forEach(array, function(value) {
-					console.log(value);
-					object.data[value[1]] = {href : value[2], name : value[1], type: value[0]}
-					object.children = object.children + 1;
-				});
-				return object;
+			get : function() {
+				return $location.search();;
 			}
 		},
 		user : {
@@ -137,11 +82,22 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 			user : {
 				signin : Restangular.all("login/"),
 				signup : Restangular.all("signup/")
-			}
+			},
+			oAuth : Restangular.all("oAuth")
 		},
 		
 		//Return Part
 		resolver : {
+			oAuth : function(provider, url, callback) {
+				
+					if(typeof(callback)==='undefined') callback = false;
+					
+					return Item.routes.oAuth.one(provider).get({callback : url}).then(function (data) {
+						if(callback) {	callback(data);	}
+						Item.data = data;
+						return data;
+					});
+				},
 			tools : {
 				all : function(opt, callback) {
 				
@@ -159,7 +115,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 				},
 				one : function(item, options, callback) {
 				
-					if(typeof(options)==='undefined') options =  {keyword:true, platform:true, developer : true, type:true};
+					if(typeof(options)==='undefined') options =  {keyword:true, platform:true, developer : true, type:true, applicationType: true};
 					if(typeof(callback)==='undefined') callback = false;
 					
 					return Item.routes.tools.one.one(item).get(options).then(function (data) {
@@ -277,6 +233,16 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 						if(typeof(callback)==='undefined') callback = false;
 					
 					return Item.routes.search.faceted.post(options).then(function(data) {
+						Item.data = data;
+						if(callback) { callback(data); }
+						return data;
+					});
+				},
+				facetedGet :  function(options, callback) {
+					
+					if(typeof(callback)==='undefined') callback = false;
+					
+					return Restangular.one('search/faceted/?'+options).get().then(function(data) {
 						Item.data = data;
 						if(callback) { callback(data); }
 						return data;

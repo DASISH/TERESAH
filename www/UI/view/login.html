@@ -1,47 +1,78 @@
 <div class="row" ng-show="!$parent.user.signedin">
-	<div class="col-lg-6">
-		<h2>Sign in</h2>
-		<form class="form-signin" ng-submit="ui.login.submit()">
-			<input class="form-control" type="text" name="user" ng-model="ui.login.inputs.user" autofocus="" placeholder="Email address">
-			<input class="form-control" type="password" name="password" ng-model="ui.login.inputs.password" placeholder="Password">
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-		</form>
+	<div class="row">
+		<h2>Use your social network :</h2>
+		<ul class="list-unstyled list-inline lead">
+			<li>
+				<span class="icon-stack" ng-click="ui.user.oAuth('Facebook')">
+					<i class="icon-check-empty icon-stack-base"></i>
+					<i class="icon-facebook"></i>
+				</span>
+			</li>
+			<li>
+				<span class="icon-stack" ng-click="ui.user.oAuth('Github')">
+					<i class="icon-check-empty icon-stack-base"></i>
+					<i class="icon-github"></i>
+				</span>
+			</li>
+			<li>
+				<span class="icon-stack" ng-click="ui.user.oAuth('Twitter')">
+					<i class="icon-check-empty icon-stack-base"></i>
+					<i class="icon-twitter"></i>
+				</span>
+			</li>
+			<li>
+				<span class="icon-stack" ng-click="ui.user.oAuth('Google')">
+					<i class="icon-check-empty icon-stack-base"></i>
+					<i class="icon-google-plus"></i>
+				</span>
+			</li>
+		</ul>
 	</div>
-	<div class="col-lg-6">
-		<h2>Sign up</h2>
-		<div class="alert alert-success" ng-show="ui.signup.message.success">{{ui.signup.message.success}}</div>
-		<div class="alert alert-success" ng-show="ui.signup.message.error">{{ui.signup.message.error}}</div>
-		<form class="form-horizontal" role="form" ng-show="!ui.signup.message.success" ng-submit="ui.signup.submit()">
-			<div class="form-group">
-				<label for="inputName1" class="col-lg-2 control-label">Name</label>
-				<div class="col-lg-10">
-					<input type="text" class="form-control" id="inputName1" ng-model="ui.signup.inputs.name" placeholder="Name">
+	<div class="row">
+		<div class="col-lg-6">
+			<h2>Sign in</h2>
+			<form class="form-signin" ng-submit="ui.login.submit()">
+				<input class="form-control" type="text" name="user" ng-model="ui.login.inputs.user" autofocus="" placeholder="Email address">
+				<input class="form-control" type="password" name="password" ng-model="ui.login.inputs.password" placeholder="Password">
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			</form>
+		</div>
+		<div class="col-lg-6">
+			<h2>Sign up</h2>
+			<div class="alert alert-success" ng-show="ui.signup.message.success">{{ui.signup.message.success}}</div>
+			<div class="alert alert-success" ng-show="ui.signup.message.error">{{ui.signup.message.error}}</div>
+			<form class="form-horizontal" role="form" ng-show="!ui.signup.message.success" ng-submit="ui.signup.submit()">
+				<div class="form-group">
+					<label for="inputName1" class="col-lg-2 control-label">Name</label>
+					<div class="col-lg-10">
+						<input type="text" class="form-control" id="inputName1" ng-model="ui.signup.inputs.name" placeholder="Name">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="inputEmail1" class="col-lg-2 control-label">Email</label>
-				<div class="col-lg-10">
-					<input type="email" class="form-control" id="inputEmail1"  ng-model="ui.signup.inputs.mail" placeholder="Email">
+				<div class="form-group">
+					<label for="inputEmail1" class="col-lg-2 control-label">Email</label>
+					<div class="col-lg-10">
+						<input type="email" class="form-control" id="inputEmail1"  ng-model="ui.signup.inputs.mail" placeholder="Email">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="inputUsername1" class="col-lg-2 control-label">Username</label>
-				<div class="col-lg-10">
-					<input type="text" class="form-control" id="inputUsername1"  ng-model="ui.signup.inputs.user" placeholder="Username">
+				<div class="form-group">
+					<label for="inputUsername1" class="col-lg-2 control-label">Username</label>
+					<div class="col-lg-10">
+						<input type="text" class="form-control" id="inputUsername1"  ng-model="ui.signup.inputs.user" placeholder="Username">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="inputPassword1" class="col-lg-2 control-label">Password</label>
-				<div class="col-lg-10">
-					<input type="password" class="form-control" id="inputPassword1" ng-model="ui.signup.inputs.password" placeholder="Password">
+				<div class="form-group">
+					<label for="inputPassword1" class="col-lg-2 control-label">Password</label>
+					<div class="col-lg-10">
+						<input type="password" class="form-control" id="inputPassword1" ng-model="ui.signup.inputs.password" placeholder="Password">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-lg-offset-2 col-lg-10">
-					<button type="submit" class="btn btn-primary btn-block">Sign up</button>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<button type="submit" class="btn btn-primary btn-block">Sign up</button>
+					</div>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
 <div class="container" ng-show="$parent.user.signedin == true">

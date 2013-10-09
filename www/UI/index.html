@@ -9,7 +9,15 @@
 
 		<title>DASISH Tool Registry</title>
 
-		<link href="./assets/css/bootstrap.css" rel="stylesheet">
+		<link href="./assets/css/bootstrap.css" rel="stylesheet" />
+		<link href="./assets/css/font-awesome.min.css" rel="stylesheet" />
+		<link href="./assets/css/font-awesome-ie7.min.css" rel="stylesheet" />
+		
+		<link rel="alternate" type="application/rdf+xml" href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/xml" title="Structured Descriptor Document (RDF/XML format)" />
+		<link rel="alternate" type="text/rdf+n3" href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/turtle" title="Structured Descriptor Document (N3/Turtle format)" />
+		<link rel="alternate" type="application/json+rdf" href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/json" title="Structured Descriptor Document (RDF/JSON format)" />
+		<link rel="alternate" type="text/plain" href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/ntriples" title="Structured Descriptor Document (N-Triples format)" />
+		
 		<style type="text/css">
 			body { margin-top:70px; }
 .form-signin {
@@ -66,6 +74,7 @@ border-top-right-radius: 0;
 				<ul class="nav navbar-nav">
 					<li ng-class="ui.routes.getRoute('HomeCtrl')"><a href="#/">Home</a></li>
 					<li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="#/search/faceted">Faceted search</a></li>
+					<li ng-class="ui.routes.getRoute('rdf')"><a href="#/about/rdf/">RDF FAQ</a></li>
 					<li ng-class="ui.routes.getRoute('About')"><a href="#contact">About</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

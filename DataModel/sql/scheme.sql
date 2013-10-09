@@ -716,6 +716,49 @@ ENGINE = InnoDB;
 
 CREATE INDEX `fk_External_Description_Tool1_idx` ON `tools_registry`.`external_description` (`tool_uid` ASC) ;
 
+
+-- -----------------------------------------------------
+-- Table `tools_registry`.`tool_application_type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tools_registry`.`tool_application_type` ;
+
+CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_application_type` (
+  `tool_application_type_uid` INT NOT NULL AUTO_INCREMENT ,
+  `tool_uid` INT NOT NULL ,
+  `application_type` ENUM('localDesktop', 'webApplication', 'webService', 'other', 'unknown') NOT NULL DEFAULT 'unknown' ,
+  PRIMARY KEY (`tool_application_type_uid`) ,
+  CONSTRAINT `fk_tool_application_type_tool1`
+    FOREIGN KEY (`tool_uid` )
+    REFERENCES `tools_registry`.`tool` (`tool_uid` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_tool_application_type_tool1_idx` ON `tools_registry`.`tool_application_type` (`tool_uid` ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table `tools_registry`.`user_oauth`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tools_registry`.`user_oauth` ;
+
+CREATE  TABLE IF NOT EXISTS `tools_registry`.`user_oauth` (
+  `user_oauth_uid` INT NOT NULL AUTO_INCREMENT ,
+  `user_uid` INT NOT NULL ,
+  `provider` VARCHAR(45) NOT NULL ,
+  `external_uid` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`user_oauth_uid`) ,
+  CONSTRAINT `fk_user_oauth_user1`
+    FOREIGN KEY (`user_uid` )
+    REFERENCES `tools_registry`.`user` (`user_uid` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_user_oauth_user1_idx` ON `tools_registry`.`user_oauth` (`user_uid` ASC) ;
+
+CREATE UNIQUE INDEX `unq` ON `tools_registry`.`user_oauth` (`provider` ASC, `external_uid` ASC) ;
+
 USE `tools_registry` ;
 
 

@@ -1,17 +1,18 @@
 var portal = angular.module('toolRegistry', ['ui.bootstrap', 'restangular', 'ngCookies', 'ngSanitize']);
-
+/*
 portal.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
 ]);
-
+*/
 portal.
 	config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
 		when('/tool/:toolId', {templateUrl: './view/tool.html', controller:"ToolCtrl", reloadOnSearch: false, resolve: Tool.resolveTool}).
 		when('/login/', {templateUrl: './view/login.html', controller:"LoginCtrl"}).
+		when('/about/rdf/', {templateUrl: './view/rdf.html'}).
 		when('/search/faceted', {templateUrl: './view/faceted.html', controller:"FacetedCtrl", reloadOnSearch: false, resolve: Faceted.resolveFaceted}).
 		when('/', {templateUrl: './view/home.html' , controller:"HomeCtrl", reloadOnSearch: false, resolve: Home.resolveHome}).
 		otherwise({redirectTo: './'});

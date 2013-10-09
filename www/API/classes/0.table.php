@@ -17,7 +17,7 @@
 				"Keyword" => array("keyword", "keyword", "keyword_uid", "tool_has_keyword", array("tool_uid", "keyword_uid")),
 				"Publication" => array("publication", "reference", "publication_uid" ,"tool_has_publication", array("tool_uid", "publication_uid")),
 				"Developer" => array("developer", "name", "developer_uid" ,"tool_has_developer", array("tool_uid", "developer_uid")),
-				"ApplicationType" => array("application_type", "application_type", "application_type_uid" ,"tool_has_application_type", array("tool_uid", "application_type_uid")),
+				"ApplicationType" => array("tool_application_type", "application_type", "application_type" ,"tool_application_type", array("tool_uid", "application_type")),
 				"ToolType" => array("tool_type", "tool_type", "tool_type_uid" ,"tool_has_tool_type", array("tool_uid", "tool_type_uid")),
 				"Organization" => array("organization", "name", "organization_uid", "description_has_organization", array("description_uid", "organization_uid")),
 				"LicenceType" => array("licence_type", "type", "licence_type_uid", "description", array("tool_uid", "licence_uid")),
@@ -50,7 +50,7 @@
 				"Keyword" => array("keyword", "Keyword"),
 				"Publication" => array("publication", "Publication"),
 				"Developer" => array("developer", "Developers"),
-				"ApplicationType" => array("application_type", "Application Type"),
+				"ApplicationType" => array("tool_application_type", "Application Type", "application_type"),
 				"ToolType" => array("tool_type", "Tool type"),
 				"Organization" => array("organization", "Organization"),
 				"LicenceType" => array("licence_type", "Licence Type"),
@@ -58,9 +58,15 @@
 			);
 			$return = array();
 			foreach($dict as $key => &$value) {
+				if(isset($value[2])) {
+					$enum = $value[2];
+				} else {
+					$enum = false;
+				}
 				$return[$value[0]] = array(
 					"facetParam" => $key,
-					"facetLegend" => $value[1]
+					"facetLegend" => $value[1],
+					"facetEnum" => $enum
 				);
 			}
 			return $return;
