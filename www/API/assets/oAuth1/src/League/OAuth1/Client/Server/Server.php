@@ -113,10 +113,13 @@ abstract class Server
      * @param  TemporaryCredentials|string  $temporaryIdentifier
      * @return void
      */
-    public function authorize($temporaryIdentifier)
+    public function authorize($temporaryIdentifier, $return = false)
     {
         $url = $this->getAuthorizationUrl($temporaryIdentifier);
-
+		if($return) {
+			return $url;
+			exit;
+		}
         header('Location: '.$url);
         exit;
     }

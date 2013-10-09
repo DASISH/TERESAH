@@ -51,9 +51,9 @@
 			if(!isset($data["email"])) {
 				$data["email"] = $data["nickname"];
 			}
-			$req = $this->DB->prepare("SELECT u.name as Name, u.mail as Mail, u.user_uid as UID FROM user_oauth uo, user u WHERE u.user_uid = uo.user_uid AND uo.provider = ? AND uo.external_uid = ?");
+			$req = $this->DB->prepare("SELECT u.name as Name, u.mail as Mail, u.user_uid as UID FROM user_oauth uo, user u WHERE u.user_uid = uo.user_uid AND uo.provider = ? AND uo.external_uid = ? LIMIT 1");
 			$req->execute(array($provider, $data["uid"]));
-			if($req->rowCount() == 1) {
+			if($req->rowCount() >= 1) {
 				$d = $req->fetch(PDO::FETCH_ASSOC);
 				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"]);
 				return array("signin" => true, "data" => $d);
@@ -64,6 +64,9 @@
 					$req->execute(array($sign, $provider, $data["uid"]));
 					$_SESSION["user"] = array("id" => $sign, "name" => $data["name"], "mail" => $data["email"]);
 					return array("signin" => true, "data" => array("UID" => $sign, "Name" => $data["name"], "Mail" => $data["email"]));
+				} elseif(isset($sign["Error"])) {
+					return array("signin" => false, "Error" => $sign["Error"]);
+				
 				}
 			}
 		}
@@ -72,23 +75,23 @@
 			switch($server) {
 				case "facebook":
 					$provider = new League\OAuth2\Client\Provider\Facebook(array(
-						'clientId'  =>  '266150806749677',
-						'clientSecret'  =>  'f1427c93991b383c018e534cd8e68859',
-						'redirectUri'   =>  'http://debian-machine.com/API/oAuth/Facebook'
+						'clientId'  =>  FB_ID,
+						'clientSecret'  =>  FB_SEC,
+						'redirectUri'   =>  FB_URI
 					));
 					break;
 				case "google":
 					$provider = new League\OAuth2\Client\Provider\Google(array(
-						'clientId'  =>  'OWE5zF6p7HzgnMCzMKI3w',
-						'clientSecret'  =>  'NHFxk3O4lNsi5oTPw5rb68r3SS8FtLeG4DdkOp7yCs',
-						'redirectUri'   =>  'http://debian-machine.com/API/oAuth/Twitter'
+						'clientId'  =>  GGL_ID,
+						'clientSecret'  =>  GGL_SEC,
+						'redirectUri'   =>  GGL_URI
 					));
 					break;
 				case "github":
 					$provider = new League\OAuth2\Client\Provider\Github(array(
-						'clientId'  =>  '032cdde9e2dd39d6a957',
-						'clientSecret'  =>  '8aa4bd7bf3271cf5aaa33d32471877b96e6aeac9',
-						'redirectUri'   =>  'http://debian-machine.com/API/oAuth/Github'
+						'clientId'  =>  GIT_SEC,
+						'clientSecret'  =>  GIT_SEC,
+						'redirectUri'   =>  GIT_URI
 					));
 					break;
 			}
@@ -138,47 +141,36 @@
 				}
 			}
 		}
-		function oAuth1($GET, $server) {
-			switch($server) {
+		function oAuth1($GET, $prov, $return = false) {
+			switch($prov) {
 				case "twitter":
 					
 					$server = new League\OAuth1\Client\Server\Twitter(array(
-						'identifier'  =>  'OWE5zF6p7HzgnMCzMKI3w',
-						'secret'  =>  'NHFxk3O4lNsi5oTPw5rb68r3SS8FtLeG4DdkOp7yCs',
-						'callback_uri'   =>  'http://debian-machine.com/API/oAuth/Twitter'
+						'identifier'  =>  TWI_ID,
+						'secret'  =>  TWI_SEC,
+						'callback_uri'   =>  TWI_URI
 					));
 					
 					break;
 			}
 			if (isset($GET['user'])) {
 
-				// Check somebody hasn't manually entered this URL in,
-				// by checkign that we have the token credentials in
-				// the session.
+				// Check somebody hasn't manually entered this URL in,				// by checkign that we have the token credentials in				// the session.
 				if ( ! isset($_SESSION['token_credentials'])) {
-					echo 'No token credentials.';
+					return 'No token credentials.';
 					exit(1);
 				}
 
 				// Retrieve our token credentials. From here, it's play time!
 				$tokenCredentials = unserialize($_SESSION['token_credentials']);
-
-				// // Below is an example of retrieving the identifier & secret
-				// // (formally known as access token key & secret in earlier
-				// // OAuth 1.0 specs).
-				// $identifier = $tokenCredentials->getIdentifier();
-				// $secret = $tokenCredentials->getSecret();
-
-				// Some OAuth clients try to act as an API wrapper for
-				// the server and it's API. We don't. This is what you
-				// get - the ability to access basic information. If
-				// you want to get fancy, you should be grabbing a
-				// package for interacting with the APIs, by using
-				// the identifier & secret that this package was
-				// designed to retrieve for you. But, for fun,
-				// here's basic user information.
+				//Get User details
 				$user = $server->getUserDetails($tokenCredentials);
-				var_dump($user);
+				//Now use our login/sign in class
+				$d = $this->oAuthLogin($user, $prov);
+				if(isset($_SESSION["callback"])) {
+					$d["Location"] = $_SESSION["callback"];
+				}
+				return $d;
 
 			// Step 3
 			} elseif (isset($GET['oauth_token']) && isset($GET['oauth_verifier'])) {
@@ -198,16 +190,16 @@
 				session_write_close();
 
 				// Redirect to the user page
-				header("Location: http://{$_SERVER['HTTP_HOST']}/?user=user");
+				header("Location: ".API_URI."/oAuth/".ucfirst($prov)."?user=user");
 				exit;
 
 			// Step 2.5 - denied request to authorize client
 			} elseif (isset($GET['denied'])) {
-				echo 'Hey! You denied the client access to your Twitter account! If you did this by mistake, you should <a href="?go=go">try again</a>.';
+				return 'Hey! You denied the client access to your Twitter account! If you did this by mistake, you should <a href="?go=go">try again</a>.';
 
 			// Step 2
-			} elseif (isset($GET['go'])) {
-
+			} else {
+				
 				// First part of OAuth 1.0 authentication is retrieving temporary credentials.
 				// These identify you as a client to the server.
 				$temporaryCredentials = $server->getTemporaryCredentials();
@@ -216,6 +208,15 @@
 				$_SESSION['temporary_credentials'] = serialize($temporaryCredentials);
 				session_write_close();
 
+				if($return == true) {
+					if(isset($GET["callback"])) {
+						$_SESSION["callback"] = $GET["callback"];
+					} else {
+						$_SESSION["callback"] = false;
+					}
+					return array("popup" => $server->authorize($temporaryCredentials, $return), "callback" => $_SESSION["callback"]);
+				}
+				
 				// Second part of OAuth 1.0 authentication is to redirect the
 				// resource owner to the login screen on the server.
 				$server->authorize($temporaryCredentials);
