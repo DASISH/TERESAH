@@ -267,7 +267,7 @@
 				
 				foreach($get["facets"] as $key => $o) {
 					#We check that there is more than one option into the said facet array
-					if(is_array($o) && array_key_exists("request", $o) && count($o["request"]) > 0) {
+					if(is_array($o) && array_key_exists("request", $o) && is_array($o["request"]) && count($o["request"]) > 0) {
 						$dic = parent::getTable($key);
 						if(array_key_exists("Error", $dic)) {
 							return $dic;
@@ -403,6 +403,7 @@
 			#We return
 			$ret["parameters"]["total"] = $this->nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
 			
+			$ret["parameters"]["url"] = urldecode(http_build_query($get));
 			return $ret;
 		}
 		function getFacets() {
