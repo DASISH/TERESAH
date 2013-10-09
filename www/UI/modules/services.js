@@ -83,7 +83,8 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 				signin : Restangular.all("login/"),
 				signup : Restangular.all("signup/")
 			},
-			oAuth : Restangular.all("oAuth")
+			oAuth : Restangular.all("oAuth"),
+			faq : Restangular.all("faq")
 		},
 		
 		//Return Part
@@ -270,6 +271,15 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					});
 					
 				}
+			},
+			faq : function(callback) {
+				if(typeof(callback)==='undefined') callback = false;
+				
+				return Item.routes.faq.getList().then(function(data) {
+					if(callback) { callback(data); }
+					return data;
+				});
+				
 			}
 		}
 	}

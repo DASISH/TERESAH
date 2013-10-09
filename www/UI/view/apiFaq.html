@@ -1,34 +1,21 @@
-<table class="table">
-	<thead>
-		<tr>
-			<th>URI</th>
-			<th>Method</th>
-			<th>Description</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td colspan="3">
-				<h2>Tool</h2>
-			</td>
-		</tr>
-		<tr>
-			<td rowspan="2"><a class="btn btn-link" ng-click="ui.tool.id = !ui.tool.id;">/tool/:id</a></td>
-			<td>GET</td>
-			<td>
-				Returns descriptions of a tool identified by its shortname or integer UID<br /> 
-			</td>
-		<tr>
-			<td colspan="2" ng-show="ui.tool.id">
-<pre>{
-	keyword : false,
-	type : false,
-	platform : false,
-	developer : false,
-	applicationType : false
-}</pre>
-		<b>E.G. :</b> <small>/tool/DASISH-Tool-Registry?keyword&type </small></td>
-		</tr>
-		
-	</tbody>
-</table>
+<div ng-repeat="chapter in documentation">
+	<h2 ng-bind="chapter.name"></h2>
+	<div class="container" ng-repeat="doc in chapter.routes">
+		<div class="row">
+			<div class="col-lg-3"><span class="btn btn-link" ng-click="ui.toggle(doc.uri)" ng-bind="doc.uri"</span></div>
+			<div class="col-lg-1" ng-bind="doc.method"></div>
+			<div class="col-lg-8">
+				<h3 style="margin-top:0; padding-top:0;">Description :</h3>
+				<p ng-bind="doc.description"></p>
+				<div ng-show="ui.toggled[doc.uri]">
+					<h3>Options :</h3>
+					<pre ng-bind="doc.options"></pre>
+					<h3>Example :</h3>
+					<p ng-bind="doc.example"></p>
+				</div>
+			</div>
+		</div>
+		<hr />
+	</div>
+	<hr />
+</div>
