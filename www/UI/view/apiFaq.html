@@ -1,0 +1,34 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>URI</th>
+			<th>Method</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="3">
+				<h2>Tool</h2>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="2"><a class="btn btn-link" ng-click="ui.tool.id = !ui.tool.id;">/tool/:id</a></td>
+			<td>GET</td>
+			<td>
+				Returns descriptions of a tool identified by its shortname or integer UID<br /> 
+			</td>
+		<tr>
+			<td colspan="2" ng-show="ui.tool.id">
+<pre>{
+	keyword : false,
+	type : false,
+	platform : false,
+	developer : false,
+	applicationType : false
+}</pre>
+		<b>E.G. :</b> <small>/tool/DASISH-Tool-Registry?keyword&type </small></td>
+		</tr>
+		
+	</tbody>
+</table>

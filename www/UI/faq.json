@@ -1,0 +1,21 @@
+[
+	{
+		"name" : "Tool",
+		routes : [
+			{
+				"uri" : "/tool/:id",
+				"method" : "GET",
+				"description" : "Returns descriptions of a tool identified by its shortname or integer UID",
+				"options" : 
+"{
+	keyword : false,
+	type : false,
+	platform : false,
+	developer : false,
+	applicationType : false
+}",
+				"example" : "/tool/DASISH-Tool-Registry?keyword&type"
+			}
+		]
+	}
+]
