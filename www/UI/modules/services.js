@@ -5,7 +5,6 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 			data : false,
 			signedin : function(callback) {
 				if(ui.user.data == false) {
-					console.log($cookies);
 					if($cookies.logged) {
 						Restangular.one("cookie/").get().then( function(data) {
 							console.log(data);

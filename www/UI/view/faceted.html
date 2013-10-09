@@ -48,8 +48,8 @@
 					</div>
 					<div class="row" ng-repeat="item in results.items">
 						<div class="media col-lg-12" >
-							<a class="pull-left" href="#">
-								<img class="media-object" src="./assets/img/{{item.applicationType}}.png" height="64" width="64" alt="{{item.applicationType}}">
+							<a class="pull-left" href="#/tool/{{item.identifiers.shortname}}">
+								<img class="media-object" ng-src="./assets/img/{{item.applicationType}}.png" height="64" width="64" alt="{{item.applicationType}}">
 							</a>
 							<div class="media-body">
 								<h4 class="media-heading"><a href="#/tool/{{item.identifiers.shortname}}">{{item.title}}</a></h4>
