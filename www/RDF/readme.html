@@ -40,11 +40,12 @@ SELECT ?tool ?title ?homepage ?created
 WHERE {
     ?tool a schema:SoftwareApplication .
     ?keyword a isocat:DC-278 ;
-        rdfs:label "XML" .
+        rdfs:label ?keyword_label .
     ?tool dcterms:subject ?keyword .
     ?tool dcterms:title ?title .
     ?tool foaf:homepage ?homepage .
     ?tool dcterms:created ?created
+    FILTER(?keyword_label = "XML")
 }
 </code>
 </pre>
@@ -70,8 +71,7 @@ WHERE {
     ?tool dcterms:licence ?licence .
     ?tool_type a isocat:DC-3786 ;
         rdfs:label ?tool_type_label .
-    ?tool dcterms:licence ;
-        dcterms:licence ?licence_label .
+    ?licence dcterms:licence ?licence_label .
     ?tool a ?tool_type.
     ?tool dcterms:title ?title .
     ?tool foaf:homepage ?homepage .
