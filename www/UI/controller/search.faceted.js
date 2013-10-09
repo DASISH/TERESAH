@@ -2,6 +2,42 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 	$scope.results = false;
 	
 	$scope.ui = {
+		url : {
+			vall : null, 
+			enable : true, 
+			reload : function() {
+				options = $item.serialize($ui.url.get());
+				if(options) {
+					if(options != $scope.ui.url.val && $scope.ui.url.enable == true) {
+						//
+						//We launch research
+						$scope.ui.url.enable = false;
+						$item.resolver.search.facetedGet(options, function(data) {
+							if(data.Error) {
+								$scope.ui.facets.error = data.Error;
+							} else {
+								$scope.ui.facets.error = false;
+							}
+							if(data.response) {
+								$scope.ui.url.enable = true;
+								if(data.response.length == 0) {
+									$scope.results = false;
+									$scope.ui.facets.error = "No results";
+								} else {
+									$scope.ui.url = data.parameters.url;
+									$ui.url.set(data.parameters.url);
+									$scope.results = { items : data.response }
+									$scope.ui.pages.totalItem = data.parameters.total;
+								}
+							} else {
+								$scope.results = false;
+							}
+							
+						});
+					}
+				}
+			}
+		},
 		facets : {
 			error : false,
 			facets : $item.data,
@@ -45,6 +81,8 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 							$scope.results = false;
 							$scope.ui.facets.error = "No results";
 						} else {
+							$scope.ui.url.val = data.parameters.url;
+							$ui.url.set(data.parameters.url);
 							$scope.results = { items : data.response }
 							$scope.ui.pages.totalItem = data.parameters.total;
 						}
@@ -88,6 +126,12 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 	
 	$ui.title("Search | Faceted");
 	
+	$scope.ui.url.reload();
+	
+	//In case of manual change of URL
+	$scope.$on('$routeUpdate', function() {
+		$scope.ui.url.reload();
+	});
 	//exec
 }]);
 Faceted.resolveFaceted = {

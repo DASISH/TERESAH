@@ -404,6 +404,7 @@
 			$ret["parameters"]["total"] = $this->nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
 			
 			$ret["parameters"]["url"] = urldecode(http_build_query($get));
+			
 			return $ret;
 		}
 		function getFacets() {

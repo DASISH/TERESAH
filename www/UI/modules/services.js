@@ -1,6 +1,14 @@
-portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
+portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $location) {
 	var ui = {
 		title : function(title) { $window.document.title = "DASISH Tool Registry | " + title; },
+		url : {
+			set : function(obj) {
+				$location.search(obj);
+			},
+			get : function() {
+				return $location.search();;
+			}
+		},
 		user : {
 			data : false,
 			signedin : function(callback) {
@@ -225,6 +233,16 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular) {
 						if(typeof(callback)==='undefined') callback = false;
 					
 					return Item.routes.search.faceted.post(options).then(function(data) {
+						Item.data = data;
+						if(callback) { callback(data); }
+						return data;
+					});
+				},
+				facetedGet :  function(options, callback) {
+					
+					if(typeof(callback)==='undefined') callback = false;
+					
+					return Restangular.one('search/faceted/?'+options).get().then(function(data) {
 						Item.data = data;
 						if(callback) { callback(data); }
 						return data;
