@@ -100,6 +100,18 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					});
 				},
 			tools : {
+				insert : function(opt, callback) {
+				
+					if(typeof(opt)==='undefined') opt =  {};
+					if(typeof(callback)==='undefined') callback = false;
+					
+					return Item.routes.tools.one.post(opt).then(function (data) {
+						if(callback) {	callback(data);	}
+						Item.data = data;
+						return data;
+					});
+					
+				},
 				all : function(opt, callback) {
 				
 					if(typeof(opt)==='undefined') opt =  {};

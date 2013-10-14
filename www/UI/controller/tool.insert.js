@@ -2,6 +2,19 @@ var AddTool = portal.controller('AddToolCtrl', ['$scope', 'ui',  'Item', functio
 	$scope.results = false;
 	
 	$scope.ui = {
+		form : {
+			fields : {
+			},
+			save : function() {
+				postData = $scope.ui.form.fields;
+				facets = $scope.ui.facets.group($scope.ui.facets.used);
+				postData["facets"] = facets["facets"];
+				
+				$item.resolver.tools.insert(postData, function(data) {
+					console.log(data);
+				});
+			}
+		},
 		facets : {
 			error : false,
 			facets : $item.data,
@@ -15,7 +28,7 @@ var AddTool = portal.controller('AddToolCtrl', ['$scope', 'ui',  'Item', functio
 				
 				return $item.resolver.facets(facet.facetParam, option)
 			},
-			submit : function(constructor) {
+			group : function(constructor) {
 				if(!constructor) {
 					constructor = { facets : {}};
 				} else {
@@ -33,6 +46,10 @@ var AddTool = portal.controller('AddToolCtrl', ['$scope', 'ui',  'Item', functio
 						});
 					}
 				});
+				return constructor;
+			},
+			submit : function(constructor) {
+				constructor = $scope.ui.facets.group(constructor);
 				
 				$item.resolver.search.faceted(constructor, function(data) {
 					if(data.Error) {

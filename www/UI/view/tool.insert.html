@@ -9,13 +9,31 @@
 			<div class="form-group">
 				<label for="nameOfTool" class="col-lg-2 control-label">Name of the tool</label>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="nameOfTool" ng-model="ui.form.fields.name" placeholder="Name">
+					<input type="text" class="form-control" id="nameOfTool" ng-model="ui.form.fields.name" placeholder="Name"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="homepageOfTool" class="col-lg-2 control-label">Homepage</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="homepageOfTool" ng-model="ui.form.fields.homepage" placeholder="Homepage"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="versionOfTool" class="col-lg-2 control-label">Version</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="versionOfTool" ng-model="ui.form.fields.version" placeholder="Version"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="availableOfTool" class="col-lg-2 control-label">Available from</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="availableOfTool" ng-model="ui.form.fields.available_from" placeholder="Date"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="descOfTool" class="col-lg-2 control-label">Description</label>
 				<div class="col-lg-10">
-					<textarea class="form-control" id="descOfTool" ng-model="ui.form.fields.desc"></textarea>
+					<textarea class="form-control" id="descOfTool" ng-model="ui.form.fields.description"></textarea>
 				</div>
 			</div>
 		</div>
@@ -72,6 +90,6 @@
 	</div>
 	<hr />
 	<div class="row">
-		<a class="btn btn-primary" ng-function="ui.form.save()">Save</a>
+		<a class="btn btn-primary" ng-click="ui.form.save()">Save</a>
 	</div>
 </form>

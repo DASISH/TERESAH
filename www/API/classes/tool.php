@@ -7,6 +7,99 @@
 			$this->DB = $DB;
 		}
 		
+	############
+	#
+	#	TOOLS
+	#
+	############
+		
+	
+		private function getShorname($str, $replace=array("'"), $delimiter='-') {
+			setlocale(LC_ALL, 'en_US.UTF8');
+			if( !empty($replace) ) {
+				$str = str_replace((array)$replace, ' ', $str);
+			}
+
+			$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+			$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
+			$clean = strtolower(trim($clean, '-'));
+			$clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
+
+			return $clean;
+		}
+	
+	#############
+	#
+	#		DELETE
+	#
+	#############
+	function delete($toolUID) {
+		$req = "DELETE FROM tool WHERE tool_uid = ? LIMIT 1";
+		$req = $this->DB->prepare($req);
+		$req->execute(array($toolUID));
+		
+	}
+	
+	#########
+	#
+	#		Insert
+	#
+	###########
+	
+		
+		function insertDescription($toolUID, $data) {
+			$ret = "Nothing happends";
+			if(isset($data["provider"])) {
+				#If we have a Data Provider, it is an external Description
+				$req = "INSERT INTO external_description VALUES ('', ?, ?, ?, ?); ";
+				$req = $this->DB->prepare($req);
+				try {
+					#echo "hi";
+					#print_r($data);
+					$ret = $req->execute(array($toolUID, $data["description"], $data["source"], $data["provider"]));
+					#print ($req);
+					#return $ret->rowCount ();
+				} catch(Exception $e) {
+					echo "Erreur";
+					$erreure = 'Erreur : '.$e->getMessage().'<br />';
+					$erreure .= 'N° : '.$e->getCode();
+					return array("Error" => $erreure);
+				}
+			
+			} else {
+				#Else, it is a simple description
+				$req = "INSERT INTO description VALUES ('', ?, ?, ?, ?, ?, CURDATE(), NULL, ?,?,?); ";
+				$req = $this->DB->prepare($req);
+				try {
+					$ret = $req->execute(array($data["name"], $data["description"], $data["version"], $data["homepage"],  $data["available_from"],  $data["facets"]["Licence"]["request"][0], $toolUID, $_SESSION["user"]["id"]));
+					return array("Success" => "Description registered", "uid" => $this->DB->lastInsertId());
+				} catch(Exception $e) {
+					$erreure = 'Erreur : '.$e->getMessage().'<br />';
+					$erreure .= 'N° : '.$e->getCode();
+					return array("Error" => $erreure);
+				}
+			}
+			return $ret;
+		}
+		
+		function insertTool($data) {
+			$req = "INSERT INTO tool (tool_uid, shortname) VALUES ( NULL , ? )";
+			$req = $this->DB->prepare($req);
+			$req->execute(array($this->getShorname($data["name"])));
+			
+			//Check
+			if($req->rowCount() == 1) {
+				return array("uid" => $this->DB->lastInsertId(), "shortname" => $this->getShorname($data["name"]));
+			} else {
+				return array("Error" => "The tool couldn't be save");
+			}
+			
+		}
+	#########
+	#
+	#		Select
+	#
+	#########
 		function getDevelopers($toolUID) {
 			$req = "SELECT d.developer_uid as UID, d.name, d.contact FROM developer d, tool_has_developer td WHERE td.developer_uid = d.developer_uid AND td.tool_uid = ?";
 			$req = $this->DB->prepare($req);
@@ -137,39 +230,7 @@
 			}
 		}
 		
-		function insertDescription($toolUID, $data) {
-			$ret = "Nothing happends";
-			if(isset($data["provider"])) {
-				#If we have a Data Provider, it is an external Description
-				$req = "INSERT INTO external_description VALUES ('', ?, ?, ?, ?); ";
-				$req = $this->DB->prepare($req);
-				try {
-					#echo "hi";
-					#print_r($data);
-					$ret = $req->execute(array($toolUID, $data["description"], $data["source"], $data["provider"]));
-					#print ($req);
-					#return $ret->rowCount ();
-				} catch(Exception $e) {
-					echo "Erreur";
-					$erreure = 'Erreur : '.$e->getMessage().'<br />';
-					$erreure .= 'N° : '.$e->getCode();
-					return $erreure;
-				}
-			
-			} else {
-				#Else, it is a simple description
-				$req = "INSERT INTO description VALUES ('', ?, ?, ?, ?, ?, CURDATE(), NULL, ?,?,?); ";
-				$req = $this->DB->prepare($req);
-				try {
-					$ret = $req->execute(array($data["title"], $data["description"], $data["version"], $data["homepage"],  $data["available_from"],  $data["licence_UID"], $toolUID, 0));
-				} catch(Exception $e) {
-					$erreure = 'Erreur : '.$e->getMessage().'<br />';
-					$erreure .= 'N° : '.$e->getCode();
-					return $erreure;
-				}
-			}
-			return $ret;
-		}
+		
 		
 		function getKeywords($tool) {
 			$req = "SELECT k.keyword_uid, k.keyword, k.source_uri as sourceURI, k.source_taxonomy as sourceTaxonomy FROM keyword k, tool_has_keyword tk WHERE tk.keyword_uid = k.keyword_uid AND tk.tool_uid = ?";
