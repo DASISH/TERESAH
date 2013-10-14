@@ -3,15 +3,33 @@
 		<h1>Add a new tool </h1>
 	</div>
 
+	<h2>Basic informations</h2>
+	<div class="row">
+		<div class="form-horizontal" role="form">
+			<div class="form-group">
+				<label for="nameOfTool" class="col-lg-2 control-label">Name of the tool</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="nameOfTool" ng-model="ui.form.fields.name" placeholder="Name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="descOfTool" class="col-lg-2 control-label">Description</label>
+				<div class="col-lg-10">
+					<textarea class="form-control" id="descOfTool" ng-model="ui.form.fields.desc"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr />
+	<h2>Metadata</h2>
 	<div class="row">
 		<div class="col-lg-3" id="facetList">
-			<h2>Metadata</h2>
 			<div class="panel-group">
 				<div class="panel panel-default" ng-repeat="facet in ui.facets.facets" ng-class="{'panel-primary' : facet.active, 'panel-success' : ui.facets.used[facet.facetParam].possibilities }">
 				<!-- Default panel contents -->
 					<div class="panel-heading" ng-click="facet.active = !facet.active;"><span class="badge pull-right">{{facet.facetTotal}}</span>{{facet.facetLegend}}</div>
 					<div class="panel-body" ng-show="ui.facets.used[facet.facetParam].possibilities">
-						<p><span ng-repeat="option in ui.facets.used[facet.facetParam].possibilities | filter:{active:true}" class="badge" ng-click="ui.facets.del(facet.facetParam, option.id)">{{option.name}}</span></p>
+						<span ng-repeat="option in ui.facets.used[facet.facetParam].possibilities | filter:{active:true}" class="badge" ng-click="ui.facets.del(facet.facetParam, option.id)">{{option.name}}</span>
 					</div>
 				</div>
 			</div>
@@ -51,5 +69,9 @@
 				</section>
 			</div>
 		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<a class="btn btn-primary" ng-function="ui.form.save()">Save</a>
 	</div>
 </form>
