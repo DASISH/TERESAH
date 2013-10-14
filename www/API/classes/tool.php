@@ -1,5 +1,5 @@
 <?php
-	class Tool {
+	class Tool extends Table {
 	
 		##Getting DB
 		function __construct() {
@@ -83,6 +83,9 @@
 		}
 		
 		function insertTool($data) {
+			if(!isset($data["name"])) {
+				return array("Error" => "The tool couldn't be save because no name was given", "fieldsError" => "name");
+			}
 			$req = "INSERT INTO tool (tool_uid, shortname) VALUES ( NULL , ? )";
 			$req = $this->DB->prepare($req);
 			$req->execute(array($this->getShorname($data["name"])));
@@ -92,6 +95,27 @@
 				return array("uid" => $this->DB->lastInsertId(), "shortname" => $this->getShorname($data["name"]));
 			} else {
 				return array("Error" => "The tool couldn't be save");
+			}
+			
+		}
+		
+		function linkFacets($data) {
+			if(!isset($data["facet"]) && !isset($data["element"]) && !isset($data["tool"])) {
+				return array("Error" => "One facet couldn't be save. Missing data");
+			}
+			$table = parent::getTable($data["facet"]);
+			$element = $data["element"];
+			$toolUID = $data["tool"];
+			
+			$sql = "INSERT INTO ".$table["link"]["name"]." (".$table["link"]["tool"].", ".$table["link"]["item"]." ) VALUES ( ? , ? )";
+			$req = $this->DB->prepare($sql);
+			$req->execute(array($toolUID, $element));
+			
+			//Check
+			if($req->rowCount() == 1) {
+				return array("uid" => $this->DB->lastInsertId(), $data["facet"]);
+			} else {
+				return array("Error" => "The facet ".$data["facet"]." (".$table["table"]["name"].") couldn't be save");//, "debug" => array("request" => $sql, "input" => $data));
 			}
 			
 		}

@@ -11,7 +11,7 @@ var AddTool = portal.controller('AddToolCtrl', ['$scope', 'ui',  'Item', functio
 				postData["facets"] = facets["facets"];
 				
 				$item.resolver.tools.insert(postData, function(data) {
-					console.log(data);
+					$scope.ui.form.return = data;
 				});
 			}
 		},

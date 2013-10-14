@@ -90,6 +90,7 @@
 	</div>
 	<hr />
 	<div class="row">
+		<div class="row alert alert-warning" ng-show="ui.form.return.Error || ui.form.return.description.Error" ng-bind="ui.form.return.Error || ui.form.return.description.Error"></div>
 		<a class="btn btn-primary" ng-click="ui.form.save()">Save</a>
 	</div>
 </form>

@@ -66,8 +66,33 @@
 			$item["description"] = $tool->insertDescription($item["uid"], $input);
 			if(isset($item["description"]["Error"])) {
 				$tool->delete($item["uid"]);
+				jP(array($item, $input));
+				exit();
 			}
-			jP(array($item, $input));
+			else {
+				$facets = array();
+				//{"facets":{"ApplicationType":{"request":["webApplication"]},"Platform":{"request":["6"]}}
+				foreach($input["facets"] as $key => &$val) {
+				
+					if($key != "Licence") {
+						foreach($val["request"] as $k2 => &$facetId) {
+							$facetData = array("facet" => $key, "element" => $facetId, "tool" => $item["uid"]);
+							$facet = $tool->linkFacets($facetData);
+							
+							if(isset($facet["Error"])) {
+								$facets[] = $facet;
+								$error = true;
+								break;
+							}
+							
+						}
+						if(isset($error)) {
+							break;
+						}
+					}
+				}
+				jP(array($item, $input, $facets));
+			}
 		}
 	} );
 ?>
