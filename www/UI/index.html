@@ -10,6 +10,7 @@
 		<title>DASISH Tool Registry</title>
 
 		<link href="./assets/css/bootstrap.css" rel="stylesheet" />
+		<link href="./assets/css/hacks.css" rel="stylesheet" />
 		<link href="./assets/css/font-awesome.min.css" rel="stylesheet" />
 		<link href="./assets/css/font-awesome-ie7.min.css" rel="stylesheet" />
 		
@@ -19,41 +20,7 @@
 		<link rel="alternate" type="text/plain" href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/ntriples" title="Structured Descriptor Document (N-Triples format)" />
 		
 		<style type="text/css">
-			body { margin-top:70px; }
-.form-signin {
-max-width: 330px;
-padding: 15px;
-margin: 0 auto;
-}
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-margin-bottom: 10px;
-}
-.form-signin .checkbox {
-font-weight: normal;
-}
-.form-signin .form-control {
-position: relative;
-font-size: 16px;
-height: auto;
-padding: 10px;
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
-box-sizing: border-box;
-}
-.form-signin .form-control:focus {
-z-index: 2;
-}
-.form-signin input[type="text"] {
-margin-bottom: -1px;
-border-bottom-left-radius: 0;
-border-bottom-right-radius: 0;
-}
-.form-signin input[type="password"] {
-margin-bottom: 10px;
-border-top-left-radius: 0;
-border-top-right-radius: 0;
-}
+
 		</style>
 	</head>
 
@@ -74,9 +41,16 @@ border-top-right-radius: 0;
 				<ul class="nav navbar-nav">
 					<li ng-class="ui.routes.getRoute('HomeCtrl')"><a href="#/">Home</a></li>
 					<li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="#/search/faceted">Faceted search</a></li>
-					<li ng-class="ui.routes.getRoute('rdf')"><a href="#/about/rdf/">RDF FAQ</a></li>
-					<li ng-class="ui.routes.getRoute('API')"><a href="#/about/api/">RDF FAQ</a></li>
-					<li ng-class="ui.routes.getRoute('About')"><a href="#contact">About</a></li>
+					<li ng-class="ui.routes.getRoute('AddToolCtrl')"><a href="#/add">Add a tool</a></li>
+					<li class="dropdown">
+					  <a class="dropdown-toggle">
+						About
+					  </a>
+					  <ul class="dropdown-menu">
+						<li ng-class="ui.routes.getRoute('rdf')"><a href="#/about/rdf/">RDF</a></li>
+						<li ng-class="ui.routes.getRoute('API')"><a href="#/about/api/">API</a></li>
+					  </ul>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="pull-right" ng-show="ui.user.data.signedin"><a><span class="glyphicon glyphicon-user"></span> {{ui.user.data.name}}</a></li>
@@ -118,6 +92,7 @@ border-top-right-radius: 0;
 	<script type="text/javascript" src="./modules/filter.js"></script>
 	
 	<script type="text/javascript" src="./controller/tool.js"></script>
+	<script type="text/javascript" src="./controller/tool.insert.js"></script>
 	<script type="text/javascript" src="./controller/top.js"></script>
 	<script type="text/javascript" src="./controller/home.js"></script>
 	<script type="text/javascript" src="./controller/apiFaq.js"></script>

@@ -11,6 +11,7 @@ portal.
 	config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
 		when('/tool/:toolId', {templateUrl: './view/tool.html', controller:"ToolCtrl", reloadOnSearch: false, resolve: Tool.resolveTool}).
+		when('/add', {templateUrl: './view/tool.insert.html', controller:"AddToolCtrl", reloadOnSearch: false, resolve: AddTool.resolveAddTool}).
 		when('/login/', {templateUrl: './view/login.html', controller:"LoginCtrl"}).
 		when('/about/rdf/', {templateUrl: './view/rdf.html'}).
 		when('/about/api/', {templateUrl: './view/apiFaq.html', controller:"apiFaqCtrl", resolve: apiFaq.resolveAPIFAQ}).
