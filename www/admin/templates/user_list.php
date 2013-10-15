@@ -11,8 +11,8 @@
         <?php foreach($users as $user): ?>
         <tr>
             <td><a href="user/<?php print $user['login']; ?>"><?php print $user['login']; ?></a></td>
-            <td><?php print $tool['name']; ?></td>
-            <td><?php print $tool['mail']; ?></td>
+            <td><?php print $user['name']; ?></td>
+            <td><?php print $user['mail']; ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>

@@ -7,7 +7,8 @@ class Statistics {
     function all(){
         return array(
             'tool' => $this->tools(),
-            'user' => $this->users()
+            'user' => $this->users(),
+            'facet' => $this->facets()
         );
     }
     
@@ -36,6 +37,13 @@ class Statistics {
        
        return $result;
     }    
+    
+    function facets(){
+        include('../API/classes/0.table.php');
+        include('../API/classes/search.php');
+        $result = $search->getFacets();
+        return $result;
+    }
     
 }
 $statistics = new Statistics();
