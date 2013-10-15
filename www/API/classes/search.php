@@ -184,6 +184,13 @@
 			#		*	Licence
 			#
 			##########
+			$dictionnaryApplicationType = array(	
+				"localDesktop" => "Desktop application",
+				"other" => "Other",
+				"unknown" => "Unkown",
+				"webApplication" => "Web Application",
+				"webService" => "Web service"
+			);
 			$dic = parent::getTable($fieldType);
 			if(array_key_exists("Error", $dic)) {
 				return $dic;
@@ -234,6 +241,13 @@
 				$req = $this->DB->prepare($req);
 				$req->execute($exec);
 				$facets = $req->fetchAll(PDO::FETCH_ASSOC);
+				if($fieldType == "ApplicationType") {
+					$ret = array();
+					foreach($facets as &$val) {
+						$ret[] = array("name" => $dictionnaryApplicationType[$val["name"]], "id" => $val["id"]);
+					}
+					$facets = $ret;
+				}
 				return array("facets" => $facets, "params" => $options);
 			}
 		}
