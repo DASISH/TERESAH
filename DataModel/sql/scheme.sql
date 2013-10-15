@@ -418,15 +418,9 @@ CREATE  TABLE IF NOT EXISTS `tools_registry`.`description` (
   `available_from` DATE NULL ,
   `registered` DATE NULL ,
   `registered_by` INT NULL ,
-  `licence_uid` INT NOT NULL COMMENT 'issued for' ,
   `tool_uid` INT NOT NULL ,
   `user_uid` INT NOT NULL ,
   PRIMARY KEY (`description_uid`) ,
-  CONSTRAINT `fk_Tool_Licence10`
-    FOREIGN KEY (`licence_uid` )
-    REFERENCES `tools_registry`.`licence` (`licence_uid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tool_has_suite_Tool1`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -438,8 +432,6 @@ CREATE  TABLE IF NOT EXISTS `tools_registry`.`description` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-CREATE INDEX `fk_Tool_Licence1_idx` ON `tools_registry`.`description` (`licence_uid` ASC) ;
 
 CREATE INDEX `fk_Tool_has_suite_Tool1_idx` ON `tools_registry`.`description` (`tool_uid` ASC) ;
 
@@ -758,6 +750,34 @@ ENGINE = InnoDB;
 CREATE INDEX `fk_user_oauth_user1_idx` ON `tools_registry`.`user_oauth` (`user_uid` ASC) ;
 
 CREATE UNIQUE INDEX `unq` ON `tools_registry`.`user_oauth` (`provider` ASC, `external_uid` ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table `tools_registry`.`tool_has_licence`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tools_registry`.`tool_has_licence` ;
+
+CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_licence` (
+  `tool_uid` INT NOT NULL ,
+  `licence_uid` INT NOT NULL ,
+  PRIMARY KEY (`tool_uid`, `licence_uid`) ,
+  CONSTRAINT `tool`
+    FOREIGN KEY (`tool_uid` )
+    REFERENCES `tools_registry`.`tool` (`tool_uid` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `licence`
+    FOREIGN KEY (`licence_uid` )
+    REFERENCES `tools_registry`.`licence` (`licence_uid` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `UNIQ` ON `tools_registry`.`tool_has_licence` (`tool_uid` ASC, `licence_uid` ASC) ;
+
+CREATE INDEX `tool_idx` ON `tools_registry`.`tool_has_licence` (`tool_uid` ASC) ;
+
+CREATE INDEX `licence_idx` ON `tools_registry`.`tool_has_licence` (`licence_uid` ASC) ;
 
 USE `tools_registry` ;
 

@@ -128,8 +128,8 @@
 			$req = "SELECT d.developer_uid as UID, d.name, d.contact FROM developer d, tool_has_developer td WHERE td.developer_uid = d.developer_uid AND td.tool_uid = ?";
 			$req = $this->DB->prepare($req);
 			$req->execute(array($toolUID));
-			$data = $req->fetchAll(PDO::FETCH_ASSOC);
-			if($data) {
+			if($req->rowCount() > 0) {
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
 				$ret = array();
 				foreach($data as &$keyword) {
 					if($keyword["contact"] != null) {
@@ -155,77 +155,75 @@
 			$userName = true;
 			#We first fetch our description
 			
-			$req = "SELECT d.user_uid as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by, l.text, l.licence_type_uid as type FROM description d, licence l WHERE d.tool_uid = ? AND l.licence_uid = d.licence_uid ";
+			$req = "SELECT d.user_uid as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by, FROM description dWHERE d.tool_uid = ?";
 			
 			if($userName) {
-				$req = "SELECT d.user_uid as User_UID, u.name as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by, l.text, l.licence_type_uid as type FROM description d, licence l, user u WHERE d.tool_uid = ? AND l.licence_uid = d.licence_uid AND u.user_uid = d.user_uid";
+				$req = "SELECT d.user_uid as User_UID, u.name as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by FROM description d, user u WHERE d.tool_uid = ? AND u.user_uid = d.user_uid";
 			}
 			
 			$req = $this->DB->prepare($req);
 			$req->execute(array($toolUID));
 			
-			#Which we put into a ret array
-			$ret = $req->fetch(PDO::FETCH_ASSOC);
-			
-			#Format User Data
-			if($userName) {
-				$ret["user"] = array(
-								"name" => $ret["User"],
-								"id" => $ret["User_UID"]
-							);
-			} else {
-				$ret["user"] = array(
-								"id" => $ret["User_UID"]
-							);
-			}
-			#Format licence
-			$ret["licence"] = array(
-								"name" => $ret["text"],
-								"type" => $ret["type"]
-							);
-			
-			#Format Creation Data
-			$ret["registration"] = array(
-								"date" => $ret["registered"],
-								"by" => $ret["registered_by"]
-							);
-			#Unseting bad data
-			unset($ret["type"], $ret["text"], $ret["User_UID"], $ret["User"], $ret["registered_by"], $ret["registered"]);
-			
-			
-			#We prepare a new array containing our description
-			if($ret["description"] != "&nbsp;") {
-				$desc = array(
-					array(
-						"provider" => "DASISH", 
-						"text" => $ret["description"],
-						"uri" => "/"
-					)
-				);
-			} else { $desc = array(); }
-			#Then if needed, we get our external_Description
-			if($external == true) {
-			
-				$req = $this->DB->prepare("SELECT description, source_uri as sourceURI, registry_name FROM external_description WHERE tool_uid = ? ");
-				$req->execute(array($toolUID));
-				$fetched = $req->fetchAll(PDO::FETCH_ASSOC);
-				
-				#We then process it if > 0
-				if(count($fetched) > 0) {
-					foreach($fetched as &$entry) {
-						if($entry["description"] != "&nbsp;") {
-							$desc[] = array(
-									"provider" => $entry["registry_name"], 
-									"text" => $entry["description"],
-									"uri" => $entry["sourceURI"]
+			if($req->rowCount() ==1) {
+				#Which we put into a ret array
+				$ret = $req->fetch(PDO::FETCH_ASSOC);
+				#Format User Data
+				if($userName) {
+					$ret["user"] = array(
+									"name" => $ret["User"],
+									"id" => $ret["User_UID"]
 								);
+				} else {
+					$ret["user"] = array(
+									"id" => $ret["User_UID"]
+								);
+				}
+				
+				#Format Creation Data
+				$ret["registration"] = array(
+									"date" => $ret["registered"],
+									"by" => $ret["registered_by"]
+								);
+				#Unseting bad data
+				unset($ret["type"], $ret["text"], $ret["User_UID"], $ret["User"], $ret["registered_by"], $ret["registered"]);
+				
+				
+				#We prepare a new array containing our description
+				if($ret["description"] != "&nbsp;") {
+					$desc = array(
+						array(
+							"provider" => "DASISH", 
+							"text" => $ret["description"],
+							"uri" => "/"
+						)
+					);
+				} else { $desc = array(); }
+				#Then if needed, we get our external_Description
+				if($external == true) {
+				
+					$req = $this->DB->prepare("SELECT description, source_uri as sourceURI, registry_name FROM external_description WHERE tool_uid = ? ");
+					$req->execute(array($toolUID));
+					$fetched = $req->fetchAll(PDO::FETCH_ASSOC);
+					
+					#We then process it if > 0
+					if(count($fetched) > 0) {
+						foreach($fetched as &$entry) {
+							if($entry["description"] != "&nbsp;") {
+								$desc[] = array(
+										"provider" => $entry["registry_name"], 
+										"text" => $entry["description"],
+										"uri" => $entry["sourceURI"]
+									);
+							}
 						}
 					}
 				}
+				
+				$ret["description"] = $desc;
+				return $ret;
+			} else 	{
+				return false;
 			}
-			
-			$ret["description"] = $desc;
-			return $ret;
 		}
 		
 		function getApplicationType($toolUID) {
@@ -239,8 +237,8 @@
 			$req = "SELECT d.application_type as UID, d.application_type as name FROM tool_application_type d WHERE d.tool_uid = ? GROUP BY application_type";
 			$req = $this->DB->prepare($req);
 			$req->execute(array($toolUID));
-			$data = $req->fetchAll(PDO::FETCH_ASSOC);
-			if($data) {
+			if($req->rowCount() > 0) {
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
 				$ret = array();
 				foreach($data as &$keyword) {
 					$ret[] = array(
@@ -260,8 +258,8 @@
 			$req = "SELECT k.keyword_uid, k.keyword, k.source_uri as sourceURI, k.source_taxonomy as sourceTaxonomy FROM keyword k, tool_has_keyword tk WHERE tk.keyword_uid = k.keyword_uid AND tk.tool_uid = ?";
 			$req = $this->DB->prepare($req);
 			$req->execute(array($tool));
-			$data = $req->fetchAll(PDO::FETCH_ASSOC);
-			if($data) {
+			if($req->rowCount() > 0) {
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
 				$ret = array();
 				foreach($data as &$keyword) {
 					if($keyword["sourceURI"] != "") {
@@ -307,9 +305,10 @@
 				$req = $this->DB->prepare($req);
 				$req->execute(array($id));
 				
-				$data = $req->fetchAll(PDO::FETCH_ASSOC);
 				#If we got data
-				if($data) {
+				if($req->rowCount() > 0) {
+					$data = $req->fetchAll(PDO::FETCH_ASSOC);
+				
 					$ret = array();
 					foreach($data as &$type) {
 						$ret[] = $type;
@@ -340,15 +339,49 @@
 				$req = $this->DB->prepare($req);
 				$req->execute(array($id));
 				
-				#Fetching data
-				$data = $req->fetchAll(PDO::FETCH_ASSOC);
-				
 				#If we got data
-				if($data) {
+				if($req->rowCount() > 0) {
+				
+					#Fetching data
+					$data = $req->fetchAll(PDO::FETCH_ASSOC);
+				
 					#Format data
 					$ret = array();
 					foreach($data as &$v) {
 						$ret[] = $v["platform"];
+					}
+				}
+			} elseif($mode == "Reverse") {
+				#TBD
+			}
+			
+			#Only one return
+			return $ret;			
+		}
+		
+		function getLicence($id, $mode = "Default") {
+			#Default return is false :
+			$ret = false;
+			
+			if($mode == "Default") {
+				#Request
+				$req = "SELECT l.text, lt.type FROM licence l, tool_has_licence tl, licence_type lt WHERE tl.tool_uid = ? AND l.licence_uid = tl.licence_uid AND lt.licence_type_uid = l.licence_type_uid";
+				$req = $this->DB->prepare($req);
+				$req->execute(array($id));
+				
+				#If we got data
+				if($req->rowCount() > 0) {
+					#Fetching data
+					$data = $req->fetchAll(PDO::FETCH_ASSOC);
+					
+					#Format data
+					$ret = array();
+					foreach($data as &$v) {
+						#Format licence
+						$ret[] = array(
+							"name" => $v["text"],
+							"type" => $v["type"]
+						);
 					}
 				}
 			} elseif($mode == "Reverse") {
@@ -370,12 +403,10 @@
 			#Executing request
 			$req = $this->DB->prepare($req);
 			$req->execute(array($ref));
-			
-			#Getting data
-			$data = $req->fetch(PDO::FETCH_ASSOC);
-			
+						
 			#Formatting
-			if($data) {
+			if($req->rowCount() > 0) {
+				$data = $req->fetch(PDO::FETCH_ASSOC);
 				$ret = array(
 							"identifier" => array("id" => $data["tool_id"], "shortname" => $data["tool_shortname"]),
 							"descriptions" => $this->getDescriptions($data["tool_id"]),
@@ -398,6 +429,12 @@
 					$ret["developers"] = $this->getDevelopers($data["tool_id"]);
 					if(!$ret["developers"]) { unset($ret["developers"]); }
 				}
+				
+				if(isset($options["licence"])) {
+					$ret["licence"] = $this->getLicence($data["tool_id"]);
+					if(!$ret["licence"]) { unset($ret["licence"]); }
+				}
+				
 				if(isset($options["applicationType"])) {
 					$ret["applicationType"] = $this->getApplicationType($data["tool_id"]);
 					if(!$ret["applicationType"]) { unset($ret["applicationType"]); }

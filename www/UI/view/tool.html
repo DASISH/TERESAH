@@ -25,19 +25,19 @@
 		<h2 class="btn btn-success btn-lg btn-block">Information</h2>
 		<dl>
 			<dt>Tool Type</dt>
-			<dd ng-repeat="type in item.type" legend="{{tyoe.uri}}">{{type.type}}</dd>
+			<dd ng-repeat="type in item.type" legend="{{type.uri}}" ng-bind="type.type"></dd>
 			<dt>Licence</dt>
-			<dd>{{item.descriptions.licence.name}}</dd>
+			<dd ng-repeat="licence in item.licence" ng-bind="licence.name"></dd>
 			<dt>Licence Type</dt>
-			<dd>{{item.descriptions.licence.type}}</dd>
+			<dd ng-repeat="licence in item.licence" ng-bind="licence.type"></dd>
 			<dt>Homepage</dt>
-			<dd><a href="{{item.descriptions.homepage}}">{{item.descriptions.homepage}}</a></dd>
+			<dd><a ng-href="{{item.descriptions.homepage}}" ng-bind="item.descriptions.homepage"></a></dd>
 			<dt>Application Type(s)</dt>
-			<dd ng-repeat="os in item.applicationType">{{os.name}}</dd>
+			<dd ng-repeat="os in item.applicationType" ng-bind="os.name"></dd>
 			<dt>Platform(s)</dt>
-			<dd ng-repeat="os in item.platform">{{os}}</dd>
+			<dd ng-repeat="os in item.platform" ng-bind="os"></dd>
 			<dt>Developer(s)</dt>
-			<dd ng-repeat="developer in item.developers">{{developer.name}}</dd>
+			<dd ng-repeat="developer in item.developers" ng-bind="developer.name"></dd>
 		</dl>
 	</div>
 </div>

@@ -154,9 +154,9 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 		pass
 		
 	elif t == "Licence":
+		key = "Tool_has_Licence"
+		req = "INSERT INTO tool_has_licence VALUES ('"+u+"', '"+str(i)+"');"
 		
-		#str = "INSERT INTO Licence (#id#, '"+v+"', NULL, 'Unknown');"
-		pass
 	else:
 		pass
 	
@@ -178,13 +178,8 @@ def mainDescription(u, o):
 	else:
 		r += "Unknown"
 		
-	r += "', NULL, CURDATE(), NULL, "#registered, registered_by
-	
-	if "licence" in o:
-		r += str(o["licence"])
-	else:
-		r += "0"
-		
+	r += "', NULL, CURDATE(), NULL"#registered, registered_by
+			
 	r += ", " + u + ", 0);"
 	
 	
@@ -296,6 +291,10 @@ def mergeSQL(obj, path):
 	
 	file.write(O2SQL(obj["registryDescription"]))
 	print "registryDescription written"
+	
+	file.write(O2SQL(obj["Tool_has_Licence"]))
+	print "Tool_has_licence written"
+	
 	
 	
 	
