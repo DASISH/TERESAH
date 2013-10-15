@@ -8,7 +8,8 @@
               </div>
               <div class="panel-body">
                Count :<?php print $statistics['tool']['count'];?><br />
-               <a href="#"><span class="glyphicon glyphicon-plus"></span>Add tool</a>
+               <a href="tool"><span class="glyphicon glyphicon-list"></span>List</a>
+               <a href="#"><span class="glyphicon glyphicon-plus"></span>Add</a>
               </div>
             </div>            
         </div>
@@ -19,29 +20,50 @@
                   Users
               </div>
               <div class="panel-body">
-               Count :<?php print $statistics['user']['count'];?>
+               Count :<?php print $statistics['user']['count'];?><br />
+               <a href="user"><span class="glyphicon glyphicon-list"></span>List</a>
+               <a href="#"><span class="glyphicon glyphicon-plus"></span>Add</a>
               </div>
             </div>            
         </div>     
         <div class="col-6 col-sm-6 col-lg-4">
             <div class="panel panel-default">
               <div class="panel-heading">
+                  <span class="glyphicon glyphicon-inbox"></span>
+                  Logs
+              </div>
+              <div class="panel-body">
+               Log entries :<br />
+               <a href="#"><span class="glyphicon glyphicon-list"></span>List</a>
+              </div>
+            </div>            
+        </div>       
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
                   <span class="glyphicon glyphicon-list-alt"></span>
                   Facets
               </div>
               <div class="panel-body">
-                  <ul class="list-group">
                     <?php foreach($statistics['facet'] as $facet): ?>
-                       <li class="list-group-item">
-                           <span class="badge"><?php print $facet['facetTotal'];?></span>
-                           <?php print $facet['facetLegend'];?><br />
-                           <a href="#"><span class="glyphicon glyphicon-list"></span>List</a> <a href="#"><span class="glyphicon glyphicon-plus"></span>Add</a>
-                       </li>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <?php print $facet['facetLegend'];?>
+                                    <span class="badge pull-right"><?php print $facet['facetTotal'];?></span>
+                                </div>
+                                <div class="panel-body">
+                                    <a href="#"><span class="glyphicon glyphicon-list"></span>List</a> <a href="#"><span class="glyphicon glyphicon-plus"></span>Add</a>
+                                </div>
+                            </div>
+                        </div>
                     <?php endforeach;?>
                   </ul>
               </div>
             </div>            
-        </div>         
+        </div>          
     </div>
     
 </div>
