@@ -29,7 +29,7 @@ var Home = portal.controller('HomeCtrl', ['$scope', 'ui',  'Item', function($sco
 }]);
 Home.resolveHome = {
 	itemData: function($route, Item) {
-		this.data = Item.resolver.tools.all({'page': 1});
+		this.data = Item.resolver.browse.all({'page': 1});
 		return this.data;
 	},
 	delay: function($q, $timeout) {

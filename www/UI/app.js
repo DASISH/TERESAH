@@ -16,6 +16,7 @@ portal.
 		when('/about/rdf/', {templateUrl: './view/rdf.html'}).
 		when('/about/api/', {templateUrl: './view/apiFaq.html', controller:"apiFaqCtrl", resolve: apiFaq.resolveAPIFAQ}).
 		when('/search/faceted', {templateUrl: './view/faceted.html', controller:"FacetedCtrl", reloadOnSearch: false, resolve: Faceted.resolveFaceted}).
+		when('/browse/:facet/:facetID', {templateUrl: './view/browse.html', controller:"BrowseCtrl", reloadOnSearch: false, resolve: BrowseCtrl.resolveBrowseCtrl}).
 		when('/', {templateUrl: './view/home.html' , controller:"HomeCtrl", reloadOnSearch: false, resolve: Home.resolveHome}).
 		otherwise({redirectTo: './'});
 }]);

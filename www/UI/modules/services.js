@@ -75,6 +75,9 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 				list : Restangular.all("search/facetList/"),
 				search : Restangular.all("search/facet")
 			},
+			browse : {
+				facet : Restangular.all("browse")
+			},
 			search : {
 				normal : Restangular.one("search/general/"),
 				faceted : Restangular.all("search/faceted/")
@@ -89,6 +92,21 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 		
 		//Return Part
 		resolver : {
+			browse : function(facet, facetID, opt, callback) {
+				
+					if(typeof(callback)==='undefined') callback = false;
+					if(typeof(opt)==='undefined') opt = {};
+					
+					if(opt.page) {
+						opt.start = opt.page * 20 - 20;
+					}
+					
+					return Item.routes.browse.facet.all(facet).one(facetID).get(opt).then(function (data) {
+						if(callback) {	callback(data);	}
+						Item.data = data;
+						return data;
+					});
+			},
 			oAuth : function(provider, url, callback) {
 				
 					if(typeof(callback)==='undefined') callback = false;

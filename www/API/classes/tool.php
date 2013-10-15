@@ -124,10 +124,36 @@
 	#		Select
 	#
 	#########
-		function getDevelopers($toolUID) {
-			$req = "SELECT d.developer_uid as UID, d.name, d.contact FROM developer d, tool_has_developer td WHERE td.developer_uid = d.developer_uid AND td.tool_uid = ?";
-			$req = $this->DB->prepare($req);
-			$req->execute(array($toolUID));
+	
+		function getFacet($name, $id) {
+			switch ($name) {
+				case "Keyword":
+					return $this->getKeywords($id, "Reverse");
+					break;
+				case "Licence":
+					return $this->getLicence($id, "Reverse");
+					break;
+				case "Developer":
+					return $this->getDevelopers($id, "Reverse");
+					break;
+				default:
+					return false;
+			}
+		}
+		function getDevelopers($id, $mode = "Default") {
+			#REVERSE MODE : Get only data about a keyword with ID = X
+			if($mode == "Reverse") {
+				$req = "SELECT d.developer_uid as UID, d.name, d.contact FROM developer d WHERE d.developer_uid = ? LIMIT 1";
+				$req = $this->DB->prepare($req);
+				$req->execute(array($id));
+			
+			#DEFAULT MODE : Get keyword for tool
+			} else {
+				$req = "SELECT d.developer_uid as UID, d.name, d.contact FROM developer d, tool_has_developer td WHERE td.developer_uid = d.developer_uid AND td.tool_uid = ?";
+				$req = $this->DB->prepare($req);
+				$req->execute(array($id));
+				
+			}
 			if($req->rowCount() > 0) {
 				$data = $req->fetchAll(PDO::FETCH_ASSOC);
 				$ret = array();
@@ -145,6 +171,8 @@
 								);
 					}
 				}
+				#Hack for formation for Reverse mode
+				if($mode == "Reverse") { $ret = $ret[0]; }
 				return $ret;
 			} else {
 				return false;
@@ -254,10 +282,16 @@
 		
 		
 		
-		function getKeywords($tool) {
-			$req = "SELECT k.keyword_uid, k.keyword, k.source_uri as sourceURI, k.source_taxonomy as sourceTaxonomy FROM keyword k, tool_has_keyword tk WHERE tk.keyword_uid = k.keyword_uid AND tk.tool_uid = ?";
+		function getKeywords($id, $mode = "Default") {
+			if($mode == "Reverse") { 
+				$req = "SELECT k.keyword_uid, k.keyword, k.source_uri as sourceURI, k.source_taxonomy as sourceTaxonomy FROM keyword k WHERE k.keyword_uid = ? LIMIT 1";
+			} else {
+				$req = "SELECT k.keyword_uid, k.keyword, k.source_uri as sourceURI, k.source_taxonomy as sourceTaxonomy FROM keyword k, tool_has_keyword tk WHERE tk.keyword_uid = k.keyword_uid AND tk.tool_uid = ?";
+			}
+			
 			$req = $this->DB->prepare($req);
-			$req->execute(array($tool));
+			$req->execute(array($id));
+			
 			if($req->rowCount() > 0) {
 				$data = $req->fetchAll(PDO::FETCH_ASSOC);
 				$ret = array();
@@ -278,6 +312,8 @@
 								);
 					}
 				}
+				
+				if($mode == "Reverse") { $ret = $ret[0]; }
 				return $ret;
 			} else {
 				return false;
@@ -385,7 +421,21 @@
 					}
 				}
 			} elseif($mode == "Reverse") {
-				#TBD
+				$req = "SELECT l.text, lt.type FROM licence l, licence_type lt WHERE l.licence_uid = ? AND lt.licence_type_uid = l.licence_type_uid";
+				$req = $this->DB->prepare($req);
+				$req->execute(array($id));
+				
+				#If we got data
+				if($req->rowCount() > 0) {
+					#Fetching data
+					$data = $req->fetch(PDO::FETCH_ASSOC);
+					
+					#Format data
+					$ret = array(
+						"name" => $data["text"],
+						"type" => $data["type"]
+					);
+				}
 			}
 			
 			#Only one return
