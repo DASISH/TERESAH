@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Admin</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+        <div class="container">
+
+          <!-- Static navbar -->
+          <div class="navbar navbar-default">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Tools Registry Admin</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Tools</a></li>
+                <li><a href="#">Facets</a></li>
+                <li><a href="#">Users</a></li>
+                <li><a href="#">API Keys</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="../navbar-static-top/">Settings</a></li>
+                <li><a href="../navbar-fixed-top/">Stuff</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+
+          <?php print $content; ?>
+
+        </div> <!-- /container -->
+        <script src="assets/js/jquery.min.js"></script>     
+        <script src="assets/js/bootstrap.min.js"></script>      
+        <script src="assets/js/jquery.dataTables.min.js"></script>     
+        <script>
+            $(document).ready(function() {
+                $('.sortable').dataTable({"bPaginate": false,});
+            });
+        </script>
+    </body>
+</html> 
