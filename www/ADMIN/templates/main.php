@@ -23,7 +23,7 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="tool">Tools</a></li>
                 <li><a href="#">Facets</a></li>
-                <li><a href="#">Users</a></li>
+                <li><a href="user">Users</a></li>
                 <li><a href="#">Logs</a></li>
                 <li><a href="#">API Keys</a></li>
               </ul>

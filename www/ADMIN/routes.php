@@ -5,4 +5,8 @@ $app->get('/', function () use ($statistics){
 $app->get('/tool', function () use ($tool){ 
     display('tool_list.php', array('tools' => $tool->listAll()));
 });
+
+$app->get('/user', function () use ($user){ 
+    display('user_list.php', array('users' => $user->listAll()));
+});
 ?>

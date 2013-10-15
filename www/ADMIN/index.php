@@ -18,6 +18,7 @@ $app->log->setLevel(\Slim\Log::DEBUG);
 
 #classes
 include 'classes/tool.php';
+include 'classes/user.php';
 include 'classes/statistics.php';
 
 #routes
