@@ -1,5 +1,5 @@
 <h1>Tools</h1>
-<table class="sortable">
+<table class="sortable table table-striped table-bordered">
     <thead>
         <tr>
             <th>Name</th>
