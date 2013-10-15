@@ -39,7 +39,7 @@
 				return array("Error" => "Unknown ".$k." facet");
 			}
 		}
-		function getFacets($facet = false) {
+		function getFacets($facet = false, $facetTable = false) {
 			$dict = array(
 				#option value	=> Table Name, Legend
 				"Suite" => array("suite", "Suite"),
@@ -61,6 +61,9 @@
 					"facetParam" => $facet,
 					"facetLegend" => $dict[$facet][1]
 				);
+				if($facetTable) {
+					$return["facetTable"] = $dict[$facet][0];
+				}
 				return $return;
 			} else {
 				$return = array();
@@ -75,6 +78,9 @@
 						"facetLegend" => $value[1],
 						"facetEnum" => $enum
 					);
+					if($facetTable) {
+						$return[$value[0]]["facetTable"] = $value[0];
+					}
 				}
 				return $return;
 			}

@@ -76,7 +76,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 				search : Restangular.all("search/facet")
 			},
 			browse : {
-				facet : Restangular.all("browse")
+				facet : Restangular.all("facet")
 			},
 			search : {
 				normal : Restangular.one("search/general/"),
@@ -92,7 +92,8 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 		
 		//Return Part
 		resolver : {
-			browse : function(facet, facetID, opt, callback) {
+			browse : {
+				element : function(facet, facetID, opt, callback) {
 				
 					if(typeof(callback)==='undefined') callback = false;
 					if(typeof(opt)==='undefined') opt = {};
@@ -106,6 +107,37 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 						Item.data = data;
 						return data;
 					});
+				},
+				facet : function(facet, opt, callback) {
+				
+					if(typeof(callback)==='undefined') callback = false;
+					if(typeof(opt)==='undefined') opt = {};
+					
+					if(opt.page) {
+						opt.start = opt.page * 20 - 20;
+					}
+					
+					return Item.routes.browse.facet.one(facet).get(opt).then(function (data) {
+						if(callback) {	callback(data);	}
+						Item.data = data;
+						return data;
+					});
+				},
+				facets : function(facet, facetID, opt, callback) {
+				
+					if(typeof(callback)==='undefined') callback = false;
+					if(typeof(opt)==='undefined') opt = {};
+					
+					if(opt.page) {
+						opt.start = opt.page * 20 - 20;
+					}
+					
+					return Item.routes.browse.facet.all(facet).one(facetID).get(opt).then(function (data) {
+						if(callback) {	callback(data);	}
+						Item.data = data;
+						return data;
+					});
+				}
 			},
 			oAuth : function(provider, url, callback) {
 				

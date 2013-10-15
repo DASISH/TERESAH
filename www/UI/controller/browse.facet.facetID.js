@@ -10,7 +10,7 @@ var BrowseCtrl = portal.controller('BrowseCtrl', ['$scope', 'ui', '$route', 'Ite
 			itemPerPage : 20,
 			change : function(page) {
 				
-				$item.resolver.browse($route.current.params.facet, $route.current.params.facetID, {'page': page}, function(data) {
+				$item.resolver.browse.element($route.current.params.facet, $route.current.params.facetID, {'page': page}, function(data) {
 					console.log(data);
 					$scope.results.items = data.response;
 					$scope.ui.parameters = data.parameters;
@@ -27,7 +27,7 @@ var BrowseCtrl = portal.controller('BrowseCtrl', ['$scope', 'ui', '$route', 'Ite
 }]);
 BrowseCtrl.resolveBrowseCtrl = {
 	itemData: function($route, Item) {
-		this.data = Item.resolver.browse($route.current.params.facet, $route.current.params.facetID);
+		this.data = Item.resolver.browse.element($route.current.params.facet, $route.current.params.facetID);
 		return this.data;
 	},
 	delay: function($q, $timeout) {

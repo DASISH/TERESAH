@@ -407,28 +407,41 @@
 			
 			return $ret;
 		}
-		function getFacets() {
-			$dict = parent::getFacets();
+		
+		function getFacets($facet = false) {
 			$return = array();
-			foreach($dict as $tableName => &$vals) {
-				if($vals["facetEnum"]) { 
-					$req = "SELECT COUNT(a.".$vals["facetEnum"].") as total FROM (SELECT ".$vals["facetEnum"]." from ".$tableName." GROUP BY ".$vals["facetEnum"].") a";
-				} else {
-					$req = "SELECT COUNT(*) as total FROM ".$tableName;
-				}
+			if($facet) {
+				$dict = parent::getFacets($facet, true);
+				
+				$req = "SELECT COUNT(*) as total FROM ".$dict["facetTable"];
 				$req = $this->DB->prepare($req);
 				$req->execute();
 				$data = $req->fetch(PDO::FETCH_ASSOC);
-				if(intval($data["total"]) > 0) {
-					$return[] = array(
-						"facetParam" => $vals["facetParam"],
-						"facetLegend" => $vals["facetLegend"],
-						"facetTotal" => intval($data["total"])
-					);
+				
+				$return = array(
+					"facetParam" => $dict["facetParam"],
+					"facetLegend" => $dict["facetLegend"],
+					"facetTotal" => intval($data["total"])
+				);
+			} else {
+				$dict = parent::getFacets();
+				foreach($dict as $tableName => &$vals) {
+					$req = "SELECT COUNT(*) as total FROM ".$tableName;
+					$req = $this->DB->prepare($req);
+					$req->execute();
+					$data = $req->fetch(PDO::FETCH_ASSOC);
+					if(intval($data["total"]) > 0) {
+						$return[] = array(
+							"facetParam" => $vals["facetParam"],
+							"facetLegend" => $vals["facetLegend"],
+							"facetTotal" => intval($data["total"])
+						);
+					}
 				}
 			}
 			return $return;
 		}
+		
 	}
 	$search = new Search();
 ?>
