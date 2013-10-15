@@ -18,6 +18,7 @@ portal.
 		when('/search/faceted', {templateUrl: './view/faceted.html', controller:"FacetedCtrl", reloadOnSearch: false, resolve: Faceted.resolveFaceted}).
 		when('/facet/:facet/:facetID', {templateUrl: './view/browse.html', controller:"BrowseCtrl", reloadOnSearch: false, resolve: BrowseCtrl.resolveBrowseCtrl}).
 		when('/facet/:facet', {templateUrl: './view/facet.html', controller:"FacetCtrl", reloadOnSearch: false, resolve: FacetCtrl.resolveFacetCtrl}).
+		when('/facet', {templateUrl: './view/facetList.html', controller:"facetListCtrl", reloadOnSearch: false, resolve: facetListCtrl.resolvefacetListCtrl}).
 		when('/', {templateUrl: './view/home.html' , controller:"HomeCtrl", reloadOnSearch: false, resolve: Home.resolveHome}).
 		otherwise({redirectTo: '/'});
 }]);
