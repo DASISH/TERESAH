@@ -21,9 +21,10 @@
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Tools</a></li>
+                <li class="active"><a href="tool">Tools</a></li>
                 <li><a href="#">Facets</a></li>
                 <li><a href="#">Users</a></li>
+                <li><a href="#">Logs</a></li>
                 <li><a href="#">API Keys</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
