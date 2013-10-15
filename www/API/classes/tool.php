@@ -127,6 +127,17 @@
 	
 		function getFacet($name, $id) {
 			switch ($name) {
+				#####
+				#
+				#	TODO : ToolType, Licence Type
+				#
+				#####
+				case "ToolType":
+					return $this->getToolType($id, "Reverse");
+					break;
+				case "Platform":
+					return $this->getPlatform($id, "Reverse");
+					break;
 				case "Keyword":
 					return $this->getKeywords($id, "Reverse");
 					break;
@@ -135,6 +146,9 @@
 					break;
 				case "Developer":
 					return $this->getDevelopers($id, "Reverse");
+					break;
+				case "ApplicationType":
+					return $this->getApplicationType($id, "Reverse");
 					break;
 				default:
 					return false;
@@ -254,7 +268,7 @@
 			}
 		}
 		
-		function getApplicationType($toolUID) {
+		function getApplicationType($id, $mode = "Default") {
 			$dictionnary = array(	
 				"localDesktop" => "Desktop application",
 				"other" => "Other",
@@ -262,9 +276,17 @@
 				"webApplication" => "Web Application",
 				"webService" => "Web service"
 			);
-			$req = "SELECT d.application_type as UID, d.application_type as name FROM tool_application_type d WHERE d.tool_uid = ? GROUP BY application_type";
+			if($mode == "Reverse") {
+				return array(
+								"name" => $dictionnary[$id],
+								"identifier" => $id
+							);
+			} else {
+				$req = "SELECT d.application_type as UID, d.application_type as name FROM tool_application_type d WHERE d.tool_uid = ? GROUP BY application_type";
+			}
 			$req = $this->DB->prepare($req);
-			$req->execute(array($toolUID));
+			$req->execute(array($id));
+			
 			if($req->rowCount() > 0) {
 				$data = $req->fetchAll(PDO::FETCH_ASSOC);
 				$ret = array();
@@ -326,7 +348,6 @@
 			#	MODES :
 			#
 			#		* Reverse = gets ToolType 							id is either null (List of ToolType) or int()
-			#		* ReverseAdvanced = gets Tools from ToolType		id cant be null
 			#		* Default = gets ToolType from Tool					id cant be null
 			#
 			###################################
@@ -334,33 +355,29 @@
 			#Default return is false :
 			$ret = false;
 			
-			if($mode == "Default") {
+			if($mode == "Reverse") {
+			
+				$req = "SELECT t.tool_type as name, t.source_uri as uri FROM tool_type t WHERE t.tool_type_uid = ? LIMIT 1";			
+			
+			} else {
 			
 				#In default mode, $id is an int
 				$req = "SELECT t.tool_type as type, t.source_uri as uri FROM tool_type t, tool_has_tool_type tt WHERE tt.tool_type_uid = t.tool_type_uid AND tt.tool_uid = ?";
+			
+			}
 				$req = $this->DB->prepare($req);
 				$req->execute(array($id));
-				
-				#If we got data
-				if($req->rowCount() > 0) {
-					$data = $req->fetchAll(PDO::FETCH_ASSOC);
-				
-					$ret = array();
-					foreach($data as &$type) {
-						$ret[] = $type;
-					}
+			
+			#If we got data
+			if($req->rowCount() > 0) {
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
+			
+				$ret = array();
+				foreach($data as &$type) {
+					$ret[] = $type;
 				}
-			
-			} elseif($mode == "Reverse") {
-			
-				#TBD
-			
-			} elseif($mode == "ReverseAdvanced") {
-			
-				#TBD
-				
+				if($mode == "Reverse") { $ret = $ret[0]; }
 			}
-			
 			#RETURN
 			return $ret;
 		}
@@ -369,28 +386,30 @@
 			#Default return is false :
 			$ret = false;
 			
-			if($mode == "Default") {
+			if($mode == "Reverse") {
+				$req = "SELECT p.name as platform FROM platform p WHERE p.platform_uid = ? LIMIT 1";
 				#Request
+			} else {
 				$req = "SELECT p.name as platform FROM tool_has_platform tp, platform p WHERE tp.tool_uid = ? AND tp.platform_uid = p.platform_uid";
-				$req = $this->DB->prepare($req);
-				$req->execute(array($id));
-				
-				#If we got data
-				if($req->rowCount() > 0) {
-				
-					#Fetching data
-					$data = $req->fetchAll(PDO::FETCH_ASSOC);
-				
-					#Format data
-					$ret = array();
-					foreach($data as &$v) {
-						$ret[] = $v["platform"];
-					}
-				}
-			} elseif($mode == "Reverse") {
 				#TBD
 			}
 			
+			$req = $this->DB->prepare($req);
+			$req->execute(array($id));
+			
+			#If we got data
+			if($req->rowCount() > 0) {
+			
+				#Fetching data
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
+			
+				#Format data
+				$ret = array();
+				foreach($data as &$v) {
+					$ret[] = $v["platform"];
+				}
+				if($mode == "Reverse") { $ret = array("name" => $ret[0]); }
+			}
 			#Only one return
 			return $ret;			
 		}

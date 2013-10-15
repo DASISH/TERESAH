@@ -5,34 +5,7 @@
 
 <section id="viewHeader">
 	<div class="page-header">
-		<h1>Browse facets</h1>
-		
-		<section ng-show="results.facet.provider">
-			<dl class="dl-horizontal">
-				<dt>Taxonomy</dt>
-				<dd ng-bind="results.facet.provider.taxonomy"></dd>
-				<dt>Source</dt>
-				<dd ><a ng-href="results.facet.provider.uri" target="_blank" ng-bind="results.facet.provider.uri"></a></dd>
-			</dl>
-		</section>
-		
-		<section ng-show="results.facet.type">
-			<dl class="dl-horizontal">
-				<dt>Type</dt>
-				<dd ng-bind="results.facet.type"></dd>
-			</dl>
-		</section>
-		
-		<section ng-show="results.facet.contact">
-			<dl class="dl-horizontal">
-				<dt>Contact</dt>
-				<dd ng-bind="results.facet.contact"></dd>
-			</dl>
-		</section>
-		
-		
-		<p>Facet's elements from {{ui.parameters.start + 1}} to {{ui.parameters.limit + ui.parameters.start}} on {{ui.parameters.total}} available</p>
-		
+		<h1>Browse facets</h1>		
 	</div>
 </section>
 <section id="viewContent" ng-show="results.items">

@@ -18,6 +18,13 @@
 			</dl>
 		</section>
 		
+		<section ng-show="results.facet.uri">
+			<dl class="dl-horizontal">
+				<dt>Source</dt>
+				<dd ><a ng-href="results.facet.uri" target="_blank" ng-bind="results.facet.uri"></a></dd>
+			</dl>
+		</section>
+		
 		<section ng-show="results.facet.type">
 			<dl class="dl-horizontal">
 				<dt>Type</dt>
