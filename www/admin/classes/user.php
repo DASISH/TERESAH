@@ -22,30 +22,34 @@ class User {
 		return $result;		
 	}
 	
-	function getUserByID($id) {
+	function getUserByID($user_uid) {
 		
-        $query = "SELECT name, mail, login FROM user WHERE user_uid = $id";
+        $query = "SELECT user_uid, name, mail, login FROM user WHERE user_uid = $user_uid";
 		$req = $this->DB->prepare($query);
 		$req->execute();
 		$user = $req->fetch(PDO::FETCH_ASSOC);
-              
+        
+		$user['openID'] = $this->getOpenIDForUser($user_uid);
+			  
 		return $user;		
 	}
 	
 	function getUserByLogin($login) {
 		
-        $query = "SELECT name, mail, login FROM user WHERE login = $login";
+        $query = "SELECT user_uid, name, mail, login FROM user WHERE login = $login";
 		$req = $this->DB->prepare($query);
 		$req->execute();
 		$user = $req->fetch(PDO::FETCH_ASSOC);
-              
+        
+		$user['openID'] = getOpenIDForUser($user['user_uid']);
+		
 		return $user;		
 	}
 	
-	function getOpenIDForUser($id) {
+	function getOpenIDForUser($user_uid) {
 	
 		$result = array();
-        $query = "SELECT provider, external_uid FROM user_oauth WHERE user_uid = $id";
+        $query = "SELECT provider, external_uid FROM user_oauth WHERE user_uid = $user_uid";
 		$req = $this->DB->prepare($query);
 		$req->execute();
 		$openIds = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -55,6 +59,41 @@ class User {
 		}
        
 		return $result;			
+	}
+	
+	function create($name, $mail, $login, $password) {
+	
+		$result = array();
+        $query = "INSERT INTO user (name, mail, login, password) VALUES ('$name', '$mail', '$login', '$password')";
+		$req = $this->DB->prepare($query);
+		$req->execute();	
+	}
+	
+	function update($values) {
+		
+		print $values['user_uid'];
+		
+		if(!empty($values['password'])) {
+		
+			$query = "UPDATE user SET name=?, mail=?, login=?, password=? WHERE user_uid=?";
+			
+			$req = $this->DB->prepare($query);
+			$req->execute(array($values['name'], $values['mail'], $values['login'], $values['password'], $values['user_uid']));		
+		}
+		else {
+				
+			$query = "UPDATE user SET name=?, mail=?, login=? WHERE user_uid=?";
+			
+			$req = $this->DB->prepare($query);
+			$req->execute(array($values['name'], $values['mail'], $values['login'], $values['user_uid']));		
+		}		
+	}
+	
+	function activate($user_uid, $action) {
+
+        $query = "UPDATE user SET active = '$action' WHERE user_uid = $user_uid";
+		$req = $this->DB->prepare($query);
+		$req->execute();
 	}
 }
 $user = new User();

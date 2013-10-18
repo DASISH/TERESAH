@@ -2,9 +2,10 @@
 <html>
     <head>
         <title>Admin</title>
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="assets/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="<?php print BASE_PATH; ?>assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php print BASE_PATH; ?>assets/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="<?php print BASE_PATH; ?>assets/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="<?php print BASE_PATH; ?>assets/css/admin.css">
     </head>
     <body>
         <div class="container">
@@ -17,19 +18,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Tools Registry Admin</a>
+              <a class="navbar-brand" href="<?php print BASE_PATH; ?>">Tools Registry Admin</a>
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="tool">Tools</a></li>
+                <li class="active"><a href="<?php print BASE_PATH; ?>tool">Tools</a></li>
                 <li><a href="#">Facets</a></li>
-                <li><a href="user">Users</a></li>
+                <li><a href="<?php print BASE_PATH; ?>user">Users</a></li>
                 <li><a href="#">Logs</a></li>
                 <li><a href="#">API Keys</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="../navbar-static-top/">Settings</a></li>
-                <li><a href="../navbar-fixed-top/">Stuff</a></li>
+                <li><a href="<?php print BASE_PATH; ?>settings"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
+                <li><a href="<?php print BASE_PATH; ?>stuff">Stuff</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>

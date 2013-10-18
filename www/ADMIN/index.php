@@ -1,6 +1,8 @@
 <?php
 define("DASISH", true);
 
+define("BASE_PATH", '/admin/');
+
 error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);
