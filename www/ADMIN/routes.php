@@ -1,5 +1,5 @@
 <?php
-$app->get('/', function () use ($statistics){ 
+$app->get('/', function () use ($statistics, $app){ 
     display('statistics.php', array('statistics' => $statistics->all()));
 });
 
@@ -25,8 +25,6 @@ $app->post('/user/:user_uid', function ($user_uid) use ($user, $app) {
 						'mail' => $app->request->post('mail'),
 						'login' => $app->request->post('login'),
 						'password' => $app->request->post('password')));
-	$app->flash('info', 'Saved');
-	$app->flashKeep();
 	$app->redirect($app->urlFor('user_list'));
 })->name('user_edit_post');
 

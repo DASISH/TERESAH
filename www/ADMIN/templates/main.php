@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="container">
-
+		
           <!-- Static navbar -->
           <div class="navbar navbar-default">
             <div class="navbar-header">
@@ -35,6 +35,9 @@
             </div><!--/.nav-collapse -->
           </div>
 
+		  <!-- flash messages -->
+		  <?php print $flash['success']; ?>
+		  
           <?php print $content; ?>
 
         </div> <!-- /container -->

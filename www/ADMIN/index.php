@@ -26,12 +26,15 @@ include 'classes/statistics.php';
 #routes
 include 'routes.php';
 
+#flash messages
+include 'flash_messages.php';
+
 #helper function, displays output in main.php
 function display($template, $variables) {
     $app = Slim\Slim::getInstance();
     ob_start();
     $app->render($template, $variables);
-    $content = ob_get_clean();
+    $content = ob_get_clean();	
     $app->render('main.php', array('content' => $content));
 }
 

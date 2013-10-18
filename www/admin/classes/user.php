@@ -71,22 +71,31 @@ class User {
 	
 	function update($values) {
 		
-		print $values['user_uid'];
+		$app = Slim\Slim::getInstance();
 		
-		if(!empty($values['password'])) {
-		
-			$query = "UPDATE user SET name=?, mail=?, login=?, password=? WHERE user_uid=?";
+		try{
+			if(!empty($values['password'])) {
 			
-			$req = $this->DB->prepare($query);
-			$req->execute(array($values['name'], $values['mail'], $values['login'], hash('sha256', $values['password']), $values['user_uid']));		
-		}
-		else {
+				$query = "UPDATE user SET name=?, mail=?, login=?, password=? WHERE user_uid=?";
 				
-			$query = "UPDATE user SET name=?, mail=?, login=? WHERE user_uid=?";
-			
-			$req = $this->DB->prepare($query);
-			$req->execute(array($values['name'], $values['mail'], $values['login'], $values['user_uid']));		
-		}		
+				$req = $this->DB->prepare($query);
+				$req->execute(array($values['name'], $values['mail'], $values['login'], hash('sha256', $values['password']), $values['user_uid']));		
+			}
+			else {
+					
+				$query = "UPDATE user SET name=?, mail=?, login=? WHERE user_uid=?";
+				
+				$req = $this->DB->prepare($query);
+				$req->execute(array($values['name'], $values['mail'], $values['login'], $values['user_uid']));		
+			}	
+		}
+		catch (Exception $e)
+		{
+			$app->flash('danger', 'An error has occured');
+			$app->flashKeep();
+		}
+		$app->flash('success', 'User saved - ' . $values['login']);
+		$app->flashKeep();
 	}
 	
 	function activate($user_uid, $action) {
