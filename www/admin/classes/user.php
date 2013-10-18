@@ -78,7 +78,7 @@ class User {
 			$query = "UPDATE user SET name=?, mail=?, login=?, password=? WHERE user_uid=?";
 			
 			$req = $this->DB->prepare($query);
-			$req->execute(array($values['name'], $values['mail'], $values['login'], $values['password'], $values['user_uid']));		
+			$req->execute(array($values['name'], $values['mail'], $values['login'], hash('sha256', $values['password']), $values['user_uid']));		
 		}
 		else {
 				
