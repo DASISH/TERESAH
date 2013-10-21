@@ -10,7 +10,7 @@
 			$dict = array(
 				#option value	=> Table Name, Text field (if many = array with [0] as title for it), PKey, Table for join (false if not), fields for joint (tool,item)
 				"Suite" => array("suite", "name", "suite_uid", "tool_has_suite", array("tool_uid", "suite_uid")),
-				"Feature" => array("feature", array("name", "description"), "feature_uid", "Tool_has_Feature", array("tool_uid", "feature_uid")),
+				"Feature" => array("feature", array("name", "description"), "feature_uid", "tool_has_feature", array("tool_uid", "feature_uid")),
 				"Platform" => array("platform", "name", "platform_uid", "tool_has_platform", array("tool_uid", "platform_uid")),
 				"Project" => array("project", array("title", "description"), "project_uid", "tool_has_project", array("tool_uid", "project_uid")),
 				"Standard" => array("standard", "title", "standard_uid" ,"tool_has_standard", array("tool_uid", "standard_uid")),

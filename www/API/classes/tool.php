@@ -135,6 +135,9 @@
 				case "Suite":
 					return $this->getSuite($id, "Reverse");
 					break;
+				case "Project":
+					return $this->getProjects($id, "Reverse");
+					break;
 				case "Publication":
 					return $this->getPublications($id, "Reverse");
 					break;
