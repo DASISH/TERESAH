@@ -10,32 +10,126 @@
 				<p ng-bind-html="item.desc.text | newline"></p>
 			</div>
 			<div class="col-lg-12">
-				<h2>
-				Keyword
-				
-				<div class="pull-right">
-					<div class="dropdown">
-						<span class="dropdown-toggle btn btn-default">
-							<span class="glyphicon glyphicon-cog"></span>
-						</span>
-						<ul class="dropdown-menu">
-							<li><a ng-click="ui.keywords.provider.show = !ui.keywords.provider.show">Providers</a></li>
-							<li><a ng-click="ui.keywords.taxonomy.show = !ui.keywords.taxonomy.show">Taxonomies</a></li>
+				<section id="keywords">
+					<h2>Keywords
+						<div class="pull-right">
+							<div class="dropdown">
+								<span class="dropdown-toggle btn btn-default">
+									<span class="glyphicon glyphicon-cog"></span>
+								</span>
+								<ul class="dropdown-menu">
+									<li><a ng-click="ui.keywords.provider.show = !ui.keywords.provider.show">Providers</a></li>
+									<li><a ng-click="ui.keywords.taxonomy.show = !ui.keywords.taxonomy.show">Taxonomies</a></li>
+									<li><a ng-click="ui.keywords.show = !ui.keywords.show">Hide/Show</a></li>
+								</ul>
+							</div>
+						</div>
+					</h2>
+					<div class="btn-group btn-block  btn-group-justified" ng-show="ui.keywords.provider.show">
+						<a class="btn" ng-click="ui.keywords.provider.selected = null" ng-class="{'btn-primary': (!ui.keywords.provider.selected), 'btn-success' : ui.keywords.provider.selected}">All Providers</a>
+						<a class="btn" ng-repeat="prov in item.keyword | kProviders" ng-click="ui.keywords.provider.selected = prov" ng-class="{'btn-primary': (ui.keywords.provider.selected == prov), 'btn-success' : (ui.keywords.provider.selected != prov)}" ng-bind="prov"></a>
+					</div>
+					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.keywords.taxonomy.show">
+						<a class="btn" ng-click="ui.keywords.taxonomy.selected = null" ng-class="{'btn-primary': (!ui.keywords.taxonomy.selected), 'btn-success' : ui.keywords.taxonomy.selected}">All Taxonomies</a>
+						<a class="btn" ng-repeat="prov in item.keyword | kTaxonomies" ng-click="ui.keywords.taxonomy.selected = prov" ng-class="{'btn-primary': (ui.keywords.taxonomy.selected == prov), 'btn-success' : (ui.keywords.taxonomy.selected != prov)}" ng-bind="prov" style="text-transform:capitalize;"></a>
+					</div>
+					<ul  class="list-inline" style="margin-top:10px;" ng-show="ui.keywords.show">
+						<li ng-repeat="kw in item.keyword |filter:{provider.domain : ui.keywords.provider.selected, provider.taxonomy : ui.keywords.taxonomy.selected}" ng-bind="kw.keyword" class="badge" style="margin-right:10px; margin-bottom:5px; text-transform:capitalize;"  ></li>
+					</ul>
+				</section>
+				<section id="publications">
+					<h2>Publications
+						<div class="pull-right">
+							<div class="dropdown">
+								<span class="dropdown-toggle btn btn-default">
+									<span class="glyphicon glyphicon-cog"></span>
+								</span>
+								<ul class="dropdown-menu">
+									<li><a ng-click="ui.publications.filter.show = !ui.publications.filter.show">Filter</a></li>
+									<li><a ng-click="ui.publications.show = !ui.publications.show">Hide/Show</a></li>
+								</ul>
+							</div>
+						</div>
+					</h2>
+					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.publications.filter.show">
+						<input class="form-control" type="text" ng-model="ui.publications.filter.input" placeholder="Filter the publications" />
+					</div>
+					<div style="margin-top:10px;" ng-show="ui.publications.show">
+						<p ng-repeat="pub in item.publications |filter:ui.publications.filter.input" ng-bind="pub.name"></p>
+					</div>
+				</section>
+				<section id="projects">
+					<h2>Projects
+						<div class="pull-right">
+							<div class="dropdown">
+								<span class="dropdown-toggle btn btn-default">
+									<span class="glyphicon glyphicon-cog"></span>
+								</span>
+								<ul class="dropdown-menu">
+									<li><a ng-click="ui.projects.filter.show = !ui.projects.filter.show">Filter</a></li>
+									<li><a ng-click="ui.projects.show = !ui.projects.show">Hide/Show</a></li>
+								</ul>
+							</div>
+						</div>
+					</h2>
+					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.projects.filter.show">
+						<input class="form-control" type="text" ng-model="ui.projects.filter.input" placeholder="Filter the projects" />
+					</div>
+					<div style="margin-top:10px;" ng-show="ui.projects.show">
+						<div ng-repeat="pub in item.projects |filter:ui.projects.filter.input">
+							<h5 ng-bind="pub.name"></h5>
+							<p><small  ng-bind="pub.informations.description"></small> <small>Contact : <a ng-href="mailto:{{pub.informations.contact}}" ng-bind="pub.informations.contact"></a></small></p>
+							
+						</div>
+					</div>
+				</section>
+				<section id="projects">
+					<h2>Features
+						<div class="pull-right">
+							<div class="dropdown">
+								<span class="dropdown-toggle btn btn-default">
+									<span class="glyphicon glyphicon-cog"></span>
+								</span>
+								<ul class="dropdown-menu">
+									<li><a ng-click="ui.features.filter.show = !ui.features.filter.show">Filter</a></li>
+									<li><a ng-click="ui.features.show = !ui.features.show">Hide/Show</a></li>
+								</ul>
+							</div>
+						</div>
+					</h2>
+					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.features.filter.show">
+						<input class="form-control" type="text" ng-model="ui.features.filter.input" placeholder="Filter the features" />
+					</div>
+					<div style="margin-top:10px;" ng-show="ui.features.show">
+						<ul ng-repeat="pub in item.features |filter:ui.features.filter.input">
+							<li><em ng-bind="pub.name"></em>
+								<p><small ng-bind="pub.informations.description"></small></p>
+							</li>
 						</ul>
 					</div>
-				</div>
-				</h2>
-				<div class="btn-group btn-block  btn-group-justified" ng-show="ui.keywords.provider.show">
-					<a class="btn" ng-click="ui.keywords.provider.selected = null" ng-class="{'btn-primary': (!ui.keywords.provider.selected), 'btn-success' : ui.keywords.provider.selected}">All Providers</a>
-					<a class="btn" ng-repeat="prov in item.keyword | kProviders" ng-click="ui.keywords.provider.selected = prov" ng-class="{'btn-primary': (ui.keywords.provider.selected == prov), 'btn-success' : (ui.keywords.provider.selected != prov)}" ng-bind="prov"></a>
-				</div>
-				<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.keywords.taxonomy.show">
-					<a class="btn" ng-click="ui.keywords.taxonomy.selected = null" ng-class="{'btn-primary': (!ui.keywords.taxonomy.selected), 'btn-success' : ui.keywords.taxonomy.selected}">All Taxonomies</a>
-					<a class="btn" ng-repeat="prov in item.keyword | kTaxonomies" ng-click="ui.keywords.taxonomy.selected = prov" ng-class="{'btn-primary': (ui.keywords.taxonomy.selected == prov), 'btn-success' : (ui.keywords.taxonomy.selected != prov)}" ng-bind="prov" style="text-transform:capitalize;"></a>
-				</div>
-				<ul  class="list-inline" style="margin-top:10px;">
-					<li ng-repeat="kw in item.keyword |filter:{provider.domain : ui.keywords.provider.selected, provider.taxonomy : ui.keywords.taxonomy.selected}" ng-bind="kw.keyword" class="badge" style="margin-right:10px; margin-bottom:5px; text-transform:capitalize;"  ></li>
-				</ul>
+				</section>
+				<section id="standards">
+					<h2>Standards
+						<div class="pull-right">
+							<div class="dropdown">
+								<span class="dropdown-toggle btn btn-default">
+									<span class="glyphicon glyphicon-cog"></span>
+								</span>
+								<ul class="dropdown-menu">
+									<li><a ng-click="ui.standards.filter.show = !ui.standards.filter.show">Filter</a></li>
+									<li><a ng-click="ui.standards.show = !ui.standards.show">Hide/Show</a></li>
+								</ul>
+							</div>
+						</div>
+					</h2>
+					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.standards.filter.show">
+						<input class="form-control" type="text" ng-model="ui.standards.filter.input" placeholder="Filter the standards" />
+					</div>
+					<div style="margin-top:10px;" ng-show="ui.standards.show">
+						<ul ng-repeat="std in item.standards |filter:ui.standards.filter.input">
+							<li><a ng-href="{{std.informations.source}}"><em ng-bind="std.name"></em> ( <span ng-bind="std.informations.version"></span> )</a></li>
+						</ul>
+				</section>
 			</div>
 		</div>
 	</div>
@@ -52,6 +146,8 @@
 			<dd ng-repeat="licence in item.licence" ng-bind="licence.name"></dd>
 			<dt>Licence Type</dt>
 			<dd ng-repeat="licence in item.licence" ng-bind="licence.type"></dd>
+			<dt ng-show="item.suite">Suite</dt>
+			<dd ng-repeat="suite in item.suite" ng-bind="suite.name"></dd>
 			<dt>Homepage</dt>
 			<dd><a ng-href="{{item.descriptions.homepage}}" ng-bind="item.descriptions.homepage"></a></dd>
 			<dt>Application Type(s)</dt>

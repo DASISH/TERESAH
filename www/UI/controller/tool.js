@@ -13,10 +13,44 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 				$scope.item.desc = provider;
 			}
 		},
+		features : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
+		standards : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
+		projects : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
+		publications : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
 		keywords : {
 			provider : {
+				selected : null,
 				selected : null
-			}
+			},
+			taxonomy : {
+				show : false,
+				selected : null
+			},
+			show : true
 		},
 		comments : {
 			form : {

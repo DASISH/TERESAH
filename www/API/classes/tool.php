@@ -132,11 +132,20 @@
 				#	TODO : ToolType, Licence Type
 				#
 				#####
+				case "Suite":
+					return $this->getSuite($id, "Reverse");
+					break;
+				case "Publication":
+					return $this->getPublications($id, "Reverse");
+					break;
 				case "ToolType":
 					return $this->getToolType($id, "Reverse");
 					break;
 				case "Platform":
 					return $this->getPlatform($id, "Reverse");
+					break;
+				case "Standard":
+					return $this->getStandards($id, "Reverse");
 					break;
 				case "Keyword":
 					return $this->getKeywords($id, "Reverse");
@@ -149,6 +158,9 @@
 					break;
 				case "ApplicationType":
 					return $this->getApplicationType($id, "Reverse");
+					break;
+				case "Feature":
+					return $this->getFeatures($id, "Reverse");
 					break;
 				default:
 					return false;
@@ -184,6 +196,149 @@
 									"identifier" => $keyword["UID"]
 								);
 					}
+				}
+				#Hack for formation for Reverse mode
+				if($mode == "Reverse") { $ret = $ret[0]; }
+				return $ret;
+			} else {
+				return false;
+			}
+		}
+
+
+		function getPublications($id, $mode = "Default") {
+			#REVERSE MODE : Get only data about a keyword with ID = X
+			if($mode == "Reverse") {
+				$req = "SELECT p.publication_uid as UID, p.reference as name FROM publication p WHERE p.publication_uid = ? LIMIT 1";
+			
+			#DEFAULT MODE : Get keyword for tool
+			} else {
+				$req = "SELECT  p.publication_uid as UID, p.reference as name FROM publication p, tool_has_publication tp WHERE tp.publication_uid = p.publication_uid AND tp.tool_uid = ?";
+				
+			}
+			#
+			#
+			$req = $this->DB->prepare($req);
+			$req->execute(array($id));
+			#
+			#
+			if($req->rowCount() > 0) {
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
+				$ret = array();
+				foreach($data as &$keyword) {
+					$ret[] = array(
+						"name" => $keyword["name"],
+						"identifier" => $keyword["UID"]
+					);
+				}
+				#Hack for formation for Reverse mode
+				if($mode == "Reverse") { $ret = $ret[0]; }
+				return $ret;
+			} else {
+				return false;
+			}
+		}
+		
+		function getFeatures($id, $mode = "Default") {
+			#REVERSE MODE : Get only data about a keyword with ID = X
+			if($mode == "Reverse") {
+				$req = "SELECT f.feature_uid as UID, f.name, f.description FROM feature f WHERE f.feature_uid = ? LIMIT 1";
+			
+			#DEFAULT MODE : Get keyword for tool
+			} else {
+				$req = "SELECT f.feature_uid as UID, f.name, f.description FROM feature f, tool_has_feature tf WHERE tf.feature_uid = f.feature_uid AND tf.tool_uid = ?";
+				
+			}
+			#
+			#
+			$req = $this->DB->prepare($req);
+			$req->execute(array($id));
+			#
+			#
+			if($req->rowCount() > 0) {
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
+				$ret = array();
+				foreach($data as &$keyword) {
+					$ret[] = array(
+						"name" => $keyword["name"],
+						"informations" => array(
+							"description" => $keyword["description"]
+						),
+						"identifier" => $keyword["UID"]
+					);
+				}
+				#Hack for formation for Reverse mode
+				if($mode == "Reverse") { $ret = $ret[0]; }
+				return $ret;
+			} else {
+				return false;
+			}
+		}		
+		function getProjects($id, $mode = "Default") {
+			#REVERSE MODE : Get only data about a keyword with ID = X
+			if($mode == "Reverse") {
+				$req = "SELECT p.project_uid as UID, p.title as name, p.description, p.contact  FROM project p WHERE p.project_uid = ? LIMIT 1";
+			
+			#DEFAULT MODE : Get keyword for tool
+			} else {
+				$req = "SELECT  p.project_uid as UID, p.title as name, p.description, p.contact FROM project p, tool_has_project tp WHERE tp.project_uid = p.project_uid AND tp.tool_uid = ?";
+				
+			}
+			#
+			#
+			$req = $this->DB->prepare($req);
+			$req->execute(array($id));
+			#
+			#
+			if($req->rowCount() > 0) {
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
+				$ret = array();
+				foreach($data as &$keyword) {
+					$ret[] = array(
+						"name" => $keyword["name"],
+						"informations" => array(
+							"description" => $keyword["description"],
+							"contact" => $keyword["contact"]
+						),
+						"identifier" => $keyword["UID"]
+					);
+				}
+				#Hack for formation for Reverse mode
+				if($mode == "Reverse") { $ret = $ret[0]; }
+				return $ret;
+			} else {
+				return false;
+			}
+		}
+		
+		function getStandards($id, $mode = "Default") {
+			#REVERSE MODE : Get only data about a keyword with ID = X
+			if($mode == "Reverse") {
+				$req = "SELECT s.standard_uid as UID, s.title as name, s.version, s.source  FROM standard s WHERE s.standard_uid = ? LIMIT 1";
+			
+			#DEFAULT MODE : Get keyword for tool
+			} else {
+				$req = "SELECT s.standard_uid as UID, s.title as name, s.version, s.source FROM standard s, tool_has_standard ts WHERE ts.standard_uid = s.standard_uid AND ts.tool_uid = ?";
+				
+			}
+			#
+			#
+			$req = $this->DB->prepare($req);
+			$req->execute(array($id));
+			#
+			#
+			if($req->rowCount() > 0) {
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
+				$ret = array();
+				foreach($data as &$keyword) {
+					$ret[] = array(
+						"name" => $keyword["name"],
+						"informations" => array(
+							"version" => $keyword["version"],
+							"source" => $keyword["source"]
+						),
+						"identifier" => $keyword["UID"]
+					);
 				}
 				#Hack for formation for Reverse mode
 				if($mode == "Reverse") { $ret = $ret[0]; }
@@ -343,6 +498,46 @@
 			}
 		}
 		
+		function getSuite($id, $mode = "Default") {
+			###################################
+			#
+			#	MODES :
+			#
+			#		* Reverse = gets ToolType 							id is either null (List of ToolType) or int()
+			#		* Default = gets ToolType from Tool					id cant be null
+			#
+			###################################
+			
+			#Default return is false :
+			$ret = false;
+			
+			if($mode == "Reverse") {
+			
+				$req = "SELECT s.name, s.suite_uid as uid FROM suite s WHERE s.suite_uid = ? LIMIT 1";			
+			
+			} else {
+			
+				#In default mode, $id is an int
+				$req = "SELECT s.name as name, s.suite_uid as uid FROM suite s, tool_has_suite ts WHERE ts.suite_uid = s.suite_uid AND ts.tool_uid = ?";
+			
+			}
+				$req = $this->DB->prepare($req);
+				$req->execute(array($id));
+			
+			#If we got data
+			if($req->rowCount() > 0) {
+				$data = $req->fetchAll(PDO::FETCH_ASSOC);
+			
+				$ret = array();
+				foreach($data as &$type) {
+					$ret[] = $type;
+				}
+				if($mode == "Reverse") { $ret = $ret[0]; }
+			}
+			#RETURN
+			return $ret;
+		}
+		
 		function getToolType($id, $mode = "Default") {
 			###################################
 			#
@@ -495,9 +690,35 @@
 					$ret["platform"] = $this->getPlatform($data["tool_id"]);
 					if(!$ret["platform"]) { unset($ret["platform"]); }
 				}
+				
 				if(isset($options["developer"])) {
 					$ret["developers"] = $this->getDevelopers($data["tool_id"]);
 					if(!$ret["developers"]) { unset($ret["developers"]); }
+				}
+				
+				if(isset($options["projects"])) {
+					$ret["projects"] = $this->getProjects($data["tool_id"]);
+					if(!$ret["projects"]) { unset($ret["projects"]); }
+				}
+				
+				if(isset($options["suite"])) {
+					$ret["suite"] = $this->getSuite($data["tool_id"]);
+					if(!$ret["suite"]) { unset($ret["suite"]); }
+				}
+				
+				if(isset($options["standards"])) {
+					$ret["standards"] = $this->getStandards($data["tool_id"]);
+					if(!$ret["standards"]) { unset($ret["standards"]); }
+				}
+				
+				if(isset($options["features"])) {
+					$ret["features"] = $this->getFeatures($data["tool_id"]);
+					if(!$ret["features"]) { unset($ret["features"]); }
+				}
+				
+				if(isset($options["publications"])) {
+					$ret["publications"] = $this->getPublications($data["tool_id"]);
+					if(!$ret["publications"]) { unset($ret["publications"]); }
 				}
 				
 				if(isset($options["licence"])) {
