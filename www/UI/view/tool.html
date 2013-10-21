@@ -11,15 +11,23 @@
 			</div>
 			<div class="col-lg-12">
 				<h2>Keyword</h2>
-				<ul  class="list-inline">
-					<li ng-repeat="kw in item.keyword" >{{kw.keyword}}</li>
+				<div class="btn-group btn-block  btn-group-justified">
+					<a class="btn" ng-click="ui.keywords.provider.selected = null" ng-class="{'btn-primary': (!ui.keywords.provider.selected), 'btn-success' : ui.keywords.provider.selected}">All Providers</a>
+					<a class="btn" ng-repeat="prov in item.keyword | kProviders" ng-click="ui.keywords.provider.selected = prov" ng-class="{'btn-primary': (ui.keywords.provider.selected == prov), 'btn-success' : (ui.keywords.provider.selected != prov)}" ng-bind="prov"></a>
+				</div>
+				<div class="btn-group btn-group-sm btn-block  btn-group-justified">
+					<a class="btn" ng-click="ui.keywords.taxonomy.selected = null" ng-class="{'btn-primary': (!ui.keywords.taxonomy.selected), 'btn-success' : ui.keywords.taxonomy.selected}">All Taxonomies</a>
+					<a class="btn" ng-repeat="prov in item.keyword | kTaxonomies" ng-click="ui.keywords.taxonomy.selected = prov" ng-class="{'btn-primary': (ui.keywords.taxonomy.selected == prov), 'btn-success' : (ui.keywords.taxonomy.selected != prov)}" ng-bind="prov" style="text-transform:capitalize;"></a>
+				</div>
+				<ul  class="list-inline" style="margin-top:10px;">
+					<li ng-repeat="kw in item.keyword |filter:{provider.domain : ui.keywords.provider.selected, provider.taxonomy : ui.keywords.taxonomy.selected}" ng-bind="kw.keyword" class="badge" style="margin-right:10px; margin-bottom:5px; text-transform:capitalize;"  ></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div class="col-lg-4">
 		<div class="btn-group-vertical btn-block">
-			<a class="btn btn-primary btn-lg btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)">{{desc.provider}}</a>
+			<a class="btn btn-primary btn-lg btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)" ng-bind="desc.provider"></a>
 		</div>
 		<p>&nbsp;</p>
 		<h2 class="btn btn-success btn-lg btn-block">Information</h2>

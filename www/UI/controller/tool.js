@@ -13,6 +13,11 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 				$scope.item.desc = provider;
 			}
 		},
+		keywords : {
+			provider : {
+				selected : null
+			}
+		},
 		comments : {
 			form : {
 				submit : function() {

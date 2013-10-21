@@ -324,6 +324,7 @@
 									"keyword" => $keyword["keyword"],
 									"provider" => array(
 													"uri" => $keyword["sourceURI"],
+													"domain" => parse_url($keyword["sourceURI"], PHP_URL_HOST),
 													"taxonomy" => $keyword["sourceTaxonomy"]
 												)
 								);
