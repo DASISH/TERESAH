@@ -63,13 +63,26 @@ class User {
 	
 	function create($name, $mail, $login, $password) {
 	
-		$result = array();
-        $query = "INSERT INTO user (name, mail, login, password) VALUES ('$name', '$mail', '$login', '$password')";
-		$req = $this->DB->prepare($query);
-		$req->execute();	
-	}
+		print 'create';
 	
+		$app = Slim\Slim::getInstance();
+		
+		try{
+			$result = array();
+			$query = "INSERT INTO user (name, mail, login, password) VALUES ('$name', '$mail', '$login', '$password')";
+			$req = $this->DB->prepare($query);
+			$req->execute();	
+		}
+		catch (Exception $e)
+		{
+			return array('danger' => 'An error has occured');
+		}
+		return array('success' => 'User created - ' . $login);
+	}
+		
 	function update($values) {
+		
+		print 'update';
 		
 		$app = Slim\Slim::getInstance();
 		

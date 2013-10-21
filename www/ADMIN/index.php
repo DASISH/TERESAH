@@ -28,8 +28,8 @@ include 'classes/statistics.php';
 #routes
 include 'routes.php';
 
-
-	include 'flash_messages.php';
+#flash messages
+include 'flash_messages.php';
 
 #helper function, displays output in main.php
 function display($template, $variables) {
