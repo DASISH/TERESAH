@@ -2,24 +2,28 @@
 
   <div class="container">
 	<h1>Welcome on DASISH Tool Registry</h1>
-    <p style="text-align:right;"><img src="../API/pie/descriptions/Default" height="300" /></p>
+    <!--<p style="text-align:right;"><img src="../API/pie/descriptions/Default" height="300" /></p>-->
   </div>
 
 <div class="row">
 	<p>Tools from {{ui.parameters.start + 1}} to {{ui.parameters.limit + ui.parameters.start}} on {{ui.parameters.total}} available</p>
-    <pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
 </div>
 
+<hr />
 
 <div class="row" ng-repeat="item in results.items">
-	<div class="media col-lg-12" >
-		<a class="pull-left" href="#/tool/{{item.identifiers.shortname}}">
-			<img class="media-object" ng-src="./assets/img/{{item.applicationType}}.png" height="64" width="64" alt="{{item.applicationType}}">
-		</a>
-		<div class="media-body">
-			<h4 class="media-heading"><a href="#/tool/{{item.identifiers.shortname}}">{{item.title}}</a></h4>
-			<span class="label label-default">{{item.description.provider}}</span> {{item.description.text}}
+	<div class="row item" >
+		<div class="col-lg-1 ">
+			<div class="container-font big-font">
+				<span class="fontello-{{item.applicationType}}"></span>
+			</div>
 		</div>
+		<div class="col-lg-11">
+			<h4><a ng-href="#/tool/{{item.identifiers.shortname}}" ng-bind="item.title"></a> <span class="pull-right"><small><em ng-bind="item.description.provider"></em></small></span></h4>
+			<p ng-bind="item.description.text"></p>
+			<hr />
+		</div>
+		
 	</div>
 </div>
 <div class="row">
