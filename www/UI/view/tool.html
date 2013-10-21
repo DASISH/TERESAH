@@ -10,12 +10,26 @@
 				<p ng-bind-html="item.desc.text | newline"></p>
 			</div>
 			<div class="col-lg-12">
-				<h2>Keyword</h2>
-				<div class="btn-group btn-block  btn-group-justified">
+				<h2>
+				Keyword
+				
+				<div class="pull-right">
+					<div class="dropdown">
+						<span class="dropdown-toggle btn btn-default">
+							<span class="glyphicon glyphicon-cog"></span>
+						</span>
+						<ul class="dropdown-menu">
+							<li><a ng-click="ui.keywords.provider.show = !ui.keywords.provider.show">Providers</a></li>
+							<li><a ng-click="ui.keywords.taxonomy.show = !ui.keywords.taxonomy.show">Taxonomies</a></li>
+						</ul>
+					</div>
+				</div>
+				</h2>
+				<div class="btn-group btn-block  btn-group-justified" ng-show="ui.keywords.provider.show">
 					<a class="btn" ng-click="ui.keywords.provider.selected = null" ng-class="{'btn-primary': (!ui.keywords.provider.selected), 'btn-success' : ui.keywords.provider.selected}">All Providers</a>
 					<a class="btn" ng-repeat="prov in item.keyword | kProviders" ng-click="ui.keywords.provider.selected = prov" ng-class="{'btn-primary': (ui.keywords.provider.selected == prov), 'btn-success' : (ui.keywords.provider.selected != prov)}" ng-bind="prov"></a>
 				</div>
-				<div class="btn-group btn-group-sm btn-block  btn-group-justified">
+				<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.keywords.taxonomy.show">
 					<a class="btn" ng-click="ui.keywords.taxonomy.selected = null" ng-class="{'btn-primary': (!ui.keywords.taxonomy.selected), 'btn-success' : ui.keywords.taxonomy.selected}">All Taxonomies</a>
 					<a class="btn" ng-repeat="prov in item.keyword | kTaxonomies" ng-click="ui.keywords.taxonomy.selected = prov" ng-class="{'btn-primary': (ui.keywords.taxonomy.selected == prov), 'btn-success' : (ui.keywords.taxonomy.selected != prov)}" ng-bind="prov" style="text-transform:capitalize;"></a>
 				</div>
