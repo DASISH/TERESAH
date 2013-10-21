@@ -20,12 +20,20 @@ $app->get('/user/:user_uid', function ($user_uid) use ($user, $app){
 })->name('user_edit');
 
 $app->post('/user/:user_uid', function ($user_uid) use ($user, $app) {
-    $user->update(array('user_uid' => $user_uid,
+    $result = $user->update(array('user_uid' => $user_uid,
 						'name' => $app->request->post('name'),
 						'mail' => $app->request->post('mail'),
 						'login' => $app->request->post('login'),
 						'password' => $app->request->post('password')));
-	$app->redirect($app->urlFor('user_list'));
+	
+	if(isset($result['success'])) {
+		$app->flash('success', $result['success']);
+		$app->redirect($app->urlFor('user_list'));
+	}	
+	else if(isset($result['error'])) {
+		$app->flash('error', $result['error']);
+	}
+		
 })->name('user_edit_post');
 
 

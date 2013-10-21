@@ -1,34 +1,36 @@
 <?php
 
-	$flash_result = $app->view()->getData('flash');
-	$message = '';
+function render_flash_message($flash) {
 	
-	if(isset($flash_result['success']))
+	$message = '';
+
+	if(isset($flash['success']))
 	{
 		$message = '<div class="alert alert-success">';
-		$message .= $flash_result['success'];
+		$message .= $flash['success'];
 		$message .= '</div>';
 	}
 
-	if(isset($flash_result['info']))
+	if(isset($flash['info']))
 	{
 		$message = '<div class="alert alert-info">';
-		$message .= $flash_result['info'];
+		$message .= $flash['info'];
 		$message .= '</div>';
 	}
 
-	if(isset($flash_result['warning']))
+	if(isset($flash['warning']))
 	{
 		$message = '<div class="alert alert-warning">';
-		$message .= $flash_result['warning'];
+		$message .= $flash['warning'];
 		$message .= '</div>';
 	}
 	
-	if(isset($flash_result['danger']))
+	if(isset($flash['danger']))
 	{
 		$message = '<div class="alert alert-danger">';
-		$message .= $flash_result['danger'];
+		$message .= $flash['danger'];
 		$message .= '</div>';
 	}
-	
+	return $message;
+}
 ?>

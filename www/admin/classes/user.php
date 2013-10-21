@@ -91,11 +91,9 @@ class User {
 		}
 		catch (Exception $e)
 		{
-			$app->flash('danger', 'An error has occured');
-			$app->flashKeep();
+			return array('danger' => 'An error has occured');
 		}
-		$app->flash('success', 'User saved - ' . $values['login']);
-		$app->flashKeep();
+		return array('success' => 'User saved - ' . $values['login']);
 	}
 	
 	function activate($user_uid, $action) {

@@ -36,8 +36,10 @@
           </div>
 
 		  <!-- flash messages -->
-		  <?php print $flash['success']; ?>
 		  
+		  <?php print render_flash_message($flash); ?>
+		  		 
+		  <!-- content -->				 
           <?php print $content; ?>
 
         </div> <!-- /container -->
