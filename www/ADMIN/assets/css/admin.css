@@ -1,11 +1,14 @@
 /* 
-    Document   : admin
+    Document   : admin.css
     Created on : 2013-okt-18, 14:03:27
-    Author     : olof
     Description:
-        Purpose of the stylesheet follows.
+        CSS-fixes for the admin interface
 */
 
 .dataTables_filter{
     margin-right: 15px;
+}
+
+.dataTables_info {
+    margin-left: 15px;
 }
