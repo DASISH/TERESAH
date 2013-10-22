@@ -16,7 +16,7 @@ $app->get('/tool', function () use ($tool){
 });
 
 $app->get('/tool/:shortname', function ($shortname) use ($tool){ 
-    display('forms/tool.php', array('tool' => $tool->getTool($shortname)));
+    display('forms/tool_edit.php', array('tool' => $tool->getTool($shortname)));
 });
 
 /////////////////////////////////////////////////////////////////////////////
