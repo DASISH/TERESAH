@@ -24,6 +24,7 @@ $app->add(new Slim\Middleware\SessionCookie(array('secret' => 'tools_registry_se
 include 'classes/tool.php';
 include 'classes/user.php';
 include 'classes/statistics.php';
+include 'classes/log.php';
 
 #routes
 include 'routes.php';

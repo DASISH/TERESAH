@@ -88,5 +88,13 @@ $app->post('/user/add', function () use ($user, $app) {
 		
 })->name('user_add_post');
 
+/////////////////////////////////////////////////////////////////////////////
+//								Log										   //
+/////////////////////////////////////////////////////////////////////////////
+
+/* List logs */
+$app->get('/log', function () use ($log){ 
+    display('log_list.php', array('logs' => $log->listAll()));
+})->name('log_list');
 
 ?>
