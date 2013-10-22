@@ -5,12 +5,12 @@
 	<div class="col-lg-8">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>{{item.desc.provider}}</h2>
-				<p>Source : <a href="{{item.desc.uri}}">{{item.desc.uri}}</a></p>
+				<h2 ng-bind="item.desc.provider"></h2>
+				<p>Source : <a ng-href="{{item.desc.uri}}" ng-bind="item.desc.uri"></a></p>
 				<p ng-bind-html="item.desc.text | newline"></p>
 			</div>
 			<div class="col-lg-12">
-				<section id="keywords">
+				<section id="keywords"  ng-show="item.keywords[0]">
 					<h2>Keywords
 						<div class="pull-right">
 							<div class="dropdown">
@@ -37,7 +37,7 @@
 						<li ng-repeat="kw in item.keyword |filter:{provider.domain : ui.keywords.provider.selected, provider.taxonomy : ui.keywords.taxonomy.selected}" ng-bind="kw.keyword" class="badge" style="margin-right:10px; margin-bottom:5px; text-transform:capitalize;"  ></li>
 					</ul>
 				</section>
-				<section id="publications">
+				<section id="publications"  ng-show="item.publications[0]">
 					<h2>Publications
 						<div class="pull-right">
 							<div class="dropdown">
@@ -58,7 +58,7 @@
 						<p ng-repeat="pub in item.publications |filter:ui.publications.filter.input" ng-bind="pub.name"></p>
 					</div>
 				</section>
-				<section id="projects">
+				<section id="projects" ng-show="item.projects[0]">
 					<h2>Projects
 						<div class="pull-right">
 							<div class="dropdown">
@@ -83,7 +83,7 @@
 						</div>
 					</div>
 				</section>
-				<section id="projects">
+				<section id="projects" ng-show="item.features[0]">
 					<h2>Features
 						<div class="pull-right">
 							<div class="dropdown">
@@ -108,7 +108,7 @@
 						</ul>
 					</div>
 				</section>
-				<section id="standards">
+				<section id="standards" ng-show="item.standards[0]">
 					<h2>Standards
 						<div class="pull-right">
 							<div class="dropdown">

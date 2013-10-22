@@ -50,6 +50,14 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
+.no-desc [class^="fontello-"]:before,  .no-desc [class*=" fontello-"]:before {
+  width: 30px;
+  height:30px;
+  line-height: 30px;
+  font-size: 20px;
+      vertical-align: top;
+}
+ 
 .fontello-localDesktop:before { content: '\e800'; } /* '?' */
 .fontello-webApplication:before { content: '\e801'; } /* '?' */
 .fontello-other:before { content: '\e802'; } /* '?' */
@@ -86,6 +94,14 @@
 	display:block;
 	margin:10px auto;
 	right:0!important;
+}
+.no-desc .container-font {
+	width:30px;
+	height:30px;
+	border-radius: 30px 30px 30px 30px;
+	margin:10px auto;
+	right:0!important;
+
 }
 .item:hover .container-font {
 	background: none repeat scroll 0 0 #428BCA;

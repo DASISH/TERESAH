@@ -9,19 +9,17 @@
 		<h1><span ng-bind="results.facet.facetLegend"></span> <small>Browse facets</small></h1>		
 		
 		<p>Facet's elements from {{ui.parameters.start + 1}} to {{ui.parameters.limit + ui.parameters.start}} on {{ui.parameters.total}} available</p>
-		
 	</div>
 </section>
 <section id="viewContent" ng-show="results.items">
-	<div class="row">
-		<pagination total-items="results.facet.facetTotal" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+	<div class="row no-desc" ng-repeat="item in results.items">
+		<div class="row" >
+			<div class="col-lg-12">
+				<em><a ng-href="#/facet/{{results.facet.facetParam}}/{{item.id}}" ng-bind="item.name"></a></em>
+				<hr style="margin:5px;"/>
+			</div>
+		</div>
 	</div>
-
-	<ul>
-		<li ng-repeat="item in results.items">
-			<a ng-href="#/facet/{{results.facet.facetParam}}/{{item.id}}" ng-bind="item.name"></a>
-		</li>
-	</ul>
 	<div class="row">
 		<pagination total-items="results.facet.facetTotal" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
 	</div>
