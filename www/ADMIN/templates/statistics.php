@@ -47,12 +47,12 @@
                   Facets
               </div>
               <div class="panel-body">
-                    <?php foreach($statistics['facet'] as $facet): ?>
+                    <?php foreach($statistics['facet'] as $facet => $count): ?>
                         <div class="col-md-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <?php print $facet['facetLegend'];?>
-                                    <span class="badge pull-right"><?php print $facet['facetTotal'];?></span>
+                                    <?php print $facet;?>
+                                    <span class="badge pull-right"><?php print $count;?></span>
                                 </div>
                                 <div class="panel-body">
                                     <a href="#"><span class="glyphicon glyphicon-list"></span>List</a> <a href="#"><span class="glyphicon glyphicon-plus"></span>Add</a>

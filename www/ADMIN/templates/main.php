@@ -27,6 +27,7 @@
                 <li><a href="<?php print BASE_PATH; ?>user">Users</a></li>
                 <li><a href="#">Logs</a></li>
                 <li><a href="#">API Keys</a></li>
+                <li><a href="#">RDF Store</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?php print BASE_PATH; ?>settings"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
