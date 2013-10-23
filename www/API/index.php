@@ -16,23 +16,7 @@
             header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 
     }
-	/*
-	function find_all_files($dir)
-	{
-		$root = scandir($dir);
-		$result = array();
-		foreach($root as $value)
-		{
-			if($value === '.' || $value === '..') {continue;}
-			if(is_file("$dir/$value")) {$result[]="$dir/$value";continue;}
-			foreach(find_all_files("$dir/$value") as $value)
-			{
-				$result[]=$value;
-			}
-		}
-		return $result;
-	}
-	*/
+	
 	//oAuth
 	require_once('assets/oAuth2/vendor/autoload.php');
 	require_once('assets/oAuth1/vendor/autoload.php');
@@ -47,20 +31,11 @@
 	require_once '../common/PieChart/index.php';
 	require_once '../common/SQL.PDO.php';
 	
-	require_once './classes/index.php';
+	require_once './classes/requires.php';
 
 	#json Print_R
 	function jP($array, $session = true) {
-		/*
-		if($session == true) {
-			if(isset($_SESSION["user"])) {
-				$array = array("data" => $array, "user" => $_SESSION["user"]);
-			} else {
-				$array = array("data" => $array, "user" => false);
-			}
-		}
-		*/
-		print(json_encode($array));#, JSON_PRETTY_PRINT));
+		print(json_encode($array));
 	}
     
 	#Start the framework
@@ -72,40 +47,18 @@
 		'cookies.cipher' => MCRYPT_RIJNDAEL_256,
 		'cookies.cipher_mode' => MCRYPT_MODE_CBC
 	));
-	/*
-	$app->add(new \Slim\Middleware\SessionCookie(array(
-		'expires' => '20 minutes',
-		'path' => '/',
-		'domain' => null,
-		'secure' => false,
-		'httponly' => false,
-		'name' => 'slim_session',
-		'secret' => 'zxcvtgbujnmxefvtgbunihjxsrdhnws4e5d6rfthyuj3se5dugbvthyycesvtdrbfyvhrjbdfrtjsxetsyefbybkttf',
-		'cipher' => MCRYPT_RIJNDAEL_256,
-		'cipher_mode' => MCRYPT_MODE_CBC
-	)));
-	*/
+	
 	$app->add(new \Slim\Middleware\ContentTypes());
 	
-	/*
-	function authenticate(\Slim\Route $route) {
-		$app = \Slim\Slim::getInstance();
-		if (isAuthentificated() === false) {
-			$app->halt(401);
-		}
-	}
-	*/
-
-/**
- * Step 3: Define the Slim application routes
- *
- * Here we define several Slim application routes that respond
- * to appropriate HTTP request methods. In this example, the second
- * argument for `Slim::get`, `Slim::post`, `Slim::put`, `Slim::patch`, and `Slim::delete`
- * is an anonymous function.
- */
-
-	require_once './routes/index.php';
+	// require_once './routes/index.php';
+	require_once './routes/tool.php';
+	require_once './routes/facet.php';
+	require_once './routes/search.php';
+	require_once './routes/pie.php';
+	require_once './routes/login.php';
+	require_once './routes/oauth.php';
+	require_once './routes/forum.php';
+	require_once './routes/faq.php';
 	header('Content-Type: application/json');
 	$app->run();
 ?>

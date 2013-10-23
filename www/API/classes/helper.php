@@ -1,12 +1,6 @@
 <?php
-	class Table {
-	/*
-		$this->dict = array(
-			#option value	=> Table Name, Text field (if many = array with [0] as title for it), PKey, Table for join (false if not), fields for joint (tool,item)
-			,
-		);
-	*/	
-		function getTable($k) {
+	class Helper {
+		function table($k) {
 			$dict = array(
 				#option value	=> Table Name, Text field (if many = array with [0] as title for it), PKey, Table for join (false if not), fields for joint (tool,item)
 				"Suite" => array("suite", "name", "suite_uid", "tool_has_suite", array("tool_uid", "suite_uid")),
@@ -39,7 +33,7 @@
 				return array("Error" => "Unknown ".$k." facet");
 			}
 		}
-		function getFacets($facet = false, $facetTable = false) {
+		function facet($facet = false, $facetTable = false) {
 			$dict = array(
 				#option value	=> Table Name, Legend
 				"Suite" => array("suite", "Suite"),
@@ -76,7 +70,7 @@
 					$return[$value[0]] = array(
 						"facetParam" => $key,
 						"facetLegend" => $value[1],
-						"facetEnum" => $enum
+						"facetEnum" => $enum #Enum = 3rd value of $dict. It is used is it is an enumeration in MYSQL
 					);
 					if($facetTable) {
 						$return[$value[0]]["facetTable"] = $value[0];

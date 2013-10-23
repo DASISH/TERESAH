@@ -1,15 +1,14 @@
 <?php
 	class User {
-		function __construct() {
-			#Gettings globals
+		private static function DB() {
 			global $DB;
-			if(!isset($DB)) { exit(); }
-			$this->DB = $DB;
+			return $DB;
 		}
+		
 		function login($post) {
 			$pw = hash('sha256', $post["password"]);
 			try {
-				$req = $this->DB->prepare("SELECT name as Name, mail as Mail, user_uid as UID FROM user WHERE login = ? AND password = ?");
+				$req = self::DB()->prepare("SELECT name as Name, mail as Mail, user_uid as UID FROM user WHERE login = ? AND password = ?");
 				$req->execute(array($post["user"], $pw));    
 			} catch (Exception $e) {
 				Die('Need to handle this error. $e has all the details');
@@ -25,12 +24,12 @@
 		function signup($post, $id = false) {
 			if(isset($post["mail"]) && isset($post["password"]) && isset($post["name"]) && isset($post["user"])) {
 				$req = "INSERT INTO user VALUES (NULL, ?, ? , ? , ? )";
-				$req = $this->DB->prepare($req);
+				$req = self::DB()->prepare($req);
 				$req->execute(array($post["name"], $post["mail"], $post["user"], hash("sha256", $post["password"])));
 				
 				if($req->rowCount() == 1) {
 					if($id == true) {
-						return $this->DB->lastInsertId();
+						return self::DB()->lastInsertId();
 					} else {
 						return array("Success" => "You have now signed up");
 					}
@@ -51,16 +50,16 @@
 			if(!isset($data["email"])) {
 				$data["email"] = $data["nickname"];
 			}
-			$req = $this->DB->prepare("SELECT u.name as Name, u.mail as Mail, u.user_uid as UID FROM user_oauth uo, user u WHERE u.user_uid = uo.user_uid AND uo.provider = ? AND uo.external_uid = ? LIMIT 1");
+			$req = self::DB()->prepare("SELECT u.name as Name, u.mail as Mail, u.user_uid as UID FROM user_oauth uo, user u WHERE u.user_uid = uo.user_uid AND uo.provider = ? AND uo.external_uid = ? LIMIT 1");
 			$req->execute(array($provider, $data["uid"]));
 			if($req->rowCount() >= 1) {
 				$d = $req->fetch(PDO::FETCH_ASSOC);
 				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"]);
 				return array("signin" => true, "data" => $d);
 			} else {
-				$sign = $this->signup(array("mail" => $data["email"], "name" => $data["name"], "user" => $data["email"], "password" => time()), true);
+				$sign = self::signup(array("mail" => $data["email"], "name" => $data["name"], "user" => $data["email"], "password" => time()), true);
 				if($sign > 0) {
-					$req = $this->DB->prepare("INSERT INTO user_oauth VALUES (NULL, ?, ?, ?)");
+					$req = self::DB()->prepare("INSERT INTO user_oauth VALUES (NULL, ?, ?, ?)");
 					$req->execute(array($sign, $provider, $data["uid"]));
 					$_SESSION["user"] = array("id" => $sign, "name" => $data["name"], "mail" => $data["email"]);
 					return array("signin" => true, "data" => array("UID" => $sign, "Name" => $data["name"], "Mail" => $data["email"]));
@@ -120,7 +119,7 @@
 
 						// We got an access token, let's now get the user's details
 						$userDetails = $provider->getUserDetails($t);
-						$d = $this->oAuthLogin($userDetails, $server);
+						$d = self::oAuthLogin($userDetails, $server);
 						if(isset($_SESSION["callback"])) {
 							$d["Location"] = $_SESSION["callback"];
 						}
@@ -166,7 +165,7 @@
 				//Get User details
 				$user = $server->getUserDetails($tokenCredentials);
 				//Now use our login/sign in class
-				$d = $this->oAuthLogin($user, $prov);
+				$d = self::oAuthLogin($user, $prov);
 				if(isset($_SESSION["callback"])) {
 					$d["Location"] = $_SESSION["callback"];
 				}
@@ -225,5 +224,4 @@
 			}
 		}
 	}
-	$user = new User();
 ?>

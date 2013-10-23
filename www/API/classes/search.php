@@ -1,13 +1,11 @@
 <?php
-	class Search extends Table {
-		function __construct() {
-			#Gettings globals
+	class Search {
+		private static function DB() {
 			global $DB;
-			$this->DB = $DB;
-			
+			return $DB;
 		}
 		function nbrTotal($req = "FROM tool USE INDEX(PRIMARY)", $params = array(), $rowCount = false) {
-			$req = $this->DB->prepare("SELECT COUNT(*) as cnt ".$req);
+			$req = self::DB()->prepare("SELECT COUNT(*) as cnt ".$req);
 			$req->execute($params);
 			if($rowCount) {
 				return $req->rowCount();
@@ -16,7 +14,8 @@
 				return $data["cnt"];
 			}
 		}
-		function options($get, $queryNeeded = False) {
+		
+		private function options($get, $queryNeeded = False) {
 			$options = array();
 			
 			#Query
@@ -55,6 +54,7 @@
 			
 			return array($options, $sensitivity);
 		}
+		
 		function all($get) {
 			#####
 			#
@@ -67,7 +67,7 @@
 			#
 			#####
 			//Default research search in keyword, description AND external Description AND Application_Type
-			$opt = $this->options($get);
+			$opt = self::options($get);
 			if(array_key_exists("Error", $opt)) {
 				return $opt;
 			}
@@ -87,7 +87,7 @@
 						LEFT OUTER JOIN tool_application_type tat ON tat.tool_uid = t.tool_uid
 					GROUP BY d.tool_uid
 					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
-			$req = $this->DB->prepare($req);
+			$req = self::DB()->prepare($req);
 			$req->execute(array($options["request"], $options["request"], $options["request"]));
 			
 			
@@ -108,7 +108,7 @@
 				$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 			}
 			
-			$ret["parameters"]["total"] = $this->nbrTotal();
+			$ret["parameters"]["total"] = self::nbrTotal();
 			return $ret;
 		}
 		function general($get) {
@@ -124,7 +124,7 @@
 			#
 			#####
 			//Default research search in keyword, description AND external Description AND Application_Type
-			$opt = $this->options($get, $queryNeeded = True);
+			$opt = self::options($get, $queryNeeded = True);
 			if(array_key_exists("Error", $opt)) {
 				return $opt;
 			}
@@ -150,7 +150,7 @@
 						ED.description LIKE CONCAT('%', ? , '%') ".$sensitivity."  
 					GROUP BY d.tool_uid
 					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
-			$req = $this->DB->prepare($req);
+			$req = self::DB()->prepare($req);
 			$req->execute(array($options["request"], $options["request"], $options["request"]));
 			
 			
@@ -191,12 +191,12 @@
 				"webApplication" => "Web Application",
 				"webService" => "Web service"
 			);
-			$dic = parent::getTable($fieldType);
+			$dic = Helper::table($fieldType);
 			if(array_key_exists("Error", $dic)) {
 				return $dic;
 			} else {
 				#Get Options
-				$opt = $this->options($get);
+				$opt = self::options($get);
 				$options = $opt[0];
 				$sensitivity = $opt[1];
 				#Set special option
@@ -238,7 +238,7 @@
 				
 				$req = "SELECT " . $ret . " FROM " . $dic["table"]["name"] . " " .$where ." LIMIT ".$options["start"]." , ".$options["limit"];
 				// return $req;
-				$req = $this->DB->prepare($req);
+				$req = self::DB()->prepare($req);
 				$req->execute($exec);
 				$facets = $req->fetchAll(PDO::FETCH_ASSOC);
 				if($fieldType == "ApplicationType") {
@@ -259,18 +259,18 @@
 			#	* marked values are required
 			#
 			#	facets = array(
-			#				"TableShortcut" ($this->dict) => array(
+			#				"TableShortcut" (self::dict) => array(
 			#					"request" * => array(val1, val2, val3),
 			#					"optionnal" => if set, AND or OR said facet
 			#					"mode" => if set, AND or OR said values
 			#			),
-			#	options => Usual Options through $this->options
+			#	options => Usual Options through self::options
 			#
 			#
 			############################
 			
 			#Get Options
-			$opt = $this->options($get);
+			$opt = self::options($get);
 			$options = $opt[0];
 			$sensitivity = $opt[1];
 			if(isset($get["facets"]) and count($get["facets"]) > 0) {
@@ -282,7 +282,7 @@
 				foreach($get["facets"] as $key => $o) {
 					#We check that there is more than one option into the said facet array
 					if(is_array($o) && array_key_exists("request", $o) && is_array($o["request"]) && count($o["request"]) > 0) {
-						$dic = parent::getTable($key);
+						$dic = Helper::table($key);
 						if(array_key_exists("Error", $dic)) {
 							return $dic;
 						}
@@ -397,7 +397,7 @@
 					// print_r($exec);
 			#print($req);
 			#We execute it
-			$req = $this->DB->prepare($req);
+			$req = self::DB()->prepare($req);
 			$req->execute($exec);
 			
 			#We add something to our options : the amount of results AND the facets		
@@ -415,7 +415,7 @@
 				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 			}
 			#We return
-			$ret["parameters"]["total"] = $this->nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
+			$ret["parameters"]["total"] = self::nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
 			
 			$ret["parameters"]["url"] = urldecode(http_build_query($get));
 			
@@ -425,10 +425,10 @@
 		function getFacets($facet = false) {
 			$return = array();
 			if($facet) {
-				$dict = parent::getFacets($facet, true);
+				$dict = Helper::facet($facet, true);
 				
 				$req = "SELECT COUNT(*) as total FROM ".$dict["facetTable"];
-				$req = $this->DB->prepare($req);
+				$req = self::DB()->prepare($req);
 				$req->execute();
 				$data = $req->fetch(PDO::FETCH_ASSOC);
 				
@@ -438,10 +438,10 @@
 					"facetTotal" => intval($data["total"])
 				);
 			} else {
-				$dict = parent::getFacets();
+				$dict = Helper::facet();
 				foreach($dict as $tableName => &$vals) {
 					$req = "SELECT COUNT(*) as total FROM ".$tableName;
-					$req = $this->DB->prepare($req);
+					$req = self::DB()->prepare($req);
 					$req->execute();
 					$data = $req->fetch(PDO::FETCH_ASSOC);
 					if(intval($data["total"]) > 0) {
@@ -457,5 +457,4 @@
 		}
 		
 	}
-	$search = new Search();
 ?>

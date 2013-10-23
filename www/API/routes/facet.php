@@ -1,27 +1,29 @@
 <?php
 	
-	$app->get('/facet/:facet/:facetID', function ($facet, $facetID) use ($search, $app, $tool) {
-		
+	$app->get('/facet/:facet/:facetID', function ($facet, $facetID) use ($require, $app) {
+		$require->req(array("facet", "search"));
 		$facets = $app->request->get();
 		$facets["facets"][$facet]["request"][] = $facetID;
-		$data = $search->faceted($facets);
+		$data = Search::faceted($facets);
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {
-			$data["facet"] = $tool->getFacet($facet, $facetID);
-			$data["facet"]["facet"] = $tool->getFacets($facet);
+			$data["facet"] = Facets::get($facet, $facetID);
+			$data["facet"]["facet"] = Helper::facet($facet);
 			return jP($data); 
 		}
 	});	
 	
-	$app->get('/facet/:facet/', function ($facet) use ($search, $app, $tool) {
+	$app->get('/facet/:facet/', function ($facet) use ($require, $app) {
+		
+		$require->req(array("search", "helper"));
 		
 		$options = $app->request->get();
-		$data = $search->fieldContent($facet, $options);
+		$data = Search::fieldContent($facet, $options);
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {
-			$data["facet"] = $search->getFacets($facet);
+			$data["facet"] = Helper::facet($facet);
 			return jP($data); 
 		}
 	});	

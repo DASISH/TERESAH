@@ -1,7 +1,8 @@
 <?php
 
-	$app->get('/search/general/', function () use ($search, $app) { 
-		$data = $search->general($app->request->get()); 
+	$app->get('/search/general/', function () use ($require, $app) { 
+		$require->req(array("search"));
+		$data = Search::general($app->request->get()); 
 		
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
@@ -11,8 +12,9 @@
 		
 	});
 
-	$app->get('/search/all/', function () use ($search, $app) { 
-		$data = $search->all($app->request->get()); 
+	$app->get('/search/all/', function () use ($require, $app) { 
+		$require->req(array("search"));
+		$data = Search::all($app->request->get()); 
 		
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
@@ -22,8 +24,9 @@
 		
 	});
 
-	$app->post('/search/general/', function () use ($search, $app) { 
-		$data = $search->general($app->request->post()); 
+	$app->post('/search/general/', function () use ($require, $app) { 
+		$require->req(array("search"));
+		$data = Search::general($app->request->post()); 
 		
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
@@ -33,8 +36,9 @@
 		
 	});
 	
-	$app->get('/search/facet/:field/', function ($facet) use ($search, $app) { 
-		$data = $search->fieldContent($facet, $app->request->get());
+	$app->get('/search/facet/:field/', function ($facet) use ($require, $app) { 
+		$require->req(array("search"));
+		$data = Search::fieldContent($facet, $app->request->get());
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {
@@ -42,8 +46,9 @@
 		}
 	});
 	
-	$app->get('/search/faceted/', function () use ($search, $app) {
-		$data = $search->faceted($app->request->get());
+	$app->get('/search/faceted/', function () use ($require, $app) {
+		$require->req(array("search"));
+		$data = Search::faceted($app->request->get());
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {
@@ -51,7 +56,8 @@
 		}
 	});
 	
-	$app->post('/search/faceted/', function () use ($search, $app) {
+	$app->post('/search/faceted/', function () use ($require, $app) {
+		$require->req(array("search"));
 	
 		if(count($app->request->post()) > 0) {
 			$input = $app->request->post();
@@ -61,7 +67,7 @@
 			$input = array();
 		}
 		
-		$data = $search->faceted($input);
+		$data = Search::faceted($input);
 		if(isset($data["Error"])) {
 			return jP($data);
 			//$app->response()->status(400);
@@ -70,8 +76,9 @@
 		}
 	});
 	
-	$app->get('/search/facetList/', function () use ($search) {
-		$data = $search->getFacets();
+	$app->get('/search/facetList/', function () use ($require) {
+		$require->req(array("search"));
+		$data = Search::getFacets();
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {

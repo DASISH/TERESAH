@@ -1,13 +1,14 @@
 <?php
 	#print "Description.php is here";
-	$app->get('/oAuth/Google', function () use ($user, $app) { 
+	$app->get('/oAuth/Google', function () use ($require, $app) { 
+		$require->req("user");
 		$app->contentType('application/json');
 		
 		$GET = $app->request->get();
 		if(isset($GET["callback"])) {
 			$_SESSION["callback"] = str_replace("null", "", $GET["callback"]);
 		}
-		$data = $user->oAuth2($app->request->get(), "google", true);  
+		$data = User::oAuth2($app->request->get(), "google", true);  
 		if(isset($data["Location"])) {
 			if($data["signin"] == true) {
 				$d = $data["data"];
@@ -22,12 +23,13 @@
 			jP($data);
 		}
 	} );
-	$app->get('/oAuth/Facebook', function () use ($user, $app) { 
+	$app->get('/oAuth/Facebook', function () use ($require, $app) { 
+		$require->req("user");
 		$GET = $app->request->get();
 		if(isset($GET["callback"])) {
 			$_SESSION["callback"] = str_replace("null", "", $GET["callback"]);
 		}
-		$data = $user->oAuth2($app->request->get(), "facebook", true);  
+		$data = User::oAuth2($app->request->get(), "facebook", true);  
 		if(isset($data["Location"])) {
 			if($data["signin"] == true) {
 				$d = $data["data"];
@@ -42,12 +44,13 @@
 			jP($data);
 		}
 	} );
-	$app->get('/oAuth/Github', function () use ($user, $app) { 
+	$app->get('/oAuth/Github', function () use ($require, $app) { 
+		$require->req("user");
 		$GET = $app->request->get();
 		if(isset($GET["callback"])) {
 			$_SESSION["callback"] = str_replace("null", "", $GET["callback"]);
 		}
-		$data = $user->oAuth2($app->request->get(), "github", true);  
+		$data = User::oAuth2($app->request->get(), "github", true);  
 		if(isset($data["Location"])) {
 			if($data["signin"] == true) {
 				$d = $data["data"];
@@ -62,7 +65,9 @@
 			jP($data);
 		}
 	} );
-	$app->get('/oAuth/Twitter', function () use ($user, $app) { 
+	$app->get('/oAuth/Twitter', function () use ($require, $app) { 
+	
+		$require->req("user");
 		$app->contentType('application/json');
 		
 		$GET = $app->request->get();
@@ -70,7 +75,7 @@
 			$_SESSION["callback"] = str_replace("null", "", $GET["callback"]);
 		}
 		
-		$data = $user->oAuth1($app->request->get(), "twitter", true);
+		$data = User::oAuth1($app->request->get(), "twitter", true);
 		if(isset($data["Location"])) {
 			if($data["signin"] == true) {
 				$d = $data["data"];

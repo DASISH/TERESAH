@@ -1,12 +1,15 @@
 <?php	
-	$app->get('/topic/:topicUID', function ($topicUID) use ($comment, $app) { 
+	$app->get('/topic/:topicUID', function ($topicUID) use ($require, $app) { 
 		$app->contentType('application/json');
-		jP(array("topic" => $comment->topic($topicUID))); 
+		$require->req(array("comment"));
+		jP(array("topic" => Comment::topic($topicUID))); 
 	} );
 	
 	
-	$app->post('/topic/:toolUID/:topicUID', function ($toolUID, $topicUID) use ($comment, $app) { 
+	$app->post('/topic/:toolUID/:topicUID', function ($toolUID, $topicUID) use ($require, $app) { 
 		$app->contentType('application/json');
+		
+		$require->req(array("comment"));
 		
 		if(count($app->request->post()) > 0) {
 			$input = $app->request->post();
@@ -16,6 +19,6 @@
 			return $app->response()->status(400);
 		}
 		
-		jP(array("topic" => $comment->reply($toolUID, $topicUID, $input))); 
+		jP(array("topic" => Comment::reply($toolUID, $topicUID, $input))); 
 	} );
 ?>
