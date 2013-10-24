@@ -34,6 +34,13 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 				show : false
 			}
 		},
+		videos : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
 		publications : {
 			show : true,
 			filter : {

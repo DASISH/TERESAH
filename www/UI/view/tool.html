@@ -1,5 +1,8 @@
-
-<div class="row"><h1>{{item.descriptions.title}}</div>
+<section id="viewHeader">
+	<div class="page-header">
+		<h1 ng-bind="item.descriptions.title"></h1>		
+	</div>
+</section>
 <div class="row">
 
 	<div class="col-lg-8">
@@ -129,6 +132,38 @@
 						<ul ng-repeat="std in item.standards |filter:ui.standards.filter.input">
 							<li><a ng-href="{{std.informations.source}}"><em ng-bind="std.name"></em> ( <span ng-bind="std.informations.version"></span> )</a></li>
 						</ul>
+					</div>
+				</section>
+				<section id="videos" ng-show="item.videos[0]">
+					<h2>Video
+						<div class="pull-right">
+							<div class="dropdown">
+								<span class="dropdown-toggle btn btn-default">
+									<span class="glyphicon glyphicon-cog"></span>
+								</span>
+								<ul class="dropdown-menu">
+									<li><a ng-click="ui.videos.provider.show = !ui.videos.provider.show">Providers</a></li>
+									<li><a ng-click="ui.videos.filter.show = !ui.videos.filter.show">Filter</a></li>
+									<li><a ng-click="ui.videos.show = !ui.videos.show">Hide/Show</a></li>
+								</ul>
+							</div>
+						</div>
+					</h2>
+					<div class="btn-group btn-block  btn-group-justified" ng-show="ui.videos.provider.show">
+						<a class="btn" ng-click="ui.videos.provider.selected = null" ng-class="{'btn-primary': (!ui.videos.provider.selected), 'btn-success' : ui.videos.provider.selected}">All Providers</a>
+						<a class="btn" ng-repeat="prov in item.videos | vProviders" ng-click="ui.videos.provider.selected = prov; console.log(prov)" ng-class="{'btn-primary': (ui.videos.provider.selected == prov), 'btn-success' : (ui.videos.provider.selected != prov)}" ng-bind="prov"></a>
+					</div>
+					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.videos.filter.show">
+						<input class="form-control" type="text" ng-model="ui.videos.filter.input" placeholder="Filter the standards" />
+					</div>
+					<div style="margin-top:10px;" ng-show="ui.videos.show">
+						<div class="row">
+							<div class="col-md-4" ng-repeat="video in item.videos | filter:ui.videos.filter.input | videoFormater | filter:{informations.provider : ui.videos.provider.selected}">
+								<h5 ng-bind="video.name"></h5>
+								<div class="flex-video widescreen"><iframe ng-src="{{video.embed}}" frameborder="0" allowfullscreen=""></iframe></div>
+							</div>
+						</div>
+					</div>
 				</section>
 			</div>
 		</div>
