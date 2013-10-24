@@ -24,7 +24,7 @@
 				<h3 style="margin-top:0; padding-top:0;">Description :</h3>
 				<p ng-bind="doc.description"></p>
 				<div ng-show="ui.toggled[doc.uri + doc.method]">
-					<h3>Options :</h3>
+					<h3 ng-show="doc.options[0]">Options :</h3>
 					<table class="table table-striped" ng-show="doc.options[0]">
 						<thead>
 							<tr><th>Property name</th><th>Default value</th><th>Description</th></tr>
