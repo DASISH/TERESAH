@@ -45,6 +45,28 @@
 				$options["limit"] = (int) $get["limit"]; 
 			}
 			
+			#ORDER
+			switch ($get["order"]) {
+				case "DESC":
+					$options["order"] = "DESC"; 
+					break;
+				case "ASC":
+				default:
+					$options["order"] = "ASC"; 
+					break;
+			}
+			
+			#ORDERBY
+			switch ($get["orderBy"]) {
+				case "identifier":
+					$options["orderBy"] = "identifier"; 
+					break;
+				case "title":
+				default:
+					$options["orderBy"] = "title"; 
+					break;
+			}
+			
 			#START
 			if(!isset($get["start"])) {
 				$options["start"] = 0; 
@@ -236,7 +258,13 @@
 				}
 				$ret = $retField." as name, ".$dic["table"]["id"]." as id";
 				
-				$req = "SELECT " . $ret . " FROM " . $dic["table"]["name"] . " " .$where ." LIMIT ".$options["start"]." , ".$options["limit"];
+				$req = "SELECT " . $ret . " FROM " . $dic["table"]["name"] . " " .$where ." ";
+				if($options["orderBy"] == "identifier") {
+					$req .= " ORDER BY ".$dic["table"]["id"]." ".$options["order"]." ";
+				} else {
+					$req .= " ORDER BY ".$retField." ".$options["order"]." ";
+				}
+				$req .= " LIMIT ".$options["start"]." , ".$options["limit"];
 				// return $req;
 				$req = self::DB()->prepare($req);
 				$req->execute($exec);
@@ -385,14 +413,25 @@
 					$exec[]  = $id;
 			}
 			
+			#Generate the order system for the request
+			switch($options["orderBy"]) {
+				case "identifier":
+					$ordering = "t.tool_uid";
+					break;
+				case "title":
+				default:
+					$ordering = "d.title";
+					break;
+			}
 			#We write the request
 			$req = "SELECT d.title, t.tool_uid as UID, t.shortname, tat.application_type FROM description d 
 						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
 						LEFT OUTER JOIN tool_application_type tat ON tat.tool_uid = t.tool_uid
 						".implode($joins, " ")."
 					".$where."
-					GROUP BY d.tool_uid
-					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
+					GROUP BY d.tool_uid ";
+			$req .=	" ORDER BY ".$ordering." ".$options["order"]." ";
+			$req .=	" LIMIT ".$options["start"]." , ".$options["limit"];
 					// print($req);
 					// print_r($exec);
 			#print($req);

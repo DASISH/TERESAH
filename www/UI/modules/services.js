@@ -72,7 +72,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 				topic : Restangular.all("topic")
 			},
 			facets : {
-				list : Restangular.all("search/facetList/"),
+				list : Restangular.all("/facet/"),
 				search : Restangular.all("search/facet")
 			},
 			browse : {

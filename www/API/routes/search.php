@@ -76,13 +76,4 @@
 		}
 	});
 	
-	$app->get('/search/facetList/', function () use ($require) {
-		$require->req(array("search"));
-		$data = Search::getFacets();
-		if(isset($data["Error"])) {
-			$app->response()->status(400);
-		} else {
-			return jP($data); 
-		}
-	});
 ?>

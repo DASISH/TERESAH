@@ -83,7 +83,6 @@ filter('videoFormater', function() {
 			video.embed = vF(video.uri)
 			data.push(video)
 		});
-		console.log(data);
 		return data;
 	}
 });
