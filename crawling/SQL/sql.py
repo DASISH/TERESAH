@@ -111,7 +111,11 @@ def getRequest(t, i, v, h, k, p): # table, tool_uid, value, host, host key
 		
 	elif t == "Licence":
 		req = "INSERT INTO licence VALUES (#id#, '"+v+"', NULL, 'Unknown');"
+<<<<<<< HEAD
+		#add = "#id#"
+=======
 		add = "#id#"
+>>>>>>> 09dcc76bf16bc8a6aa8ec4a57deaa02e4079ea94
 		
 	else:
 		pass
@@ -155,8 +159,12 @@ def createConnection(u, t, i, v, h, o): # uid, table, element_id, element_value,
 		
 	elif t == "Licence":
 		key = "Tool_has_Licence"
+<<<<<<< HEAD
+		req = "INSERT INTO tool_has_licence VALUES ('"+u+"', '"+str(i)+"');"
+=======
 		req = "INSERT INTO tool_has_licence VALUES ('"+u+"', '"+str(i)+"');"
 		
+>>>>>>> 09dcc76bf16bc8a6aa8ec4a57deaa02e4079ea94
 	else:
 		pass
 	
@@ -178,10 +186,21 @@ def mainDescription(u, o):
 	else:
 		r += "Unknown"
 		
+<<<<<<< HEAD
+	r += "', NULL, CURDATE(), NULL "#registered, registered_by
+	
+	"""
+	if "licence" in o:
+		r += str(o["licence"])
+	else:
+		r += "0"
+	"""
+		
+=======
 	r += "', NULL, CURDATE(), NULL"#registered, registered_by
 			
+>>>>>>> 09dcc76bf16bc8a6aa8ec4a57deaa02e4079ea94
 	r += ", " + u + ", 0);"
-	
 	
 		#
 	#NAME', '\n', '', 'HOMEPAGE', REGISTERED, REGISTERED_BY, Licence_UID, TOOL_UID, USER_UID);"
@@ -237,7 +256,7 @@ def filterObject(data):#We need to
 								kkey = conv[host][key]
 								kkey = kkey.lower()
 								desc[kkey] = prs(add)
-		print desc
+		#print desc
 		ins, id = createInsert(ins, "Dasish", "Description", mainDescription(str(tmp["id"]), desc))
 	return ins, s
 
@@ -293,8 +312,12 @@ def mergeSQL(obj, path):
 	print "registryDescription written"
 	
 	file.write(O2SQL(obj["Tool_has_Licence"]))
+<<<<<<< HEAD
+	print "Tool_has_licence written"
+=======
 	print "Tool_has_licence written"
 	
+>>>>>>> 09dcc76bf16bc8a6aa8ec4a57deaa02e4079ea94
 	
 	
 	
