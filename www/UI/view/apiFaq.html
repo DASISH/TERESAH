@@ -1,15 +1,34 @@
 <div ng-repeat="chapter in documentation">
 	<h2 ng-bind="chapter.name"></h2>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3">URI</div>
+			<div class="col-lg-1">Method</div>
+			<div class="col-lg-8">Informations</div>
+		</div>
+		<hr />
+	</div>
 	<div class="container" ng-repeat="doc in chapter.routes">
 		<div class="row">
-			<div class="col-lg-3"><span class="btn btn-link" ng-click="ui.toggle(doc.uri)" ng-bind="doc.uri"</span></div>
+			<div class="col-lg-3"><span class="btn btn-link" ng-click="ui.toggle(doc.uri + doc.method)" ng-bind="doc.uri"></span></div>
 			<div class="col-lg-1" ng-bind="doc.method"></div>
 			<div class="col-lg-8">
 				<h3 style="margin-top:0; padding-top:0;">Description :</h3>
 				<p ng-bind="doc.description"></p>
 				<div ng-show="ui.toggled[doc.uri]">
 					<h3>Options :</h3>
-					<pre ng-bind="doc.options"></pre>
+					<table class="table table-striped" ng-show="doc.options[0]">
+						<thead>
+							<tr><th>Property name</th><th>Default value</th><th>Description</th></tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="option in doc.options">
+								<td ng-bind="option.name"></td>
+								<td ng-bind="option.default"></td>
+								<td ng-bind="option.definition"></td>
+							</tr>
+						</tbody>
+					</table>
 					<h3>Example :</h3>
 					<p ng-bind="doc.example"></p>
 				</div>

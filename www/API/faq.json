@@ -6,8 +6,65 @@
 				"uri" : "/tool/:id",
 				"method" : "GET",
 				"description" : "Returns descriptions of a tool identified by its shortname or integer UID",
-				"options" : "{\n \tkeyword : false, \n\t type : false,\n\t platform : false,\n\t developer : false, \n\t applicationType : false\n}",
+				"options" : [
+					{
+						"name" : "keyword",
+						"default" : "false",
+						"definition" : "Return keywords attached to the tool"
+					},
+					{
+						"name" : "type",
+						"default" : "false",
+						"definition" : "Return tool type attached to the tool"
+					},
+					{
+						"name" : "platform",
+						"default" : "false",
+						"definition" : "Return platforms attached to the tool"
+					},
+					{
+						"name" : "developer",
+						"default" : "false",
+						"definition" : "Return developers attached to the tool"
+					},
+					{
+						"name" : "applicationType",
+						"default" : "false",
+						"definition" : "Return application type attached to the tool"
+					}
+				],
 				"example" : "/tool/DASISH-Tool-Registry?keyword&type"
+			},
+			{
+				"uri" : "/tool/:id/comments",
+				"method" : "GET",
+				"description" : "Returns comments on a tool identified by its shortname or integer UID",
+				"options" : null,
+				"example" : "/tool/1/comments"
+			},
+			{
+				"uri" : "/tool/:id/forum",
+				"method" : "GET",
+				"description" : "Returns forum of a tool identified by its shortname or integer UID",
+				"options" : null,
+				"example" : "/tool/1/forum"
+			},
+			{
+				"uri" : "/tool/:id/comments",
+				"method" : "POST",
+				"description" : "Returns comments on a tool identified by its shortname or integer UID",
+				"options" : [
+					{
+						"name" : "text",
+						"default" : "REQUIRED",
+						"definition" : "Text of the comment"
+					},{
+						"name" : "title",
+						"default" : "REQUIREd",
+						"definition" : "Title of the comment"
+					}
+				],
+				"example" : "/tool/1/comments"
 			}
 		]
 	}
