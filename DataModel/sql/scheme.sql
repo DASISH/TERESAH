@@ -40,7 +40,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `tools_registry`.`licence_type` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`licence_type` (
-  `licence_type_uid` INT NOT NULL ,
+  `licence_type_uid` INT NOT NULL AUTO_INCREMENT ,
   `type` VARCHAR(255) NOT NULL ,
   PRIMARY KEY (`licence_type_uid`) )
 ENGINE = InnoDB;
@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_type` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_type` (
   `tool_type_uid` INT NOT NULL AUTO_INCREMENT ,
   `tool_type` VARCHAR(255) NULL ,
-  `sourceURI` VARCHAR(255) NULL ,
+  `source_uri` VARCHAR(255) NULL ,
   PRIMARY KEY (`tool_type_uid`) )
 ENGINE = InnoDB;
 
@@ -93,7 +93,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `tools_registry`.`feature` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`feature` (
-  `feature_uid` INT NOT NULL ,
+  `feature_uid` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(255) NOT NULL ,
   `description` TEXT NOT NULL ,
   PRIMARY KEY (`feature_uid`) )
@@ -132,7 +132,7 @@ CREATE INDEX `fk_Tool_has_Feature_Tool1_idx` ON `tools_registry`.`tool_has_featu
 DROP TABLE IF EXISTS `tools_registry`.`platform` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`platform` (
-  `platform_uid` INT NOT NULL ,
+  `platform_uid` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(255) NOT NULL ,
   PRIMARY KEY (`platform_uid`) )
 ENGINE = InnoDB;
@@ -778,6 +778,50 @@ CREATE UNIQUE INDEX `UNIQ` ON `tools_registry`.`tool_has_licence` (`tool_uid` AS
 CREATE INDEX `tool_idx` ON `tools_registry`.`tool_has_licence` (`tool_uid` ASC) ;
 
 CREATE INDEX `licence_idx` ON `tools_registry`.`tool_has_licence` (`licence_uid` ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table `tools_registry`.`video`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tools_registry`.`video` ;
+
+CREATE  TABLE IF NOT EXISTS `tools_registry`.`video` (
+  `video_uid` INT NOT NULL AUTO_INCREMENT ,
+  `title` VARCHAR(255) NULL ,
+  `description` TEXT NULL ,
+  `video_provider` VARCHAR(255) NULL ,
+  `video_link` VARCHAR(255) NULL ,
+  PRIMARY KEY (`video_uid`) )
+ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `video_link_UNIQUE` ON `tools_registry`.`video` (`video_link` ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table `tools_registry`.`tool_has_video`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tools_registry`.`tool_has_video` ;
+
+CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_video` (
+  `tool_uid` INT NOT NULL ,
+  `video_uid` INT NOT NULL ,
+  CONSTRAINT `tool_has_video_tool`
+    FOREIGN KEY (`tool_uid` )
+    REFERENCES `tools_registry`.`tool` (`tool_uid` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `tool_has_video_video`
+    FOREIGN KEY (`video_uid` )
+    REFERENCES `tools_registry`.`video` (`video_uid` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `thv_unique` ON `tools_registry`.`tool_has_video` (`tool_uid` ASC, `video_uid` ASC) ;
+
+CREATE INDEX `tool_idx` ON `tools_registry`.`tool_has_video` (`tool_uid` ASC) ;
+
+CREATE INDEX `video_idx` ON `tools_registry`.`tool_has_video` (`video_uid` ASC) ;
 
 USE `tools_registry` ;
 
