@@ -13,6 +13,9 @@ class Facets {
 			#	TODO : ToolType, Licence Type
 			#
 			#####
+			case "Video":
+				return self::getVideo($id, $mode);
+				break;
 			case "Suite":
 				return self::getSuite($id, $mode);
 				break;
@@ -50,6 +53,42 @@ class Facets {
 				return false;
 		}
 	}
+	private function getVideo($id, $mode = "Default") {
+
+		#REVERSE MODE : Get only data about a developer with developer_uid = $id
+		if($mode == "Reverse") {
+			$req = "SELECT v.video_uid as UID, v.title, v.description, v.video_provider, v.video_link FROM video v WHERE v.video_uid = ? LIMIT 1";
+		#DEFAULT MODE : Get keyword for tool
+		} else {
+			$req = "SELECT v.video_uid as UID, v.title, v.description, v.video_provider, v.video_link FROM video v, tool_has_video tv WHERE tv.video_uid = v.video_uid AND tv.tool_uid = ?";
+		}
+		#We group prepare and execute so we dont have any duplicate line
+		$req = self::DB()->prepare($req);
+		$req->execute(array($id));
+		
+		#If we got more than 0 result, we format
+		if($req->rowCount() > 0) {
+			$data = $req->fetchAll(PDO::FETCH_ASSOC);
+			$ret = array();
+			foreach($data as &$video) {
+				$ret[] = array(
+							"name" => $video["title"],
+							"identifier" => $video["UID"],
+							"uri" => $video["video_link"],
+							"informations" => array(
+								"provider" => $video["video_provider"],
+								"description" => $video["description"]
+							)
+						);
+			}
+			#In reverse mode, we have only one return item
+			if($mode == "Reverse") { $ret = $ret[0]; }
+			return $ret;
+		} else {
+			return false;
+		}
+	}
+
 	private function getDevelopers($id, $mode = "Default") {
 
 		#REVERSE MODE : Get only data about a developer with developer_uid = $id

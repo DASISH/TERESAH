@@ -15,7 +15,8 @@
 				"ToolType" => array("tool_type", "tool_type", "tool_type_uid" ,"tool_has_tool_type", array("tool_uid", "tool_type_uid")),
 				"Organization" => array("organization", "name", "organization_uid", "description_has_organization", array("description_uid", "organization_uid")),
 				"LicenceType" => array("licence_type", "type", "licence_type_uid", "description", array("tool_uid", "licence_uid")),
-				"Licence" => array("licence", "text", "licence_uid", "tool_has_licence", array("tool_uid", "licence_uid"))
+				"Licence" => array("licence", "text", "licence_uid", "tool_has_licence", array("tool_uid", "licence_uid")),
+				"Video" => array("video", array("title", "description", "video_provider"), "video_uid", "tool_has_video", array("tool_uid", "video_uid"))
 			);
 			if(is_string($k) && array_key_exists($k, $dict)) {
 				$array = array(
@@ -48,7 +49,8 @@
 				"ToolType" => array("tool_type", "Tool type"),
 				"Organization" => array("organization", "Organization"),
 				"LicenceType" => array("licence_type", "Licence Type"),
-				"Licence" => array("licence", "Licence")
+				"Licence" => array("licence", "Licence"),
+				"Video" => array("video", "Video")
 			);
 			if($facet) {
 				$return = array(

@@ -149,6 +149,11 @@
 					if(!$ret["standards"]) { unset($ret["standards"]); }
 				}
 				
+				if(isset($options["video"])) {
+					$ret["videos"] = Facets::get("Video", $data["tool_id"]);
+					if(!$ret["videos"]) { unset($ret["videos"]); }
+				}
+				
 				if(isset($options["features"])) {
 					$ret["features"] = Facets::get("Feature", $data["tool_id"]);
 					if(!$ret["features"]) { unset($ret["features"]); }
