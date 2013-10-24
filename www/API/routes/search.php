@@ -1,6 +1,7 @@
 <?php
 
 	$app->get('/search/general/', function () use ($require, $app) { 
+		$app->contentType('application/json');
 		$require->req(array("search"));
 		$data = Search::general($app->request->get()); 
 		
@@ -13,6 +14,7 @@
 	});
 
 	$app->get('/search/all/', function () use ($require, $app) { 
+		$app->contentType('application/json');
 		$require->req(array("search"));
 		$data = Search::all($app->request->get()); 
 		
@@ -25,6 +27,7 @@
 	});
 
 	$app->post('/search/general/', function () use ($require, $app) { 
+		$app->contentType('application/json');
 		$require->req(array("search"));
 		$data = Search::general($app->request->post()); 
 		
@@ -37,6 +40,7 @@
 	});
 	
 	$app->get('/search/facet/:field/', function ($facet) use ($require, $app) { 
+		$app->contentType('application/json');
 		$require->req(array("search"));
 		$data = Search::fieldContent($facet, $app->request->get());
 		if(isset($data["Error"])) {
@@ -47,6 +51,7 @@
 	});
 	
 	$app->get('/search/faceted/', function () use ($require, $app) {
+		$app->contentType('application/json');
 		$require->req(array("search"));
 		$data = Search::faceted($app->request->get());
 		if(isset($data["Error"])) {
@@ -57,6 +62,7 @@
 	});
 	
 	$app->post('/search/faceted/', function () use ($require, $app) {
+		$app->contentType('application/json');
 		$require->req(array("search"));
 	
 		if(count($app->request->post()) > 0) {

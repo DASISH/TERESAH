@@ -112,10 +112,6 @@
 				"description" : "Returns a list of labels for said facets :type. List of available facets can be find at /facet/",
 				"options" : [
 					{
-						"name" : "case_insensitivity",
-						"default" : "false",
-						"definition" : "Research are not sensitive to case"
-					},{
 						"name" : "limit",
 						"default" : "20",
 						"definition" : "Limit of item shown on one page of results. Maximum is 50"
@@ -170,6 +166,47 @@
 				"description" : "Returns a pie graph. :mode Default is the only available right now.",
 				"options" : null,
 				"example" : "/pie/descriptions/default"
+			}
+		]
+	},{
+		"name" : "Search",
+		"routes" : [
+			{
+				"uri" : "/search/general",
+				"method" : "GET",
+				"description" : "Search through the title, the description and the keyword of the tool.",
+				"options" : [
+					{
+						"name" : "limited",
+						"default" : "false",
+						"definition" : "If set to 'title', only the title is searched. If set to 'nokeyword', won't search in keyword"
+					},{
+						"name" : "request",
+						"default" : "Required",
+						"definition" : "Text you want to search in the description or keyword connected to the tool"
+					},{
+						"name" : "case_insensitivity",
+						"default" : "false",
+						"definition" : "Research are not sensitive to case"
+					},{
+						"name" : "limit",
+						"default" : "20",
+						"definition" : "Limit of item shown on one page of results. Maximum is 50"
+					},{
+						"name" : "start",
+						"default" : "0",
+						"definition" : "Number of first result item shown"
+					},{
+						"name" : "order",
+						"default" : "ASC",
+						"definition" : "Ascendant order or descendant order of items (ASC|DESC)"
+					},{
+						"name" : "orderBy",
+						"default" : "title",
+						"definition" : "Order item either by 'title' or 'identifier'"
+					}
+				],
+				"example" : "/search/general/?request=twitter&order=ASC&case_insensitivity=true"
 			}
 		]
 	},{

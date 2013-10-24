@@ -46,6 +46,7 @@
 			}
 			
 			#ORDER
+			if(!isset($get["order"])) { $get["order"] = false; }
 			switch ($get["order"]) {
 				case "DESC":
 					$options["order"] = "DESC"; 
@@ -57,6 +58,7 @@
 			}
 			
 			#ORDERBY
+			if(!isset($get["orderBy"])) { $get["orderBy"] = false; }
 			switch ($get["orderBy"]) {
 				case "identifier":
 					$options["orderBy"] = "identifier"; 
@@ -65,6 +67,21 @@
 				default:
 					$options["orderBy"] = "title"; 
 					break;
+			}
+			
+			#ORDERBY
+			if(isset($get["limited"])) { 
+				switch ($get["limited"]) {
+					case "title":
+						$options["limited"] = "title"; 
+						break;
+					case "nokeyword":
+						$options["limited"] = "nokeyword"; 
+						break;
+					default:
+						$options["limited"] = false; 
+						break;
+				}
 			}
 			
 			#START
@@ -160,21 +177,46 @@
 			#	Keyword Research
 			#
 			###########
-			
+			#Generate the order system for the request
+			switch($options["orderBy"]) {
+				case "identifier":
+					$ordering = "t.tool_uid";
+					break;
+				case "title":
+				default:
+					$ordering = "d.title";
+					break;
+			}
+			#Request generation
 			$req = "SELECT d.title, t.tool_uid as UID, t.shortname FROM description d 
 						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
-						RIGHT OUTER JOIN tool_has_keyword tk ON tk.tool_uid = t.tool_uid
-						RIGHT OUTER JOIN keyword k ON k.keyword_uid = tk.keyword_uid
-						RIGHT OUTER JOIN external_description ED ON ED.tool_uid = t.tool_uid
-					WHERE 
-						k.keyword LIKE CONCAT('%', ? , '%') ".$sensitivity." OR
-						d.description LIKE CONCAT('%', ? , '%') ".$sensitivity." OR
-						ED.description LIKE CONCAT('%', ? , '%') ".$sensitivity."  
-					GROUP BY d.tool_uid
-					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
+						RIGHT OUTER JOIN external_description ED ON ED.tool_uid = t.tool_uid ";
+						
+			if(!isset($options["limited"]) || $options["limited"] == false) {
+				$req .=	"RIGHT OUTER JOIN tool_has_keyword tk ON tk.tool_uid = t.tool_uid
+						RIGHT OUTER JOIN keyword k ON k.keyword_uid = tk.keyword_uid ";
+			}
+			$req .=	"WHERE 
+						d.title LIKE CONCAT('%', ? , '%') ".$sensitivity." ";
+				
+			if(!isset($options["limited"]) || $options["limited"] == false) {
+				$req .=	" OR k.keyword LIKE CONCAT('%', ? , '%') ".$sensitivity." ";
+			}
+			if(!isset($options["limited"]) || $options["limited"] != "title") {
+				$req .=	" OR d.description LIKE CONCAT('%', ? , '%') ".$sensitivity." OR
+						ED.description LIKE CONCAT('%', ? , '%') ".$sensitivity."  ";
+			}
+			$req .=	"GROUP BY d.tool_uid
+					ORDER BY ".$ordering." ".$options["order"]." LIMIT ".$options["start"]." , ".$options["limit"];
 			$req = self::DB()->prepare($req);
-			$req->execute(array($options["request"], $options["request"], $options["request"]));
 			
+			if(!isset($options["limited"]) || $options["limited"] == false) {
+				$req->execute(array($options["request"], $options["request"], $options["request"], $options["request"]));
+			} elseif($options["limited"] == "nokeyword") {
+				$req->execute(array($options["request"], $options["request"], $options["request"]));
+			} else {
+				$req->execute(array($options["request"]));
+			}
 			
 			$options["results"] = $req->rowCount();
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
