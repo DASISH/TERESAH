@@ -60,11 +60,127 @@
 						"definition" : "Text of the comment"
 					},{
 						"name" : "title",
-						"default" : "REQUIREd",
+						"default" : "REQUIRED",
 						"definition" : "Title of the comment"
 					}
 				],
 				"example" : "/tool/1/comments"
+			}
+		]
+	},
+	{
+		"name" : "Topic",
+		"routes" : [
+			{
+				"uri" : "/topic/:topic",
+				"method" : "GET",
+				"description" : "Returns a topic with the given numeric identifier :topic",
+				"options" : null,
+				"example" : "/topic/1"
+			},{
+				"uri" : "/topic/:tool/:topic",
+				"method" : "GET",
+				"description" : "Post a reply to a topic with the given numeric identifier for tool :tool and topic :topic",
+				"options" : [
+					{
+						"name" : "text",
+						"default" : "REQUIRED",
+						"definition" : "Text of the comment"
+					},{
+						"name" : "title",
+						"default" : "REQUIREd",
+						"definition" : "Title of the comment"
+					}
+				],
+				"example" : "/topic/1/1"
+			}
+		]
+	},
+	{
+		"name" : "Facets",
+		"routes" : [
+			{
+				"uri" : "/facet/",
+				"method" : "GET",
+				"description" : "Returns a list of facets",
+				"options" : null,
+				"example" : "/facet/"
+			},
+			{
+				"uri" : "/facet/:type",
+				"method" : "GET",
+				"description" : "Returns a list of labels for said facets :type. List of available facets can be find at /facet/",
+				"options" : [
+					{
+						"name" : "case_insensitivity",
+						"default" : "false",
+						"definition" : "Research are not sensitive to case"
+					},{
+						"name" : "limit",
+						"default" : "20",
+						"definition" : "Limit of item shown on one page of results. Maximum is 50"
+					},{
+						"name" : "start",
+						"default" : "0",
+						"definition" : "Number of first result item shown"
+					},{
+						"name" : "order",
+						"default" : "ASC",
+						"definition" : "Ascendant order or descendant order of items (ASC|DESC)"
+					},{
+						"name" : "orderBy",
+						"default" : "title",
+						"definition" : "Order item either by 'title' or 'identifier'"
+					}
+					
+				],
+				"example" : "/facet/Keyword"
+			},{
+				"uri" : "/facet/:type/:identifier",
+				"method" : "GET",
+				"description" : "Returns a list of tools linked to a facet identified by its :type and its numeric :identifier ",
+				"options" : [
+					{
+						"name" : "limit",
+						"default" : "20",
+						"definition" : "Limit of item shown on one page of results. Maximum is 50"
+					},{
+						"name" : "start",
+						"default" : "0",
+						"definition" : "Number of first result item shown"
+					},{
+						"name" : "order",
+						"default" : "ASC",
+						"definition" : "Ascendant order or descendant order of items (ASC|DESC)"
+					},{
+						"name" : "orderBy",
+						"default" : "title",
+						"definition" : "Order item either by 'title' or 'identifier'"
+					}
+				],
+				"example" : "/facet/Keyword/1"
+			}
+		]
+	},{
+		"name" : "Graph",
+		"routes" : [
+			{
+				"uri" : "/pie/descriptions/:mode",
+				"method" : "GET",
+				"description" : "Returns a pie graph. :mode Default is the only available right now.",
+				"options" : null,
+				"example" : "/pie/descriptions/default"
+			}
+		]
+	},{
+		"name" : "Documentation",
+		"routes" : [
+			{
+				"uri" : "/faq",
+				"method" : "GET",
+				"description" : "Returns the documentation of the application's API.",
+				"options" : null,
+				"example" : "/faq"
 			}
 		]
 	}
