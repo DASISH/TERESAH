@@ -20,6 +20,21 @@ filter('kProviders', function() {
 		return data;
 	}
 }).
+filter('apiFilter', function() {
+	return function(input) {
+		data = [];
+		angular.forEach(input, function(item) {
+			dom = item.name;
+			if(data.indexOf(dom) == -1) {
+				data.push(dom)
+				return item;
+			} else {
+				return false;
+			}
+		});
+		return data;
+	}
+}).
 filter('vProviders', function() {
 	return function(input) {
 		data = [];
