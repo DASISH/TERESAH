@@ -3,6 +3,41 @@
 		"name" : "Tool",
 		"routes" : [
 			{
+				"uri" : "/tool/",
+				"method" : "GET",
+				"description" : "Returns all tools",
+				"options" : [
+					{
+						"name" : "descriptionSize",
+						"default" : "140",
+						"definition" : "Characters Length of the description returned",
+						"type" : "INT"
+					},{
+						"name" : "limit",
+						"default" : "20",
+						"definition" : "Limit of item shown on one page of results. Maximum is 50",
+						"type" : "INT"
+					},{
+						"name" : "start",
+						"default" : "0",
+						"definition" : "Number of first result item shown",
+						"type" : "INT"
+					},{
+						"name" : "order",
+						"default" : "ASC",
+						"definition" : "Ascendant order or descendant order of items (ASC / DESC)",
+						"type" : "ENUM(ASC , DESC )"
+					},{
+						"name" : "orderBy",
+						"default" : "title",
+						"definition" : "Order item either by 'title' or 'identifier'",
+						"type" : "ENUM(title , identifier )"
+					}
+					
+				],
+				"example" : "/tool/DASISH-Tool-Registry?keyword&type"
+			},
+			{
 				"uri" : "/tool/:id",
 				"method" : "GET",
 				"description" : "Returns descriptions of a tool identified by its shortname or integer UID",
@@ -10,27 +45,32 @@
 					{
 						"name" : "keyword",
 						"default" : "false",
-						"definition" : "Return keywords attached to the tool"
+						"definition" : "Return keywords attached to the tool",
+						"type" : "Boolean"
 					},
 					{
 						"name" : "type",
 						"default" : "false",
-						"definition" : "Return tool type attached to the tool"
+						"definition" : "Return tool type attached to the tool",
+						"type" : "Boolean"
 					},
 					{
 						"name" : "platform",
 						"default" : "false",
-						"definition" : "Return platforms attached to the tool"
+						"definition" : "Return platforms attached to the tool",
+						"type" : "Boolean"
 					},
 					{
 						"name" : "developer",
 						"default" : "false",
-						"definition" : "Return developers attached to the tool"
+						"definition" : "Return developers attached to the tool",
+						"type" : "Boolean"
 					},
 					{
 						"name" : "applicationType",
 						"default" : "false",
-						"definition" : "Return application type attached to the tool"
+						"definition" : "Return application type attached to the tool",
+						"type" : "Boolean"
 					}
 				],
 				"example" : "/tool/DASISH-Tool-Registry?keyword&type"
@@ -56,12 +96,16 @@
 				"options" : [
 					{
 						"name" : "text",
-						"default" : "REQUIRED",
-						"definition" : "Text of the comment"
+						"default" : "-",
+						"definition" : "Text of the comment",
+						"type" : "TEXT",
+						"required" : true
 					},{
 						"name" : "title",
-						"default" : "REQUIRED",
-						"definition" : "Title of the comment"
+						"default" : "-",
+						"definition" : "Title of the comment",
+						"type" : "TEXT",
+						"required" : true
 					}
 				],
 				"example" : "/tool/1/comments"
@@ -84,12 +128,16 @@
 				"options" : [
 					{
 						"name" : "text",
-						"default" : "REQUIRED",
-						"definition" : "Text of the comment"
+						"default" : "-",
+						"definition" : "Text of the comment",
+						"type" : "TEXT",
+						"required" : true
 					},{
 						"name" : "title",
-						"default" : "REQUIREd",
-						"definition" : "Title of the comment"
+						"default" : "-",
+						"definition" : "Title of the comment",
+						"type" : "TEXT",
+						"required" : true
 					}
 				],
 				"example" : "/topic/1/1"
@@ -112,21 +160,30 @@
 				"description" : "Returns a list of labels for said facets :type. List of available facets can be find at /facet/",
 				"options" : [
 					{
+						"name" : "request",
+						"default" : "-",
+						"definition" : "Text you want to search in the labels.",
+						"type" : "TEXT"
+					},{
 						"name" : "limit",
 						"default" : "20",
-						"definition" : "Limit of item shown on one page of results. Maximum is 50"
+						"definition" : "Limit of item shown on one page of results. Maximum is 50",
+						"type" : "INT"
 					},{
 						"name" : "start",
 						"default" : "0",
-						"definition" : "Number of first result item shown"
+						"definition" : "Number of first result item shown",
+						"type" : "INT"
 					},{
 						"name" : "order",
 						"default" : "ASC",
-						"definition" : "Ascendant order or descendant order of items (ASC|DESC)"
+						"definition" : "Ascendant order or descendant order of items (ASC|DESC)",
+						"type" : "ENUM(ASC,DESC)"
 					},{
 						"name" : "orderBy",
 						"default" : "title",
-						"definition" : "Order item either by 'title' or 'identifier'"
+						"definition" : "Order item either by 'title' or 'identifier'",
+						"type" : "ENUM(title,identifier)"
 					}
 					
 				],
@@ -139,19 +196,23 @@
 					{
 						"name" : "limit",
 						"default" : "20",
-						"definition" : "Limit of item shown on one page of results. Maximum is 50"
+						"definition" : "Limit of item shown on one page of results. Maximum is 50",
+						"type" : "INT"
 					},{
 						"name" : "start",
 						"default" : "0",
-						"definition" : "Number of first result item shown"
+						"definition" : "Number of first result item shown",
+						"type" : "INT"
 					},{
 						"name" : "order",
 						"default" : "ASC",
-						"definition" : "Ascendant order or descendant order of items (ASC|DESC)"
+						"definition" : "Ascendant order or descendant order of items (ASC|DESC)",
+						"type" : "ENUM(ASC,DESC)"
 					},{
 						"name" : "orderBy",
 						"default" : "title",
-						"definition" : "Order item either by 'title' or 'identifier'"
+						"definition" : "Order item either by 'title' or 'identifier'",
+						"type" : "ENUM(title,identifier)"
 					}
 				],
 				"example" : "/facet/Keyword/1"
@@ -169,44 +230,190 @@
 			}
 		]
 	},{
+		"name" : "User",
+		"routes" : [
+			{
+				"uri" : "/login/",
+				"method" : "POST",
+				"description" : "Sign in a user",
+				"options" : [
+					{
+						"name" : "user",
+						"default" : "-",
+						"definition" : "User login name",
+						"type" : "TEXT",
+						"required" : true
+					},{
+						"name" : "password",
+						"default" : "-",
+						"definition" : "User password",
+						"type" : "TEXT",
+						"required" : true
+					}
+				],
+				"example" : "/login/"
+			},{
+				"uri" : "/signup/",
+				"method" : "POST",
+				"description" : "Sign UP a user",
+				"options" : [
+					{
+						"name" : "mail",
+						"default" : "-",
+						"definition" : "User's mail",
+						"type" : "MAIL",
+						"required" : true
+					},{
+						"name" : "name",
+						"default" : "-",
+						"definition" : "User display name",
+						"type" : "TEXT",
+						"required" : true
+					},{
+						"name" : "user",
+						"default" : "-",
+						"definition" : "User login name",
+						"type" : "TEXT",
+						"required" : true
+					},{
+						"name" : "password",
+						"default" : "-",
+						"definition" : "User password",
+						"type" : "TEXT",
+						"required" : true
+					}
+				],
+				"example" : "/signup/"
+			},{
+				"uri" : "/cookie/",
+				"method" : "GET",
+				"description" : "Return an object containing session informations",
+				"options" : null,
+				"example" : "/cookie/"
+			},{
+				"uri" : "/signout/",
+				"method" : "GET",
+				"description" : "Sign the user out",
+				"options" : null,
+				"example" : "/signout/"
+			},{
+				"uri" : "/oAuth/:provider",
+				"method" : "GET",
+				"description" : "Use oAuth to sign up or sign in",
+				"options" : [{
+						"name" : "callback",
+						"default" : "-",
+						"definition" : "Url to which it should redirect at the end of the login",
+						"type" : "URL",
+						"required" : true
+					}
+				],
+				"example" : "/signout/"
+			}
+		]
+	},{
 		"name" : "Search",
 		"routes" : [
 			{
 				"uri" : "/search/general",
-				"method" : "GET",
+				"method" : "GET/POST",
 				"description" : "Search through the title, the description and the keyword of the tool.",
 				"options" : [
 					{
+						"name" : "request",
+						"default" : "-",
+						"definition" : "Text you want to search in the description or keyword connected to the tool",
+						"type" : "TEXT",
+						"required" : true
+					},{
 						"name" : "limited",
 						"default" : "false",
-						"definition" : "If set to 'title', only the title is searched. If set to 'nokeyword', won't search in keyword"
+						"definition" : "If set to 'title', only the title is searched. If set to 'nokeyword', won't search in keyword",
+						"type" : "ENUM(title,nokeyword,false)"
 					},{
-						"name" : "request",
-						"default" : "Required",
-						"definition" : "Text you want to search in the description or keyword connected to the tool"
+						"name" : "description",
+						"default" : "false",
+						"definition" : "If set to true, will return a shorten description for the tool",
+						"type" : "BOOLEAN"
+					},{
+						"name" : "descriptionSize",
+						"default" : "140",
+						"definition" : "Characters Length of the description returned",
+						"type" : "INT"
 					},{
 						"name" : "case_insensitivity",
 						"default" : "false",
-						"definition" : "Research are not sensitive to case"
+						"definition" : "Research are not sensitive to case",
+						"type" : "BOOLEAN"
 					},{
 						"name" : "limit",
 						"default" : "20",
-						"definition" : "Limit of item shown on one page of results. Maximum is 50"
+						"definition" : "Limit of item shown on one page of results. Maximum is 50",
+						"type" : "INT"
 					},{
 						"name" : "start",
 						"default" : "0",
-						"definition" : "Number of first result item shown"
+						"definition" : "Number of first result item shown",
+						"type" : "INT"
 					},{
 						"name" : "order",
 						"default" : "ASC",
-						"definition" : "Ascendant order or descendant order of items (ASC|DESC)"
+						"definition" : "Ascendant order or descendant order of items (ASC|DESC)",
+						"type" : "ENUM(ASC,DESC)"
 					},{
 						"name" : "orderBy",
 						"default" : "title",
-						"definition" : "Order item either by 'title' or 'identifier'"
+						"definition" : "Order item either by 'title' or 'identifier'",
+						"type" : "ENUM(title,identifier)"
 					}
 				],
 				"example" : "/search/general/?request=twitter&order=ASC&case_insensitivity=true"
+			},{
+				"uri" : "/search/faceted",
+				"method" : "GET/POST",
+				"description" : "Create a faceted search.",
+				"options" : [
+					{
+						"name" : "facets",
+						"default" : "-",
+						"definition" : "Facets you want to be connected to the tool you want to search",
+						"type" : "ARRAY",
+						"required" : true
+					},{
+						"name" : "facets[:type]",
+						"default" : "-",
+						"definition" : "Type of facet you want to be connected",
+						"type" : "ARRAY",
+						"required" : true
+					},{
+						"name" : "facets[:type]['request']",
+						"default" : "-",
+						"definition" : "List of labels in facet :type you want to be connected to your tool. \n Json Example : {\"facets\":{\"Publication\":{\"request\":[\"1\"]}}} ",
+						"type" : "ARRAY OF INT",
+						"required" : true
+					},{
+						"name" : "limit",
+						"default" : "20",
+						"definition" : "Limit of item shown on one page of results. Maximum is 50",
+						"type" : "INT"
+					},{
+						"name" : "start",
+						"default" : "0",
+						"definition" : "Number of first result item shown",
+						"type" : "INT"
+					},{
+						"name" : "order",
+						"default" : "ASC",
+						"definition" : "Ascendant order or descendant order of items (ASC|DESC)",
+						"type" : "ENUM(ASC,DESC)"
+					},{
+						"name" : "orderBy",
+						"default" : "title",
+						"definition" : "Order item either by 'title' or 'identifier'",
+						"type" : "ENUM(title,identifier)"
+					}
+				],
+				"example" : "/search/faceted/?facets[Licence][request][0]=22"
 			}
 		]
 	},{
