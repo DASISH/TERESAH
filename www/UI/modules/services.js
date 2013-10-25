@@ -67,13 +67,13 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 		//
 		routes : {
 			tools : {
-				all : Restangular.one("search/all/"),
+				all : Restangular.one("tool/"),
 				one : Restangular.all("tool"),
 				topic : Restangular.all("topic")
 			},
 			facets : {
 				list : Restangular.all("/facet/"),
-				search : Restangular.all("search/facet")
+				search : Restangular.all("/facet")
 			},
 			browse : {
 				facet : Restangular.all("facet")
