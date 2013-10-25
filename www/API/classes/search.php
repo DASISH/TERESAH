@@ -57,6 +57,25 @@
 					break;
 			}
 			
+			#Description
+			if(!isset($get["description"])) { $get["description"] = false; }
+			switch ($get["description"]) {
+				case "true":
+				case "yes":
+				case true:
+					$options["description"] = true; 
+					break;
+				default:
+					$options["description"] = false; 
+					break;
+			}
+			
+			#DescriptionLength
+			if(!isset($get["descriptionSize"])) { 
+				$options["descriptionSize"] = 140; 
+			} else {
+				$options["descriptionSize"] = intval($get["descriptionSize"]); 
+			}
 			#ORDERBY
 			if(!isset($get["orderBy"])) { $get["orderBy"] = false; }
 			switch ($get["orderBy"]) {
@@ -94,6 +113,7 @@
 			return array($options, $sensitivity);
 		}
 		
+		#Returns all tools
 		function all($get) {
 			#####
 			#
@@ -111,12 +131,20 @@
 				return $opt;
 			}
 			$options = $opt[0];
-			#$reqWord = "xml";
-			// $reqWord = "%".$reqWord."%";
+			
+			switch($options["orderBy"]) {
+				case "identifier":
+					$ordering = "t.tool_uid";
+					break;
+				case "title":
+				default:
+					$ordering = "d.title";
+					break;
+			}
 			
 			###########
 			#
-			#	Keyword Research
+			#	Tool Query
 			#
 			###########
 			
@@ -125,7 +153,7 @@
 						LEFT OUTER JOIN external_description ED ON ED.tool_uid = t.tool_uid
 						LEFT OUTER JOIN tool_application_type tat ON tat.tool_uid = t.tool_uid
 					GROUP BY d.tool_uid
-					ORDER BY d.title LIMIT ".$options["start"]." , ".$options["limit"];
+					ORDER BY ".$ordering." ".$options["order"]." LIMIT ".$options["start"]." , ".$options["limit"];
 			$req = self::DB()->prepare($req);
 			$req->execute(array($options["request"], $options["request"], $options["request"]));
 			
@@ -135,10 +163,10 @@
 			$ret = array("response" => array(), "parameters" => $options);
 			foreach($data as &$answer) {
 				if($answer["InnerDescription"] == "&nbsp;") {
-					$desc = substr($answer["ExternalDescription"], 0, 140)."...";
+					$desc = substr($answer["ExternalDescription"], 0, $options["descriptionSize"])."...";
 					$provider = $answer["Provider"];
 				} elseif($answer["InnerDescription"] != Null) {
-					$desc = substr($answer["InnerDescription"], 0, 140)."...";
+					$desc = substr($answer["InnerDescription"], 0, $options["descriptionSize"])."...";
 					$provider = "DASISH";
 				} else {
 					$desc = "";
@@ -169,8 +197,6 @@
 			}
 			$options = $opt[0];
 			$sensitivity = $opt[1];
-			#$reqWord = "xml";
-			// $reqWord = "%".$reqWord."%";
 			
 			###########
 			#
@@ -187,11 +213,23 @@
 					$ordering = "d.title";
 					break;
 			}
-			#Request generation
-			$req = "SELECT d.title, t.tool_uid as UID, t.shortname FROM description d 
+			
+			
+			#Select Generation
+			$req = "SELECT  d.title, t.tool_uid as UID, t.shortname, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription";
+			
+			#If description asked, we output type as well
+			if(isset($options["description"]) && ($options["description"] == true)) {
+				$req .= ", tat.application_type ";
+			}
+			#From Generation
+			$req .=	" FROM description d
 						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
 						RIGHT OUTER JOIN external_description ED ON ED.tool_uid = t.tool_uid ";
 						
+			if(isset($options["description"]) && ($options["description"] == true)) {
+				$req .= "LEFT OUTER JOIN tool_application_type tat ON tat.tool_uid = t.tool_uid ";
+			}
 			if(!isset($options["limited"]) || $options["limited"] == false) {
 				$req .=	"RIGHT OUTER JOIN tool_has_keyword tk ON tk.tool_uid = t.tool_uid
 						RIGHT OUTER JOIN keyword k ON k.keyword_uid = tk.keyword_uid ";
@@ -210,6 +248,8 @@
 					ORDER BY ".$ordering." ".$options["order"]." LIMIT ".$options["start"]." , ".$options["limit"];
 			$req = self::DB()->prepare($req);
 			
+			
+			#Request execution :
 			if(!isset($options["limited"]) || $options["limited"] == false) {
 				$req->execute(array($options["request"], $options["request"], $options["request"], $options["request"]));
 			} elseif($options["limited"] == "nokeyword") {
@@ -222,10 +262,29 @@
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
 			
 			$ret = array("response" => array(), "parameters" => $options);
-			foreach($data as &$answer) {
-				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
-			}
 			
+			#Formating
+			if(!isset($options["description"]) || ($options["description"] == false)) {
+				##If no description asked :
+				foreach($data as &$answer) {
+					$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]));
+				}
+			} else {
+				##If options : Descriptions asked
+				foreach($data as &$answer) {
+					if($answer["InnerDescription"] == "&nbsp;") {
+						$desc = substr($answer["ExternalDescription"], 0, $options["descriptionSize"])."...";
+						$provider = $answer["Provider"];
+					} elseif($answer["InnerDescription"] != Null) {
+						$desc = substr($answer["InnerDescription"], 0, $options["descriptionSize"])."...";
+						$provider = "DASISH";
+					} else {
+						$desc = "";
+						$provider = "";
+					}
+					$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
+				}
+		}	
 			
 			return $ret;
 		}
