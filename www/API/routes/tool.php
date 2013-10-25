@@ -6,6 +6,18 @@
 		jP(Tool::get($toolUID, $app->request->get())); 
 	} );
 	
+	$app->get('/tool/', function () use ($require, $app) { 
+		$app->contentType('application/json');
+		$require->req(array("search"));
+		$data = Search::all($app->request->get()); 
+			
+		if(isset($data["Error"])) {
+			$app->response()->status(400);
+		} else {
+			return jP($data); 
+		}
+	});
+	
 ################
 #
 #	COMMENTS AND FORUM PART

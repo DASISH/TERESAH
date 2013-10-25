@@ -31,7 +31,7 @@
 		}
 	});	
 	
-	$app->get('/facet/', function () use ($require) {
+	$app->get('/facet/', function () use ($require, $app) {
 		$app->contentType('application/json');
 		$require->req(array("search"));
 		$data = Search::getFacets();
