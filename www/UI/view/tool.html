@@ -3,6 +3,7 @@
 		<div class="pull-right">
 			<div class="btn-group btn-group-sm">
 				<a class="btn btn-sm btn-default" ng-click="ui.page = 'Details'" ng-class="{'btn-primary': (ui.page == 'Details')}">Details</a>
+				<a class="btn btn-sm btn-default" ng-href="#/link/{{item.identifier.id}}" ng-show="ui.user.data.signedin">Add a label</a>
 				<a class="btn btn-sm btn-default" ng-click="ui.page = 'Forum&Comments'" ng-class="{'btn-primary': (ui.page == 'Forum&Comments')}">Forum</a>
 			</div>
 		</div>
@@ -234,12 +235,6 @@
 				<a class="btn btn-sm btn-block" ng-repeat="key in ui.sections.list" ng-show="key" ng-click="ui.sections.toggle(key)" ng-bind="key"></a>
 			</div>
 			<hr />
-		</section>
-		<section id="edit" ng-show="ui.user.data.name">
-			<hr />
-			<h2>Edit</h2>
-				<button class="btn" ng-click="ui.link()">Open me!</button>
-				<div ng-show="selected">Selection from a modal: {{ selected }}</div>
 		</section>
 	</div>
 </div>

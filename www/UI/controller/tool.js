@@ -46,8 +46,10 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', '$rootScope',
 		user : {
 			data : false,
 			signedin : function () { 
-				if($root.user.signedin) {
-					$scope.ui.user.data = $root.user;
+				if($root.user) {
+					if($root.user.signedin) {
+						$scope.ui.user.data = $root.user;
+					}
 				}
 			}
 		},
