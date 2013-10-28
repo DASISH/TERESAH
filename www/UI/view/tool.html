@@ -1,22 +1,32 @@
 <section id="viewHeader">
 	<div class="page-header">
-		<h1 ng-bind="item.descriptions.title"></h1>		
+		<div class="pull-right">
+			<div class="btn-group btn-group-sm">
+				<a class="btn btn-sm btn-default" ng-click="ui.page = 'Details'" ng-class="{'btn-primary': (ui.page == 'Details')}">Details</a>
+				<a class="btn btn-sm btn-default" ng-click="ui.page = 'Forum&Comments'" ng-class="{'btn-primary': (ui.page == 'Forum&Comments')}">Forum</a>
+			</div>
+		</div>
+		<h1 ng-bind="item.descriptions.title"></h1>
 	</div>
 </section>
+
+<section ng-show="ui.page == 'Details'">
 <div class="row">
 
 	<div class="col-lg-8">
 		<div class="row">
-			<div class="col-lg-12">
+			<section class="col-lg-12" id="descrition">
 				<h2 ng-bind="item.desc.provider"></h2>
 				<p>Source : <a ng-href="{{item.desc.uri}}" ng-bind="item.desc.uri"></a></p>
 				<p ng-bind-html="item.desc.text | newline"></p>
-			</div>
+				<hr />
+			</section>
 			<div class="col-lg-12">
-				<section id="keywords"  ng-show="item.keyword[0]">
+				<section id="keywords"  ng-show="item.keyword[0] && !(ui.sections.list['Keywords'])">
 					<h2>Keywords
 						<div class="pull-right">
-							<div class="dropdown">
+							<span class="btn btn-default" ng-click="ui.sections.toggle('Keywords')"><span class="glyphicon glyphicon-eye-close"></span></span>
+							<span class="dropdown">
 								<span class="dropdown-toggle btn btn-default">
 									<span class="glyphicon glyphicon-cog"></span>
 								</span>
@@ -25,7 +35,7 @@
 									<li><a ng-click="ui.keywords.taxonomy.show = !ui.keywords.taxonomy.show">Taxonomies</a></li>
 									<li><a ng-click="ui.keywords.show = !ui.keywords.show">Hide/Show</a></li>
 								</ul>
-							</div>
+							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-block  btn-group-justified" ng-show="ui.keywords.provider.show">
@@ -39,11 +49,13 @@
 					<ul  class="list-inline" style="margin-top:10px;" ng-show="ui.keywords.show">
 						<li ng-repeat="kw in item.keyword |filter:{provider.domain : ui.keywords.provider.selected, provider.taxonomy : ui.keywords.taxonomy.selected}" ng-bind="kw.keyword" class="badge" style="margin-right:10px; margin-bottom:5px; text-transform:capitalize;"  ></li>
 					</ul>
+					<hr />
 				</section>
-				<section id="publications"  ng-show="item.publications[0]">
+				<section id="publications"  ng-show="item.publications[0] && !(ui.sections.list['Publications'])">
 					<h2>Publications
 						<div class="pull-right">
-							<div class="dropdown">
+							<span class="btn btn-default" ng-click="ui.sections.toggle('Publications')"><span class="glyphicon glyphicon-eye-close"></span></span>
+							<span class="dropdown">
 								<span class="dropdown-toggle btn btn-default">
 									<span class="glyphicon glyphicon-cog"></span>
 								</span>
@@ -51,7 +63,7 @@
 									<li><a ng-click="ui.publications.filter.show = !ui.publications.filter.show">Filter</a></li>
 									<li><a ng-click="ui.publications.show = !ui.publications.show">Hide/Show</a></li>
 								</ul>
-							</div>
+							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.publications.filter.show">
@@ -60,11 +72,13 @@
 					<div style="margin-top:10px;" ng-show="ui.publications.show">
 						<p ng-repeat="pub in item.publications |filter:ui.publications.filter.input" ng-bind="pub.name"></p>
 					</div>
+					<hr />
 				</section>
-				<section id="projects" ng-show="item.projects[0]">
+				<section id="projects" ng-show="item.projects[0] && !(ui.sections.list['Projects'])">
 					<h2>Projects
 						<div class="pull-right">
-							<div class="dropdown">
+							<span class="btn btn-default" ng-click="ui.sections.toggle('Projects')"><span class="glyphicon glyphicon-eye-close"></span></span>
+							<span class="dropdown">
 								<span class="dropdown-toggle btn btn-default">
 									<span class="glyphicon glyphicon-cog"></span>
 								</span>
@@ -72,7 +86,7 @@
 									<li><a ng-click="ui.projects.filter.show = !ui.projects.filter.show">Filter</a></li>
 									<li><a ng-click="ui.projects.show = !ui.projects.show">Hide/Show</a></li>
 								</ul>
-							</div>
+							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.projects.filter.show">
@@ -85,11 +99,13 @@
 							
 						</div>
 					</div>
+					<hr />
 				</section>
-				<section id="projects" ng-show="item.features[0]">
+				<section id="projects" ng-show="item.features[0] && !(ui.sections.list['Features'])">
 					<h2>Features
 						<div class="pull-right">
-							<div class="dropdown">
+							<span class="btn btn-default" ng-click="ui.sections.toggle('Features')"><span class="glyphicon glyphicon-eye-close"></span></span>
+							<span class="dropdown">
 								<span class="dropdown-toggle btn btn-default">
 									<span class="glyphicon glyphicon-cog"></span>
 								</span>
@@ -97,7 +113,7 @@
 									<li><a ng-click="ui.features.filter.show = !ui.features.filter.show">Filter</a></li>
 									<li><a ng-click="ui.features.show = !ui.features.show">Hide/Show</a></li>
 								</ul>
-							</div>
+							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.features.filter.show">
@@ -110,11 +126,13 @@
 							</li>
 						</ul>
 					</div>
+					<hr />
 				</section>
-				<section id="standards" ng-show="item.standards[0]">
+				<section id="standards" ng-show="item.standards[0] && !(ui.sections.list['Standards'])">
 					<h2>Standards
 						<div class="pull-right">
-							<div class="dropdown">
+							<span class="btn btn-default" ng-click="ui.sections.toggle('Standards')"><span class="glyphicon glyphicon-eye-close"></span></span>
+							<span class="dropdown">
 								<span class="dropdown-toggle btn btn-default">
 									<span class="glyphicon glyphicon-cog"></span>
 								</span>
@@ -122,7 +140,7 @@
 									<li><a ng-click="ui.standards.filter.show = !ui.standards.filter.show">Filter</a></li>
 									<li><a ng-click="ui.standards.show = !ui.standards.show">Hide/Show</a></li>
 								</ul>
-							</div>
+							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.standards.filter.show">
@@ -133,11 +151,13 @@
 							<li><a ng-href="{{std.informations.source}}"><em ng-bind="std.name"></em> ( <span ng-bind="std.informations.version"></span> )</a></li>
 						</ul>
 					</div>
+					<hr />
 				</section>
-				<section id="videos" ng-show="item.videos[0]">
+				<section id="videos" ng-show="item.videos[0] && !(ui.sections.list['Videos'])">
 					<h2>Video
 						<div class="pull-right">
-							<div class="dropdown">
+							<span class="btn btn-default" ng-click="ui.sections.toggle('Videos')"><span class="glyphicon glyphicon-eye-close"></span></span>
+							<span class="dropdown">
 								<span class="dropdown-toggle btn btn-default">
 									<span class="glyphicon glyphicon-cog"></span>
 								</span>
@@ -146,7 +166,7 @@
 									<li><a ng-click="ui.videos.filter.show = !ui.videos.filter.show">Filter</a></li>
 									<li><a ng-click="ui.videos.show = !ui.videos.show">Hide/Show</a></li>
 								</ul>
-							</div>
+							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-block  btn-group-justified" ng-show="ui.videos.provider.show">
@@ -164,180 +184,205 @@
 							</div>
 						</div>
 					</div>
+					<hr />
 				</section>
 			</div>
 		</div>
 	</div>
 	<div class="col-lg-4">
-		<h2>Information</h2>
-		<dl>
-			<dt ng-show="item.type">Tool Type</dt>
-			<dd ng-repeat="type in item.type" legend="{{type.uri}}" ng-bind="type.type"></dd>
-			<dt ng-show="item.licence">Licence</dt>
-			<dd ng-repeat="licence in item.licence" ng-bind="licence.name"></dd>
-			<dt ng-show="item.licence">Licence Type</dt>
-			<dd ng-repeat="licence in item.licence" ng-bind="licence.type"></dd>
-			<dt ng-show="item.suite">Suite</dt>
-			<dd ng-repeat="suite in item.suite" ng-bind="suite.name"></dd>
-			<dt ng-show="item.descriptions.homepage">Homepage</dt>
-			<dd><a ng-href="{{item.descriptions.homepage}}" ng-bind="item.descriptions.homepage"></a></dd>
-			<dt ng-show="item.applicationType">Application Type(s)</dt>
-			<dd ng-repeat="os in item.applicationType" ng-bind="os.name"></dd>
-			<dt ng-show="item.platform">Platform(s)</dt>
-			<dd ng-repeat="os in item.platform" ng-bind="os"></dd>
-			<dt ng-show="item.developers">Developer(s)</dt>
-			<dd ng-repeat="developer in item.developers" ng-bind="developer.name"></dd>
-		</dl>
-		<hr />
-		<h2>Available Descriptions</h2>
-		<div class="btn-group btn-group-sm btn-block  btn-group-justified">
-			<a class="btn btn-sm btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)" ng-bind="desc.provider"></a>
-		</div>
-		<hr />
-		<h2>Structured Descriptor Document</h2>
-		<div class="btn-group btn-group-sm btn-block  btn-group-justified">
-			<a class="btn btn-sm btn-block" rel="alternate" type="application/rdf+xml" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/xml">RDF/XML format</a>
-			<a class="btn btn-sm btn-block" rel="alternate" type="text/rdf+n3" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/turtle">N3/Turtle</a>
-			<a class="btn btn-sm btn-block" rel="alternate" type="application/json+rdf" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/json">RDF/JSON</a>
-			<a class="btn btn-sm btn-block" rel="alternate" type="text/plain" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/ntriples">N-Triples</a>
-		</div>
-	</div>
-</div>
-<div class="row">
-
-	<div class="btn-toolbar">
-		<div class="btn-group">
-			<button type="button" class="btn btn-success" ng-click="ui.forum.activate();">Forum</button>
-			<button type="button" class="btn btn-warning" ng-click="ui.comments.activate();">Comments</button>
-		</div>
-		<div class="btn-group" ng-show="ui.forum.active">
-			<button ng-show="ui.forum.topic.active" ng-click="ui.forum.topic.active = false" class="btn btn-warning">Close topic</button>
-			<button ng-show="ui.forum.active" class="btn btn-primary" ng-click="ui.forum.form.active = !ui.forum.form.active" ng-show="!ui.forum.form.active">New Subject</button>
-		</div>
-		<div class="btn-group" ng-show="ui.comments.active">
-			<button class="btn btn-primary"  ng-click="ui.comments.form.active = true" ng-show="!ui.comments.form.active">New Comment</button>
-			<button class="btn btn-primary"  ng-click="ui.comments.form.active = false" ng-show="ui.comments.form.active">Close form</button>
-		</div>
-	</div>
-
-</div>
-
-<div class="row" ng-show="ui.comments.active">
-	<h2>Comments</h2>
-	<div class="container " style="margin-bottom:40px;" ng-show="ui.comments.list && !ui.comments.form.active">
-		<div class="row col-lg-10 col-lg-offset-1" ng-repeat="comment in ui.comments.list">
-			<div class="container">
-				<div class="col-lg-2">
-					<h4 style="text-align:center;">{{comment.user.name}}</h4>
-					<img src="http://www.gravatar.com/avatar/{{comment.user.mail}}?s=80" alt="..." class="img-circle">
-				</div>
-				<div class="col-lg-10">
-					<h3>{{comment.comment.subject}}</h3>
-					<p ng-bind-html="comment.comment.text | newline "></p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<form class="form-horizontal" role="form" ng-submit="ui.comments.form.submit()" ng-show="ui.comments.form.active">
+		<section id ="informations">
+			<h2>Details</h2>
+			<dl>
+				<dt ng-show="item.type">Tool Type</dt>
+					<dd ng-repeat="type in item.type" legend="{{type.uri}}" ng-bind="type.type"></dd>
+				<dt ng-show="item.licence">Licence</dt>
+					<dd ng-repeat="licence in item.licence" ng-bind="licence.name"></dd>
+				<dt ng-show="item.licence">Licence Type</dt>
+					<dd ng-repeat="licence in item.licence" ng-bind="licence.type"></dd>
+				<dt ng-show="item.suite">Suite</dt>
+					<dd ng-repeat="suite in item.suite" ng-bind="suite.name"></dd>
+				<dt ng-show="item.descriptions.homepage">Homepage</dt>
+					<dd><a ng-href="{{item.descriptions.homepage}}" ng-bind="item.descriptions.homepage"></a></dd>
+				<dt ng-show="item.applicationType">Application Type(s)</dt>
+					<dd ng-repeat="os in item.applicationType" ng-bind="os.name"></dd>
+				<dt ng-show="item.platform">Platform(s)</dt>
+					<dd ng-repeat="os in item.platform" ng-bind="os"></dd>
+				<dt ng-show="item.developers">Developer(s)</dt>
+					<dd ng-repeat="developer in item.developers" ng-bind="developer.name"></dd>
+			</dl>
 			<hr />
-			<div class="alert alert-success" ng-show="ui.comments.form.error">{{ui.comments.form.error}}</div>
-			<div class="form-group">
-				<label for="title" class="col-lg-2 control-label">Title</label>
-				<div class="col-lg-10">
-					<input type="text" ng-model="ui.comments.form.data.title" class="form-control" id="title" placeholder="Title">
-				</div>
+		</section>
+		<section id="availableDescriptions" ng-show="item.descriptions.description[1]">
+			<h2>Available Descriptions</h2>
+			<div class="btn-group btn-group-sm btn-block  btn-group-justified">
+				<a class="btn btn-sm btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)" ng-bind="desc.provider"></a>
 			</div>
-			<div class="form-group">
-				<label for="Message" class="col-lg-2 control-label">Message</label>
-				<div class="col-lg-10">
-					<textarea ng-model="ui.comments.form.data.text" id="Message" class="form-control"></textarea>
-				</div>
+			<hr />
+		</section>
+		<section id="RDF">
+			<h2>Structured Descriptor Document</h2>
+			<div class="btn-group btn-group-sm btn-block  btn-group-justified">
+				<a class="btn btn-sm btn-block" rel="alternate" type="application/rdf+xml" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/xml">RDF/XML format</a>
+				<a class="btn btn-sm btn-block" rel="alternate" type="text/rdf+n3" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/turtle">N3/Turtle</a>
+				<a class="btn btn-sm btn-block" rel="alternate" type="application/json+rdf" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/json">RDF/JSON</a>
+				<a class="btn btn-sm btn-block" rel="alternate" type="text/plain" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/ntriples">N-Triples</a>
 			</div>
-			<div class="form-group">
-				<div class="col-lg-offset-2 col-lg-10">
-					<button type="submit" class="btn btn-default">Comment</button>
-				</div>
+		</section>
+		<section id="blocks" ng-show="ui.sections.active > 0">
+			<h2>Available blocks</h2>
+			<div class="btn-group btn-group-sm btn-block  btn-group-justified">
+				<a class="btn btn-sm btn-block" ng-repeat="key in ui.sections.list" ng-show="key" ng-click="ui.sections.toggle(key)" ng-bind="key"></a>
 			</div>
-		</form>
+			<hr />
+		</section>
+		<section id="edit" ng-show="ui.user.data.name">
+			<hr />
+			<h2>Edit</h2>
+		</section>
 	</div>
 </div>
+</section>
 
-<div class="row" ng-show="ui.forum.active">
-	
-	<div class="container " style="margin-bottom:40px;" ng-show="ui.forum.topic.active">
-		<div class="row col-lg-10 col-lg-offset-1" ng-repeat="comment in ui.forum.topic.list" >
-			<div class="container">
-				<div class="col-lg-2" style="text-align:center;">
-					<h4>{{comment.user.name}}</h4>
-					<img src="http://www.gravatar.com/avatar/{{comment.user.mail}}?s=80" alt="..." class="img-circle">
-				</div>
-				<div class="col-lg-10">
-					<h3>{{comment.comment.subject}}</h3>
-					<p ng-bind-html="comment.comment.text | newline "></p>
+<section ng-show="ui.page == 'Forum&Comments'">
+	<div class="row">
+
+		<div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-success" ng-click="ui.forum.activate();">Forum</button>
+				<button type="button" class="btn btn-warning" ng-click="ui.comments.activate();">Comments</button>
+			</div>
+			
+			<div ng-show="ui.forum.active" class="pull-right">
+				<hr />
+				<button ng-show="ui.forum.topic.active" ng-click="ui.forum.topic.active = false" class="btn btn-warning">Close topic</button>
+				<button class="btn btn-primary" ng-click="ui.forum.form.active = !ui.forum.form.active" ng-show="!ui.forum.active && ui.user.data.name">New Subject</button>
+			</div>
+			<div ng-show="ui.comments.active">
+				<hr />
+				<button class="btn btn-primary"  ng-click="ui.comments.form.active = true" ng-show="!ui.comments.form.active && ui.user.data.name">New Comment</button>
+				<button class="btn btn-primary"  ng-click="ui.comments.form.active = false" ng-show="ui.comments.form.active">Close form</button>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="row" ng-show="ui.comments.active">
+		<h2>Comments</h2>
+		<div class="container " style="margin-bottom:40px;" ng-show="ui.comments.list && !ui.comments.form.active">
+			<div class="row col-lg-10 col-lg-offset-1" ng-repeat="comment in ui.comments.list">
+				<div class="container">
+					<div class="col-lg-2">
+						<h4 style="text-align:center;">{{comment.user.name}}</h4>
+						<img src="http://www.gravatar.com/avatar/{{comment.user.mail}}?s=80" alt="..." class="img-circle">
+					</div>
+					<div class="col-lg-10">
+						<h3>{{comment.comment.subject}}</h3>
+						<p ng-bind-html="comment.comment.text | newline "></p>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row col-lg-10 col-lg-offset-1">
-			<button class="btn btn-primary" ng-click="ui.forum.topic.form.active = !ui.forum.topic.form.active" ng-show="!ui.forum.topic.form.active">Reply</button>
-			<hr />
-			<form class="form-horizontal" role="form" ng-submit="ui.forum.topic.form.submit()" ng-show="ui.forum.topic.form.active">
-				<div class="alert alert-success" ng-show="ui.forum.topic.form.error">{{ui.forum.topic.form.error}}</div>
+		<div class="container">
+			<form class="form-horizontal" role="form" ng-submit="ui.comments.form.submit()" ng-show="ui.comments.form.active">
+				<hr />
+				<div class="alert alert-success" ng-show="ui.comments.form.error">{{ui.comments.form.error}}</div>
 				<div class="form-group">
 					<label for="title" class="col-lg-2 control-label">Title</label>
 					<div class="col-lg-10">
-						<input type="text" ng-model="ui.forum.topic.form.data.title" class="form-control" id="title" placeholder="Title">
+						<input type="text" ng-model="ui.comments.form.data.title" class="form-control" id="title" placeholder="Title">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="Message" class="col-lg-2 control-label">Message</label>
 					<div class="col-lg-10">
-						<textarea ng-model="ui.forum.topic.form.data.text" id="Message" class="form-control"></textarea>
+						<textarea ng-model="ui.comments.form.data.text" id="Message" class="form-control"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
-						<button type="submit" class="btn btn-default">Reply</button>
+						<button type="submit" class="btn btn-default">Comment</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
-	
-	<div class="row col-lg-10 col-lg-offset-1">
-		<form class="form-horizontal" role="form" ng-submit="ui.forum.form.submit()" ng-show="ui.forum.form.active">
-			<div class="alert alert-success" ng-show="ui.forum.form.error">{{ui.forum.topic.form.error}}</div>
-			<div class="form-group">
-				<label for="title" class="col-lg-2 control-label">Title</label>
-				<div class="col-lg-10">
-					<input type="text" ng-model="ui.forum.form.data.title" class="form-control" id="title" placeholder="Title">
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="Message" class="col-lg-2 control-label">Message</label>
-				<div class="col-lg-10">
-					<textarea ng-model="ui.forum.form.data.text" id="Message" class="form-control"></textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-lg-offset-2 col-lg-10">
-					<button type="submit" class="btn btn-default">New topic</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	
-	<table class="table table-striped">
-		<thead>
-			<tr><th>Date</th><th>Title</th><th>User</th></tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="topic in ui.forum.list">
-				<td>{{topic.comment.date}}</td>
-				<td><a ng-click="ui.forum.topic.read(topic.identifier)">{{topic.comment.subject}}</a></td>
-				<td>{{topic.user.name}}</td>
-			</tr>
-		</tbody>
-	</table>
 
-</div>
+	<div class="row" ng-show="ui.forum.active">
+		
+		<div class="container " style="margin-bottom:40px;" ng-show="ui.forum.topic.active">
+			<div class="row col-lg-10 col-lg-offset-1" ng-repeat="comment in ui.forum.topic.list" >
+				<div class="container">
+					<div class="col-lg-2" style="text-align:center;">
+						<h4>{{comment.user.name}}</h4>
+						<img src="http://www.gravatar.com/avatar/{{comment.user.mail}}?s=80" alt="..." class="img-circle">
+					</div>
+					<div class="col-lg-10">
+						<h3>{{comment.comment.subject}}</h3>
+						<p ng-bind-html="comment.comment.text | newline "></p>
+					</div>
+				</div>
+			</div>
+			<div class="row col-lg-10 col-lg-offset-1">
+				<button class="btn btn-primary" ng-click="ui.forum.topic.form.active = !ui.forum.topic.form.active" ng-show="!ui.forum.topic.form.active">Reply</button>
+				<hr />
+				<form class="form-horizontal" role="form" ng-submit="ui.forum.topic.form.submit()" ng-show="ui.forum.topic.form.active">
+					<div class="alert alert-success" ng-show="ui.forum.topic.form.error">{{ui.forum.topic.form.error}}</div>
+					<div class="form-group">
+						<label for="title" class="col-lg-2 control-label">Title</label>
+						<div class="col-lg-10">
+							<input type="text" ng-model="ui.forum.topic.form.data.title" class="form-control" id="title" placeholder="Title">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="Message" class="col-lg-2 control-label">Message</label>
+						<div class="col-lg-10">
+							<textarea ng-model="ui.forum.topic.form.data.text" id="Message" class="form-control"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-offset-2 col-lg-10">
+							<button type="submit" class="btn btn-default">Reply</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="row col-lg-10 col-lg-offset-1">
+			<form class="form-horizontal" role="form" ng-submit="ui.forum.form.submit()" ng-show="ui.forum.form.active">
+				<div class="alert alert-success" ng-show="ui.forum.form.error">{{ui.forum.topic.form.error}}</div>
+				<div class="form-group">
+					<label for="title" class="col-lg-2 control-label">Title</label>
+					<div class="col-lg-10">
+						<input type="text" ng-model="ui.forum.form.data.title" class="form-control" id="title" placeholder="Title">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="Message" class="col-lg-2 control-label">Message</label>
+					<div class="col-lg-10">
+						<textarea ng-model="ui.forum.form.data.text" id="Message" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<button type="submit" class="btn btn-default">New topic</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<table class="table table-striped">
+			<thead>
+				<tr><th>Date</th><th>Title</th><th>User</th></tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="topic in ui.forum.list">
+					<td>{{topic.comment.date}}</td>
+					<td><a ng-click="ui.forum.topic.read(topic.identifier)">{{topic.comment.subject}}</a></td>
+					<td>{{topic.user.name}}</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</section>

@@ -53,7 +53,6 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 	$scope.$watch('user.signedin', function(status) {
 		if(status == true) {
 			$scope.ui.user.data = $root.user;
-			console.log($root.user);
 		}
 	});
 }]);

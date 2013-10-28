@@ -7,6 +7,37 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 		$scope.item.desc = $scope.item.descriptions.description[0];
 	}
 	$scope.ui = {
+		page : "Details",
+		sections : {
+			list : {},
+			active : 0,
+			toggle : function(name) {
+				if(this.list[name]) {
+					this.list[name] = false;
+				} else {
+					this.list[name] = name;
+				}
+				console.log(this.list);
+				$scope.ui.sections.active = 0;
+				angular.forEach($scope.ui.sections.list, function(val) {
+					if(val) { 
+						$scope.ui.sections.active = $scope.ui.sections.active + 1;
+					}
+				});
+			}
+		},
+		user : {
+			data : false,
+			signedin : function () { $ui.user.signedin(function(data) {
+					console.log(data);
+					o = {name : data.name, mail: data.mail, signedin : true };
+					//$root.user = o;
+					$scope.ui.user.data = o;
+					console.log($scope.ui.user.data);
+				}); 
+			}
+		},
+		//UI TOOLS
 		changeDesc : function(provider) {
 			if(typeof provider == "string") {
 			} else {
@@ -166,12 +197,12 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 	};
 	//
 	$ui.title("Tool | " + $scope.item.descriptions.title);
+	$scope.ui.user.signedin();
 	
 	//exec
 }]);
 Tool.resolveTool = {
 	itemData: function($route, Item) {
-		console.log($route.current.params.toolId);
 		this.data = Item.resolver.tools.one($route.current.params.toolId);
 		return Item.data;
 	},
