@@ -169,29 +169,38 @@
 		</div>
 	</div>
 	<div class="col-lg-4">
-		<div class="btn-group-vertical btn-block">
-			<a class="btn btn-primary btn-lg btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)" ng-bind="desc.provider"></a>
-		</div>
-		<p>&nbsp;</p>
-		<h2 class="btn btn-success btn-lg btn-block">Information</h2>
+		<h2>Information</h2>
 		<dl>
-			<dt>Tool Type</dt>
+			<dt ng-show="item.type">Tool Type</dt>
 			<dd ng-repeat="type in item.type" legend="{{type.uri}}" ng-bind="type.type"></dd>
-			<dt>Licence</dt>
+			<dt ng-show="item.licence">Licence</dt>
 			<dd ng-repeat="licence in item.licence" ng-bind="licence.name"></dd>
-			<dt>Licence Type</dt>
+			<dt ng-show="item.licence">Licence Type</dt>
 			<dd ng-repeat="licence in item.licence" ng-bind="licence.type"></dd>
 			<dt ng-show="item.suite">Suite</dt>
 			<dd ng-repeat="suite in item.suite" ng-bind="suite.name"></dd>
-			<dt>Homepage</dt>
+			<dt ng-show="item.descriptions.homepage">Homepage</dt>
 			<dd><a ng-href="{{item.descriptions.homepage}}" ng-bind="item.descriptions.homepage"></a></dd>
-			<dt>Application Type(s)</dt>
+			<dt ng-show="item.applicationType">Application Type(s)</dt>
 			<dd ng-repeat="os in item.applicationType" ng-bind="os.name"></dd>
-			<dt>Platform(s)</dt>
+			<dt ng-show="item.platform">Platform(s)</dt>
 			<dd ng-repeat="os in item.platform" ng-bind="os"></dd>
-			<dt>Developer(s)</dt>
+			<dt ng-show="item.developers">Developer(s)</dt>
 			<dd ng-repeat="developer in item.developers" ng-bind="developer.name"></dd>
 		</dl>
+		<hr />
+		<h2>Available Descriptions</h2>
+		<div class="btn-group btn-group-sm btn-block  btn-group-justified">
+			<a class="btn btn-sm btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)" ng-bind="desc.provider"></a>
+		</div>
+		<hr />
+		<h2>Structured Descriptor Document</h2>
+		<div class="btn-group btn-group-sm btn-block  btn-group-justified">
+			<a class="btn btn-sm btn-block" rel="alternate" type="application/rdf+xml" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/xml">RDF/XML format</a>
+			<a class="btn btn-sm btn-block" rel="alternate" type="text/rdf+n3" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/turtle">N3/Turtle</a>
+			<a class="btn btn-sm btn-block" rel="alternate" type="application/json+rdf" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/json">RDF/JSON</a>
+			<a class="btn btn-sm btn-block" rel="alternate" type="text/plain" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/ntriples">N-Triples</a>
+		</div>
 	</div>
 </div>
 <div class="row">
