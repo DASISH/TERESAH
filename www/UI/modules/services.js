@@ -68,6 +68,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 		routes : {
 			tools : {
 				all : Restangular.one("tool/"),
+				link : Restangular.all("tool/facet"),
 				one : Restangular.all("tool"),
 				topic : Restangular.all("topic")
 			},
@@ -141,6 +142,18 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					if(typeof(callback)==='undefined') callback = false;
 					
 					return Item.routes.tools.one.post(opt).then(function (data) {
+						if(callback) {	callback(data);	}
+						Item.data = data;
+						return data;
+					});
+					
+				},
+				link : function(opt, callback) {
+				
+					if(typeof(opt)==='undefined') opt =  {};
+					if(typeof(callback)==='undefined') callback = false;
+					
+					return Item.routes.tools.link.post(opt).then(function (data) {
 						if(callback) {	callback(data);	}
 						Item.data = data;
 						return data;

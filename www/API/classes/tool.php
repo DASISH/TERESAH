@@ -77,7 +77,7 @@
 			
 			$sql = "INSERT INTO ".$table["link"]["name"]." (".$table["link"]["tool"].", ".$table["link"]["item"]." ) VALUES ( ? , ? )";
 			$req = self::DB()->prepare($sql);
-			$req->execute(array($toolUID, $element));
+			$req->execute(array($data["tool"], $data["element"]));
 			
 			//Check
 			if($req->rowCount() == 1) {

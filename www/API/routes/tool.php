@@ -70,6 +70,30 @@
 #	NEW TOOL / POST FOR TOOL
 #
 #############
+	$app->post('/tool/facet', function () use ($require, $app) { 
+		$app->contentType('application/json');
+		$require->req(array("tool", "helper"));
+		
+		if(!isset($_SESSION["user"]["id"])) {
+			jP(array("Error" => "You need to be logged in to use this function"));
+			exit();
+		}	
+		
+		if(count($app->request->post()) > 0) {
+			$input = $app->request->post();
+		} elseif(count($app->request()->getBody()) > 0) {
+			$input = $app->request()->getBody();
+		} else {
+			return $app->response()->status(400);
+		}
+		$item = array();
+		foreach($input["facets"] as $i) {
+			$item[] = Tool::linkFacets(array("element" => $i["element"], "facet" => $i["facet"], "tool" => $input["tool"]));
+		}
+		jP($item);
+		exit;
+	});
+	
 	$app->post('/tool/', function () use ($require, $app) { 
 		$app->contentType('application/json');
 		$require->req(array("tool"));

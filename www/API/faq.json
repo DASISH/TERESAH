@@ -109,6 +109,39 @@
 					}
 				],
 				"example" : "/tool/1/comments"
+			},
+			{
+				"uri" : "/tool/facet",
+				"method" : "POST",
+				"description" : "Link a label from a facet to a chosen tool. Can have multiple array in facets.",
+				"options" : [
+					{
+						"name" : "tool",
+						"default" : "-",
+						"definition" : "UID of the tool",
+						"type" : "INT",
+						"required" : true
+					},{
+						"name" : "facets",
+						"default" : "-",
+						"definition" : "Title of the comment",
+						"type" : "array",
+						"required" : true
+					},{
+						"name" : "facets[0]['facet']",
+						"default" : "-",
+						"definition" : "Type of the facet",
+						"type" : "TEXT",
+						"required" : true
+					},{
+						"name" : "facets[0]['element']",
+						"default" : "-",
+						"definition" : "UID of the label",
+						"type" : "INT",
+						"required" : true
+					}
+				],
+				"example" : "/tool/link"
 			}
 		]
 	},

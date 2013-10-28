@@ -99,7 +99,6 @@ AddTool.resolveAddTool = {
 		Item.resolver.facets(false, false, function(data) {
 			x = []
 			angular.forEach(data, function(val) {
-				console.log(val);
 				val["option"] = { case_insensitivity : true };
 				x.push(val);
 			});
