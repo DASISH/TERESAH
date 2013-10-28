@@ -6,6 +6,40 @@ class Facets {
 		return $DB;
 	}
 	
+	function information($facet = false) {
+		$return = array();
+		if($facet) {
+			$dict = Helper::facet($facet, true);
+			
+			$req = "SELECT COUNT(*) as total FROM ".$dict["facetTable"];
+			$req = self::DB()->prepare($req);
+			$req->execute();
+			$data = $req->fetch(PDO::FETCH_ASSOC);
+			
+			$return = array(
+				"facetParam" => $dict["facetParam"],
+				"facetLegend" => $dict["facetLegend"],
+				"facetTotal" => intval($data["total"])
+			);
+		} else {
+			$dict = Helper::facet();
+			foreach($dict as $tableName => &$vals) {
+				$req = "SELECT COUNT(*) as total FROM ".$tableName;
+				$req = self::DB()->prepare($req);
+				$req->execute();
+				$data = $req->fetch(PDO::FETCH_ASSOC);
+				if(intval($data["total"]) > 0) {
+					$return[] = array(
+						"facetParam" => $vals["facetParam"],
+						"facetLegend" => $vals["facetLegend"],
+						"facetTotal" => intval($data["total"])
+					);
+				}
+			}
+		}
+		return $return;
+	}
+
 	function get($name, $id, $mode = "Default") {
 		switch ($name) {
 			#####

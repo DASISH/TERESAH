@@ -175,7 +175,7 @@
 				$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 			}
 			
-			$ret["parameters"]["total"] = self::nbrTotal();
+			// $ret["parameters"]["total"] = self::nbrTotal();
 			return $ret;
 		}
 		function general($get) {
@@ -377,6 +377,7 @@
 					}
 					$facets = $ret;
 				}
+				$options["total"] = self::nbrTotal(" FROM " . $dic["table"]["name"]);
 				return array("facets" => $facets, "params" => $options);
 			}
 		}
@@ -562,39 +563,7 @@
 			return $ret;
 		}
 		
-		function getFacets($facet = false) {
-			$return = array();
-			if($facet) {
-				$dict = Helper::facet($facet, true);
-				
-				$req = "SELECT COUNT(*) as total FROM ".$dict["facetTable"];
-				$req = self::DB()->prepare($req);
-				$req->execute();
-				$data = $req->fetch(PDO::FETCH_ASSOC);
-				
-				$return = array(
-					"facetParam" => $dict["facetParam"],
-					"facetLegend" => $dict["facetLegend"],
-					"facetTotal" => intval($data["total"])
-				);
-			} else {
-				$dict = Helper::facet();
-				foreach($dict as $tableName => &$vals) {
-					$req = "SELECT COUNT(*) as total FROM ".$tableName;
-					$req = self::DB()->prepare($req);
-					$req->execute();
-					$data = $req->fetch(PDO::FETCH_ASSOC);
-					if(intval($data["total"]) > 0) {
-						$return[] = array(
-							"facetParam" => $vals["facetParam"],
-							"facetLegend" => $vals["facetLegend"],
-							"facetTotal" => intval($data["total"])
-						);
-					}
-				}
-			}
-			return $return;
-		}
+
 		
 	}
 ?>

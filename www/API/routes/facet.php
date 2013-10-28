@@ -19,22 +19,22 @@
 	$app->get('/facet/:facet/', function ($facet) use ($require, $app) {
 		$app->contentType('application/json');
 		
-		$require->req(array("search", "helper"));
+		$require->req(array("facet", "search", "helper"));
 		
 		$options = $app->request->get();
 		$data = Search::fieldContent($facet, $options);
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {
-			$data["facet"] = Helper::facet($facet);
+			$data["facet"] = Facets::information($facet);
 			return jP($data); 
 		}
 	});	
 	
 	$app->get('/facet/', function () use ($require, $app) {
 		$app->contentType('application/json');
-		$require->req(array("search"));
-		$data = Search::getFacets();
+		$require->req(array("facet"));
+		$data = Facets::information();
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {
