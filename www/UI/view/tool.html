@@ -238,28 +238,32 @@
 		<section id="edit" ng-show="ui.user.data.name">
 			<hr />
 			<h2>Edit</h2>
+				<button class="btn" ng-click="ui.link()">Open me!</button>
+				<div ng-show="selected">Selection from a modal: {{ selected }}</div>
 		</section>
 	</div>
 </div>
 </section>
+
+
+
 
 <section ng-show="ui.page == 'Forum&Comments'">
 	<div class="row">
 
 		<div>
 			<div class="btn-group">
-				<button type="button" class="btn btn-success" ng-click="ui.forum.activate();">Forum</button>
-				<button type="button" class="btn btn-warning" ng-click="ui.comments.activate();">Comments</button>
+				<button type="button" class="btn btn-default" ng-class="{'btn-primary' : ui.forum.active}" ng-click="ui.forum.activate();">Forum</button>
+				<button type="button" class="btn btn-default" ng-class="{'btn-primary' : ui.comments.active}" ng-click="ui.comments.activate();">Comments</button>
 			</div>
 			
 			<div ng-show="ui.forum.active" class="pull-right">
-				<hr />
 				<button ng-show="ui.forum.topic.active" ng-click="ui.forum.topic.active = false" class="btn btn-warning">Close topic</button>
-				<button class="btn btn-primary" ng-click="ui.forum.form.active = !ui.forum.form.active" ng-show="!ui.forum.active && ui.user.data.name">New Subject</button>
+				<button class="btn btn-primary" ng-click="ui.forum.form.active = !ui.forum.form.active" ng-show="ui.forum.active && !ui.forum.topic.active && ui.user.data.signedin">New Subject</button>
+				<button class="btn btn-primary" ng-click="ui.forum.form.active = !ui.forum.form.active" ng-show="ui.forum.active && ui.forum.topic.active && ui.user.data.signedin">Close Subject</button>
 			</div>
-			<div ng-show="ui.comments.active">
-				<hr />
-				<button class="btn btn-primary"  ng-click="ui.comments.form.active = true" ng-show="!ui.comments.form.active && ui.user.data.name">New Comment</button>
+			<div ng-show="ui.comments.active" class="pull-right">
+				<button class="btn btn-primary"  ng-click="ui.comments.form.active = true" ng-show="!ui.comments.form.active && ui.user.data.signedin">New Comment</button>
 				<button class="btn btn-primary"  ng-click="ui.comments.form.active = false" ng-show="ui.comments.form.active">Close form</button>
 			</div>
 		</div>

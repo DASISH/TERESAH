@@ -94,6 +94,7 @@
 	<script type="text/javascript" src="./modules/filter.js"></script>
 	
 	<script type="text/javascript" src="./controller/tool.js"></script>
+	<script type="text/javascript" src="./controller/link.js"></script>
 	<script type="text/javascript" src="./controller/tool.insert.js"></script>
 	<script type="text/javascript" src="./controller/top.js"></script>
 	<script type="text/javascript" src="./controller/home.js"></script>
@@ -104,6 +105,23 @@
 	<script type="text/javascript" src="./controller/browse.facet.js"></script>
 	<script type="text/javascript" src="./controller/browse.js"></script>
 	
+	<script type="text/ng-template" id="myModalContent.html">
+		<div class="modal-header">
+			<h3>I'm a modal!</h3>
+		</div>
+		<div class="modal-body">
+			<ul>
+				<li ng-repeat="item in items">
+					<a ng-click="selected.item = item">{{ item }}</a>
+				</li>
+			</ul>
+			Selected: <b>{{ selected.item }}</b>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" ng-click="ok()">OK</button>
+			<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+		</div>
+	</script>
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
 </html>

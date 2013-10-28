@@ -1,4 +1,4 @@
-var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($scope, $ui, $item) {
+var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', '$rootScope', '$modal', '$log', function($scope, $ui, $item, $root, $modal, $log) {
 
 	$scope.item = $item.data;
 	
@@ -7,6 +7,23 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 		$scope.item.desc = $scope.item.descriptions.description[0];
 	}
 	$scope.ui = {
+		link : function () {
+			var modalInstance = $modal.open({
+				templateUrl: 'myModalContent.html',
+				controller: LinkCtrl,
+				resolve: {
+					items: function () {
+						return $scope.item;
+					}
+				}
+			});
+
+			modalInstance.result.then(function (selectedItem) {
+				$scope.selected = selectedItem;
+			}, function () {
+				$log.info('Modal dismissed at: ' + new Date());
+			});
+		},
 		page : "Details",
 		sections : {
 			list : {},
@@ -28,13 +45,10 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 		},
 		user : {
 			data : false,
-			signedin : function () { $ui.user.signedin(function(data) {
-					console.log(data);
-					o = {name : data.name, mail: data.mail, signedin : true };
-					//$root.user = o;
-					$scope.ui.user.data = o;
-					console.log($scope.ui.user.data);
-				}); 
+			signedin : function () { 
+				if($root.user.signedin) {
+					$scope.ui.user.data = $root.user;
+				}
 			}
 		},
 		//UI TOOLS
