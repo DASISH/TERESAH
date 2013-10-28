@@ -32,6 +32,7 @@
 					$this->r("descriptions.php");
 					break;
 				case "facet":
+					$this->r("helper.php");
 					$this->r("facets.php");
 					break;
 				case "user":
