@@ -35,6 +35,10 @@
 					$this->r("helper.php");
 					$this->r("facets.php");
 					break;
+				case "description":
+					$this->r("helper.php");
+					$this->r("descriptions.php");
+					break;
 				case "user":
 					$this->r("user.php");
 					break;

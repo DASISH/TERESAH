@@ -236,6 +236,38 @@
 			</div>
 			<hr />
 		</section>
+		<section id="blocks" ng-show="ui.user.data.signedin">
+			<span class="pull-right btn btn-default" ng-click="ui.description.edit.show = !ui.description.edit.show;"><span class="glyphicon" ng-class="{'glyphicon-eye-close' : ui.description.edit.show,'glyphicon-eye-open' : !ui.description.edit.show}"></span></span>
+			<h2>Edit description</h2>
+			<form role="form" ng-submit="ui.description.edit.submit()" ng-show="ui.description.edit.show ">
+				<div class="alert alert-danger" ng-bind="ui.description.edit.response.Error" ng-show="ui.description.edit.response.Error"></div>
+				<div class="alert alert-success" ng-bind="ui.description.edit.response.Success" ng-show="ui.description.edit.response.Success"></div>
+
+				<div class="form-group">
+					<label for="tTitle">Title</label>
+					<input type="text" class="form-control" id="tTitle" placeholder="Title" ng-model="ui.description.edit.data.name">
+				</div>
+				<div class="form-group">
+					<label for="tDescription">Description</label>
+					<textarea class="form-control" id="tDescription" placeholder="Description" ng-model="ui.description.edit.data.description"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="tVersion">Version</label>
+					<input type="text" class="form-control" id="tVersion" placeholder="Version" ng-model="ui.description.edit.data.version">
+				</div>
+				<div class="form-group">
+					<label for="tHomepage">Homepage</label>
+					<input type="url" class="form-control" id="tHomepage" placeholder="Homepage" ng-model="ui.description.edit.data.homepage">
+				</div>
+				<div class="form-group">
+					<label for="tAvail">Available from</label>
+					<input type="date" class="form-control" id="tAvail" placeholder="YYYY-MM-DD" ng-model="ui.description.edit.data.available_from">
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+
+			<hr />
+		</section>
 	</div>
 </div>
 </section>

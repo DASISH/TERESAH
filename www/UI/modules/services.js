@@ -15,11 +15,8 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 				if(ui.user.data == false) {
 					if($cookies.logged) {
 						Restangular.one("cookie/").get().then( function(data) {
-							console.log(data);
-							console.log("ui");
 							data = {name : data.name, id : data.id, mail : data.mail }
 							ui.user.data = data;
-							console.log(ui.user.data);
 							if(callback) {
 								return callback(ui.user.data);
 							}
@@ -67,9 +64,9 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 		//
 		routes : {
 			tools : {
-				all : Restangular.one("tool/"),
+				one : Restangular.one("tool/"),
 				link : Restangular.all("tool/facet"),
-				one : Restangular.all("tool"),
+				all : Restangular.all("tool"),
 				topic : Restangular.all("topic")
 			},
 			facets : {
@@ -136,12 +133,28 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					});
 				},
 			tools : {
+				edit : {
+					description : function(toolId, opt, callback) {
+						if(typeof(callback)==='undefined') callback = false;
+						if(typeof(opt)==='undefined') {
+							x = { Error : "No input given" };
+							if(callback == false) { return x; }
+							else { return x; }
+						} else {
+							return Item.routes.tools.all.all(toolId).all("edit").post(opt).then(function(data) {
+								if(callback) { return callback(data); }
+								Item.data = data;
+								return data;
+							});
+						}
+					}
+				},
 				insert : function(opt, callback) {
 				
 					if(typeof(opt)==='undefined') opt =  {};
 					if(typeof(callback)==='undefined') callback = false;
 					
-					return Item.routes.tools.one.post(opt).then(function (data) {
+					return Item.routes.tools.all.post(opt).then(function (data) {
 						if(callback) {	callback(data);	}
 						Item.data = data;
 						return data;
@@ -168,7 +181,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					if(opt.page) {
 						opt.start = opt.page * 20 - 20;
 					}
-					return Item.routes.tools.all.get(opt).then(function (data) {
+					return Item.routes.tools.one.get(opt).then(function (data) {
 						if(callback) {	callback(data);	}
 						Item.data = data;
 						return data;
@@ -179,7 +192,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					if(typeof(options)==='undefined') options =  {keyword:true, platform:true, developer : true, type:true, applicationType: true, licence : true, publications: true,projects: true,suite:true, standards:true, features:true, video:true};
 					if(typeof(callback)==='undefined') callback = false;
 					
-					return Item.routes.tools.one.one(item).get(options).then(function (data) {
+					return Item.routes.tools.all.one(item).get(options).then(function (data) {
 						Item.data = data;
 						if(callback) {	callback(data);	}
 						return data;
@@ -190,7 +203,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					
 						if(typeof(callback)==='undefined') callback = false;
 					
-						return Item.routes.tools.one.one(item).one("comments").get().then(function (data) {
+						return Item.routes.tools.all.one(item).one("comments").get().then(function (data) {
 							Item.data = data;
 							if(callback) {	callback(data);	}
 							return data;
@@ -200,7 +213,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					
 						if(typeof(callback)==='undefined') callback = false;
 					
-						return Item.routes.tools.one.one(item).all("comments").post(options).then(function (data) {
+						return Item.routes.tools.all.one(item).all("comments").post(options).then(function (data) {
 							Item.data = data;
 							if(callback) {	callback(data);	}
 							return data;
@@ -212,7 +225,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					
 						if(typeof(callback)==='undefined') callback = false;
 					
-						return Item.routes.tools.one.one(item).one("forum").get().then(function (data) {
+						return Item.routes.tools.all.one(item).one("forum").get().then(function (data) {
 							Item.data = data;
 							if(callback) {	callback(data);	}
 							return data;
@@ -222,7 +235,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					
 						if(typeof(callback)==='undefined') callback = false;
 					
-						return Item.routes.tools.one.one(item).all("forum").post(options).then(function (data) {
+						return Item.routes.tools.all.one(item).all("forum").post(options).then(function (data) {
 							Item.data = data;
 							if(callback) {	callback(data);	}
 							return data;

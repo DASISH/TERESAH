@@ -7,22 +7,26 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', '$rootScope',
 		$scope.item.desc = $scope.item.descriptions.description[0];
 	}
 	$scope.ui = {
-		link : function () {
-			var modalInstance = $modal.open({
-				templateUrl: 'myModalContent.html',
-				controller: LinkCtrl,
-				resolve: {
-					items: function () {
-						return $scope.item;
-					}
+		description : {
+			edit : {
+				show : false,
+				data : {
+					name : $scope.item.descriptions.title,
+					version : $scope.item.descriptions.version,
+					homepage : $scope.item.descriptions.homepage,
+					available_from : $scope.item.descriptions.available_from,
+				},
+				submit : function() {
+					input = this.data;
+					$item.resolver.tools.edit.description($scope.item.identifier.id, input, function(data) {
+						$scope.ui.description.edit.response = data;
+					});
+				},
+				response : {
+					Success : false,
+					Error : false
 				}
-			});
-
-			modalInstance.result.then(function (selectedItem) {
-				$scope.selected = selectedItem;
-			}, function () {
-				$log.info('Modal dismissed at: ' + new Date());
-			});
+			}
 		},
 		page : "Details",
 		sections : {

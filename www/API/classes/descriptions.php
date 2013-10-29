@@ -11,29 +11,24 @@
 				$req = "INSERT INTO external_description VALUES ('', ?, ?, ?, ?); ";
 				$req = self::DB()->prepare($req);
 				try {
-					#echo "hi";
-					#print_r($data);
 					$ret = $req->execute(array($toolUID, $data["description"], $data["source"], $data["provider"]));
-					#print ($req);
-					#return $ret->rowCount ();
 				} catch(Exception $e) {
-					echo "Erreur";
-					$erreure = 'Erreur : '.$e->getMessage().'<br />';
-					$erreure .= 'N° : '.$e->getCode();
-					return array("Error" => $erreure);
+					return array("Error" => "A field might be missing");
 				}
 			
 			} else {
 				#Else, it is a simple description
-				$req = "INSERT INTO description VALUES ('', ?, ?, ?, ?, ?, CURDATE(), NULL, ?,?,?); ";
-				$req = self::DB()->prepare($req);
+				$sql = "INSERT INTO `tools_registry`.`description` 
+					(`description_uid`, `title`, `description`, `version`, `homepage`, `available_from`, `registered`, `registered_by`, `tool_uid`, `user_uid`) VALUES 
+					('',				 ?,	 		?, 			?,		 	?,		 	?,			CURDATE(), 			NULL,		 		?	,		 ?);";
+				// $req = "INSERT INTO description VALUES ('', ?, ?, ?, ?, ?, CURDATE(), NULL, ?,?,?); ";
+				$req = self::DB()->prepare($sql);
 				try {
-					$ret = $req->execute(array($data["name"], $data["description"], $data["version"], $data["homepage"],  $data["available_from"],  $data["facets"]["Licence"]["request"][0], $toolUID, $_SESSION["user"]["id"]));
-					return array("Success" => "Description registered", "uid" => self::DB()->lastInsertId());
+					$data = array($data["name"], $data["description"], $data["version"], $data["homepage"],  $data["available_from"],  $toolUID, $_SESSION["user"]["id"]);
+					$ret = $req->execute($data);
+					return array("Success" => "Description registered", "identifier" => array("id" => self::DB()->lastInsertId()));
 				} catch(Exception $e) {
-					$erreure = 'Erreur : '.$e->getMessage().'<br />';
-					$erreure .= 'N° : '.$e->getCode();
-					return array("Error" => $erreure);
+					return array("Error" => "A field might be missing");
 				}
 			}
 			return $ret;
@@ -42,10 +37,10 @@
 			$userName = true;
 			#We first fetch our description
 			
-			$req = "SELECT d.user_uid as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by, FROM description dWHERE d.tool_uid = ?";
+			$req = "SELECT d.user_uid as User, d.title, d.description, d.version, d.homepage, d.description_uid UID, d.registered, d.available_from, d.registered_by, FROM description d WHERE d.tool_uid = ?  ORDER BY d.description_uid DESC LIMIT 1";
 			
 			if($userName) {
-				$req = "SELECT d.user_uid as User_UID, u.name as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by FROM description d, user u WHERE d.tool_uid = ? AND u.user_uid = d.user_uid";
+				$req = "SELECT d.user_uid as User_UID, u.name as User, d.title, d.description, d.description_uid UID, d.version, d.homepage, d.registered, d.available_from, d.registered_by FROM description d, user u WHERE d.tool_uid = ? AND u.user_uid = d.user_uid ORDER BY d.description_uid DESC LIMIT 1";
 			}
 			
 			$req = self::DB()->prepare($req);
@@ -71,9 +66,9 @@
 									"date" => $ret["registered"],
 									"by" => $ret["registered_by"]
 								);
+				$ret["identifier"] = array("id" => $ret["UID"]);
 				#Unseting bad data
-				unset($ret["type"], $ret["text"], $ret["User_UID"], $ret["User"], $ret["registered_by"], $ret["registered"]);
-				
+				unset($ret["type"], $ret["text"], $ret["User_UID"], $ret["User"], $ret["registered_by"], $ret["registered"], $ret["UID"]);
 				
 				#We prepare a new array containing our description
 				if($ret["description"] != "&nbsp;") {

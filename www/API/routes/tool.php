@@ -93,6 +93,26 @@
 		jP($item);
 		exit;
 	});
+	$app->post('/tool/:toolId/edit', function ($toolId) use ($require, $app) { 
+		$app->contentType('application/json');
+		$require->req(array("helper", "description"));
+		
+		if(!isset($_SESSION["user"]["id"])) {
+			jP(array("Error" => "You need to be logged in to use this function"));
+			exit();
+		}	
+		
+		if(count($app->request->post()) > 0) {
+			$input = $app->request->post();
+		} elseif(count($app->request()->getBody()) > 0) {
+			$input = $app->request()->getBody();
+		} else {
+			return $app->response()->status(400);
+		}
+		$item = Description::insert($toolId, $input);
+		jP($item);
+		exit;
+	});
 	
 	$app->post('/tool/', function () use ($require, $app) { 
 		$app->contentType('application/json');

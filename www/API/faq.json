@@ -141,7 +141,68 @@
 						"required" : true
 					}
 				],
-				"example" : "/tool/link"
+				"example" : "/tool/facet"
+			},
+			{
+				"uri" : "/tool/:toolId/edit",
+				"method" : "POST",
+				"description" : "Update the description for a tool identified by numeric :toolId",
+				"options" : [
+					{
+						"name" : "name",
+						"default" : "-",
+						"definition" : "Name of the tool",
+						"type" : "TEXT",
+						"required" : true
+					},{
+						"name" : "description",
+						"default" : "-",
+						"definition" : "Description of the tool",
+						"type" : "TEXT",
+						"required" : true
+					},{
+						"name" : "version",
+						"default" : "-",
+						"definition" : "Version of the tool",
+						"type" : "TEXT"
+					},{
+						"name" : "homepage",
+						"default" : "-",
+						"definition" : "Homepage URL of the tool",
+						"type" : "URL"
+					},{
+						"name" : "abailable_from",
+						"default" : "YYYY-MM-DD",
+						"definition" : "Date of first release",
+						"type" : "DATE"
+					}
+				],
+				"example" : "/tool/1/edit"
+			},
+			{
+				"uri" : "/tool/:toolId/edit",
+				"method" : "POST",
+				"description" : "Insert a new external description for a label",
+				"options" : [
+					{
+						"name" : "description",
+						"default" : "-",
+						"definition" : "Description of the tool",
+						"type" : "TEXT",
+						"required" : true
+					},{
+						"name" : "source",
+						"default" : "-",
+						"definition" : "Source of the description",
+						"type" : "URL"
+					},{
+						"name" : "provider",
+						"default" : "-",
+						"definition" : "Name of the provider for the description",
+						"type" : "TEXT"
+					}
+				],
+				"example" : "/tool/facet"
 			}
 		]
 	},
