@@ -242,6 +242,20 @@
 		"name" : "Facets",
 		"routes" : [
 			{
+				"uri" : "/facet/:type",
+				"method" : "OPTIONS",
+				"description" : "Returns a list of fields needed for new label in facet list :type",
+				"options" : null,
+				"example" : "/facet/keyword"
+			},
+			{
+				"uri" : "/facet/:type",
+				"method" : "POST",
+				"description" : "Insert new label in :type . Please use the list of fields generated in /facet/:type",
+				"options" : null,
+				"example" : "/facet/keyword"
+			},
+			{
 				"uri" : "/facet/",
 				"method" : "GET",
 				"description" : "Returns a list of facets",

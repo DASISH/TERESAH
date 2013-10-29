@@ -27,7 +27,7 @@
 		</div>
 		<hr />
 	</div>
-	<div class="container" ng-repeat="doc in chapter.routes">
+	<div class="container" ng-repeat="doc in chapter.routes | filter:ui.documentation.filter">
 		<div class="row">
 			<div class="col-lg-3"><span class="btn btn-link" ng-click="ui.toggle(doc.uri,doc.method)" ng-bind="doc.uri"></span></div>
 			<div class="col-lg-1" ng-bind="doc.method"></div>

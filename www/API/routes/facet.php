@@ -31,6 +31,35 @@
 		}
 	});	
 	
+	$app->options('/facet/:facet/', function ($facet) use ($require, $app) {
+		$app->contentType('application/json');
+		
+		$require->req(array("facet"));
+		
+		$data = Facets::insert($facet);
+		return jP($data); 
+		
+	});	
+	
+	
+	$app->post('/facet/:facet/', function ($facet) use ($require, $app) {
+		$app->contentType('application/json');
+		
+		$require->req(array("facet", "helper"));
+		
+		if(count($app->request->post()) > 0) {
+			$input = $app->request->post();
+		} elseif(count($app->request()->getBody()) > 0) {
+			$input = $app->request()->getBody();
+		} else {
+			$app->response()->status(400);
+		}
+		
+		#Then Process
+		$data = Facets::insert($facet, $input);
+		return jP($data); 
+	});	
+	
 	$app->get('/facet/', function () use ($require, $app) {
 		$app->contentType('application/json');
 		$require->req(array("facet"));
