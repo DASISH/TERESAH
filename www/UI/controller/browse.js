@@ -2,14 +2,13 @@ var facetListCtrl = portal.controller('facetListCtrl', ['$scope', 'ui', 'Item', 
 	$scope.results = {
 		items: $item.data
 	}
-	console.log($scope.results );
 	$ui.title("Browse by Facet");
 	
 	//exec
 }]);
 facetListCtrl.resolvefacetListCtrl = {
 	itemData: function(Item) {
-		Item.resolver.facets(false, false);
+		Item.resolver.facets.list();
 		return Item.data;
 	},
 	delay: function($q, $timeout) {

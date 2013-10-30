@@ -49,7 +49,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				}
 				option["request"] = facet.filter;
 				
-				return $item.resolver.facets(facet.facetParam, option)
+				return $item.resolver.facets.facet.search(facet.facetParam, option)
 			},
 			submit : function(constructor) {
 				if(!constructor) {
@@ -136,7 +136,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 }]);
 Faceted.resolveFaceted = {
 	itemData: function($route, Item) {
-		Item.resolver.facets(false, false, function(data) {
+		Item.resolver.facets.list(function(data) {
 			x = []
 			angular.forEach(data, function(val) {
 				console.log(val);

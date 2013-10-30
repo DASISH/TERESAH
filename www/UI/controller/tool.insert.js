@@ -26,7 +26,7 @@ var AddTool = portal.controller('AddToolCtrl', ['$scope', 'ui',  'Item', functio
 				}
 				option["request"] = facet.filter;
 				
-				return $item.resolver.facets(facet.facetParam, option)
+				return $item.resolver.facets.facet.search(facet.facetParam, option);
 			},
 			group : function(constructor) {
 				if(!constructor) {
@@ -96,7 +96,7 @@ var AddTool = portal.controller('AddToolCtrl', ['$scope', 'ui',  'Item', functio
 }]);
 AddTool.resolveAddTool = {
 	itemData: function($route, Item) {
-		Item.resolver.facets(false, false, function(data) {
+		Item.resolver.facets.list({"all" : true}, function(data) {
 			x = []
 			angular.forEach(data, function(val) {
 				val["option"] = { case_insensitivity : true };
