@@ -31,13 +31,13 @@
 					if($id == true) {
 						return self::DB()->lastInsertId();
 					} else {
-						return array("Success" => "You have now signed up");
+						return array("status" => "success", "message" => "You have now signed up");
 					}
 				} else {
-					return array("Error" => "Error during signin up. Please contact DASISH or retry.");
+					return array("status" => "error", "message" => "Error during signin up. Please contact DASISH or retry.");
 				}
 			} else {
-				return array("Error" => "A field is missing");
+				return array("status" => "error", "message" => "A field is missing");
 			}
 		}
 		
@@ -64,7 +64,7 @@
 					$_SESSION["user"] = array("id" => $sign, "name" => $data["name"], "mail" => $data["email"]);
 					return array("signin" => true, "data" => array("UID" => $sign, "Name" => $data["name"], "Mail" => $data["email"]));
 				} elseif(isset($sign["Error"])) {
-					return array("signin" => false, "Error" => $sign["Error"]);
+					return array("signin" => false, "status" => "error", "message" => $sign["Error"]);
 				
 				}
 			}

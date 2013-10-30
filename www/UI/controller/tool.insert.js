@@ -52,8 +52,8 @@ var AddTool = portal.controller('AddToolCtrl', ['$scope', 'ui',  'Item', functio
 				constructor = $scope.ui.facets.group(constructor);
 				
 				$item.resolver.search.faceted(constructor, function(data) {
-					if(data.Error) {
-						$scope.ui.facets.error = data.Error;
+					if(data.status == "error") {
+						$scope.ui.facets.error = data.message;
 					} else {
 						$scope.ui.facets.error = false;
 					}

@@ -18,18 +18,13 @@ var Login = portal.controller('LoginCtrl', ['$scope', 'ui',  'Item', '$rootScope
 		},
 		signup : {
 			submit : function () {
-				//if(isset($post["mail"]) && isset($post["password"]) && isset($post["name"]) && isset($post["user"]))
 				$item.resolver.user.signup($scope.ui.signup.inputs, function(data) {
-					if(data.Error) {
-						$scope.ui.signup.message.error = data.Error;
-						$scope.ui.signup.message.success = false;
-					} else {
-						$scope.ui.signup.message.success = data.Success;
-						$scope.ui.signup.message.error = false;
-					}
+					$scope.ui.signup.message = data.message;
+					$scope.ui.signup.status = data.status;
 				});
 			},
-			message : {},
+			message : false,
+			status : false,
 			data : { }
 		},
 		user : {

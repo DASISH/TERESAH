@@ -31,7 +31,7 @@
 				);
 				return $array;
 			} else {
-				return array("Error" => "Unknown ".$k." facet");
+				return array("status" => "error", "message" => "Unknown ".$k." facet");
 			}
 		}
 		function facet($facet = false, $facetTable = false) {

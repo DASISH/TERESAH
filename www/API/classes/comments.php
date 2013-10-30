@@ -18,7 +18,7 @@
 				
 				return array("Rows" => $req->rowCount());
 			} else {
-				return array("Error" => "Not signed in", "Rows" => 0);
+				return array("status" => "error", "message" => "Not signed in", "Rows" => 0);
 			}
 		}
 		
@@ -39,7 +39,7 @@
 				
 				return array("Rows" => $req->rowCount());
 			} else {
-				return array("Error" => "Not signed in", "Rows" => 0);
+				return array("status" => "error", "message" => "Not signed in", "Rows" => 0);
 			}
 		}
 		

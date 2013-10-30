@@ -69,7 +69,7 @@
 		
 		function linkFacets($data) {
 			if(!isset($data["facet"]) && !isset($data["element"]) && !isset($data["tool"])) {
-				return array("Error" => "One facet couldn't be save. Missing data");
+				return array("status" => "error", "message" => "One facet couldn't be save. Missing data");
 			}
 			$table = Helper::table($data["facet"]);
 			$element = $data["element"];

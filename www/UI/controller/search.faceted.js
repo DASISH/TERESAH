@@ -13,8 +13,8 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 						//We launch research
 						$scope.ui.url.enable = false;
 						$item.resolver.search.facetedGet(options, function(data) {
-							if(data.Error) {
-								$scope.ui.facets.error = data.Error;
+							if(data.status == "error") {
+								$scope.ui.facets.error = data.message;
 							} else {
 								$scope.ui.facets.error = false;
 							}
@@ -49,7 +49,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				}
 				option["request"] = facet.filter;
 				
-				return $item.resolver.facets.facet.search(facet.facetParam, option)
+				return $item.resolver.facets.facet.search(facet.facetParam, option);
 			},
 			submit : function(constructor) {
 				if(!constructor) {
@@ -71,8 +71,8 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				});
 				
 				$item.resolver.search.faceted(constructor, function(data) {
-					if(data.Error) {
-						$scope.ui.facets.error = data.Error;
+					if(data.status == "error") {
+						$scope.ui.facets.error = data.message;
 					} else {
 						$scope.ui.facets.error = false;
 					}

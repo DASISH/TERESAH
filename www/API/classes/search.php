@@ -21,7 +21,7 @@
 			#Query
 			if(!isset($get["request"])) {
 				if($queryNeeded) {
-					return array("Error" => "No request given"); 
+					return array("status" => "error", "message" => "No request given"); 
 				} else {
 					$options["request"] = Null;
 				}
@@ -160,6 +160,7 @@
 			
 			$options["results"] = $req->rowCount();
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
+			$options["total"] = self::nbrTotal();
 			$ret = array("response" => array(), "parameters" => $options);
 			foreach($data as &$answer) {
 				if($answer["InnerDescription"] == "&nbsp;") {
@@ -260,7 +261,7 @@
 			
 			$options["results"] = $req->rowCount();
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
-			
+			$options["total"] = self::nbrTotal();
 			$ret = array("response" => array(), "parameters" => $options);
 			
 			#Formating
@@ -480,19 +481,19 @@
 						}
 						#But if we have only one facets, that means that we have none, so we return an error
 						if(count($get["facets"]) == 1) {
-							return  array("Error" => "Facet ".$key." has no request parameter and it is this only facet", "options" => $options);
+							return  array("status" => "error", "message" =>  "Facet ".$key." has no request parameter and it is this only facet", "options" => $options);
 						}
 					}
 				}
 				#return $exec;
 			} else {
-				return array("Error" => "No facets given");
+				return array("status" => "error", "message" => "No facets given");
 			}
 			
 			#If we have no exec, that means we have no param
 			$cnt = count($exec) + count($execEnd);
 			if($cnt == 0) {
-				return array("Error" => "No facets given");
+				return array("status" => "error", "message" => "No facets given");
 			}
 			
 			###########
