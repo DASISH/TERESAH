@@ -7,6 +7,63 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', '$rootScope',
 		$scope.item.desc = $scope.item.descriptions.description[0];
 	}
 	$scope.ui = {
+		quickLinking : {
+			status : {
+				show : false,
+				message : false
+			},
+			applied : {
+			},
+			show : false,
+			facets : {
+				facets : [],
+				facet : null
+			},
+			link : function(facet, label) {
+				input = {facets : [{"facet" : facet, "element" : label}], tool: $scope.item.identifier.id}
+				
+				$item.resolver.tools.link(input, function(data) {
+					if(data.status == "error") {
+						$scope.ui.quickLinking.status.show = true;
+						$scope.ui.quickLinking.status.message = data.message;
+					} else {
+						if(!$scope.ui.quickLinking.applied[facet]) {
+							$scope.ui.quickLinking.applied[facet] = {};
+						}
+						$scope.ui.quickLinking.applied[facet][label] = true;
+					}
+				});
+			},
+			get : function() {
+				this.show = !this.show;
+				if(this.show) {
+					$item.resolver.facets.list({"all" : true}, function(data) {
+						x = []
+						angular.forEach(data, function(val) {
+							val["option"] = { case_insensitivity : true };
+							x.push(val);
+						});
+						$scope.ui.quickLinking.facets.facets = x;
+					});
+				}
+			},
+			search : {
+				model : null,
+				get : function(facet) {
+					if(facet) {
+						$scope.ui.quickLinking.method = "link";
+					}
+				},
+				search : function(facet) {
+					option = { request : $scope.ui.quickLinking.search.model, limit : 5 };
+					
+					$item.resolver.facets.facet.search(facet, option, function(data) {
+						$scope.ui.quickLinking.search.items = data.facets;
+					});
+				},
+				items : []
+			}
+		},
 		description : {
 			edit : {
 				show : false,

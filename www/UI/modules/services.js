@@ -293,7 +293,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					},
 					search : function (key, option, callback) {
 						if(typeof(callback)==='undefined') callback = false;
-						return Item.routes.facets.search.one(key).getList().then(function (data) {
+						return Item.routes.facets.search.one(key).get(option).then(function (data) {
 							Item.data = data.original;
 							if(callback) {	callback(data.original);	}
 							return data.original;

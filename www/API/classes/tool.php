@@ -60,9 +60,9 @@
 			
 			//Check
 			if($req->rowCount() == 1) {
-				return array("uid" => self::DB()->lastInsertId(), "shortname" => self::getShorname($data["name"]));
+				return array("status" => "success", "uid" => self::DB()->lastInsertId(), "shortname" => self::getShorname($data["name"]));
 			} else {
-				return array("Error" => "The tool couldn't be save");
+				return array("status" => "error", "message" => "The tool couldn't be save");
 			}
 			
 		}
@@ -81,9 +81,9 @@
 			
 			//Check
 			if($req->rowCount() == 1) {
-				return array("uid" => self::DB()->lastInsertId(), $data["facet"]);
+				return array("status" => "success", "uid" => self::DB()->lastInsertId(), $data["facet"]);
 			} else {
-				return array("Error" => "The facet ".$data["facet"]." (".$table["table"]["name"].") couldn't be save");//, "debug" => array("request" => $sql, "input" => $data));
+				return array("status" => "error", "message" =>  "The facet ".$data["facet"]." (".$table["table"]["name"].") couldn't be save");//, "debug" => array("request" => $sql, "input" => $data));
 			}
 			
 		}
@@ -175,7 +175,7 @@
 				}
 				
 			} else {
-				$ret = array("Error" => "No tool for " + $ref +" identifier");
+				$ret = array("status" => "error", "message" => "No tool for " + $ref +" identifier");
 			}
 			return $ret;
 			

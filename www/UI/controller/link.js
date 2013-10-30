@@ -13,9 +13,7 @@ var LinkCtrler = portal.controller('LinkCtrl', ['$scope', 'ui',  'Item', functio
 				postData = $scope.ui.form.fields;
 				facets = $scope.ui.facets.group($scope.ui.facets.used);
 				postData["facets"] = facets["facets"];
-				
-				console.log(postData);
-				
+								
 				$item.resolver.tools.link(postData, function(data) {
 					$scope.ui.form.return = data;
 				});
@@ -95,8 +93,8 @@ var LinkCtrler = portal.controller('LinkCtrl', ['$scope', 'ui',  'Item', functio
 				constructor = $scope.ui.facets.group(constructor);
 				
 				$item.resolver.search.faceted(constructor, function(data) {
-					if(data.Error) {
-						$scope.ui.facets.error = data.Error;
+					if(data.status == "error") {
+						$scope.ui.facets.error = data.message;
 					} else {
 						$scope.ui.facets.error = false;
 					}

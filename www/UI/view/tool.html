@@ -192,8 +192,11 @@
 	</div>
 	<div class="col-lg-4">
 		<section id ="informations">
+			<div class="pull-right" ng-show="ui.user.data.signedin">
+				<a class="btn btn-default" ng-class="{'btn-primary' : ui.quickLinking.show}" ng-click="ui.quickLinking.get()"><span class="glyphicon glyphicon-link"></span></a>
+			</div>
 			<h2>Details</h2>
-			<dl>
+			<dl ng-show="!ui.quickLinking.show">
 				<dt ng-show="item.type">Tool Type</dt>
 					<dd ng-repeat="type in item.type" legend="{{type.uri}}" ng-bind="type.type"></dd>
 				<dt ng-show="item.licence">Licence</dt>
@@ -211,6 +214,39 @@
 				<dt ng-show="item.developers">Developer(s)</dt>
 					<dd ng-repeat="developer in item.developers" ng-bind="developer.name"></dd>
 			</dl>
+			<form ng-show="ui.quickLinking.show" ng-submit="ui.quickLinking.submit()" class="form-horizontal" role="form">
+				<div class="form-group">
+					<label for="facetType" class="col-lg-4 control-label">Facet type</label>
+					<div class="col-lg-8">
+						<select ng-model="ui.quickLinking.facets.facet"  ng-options="c.facetParam as c.facetLegend for c in ui.quickLinking.facets.facets" class="form-control" id="facetType"><option value="">-- choose facet --</option></select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-offset-4 col-lg-8">
+						<div class="btn-group btn-group-sm btn-group-justified btn-block">
+							<a class="btn btn-sm btn-default" ng-class="{'btn-primary' : (ui.quickLinking.method == 'link')}" ng-click="ui.quickLinking.search.get(ui.quickLinking.facets.facet)"><span class="glyphicon glyphicon-search"></span></a>
+							<a class="btn btn-sm btn-default" ng-class="{'btn-primary' : (ui.quickLinking.method == 'new')}"><span class="glyphicon glyphicon-plus"></span></a>
+						</div>
+					</div>
+				</div>
+				<section id="linkingForm" ng-show="ui.quickLinking.method == 'link'">
+					<div class="form-group">
+						<label for="searchModel" class="col-lg-4">Query</label>
+						<div class="col-lg-8">
+							<input class="form-control" ng-model="ui.quickLinking.search.model" placeholder="Type something here" id="searchModel" ng-change="ui.quickLinking.search.search(ui.quickLinking.facets.facet)" />
+						</div>
+					</div>
+					<div class="form-group" ng-repeat="label in ui.quickLinking.search.items">
+						<div class="col-lg-4" style="text-align:center;">
+							<a class="btn btn-sm btn-default" ng-click="ui.quickLinking.link(ui.quickLinking.facets.facet, label.id)" ng-show="!ui.quickLinking.applied[ui.quickLinking.facets.facet][label.id]">Add</a>
+							<span class="btn btn-sm btn-success" ng-show="ui.quickLinking.applied[ui.quickLinking.facets.facet][label.id]">Applied</span>
+						</div>
+						<div class="col-lg-8" ng-bind="label.name">
+						</div>
+					</div>
+				</section>
+				<section id="newFacetForm" ng-show="ui.quickLinking.method == 'new'"></section>
+			</form>
 			<hr />
 		</section>
 		<section id="availableDescriptions" ng-show="item.descriptions.description[1]">

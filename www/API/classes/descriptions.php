@@ -13,7 +13,7 @@
 				try {
 					$ret = $req->execute(array($toolUID, $data["description"], $data["source"], $data["provider"]));
 				} catch(Exception $e) {
-					return array("Error" => "A field might be missing");
+					return array("status" => "error", "message" => "A field might be missing");
 				}
 			
 			} else {
@@ -26,9 +26,9 @@
 				try {
 					$data = array($data["name"], $data["description"], $data["version"], $data["homepage"],  $data["available_from"],  $toolUID, $_SESSION["user"]["id"]);
 					$ret = $req->execute($data);
-					return array("Success" => "Description registered", "identifier" => array("id" => self::DB()->lastInsertId()));
+					return array("status" => "success", "message" => "Description registered", "identifier" => array("id" => self::DB()->lastInsertId()));
 				} catch(Exception $e) {
-					return array("Error" => "A field might be missing");
+					return array("status" => "error", "message" =>  "A field might be missing");
 				}
 			}
 			return $ret;
