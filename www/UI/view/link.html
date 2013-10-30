@@ -1,0 +1,63 @@
+<section id="viewHeader">
+	<div class="page-header">
+		<div class="pull-right">
+			<div class="btn-group btn-group-sm">
+				<a class="btn btn-sm btn-default"  ng-href="#/tool/{{item.identifier.shortname}}">Return to tool</a>
+			</div>
+		</div>
+		<h1 ng-bind="item.descriptions.title"></h1>
+	</div>
+</section>
+<h2>Metadata</h2>
+<div class="row">
+	<div class="col-lg-3" id="facetList">
+		<div class="panel-group">
+			<div class="panel panel-default" ng-repeat="facet in ui.facets.facets" ng-class="{'panel-primary' : facet.active, 'panel-success' : ui.facets.used[facet.facetParam].possibilities }">
+			<!-- Default panel contents -->
+				<div class="panel-heading" ng-click="facet.active = !facet.active;"><span class="badge pull-right">{{facet.facetTotal}}</span>{{facet.facetLegend}}</div>
+				<div class="panel-body" ng-show="ui.facets.used[facet.facetParam].possibilities">
+					<span ng-repeat="option in ui.facets.used[facet.facetParam].possibilities | filter:{active:true}" class="badge" ng-click="ui.facets.del(facet.facetParam, option.id)">{{option.name}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-9">
+		<div class="container">
+			<div class="row">
+					<ul class="list-inline">
+						<li ng-repeat="facet in ui.facets.facets | filter:{active:true}" class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									{{facet.facetLegend}}
+									<div class="pull-right panel-form row">
+										<div class="col-lg-3">
+											<input type="text" class="form-control input-sm" ng-model="facet.filter" placeholder="Filter your {{facet.facetLegend}}" ng-change="facet.possibilities = ui.facets.search(facet)"/>
+										</div>
+										<a class="btn btn-sm  btn-default" ng-class="{'active' : !facet.option.case_insensitivity}" ng-click="facet.option.case_insensitivity = !facet.option.case_insensitivity; facet.possibilities = ui.facets.search(facet);">Case Sens.</a>
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="facet.active = !facet.active;">&times;</button>
+									</div>
+								</div>
+								<div class="panel-body">
+									<div style="max-height:400px; overflow:auto;">
+										<div class="checkbox" ng-repeat="keyword in facet.possibilities.facets" ng-click="ui.facets.select(facet, keyword)">
+											<label>
+												<input type="checkbox" id="{{facet.facetParam}}-{{keyword.id}}" ng-model="keyword.active" value="{{keyword.id}}" /> {{keyword.name}}
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</li>
+					</ul>
+			</div>
+			<section id="errors" ng-show="!results && ui.facets.error">
+				<div class="alert alert-warning">{{ui.facets.error}}</div>
+			</section>
+		</div>
+	</div>
+</div>
+<hr />
+<div class="row">
+	<a class="btn btn-primary" ng-click="ui.form.save()">Save</a>
+</div>
