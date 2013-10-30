@@ -1,12 +1,4 @@
 var portal = angular.module('toolRegistry', ['ui.bootstrap', 'restangular', 'ngCookies', 'ngSanitize']);
-/*
-portal.config(['$httpProvider', function($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-		delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    }
-]);
-*/
 portal.
 	config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
