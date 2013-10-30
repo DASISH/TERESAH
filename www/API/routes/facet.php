@@ -70,4 +70,14 @@
 			return jP($data); 
 		}
 	});
+	$app->options('/facet/', function () use ($require, $app) {
+		$app->contentType('application/json');
+		$require->req(array("facet"));
+		$data = Facets::information(false,true);
+		if(isset($data["Error"])) {
+			$app->response()->status(400);
+		} else {
+			return jP($data); 
+		}
+	});
 ?>

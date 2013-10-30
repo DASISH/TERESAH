@@ -3,6 +3,7 @@ var LinkCtrler = portal.controller('LinkCtrl', ['$scope', 'ui',  'Item', functio
 	console.log($item.data)
 	$scope.item = $item.data;
 	
+	console.log($item.data);
 	$scope.ui = {
 		form : {
 			fields : {
@@ -21,6 +22,45 @@ var LinkCtrler = portal.controller('LinkCtrl', ['$scope', 'ui',  'Item', functio
 			}
 		},
 		facets : {
+			new : {
+				form : {
+					get : function (key) {
+						if($scope.ui.facets.new.form.active[key]) {
+							$scope.ui.facets.new.form.active = {};
+						} else {
+							$item.resolver.facets.facet.options(key, function(data) {
+								angular.forEach(data, function(value, k) {
+									
+									$scope.ui.facets.new.form.fields[k] = value;
+									$scope.ui.facets.new.form.fields[k]["val"] = null;
+								});
+								$scope.ui.facets.new.form.active = {};
+								$scope.ui.facets.new.form.active[key] = true;
+								
+							});
+						}
+					},
+					fields : {},
+					active : {},
+					submit : function (facet) {
+						input = {}
+						angular.forEach($scope.ui.facets.new.form.fields, function(value, k) {
+							input[k] = value.val;
+						});
+						$item.resolver.facets.facet.insert(facet, input, function(data) {
+							if(data.status == "success") {
+								$scope.ui.facets.new.form.error = false;
+								$scope.ui.facets.select({facetParam : facet}, data.identifier);
+								$scope.ui.facets.new.form.active = {};
+							} else {
+								$scope.ui.facets.new.form.error = true;
+								$scope.ui.facets.new.form.message = data.message;
+							}
+						});
+						
+					}
+				}
+			},
 			error : false,
 			facets : null,
 			search : function(facet) {
@@ -31,7 +71,7 @@ var LinkCtrler = portal.controller('LinkCtrl', ['$scope', 'ui',  'Item', functio
 				}
 				option["request"] = facet.filter;
 				
-				return $item.resolver.facets(facet.facetParam, option)
+				return $item.resolver.facets.facet.search(facet.facetParam, option);
 			},
 			group : function(constructor) {
 				if(!constructor) {
@@ -93,7 +133,7 @@ var LinkCtrler = portal.controller('LinkCtrl', ['$scope', 'ui',  'Item', functio
 			used : {}
 		}
 	};
-	$item.resolver.facets(false, false, function(data) {
+	$item.resolver.facets.list({"all" : true}, function(data) {
 		x = []
 		angular.forEach(data, function(val) {
 			val["option"] = { case_insensitivity : true };

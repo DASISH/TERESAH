@@ -6,7 +6,7 @@ class Facets {
 		return $DB;
 	}
 	
-	function information($facet = false) {
+	function information($facet = false, $all = false) {
 		$return = array();
 		if($facet) {
 			$dict = Helper::facet($facet, true);
@@ -34,6 +34,12 @@ class Facets {
 						"facetLegend" => $vals["facetLegend"],
 						"facetTotal" => intval($data["total"])
 					);
+				} elseif($all) {
+					$return[] = array(
+						"facetParam" => $vals["facetParam"],
+						"facetLegend" => $vals["facetLegend"],
+						"facetTotal" => 0
+					);
 				}
 			}
 		}
@@ -56,12 +62,14 @@ class Facets {
 					"description" =>	array("legend" => "Description", "type"=>"text"), 
 					"video_link" => 	array("legend" => "URI", "type"=>"url")
 				);
+				$title = "title";
 				break;
 			case "Suite":
 				$sql = "INSERT INTO `tools_registry`.`suite` (`suite_uid`, `name`) VALUES ('' , :name );";
 				$require = array(
 					"name" => 		array("legend" => "Name", "type" => "text")
 				);
+				$title = "name";
 				break;
 			case "Project":
 				$sql = "INSERT INTO `tools_registry`.`project` (`project_uid`, `title`, `description`, `contact`) VALUES ('', :title , :description , :contact );";
@@ -70,12 +78,14 @@ class Facets {
 					"description" =>	array("legend" => "Description", "type"=>"text"), 
 					"contact" => 	array("legend" => "Contact", "type"=>"mail")
 				);
+				$title = "title";
 				break;
 			case "Publication":
 				$sql = "INSERT INTO `tools_registry`.`publication` (`publication_uid`, `reference`) VALUES ('', :reference);";
 				$require = array(
 					"reference" => 		array("legend" => "Reference", "type" => "text")
 				);
+				$title = "reference";
 				break;
 			case "ToolType":
 				$sql = "INSERT INTO `tools_registry`.`tool_type` (`tool_type_uid`, `tool_type`, `source_uri`) VALUES (NULL, :name , :source );";
@@ -83,12 +93,14 @@ class Facets {
 					"name" => 		array("legend" => "Name", "type" => "text"),
 					"source" => 		array("legend" => "Source", "type" => "url")
 				);
+				$title = "name";
 				break;
 			case "Platform":
 				$sql = "INSERT INTO `tools_registry`.`platform` (`platform_uid`, `name`) VALUES ('', :name );";
 				$require = array(
 					"name" => 		array("legend" => "Name", "type" => "text")
 				);
+				$title = "name";
 				break;
 			case "Standard":
 				$sql = "INSERT INTO `tools_registry`.`standard` (`standard_uid`, `title`, `version`, `source`) VALUES ('', :title , :version , :source );";
@@ -97,6 +109,7 @@ class Facets {
 					"version" => 		array("legend" => "Version", "type" => "text"),
 					"source" => 		array("legend" => "Source", "type" => "url")
 				);
+				$title = "title";
 				break;
 			case "Keyword":
 				$sql = "INSERT INTO `tools_registry`.`keyword` (`keyword_uid`, `keyword`, `source_uri`, `source_taxonomy`) VALUES ('', :keyword , :source , :taxonomy );";
@@ -105,6 +118,7 @@ class Facets {
 					"source" => 		array("legend" => "Source URI", "type" => "url", "not_required" => "true"),
 					"taxonomy" => 		array("legend" => "Source Taxonomy's Name", "type" => "text", "not_required" => "true")
 				);
+				$title = "keyword";
 				break;
 			case "Licence":
 				//Problem with licence_type_uid...
@@ -116,6 +130,7 @@ class Facets {
 					"name" => 			array("legend" => "Name", "type" => "text"), 
 					"contact" =>	array("legend" => "Contact", "type"=>"mail")
 				);
+				$title = "name";
 				break;
 			case "ApplicationType":
 				return false;
@@ -126,9 +141,10 @@ class Facets {
 					"name" => 			array("legend" => "Name", "type" => "text"), 
 					"description" =>	array("legend" => "Description", "type"=>"text")
 				);
+				$title = "name";
 				break;
 			default:
-				return array("Error" => "Unknown facet");
+				return array("status" => "error", "message" => "Unknown facet");
 		}
 		if($data != false && isset($require)) {
 			//Check Data
@@ -138,7 +154,7 @@ class Facets {
 						if(isset($val["not_required"])) {
 							$data[$field] = null;
 						} else {
-							return array("Error" => $val["legend"]. " is missing.");
+							return array("status" => "error", "message" => $val["legend"]. " is missing.");
 						}
 					}
 				}
@@ -157,9 +173,9 @@ class Facets {
 					$req->bindParam($name, $data[$field]);
 				}
 				$req->execute();
-				return array("Success" => "Facet registered", "identifier" => array("id" => self::DB()->lastInsertId()));
+				return array("status" => "success", "identifier" => array("id" => self::DB()->lastInsertId(), "name" => $data[$title]));
 			} else {
-				return array("Error" => "Input object is wrong");
+				return array("status" => "error", "message" => "Input object is wrong");
 			}
 		/*
 		Need to implement a function to check whether this facet is activated or not for insert
