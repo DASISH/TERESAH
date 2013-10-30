@@ -19,7 +19,7 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', '$rootScope',
 				facets : [],
 				facet : null
 			},
-			link : function(facet, label) {
+			link : function(facet, label, callback) {
 				input = {facets : [{"facet" : facet, "element" : label}], tool: $scope.item.identifier.id}
 				
 				$item.resolver.tools.link(input, function(data) {
@@ -27,10 +27,14 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', '$rootScope',
 						$scope.ui.quickLinking.status.show = true;
 						$scope.ui.quickLinking.status.message = data.message;
 					} else {
-						if(!$scope.ui.quickLinking.applied[facet]) {
-							$scope.ui.quickLinking.applied[facet] = {};
+						if(callback) {
+							callback(data);
+						} else {
+							if(!$scope.ui.quickLinking.applied[facet]) {
+								$scope.ui.quickLinking.applied[facet] = {};
+							}
+							$scope.ui.quickLinking.applied[facet][label] = true;
 						}
-						$scope.ui.quickLinking.applied[facet][label] = true;
 					}
 				});
 			},
@@ -62,6 +66,48 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', '$rootScope',
 					});
 				},
 				items : []
+			},
+			new : {
+				get : function (facet) {
+					if(facet) {
+						$scope.ui.quickLinking.method = "new";
+						
+						$item.resolver.facets.facet.options(facet, function(data) {
+							if(data.status && data.status == "error") {
+								$scope.ui.quickLinking.new.nofield = true;
+							} else {
+								$scope.ui.quickLinking.new.nofield = false;
+								$scope.ui.quickLinking.new.fields = {}
+								angular.forEach(data, function(value, k) {
+									
+									$scope.ui.quickLinking.new.fields[k] = value;
+									$scope.ui.quickLinking.new.fields[k]["val"] = null;
+								});
+								$scope.ui.quickLinking.new.active = {};
+								$scope.ui.quickLinking.new.active[facet] = true;
+							}
+						});
+					}
+				},
+				fields : {},
+				submit : function (facet) {
+					input = {}
+					angular.forEach($scope.ui.quickLinking.new.fields, function(value, k) {
+						input[k] = value.val;
+					});
+					$item.resolver.facets.facet.insert(facet, input, function(insert) {
+						if(insert.status == "success") {
+							$scope.ui.quickLinking.link($scope.ui.quickLinking.facets.facet, insert.identifier.id, function(data) {
+								$scope.ui.quickLinking.new.error = false;
+								$scope.ui.quickLinking.method = "";
+							});
+						} else {
+							$scope.ui.quickLinking.new.error = true;
+							$scope.ui.quickLinking.new.message = insert.message;
+						}
+					});
+					
+				}
 			}
 		},
 		description : {

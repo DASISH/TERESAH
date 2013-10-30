@@ -26,6 +26,7 @@ var LinkCtrler = portal.controller('LinkCtrl', ['$scope', 'ui',  'Item', functio
 						if($scope.ui.facets.new.form.active[key]) {
 							$scope.ui.facets.new.form.active = {};
 						} else {
+							$scope.ui.facets.new.form.fields = {}
 							$item.resolver.facets.facet.options(key, function(data) {
 								angular.forEach(data, function(value, k) {
 									

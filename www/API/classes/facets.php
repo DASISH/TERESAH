@@ -122,7 +122,7 @@ class Facets {
 				break;
 			case "Licence":
 				//Problem with licence_type_uid...
-				return false;
+				return array("status" => "error", "message" => "Not available");
 				break;
 			case "Developer":
 				$sql = "INSERT INTO `tools_registry`.`developer` (`developer_uid`, `name`, `contact`) VALUES ('', ?, ?);";
@@ -133,7 +133,7 @@ class Facets {
 				$title = "name";
 				break;
 			case "ApplicationType":
-				return false;
+				return array("status" => "error", "message" => "Not available");
 				break;
 			case "Feature":
 				$sql = "INSERT INTO `tools_registry`.`feature` (`feature_uid`, `name`, `description`) VALUES ('', :name , :description );";
@@ -180,6 +180,7 @@ class Facets {
 		/*
 		Need to implement a function to check whether this facet is activated or not for insert
 		} elseif {
+			return array("status" => "error", "message" => "Not available");
 		*/
 		} else {
 			return $require;
