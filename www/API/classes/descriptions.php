@@ -37,12 +37,11 @@
 			$userName = true;
 			#We first fetch our description
 			
-			$req = "SELECT d.user_uid as User, d.title, d.description, d.version, d.homepage, d.description_uid UID, d.registered, d.available_from, d.registered_by, FROM description d WHERE d.tool_uid = ?  ORDER BY d.description_uid DESC LIMIT 1";
+			$req = "SELECT d.user_uid as User, d.title, d.description, d.version, d.homepage, d.description_uid UID, d.registered, d.available_from, FROM description d WHERE d.tool_uid = ?  ORDER BY d.description_uid DESC LIMIT 1";
 			
 			if($userName) {
-				$req = "SELECT d.user_uid as User_UID, u.name as User, d.title, d.description, d.description_uid UID, d.version, d.homepage, d.registered, d.available_from, d.registered_by FROM description d, user u WHERE d.tool_uid = ? AND u.user_uid = d.user_uid ORDER BY d.description_uid DESC LIMIT 1";
+				$req = "SELECT d.user_uid as User_UID, u.name as User, d.title, d.description, d.description_uid UID, d.version, d.homepage, d.registered, d.available_from FROM description d, user u WHERE d.tool_uid = ? AND u.user_uid = d.user_uid ORDER BY d.description_uid DESC LIMIT 1";
 			}
-			
 			$req = self::DB()->prepare($req);
 			$req->execute(array($toolUID));
 			
@@ -63,15 +62,14 @@
 				
 				#Format Creation Data
 				$ret["registration"] = array(
-									"date" => $ret["registered"],
-									"by" => $ret["registered_by"]
+									"date" => $ret["registered"]
 								);
 				$ret["identifier"] = array("id" => $ret["UID"]);
 				#Unseting bad data
 				unset($ret["type"], $ret["text"], $ret["User_UID"], $ret["User"], $ret["registered_by"], $ret["registered"], $ret["UID"]);
 				
 				#We prepare a new array containing our description
-				if($ret["description"] != "&nbsp;") {
+				if($ret["description"] != "") {
 					$desc = array(
 						array(
 							"provider" => "DASISH", 

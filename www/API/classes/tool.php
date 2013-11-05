@@ -112,7 +112,7 @@
 				$data = $req->fetch(PDO::FETCH_ASSOC);
 				$ret = array(
 							"identifier" => array("id" => $data["tool_id"], "shortname" => $data["tool_shortname"]),
-							"descriptions" => Description::get($data["tool_id"]),
+							"descriptions" => Description::get($data["tool_id"], true),
 							"parameters" => $options
 						);
 						

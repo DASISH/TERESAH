@@ -21,20 +21,6 @@ CREATE UNIQUE INDEX `shortname_UNIQUE` ON `tools_registry`.`tool` (`shortname` A
 
 
 -- -----------------------------------------------------
--- Table `tools_registry`.`organization`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tools_registry`.`organization` ;
-
-CREATE  TABLE IF NOT EXISTS `tools_registry`.`organization` (
-  `organization_uid` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(255) NOT NULL ,
-  `contact` VARCHAR(255) NOT NULL ,
-  `homepage` VARCHAR(255) NOT NULL ,
-  PRIMARY KEY (`organization_uid`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `tools_registry`.`licence_type`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `tools_registry`.`licence_type` ;
@@ -54,22 +40,14 @@ DROP TABLE IF EXISTS `tools_registry`.`licence` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`licence` (
   `licence_uid` INT NOT NULL AUTO_INCREMENT ,
   `text` TEXT NOT NULL ,
-  `issued_by` INT NULL COMMENT 'Provider_UID' ,
   `licence_type_uid` INT NOT NULL COMMENT 'Licence_type_licence_type' ,
   PRIMARY KEY (`licence_uid`) ,
-  CONSTRAINT `fk_Licence_Provider1`
-    FOREIGN KEY (`issued_by` )
-    REFERENCES `tools_registry`.`organization` (`organization_uid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Licence_Licence_type1`
     FOREIGN KEY (`licence_type_uid` )
     REFERENCES `tools_registry`.`licence_type` (`licence_type_uid` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-CREATE INDEX `fk_Licence_Provider1_idx` ON `tools_registry`.`licence` (`issued_by` ASC) ;
 
 CREATE INDEX `fk_Licence_Licence_type1_idx` ON `tools_registry`.`licence` (`licence_type_uid` ASC) ;
 
@@ -108,7 +86,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_feature` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_feature` (
   `tool_uid` INT NOT NULL ,
   `feature_uid` INT NOT NULL ,
-  PRIMARY KEY (`tool_uid`, `feature_uid`) ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `tool_uid`, `feature_uid`) ,
   CONSTRAINT `fk_Tool_has_Feature_Tool1`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -146,7 +125,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_platform` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_platform` (
   `tool_uid` INT NOT NULL ,
   `platform_uid` INT NOT NULL ,
-  PRIMARY KEY (`tool_uid`, `platform_uid`) ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `tool_uid`, `platform_uid`) ,
   CONSTRAINT `fk_Tool_has_Platform_Tool1`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -188,7 +168,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_keyword` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_keyword` (
   `tool_uid` INT NOT NULL ,
   `keyword_uid` INT NOT NULL ,
-  PRIMARY KEY (`tool_uid`, `keyword_uid`) ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `tool_uid`, `keyword_uid`) ,
   CONSTRAINT `fk_Tool_has_Keyword_Tool1`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -230,7 +211,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_project` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_project` (
   `tool_uid` INT NOT NULL ,
   `project_uid` INT NOT NULL ,
-  PRIMARY KEY (`tool_uid`, `project_uid`) ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `tool_uid`, `project_uid`) ,
   CONSTRAINT `fk_Tool_has_Project_Tool1`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -268,7 +250,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_publication` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_publication` (
   `tool_uid` INT NOT NULL ,
   `publication_uid` INT NOT NULL ,
-  PRIMARY KEY (`tool_uid`, `publication_uid`) ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `tool_uid`, `publication_uid`) ,
   CONSTRAINT `fk_Tool_has_Publication_Tool1`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -308,7 +291,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_standard` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_standard` (
   `tool_uid` INT NOT NULL ,
   `standard_uid` INT NOT NULL ,
-  PRIMARY KEY (`tool_uid`, `standard_uid`) ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `tool_uid`, `standard_uid`) ,
   CONSTRAINT `fk_Tool_has_Standard_Tool1`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -335,6 +319,7 @@ CREATE  TABLE IF NOT EXISTS `tools_registry`.`developer` (
   `developer_uid` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(255) NOT NULL ,
   `contact` VARCHAR(255) NULL ,
+  `type` VARCHAR(45) NULL ,
   PRIMARY KEY (`developer_uid`) )
 ENGINE = InnoDB;
 
@@ -347,7 +332,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_developer` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_developer` (
   `tool_uid` INT NOT NULL ,
   `developer_uid` INT NOT NULL ,
-  PRIMARY KEY (`tool_uid`, `developer_uid`) ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `tool_uid`, `developer_uid`) ,
   CONSTRAINT `fk_Tool_has_Developer_Tool1`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -400,6 +386,8 @@ CREATE  TABLE IF NOT EXISTS `tools_registry`.`user` (
   `mail` VARCHAR(255) NOT NULL ,
   `login` VARCHAR(255) NOT NULL ,
   `password` VARCHAR(64) NOT NULL ,
+  `active` TINYINT(1) NULL DEFAULT 1 ,
+  `admin` TINYINT(1) NULL DEFAULT 0 ,
   PRIMARY KEY (`user_uid`) )
 ENGINE = InnoDB;
 
@@ -412,12 +400,11 @@ DROP TABLE IF EXISTS `tools_registry`.`description` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`description` (
   `description_uid` INT NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(255) NOT NULL ,
-  `description` TEXT NOT NULL ,
+  `description` TEXT NULL ,
   `version` VARCHAR(255) NULL ,
-  `homepage` VARCHAR(255) NOT NULL ,
+  `homepage` VARCHAR(255) NULL ,
   `available_from` DATE NULL ,
   `registered` DATE NULL ,
-  `registered_by` INT NULL ,
   `tool_uid` INT NOT NULL ,
   `user_uid` INT NOT NULL ,
   PRIMARY KEY (`description_uid`) ,
@@ -446,7 +433,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_suite` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_suite` (
   `tool_uid` INT NOT NULL ,
   `suite_uid` INT NOT NULL ,
-  PRIMARY KEY (`tool_uid`, `suite_uid`) ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `tool_uid`, `suite_uid`) ,
   CONSTRAINT `fk_Tool_has_Feature_Tool10`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -591,48 +579,22 @@ CREATE INDEX `fk_SystemLog_Users1_idx` ON `tools_registry`.`system_log` (`user_u
 
 
 -- -----------------------------------------------------
--- Table `tools_registry`.`description_has_organization`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tools_registry`.`description_has_organization` ;
-
-CREATE  TABLE IF NOT EXISTS `tools_registry`.`description_has_organization` (
-  `organization_uid` INT NOT NULL ,
-  `description_uid` INT NOT NULL ,
-  PRIMARY KEY (`organization_uid`, `description_uid`) ,
-  CONSTRAINT `fk_Description_has_Organization_Organization1`
-    FOREIGN KEY (`organization_uid` )
-    REFERENCES `tools_registry`.`organization` (`organization_uid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Description_has_Organization_Description1`
-    FOREIGN KEY (`description_uid` )
-    REFERENCES `tools_registry`.`description` (`description_uid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE INDEX `fk_Description_has_Organization_Organization1_idx` ON `tools_registry`.`description_has_organization` (`organization_uid` ASC) ;
-
-CREATE INDEX `fk_Description_has_Organization_Description1_idx` ON `tools_registry`.`description_has_organization` (`description_uid` ASC) ;
-
-
--- -----------------------------------------------------
 -- Table `tools_registry`.`alternative_title`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `tools_registry`.`alternative_title` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`alternative_title` (
-  `description_uid` INT NOT NULL ,
+  `tool_uid` INT NOT NULL ,
   `title` VARCHAR(255) NOT NULL ,
-  PRIMARY KEY (`description_uid`) ,
+  PRIMARY KEY (`tool_uid`) ,
   CONSTRAINT `fk_Alternative_Title_Description1`
-    FOREIGN KEY (`description_uid` )
-    REFERENCES `tools_registry`.`description` (`description_uid` )
+    FOREIGN KEY (`tool_uid` )
+    REFERENCES `tools_registry`.`tool` (`tool_uid` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Alternative_Title_Description1_idx` ON `tools_registry`.`alternative_title` (`description_uid` ASC) ;
+CREATE INDEX `fk_Alternative_Title_Description1_idx` ON `tools_registry`.`alternative_title` (`tool_uid` ASC) ;
 
 
 -- -----------------------------------------------------
@@ -643,7 +605,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_tool_type` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_tool_type` (
   `tool_type_uid` INT NOT NULL ,
   `tool_uid` INT NOT NULL ,
-  PRIMARY KEY (`tool_type_uid`, `tool_uid`) ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `tool_type_uid`, `tool_uid`) ,
   CONSTRAINT `fk_Description_has_Tool_type_Tool_type1`
     FOREIGN KEY (`tool_type_uid` )
     REFERENCES `tools_registry`.`tool_type` (`tool_type_uid` )
@@ -715,7 +678,7 @@ CREATE INDEX `fk_External_Description_Tool1_idx` ON `tools_registry`.`external_d
 DROP TABLE IF EXISTS `tools_registry`.`tool_application_type` ;
 
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_application_type` (
-  `tool_application_type_uid` INT NOT NULL AUTO_INCREMENT ,
+  `tool_application_type_uid` INT NOT NULL ,
   `tool_uid` INT NOT NULL ,
   `application_type` ENUM('localDesktop', 'webApplication', 'webService', 'other', 'unknown') NOT NULL DEFAULT 'unknown' ,
   PRIMARY KEY (`tool_application_type_uid`) ,
@@ -760,7 +723,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_licence` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_licence` (
   `tool_uid` INT NOT NULL ,
   `licence_uid` INT NOT NULL ,
-  PRIMARY KEY (`tool_uid`, `licence_uid`) ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `tool_uid`, `licence_uid`) ,
   CONSTRAINT `tool`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -805,6 +769,8 @@ DROP TABLE IF EXISTS `tools_registry`.`tool_has_video` ;
 CREATE  TABLE IF NOT EXISTS `tools_registry`.`tool_has_video` (
   `tool_uid` INT NOT NULL ,
   `video_uid` INT NOT NULL ,
+  `link_uid` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`link_uid`, `video_uid`, `tool_uid`) ,
   CONSTRAINT `tool_has_video_tool`
     FOREIGN KEY (`tool_uid` )
     REFERENCES `tools_registry`.`tool` (`tool_uid` )
@@ -823,7 +789,6 @@ CREATE INDEX `tool_idx` ON `tools_registry`.`tool_has_video` (`tool_uid` ASC) ;
 
 CREATE INDEX `video_idx` ON `tools_registry`.`tool_has_video` (`video_uid` ASC) ;
 
-USE `tools_registry` ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

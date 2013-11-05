@@ -163,7 +163,7 @@
 			$options["total"] = self::nbrTotal();
 			$ret = array("response" => array(), "parameters" => $options);
 			foreach($data as &$answer) {
-				if($answer["InnerDescription"] == "&nbsp;") {
+				if($answer["InnerDescription"] == "") {
 					$desc = substr($answer["ExternalDescription"], 0, $options["descriptionSize"])."...";
 					$provider = $answer["Provider"];
 				} elseif($answer["InnerDescription"] != Null) {
@@ -273,7 +273,7 @@
 			} else {
 				##If options : Descriptions asked
 				foreach($data as &$answer) {
-					if($answer["InnerDescription"] == "&nbsp;") {
+					if($answer["InnerDescription"] == "") {
 						$desc = substr($answer["ExternalDescription"], 0, $options["descriptionSize"])."...";
 						$provider = $answer["Provider"];
 					} elseif($answer["InnerDescription"] != Null) {
