@@ -45,7 +45,7 @@ class Rdf {
     function tool($id = null) {
         $result = array();
 
-        $query = "SELECT t.tool_uid, t.shortname, d.description, d.title, d.homepage, d.licence_uid, d.available_from, d.registered, d.licence_uid FROM tool t
+        $query = "SELECT t.tool_uid, t.shortname, d.description, d.title, d.homepage, d.available_from, d.registered FROM tool t
                       INNER JOIN description d ON t.tool_uid = d.tool_uid";
 
         if ($id) {
@@ -78,9 +78,16 @@ class Rdf {
                 $result[$uri][$this->pre['dcterms'].'description'][] = $this->_val(htmlspecialchars($tool['description']));
             }
             
-            $result[$uri][$this->pre['dcterms'].'licence'][] = $this->_val($this->pre['dasish'].'licence/'.$tool['licence_uid'], 'uri');
-            if($id){
-                $result = array_merge($result, $this->licence($tool['licence_uid']));
+            //hasLicence
+            $licenceQuery = $this->DB->prepare("SELECT tool_uid, licence_uid FROM tool_has_licence WHERE tool_uid =  ?");
+            $licenceQuery->execute(array($tool['tool_uid']));
+            $licences = $licenceQuery->fetchAll(PDO::FETCH_ASSOC);
+            
+            foreach ($licences as &$licence) {
+                $result[$uri][$this->pre['dcterms'].'licence'][] = $this->_val($this->pre['dasish'].'licence/'.$licence['licence_uid'], 'uri');
+                if($id){
+                    $result = array_merge($result, $this->licence($licence['licence_uid']));
+                }
             }
             
             //hasKeyword
@@ -119,14 +126,14 @@ class Rdf {
             }
             
             //hasPlatform (using dbpedia)
-            $platformQuery = $this->DB->prepare("SELECT * FROM tool_has_platform tp INNER JOIN platform p ON p.platform_uid = tp.platform_id WHERE tool_uid = ?");
+            $platformQuery = $this->DB->prepare("SELECT * FROM tool_has_platform tp INNER JOIN platform p ON p.platform_uid = tp.platform_uid WHERE tool_uid = ?");
             $platformQuery->execute(array($tool['tool_uid']));
             $platforms = $platformQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($platforms as &$platform) {
                 if($platform['name'] == 'osX'){
                     $platform['name'] = 'OS_X';
                 }
-                $result[$uri][$this->pre['dcterms'].'requires'][] = $this->_val('http://dbpedia.org/page/'.$platform['platform_platform'], 'uri');
+                $result[$uri][$this->pre['dcterms'].'requires'][] = $this->_val('http://dbpedia.org/page/'.$platform['name'], 'uri');
             }
             
             //externalDescription (blank node)

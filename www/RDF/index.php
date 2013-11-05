@@ -1,5 +1,6 @@
 <?php
 
+
 define("DASISH", true);
 
 define('ARC2_db_host', 'localhost');
@@ -21,16 +22,19 @@ require_once('rdf.php');
 require_once('sparql.php');
 
 function output_rdf($data, $format){
-    $graph = new EasyRdf_Graph('http://tools.dasish.eu/#/');
-    $graph->parse($data, 'php', 'http://tools.dasish.eu/#/');
-    
+    $graph = new EasyRdf_Graph('http://wp23.borsna.se/#/');
+    $graph->parse($data, 'php', 'http://wp23.borsna.se/#/');
+
     $output_format = EasyRdf_Format::getFormat($format);
     print $graph->serialise($output_format);
 }
 
 #Start the framework
 \Slim\Slim::registerAutoloader();
-$app = new \Slim\Slim();
+$app = new \Slim\Slim(array(
+                'mode' => 'development',
+                'debug' => true
+            ));
 
 require_once('routes.php');
 
