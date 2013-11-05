@@ -10,7 +10,7 @@ class User {
 	function listAll() {
 		
 		$result = array();
-        $query = "SELECT user_uid, name, mail, login FROM user ORDER BY login ASC";
+        $query = "SELECT user_uid, name, mail, login, active FROM user ORDER BY login ASC";
 		$req = $this->DB->prepare($query);
 		$req->execute();
 		$users = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -36,7 +36,7 @@ class User {
 	
 	function getUserByLogin($login) {
 		
-        $query = "SELECT user_uid, name, mail, login FROM user WHERE login = $login";
+        $query = "SELECT user_uid, name, mail, login, active FROM user WHERE login = $login";
 		$req = $this->DB->prepare($query);
 		$req->execute();
 		$user = $req->fetch(PDO::FETCH_ASSOC);
@@ -69,7 +69,7 @@ class User {
 		
 		try{
 			$result = array();
-			$query = "INSERT INTO user (name, mail, login, password) VALUES ('$name', '$mail', '$login', '$password')";
+			$query = "INSERT INTO user (name, mail, login, password, active) VALUES ('$name', '$mail', '$login', '$password', 1)";
 			$req = $this->DB->prepare($query);
 			$req->execute();	
 		}
@@ -89,17 +89,17 @@ class User {
 		try{
 			if(!empty($values['password'])) {
 			
-				$query = "UPDATE user SET name=?, mail=?, login=?, password=? WHERE user_uid=?";
+				$query = "UPDATE user SET name=?, mail=?, login=?, password=?, active=? WHERE user_uid=?";
 				
 				$req = $this->DB->prepare($query);
-				$req->execute(array($values['name'], $values['mail'], $values['login'], hash('sha256', $values['password']), $values['user_uid']));		
+				$req->execute(array($values['name'], $values['mail'], $values['login'], hash('sha256', $values['password']), $values['user_active'], $values['user_uid']));		
 			}
 			else {
 					
-				$query = "UPDATE user SET name=?, mail=?, login=? WHERE user_uid=?";
+				$query = "UPDATE user SET name=?, mail=?, login=?, active=? WHERE user_uid=?";
 				
 				$req = $this->DB->prepare($query);
-				$req->execute(array($values['name'], $values['mail'], $values['login'], $values['user_uid']));		
+				$req->execute(array($values['name'], $values['mail'], $values['login'], $values['user_active'], $values['user_uid']));		
 			}	
 		}
 		catch (Exception $e)
