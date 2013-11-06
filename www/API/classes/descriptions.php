@@ -26,7 +26,10 @@
 				try {
 					$data = array($data["name"], $data["description"], $data["version"], $data["homepage"],  $data["available_from"],  $toolUID, $_SESSION["user"]["id"]);
 					$ret = $req->execute($data);
-					return array("status" => "success", "message" => "Description registered", "identifier" => array("id" => self::DB()->lastInsertId()));
+					$uid = self::DB()->lastInsertId();
+					
+					Log::insert("insert", $_SESSION["user"]["id"], "description", $uid);
+					return array("status" => "success", "message" => "Description registered", "identifier" => array("id" => $uid));
 				} catch(Exception $e) {
 					return array("status" => "error", "message" =>  "A field might be missing");
 				}

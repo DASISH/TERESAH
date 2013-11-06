@@ -42,6 +42,9 @@
 				case "user":
 					$this->r("user.php");
 					break;
+				case "log":
+					$this->r("log.php");
+					break;
 			}
 		}
 	

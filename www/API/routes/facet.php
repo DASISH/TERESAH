@@ -45,7 +45,12 @@
 	$app->post('/facet/:facet/', function ($facet) use ($require, $app) {
 		$app->contentType('application/json');
 		
-		$require->req(array("facet", "helper"));
+		if(!isset($_SESSION["user"]["id"])) {
+			jP(array("status" => "error" , "message" => "You need to be logged in to use this function"));
+			exit();
+		}	
+		
+		$require->req(array("facet", "helper", "log"));
 		
 		if(count($app->request->post()) > 0) {
 			$input = $app->request->post();

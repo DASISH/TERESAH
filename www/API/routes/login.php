@@ -36,7 +36,7 @@
 	})->via('POST')->name('login');
 	
 	$app->map('/signup/', function () use ($app, $require) {
-		$require->req("user");
+		$require->req("user", "log");
 		// Don't forget to set the correct attributes in your form (name="user" + name="password")
 		
 		if(count($app->request->post()) > 0) {

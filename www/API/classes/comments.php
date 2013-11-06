@@ -16,6 +16,7 @@
 				$req = self::DB()->prepare($req);
 				$req->execute(array($data["text"], $data["title"], $_SESSION["user"]["id"], $id, self::type($type)));
 				
+				Log::insert("insert", $_SESSION["user"]["id"], "comment", self::DB()->lastInsertId());
 				return array("Rows" => $req->rowCount());
 			} else {
 				return array("status" => "error", "message" => "Not signed in", "Rows" => 0);
@@ -29,12 +30,12 @@
 				$req->execute(array($data["text"], $data["title"], $_SESSION["user"]["id"], $id, self::type(3)));
 				
 				$lii = self::DB()->lastInsertId();
-				echo $lii;
-				echo $topic;
+				Log::insert("insert", $_SESSION["user"]["id"], "comment", $lii);
 				if($lii > 0) {
 					$req = "INSERT INTO comment_has_reply VALUES ( ? , ? )";
 					$req = self::DB()->prepare($req);
 					$req->execute(array($topic, $lii));
+					Log::insert("insert", $_SESSION["user"]["id"], "comment_has_reply", $lii);
 				}
 				
 				return array("Rows" => $req->rowCount());

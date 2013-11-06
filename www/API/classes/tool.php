@@ -57,10 +57,12 @@
 			$req = "INSERT INTO tool (tool_uid, shortname) VALUES ( NULL , ? )";
 			$req = self::DB()->prepare($req);
 			$req->execute(array(self::getShorname($data["name"])));
+			$uid = self::DB()->lastInsertId();
+			Log::insert("insert", $_SESSION["user"]["id"], "tool", $uid);
 			
 			//Check
 			if($req->rowCount() == 1) {
-				return array("status" => "success", "uid" => self::DB()->lastInsertId(), "shortname" => self::getShorname($data["name"]));
+				return array("status" => "success", "uid" => $uid, "shortname" => self::getShorname($data["name"]));
 			} else {
 				return array("status" => "error", "message" => "The tool couldn't be save");
 			}
@@ -79,9 +81,11 @@
 			$req = self::DB()->prepare($sql);
 			$req->execute(array($data["tool"], $data["element"]));
 			
+			Log::insert("insert", $_SESSION["user"]["id"], $table["link"]["name"], self::DB()->lastInsertId());
+			$id = self::DB()->lastInsertId();
 			//Check
 			if($req->rowCount() == 1) {
-				return array("status" => "success", "uid" => self::DB()->lastInsertId(), $data["facet"]);
+				return array("status" => "success", "uid" => $id, "facet" => $data["facet"]);
 			} else {
 				return array("status" => "error", "message" =>  "The facet ".$data["facet"]." (".$table["table"]["name"].") couldn't be save");//, "debug" => array("request" => $sql, "input" => $data));
 			}

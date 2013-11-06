@@ -9,7 +9,7 @@
 	$app->post('/topic/:toolUID/:topicUID', function ($toolUID, $topicUID) use ($require, $app) { 
 		$app->contentType('application/json');
 		
-		$require->req(array("comment"));
+		$require->req(array("comment", "log"));
 		
 		if(count($app->request->post()) > 0) {
 			$input = $app->request->post();

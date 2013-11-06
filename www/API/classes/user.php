@@ -29,7 +29,9 @@
 				
 				if($req->rowCount() == 1) {
 					if($id == true) {
-						return self::DB()->lastInsertId();
+						$uid = self::DB()->lastInsertId()
+						Log::insert("insert", $uid, "user", $uid);
+						return $uid;
 					} else {
 						return array("status" => "success", "message" => "You have now signed up");
 					}
@@ -62,6 +64,7 @@
 					$req = self::DB()->prepare("INSERT INTO user_oauth VALUES (NULL, ?, ?, ?)");
 					$req->execute(array($sign, $provider, $data["uid"]));
 					$_SESSION["user"] = array("id" => $sign, "name" => $data["name"], "mail" => $data["email"]);
+					Log::insert("insert", $sign, "user", self::DB()->lastInsertId());
 					return array("signin" => true, "data" => array("UID" => $sign, "Name" => $data["name"], "Mail" => $data["email"]));
 				} elseif(isset($sign["Error"])) {
 					return array("signin" => false, "status" => "error", "message" => $sign["Error"]);

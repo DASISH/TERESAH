@@ -173,7 +173,10 @@ class Facets {
 					$req->bindParam($name, $data[$field]);
 				}
 				$req->execute();
-				return array("status" => "success", "identifier" => array("id" => self::DB()->lastInsertId(), "name" => $data[$title]));
+				$uid = self::DB()->lastInsertId();
+				
+				Log::insert("insert", $_SESSION["user"]["id"], $name, $uid);
+				return array("status" => "success", "identifier" => array("id" => $uid, "name" => $data[$title]));
 			} else {
 				return array("status" => "error", "message" => "Input object is wrong");
 			}
