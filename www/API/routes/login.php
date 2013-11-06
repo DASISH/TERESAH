@@ -67,7 +67,7 @@
 		if(isset($_SESSION["user"])) {
 			return jP($_SESSION["user"]);
 		} else {
-			return jP(array("Error" => "Not connected"));
+			return jP(array("status" => "error", "message" => "Not connected"));
 		}
 	} );
 	
