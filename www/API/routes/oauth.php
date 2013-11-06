@@ -1,7 +1,7 @@
 <?php
 	#print "Description.php is here";
 	$app->get('/oAuth/Google', function () use ($require, $app) { 
-		$require->req("user", "log");
+		$require->req(array("user", "log"));
 		$app->contentType('application/json');
 		
 		$GET = $app->request->get();
@@ -24,7 +24,7 @@
 		}
 	} );
 	$app->get('/oAuth/Facebook', function () use ($require, $app) { 
-		$require->req("user", "log");
+		$require->req(array("user", "log"));
 		$GET = $app->request->get();
 		if(isset($GET["callback"])) {
 			$_SESSION["callback"] = str_replace("null", "", $GET["callback"]);
@@ -45,7 +45,7 @@
 		}
 	} );
 	$app->get('/oAuth/Github', function () use ($require, $app) { 
-		$require->req("user", "log");
+		$require->req(array("user", "log"));
 		$GET = $app->request->get();
 		if(isset($GET["callback"])) {
 			$_SESSION["callback"] = str_replace("null", "", $GET["callback"]);
@@ -67,7 +67,7 @@
 	} );
 	$app->get('/oAuth/Twitter', function () use ($require, $app) { 
 	
-		$require->req("user", "log");
+		$require->req(array("user", "log"));
 		$app->contentType('application/json');
 		
 		$GET = $app->request->get();

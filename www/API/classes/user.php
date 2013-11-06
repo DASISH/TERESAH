@@ -23,20 +23,20 @@
 		}
 		function signup($post, $id = false) {
 			if(isset($post["mail"]) && isset($post["password"]) && isset($post["name"]) && isset($post["user"])) {
-				$req = "INSERT INTO user VALUES (NULL, ?, ? , ? , ? )";
+				$req = "INSERT INTO user (`user_uid`,`name`,`mail`,`login`,`password`,`active`,`admin`) VALUES (NULL, ?, ? , ? , ?, NULL, NULL )";
 				$req = self::DB()->prepare($req);
 				$req->execute(array($post["name"], $post["mail"], $post["user"], hash("sha256", $post["password"])));
 				
 				if($req->rowCount() == 1) {
 					if($id == true) {
-						$uid = self::DB()->lastInsertId()
+						$uid = self::DB()->lastInsertId();
 						Log::insert("insert", $uid, "user", $uid);
-						return $uid;
+						return array("status" => "success", "uid" => $uid);
 					} else {
 						return array("status" => "success", "message" => "You have now signed up");
 					}
 				} else {
-					return array("status" => "error", "message" => "Error during signin up. Please contact DASISH or retry.");
+					return array("status" => "error", "message" => "Error during sign up. Please contact DASISH or retry.");
 				}
 			} else {
 				return array("status" => "error", "message" => "A field is missing");
@@ -60,14 +60,14 @@
 				return array("signin" => true, "data" => $d);
 			} else {
 				$sign = self::signup(array("mail" => $data["email"], "name" => $data["name"], "user" => $data["email"], "password" => time()), true);
-				if($sign > 0) {
+				if($sign["status"] == "success") {
 					$req = self::DB()->prepare("INSERT INTO user_oauth VALUES (NULL, ?, ?, ?)");
-					$req->execute(array($sign, $provider, $data["uid"]));
-					$_SESSION["user"] = array("id" => $sign, "name" => $data["name"], "mail" => $data["email"]);
-					Log::insert("insert", $sign, "user", self::DB()->lastInsertId());
+					$req->execute(array($sign["uid"], $provider, $data["uid"]));
+					$_SESSION["user"] = array("id" => $sign["uid"], "name" => $data["name"], "mail" => $data["email"]);
+					Log::insert("insert", $sign["uid"], "user", self::DB()->lastInsertId());
 					return array("signin" => true, "data" => array("UID" => $sign, "Name" => $data["name"], "Mail" => $data["email"]));
-				} elseif(isset($sign["Error"])) {
-					return array("signin" => false, "status" => "error", "message" => $sign["Error"]);
+				} else {
+					return array("signin" => false, "status" => "error", "message" => $sign["message"]);
 				
 				}
 			}
