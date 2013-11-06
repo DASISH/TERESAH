@@ -12,6 +12,9 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 			input : undefined,
 			select : function(item) {
 				$location.path('/tool/'+item.identifiers.shortname)
+			},
+			go : function() {
+				$location.path('/search/general/?case_insensitivity=1&limited=title&request='+item.identifiers.shortname)
 			}
 		},
 		routes : {

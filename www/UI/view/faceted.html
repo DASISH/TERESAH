@@ -44,22 +44,8 @@
 				</section>
 				<section id="viewContent" ng-show="results.items">
 					<hr />
-					<div class="row no-desc" ng-repeat="item in results.items">
-						<div class="row item" >
-							<div class="col-lg-1 ">
-								<div class="container-font big-font">
-									<span class="fontello-{{item.applicationType}}"></span>
-								</div>
-							</div>
-							<div class="col-lg-11">
-								<h4><a ng-href="#/tool/{{item.identifiers.shortname}}" ng-bind="item.title"></a> <span class="pull-right"><small><em ng-bind="item.description.provider"></em></small></span></h4>
-								<p ng-bind="item.description.text"></p>
-								<hr />
-							</div>
-							
-						</div>
-					</div>
-					<div class="row">
+					<section class="itemList" items="results.items"></section>
+					<div class="row" ng-show="ui.pages.total > 1">
 						<pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
 					</div>
 				</section>

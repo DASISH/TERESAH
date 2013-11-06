@@ -1,7 +1,7 @@
 <?php
 	$app->map('/login/', function () use ($app, $require) {
 		// Don't forget to set the correct attributes in your form (name="user" + name="password")
-		$require->req("user", "log");
+		$require->req(array("user", "log"));
 		if(count($app->request->post()) > 0) {
 			$input = $app->request->post();
 		} elseif(count($app->request()->getBody()) > 0) {
@@ -36,7 +36,7 @@
 	})->via('POST')->name('login');
 	
 	$app->map('/signup/', function () use ($app, $require) {
-		$require->req("user", "log");
+		$require->req(array("user", "log"));
 		// Don't forget to set the correct attributes in your form (name="user" + name="password")
 		
 		if(count($app->request->post()) > 0) {

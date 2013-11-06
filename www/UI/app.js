@@ -9,6 +9,7 @@ portal.
 		when('/about/rdf/', {templateUrl: './view/rdf.html'}).
 		when('/about/api/', {templateUrl: './view/apiFaq.html', controller:"apiFaqCtrl", resolve: apiFaq.resolveAPIFAQ}).
 		when('/search/faceted', {templateUrl: './view/faceted.html', controller:"FacetedCtrl", reloadOnSearch: false, resolve: Faceted.resolveFaceted}).
+		when('/search/general', {templateUrl: './view/search.html', controller:"SearchCtrl", reloadOnSearch: false, resolve: Search.resolveSearch}).
 		when('/facet/:facet/:facetID', {templateUrl: './view/browse.html', controller:"BrowseCtrl", reloadOnSearch: false, resolve: BrowseCtrl.resolveBrowseCtrl}).
 		when('/facet/:facet', {templateUrl: './view/facet.html', controller:"FacetCtrl", reloadOnSearch: false, resolve: FacetCtrl.resolveFacetCtrl}).
 		when('/facet', {templateUrl: './view/facetList.html', controller:"facetListCtrl", reloadOnSearch: false, resolve: facetListCtrl.resolvefacetListCtrl}).

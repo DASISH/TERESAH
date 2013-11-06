@@ -500,6 +500,18 @@
 						"type" : "ARRAY OF INT",
 						"required" : true
 					},{
+						"name" : "facets[:type]['optional']",
+						"default" : "true",
+						"definition" : "Set said facet as an optional parameter",
+						"type" : "BOOLEAN",
+						"required" : false
+					},{
+						"name" : "facets[:type]['mode']",
+						"default" : "AND",
+						"definition" : "Return any item which as at least one of the given label for the said facet",
+						"type" : "ENUM(AND,OR)",
+						"required" : false
+					},{
 						"name" : "limit",
 						"default" : "20",
 						"definition" : "Limit of item shown on one page of results. Maximum is 50",

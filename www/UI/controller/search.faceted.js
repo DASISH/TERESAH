@@ -3,7 +3,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 	
 	$scope.ui = {
 		url : {
-			vall : null, 
+			val : null, 
 			enable : true, 
 			reload : function() {
 				options = $item.serialize($ui.url.get());
@@ -119,7 +119,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				opt.page = page;
 				opt.start = page * 20 - 20;
 				
-				$scope.ui.facets.submit(opt)
+				$scope.ui.facets.submit(opt);
 				}
 		}
 	};

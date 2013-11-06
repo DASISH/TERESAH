@@ -42,6 +42,7 @@
 				<ul class="nav navbar-nav">
 					<li ng-class="ui.routes.getRoute('HomeCtrl')"><a href="#/">Home</a></li>
 					<li ng-class="ui.routes.getRoute('facetListCtrl')"><a href="#/facet">Browse</a></li>
+					<li ng-class="ui.routes.getRoute('SearchCtrl')"><a href="#/search/general">Search</a></li>
 					<li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="#/search/faceted">Faceted search</a></li>
 					<li ng-class="ui.routes.getRoute('AddToolCtrl')" ng-show="ui.user.data.signedin"><a href="#/add">Add a tool</a></li>
 					<li class="dropdown">
@@ -59,7 +60,7 @@
 					<li class="pull-right" ng-show="ui.user.data.signedin"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
 					<li class="pull-right" ng-show="!ui.user.data.signedin"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
 				</ul>
-				<form class="navbar-form navbar-right">
+				<form class="navbar-form navbar-right" ng-submit="ui.search.go()">
 					<div class="form-group">
 						<input type="text" placeholder="Type your research here"  ng-model="ui.search.input" class="form-control" typeahead-wait-ms="100" typeahead="answer.identifiers.shortname as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-loading="true" typeahead-on-select="ui.search.select($item)">
 					</div>
@@ -92,6 +93,7 @@
 	
 	<script type="text/javascript" src="./modules/services.js"></script>
 	<script type="text/javascript" src="./modules/filter.js"></script>
+	<script type="text/javascript" src="./modules/directives.js"></script>
 	
 	<script type="text/javascript" src="./controller/tool.js"></script>
 	<script type="text/javascript" src="./controller/link.js"></script>
@@ -104,6 +106,7 @@
 	<script type="text/javascript" src="./controller/browse.facet.facetID.js"></script>
 	<script type="text/javascript" src="./controller/browse.facet.js"></script>
 	<script type="text/javascript" src="./controller/browse.js"></script>
+	<script type="text/javascript" src="./controller/search.quick.js"></script>
 	
 	<script type="text/ng-template" id="myModalContent.html">
 		<div class="modal-header">

@@ -3,13 +3,23 @@
 	$app->get('/search/general/', function () use ($require, $app) { 
 		$app->contentType('application/json');
 		$require->req(array("search"));
-		$data = Search::general($app->request->get()); 
-		
-		if(isset($data["Error"])) {
-			$app->response()->status(400);
-		} else {
-			return jP($data); 
+		$filtered = $app->request->get(); 
+		if((count($filtered) > 0) && isset($filtered["request"])) {
+			foreach($filtered as $k => $v) {
+				if($v == "false" && $k != "request") {
+					$filtered[$k] = false;
+				}
+			}
+			
+			$data = Search::general($filtered);
+			if(isset($data["Error"])) {
+				$app->response()->status(400);
+			} else {
+				$data["status"] = "success";
+				return jP($data); 
+			}
 		}
+		return jP(array("status" => "error", "message" => "No input given")); 
 		
 	});
 
@@ -29,7 +39,8 @@
 	$app->get('/search/faceted/', function () use ($require, $app) {
 		$app->contentType('application/json');
 		$require->req(array("search"));
-		$data = Search::faceted($app->request->get());
+		$filtered = $app->request->get();
+		$data = Search::faceted($filtered);
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {

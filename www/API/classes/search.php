@@ -217,14 +217,14 @@
 			
 			
 			#Select Generation
-			$req = "SELECT  d.title, t.tool_uid as UID, t.shortname, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription";
+			$req2 = "SELECT  d.title, t.tool_uid as UID, t.shortname, ED.description as ExternalDescription, ED.registry_name as Provider, d.description as InnerDescription";
 			
 			#If description asked, we output type as well
 			if(isset($options["description"]) && ($options["description"] == true)) {
-				$req .= ", tat.application_type ";
+				$req2 .= ", tat.application_type ";
 			}
 			#From Generation
-			$req .=	" FROM description d
+			$req =	" FROM description d
 						INNER JOIN tool t ON t.tool_uid = d.tool_uid 
 						RIGHT OUTER JOIN external_description ED ON ED.tool_uid = t.tool_uid ";
 						
@@ -245,23 +245,25 @@
 				$req .=	" OR d.description LIKE CONCAT('%', ? , '%') ".$sensitivity." OR
 						ED.description LIKE CONCAT('%', ? , '%') ".$sensitivity."  ";
 			}
-			$req .=	"GROUP BY d.tool_uid
-					ORDER BY ".$ordering." ".$options["order"]." LIMIT ".$options["start"]." , ".$options["limit"];
-			$req = self::DB()->prepare($req);
+			$req .=	"GROUP BY d.tool_uid";
+			$totalReq = $req;
+			$req2 .=	$req . " ORDER BY ".$ordering." ".$options["order"]." LIMIT ".$options["start"]." , ".$options["limit"];
+			$req = self::DB()->prepare($req2);
 			
 			
 			#Request execution :
 			if(!isset($options["limited"]) || $options["limited"] == false) {
-				$req->execute(array($options["request"], $options["request"], $options["request"], $options["request"]));
+				$paramReq = array($options["request"], $options["request"], $options["request"], $options["request"]);
 			} elseif($options["limited"] == "nokeyword") {
-				$req->execute(array($options["request"], $options["request"], $options["request"]));
+				$paramReq = array($options["request"], $options["request"], $options["request"]);
 			} else {
-				$req->execute(array($options["request"]));
+				$paramReq = array($options["request"]);
 			}
+			$req->execute($paramReq);
 			
 			$options["results"] = $req->rowCount();
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
-			$options["total"] = self::nbrTotal();
+			$options["total"] = self::nbrTotal($totalReq, $paramReq, true);
 			$ret = array("response" => array(), "parameters" => $options);
 			
 			#Formating
@@ -437,7 +439,7 @@
 							}
 
 						} else {
-							if(isset($o["optionnal"])) {
+							if(isset($o["optional"])) {
 								$joinText = "LEFT OUTER JOIN";
 							} else {
 								$joinText = "INNER JOIN";

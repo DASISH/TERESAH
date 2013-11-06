@@ -1,0 +1,87 @@
+<div class="page-header">
+	<h2>General Search</h2>
+	
+	<form class="form form-horizontal" ng-submit="ui.search()">
+		<div class="form-group">
+			<label for="searchInput" class="control-label col-sm-2">Search input</label>
+			<div class="col-sm-10">
+				<input class="form-control" id="searchInput" ng-model="ui.params.request" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2"></label>
+			<div class="col-sm-10">
+				<div class="btn-toolbar" role="toolbar">
+					<div class="btn-group" ng-click="ui.params.case_insensitivity = !ui.params.case_insensitivity;">
+						<span class="btn btn-default"><b>Case sensitivity</b></span>
+						<span class="btn" ng-class="{'btn-default' : !(ui.params.case_insensitivity), 'btn-primary' : (ui.params.case_insensitivity)}" >
+							<span class="glyphicon glyphicon-off"></span>
+						</span>
+					</div>
+					<div class="btn-group" ng-click="ui.params.description = !ui.params.description;">
+						<span class="btn btn-default"><b>Show description</b></span>
+						<span class="btn" ng-class="{'btn-default' : !(ui.params.description), 'btn-primary' : (ui.params.description)}" >
+							<span class="glyphicon glyphicon-off"></span>
+						</span>
+					</div>
+					<div class="btn-group">
+						<span class="btn btn-default"><b>Order by</b></span>
+						<span class="btn btn-default" ng-class="{'btn-primary' : ui.params.orderBy == 'title'}"  ng-click="ui.params.orderBy = 'title';">
+							Title
+						</span>
+						<span class="btn btn-default" ng-class="{'btn-primary' : ui.params.orderBy == 'identifier'}"  ng-click="ui.params.orderBy = 'identifier';">
+							Date
+						</span>
+					</div>
+					<div class="btn-group">
+						<span class="btn btn-default"><b>Order</b></span>
+						<span class="btn btn-default" ng-class="{'btn-primary' : ui.params.order == 'ASC'}"  ng-click="ui.params.order = 'ASC';">
+							A-Z
+						</span>
+						<span class="btn btn-default" ng-class="{'btn-primary' : ui.params.order == 'DESC'}"  ng-click="ui.params.order = 'DESC';">
+							Z-A
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2"></label>
+			<div class="col-sm-10">
+				<div class="btn-group">
+					<span class="btn btn-default"><b>Limit to</b></span>
+					<span class="btn btn-default" ng-class="{'btn-primary' : !(ui.params.limited)}"  ng-click="ui.params.limited = false;">
+						Keyword
+					</span>
+					<span class="btn btn-default" ng-class="{'btn-primary' : ui.params.limited == 'nokeyword'}"  ng-click="ui.params.limited = 'nokeyword';">
+						Description
+					</span>
+					<span class="btn btn-default" ng-class="{'btn-primary' : ui.params.limited == 'title'}"  ng-click="ui.params.limited = 'title';">
+						Title
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="searchInput" class="control-label col-sm-2"></label>
+			<div class="col-sm-10">
+				<button type="submit" class="btn btn-info">Search</button>
+			</div>
+		</div>
+	</form>
+
+</div>
+
+<div class="alert alert-warning" ng-show="ui.status.status == 'error'" ng-bind="ui.status.message"></div>
+
+<div class="row" ng-show="ui.params.total > 1">
+	<p>Tools from {{ui.params.start + 1}} to {{ui.params.limit + ui.params.start}} on {{ui.params.total}} available</p>
+</div>
+
+<hr />
+
+<section class="itemList" items="results.items"></section>
+
+<div class="row" ng-show="ui.params.total > ui.pages.itemPerPage">
+	<pagination total-items="ui.params.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+</div>

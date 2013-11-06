@@ -318,36 +318,10 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					}
 				}
 			},
-			/*facets : function(key, option, callback) {
-					
-						if(typeof(callback)==='undefined') callback = false;
-					
-				if(key) {
-					if(option) {
-						return Item.routes.facets.search.one(key).get(option).then(function (data) {
-							Item.data = data.original;
-							if(callback) {	callback(data.original);	}
-							return data.original;
-						});
-					} else {
-						return Item.routes.facets.search.one(key).getList().then(function (data) {
-							Item.data = data.original;
-							if(callback) {	callback(data.original);	}
-							return data.original;
-						});
-					}
-				} else {
-					return Item.routes.facets.list.getList().then(function (data) {
-						Item.data = data.original;
-						if(callback) {	callback(data.original);	}
-						return data.original;
-					});
-				}
-			},*/
 			search : {
 				normal : function(options, callback) {
 					
-						if(typeof(callback)==='undefined') callback = false;
+					if(typeof(callback)==='undefined') callback = false;
 					
 					return Item.routes.search.normal.get(options).then(function(data) {
 						Item.data = data.original;
