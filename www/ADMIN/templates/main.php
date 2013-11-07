@@ -25,9 +25,8 @@
                 <li class="active"><a href="<?php print BASE_PATH; ?>tool">Tools</a></li>
                 <li><a href="#">Facets</a></li>
                 <li><a href="<?php print BASE_PATH; ?>user">Users</a></li>
-                <li><a href="#">Logs</a></li>
+                <li><a href="<?php print BASE_PATH; ?>log">Logs</a></li>
                 <li><a href="#">API Keys</a></li>
-                <li><a href="#">RDF Store</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?php print BASE_PATH; ?>settings"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
@@ -36,8 +35,7 @@
             </div><!--/.nav-collapse -->
           </div>
 
-		  <!-- flash messages -->
-		  
+		  <!-- flash messages -->		  
 		  <?php print render_flash_message($flash); ?>
 		  		 
 		  <!-- content -->				 
