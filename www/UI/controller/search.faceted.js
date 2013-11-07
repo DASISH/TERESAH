@@ -1,5 +1,9 @@
-var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restangular', function($scope, $ui, $item, $rest) {
+var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restangular', '$rootScope', function($scope, $ui, $item, $rest, $root) {
 	$scope.results = false;
+	
+	$scope.$watch('ui.pages.total', function(v) {
+		console.log(v);
+	});
 	
 	$scope.ui = {
 		url : {
@@ -12,6 +16,11 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 						//
 						//We launch research
 						$scope.ui.url.enable = false;
+						//console.log(options);
+						if(!(options.match("\&retrieveLabel")))
+						{
+							options += "&retrieveLabel";
+						}
 						$item.resolver.search.facetedGet(options, function(data) {
 							if(data.status == "error") {
 								$scope.ui.facets.error = data.message;
@@ -34,13 +43,17 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 							}
 							//Loop to set items following value in data.parameters
 							angular.forEach(data.parameters.facets, function(v, k) {
-								angular.forEach(v.request, function(v) {
-									this[v] = {name : "HELLO FACET", active : true, id : v};
-								}, v.request);
-								$scope.ui.facets.used[k] = {active : true, possibilities : v.request, facetParam: k};
+								tmp = {}
+								angular.forEach(v.request, function(labelName, idLabel) {
+									this[idLabel] = {name : labelName, active : true, id : idLabel};
+								}, tmp);
+								console.log(v);
+								console.log(k);
+								angular.extend($scope.ui.facets.used[k], {active : true, possibilities : tmp, facetParam: k});
 								if(v.mode) { if(v.mode == "AND") { modeVal = true; } else {  modeVal = false; }} else { modeVal = true; }
 								if(v.optional) { if(v.optional == "1") { optionalVal = true; } else {  optionalVal = false; }} else { optionalVal = true; }
-								$scope.ui.facets.options[k] = {inclusive : modeVal, optional : optionalVal};
+								
+								angular.extend($scope.ui.facets.options[k], {inclusive : modeVal, optional : optionalVal});
 							})
 							
 							
@@ -72,7 +85,9 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				} else {
 					constructor["facets"] = {};
 				}
+				//We merge the order options
 				angular.extend(constructor, $scope.ui.facets.params);
+				//We create a list of required label, options in facets in a facet array
 				angular.forEach($scope.ui.facets.used, function(val) {
 					if(val.active) {
 						constructor.facets[val.facetParam] = {"request" : []};
@@ -123,6 +138,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 					delete $scope.ui.facets.used[facet.facetParam].possibilities[keyword.id];
 				} else {
 					$scope.ui.facets.used[facet.facetParam].possibilities[keyword.id] = keyword;
+					$scope.ui.facets.used[facet.facetParam].active = true;
 				}
 			},
 			del : function (par, key) {
@@ -156,9 +172,8 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 	//Formating each options Array
 	angular.forEach($scope.ui.facets.facets, function(v) {
 		$scope.ui.facets.options[v.facetParam] = {optional : false, inclusive: true};
-		$scope.ui.facets.used[v.facetParam] = {};
+		$scope.ui.facets.used[v.facetParam] = {"facetParam" : v.facetParam, "facetLegend" : v.facetLegend, "possibilities" : [], active : false};
 	});
-
 	$scope.ui.url.reload();
 	
 	//In case of manual change of URL
@@ -171,7 +186,6 @@ Faceted.resolveFaceted = {
 		Item.resolver.facets.list(function(data) {
 			x = []
 			angular.forEach(data, function(val) {
-				console.log(val);
 				val["option"] = { case_insensitivity : true };
 				x.push(val);
 			});

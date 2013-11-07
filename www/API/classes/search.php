@@ -412,6 +412,7 @@
 			#
 			############################
 			
+			$realParams = array();
 			#Get Options
 			$opt = self::options($get);
 			$options = $opt[0];
@@ -425,6 +426,7 @@
 				foreach($get["facets"] as $key => $o) {
 					#We check that there is more than one option into the said facet array
 					if(is_array($o) && array_key_exists("request", $o) && is_array($o["request"]) && count($o["request"]) > 0) {
+						$realParams[$key] = array("request" => $o["request"]);
 						$dic = Helper::table($key);
 						if(array_key_exists("Error", $dic)) {
 							return $dic;
@@ -451,12 +453,13 @@
 						} else {
 							if(isset($o["optional"])) {
 								$joinText = "LEFT OUTER JOIN";
+								$realParams[$key]["optional"] = true;
 							} else {
 								$joinText = "INNER JOIN";
 							}
 							#This where clause is equal to a = $ OR = $
 							if(isset($o["mode"]) && $o["mode"] == "OR")	{
-							
+								$realParams[$key]["mode"] = "OR";
 								#We add this join request to our join array
 								$joins[] =  " ".$joinText." ".$dic["link"]["name"]." ON t.tool_uid = ".$dic["link"]["name"].".".$dic["link"]["tool"] . " ";
 								
@@ -551,7 +554,7 @@
 			#We execute it
 			//self::debug($req, $exec);
 			
-			$debug = self::debug($req, $exec);
+			//$debug = self::debug($req, $exec);
 			$req = self::DB()->prepare($req);
 			$req->execute($exec);
 			
@@ -562,9 +565,14 @@
 			#We fetch the data
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
 			
+			//Unset unavailable options
+			unset($options["request"], $options["case_insentivity"], $options["description"], $options["descriptionSize"]);
 			
 			#We create our own return array
 			$ret = array("response" => array(), "parameters" => $options);
+			if(isset($realParams)) {
+				$ret["parameters"]["facets"] = $realParams;
+			}
 			#For each answer we format it
 			foreach($data as &$answer) {
 				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
@@ -572,9 +580,9 @@
 			#We return
 			$ret["parameters"]["total"] = self::nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
 			
-			$ret["parameters"]["url"] = urldecode(http_build_query($get));
+			$ret["parameters"]["url"] = urldecode(http_build_query(array("facets" => $realParams, "orderBy" => $options["orderBy"], "order" => $options["order"])));
 			
-			$ret["debug"] = $debug;
+			//$ret["debug"] = $debug;
 			return $ret;
 		}
 		

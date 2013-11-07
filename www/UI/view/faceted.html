@@ -2,9 +2,15 @@
 	<div class="row">
 		<div class="col-lg-3" id="facetList">
 			<div class="list-group">
-				<a class="list-group-item" ng-repeat="facet in ui.facets.facets" ng-class="{'active' : facet.active }">
-					<h4 ng-click="facet.active = !facet.active;" class="list-group-item-heading"><span class="badge pull-right">{{facet.facetTotal}}</span>{{facet.facetLegend}}</h4>
+				<a class="list-group-item" ng-repeat="facet in ui.facets.facets" >
+					<h4 class="list-group-item-heading">
+						<span class="btn btn-xs btn-default" ng-click="ui.facets.used[facet.facetParam].active = !ui.facets.used[facet.facetParam].active;" ng-class="{'btn-primary' : ui.facets.used[facet.facetParam].active }" ><span class="glyphicon glyphicon-off"></span></span>
+						<span class="btn btn-xs btn-default pull-right" ng-click="facet.active = !facet.active;" ng-class="{'btn-primary' : facet.active }" ><span class="glyphicon glyphicon-search"></span></span>
+						<span ng-bind="facet.facetLegend"></span>
+						</h4>
 					<section class="list-group-options">
+					
+						<span ng-bind="facet.facetTotal"></span> label(s) available
 						<hr />
 						<div ng-click="ui.facets.options[facet.facetParam].inclusive = !ui.facets.options[facet.facetParam].inclusive;" class="btn-col-group">
 							<span class="btn"><b>Inclusive</b></span>
@@ -56,7 +62,10 @@
 							<li ng-repeat="facet in ui.facets.facets | filter:{active:true}" class="col-lg-3">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<h3 class="panel-title">{{facet.facetLegend}}</h3>
+										<h3 class="panel-title">
+											<span ng-bind="facet.facetLegend"></span>
+											<span class="btn btn-xs btn-default pull-right" ng-click="facet.active = !facet.active;" ng-class="{'btn-primary' : facet.active }" ><span class="glyphicon glyphicon-remove"></span></span>
+										</h3>
 									</div>
 									<div class="panel-body">
 										<div class="btn-group btn-group-sm" style="margin-bottom:5px;">
@@ -82,9 +91,10 @@
 				</section>
 				<section id="viewContent" ng-show="results.items">
 					<hr />
+					
 					<section class="itemList" items="results.items"></section>
-					<div class="row" ng-show="ui.pages.total > 1">
-						<pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+					<div class="row" ng-show="ui.pages.totalItem > ui.pages.itemPerPage">
+						<pagination total-items="ui.pages.totalItem" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
 					</div>
 				</section>
 			</div>
