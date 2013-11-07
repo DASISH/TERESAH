@@ -1,4 +1,4 @@
-var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($scope, $ui, $item) {
+var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', '$rootScope', '$modal', '$log', function($scope, $ui, $item, $root, $modal, $log) {
 
 	$scope.item = $item.data;
 	
@@ -7,11 +7,211 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 		$scope.item.desc = $scope.item.descriptions.description[0];
 	}
 	$scope.ui = {
+		quickLinking : {
+			status : {
+				show : false,
+				message : false
+			},
+			applied : {
+			},
+			show : false,
+			facets : {
+				facets : [],
+				facet : null
+			},
+			link : function(facet, label, callback) {
+				input = {facets : [{"facet" : facet, "element" : label}], tool: $scope.item.identifier.id}
+				
+				$item.resolver.tools.link(input, function(data) {
+					if(data.status == "error") {
+						$scope.ui.quickLinking.status.show = true;
+						$scope.ui.quickLinking.status.message = data.message;
+					} else {
+						if(callback) {
+							callback(data);
+						} else {
+							if(!$scope.ui.quickLinking.applied[facet]) {
+								$scope.ui.quickLinking.applied[facet] = {};
+							}
+							$scope.ui.quickLinking.applied[facet][label] = true;
+						}
+					}
+				});
+			},
+			get : function() {
+				this.show = !this.show;
+				if(this.show) {
+					$item.resolver.facets.list({"all" : true}, function(data) {
+						x = []
+						angular.forEach(data, function(val) {
+							val["option"] = { case_insensitivity : true };
+							x.push(val);
+						});
+						$scope.ui.quickLinking.facets.facets = x;
+					});
+				}
+			},
+			search : {
+				model : null,
+				get : function(facet) {
+					if(facet) {
+						$scope.ui.quickLinking.method = "link";
+					}
+				},
+				search : function(facet) {
+					option = { request : $scope.ui.quickLinking.search.model, limit : 5 };
+					
+					$item.resolver.facets.facet.search(facet, option, function(data) {
+						$scope.ui.quickLinking.search.items = data.facets;
+					});
+				},
+				items : []
+			},
+			new : {
+				get : function (facet) {
+					if(facet) {
+						$scope.ui.quickLinking.method = "new";
+						
+						$item.resolver.facets.facet.options(facet, function(data) {
+							if(data.status && data.status == "error") {
+								$scope.ui.quickLinking.new.nofield = true;
+							} else {
+								$scope.ui.quickLinking.new.nofield = false;
+								$scope.ui.quickLinking.new.fields = {}
+								angular.forEach(data, function(value, k) {
+									
+									$scope.ui.quickLinking.new.fields[k] = value;
+									$scope.ui.quickLinking.new.fields[k]["val"] = null;
+								});
+								$scope.ui.quickLinking.new.active = {};
+								$scope.ui.quickLinking.new.active[facet] = true;
+							}
+						});
+					}
+				},
+				fields : {},
+				submit : function (facet) {
+					input = {}
+					angular.forEach($scope.ui.quickLinking.new.fields, function(value, k) {
+						input[k] = value.val;
+					});
+					$item.resolver.facets.facet.insert(facet, input, function(insert) {
+						if(insert.status == "success") {
+							$scope.ui.quickLinking.link($scope.ui.quickLinking.facets.facet, insert.identifier.id, function(data) {
+								$scope.ui.quickLinking.new.error = false;
+								$scope.ui.quickLinking.method = "";
+							});
+						} else {
+							$scope.ui.quickLinking.new.error = true;
+							$scope.ui.quickLinking.new.message = insert.message;
+						}
+					});
+					
+				}
+			}
+		},
+		description : {
+			edit : {
+				show : false,
+				data : {
+					name : $scope.item.descriptions.title,
+					version : $scope.item.descriptions.version,
+					homepage : $scope.item.descriptions.homepage,
+					available_from : $scope.item.descriptions.available_from,
+				},
+				submit : function() {
+					input = this.data;
+					$item.resolver.tools.edit.description($scope.item.identifier.id, input, function(data) {
+						$scope.ui.description.edit.response = data;
+					});
+				},
+				response : {
+					Success : false,
+					Error : false
+				}
+			}
+		},
+		page : "Details",
+		sections : {
+			list : {},
+			active : 0,
+			toggle : function(name) {
+				if(this.list[name]) {
+					this.list[name] = false;
+				} else {
+					this.list[name] = name;
+				}
+				console.log(this.list);
+				$scope.ui.sections.active = 0;
+				angular.forEach($scope.ui.sections.list, function(val) {
+					if(val) { 
+						$scope.ui.sections.active = $scope.ui.sections.active + 1;
+					}
+				});
+			}
+		},
+		user : {
+			data : false,
+			signedin : function () { 
+				if($root.user) {
+					if($root.user.signedin) {
+						$scope.ui.user.data = $root.user;
+					}
+				}
+			}
+		},
+		//UI TOOLS
 		changeDesc : function(provider) {
 			if(typeof provider == "string") {
 			} else {
 				$scope.item.desc = provider;
 			}
+		},
+		features : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
+		standards : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
+		projects : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
+		videos : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
+		publications : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
+		keywords : {
+			provider : {
+				selected : null,
+				selected : null
+			},
+			taxonomy : {
+				show : false,
+				selected : null
+			},
+			show : true
 		},
 		comments : {
 			form : {
@@ -120,12 +320,12 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', function($sco
 	};
 	//
 	$ui.title("Tool | " + $scope.item.descriptions.title);
+	$scope.ui.user.signedin();
 	
 	//exec
 }]);
 Tool.resolveTool = {
 	itemData: function($route, Item) {
-		console.log($route.current.params.toolId);
 		this.data = Item.resolver.tools.one($route.current.params.toolId);
 		return Item.data;
 	},

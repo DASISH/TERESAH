@@ -3,7 +3,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 	
 	$scope.ui = {
 		url : {
-			vall : null, 
+			val : null, 
 			enable : true, 
 			reload : function() {
 				options = $item.serialize($ui.url.get());
@@ -13,8 +13,8 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 						//We launch research
 						$scope.ui.url.enable = false;
 						$item.resolver.search.facetedGet(options, function(data) {
-							if(data.Error) {
-								$scope.ui.facets.error = data.Error;
+							if(data.status == "error") {
+								$scope.ui.facets.error = data.message;
 							} else {
 								$scope.ui.facets.error = false;
 							}
@@ -49,7 +49,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				}
 				option["request"] = facet.filter;
 				
-				return $item.resolver.facets(facet.facetParam, option)
+				return $item.resolver.facets.facet.search(facet.facetParam, option);
 			},
 			submit : function(constructor) {
 				if(!constructor) {
@@ -71,8 +71,8 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				});
 				
 				$item.resolver.search.faceted(constructor, function(data) {
-					if(data.Error) {
-						$scope.ui.facets.error = data.Error;
+					if(data.status == "error") {
+						$scope.ui.facets.error = data.message;
 					} else {
 						$scope.ui.facets.error = false;
 					}
@@ -119,7 +119,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				opt.page = page;
 				opt.start = page * 20 - 20;
 				
-				$scope.ui.facets.submit(opt)
+				$scope.ui.facets.submit(opt);
 				}
 		}
 	};
@@ -136,7 +136,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 }]);
 Faceted.resolveFaceted = {
 	itemData: function($route, Item) {
-		Item.resolver.facets(false, false, function(data) {
+		Item.resolver.facets.list(function(data) {
 			x = []
 			angular.forEach(data, function(val) {
 				console.log(val);

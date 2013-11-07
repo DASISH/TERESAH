@@ -3,7 +3,7 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 		search : {
 			typeahead : function(str) {
 				var defer = $q.defer();
-				$item.resolver.search.normal({request : str, limit : 5, case_insensitivity : true}, function(data) {
+				$item.resolver.search.normal({request : str, limit : 10, case_insensitivity : true, limited: "title"}, function(data) {
 					defer.resolve(data.response);
 				});
 				return defer.promise;
@@ -12,6 +12,9 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 			input : undefined,
 			select : function(item) {
 				$location.path('/tool/'+item.identifiers.shortname)
+			},
+			go : function() {
+				$location.path('/search/general/?case_insensitivity=1&limited=title&request='+item.identifiers.shortname)
 			}
 		},
 		routes : {
@@ -53,7 +56,6 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 	$scope.$watch('user.signedin', function(status) {
 		if(status == true) {
 			$scope.ui.user.data = $root.user;
-			console.log($root.user);
 		}
 	});
 }]);

@@ -1,16 +1,10 @@
 <?php
-	class Table {
-	/*
-		$this->dict = array(
-			#option value	=> Table Name, Text field (if many = array with [0] as title for it), PKey, Table for join (false if not), fields for joint (tool,item)
-			,
-		);
-	*/	
-		function getTable($k) {
+	class Helper {
+		function table($k) {
 			$dict = array(
 				#option value	=> Table Name, Text field (if many = array with [0] as title for it), PKey, Table for join (false if not), fields for joint (tool,item)
 				"Suite" => array("suite", "name", "suite_uid", "tool_has_suite", array("tool_uid", "suite_uid")),
-				"Feature" => array("feature", array("name", "description"), "feature_uid", "Tool_has_Feature", array("tool_uid", "feature_uid")),
+				"Feature" => array("feature", array("name", "description"), "feature_uid", "tool_has_feature", array("tool_uid", "feature_uid")),
 				"Platform" => array("platform", "name", "platform_uid", "tool_has_platform", array("tool_uid", "platform_uid")),
 				"Project" => array("project", array("title", "description"), "project_uid", "tool_has_project", array("tool_uid", "project_uid")),
 				"Standard" => array("standard", "title", "standard_uid" ,"tool_has_standard", array("tool_uid", "standard_uid")),
@@ -21,7 +15,8 @@
 				"ToolType" => array("tool_type", "tool_type", "tool_type_uid" ,"tool_has_tool_type", array("tool_uid", "tool_type_uid")),
 				"Organization" => array("organization", "name", "organization_uid", "description_has_organization", array("description_uid", "organization_uid")),
 				"LicenceType" => array("licence_type", "type", "licence_type_uid", "description", array("tool_uid", "licence_uid")),
-				"Licence" => array("licence", array("text", "type"), "licence_uid", "description", array("tool_uid", "licence_uid"))
+				"Licence" => array("licence", "text", "licence_uid", "tool_has_licence", array("tool_uid", "licence_uid")),
+				"Video" => array("video", array("title", "description", "video_provider"), "video_uid", "tool_has_video", array("tool_uid", "video_uid"))
 			);
 			if(is_string($k) && array_key_exists($k, $dict)) {
 				$array = array(
@@ -36,10 +31,10 @@
 				);
 				return $array;
 			} else {
-				return array("Error" => "Unknown ".$k." facet");
+				return array("status" => "error", "message" => "Unknown ".$k." facet");
 			}
 		}
-		function getFacets() {
+		function facet($facet = false, $facetTable = false) {
 			$dict = array(
 				#option value	=> Table Name, Legend
 				"Suite" => array("suite", "Suite"),
@@ -54,22 +49,37 @@
 				"ToolType" => array("tool_type", "Tool type"),
 				"Organization" => array("organization", "Organization"),
 				"LicenceType" => array("licence_type", "Licence Type"),
-				"Licence" => array("licence", "Licence")
+				"Licence" => array("licence", "Licence"),
+				"Video" => array("video", "Video")
 			);
-			$return = array();
-			foreach($dict as $key => &$value) {
-				if(isset($value[2])) {
-					$enum = $value[2];
-				} else {
-					$enum = false;
-				}
-				$return[$value[0]] = array(
-					"facetParam" => $key,
-					"facetLegend" => $value[1],
-					"facetEnum" => $enum
+			if($facet) {
+				$return = array(
+					"facetParam" => $facet,
+					"facetLegend" => $dict[$facet][1]
 				);
+				if($facetTable) {
+					$return["facetTable"] = $dict[$facet][0];
+				}
+				return $return;
+			} else {
+				$return = array();
+				foreach($dict as $key => &$value) {
+					if(isset($value[2])) {
+						$enum = $value[2];
+					} else {
+						$enum = false;
+					}
+					$return[$value[0]] = array(
+						"facetParam" => $key,
+						"facetLegend" => $value[1],
+						"facetEnum" => $enum #Enum = 3rd value of $dict. It is used is it is an enumeration in MYSQL
+					);
+					if($facetTable) {
+						$return[$value[0]]["facetTable"] = $value[0];
+					}
+				}
+				return $return;
 			}
-			return $return;
 		}
 		
 	}

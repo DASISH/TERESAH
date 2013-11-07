@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('../fonts/fontello.eot?28570398');
+  src: url('../fonts/fontello.eot?28570398#iefix') format('embedded-opentype'),
+       url('../fonts/fontello.woff?28570398') format('woff'),
+       url('../fonts/fontello.ttf?28570398') format('truetype'),
+       url('../fonts/fontello.svg?28570398#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../fonts/fontello.svg?28570398#fontello') format('svg');
+  }
+}
+*/
+ 
+ [class^="fontello-"]:before, [class*=" fontello-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 48px;
+  height:48px;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+     
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 48px;;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  text-align:center;
+  
+  /* you can be more comfortable with increased icons size */
+  font-size: 30px; 
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.no-desc [class^="fontello-"]:before,  .no-desc [class*=" fontello-"]:before {
+  width: 30px;
+  height:30px;
+  line-height: 30px;
+  font-size: 20px;
+      vertical-align: top;
+}
+ 
+.fontello-localDesktop:before { content: '\e800'; } /* '?' */
+.fontello-webApplication:before { content: '\e801'; } /* '?' */
+.fontello-other:before { content: '\e802'; } /* '?' */
+.fontello-monitor:before { content: '\e804'; } /* '?' */
+.fontello-globe-1:before { content: '\e803'; } /* '?' */
+.fontello-dot-3:before { content: '\e805'; } /* '?' */
+
+[class^="fontello-"], [class*=" fontello-"] {
+  font-family: 'fontello';
+  font-style: normal;
+  font-weight: normal;
+ 
+  /* fix buttons height */
+  line-height: 1em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+}
+ 
+ .big-font {
+  line-height: 48px;
+  font-size:48px;
+ }
+.container-font {
+	width:50px;
+	height:50px;
+	border-radius: 30px 30px 30px 30px;
+    font-size: inherit;
+    font-weight: 400;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+	background: none repeat scroll 0 0 #333333;
+    color: #FFFFFF;
+	display:block;
+	margin:10px auto;
+	right:0!important;
+}
+.no-desc .container-font {
+	width:30px;
+	height:30px;
+	border-radius: 30px 30px 30px 30px;
+	margin:10px auto;
+	right:0!important;
+
+}
+.item:hover .container-font {
+	background: none repeat scroll 0 0 #428BCA;
+}
+.item hr {
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.fontello-localDesktop { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe800;&nbsp;'); }
+.fontello-webApplication { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe801;&nbsp;'); }
+.fontello-other { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe802;&nbsp;'); }
+.fontello-monitor { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe804;&nbsp;'); }
+.fontello-globe-1 { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe803;&nbsp;'); }
+.fontello-dot-3 { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe805;&nbsp;'); }
+

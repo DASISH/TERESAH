@@ -2,10 +2,14 @@ var apiFaq = portal.controller('apiFaqCtrl', ['$scope', 'ui', 'Item', function($
 	$scope.documentation = $item.data.faq;
 	
 	$scope.ui = {
-		toggle : function(rte) {
-			this.toggled[rte] = !this.toggled[rte];
+		toggle : function(rte, methd) {
+			console.log(rte + methd);
+			this.toggled[rte + methd] = !this.toggled[rte + methd];
 		},
-		toggled : {}
+		toggled : {},
+		documentation : {
+			selected : null
+		}
 	}
 }]);
 apiFaq.resolveAPIFAQ = {

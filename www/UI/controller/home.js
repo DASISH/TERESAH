@@ -1,6 +1,4 @@
 var Home = portal.controller('HomeCtrl', ['$scope', 'ui',  'Item', function($scope, $ui, $item) {
-	console.log("Hello from tool")
-	console.log($item.data)
 	$scope.results = {
 		items: $item.data.response
 	}

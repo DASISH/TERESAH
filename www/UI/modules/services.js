@@ -15,11 +15,8 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 				if(ui.user.data == false) {
 					if($cookies.logged) {
 						Restangular.one("cookie/").get().then( function(data) {
-							console.log(data);
-							console.log("ui");
 							data = {name : data.name, id : data.id, mail : data.mail }
 							ui.user.data = data;
-							console.log(ui.user.data);
 							if(callback) {
 								return callback(ui.user.data);
 							}
@@ -67,13 +64,17 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 		//
 		routes : {
 			tools : {
-				all : Restangular.one("search/all/"),
-				one : Restangular.all("tool"),
+				one : Restangular.one("tool/"),
+				link : Restangular.all("tool/facet"),
+				all : Restangular.all("tool"),
 				topic : Restangular.all("topic")
 			},
 			facets : {
-				list : Restangular.all("search/facetList/"),
-				search : Restangular.all("search/facet")
+				list : Restangular.all("facet/"),
+				search : Restangular.all("facet")
+			},
+			browse : {
+				facet : Restangular.all("facet")
 			},
 			search : {
 				normal : Restangular.one("search/general/"),
@@ -89,17 +90,89 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 		
 		//Return Part
 		resolver : {
+			browse : {
+				element : function(facet, facetID, opt, callback) {
+				
+					if(typeof(callback)==='undefined') callback = false;
+					if(typeof(opt)==='undefined') opt = {};
+					
+					if(opt.page) {
+						opt.start = opt.page * 20 - 20;
+					}
+					
+					return Item.routes.browse.facet.all(facet).one(facetID).get(opt).then(function (data) {
+						if(callback) {	callback(data.original);	}
+						Item.data = data.original;
+						return data.original;
+					});
+				},
+				facet : function(facet, opt, callback) {
+				
+					if(typeof(callback)==='undefined') callback = false;
+					if(typeof(opt)==='undefined') opt = {};
+					
+					if(opt.page) {
+						opt.start = opt.page * 20 - 20;
+					}
+					
+					return Item.routes.browse.facet.one(facet).get(opt).then(function (data) {
+						if(callback) {	callback(data.original);	}
+						Item.data = data.original;
+						return data.original;
+					});
+				}
+			},
 			oAuth : function(provider, url, callback) {
 				
 					if(typeof(callback)==='undefined') callback = false;
 					
 					return Item.routes.oAuth.one(provider).get({callback : url}).then(function (data) {
-						if(callback) {	callback(data);	}
-						Item.data = data;
-						return data;
+						if(callback) {	callback(data.original);	}
+						Item.data = data.original;
+						return data.original;
 					});
 				},
 			tools : {
+				edit : {
+					description : function(toolId, opt, callback) {
+						if(typeof(callback)==='undefined') callback = false;
+						if(typeof(opt)==='undefined') {
+							x = { Error : "No input given" };
+							if(callback == false) { return x; }
+							else { return x; }
+						} else {
+							return Item.routes.tools.all.all(toolId).all("edit").post(opt).then(function(data) {
+								if(callback) { return callback(data); }
+								Item.data = data.original;
+								return data.original;
+							});
+						}
+					}
+				},
+				insert : function(opt, callback) {
+				
+					if(typeof(opt)==='undefined') opt =  {};
+					if(typeof(callback)==='undefined') callback = false;
+					
+					return Item.routes.tools.all.post(opt).then(function (data) {
+						if(callback) {	callback(data.original);	}
+						Item.data = data.original;
+						return data.original;
+					});
+					
+				},
+				link : function(opt, callback) {
+				
+					if(typeof(opt)==='undefined') opt =  {};
+					if(typeof(callback)==='undefined') callback = false;
+					
+					return Item.routes.tools.link.post(opt).then(function (data) {
+						if(callback) {	callback(data.original);	}
+						Item.data = data.original;
+						return data.original;
+					});
+					
+				},
 				all : function(opt, callback) {
 				
 					if(typeof(opt)==='undefined') opt =  {};
@@ -108,21 +181,21 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					if(opt.page) {
 						opt.start = opt.page * 20 - 20;
 					}
-					return Item.routes.tools.all.get(opt).then(function (data) {
-						if(callback) {	callback(data);	}
-						Item.data = data;
-						return data;
+					return Item.routes.tools.one.get(opt).then(function (data) {
+						if(callback) {	callback(data.original);	}
+						Item.data = data.original;
+						return data.original;
 					});
 				},
 				one : function(item, options, callback) {
 				
-					if(typeof(options)==='undefined') options =  {keyword:true, platform:true, developer : true, type:true, applicationType: true};
+					if(typeof(options)==='undefined') options =  {keyword:true, platform:true, developer : true, type:true, applicationType: true, licence : true, publications: true,projects: true,suite:true, standards:true, features:true, video:true};
 					if(typeof(callback)==='undefined') callback = false;
 					
-					return Item.routes.tools.one.one(item).get(options).then(function (data) {
-						Item.data = data;
-						if(callback) {	callback(data);	}
-						return data;
+					return Item.routes.tools.all.one(item).get(options).then(function (data) {
+						Item.data = data.original;
+						if(callback) {	callback(data.original);	}
+						return data.original;
 					});
 				},
 				comments : {
@@ -130,20 +203,20 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					
 						if(typeof(callback)==='undefined') callback = false;
 					
-						return Item.routes.tools.one.one(item).one("comments").get().then(function (data) {
-							Item.data = data;
-							if(callback) {	callback(data);	}
-							return data;
+						return Item.routes.tools.all.one(item).one("comments").get().then(function (data) {
+							Item.data = data.original;
+							if(callback) {	callback(data.original);	}
+							return data.original;
 						});
 					},
 					post : function(item, options, callback) {
 					
 						if(typeof(callback)==='undefined') callback = false;
 					
-						return Item.routes.tools.one.one(item).all("comments").post(options).then(function (data) {
-							Item.data = data;
-							if(callback) {	callback(data);	}
-							return data;
+						return Item.routes.tools.all.one(item).all("comments").post(options).then(function (data) {
+							Item.data = data.original;
+							if(callback) {	callback(data.original);	}
+							return data.original;
 						});
 					}
 				},
@@ -152,20 +225,20 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					
 						if(typeof(callback)==='undefined') callback = false;
 					
-						return Item.routes.tools.one.one(item).one("forum").get().then(function (data) {
-							Item.data = data;
-							if(callback) {	callback(data);	}
-							return data;
+						return Item.routes.tools.all.one(item).one("forum").get().then(function (data) {
+							Item.data = data.original;
+							if(callback) {	callback(data.original);	}
+							return data.original;
 						});
 					},
 					post : function(item, options, callback) {
 					
 						if(typeof(callback)==='undefined') callback = false;
 					
-						return Item.routes.tools.one.one(item).all("forum").post(options).then(function (data) {
-							Item.data = data;
-							if(callback) {	callback(data);	}
-							return data;
+						return Item.routes.tools.all.one(item).all("forum").post(options).then(function (data) {
+							Item.data = data.original;
+							if(callback) {	callback(data.original);	}
+							return data.original;
 						});
 					},
 					topic : {
@@ -174,9 +247,9 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 							if(typeof(callback)==='undefined') callback = false;
 						
 							return Item.routes.tools.topic.one(item).get().then(function (data) {
-								Item.data = data;
-								if(callback) {	callback(data);	}
-								return data;
+								Item.data = data.original;
+								if(callback) {	callback(data.original);	}
+								return data.original;
 							});
 						},
 						post : function(itemID, topicId, options, callback) {
@@ -184,49 +257,76 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 							if(typeof(callback)==='undefined') callback = false;
 						
 							return Item.routes.tools.topic.all(itemID).all(topicId).post(options).then(function (data) {
-								Item.data = data;
-								if(callback) {	callback(data);	}
-								return data;
+								Item.data = data.original;
+								if(callback) {	callback(data.original);	}
+								return data.original;
 							});
 						}
 					}
 				}
 			},
-			facets : function(key, option, callback) {
-					
-						if(typeof(callback)==='undefined') callback = false;
-					
-				if(key) {
-					if(option) {
-						return Item.routes.facets.search.one(key).get(option).then(function (data) {
-							Item.data = data;
-							if(callback) {	callback(data);	}
-							return data;
-						});
+			facets : {
+				list : function(option, callback) {
+					if(typeof(option)==='undefined') option = {};
+					if(typeof(callback)==='undefined') callback = false;
+					if(option.all) {
+						fn = Item.routes.facets.list.options();
 					} else {
+						fn = Item.routes.facets.list.getList();
+					}
+					return fn.then(function (data) {
+						Item.data = data.original;
+						if(callback) {	callback(data.original);	}
+						return data.original;
+					});
+				},
+				search : {
+				},
+				facet : {
+					list : function (key, callback) {
+						if(typeof(callback)==='undefined') callback = false;
 						return Item.routes.facets.search.one(key).getList().then(function (data) {
-							Item.data = data;
-							if(callback) {	callback(data);	}
-							return data;
+							Item.data = data.original;
+							if(callback) {	callback(data.original);	}
+							return data.original;
+						});
+					},
+					search : function (key, option, callback) {
+						if(typeof(callback)==='undefined') callback = false;
+						return Item.routes.facets.search.one(key).get(option).then(function (data) {
+							Item.data = data.original;
+							if(callback) {	callback(data.original);	}
+							return data.original;
+						});
+					},
+					options : function (key, callback) {
+						if(typeof(callback)==='undefined') callback = false;
+						return Item.routes.facets.search.one(key).options().then(function (data) {
+							Item.data = data.original;
+							if(callback) {	callback(data.original);	}
+							return data.original;
+						});
+					},
+					insert : function (key, input, callback) {
+						
+						if(typeof(callback)==='undefined') callback = false;
+						return Item.routes.facets.search.all(key).post(input).then(function (data) {
+							Item.data = data.original;
+							if(callback) {	callback(data.original);	}
+							return data.original;
 						});
 					}
-				} else {
-					return Item.routes.facets.list.getList().then(function (data) {
-						Item.data = data;
-						if(callback) {	callback(data);	}
-						return data;
-					});
 				}
 			},
 			search : {
 				normal : function(options, callback) {
 					
-						if(typeof(callback)==='undefined') callback = false;
+					if(typeof(callback)==='undefined') callback = false;
 					
 					return Item.routes.search.normal.get(options).then(function(data) {
-						Item.data = data;
+						Item.data = data.original;
 						if(callback) { callback(data); }
-						return data;
+						return data.original;
 					});
 				},
 				faceted : function(options, callback) {
@@ -234,9 +334,9 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 						if(typeof(callback)==='undefined') callback = false;
 					
 					return Item.routes.search.faceted.post(options).then(function(data) {
-						Item.data = data;
+						Item.data = data.original;
 						if(callback) { callback(data); }
-						return data;
+						return data.original;
 					});
 				},
 				facetedGet :  function(options, callback) {
@@ -244,9 +344,9 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					if(typeof(callback)==='undefined') callback = false;
 					
 					return Restangular.one('search/faceted/?'+options).get().then(function(data) {
-						Item.data = data;
+						Item.data = data.original;
 						if(callback) { callback(data); }
-						return data;
+						return data.original;
 					});
 				}
 			},
@@ -257,7 +357,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					
 					return Item.routes.user.signin.post(obj).then(function(data) {
 						if(callback) { callback(data); }
-						return data;
+						return data.original;
 					});
 					
 				},
@@ -267,7 +367,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					
 					return Item.routes.user.signup.post(obj).then(function(data) {
 						if(callback) { callback(data); }
-						return data;
+						return data.original;
 					});
 					
 				}
@@ -277,7 +377,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 				
 				return Item.routes.faq.getList().then(function(data) {
 					if(callback) { callback(data); }
-					return data;
+					return data.original;
 				});
 				
 			}

@@ -1,43 +1,46 @@
 <?php
 	class Comment {
-		function __construct() {
-			#Gettings globals
+		##Getting DB
+		private static function DB() {
 			global $DB;
-			if(!isset($DB)) { exit(); }
-			$this->DB = $DB;
-			
-			$this->type = array(1=> "comment", 2 => "question", 3=>"answer");
+			return $DB;
 		}
+		private static function type($id) {
+			$type = array(1=> "comment", 2 => "question", 3=>"answer");
+			return $type[$id];
+		}
+		
 		function insert($id, $data, $type = 1) {
 			if(isset($_SESSION["user"]["id"])) {
 				$req = "INSERT INTO comment VALUES (NULL, ?, NOW(), ?, ?, ?, ?)";
-				$req = $this->DB->prepare($req);
-				$req->execute(array($data["text"], $data["title"], $_SESSION["user"]["id"], $id, $this->type[$type]));
+				$req = self::DB()->prepare($req);
+				$req->execute(array($data["text"], $data["title"], $_SESSION["user"]["id"], $id, self::type($type)));
 				
+				Log::insert("insert", $_SESSION["user"]["id"], "comment", self::DB()->lastInsertId());
 				return array("Rows" => $req->rowCount());
 			} else {
-				return array("Error" => "Not signed in", "Rows" => 0);
+				return array("status" => "error", "message" => "Not signed in", "Rows" => 0);
 			}
 		}
 		
 		function reply($id, $topic, $data) {
 			if(isset($_SESSION["user"]["id"])) {
 				$req = "INSERT INTO comment VALUES (NULL, ?, NOW(), ?, ?, ?, ?)";
-				$req = $this->DB->prepare($req);
-				$req->execute(array($data["text"], $data["title"], $_SESSION["user"]["id"], $id, $this->type[3]));
+				$req = self::DB()->prepare($req);
+				$req->execute(array($data["text"], $data["title"], $_SESSION["user"]["id"], $id, self::type(3)));
 				
-				$lii = $this->DB->lastInsertId();
-				echo $lii;
-				echo $topic;
+				$lii = self::DB()->lastInsertId();
+				Log::insert("insert", $_SESSION["user"]["id"], "comment", $lii);
 				if($lii > 0) {
 					$req = "INSERT INTO comment_has_reply VALUES ( ? , ? )";
-					$req = $this->DB->prepare($req);
+					$req = self::DB()->prepare($req);
 					$req->execute(array($topic, $lii));
+					Log::insert("insert", $_SESSION["user"]["id"], "comment_has_reply", $lii);
 				}
 				
 				return array("Rows" => $req->rowCount());
 			} else {
-				return array("Error" => "Not signed in", "Rows" => 0);
+				return array("status" => "error", "message" => "Not signed in", "Rows" => 0);
 			}
 		}
 		
@@ -49,11 +52,11 @@
 				//Request
 				$req = "SELECT c.text as Text, c.date as Date, c.subject as Subject, c.comment_uid as UID , u.mail as Mail, u.name as Name, c.type as Comment_type_name FROM comment c, user u WHERE c.tool_uid = ? AND u.user_uid = c.user_uid AND c.type = ?";
 			}
-			$req = $this->DB->prepare($req);
-			$req->execute(array($id, $this->type[$type]));
+			$req = self::DB()->prepare($req);
+			$req->execute(array($id, self::type($type)));
 			$d = $req->fetchAll(PDO::FETCH_ASSOC) ;
 			//Format
-			$r = $this->format($type, $d);
+			$r = self::format($type, $d);
 			
 			return $r;
 		}
@@ -102,21 +105,21 @@
 		function topic($id) {
 			//Original topic
 			$req = "SELECT c.text as Text, c.date as Date, c.subject as Subject, c.comment_uid as UID , u.mail as Mail, u.name as Name FROM comment c, user u WHERE c.comment_uid = ? AND u.user_uid = c.user_uid AND c.type = ? LIMIT 1";
-			$req = $this->DB->prepare($req);
-			$req->execute(array($id, $this->type[2]));
+			$req = self::DB()->prepare($req);
+			$req->execute(array($id, self::type(2)));
 			$d = $req->fetchAll(PDO::FETCH_ASSOC) ;
 			
 			//print_r($d);
 			//Format
-			$r = $this->format(3, $d);
+			$r = self::format(3, $d);
 			
 			//Answers
 			$req = "SELECT c.text as Text, c.date as Date, c.subject as Subject, c.comment_uid as UID , u.mail as Mail, u.name as Name FROM comment c, user u, comment_has_reply cr WHERE cr.comment_uid = ? AND c.comment_uid=cr.comment_uid1 AND u.user_uid = c.user_uid AND c.type = ? ORDER BY c.comment_uid ASC";
-			$req = $this->DB->prepare($req);
-			$req->execute(array($id, $this->type[3]));
+			$req = self::DB()->prepare($req);
+			$req->execute(array($id, self::type(3)));
 			$d = $req->fetchAll(PDO::FETCH_ASSOC) ;
 			
-			$r = $this->format(3, $d, $r);
+			$r = self::format(3, $d, $r);
 			
 			
 			return $r;

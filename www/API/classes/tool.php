@@ -1,280 +1,105 @@
 <?php
 	class Tool {
 	
-		##Getting DB
-		function __construct() {
-			global $DB;
-			$this->DB = $DB;
-		}
+
+	##Getting DB
+	private static function DB() {
+		global $DB;
+		return $DB;
+	}
 		
-		function getDevelopers($toolUID) {
-			$req = "SELECT d.developer_uid as UID, d.name, d.contact FROM developer d, tool_has_developer td WHERE td.developer_uid = d.developer_uid AND td.tool_uid = ?";
-			$req = $this->DB->prepare($req);
-			$req->execute(array($toolUID));
-			$data = $req->fetchAll(PDO::FETCH_ASSOC);
-			if($data) {
-				$ret = array();
-				foreach($data as &$keyword) {
-					if($keyword["contact"] != null) {
-						$ret[] = array(
-									"name" => $keyword["name"],
-									"contact" => $keyword["contact"],
-									"identifier" => $keyword["UID"]
-								);
-					}	else {
-						$ret[] = array(
-									"name" => $keyword["name"],
-									"identifier" => $keyword["UID"]
-								);
-					}
-				}
-				return $ret;
+	############
+	#
+	#	TOOLS
+	#
+	############
+		
+	
+	private function getShorname($str, $replace=array("'"), $delimiter='-') {
+		setlocale(LC_ALL, 'en_US.UTF8');
+		if( !empty($replace) ) {
+			$str = str_replace((array)$replace, ' ', $str);
+		}
+
+		$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+		$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
+		$clean = strtolower(trim($clean, '-'));
+		$clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
+
+		return $clean;
+	}
+	
+	#############
+	#
+	#		DELETE
+	#
+	#############
+	function delete($toolUID) {
+		$req = "DELETE FROM tool WHERE tool_uid = ? LIMIT 1";
+		$req = self::DB()->prepare($req);
+		$req->execute(array($toolUID));
+		
+	}
+	
+	#########
+	#
+	#		Insert
+	#
+	###########
+	
+		
+
+		
+		function insert($data) {
+			if(!isset($data["name"])) {
+				return array("Error" => "The tool couldn't be save because no name was given", "fieldsError" => "name");
+			}
+			$req = "INSERT INTO tool (tool_uid, shortname) VALUES ( NULL , ? )";
+			$req = self::DB()->prepare($req);
+			$req->execute(array(self::getShorname($data["name"])));
+			$uid = self::DB()->lastInsertId();
+			Log::insert("insert", $_SESSION["user"]["id"], "tool", $uid);
+			
+			//Check
+			if($req->rowCount() == 1) {
+				return array("status" => "success", "uid" => $uid, "shortname" => self::getShorname($data["name"]));
 			} else {
-				return false;
+				return array("status" => "error", "message" => "The tool couldn't be save");
 			}
+			
 		}
 		
-		function getDescriptions($toolUID, $external = true, $userName = false) {
-			$userName = true;
-			#We first fetch our description
-			
-			$req = "SELECT d.user_uid as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by, l.text, l.licence_type_uid as type FROM description d, licence l WHERE d.tool_uid = ? AND l.licence_uid = d.licence_uid ";
-			
-			if($userName) {
-				$req = "SELECT d.user_uid as User_UID, u.name as User, d.title, d.description, d.version, d.homepage, d.registered, d.available_from, d.registered_by, l.text, l.licence_type_uid as type FROM description d, licence l, user u WHERE d.tool_uid = ? AND l.licence_uid = d.licence_uid AND u.user_uid = d.user_uid";
+		function linkFacets($data) {
+			if(!isset($data["facet"]) && !isset($data["element"]) && !isset($data["tool"])) {
+				return array("status" => "error", "message" => "One facet couldn't be save. Missing data");
 			}
+			$table = Helper::table($data["facet"]);
+			$element = $data["element"];
+			$toolUID = $data["tool"];
 			
-			$req = $this->DB->prepare($req);
-			$req->execute(array($toolUID));
+			$sql = "INSERT INTO ".$table["link"]["name"]." (".$table["link"]["tool"].", ".$table["link"]["item"]." ) VALUES ( ? , ? )";
+			$req = self::DB()->prepare($sql);
+			$req->execute(array($data["tool"], $data["element"]));
 			
-			#Which we put into a ret array
-			$ret = $req->fetch(PDO::FETCH_ASSOC);
-			
-			#Format User Data
-			if($userName) {
-				$ret["user"] = array(
-								"name" => $ret["User"],
-								"id" => $ret["User_UID"]
-							);
+			Log::insert("insert", $_SESSION["user"]["id"], $table["link"]["name"], self::DB()->lastInsertId());
+			$id = self::DB()->lastInsertId();
+			//Check
+			if($req->rowCount() == 1) {
+				return array("status" => "success", "uid" => $id, "facet" => $data["facet"]);
 			} else {
-				$ret["user"] = array(
-								"id" => $ret["User_UID"]
-							);
-			}
-			#Format licence
-			$ret["licence"] = array(
-								"name" => $ret["text"],
-								"type" => $ret["type"]
-							);
-			
-			#Format Creation Data
-			$ret["registration"] = array(
-								"date" => $ret["registered"],
-								"by" => $ret["registered_by"]
-							);
-			#Unseting bad data
-			unset($ret["type"], $ret["text"], $ret["User_UID"], $ret["User"], $ret["registered_by"], $ret["registered"]);
-			
-			
-			#We prepare a new array containing our description
-			if($ret["description"] != "&nbsp;") {
-				$desc = array(
-					array(
-						"provider" => "DASISH", 
-						"text" => $ret["description"],
-						"uri" => "/"
-					)
-				);
-			} else { $desc = array(); }
-			#Then if needed, we get our external_Description
-			if($external == true) {
-			
-				$req = $this->DB->prepare("SELECT description, source_uri as sourceURI, registry_name FROM external_description WHERE tool_uid = ? ");
-				$req->execute(array($toolUID));
-				$fetched = $req->fetchAll(PDO::FETCH_ASSOC);
-				
-				#We then process it if > 0
-				if(count($fetched) > 0) {
-					foreach($fetched as &$entry) {
-						if($entry["description"] != "&nbsp;") {
-							$desc[] = array(
-									"provider" => $entry["registry_name"], 
-									"text" => $entry["description"],
-									"uri" => $entry["sourceURI"]
-								);
-						}
-					}
-				}
+				return array("status" => "error", "message" =>  "The facet ".$data["facet"]." (".$table["table"]["name"].") couldn't be save");//, "debug" => array("request" => $sql, "input" => $data));
 			}
 			
-			$ret["description"] = $desc;
-			return $ret;
 		}
+	#########
+	#
+	#		Select
+	#
+	#########
+
+
 		
-		function getApplicationType($toolUID) {
-			$dictionnary = array(	
-				"localDesktop" => "Desktop application",
-				"other" => "Other",
-				"unknown" => "Unkown",
-				"webApplication" => "Web Application",
-				"webService" => "Web service"
-			);
-			$req = "SELECT d.application_type as UID, d.application_type as name FROM tool_application_type d WHERE d.tool_uid = ? GROUP BY application_type";
-			$req = $this->DB->prepare($req);
-			$req->execute(array($toolUID));
-			$data = $req->fetchAll(PDO::FETCH_ASSOC);
-			if($data) {
-				$ret = array();
-				foreach($data as &$keyword) {
-					$ret[] = array(
-								"name" => $dictionnary[$keyword["name"]],
-								"identifier" => $keyword["UID"]
-							);
-				}
-				return $ret;
-			} else {
-				return false;
-			}
-		}
-		
-		function insertDescription($toolUID, $data) {
-			$ret = "Nothing happends";
-			if(isset($data["provider"])) {
-				#If we have a Data Provider, it is an external Description
-				$req = "INSERT INTO external_description VALUES ('', ?, ?, ?, ?); ";
-				$req = $this->DB->prepare($req);
-				try {
-					#echo "hi";
-					#print_r($data);
-					$ret = $req->execute(array($toolUID, $data["description"], $data["source"], $data["provider"]));
-					#print ($req);
-					#return $ret->rowCount ();
-				} catch(Exception $e) {
-					echo "Erreur";
-					$erreure = 'Erreur : '.$e->getMessage().'<br />';
-					$erreure .= 'N° : '.$e->getCode();
-					return $erreure;
-				}
-			
-			} else {
-				#Else, it is a simple description
-				$req = "INSERT INTO description VALUES ('', ?, ?, ?, ?, ?, CURDATE(), NULL, ?,?,?); ";
-				$req = $this->DB->prepare($req);
-				try {
-					$ret = $req->execute(array($data["title"], $data["description"], $data["version"], $data["homepage"],  $data["available_from"],  $data["licence_UID"], $toolUID, 0));
-				} catch(Exception $e) {
-					$erreure = 'Erreur : '.$e->getMessage().'<br />';
-					$erreure .= 'N° : '.$e->getCode();
-					return $erreure;
-				}
-			}
-			return $ret;
-		}
-		
-		function getKeywords($tool) {
-			$req = "SELECT k.keyword_uid, k.keyword, k.source_uri as sourceURI, k.source_taxonomy as sourceTaxonomy FROM keyword k, tool_has_keyword tk WHERE tk.keyword_uid = k.keyword_uid AND tk.tool_uid = ?";
-			$req = $this->DB->prepare($req);
-			$req->execute(array($tool));
-			$data = $req->fetchAll(PDO::FETCH_ASSOC);
-			if($data) {
-				$ret = array();
-				foreach($data as &$keyword) {
-					if($keyword["sourceURI"] != "") {
-						$ret[] = array(
-									"identifier" => $keyword["keyword_uid"],
-									"keyword" => $keyword["keyword"],
-									"provider" => array(
-													"uri" => $keyword["sourceURI"],
-													"taxonomy" => $keyword["sourceTaxonomy"]
-												)
-								);
-					}	else {
-						$ret[] = array(
-									"identifier" => $keyword["keyword_uid"],
-									"keyword" => $keyword["keyword"]
-								);
-					}
-				}
-				return $ret;
-			} else {
-				return false;
-			}
-		}
-		
-		function getToolType($id, $mode = "Default") {
-			###################################
-			#
-			#	MODES :
-			#
-			#		* Reverse = gets ToolType 							id is either null (List of ToolType) or int()
-			#		* ReverseAdvanced = gets Tools from ToolType		id cant be null
-			#		* Default = gets ToolType from Tool					id cant be null
-			#
-			###################################
-			
-			#Default return is false :
-			$ret = false;
-			
-			if($mode == "Default") {
-			
-				#In default mode, $id is an int
-				$req = "SELECT t.tool_type as type, t.source_uri as uri FROM tool_type t, tool_has_tool_type tt WHERE tt.tool_type_uid = t.tool_type_uid AND tt.tool_uid = ?";
-				$req = $this->DB->prepare($req);
-				$req->execute(array($id));
-				
-				$data = $req->fetchAll(PDO::FETCH_ASSOC);
-				#If we got data
-				if($data) {
-					$ret = array();
-					foreach($data as &$type) {
-						$ret[] = $type;
-					}
-				}
-			
-			} elseif($mode == "Reverse") {
-			
-				#TBD
-			
-			} elseif($mode == "ReverseAdvanced") {
-			
-				#TBD
-				
-			}
-			
-			#RETURN
-			return $ret;
-		}
-		
-		function getPlatform($id, $mode = "Default") {
-			#Default return is false :
-			$ret = false;
-			
-			if($mode == "Default") {
-				#Request
-				$req = "SELECT p.name as platform FROM tool_has_platform tp, platform p WHERE tp.tool_uid = ? AND tp.platform_uid = p.platform_uid";
-				$req = $this->DB->prepare($req);
-				$req->execute(array($id));
-				
-				#Fetching data
-				$data = $req->fetchAll(PDO::FETCH_ASSOC);
-				
-				#If we got data
-				if($data) {
-					#Format data
-					$ret = array();
-					foreach($data as &$v) {
-						$ret[] = $v["platform"];
-					}
-				}
-			} elseif($mode == "Reverse") {
-				#TBD
-			}
-			
-			#Only one return
-			return $ret;			
-		}
-		
-		function getTool($ref, $options) {
+		function get($ref, $options) {
 			#Setting request, following $ref is the id or the shortname
 			if(is_numeric($ref)) {
 				$req = "SELECT tool_uid as tool_id, shortname as tool_shortname FROM tool WHERE tool_uid = ? LIMIT 1";
@@ -283,47 +108,81 @@
 			}
 			
 			#Executing request
-			$req = $this->DB->prepare($req);
+			$req = self::DB()->prepare($req);
 			$req->execute(array($ref));
-			
-			#Getting data
-			$data = $req->fetch(PDO::FETCH_ASSOC);
-			
+						
 			#Formatting
-			if($data) {
+			if($req->rowCount() > 0) {
+				$data = $req->fetch(PDO::FETCH_ASSOC);
 				$ret = array(
 							"identifier" => array("id" => $data["tool_id"], "shortname" => $data["tool_shortname"]),
-							"descriptions" => $this->getDescriptions($data["tool_id"]),
+							"descriptions" => Description::get($data["tool_id"], true),
 							"parameters" => $options
 						);
 						
 				if(isset($options["keyword"])) {
-					$ret["keyword"] = $this->getKeywords($data["tool_id"]);
+					$ret["keyword"] = Facets::get("Keyword", $data["tool_id"]);
 					if(!$ret["keyword"]) { unset($ret["keyword"]); }
 				}
 				if(isset($options["type"])) {
-					$ret["type"] = $this->getToolType($data["tool_id"]);
+					$ret["type"] = Facets::get("ToolType", $data["tool_id"]);
 					if(!$ret["type"]) { unset($ret["type"]); }
 				}
 				if(isset($options["platform"])) {
-					$ret["platform"] = $this->getPlatform($data["tool_id"]);
+					$ret["platform"] = Facets::get("Platform", $data["tool_id"]);
 					if(!$ret["platform"]) { unset($ret["platform"]); }
 				}
+				
 				if(isset($options["developer"])) {
-					$ret["developers"] = $this->getDevelopers($data["tool_id"]);
+					$ret["developers"] = Facets::get("Developer", $data["tool_id"]);
 					if(!$ret["developers"]) { unset($ret["developers"]); }
 				}
+				
+				if(isset($options["projects"])) {
+					$ret["projects"] = Facets::get("Project", $data["tool_id"]);
+					if(!$ret["projects"]) { unset($ret["projects"]); }
+				}
+				
+				if(isset($options["suite"])) {
+					$ret["suite"] = Facets::get("Suite", $data["tool_id"]);
+					if(!$ret["suite"]) { unset($ret["suite"]); }
+				}
+				
+				if(isset($options["standards"])) {
+					$ret["standards"] = Facets::get("Standard", $data["tool_id"]);
+					if(!$ret["standards"]) { unset($ret["standards"]); }
+				}
+				
+				if(isset($options["video"])) {
+					$ret["videos"] = Facets::get("Video", $data["tool_id"]);
+					if(!$ret["videos"]) { unset($ret["videos"]); }
+				}
+				
+				if(isset($options["features"])) {
+					$ret["features"] = Facets::get("Feature", $data["tool_id"]);
+					if(!$ret["features"]) { unset($ret["features"]); }
+				}
+				
+				if(isset($options["publications"])) {
+					$ret["publications"] = Facets::get("Publication", $data["tool_id"]);
+					if(!$ret["publications"]) { unset($ret["publications"]); }
+				}
+				
+				if(isset($options["licence"])) {
+					$ret["licence"] = Facets::get("Licence", $data["tool_id"]);
+					if(!$ret["licence"]) { unset($ret["licence"]); }
+				}
+				
 				if(isset($options["applicationType"])) {
-					$ret["applicationType"] = $this->getApplicationType($data["tool_id"]);
+					$ret["applicationType"] = Facets::get("ApplicationType", $data["tool_id"]);
 					if(!$ret["applicationType"]) { unset($ret["applicationType"]); }
 				}
 				
 			} else {
-				$ret = array("Error" => "No tool for " + $ref +" identifier");
+				$ret = array("status" => "error", "message" => "No tool for " + $ref +" identifier");
 			}
 			return $ret;
 			
 		}
 	}
-	$tool = new Tool();
 ?>

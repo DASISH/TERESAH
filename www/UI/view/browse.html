@@ -1,0 +1,53 @@
+<ol class="breadcrumb">
+  <li><a href="#/">Home</a></li>
+  <li><a href="#/facet">Browse by facet</a></li>
+  <li><a href="#/facet/{{results.facet.facet.facetParam}}" ng-bind="results.facet.facet.facetLegend"></a></li>
+  <li><a href="#/facet/{{results.facet.facet.facetParam}}/{{results.facet.identifier}}" ng-bind="results.facet.name || results.facet.keyword"></a></li>
+</ol>
+
+<section id="viewHeader">
+	<div class="page-header">
+		<h1><span ng-bind="results.facet.name || results.facet.keyword"></span> <small ng-bind="'Browse by ' + results.facet.facet.facetLegend"></small></h1>
+		
+		<section ng-show="results.facet.provider">
+			<dl class="dl-horizontal">
+				<dt>Taxonomy</dt>
+				<dd ng-bind="results.facet.provider.taxonomy"></dd>
+				<dt>Source</dt>
+				<dd ><a ng-href="results.facet.provider.uri" target="_blank" ng-bind="results.facet.provider.uri"></a></dd>
+			</dl>
+		</section>
+		
+		<section ng-show="results.facet.uri">
+			<dl class="dl-horizontal">
+				<dt>Source</dt>
+				<dd ><a ng-href="results.facet.uri" target="_blank" ng-bind="results.facet.uri"></a></dd>
+			</dl>
+		</section>
+		
+		<section ng-show="results.facet.type">
+			<dl class="dl-horizontal">
+				<dt>Type</dt>
+				<dd ng-bind="results.facet.type"></dd>
+			</dl>
+		</section>
+		
+		<section ng-show="results.facet.contact">
+			<dl class="dl-horizontal">
+				<dt>Contact</dt>
+				<dd ng-bind="results.facet.contact"></dd>
+			</dl>
+		</section>
+		
+		
+		<p>Tools from {{ui.parameters.start + 1}} to {{ui.parameters.limit + ui.parameters.start}} on {{ui.parameters.total}} available</p>
+		
+	</div>
+</section>
+<section id="viewContent" ng-show="results.items">
+	<hr />
+	<section class="itemList" items="results.items"></section>
+	<div class="row" ng-show="ui.pages.total > 1">
+		<pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+	</div>
+</section>
