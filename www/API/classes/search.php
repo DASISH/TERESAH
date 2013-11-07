@@ -1,5 +1,15 @@
 <?php
 	class Search {
+		private static function debug($string, $data) {
+			
+			$indexed=$data==array_values($data);
+			foreach($data as $k=>$v) {
+				if(is_string($v)) $v="'$v'";
+				if($indexed) $string=preg_replace('/\?/',$v,$string,1);
+				else $string=str_replace(":$k",$v,$string);
+			}
+			return $string;
+		}
 		private static function DB() {
 			global $DB;
 			return $DB;
@@ -448,7 +458,7 @@
 							if(isset($o["mode"]) && $o["mode"] == "OR")	{
 							
 								#We add this join request to our join array
-								$joins[] =  " ".$joinText." ".$dic["link"]["table"]." ON t.UID = ".$dic["link"]["name"].".".$dic["link"]["tool"] . " ";
+								$joins[] =  " ".$joinText." ".$dic["link"]["name"]." ON t.tool_uid = ".$dic["link"]["name"].".".$dic["link"]["tool"] . " ";
 								
 								#We add this join request to our WHERE array
 								$where[] = " ".$dic["link"]["name"].".".$dic["link"]["item"]." IN (".$inQuery.") ";
@@ -521,11 +531,11 @@
 			#Generate the order system for the request
 			switch($options["orderBy"]) {
 				case "identifier":
-					$ordering = "t.tool_uid";
+					$ordering = "t.tool_uid ";
 					break;
 				case "title":
 				default:
-					$ordering = "d.title";
+					$ordering = "d.title  COLLATE utf8_general_ci";
 					break;
 			}
 			#We write the request
@@ -537,10 +547,11 @@
 					GROUP BY d.tool_uid ";
 			$req .=	" ORDER BY ".$ordering." ".$options["order"]." ";
 			$req .=	" LIMIT ".$options["start"]." , ".$options["limit"];
-					// print($req);
-					// print_r($exec);
-			#print($req);
+			
 			#We execute it
+			//self::debug($req, $exec);
+			
+			$debug = self::debug($req, $exec);
 			$req = self::DB()->prepare($req);
 			$req->execute($exec);
 			
@@ -563,6 +574,7 @@
 			
 			$ret["parameters"]["url"] = urldecode(http_build_query($get));
 			
+			$ret["debug"] = $debug;
 			return $ret;
 		}
 		

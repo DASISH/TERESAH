@@ -24,7 +24,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 									$scope.results = false;
 									$scope.ui.facets.error = "No results";
 								} else {
-									$scope.ui.url = data.parameters.url;
+									$scope.ui.url.val = data.parameters.url;
 									$ui.url.set(data.parameters.url);
 									$scope.results = { items : data.response }
 									$scope.ui.pages.totalItem = data.parameters.total;
@@ -32,7 +32,22 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 							} else {
 								$scope.results = false;
 							}
+							//Loop to set items following value in data.parameters
+							angular.forEach(data.parameters.facets, function(v, k) {
+								angular.forEach(v.request, function(v) {
+									this[v] = {name : "HELLO FACET", active : true, id : v};
+								}, v.request);
+								$scope.ui.facets.used[k] = {active : true, possibilities : v.request, facetParam: k};
+								if(v.mode) { if(v.mode == "AND") { modeVal = true; } else {  modeVal = false; }} else { modeVal = true; }
+								if(v.optional) { if(v.optional == "1") { optionalVal = true; } else {  optionalVal = false; }} else { optionalVal = true; }
+								$scope.ui.facets.options[k] = {inclusive : modeVal, optional : optionalVal};
+							})
 							
+							
+							$scope.ui.facets.params = {
+								orderBy : data.parameters.orderBy,
+								order:	data.parameters.order
+							}
 						});
 					}
 				}
@@ -57,6 +72,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 				} else {
 					constructor["facets"] = {};
 				}
+				angular.extend(constructor, $scope.ui.facets.params);
 				angular.forEach($scope.ui.facets.used, function(val) {
 					if(val.active) {
 						constructor.facets[val.facetParam] = {"request" : []};
@@ -67,6 +83,12 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 								constructor.facets[val.facetParam]["request"].push(opt.id);
 							}
 						});
+						if($scope.ui.facets.options[val.facetParam].optional == true) {
+							constructor.facets[val.facetParam].optional = true;
+						}
+						if($scope.ui.facets.options[val.facetParam].inclusive == false) {
+							constructor.facets[val.facetParam].mode = "OR";
+						}
 					}
 				});
 				
@@ -106,7 +128,12 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 			del : function (par, key) {
 				delete $scope.ui.facets.used[par].possibilities[key];
 			},
-			used : {}
+			used : {},
+			options : {},
+			params : {
+				orderBy : "title",
+				order:	"ASC"
+			}
 		},
 		pages : {
 			current : 1,
@@ -126,13 +153,18 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 	
 	$ui.title("Search | Faceted");
 	
+	//Formating each options Array
+	angular.forEach($scope.ui.facets.facets, function(v) {
+		$scope.ui.facets.options[v.facetParam] = {optional : false, inclusive: true};
+		$scope.ui.facets.used[v.facetParam] = {};
+	});
+
 	$scope.ui.url.reload();
 	
 	//In case of manual change of URL
 	$scope.$on('$routeUpdate', function() {
 		$scope.ui.url.reload();
 	});
-	//exec
 }]);
 Faceted.resolveFaceted = {
 	itemData: function($route, Item) {

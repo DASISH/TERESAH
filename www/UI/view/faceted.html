@@ -4,12 +4,50 @@
 			<div class="list-group">
 				<a class="list-group-item" ng-repeat="facet in ui.facets.facets" ng-class="{'active' : facet.active }">
 					<h4 ng-click="facet.active = !facet.active;" class="list-group-item-heading"><span class="badge pull-right">{{facet.facetTotal}}</span>{{facet.facetLegend}}</h4>
+					<section class="list-group-options">
+						<hr />
+						<div ng-click="ui.facets.options[facet.facetParam].inclusive = !ui.facets.options[facet.facetParam].inclusive;" class="btn-col-group">
+							<span class="btn"><b>Inclusive</b></span>
+							<span class="btn pull-right" ng-class="{'btn-default' : !(ui.facets.options[facet.facetParam].inclusive), 'btn-primary' : (ui.facets.options[facet.facetParam].inclusive)}" >
+								<span class="glyphicon glyphicon-off"></span>
+							</span>
+						</div>
+						<div ng-click="ui.facets.options[facet.facetParam].optional = !ui.facets.options[facet.facetParam].optional;">
+							<span class="btn"><b>Optional</b></span>
+							<span class="btn pull-right" ng-class="{'btn-default' : !(ui.facets.options[facet.facetParam].optional), 'btn-primary' : (ui.facets.options[facet.facetParam].optional)}" >
+								<span class="glyphicon glyphicon-off"></span>
+							</span>
+						</div>
+						<hr />
+					</section>
 					<p class="list-group-item-text"><span ng-repeat="option in ui.facets.used[facet.facetParam].possibilities | filter:{active:true}" class="badge" ng-click="ui.facets.del(facet.facetParam, option.id)">{{option.name}}</span></p>
 				</a>
 			</div>
-			<p></p>
-			<button ng-click="ui.facets.submit()" class="btn btn-primary btn-lg btn-block">Search</button>
+			<hr />
 			
+				
+			<div class="btn-group btn-block btn-group-justified btn-col-group">
+				<span class="btn"><b>Order by</b></span>
+				<span class="btn btn-default" ng-class="{'btn-primary' : ui.facets.params.orderBy == 'title'}"  ng-click="ui.facets.params.orderBy = 'title';">
+					Title
+				</span>
+				<span class="btn btn-default" ng-class="{'btn-primary' : ui.facets.params.orderBy == 'identifier'}"  ng-click="ui.facets.params.orderBy = 'identifier';">
+					Date
+				</span>
+			</div>
+			<div class="btn-group btn-block btn-group-justified">
+				<span class="btn"><b>Order</b></span>
+				<span class="btn btn-default" ng-class="{'btn-primary' : ui.facets.params.order == 'ASC'}"  ng-click="ui.facets.params.order = 'ASC';">
+					A-Z
+				</span>
+				<span class="btn btn-default" ng-class="{'btn-primary' : ui.facets.params.order == 'DESC'}"  ng-click="ui.facets.params.order = 'DESC';">
+					Z-A
+				</span>
+			</div>
+			<hr />
+			<p>
+			<button ng-click="ui.facets.submit()" class="btn btn-primary btn-lg btn-block">Search</button>
+			</p>
 		</div>
 		<div class="col-lg-9">
 			<div class="container">
