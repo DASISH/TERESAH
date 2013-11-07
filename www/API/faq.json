@@ -531,6 +531,12 @@
 						"default" : "title",
 						"definition" : "Order item either by 'title' or 'identifier'",
 						"type" : "ENUM(title,identifier)"
+					},{
+						"name" : "retrieveLabel",
+						"default" : "false",
+						"definition" : "Get label's name back from query",
+						"type" : "BOOLEAN",
+						"required" : false
 					}
 				],
 				"example" : "/search/faceted/?facets[Licence][request][0]=22"
