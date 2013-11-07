@@ -12,3 +12,11 @@
 .dataTables_info {
     margin-left: 15px;
 }
+
+.glyphicon {
+	margin-right: 3px;
+}
+
+ .action-links  a {
+	display: block;
+ }

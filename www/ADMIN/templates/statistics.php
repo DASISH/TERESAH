@@ -6,7 +6,7 @@
                   <span class="glyphicon glyphicon-briefcase"></span>
                   Tools
               </div>
-              <div class="panel-body">
+              <div class="panel-body action-links">
                Count :<?php print $statistics['tool']['count'];?><br />
                <a href="tool"><span class="glyphicon glyphicon-list"></span>List</a>
                <a href="#"><span class="glyphicon glyphicon-plus"></span>Add</a>
@@ -19,7 +19,7 @@
                   <span class="glyphicon glyphicon-user"></span>
                   Users
               </div>
-              <div class="panel-body">
+              <div class="panel-body action-links">
                Count :<?php print $statistics['user']['count'];?><br />
                <a href="user"><span class="glyphicon glyphicon-list"></span>List</a>
                <a href="#"><span class="glyphicon glyphicon-plus"></span>Add</a>
@@ -32,7 +32,7 @@
                   <span class="glyphicon glyphicon-inbox"></span>
                   Logs
               </div>
-              <div class="panel-body">
+              <div class="panel-body action-links">
                Log entries :<br />
                <a href="#"><span class="glyphicon glyphicon-list"></span>List</a>
               </div>
@@ -54,7 +54,7 @@
                                     <?php print $facet;?>
                                     <span class="badge pull-right"><?php print $count;?></span>
                                 </div>
-                                <div class="panel-body">
+                                <div class="panel-body action-links">
                                     <a href="#"><span class="glyphicon glyphicon-list"></span>List</a> <a href="#"><span class="glyphicon glyphicon-plus"></span>Add</a>
                                 </div>
                             </div>

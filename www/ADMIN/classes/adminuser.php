@@ -1,17 +1,17 @@
 <?php
 
-class User {
+class AdminUser extends User{
 
-	function __construct() {
+	private static function DB() {
 		global $DB;
-		$this->DB = $DB;
-    }
+		return $DB;
+	}
 
-	function listAll() {
+	static function listAll() {
 		
 		$result = array();
         $query = "SELECT user_uid, name, mail, login, active FROM user ORDER BY login ASC";
-		$req = $this->DB->prepare($query);
+		$req = self::DB()->prepare($query);
 		$req->execute();
 		$users = $req->fetchAll(PDO::FETCH_ASSOC);
        
@@ -22,10 +22,10 @@ class User {
 		return $result;		
 	}
 	
-	function getUserByID($user_uid) {
+	static function getUserByID($user_uid) {
 		
         $query = "SELECT user_uid, name, mail, login FROM user WHERE user_uid = $user_uid";
-		$req = $this->DB->prepare($query);
+		$req = self::DB()->prepare($query);
 		$req->execute();
 		$user = $req->fetch(PDO::FETCH_ASSOC);
         
@@ -34,10 +34,10 @@ class User {
 		return $user;		
 	}
 	
-	function getUserByLogin($login) {
+	static function getUserByLogin($login) {
 		
         $query = "SELECT user_uid, name, mail, login, active FROM user WHERE login = $login";
-		$req = $this->DB->prepare($query);
+		$req = self::DB()->prepare($query);
 		$req->execute();
 		$user = $req->fetch(PDO::FETCH_ASSOC);
         
@@ -46,11 +46,11 @@ class User {
 		return $user;		
 	}
 	
-	function getOpenIDForUser($user_uid) {
+	static function getOpenIDForUser($user_uid) {
 	
 		$result = array();
         $query = "SELECT provider, external_uid FROM user_oauth WHERE user_uid = $user_uid";
-		$req = $this->DB->prepare($query);
+		$req = self::DB()->prepare($query);
 		$req->execute();
 		$openIds = $req->fetchAll(PDO::FETCH_ASSOC);
        
@@ -61,7 +61,7 @@ class User {
 		return $result;			
 	}
 	
-	function create($name, $mail, $login, $password) {
+	static function create($name, $mail, $login, $password) {
 	
 		print 'create';
 	
@@ -70,7 +70,7 @@ class User {
 		try{
 			$result = array();
 			$query = "INSERT INTO user (name, mail, login, password, active) VALUES ('$name', '$mail', '$login', '$password', 1)";
-			$req = $this->DB->prepare($query);
+			$req = self::DB()->prepare($query);
 			$req->execute();	
 		}
 		catch (Exception $e)
@@ -80,7 +80,7 @@ class User {
 		return array('success' => 'User created - ' . $login);
 	}
 		
-	function update($values) {
+	static function update($values) {
 		
 		print 'update';
 		
@@ -91,14 +91,14 @@ class User {
 			
 				$query = "UPDATE user SET name=?, mail=?, login=?, password=?, active=? WHERE user_uid=?";
 				
-				$req = $this->DB->prepare($query);
+				$req = self::DB()->prepare($query);
 				$req->execute(array($values['name'], $values['mail'], $values['login'], hash('sha256', $values['password']), $values['user_active'], $values['user_uid']));		
 			}
 			else {
 					
 				$query = "UPDATE user SET name=?, mail=?, login=?, active=? WHERE user_uid=?";
 				
-				$req = $this->DB->prepare($query);
+				$req = self::DB()->prepare($query);
 				$req->execute(array($values['name'], $values['mail'], $values['login'], $values['user_active'], $values['user_uid']));		
 			}	
 		}
@@ -109,13 +109,12 @@ class User {
 		return array('success' => 'User saved - ' . $values['login']);
 	}
 	
-	function activate($user_uid, $action) {
+	static function activate($user_uid, $action) {
 
         $query = "UPDATE user SET active = '$action' WHERE user_uid = $user_uid";
-		$req = $this->DB->prepare($query);
+		$req = self::DB()->prepare($query);
 		$req->execute();
 	}
 }
-$user = new User();
 
 ?>

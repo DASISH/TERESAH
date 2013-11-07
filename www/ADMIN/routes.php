@@ -24,25 +24,25 @@ $app->get('/tool/:shortname', function ($shortname) use ($tool){
 /////////////////////////////////////////////////////////////////////////////
 
 /* List users */
-$app->get('/user', function () use ($user){ 
-    display('user_list.php', array('users' => $user->listAll()));
+$app->get('/user', function () { 
+    display('user_list.php', array('users' => AdminUser::listAll()));
 })->name('user_list');
 
 /* Edit user */
-$app->get('/user/edit/:user_uid', function ($user_uid) use ($user, $app){ 
+$app->get('/user/edit/:user_uid', function ($user_uid) use ($app){ 
 
 	$form_address = $app->urlFor('user_edit_post', array('user_uid' => $user_uid));
 
-    display('forms/user_edit.php', array('user' => $user->getUserByID($user_uid), 
+    display('forms/user_edit.php', array('user' => AdminUser::getUserByID($user_uid), 
 										 'form_address' => $form_address,
 										 'title' => 'Edit user'));
 })->name('user_edit');
 
 /* Edit user post */
-$app->post('/user/edit/:user_uid', function ($user_uid) use ($user, $app) {
+$app->post('/user/edit/:user_uid', function ($user_uid) use ($app) {
     
 	$app->flash('info', "post('/user/:user_uid'");
-	$result = $user->update(array('user_uid' => $user_uid,
+	$result = AdminUser::update(array('user_uid' => $user_uid,
 						'name' => $app->request->post('name'),
 						'mail' => $app->request->post('mail'),
 						'login' => $app->request->post('login'),
@@ -69,14 +69,14 @@ $app->get('/user/add', function () use ($app){
 })->name('user_add');
 
 /* Add user post */
-$app->post('/user/add', function () use ($user, $app) {
+$app->post('/user/add', function () use ($app) {
 
 	$app->flash('info', "post('/user/add'");
 
-    $result = $user->create($app->request->post('name'), 
-							$app->request->post('mail'), 
-							$app->request->post('login'), 
-							$app->request->post('password'));
+    $result = AdminUser::create($app->request->post('name'), 
+							  	 $app->request->post('mail'), 
+								 $app->request->post('login'), 
+								 $app->request->post('password'));
 	
 	if(isset($result['success'])) {
 		$app->flash('success', $result['success']);
@@ -93,8 +93,8 @@ $app->post('/user/add', function () use ($user, $app) {
 /////////////////////////////////////////////////////////////////////////////
 
 /* List logs */
-$app->get('/log', function () use ($log){ 
-    display('log_list.php', array('logs' => $log->listAll()));
+$app->get('/log', function () { 
+    display('log_list.php', array('logs' => Log::listAll()));
 })->name('log_list');
 
 ?>

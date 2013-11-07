@@ -9,6 +9,8 @@ ini_set('display_startup_errors', TRUE);
 
 #Require configuration, frameworks, assets 
 require_once "../API/conf/config.php";
+require_once '../API/classes/log.php';
+require_once '../API/classes/user.php';
 require_once '../common/SQL.PDO.php';
 require_once '../common/Slim/Slim.php';
 require_once '../common/Slim/Middleware.php';
@@ -22,9 +24,8 @@ $app->add(new Slim\Middleware\SessionCookie(array('secret' => 'tools_registry_se
 
 #classes
 include 'classes/tool.php';
-include 'classes/user.php';
+include 'classes/adminuser.php';
 include 'classes/statistics.php';
-include 'classes/log.php';
 
 #routes
 include 'routes.php';
