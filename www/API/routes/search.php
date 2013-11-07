@@ -79,7 +79,7 @@
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {
-			if(count($data["parameters"]["facets"]) > 0 && isset($filtered["retrieveLabel"])) {
+			if(count($data["parameters"]["facets"]) > 0 && isset($input["retrieveLabel"])) {
 				//We are dependant on facet now
 				$require->req("facet");
 				
