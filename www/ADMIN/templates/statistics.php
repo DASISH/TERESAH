@@ -9,7 +9,7 @@
               <div class="panel-body action-links">
                Count :<?php print $statistics['tool']['count'];?><br />
                <a href="tool"><span class="glyphicon glyphicon-list"></span>List</a>
-               <a href="#"><span class="glyphicon glyphicon-plus"></span>Add</a>
+               <a href="tool/add"><span class="glyphicon glyphicon-plus"></span>Add</a>
               </div>
             </div>            
         </div>
@@ -22,7 +22,7 @@
               <div class="panel-body action-links">
                Count :<?php print $statistics['user']['count'];?><br />
                <a href="user"><span class="glyphicon glyphicon-list"></span>List</a>
-               <a href="#"><span class="glyphicon glyphicon-plus"></span>Add</a>
+               <a href="user/add"><span class="glyphicon glyphicon-plus"></span>Add</a>
               </div>
             </div>            
         </div>     
@@ -34,7 +34,7 @@
               </div>
               <div class="panel-body action-links">
                Log entries :<br />
-               <a href="#"><span class="glyphicon glyphicon-list"></span>List</a>
+               <a href="log"><span class="glyphicon glyphicon-list"></span>List</a>
               </div>
             </div>            
         </div>       
