@@ -29,7 +29,7 @@ class AdminUser extends User{
 		$req->execute();
 		$user = $req->fetch(PDO::FETCH_ASSOC);
         
-		$user['openID'] = $this->getOpenIDForUser($user_uid);
+		$user['openID'] = self::getOpenIDForUser($user_uid);
 			  
 		return $user;		
 	}
@@ -61,51 +61,52 @@ class AdminUser extends User{
 		return $result;			
 	}
 	
-	static function create($name, $mail, $login, $password, $admin) {
-	
+	static function create($name, $mail, $login, $password, $active, $admin) {
+		
 		try{
 			$result = array();
-			$query = "INSERT INTO user (name, mail, login, password, active, admin) VALUES ('$name', '$mail', '$login', '$password', 1, $admin)";
+			$query = "INSERT INTO user (name, mail, login, password, active, admin) VALUES (?, ?, ?, ?, ?, ?)";
 			$req = self::DB()->prepare($query);
+			$req->execute(array($name, $mail, $login, hash('sha256', $password), $active, $admin));	
+			
 			$uid = self::DB()->lastInsertId();
-			$req->execute();	
 		}
 		catch (Exception $e)
 		{
 			return array('danger' => 'An error has occured');
 		}
 		
-		LOG::insert('insert', $_SESSION['user']['id'], 'user', $uid);
+		//LOG::insert('insert', $_SESSION['user']['id'], 'user', $uid);
 		
 		return array('success' => 'User created - ' . $login);
 	}
 		
-	static function update($values) {
-		
+	static function update($user_uid, $name, $mail, $login, $password, $active, $admin) {
+				
 		try{
 			if(!empty($values['password'])) {
 			
 				$query = "UPDATE user SET name=?, mail=?, login=?, password=?, active=?, admin=? WHERE user_uid=?";
 				
 				$req = self::DB()->prepare($query);
-				$req->execute(array($values['name'], $values['mail'], $values['login'], hash('sha256', $values['password']), $values['user_active'], $values['user_admin'], $values['user_uid']));		
+				$req->execute(array($name, $mail, $login, hash('sha256', $password), $active, $admin, $user_uid));		
 			}
 			else {
 					
 				$query = "UPDATE user SET name=?, mail=?, login=?, active=?, admin=? WHERE user_uid=?";
 				
 				$req = self::DB()->prepare($query);
-				$req->execute(array($values['name'], $values['mail'], $values['login'], $values['user_active'], $values['user_admin'], $values['user_uid']));		
+				$req->execute(array($name, $mail, $login, $active, $admin, $user_uid));	
 			}	
 		}
 		catch (Exception $e)
 		{
 			return array('danger' => 'An error has occured');
 		}
+				
+		//LOG::insert('update', $_SESSION['user']['id'], 'user', $values['user_uid']);
 		
-		LOG::insert('update', $_SESSION['user']['id'], 'user', $values['user_uid']);
-		
-		return array('success' => 'User saved - ' . $values['login']);
+		return array('success' => 'User saved - ' . $login);
 	}
 	
 	static function activate($user_uid, $action) {

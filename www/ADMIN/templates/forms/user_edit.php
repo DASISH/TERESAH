@@ -35,21 +35,28 @@
 			<div class="col-lg-2">
 				<div class="input-group">
 					<span class="input-group-addon">
-						<input type="radio" name="user_active" value="active">
+						<input type="checkbox" name="user_active" <?php if(isset($user['active'])) print $user['active'] == 1 ? 'checked' : ''; ?>>
 					</span>
-					<input type="text" class="form-control" value="active">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="input-group">
-					<span class="input-group-addon">
-						<input type="radio" name="user_active" value="inactive"><br/>
-					</span>
-					<input type="text" class="form-control" value="inactive">
+					<input type="text" class="form-control" value="Active user">
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<div class="form-group">
+		<label class="col-lg-1 control-label">Admin</label>
+		<div class="row">
+			<div class="col-lg-2">
+				<div class="input-group">
+					<span class="input-group-addon">
+						<input type="checkbox" name="user_admin" <?php if(isset($user['admin'])) print $user['admin'] == 1 ? 'checked' : ''; ?>>
+					</span>
+					<input type="text" class="form-control" value="Admin user">
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<br/>
 	<input class="btn btn-primary" type="submit" value="Submit">
 </form>

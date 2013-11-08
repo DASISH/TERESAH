@@ -41,12 +41,13 @@ $app->get('/user/edit/:user_uid', function ($user_uid) use ($app){
 /* Edit user post */
 $app->post('/user/edit/:user_uid', function ($user_uid) use ($app) {
     
-	$app->flash('info', "post('/user/:user_uid'");
-	$result = AdminUser::update(array('user_uid' => $user_uid,
-						'name' => $app->request->post('name'),
-						'mail' => $app->request->post('mail'),
-						'login' => $app->request->post('login'),
-						'password' => $app->request->post('password')));
+	$result = AdminUser::update($user_uid,
+								$app->request->post('name'),
+								$app->request->post('mail'),
+								$app->request->post('login'),
+								$app->request->post('password'),
+								$app->request->post('user_active') == 'on' ? 1 : 0,
+								$app->request->post('user_admin') == 'on' ? 1 : 0);
 	
 	if(isset($result['success'])) {
 		$app->flash('success', $result['success']);
@@ -71,12 +72,12 @@ $app->get('/user/add', function () use ($app){
 /* Add user post */
 $app->post('/user/add', function () use ($app) {
 
-	$app->flash('info', "post('/user/add'");
-
     $result = AdminUser::create($app->request->post('name'), 
-							  	 $app->request->post('mail'), 
-								 $app->request->post('login'), 
-								 $app->request->post('password'));
+							  	$app->request->post('mail'), 
+								$app->request->post('login'), 
+								$app->request->post('password'),
+								$app->request->post('user_active') == 'on' ? 1 : 0,
+								$app->request->post('user_admin') == 'on' ? 1 : 0);
 	
 	if(isset($result['success'])) {
 		$app->flash('success', $result['success']);
