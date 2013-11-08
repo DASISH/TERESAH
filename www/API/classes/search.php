@@ -460,11 +460,24 @@
 							#This where clause is equal to a = $ OR = $
 							if(isset($o["mode"]) && $o["mode"] == "OR")	{
 								$realParams[$key]["mode"] = "OR";
-								#We add this join request to our join array
-								$joins[] =  " ".$joinText." ".$dic["link"]["name"]." ON t.tool_uid = ".$dic["link"]["name"].".".$dic["link"]["tool"] . " ";
-								
-								#We add this join request to our WHERE array
-								$where[] = " ".$dic["link"]["name"].".".$dic["link"]["item"]." IN (".$inQuery.") ";
+								if($dic["table"]["name"] != "licence_type") {
+									#We add this join request to our join array
+									$joins[] =  " ".$joinText." ".$dic["link"]["name"]." ON t.tool_uid = ".$dic["link"]["name"].".".$dic["link"]["tool"] . " ";
+									
+									#We add this join request to our WHERE array
+									$where[] = " ".$dic["link"]["name"].".".$dic["link"]["item"]." IN (".$inQuery.") ";
+								} else {
+									#We add this join request to our join array
+									
+									$joins[]  = " ".$joinText." ( 
+													SELECT tool_has_licence.tool_uid 
+													FROM licence, tool_has_licence 
+													WHERE licence.licence_type_uid IN (".$inQuery.") 
+													GROUP BY tool_has_licence.tool_uid 
+												) licence ON licence.tool_uid = t.tool_uid 
+									
+									";
+								}
 								
 								#For each value we add it to our exec end array which will be added to exec array (used in ->execute(array()))
 								#We do so because WHERE normal parameters are at the end of the request
@@ -472,18 +485,33 @@
 									$execEnd[]  = $id;
 								}
 							} else {
-							#This where clause is equal to Tool has all of this kind of facets
-							$joins[] = " ".$joinText."
-										(
-											SELECT  ".$dic["link"]["tool"] . "
-											FROM    ".$dic["link"]["name"]."
-											WHERE   ".$dic["link"]["item"]." IN (".$inQuery.")
-											GROUP   BY ".$dic["link"]["tool"] . "
-											HAVING  COUNT(DISTINCT ".$dic["link"]["item"].") = ".$i."
-										) ".$dic["link"]["name"]." ON ".$dic["link"]["name"].".".$dic["link"]["tool"] . " = t.tool_uid";
-								#For each value we add it to our exec array which will be used in ->execute(array())
-								foreach($val as $id) {
-									$exec[]  = $id;
+								if($dic["table"]["name"] == "licence_type") {
+									$joins[]  = " ".$joinText." ( 
+													SELECT tool_has_licence.tool_uid 
+													FROM licence, tool_has_licence 
+													WHERE licence.licence_type_uid IN (".$inQuery.") 
+													GROUP BY tool_has_licence.tool_uid 
+													HAVING COUNT(DISTINCT licence_type_uid) = ".$i."
+												) licence ON licence.tool_uid = t.tool_uid 
+									
+									";
+										foreach($val as $id) {
+											$exec[]  = $id;
+										}
+								} else {
+									#This where clause is equal to Tool has all of this kind of facets
+									$joins[] = " ".$joinText."
+												(
+													SELECT  ".$dic["link"]["tool"] . "
+													FROM    ".$dic["link"]["name"]."
+													WHERE   ".$dic["link"]["item"]." IN (".$inQuery.")
+													GROUP   BY ".$dic["link"]["tool"] . "
+													HAVING  COUNT(DISTINCT ".$dic["link"]["item"].") = ".$i."
+												) ".$dic["link"]["name"]." ON ".$dic["link"]["name"].".".$dic["link"]["tool"] . " = t.tool_uid";
+										#For each value we add it to our exec array which will be used in ->execute(array())
+										foreach($val as $id) {
+											$exec[]  = $id;
+										}
 								}
 							}
 						}
@@ -554,7 +582,7 @@
 			#We execute it
 			//self::debug($req, $exec);
 			
-			//$debug = self::debug($req, $exec);
+			$debug = self::debug($req, $exec);
 			$req = self::DB()->prepare($req);
 			$req->execute($exec);
 			
@@ -582,7 +610,7 @@
 			
 			$ret["parameters"]["url"] = urldecode(http_build_query(array("facets" => $realParams, "orderBy" => $options["orderBy"], "order" => $options["order"])));
 			
-			//$ret["debug"] = $debug;
+			$ret["debug"] = preg_replace('/\s+/', ' ', $debug);
 			return $ret;
 		}
 		

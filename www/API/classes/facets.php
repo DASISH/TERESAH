@@ -596,12 +596,12 @@ class Facets {
 			
 		} elseif($mode == "Reverse") {
 		
-			$req = "SELECT l.type as name, s.licence_type_uid as uid FROM licence_type l WHERE l.licence_type_uid = ? LIMIT 1";			
+			$req = "SELECT l.type as name, l.licence_type_uid as uid FROM licence_type l WHERE l.licence_type_uid = ? LIMIT 1";			
 		
 		} else {
 			return false;
 			#In default mode, $id is an int
-			$req = "SELECT s.name as name, s.suite_uid as uid FROM suite s, tool_has_suite ts WHERE ts.suite_uid = s.suite_uid AND ts.tool_uid = ?";
+			$req = "SELECT l.type as name, l.licence_type_uid as uid FROM  licence_type l, licence ll, tool_has_licence thl WHERE l.licence_type_uid = ll.licence_type_uid AND ll.licence_uid = thl.licence_uid AND thl.tool_uid = ?";
 		
 		}
 			$req = self::DB()->prepare($req);
