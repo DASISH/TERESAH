@@ -1,9 +1,10 @@
 <?php
 class Statistics {
-    function __construct() {
-            global $DB;
-            $this->DB = $DB;
+    private static function DB() {
+        global $DB;
+        return $DB;
     }
+    
     function all(){
         return array(
             'tool' => $this->tools(),
@@ -32,7 +33,7 @@ class Statistics {
     }
     function _count($table, $count_field){
        $query = "SELECT COUNT(".$count_field.") AS count FROM ".$table;
-       $req = $this->DB->prepare($query);
+       $req = self::DB()->prepare($query);
        $req->execute();
        $stats = $req->fetch(PDO::FETCH_ASSOC);
        
