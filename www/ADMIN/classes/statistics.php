@@ -5,7 +5,7 @@ class Statistics {
         return $DB;
     }
     
-    function all(){
+    static function all(){
         return array(
             'tool' => $this->tools(),
             'user' => $this->users(),
@@ -13,15 +13,15 @@ class Statistics {
         );
     }
     
-    function tools(){
+    static function tools(){
        return array('count' => $this->_count('tool', 'tool_uid'));
     }
 
-    function users(){
+    static function users(){
        return array('count' => $this->_count('user', 'user_uid'));
     }
     
-    function facets(){
+    static function facets(){
         return array(
             'Platform' => $this->_count('platform', 'platform_uid'),
             'Keyword' => $this->_count('keyword', 'keyword_uid'),
@@ -31,15 +31,14 @@ class Statistics {
             'Licence type' => $this->_count('licence_type', 'licence_type_uid')
         );
     }
-    function _count($table, $count_field){
+    static function _count($table, $count_field){
        $query = "SELECT COUNT(".$count_field.") AS count FROM ".$table;
        $req = self::DB()->prepare($query);
        $req->execute();
        $stats = $req->fetch(PDO::FETCH_ASSOC);
        
        return $stats['count'];
-    }    
-    
+    }
 }
-$statistics = new Statistics();
+
 ?>
