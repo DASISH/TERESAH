@@ -107,7 +107,7 @@ class Rdf {
             $toolTypeQuery->execute(array($tool['tool_uid']));
             $tool_types = $toolTypeQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($tool_types as &$tool_type) {
-                $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($tool_type['sourceURI'], 'uri');
+                $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($tool_type['source_uri'], 'uri');
                 $result[$uri][$this->pre['rdf'].'type'][] = $this->_val($this->pre['dasish'].'tool_type/'.$tool_type['tool_type_uid'], 'uri');
                 if($id){
                     $result = array_merge($result, $this->tool_type($tool_type['tool_type_uid']));
@@ -236,7 +236,7 @@ class Rdf {
             
             $result[$uri][$this->pre['rdf'].'type'][]      = $this->_val('http://isocat.org/datcat/DC-3786', 'uri');
             $result[$uri][$this->pre['rdfs'].'label'][]    = $this->_val($tool_type['tool_type']);
-            $result[$uri][$this->pre['owl'].'sameAs'][]    = $this->_val($tool_type['sourceURI'], 'uri');
+            $result[$uri][$this->pre['owl'].'sameAs'][]    = $this->_val($tool_type['source_uri'], 'uri');
         }
         return $result;
     }    
