@@ -8,16 +8,18 @@
     <thead>
         <tr>
 			<th class="sorting_disabled">&nbsp;</th>
-            <th>Text</th>
-            <th>Type</th>			
+			<?php foreach ($fields as $title => $field): ?>
+				<th><?php print $title; ?></th>				
+			<? endforeach; ?>
         </tr>
     </thead>
     <tbody>
         <?php foreach($items as $item): ?>
         <tr>
-			<td><input type="checkbox" value="<?php print $item[$facet_uid]; ?>" name="id[]" /></td>
-            <td><a href="<?php print $facet;?>/edit/<?php print $item[$facet_uid]; ?>"><?php print $item['text']; ?></a></td>
-            <td><?php print $item['type']; ?></td>
+			<td><input type="checkbox" value="<?php print $item[$facet_uid]; ?>" name="id[]" /></td>			
+			<?php foreach ($fields as $title => $field): ?>
+				<td><a href="<?php print $facet;?>/edit/<?php print $item[$facet_uid]; ?>"><?php print $item[$field]; ?></a></td>
+			<? endforeach; ?>            
         </tr>
         <?php endforeach; ?>
     </tbody>
