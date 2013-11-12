@@ -40,5 +40,4 @@ class Statistics {
        return $stats['count'];
     }
 }
-
 ?>
