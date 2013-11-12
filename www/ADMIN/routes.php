@@ -98,4 +98,13 @@ $app->get('/log', function () {
     display('log_list.php', array('logs' => Log::listAll()));
 })->name('log_list');
 
+/////////////////////////////////////////////////////////////////////////////
+//								Facets									   //
+/////////////////////////////////////////////////////////////////////////////
+
+/* List licenses */
+$app->get('/license', function () { 
+    display('facets_list.php', array('facet' => 'license', 'title' => 'Licenses', 'facet_uid' => 'licence_uid', 'items' => AdminFacets::getLicenses()));
+})->name('license_list');
+
 ?>

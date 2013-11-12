@@ -27,8 +27,8 @@ class Statistics {
             'Keyword' => $this->_count('keyword', 'keyword_uid'),
             'Developer' => $this->_count('developer', 'developer_uid'),
             'Tool type' => $this->_count('tool_type', 'tool_type_uid'),
-            'Licence' => $this->_count('licence', 'licence_uid'),
-            'Licence type' => $this->_count('licence_type', 'licence_type_uid')
+            'License' => $this->_count('licence', 'licence_uid'),
+            'License type' => $this->_count('licence_type', 'licence_type_uid')
         );
     }
     static function _count($table, $count_field){

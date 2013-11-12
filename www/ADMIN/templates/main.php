@@ -26,12 +26,12 @@
                 <li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Facets <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Platform</a></li>
-						<li><a href="#">Keyword</a></li>
-						<li><a href="#">Developer</a></li>
-						<li><a href="#">Tool type</a></li>
-						<li><a href="#">License</a></li>
-						<li><a href="#">License type</a></li>
+						<li><a href="<?php print BASE_PATH; ?>platform">Platform</a></li>
+						<li><a href="<?php print BASE_PATH; ?>keyword">Keyword</a></li>
+						<li><a href="<?php print BASE_PATH; ?>developer">Developer</a></li>
+						<li><a href="<?php print BASE_PATH; ?>tool-type">Tool type</a></li>
+						<li><a href="<?php print BASE_PATH; ?>license">License</a></li>
+						<li><a href="<?php print BASE_PATH; ?>license-type">License type</a></li>
 					</ul>
                 <li><a href="<?php print BASE_PATH; ?>user">Users</a></li>
                 <li><a href="<?php print BASE_PATH; ?>log">Logs</a></li>

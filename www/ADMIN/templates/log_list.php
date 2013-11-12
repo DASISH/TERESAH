@@ -1,3 +1,5 @@
+<?php print_r($logs); ?>
+
 <h1>Logs</h1>
 <!--
 <a href="<?php print BASE_PATH; ?>tool/add"><span class="glyphicon glyphicon-plus"></span> Add</a>  
