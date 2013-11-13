@@ -16,6 +16,10 @@ require_once '../common/SQL.PDO.php';
 require_once '../common/Slim/Slim.php';
 require_once '../common/Slim/Middleware.php';
 
+//oAuth
+require_once('../API/assets/oAuth2/vendor/autoload.php');
+require_once('../API/assets/oAuth1/vendor/autoload.php');
+
 #Start the framework
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
@@ -43,6 +47,17 @@ function display($template, $variables) {
     $app->render($template, $variables);
     $content = ob_get_clean();	
     $app->render('main.php', array('content' => $content));
+}
+
+function is_admin(){
+    global $DB;
+    $query = "SELECT user_uid, name, mail, login, active, admin FROM user WHERE user_uid = :user_uid";
+    $req = $db->prepare($query);    
+    if(!isset($_SESSION["user"]["id"])){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 require_once './routes.php';

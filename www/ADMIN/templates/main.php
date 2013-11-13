@@ -54,13 +54,6 @@
         <script src="assets/js/jquery.min.js"></script>     
         <script src="assets/js/bootstrap.min.js"></script>      
         <script src="assets/js/jquery.dataTables.min.js"></script>     
-        <script>       
-            $(document).ready(function() {
-                $('.sortable').dataTable({
-                    "bPaginate": false,
-                    "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>"
-                });
-            });
-        </script>
+        <script src="assets/js/admin.js"></script>    
     </body>
 </html> 
