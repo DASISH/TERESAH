@@ -9,5 +9,11 @@ $(document).ready(function() {
     $(".glyphicon-check").parent().click(function (){
         $('input[type="checkbox"]').prop('checked', true);
     });
+    
+    //unselect all action
+    $(".glyphicon-unchecked").parent().click(function (){
+        $('input[type="checkbox"]').removeAttr('checked');
+    });
+    
 });
 
