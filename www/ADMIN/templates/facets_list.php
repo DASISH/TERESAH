@@ -2,8 +2,7 @@
     <h1><?php print $title; ?></h1>
     <div class="toolbox-fixed">
         <a href="<?php print BASE_PATH . $facet; ?>/add"><span class="glyphicon glyphicon-plus"></span> Add</a>  
-        <a href="#"><span class="glyphicon glyphicon-check"></span> Select all</a>
-        <a href="#"><span class="glyphicon glyphicon-unchecked"></span> Unselect all</a>
+        <a href="#"><span class="glyphicon glyphicon-check"></span> Select/deselect all</a>
         <a href="#" class="batch-action" data-batch-function="deleteFacet"><span class="glyphicon glyphicon-trash"></span> Delete</a>    
     </div>
 </div>
