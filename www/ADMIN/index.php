@@ -39,7 +39,13 @@ include 'routes.php';
 #flash messages
 include 'flash_messages.php';
 
-#helper function, displays output in main.php
+/**
+ * Render all content in the main.php template using
+ * a inner template
+ * 
+ * @param string $template name of template
+ * @param string $variables variables to pass to template
+ */
 function display($template, $variables) {
 		
     $app = Slim\Slim::getInstance();
