@@ -24,8 +24,9 @@ class Statistics {
      */
     static function all(){
         return array(
-            'tool' => Statistics::tools(),
-            'user' => Statistics::users(),
+            'tool'  => Statistics::tools(),
+            'user'  => Statistics::users(),
+            'log'   => Statistics::logs(),
             'facet' => Statistics::facets()
         );
     }
@@ -43,6 +44,14 @@ class Statistics {
     static function users(){
        return array('count' => Statistics::_count('user', 'user_uid'));
     }
+
+    /**
+     * @return Array summary statistics for user
+     */
+    static function logs(){
+       return array('count' => Statistics::_count('system_log', 'system_log_uid'));
+    }
+        
     
     /**
      * @return Array summary statistics for facet

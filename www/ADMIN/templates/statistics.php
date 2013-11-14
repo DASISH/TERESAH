@@ -33,7 +33,7 @@
                   Logs
               </div>
               <div class="panel-body action-links">
-               Log entries :<br />
+               Log entries : <?php print $statistics['log']['count'];?><br />
                <a href="log"><span class="glyphicon glyphicon-list"></span>List</a>
               </div>
             </div>            
