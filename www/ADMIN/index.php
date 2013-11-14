@@ -66,6 +66,24 @@ function is_admin(){
     }
 }
 
+function is_in_active_path($fragment){
+    if(is_array($fragment)){
+        $result = false;
+        foreach($fragment as $f){
+            if(strpos($_SERVER['REQUEST_URI'],$f.'/') || substr($_SERVER['REQUEST_URI'], -strlen($f)) === $f){
+                $result = true;
+            }            
+        }
+        return $result;
+    }else{
+        if(strpos($_SERVER['REQUEST_URI'],$fragment.'/') || substr($_SERVER['REQUEST_URI'], -strlen($fragment)) === $fragment){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
 require_once './routes.php';
 
 $app->run();

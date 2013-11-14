@@ -1,6 +1,6 @@
 /* 
     Document   : admin.css
-    Created on : 2013-okt-18, 14:03:27
+    Created on : 2013-10-18, 14:03:27
     Description:
         CSS-fixes for the admin interface
 */
@@ -42,4 +42,8 @@
  .toolbox-fixed{
    position: fixed;
    z-index: 1000;
+ }
+ 
+ .statistics{
+     margin-top: 20px;
  }
