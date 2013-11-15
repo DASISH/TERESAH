@@ -11,7 +11,7 @@
         <div class="container">
 		
           <!-- Static navbar -->
-          <div class="navbar navbar-default">
+          <div class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
@@ -22,19 +22,20 @@
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php print BASE_PATH; ?>tool">Tools</a></li>
-                <li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Facets <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php print BASE_PATH; ?>platform">Platform</a></li>
-						<li><a href="<?php print BASE_PATH; ?>keyword">Keyword</a></li>
-						<li><a href="<?php print BASE_PATH; ?>developer">Developer</a></li>
-						<li><a href="<?php print BASE_PATH; ?>tool-type">Tool type</a></li>
-						<li><a href="<?php print BASE_PATH; ?>license">License</a></li>
-						<li><a href="<?php print BASE_PATH; ?>license-type">License type</a></li>
-					</ul>
-                <li><a href="<?php print BASE_PATH; ?>user">Users</a></li>
-                <li><a href="<?php print BASE_PATH; ?>log">Logs</a></li>
+                <li<?php if(is_in_active_path('tool')):?> class="active"<?php endif;?>><a href="<?php print BASE_PATH; ?>tool">Tools</a></li>
+                <li class="dropdown<?php if(is_in_active_path(array('platform','keyword','developer','tool-type','license','license-type'))):?> active<?php endif;?>">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Facets <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                            <li><a href="<?php print BASE_PATH; ?>platform">Platform</a></li>
+                            <li><a href="<?php print BASE_PATH; ?>keyword">Keyword</a></li>
+                            <li><a href="<?php print BASE_PATH; ?>developer">Developer</a></li>
+                            <li><a href="<?php print BASE_PATH; ?>tool-type">Tool type</a></li>
+                            <li><a href="<?php print BASE_PATH; ?>license">License</a></li>
+                            <li><a href="<?php print BASE_PATH; ?>license-type">License type</a></li>
+                    </ul>
+                </li>
+                <li<?php if(is_in_active_path('user')):?> class="active"<?php endif;?>><a href="<?php print BASE_PATH; ?>user">Users</a></li>
+                <li<?php if(is_in_active_path('log')):?> class="active"<?php endif;?>><a href="<?php print BASE_PATH; ?>log">Logs</a></li>
                 <li><a href="#">API Keys</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
@@ -44,10 +45,10 @@
             </div><!--/.nav-collapse -->
           </div>
 
-		  <!-- flash messages -->		  
-		  <?php print render_flash_message($flash); ?>
+        <!-- flash messages -->		  
+        <?php print render_flash_message($flash); ?>
 		  		 
-		  <!-- content -->				 
+            <!-- content -->				 
           <?php print $content; ?>
 
         </div> <!-- /container -->

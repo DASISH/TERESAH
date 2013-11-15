@@ -1,9 +1,24 @@
+<<<<<<< HEAD
 <h1>Logs</h1>
 <!--
 <a href="<?php print BASE_PATH; ?>tool/add"><span class="glyphicon glyphicon-plus"></span> Add</a>  
 <a href="#"><span class="glyphicon glyphicon-check"></span> Select all</a>
 <a href="#" class="batch-action" data-batch-function="deleteTools"><span class="glyphicon glyphicon-trash"></span> Delete</a>
 -->
+=======
+<?php print_r($logs); ?>
+
+<div class="page-header">
+    <h1>Logs</h1>
+    <div class="toolbox-fixed">
+        <!--
+        <a href="<?php print BASE_PATH; ?>tool/add"><span class="glyphicon glyphicon-plus"></span> Add</a>  
+        <a href="#"><span class="glyphicon glyphicon-check"></span> Select/deselect all</a>
+        <a href="#" class="batch-action" data-batch-function="deleteTools"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+        --> 
+    </div>
+</div>
+>>>>>>> 3b9b8ae118bbc08da2bd686f3977473ee9a3b3ce
 
 <table class="sortable table table-striped table-bordered">
     <thead>

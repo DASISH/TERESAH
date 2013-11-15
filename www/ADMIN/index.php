@@ -39,7 +39,13 @@ include 'routes.php';
 #flash messages
 include 'flash_messages.php';
 
-#helper function, displays output in main.php
+/**
+ * Render all content in the main.php template using
+ * a inner template
+ * 
+ * @param string $template name of template
+ * @param string $variables variables to pass to template
+ */
 function display($template, $variables) {
 		
     $app = Slim\Slim::getInstance();
@@ -57,6 +63,24 @@ function is_admin(){
         return true;
     }else{
         return false;
+    }
+}
+
+function is_in_active_path($fragment){
+    if(is_array($fragment)){
+        $result = false;
+        foreach($fragment as $f){
+            if(strpos($_SERVER['REQUEST_URI'],$f.'/') || substr($_SERVER['REQUEST_URI'], -strlen($f)) === $f){
+                $result = true;
+            }            
+        }
+        return $result;
+    }else{
+        if(strpos($_SERVER['REQUEST_URI'],$fragment.'/') || substr($_SERVER['REQUEST_URI'], -strlen($fragment)) === $fragment){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 

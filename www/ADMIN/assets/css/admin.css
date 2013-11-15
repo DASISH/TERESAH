@@ -1,6 +1,6 @@
 /* 
     Document   : admin.css
-    Created on : 2013-okt-18, 14:03:27
+    Created on : 2013-10-18, 14:03:27
     Description:
         CSS-fixes for the admin interface
 */
@@ -19,4 +19,31 @@
 
  .action-links  a {
 	display: block;
+ }
+ 
+ .container{
+     margin-top: 50px;
+ }
+ 
+ #DataTables_Table_0_wrapper{
+     margin-top: 100px;
+ }
+ 
+ .page-header{
+   position: fixed;
+   z-index: 1000;  
+   margin-top: 0px;
+   background-color: #FFF;
+
+   padding-bottom: 21px;
+   width:60%;
+ }
+ 
+ .toolbox-fixed{
+   position: fixed;
+   z-index: 1000;
+ }
+ 
+ .statistics{
+     margin-top: 20px;
  }
