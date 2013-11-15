@@ -150,6 +150,54 @@ $app->get('/license-type', function () {
     display('facets_list.php', array('facet' => 'license-type', 'title' => 'License types', 'facet_uid' => 'licence_type_uid', 'fields' => $fields, 'items' => AdminFacets::getAllLicenseTypes()));
 })->name('license_type_list');
 
+/* Add platform */
+$app->get('/platform/add', function () use ($app){ 
+	
+    $form_address = $app->urlFor('platform_add_post');
 
+    display('forms/platform_edit.php', array('platform' => array(), 
+                                                'form_address' => $form_address, 
+                                                'title' => 'Add platform'));
+})->name('platform_add');
+
+/* Add platform post */
+$app->post('/platform/add', function () use ($app) {
+
+    $result = AdminFacets::CreatePlatform($app->request->post('name'));
+	
+    if(isset($result['success'])) {
+            $app->flash('success', $result['success']);
+            $app->redirect($app->urlFor('platform_list'));
+    }	
+    else if(isset($result['error'])) {
+            $app->flash('error', $result['error']);
+    }
+		
+})->name('platform_add_post');
+
+/* Edit platform */
+$app->get('/platform/edit/:platform_uid', function ($platform_uid) use ($app){ 
+
+    $form_address = $app->urlFor('platform_edit_post', array('platform_uid' => $platform_uid));
+
+    display('forms/platform_edit.php', array('platform' => AdminFacets::GetPlatformByID($platform_uid), 
+                                             'form_address' => $form_address,
+                                             'title' => 'Edit platform'));
+})->name('platform_edit');
+
+/* Edit platform post */
+$app->post('/platform/edit/:platform_uid', function ($platform_uid) use ($app) {
+    
+    $result = AdminFacets::UpdatePlatform($platform_uid, $app->request->post('name'));
+
+    if(isset($result['success'])) {
+        $app->flash('success', $result['success']);
+        $app->redirect($app->urlFor('platform_list'));
+    }	
+    else if(isset($result['error'])) {
+        $app->flash('error', $result['error']);
+    }
+		
+})->name('platform_edit_post');
 
 ?>
