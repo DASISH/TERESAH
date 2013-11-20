@@ -34,7 +34,11 @@ include 'classes/adminfacets.php';
 include 'classes/statistics.php';
 
 #routes
-include 'routes.php';
+require_once './routes/routes.php';
+require_once './routes/user.php';
+require_once './routes/tool.php';
+require_once './routes/log.php';
+require_once './routes/facet.php';
 
 #flash messages
 include 'flash_messages.php';
@@ -83,8 +87,6 @@ function is_in_active_path($fragment){
         }
     }
 }
-
-require_once './routes.php';
 
 $app->run();
 ?>
