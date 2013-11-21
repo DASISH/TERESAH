@@ -41,9 +41,14 @@
 				<ul class="nav navbar-nav">
 					<li ng-class="ui.routes.getRoute('HomeCtrl')"><a href="#/">Home</a></li>
 					<li ng-class="ui.routes.getRoute('facetListCtrl')"><a href="#/facet">Browse</a></li>
-					<li ng-class="ui.routes.getRoute('SearchCtrl')"><a href="#/search/general">Search</a></li>
-					<li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="#/search/faceted">Faceted search</a></li>
-					<li ng-class="ui.routes.getRoute('AddToolCtrl')" ng-show="ui.user.data.signedin"><a href="#/add">Add a tool</a></li>
+					<li class="dropdown">
+					  <a class="dropdown-toggle">Search</a>
+					  <ul class="dropdown-menu">
+							<li ng-class="ui.routes.getRoute('SearchCtrl')"><a href="#/search/general">General</a></li>
+							<li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="#/search/faceted">Faceted</a></li>
+					  </ul>
+					</li>
+					<li ng-class="ui.routes.getRoute('AddToolCtrl')" ng-show="ui.user.data.signedin"><a href="#/add">Add</a></li>
 					<li class="dropdown">
 					  <a class="dropdown-toggle">
 						About
@@ -55,15 +60,15 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="pull-right" ng-show="ui.user.data.signedin"><a><span class="glyphicon glyphicon-user"></span> <span ng-bind="ui.user.data.name"></span></a></li>
-					<li class="pull-right" ng-show="ui.user.data.signedin"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+					<li class="pull-right" ng-show="ui.user.data.signedin"><a><span class="glyphicon glyphicon-user"></span> <span ng-bind="ui.user.data.name.substr(0,7);"></span><span ng-show="ui.user.data.name.length > 7"></span>...</a></li>
+					<li class="pull-right" ng-show="ui.user.data.signedin"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
 					<li class="pull-right" ng-show="!ui.user.data.signedin"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
 				</ul>
-				<form class="navbar-form navbar-right" ng-submit="ui.search.go()">
+				<form class="navbar-form navbar-right hidden-sm" ng-submit="ui.search.go()">
 					<div class="form-group">
-						<input type="text" placeholder="Type your research here"  ng-model="ui.search.input" class="form-control" typeahead-wait-ms="100" typeahead="answer.identifiers.shortname as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-loading="true" typeahead-on-select="ui.search.select($item)">
+						<input type="text" placeholder="Type your research here"  ng-model="ui.search.input" class="form-control input-sm" typeahead-wait-ms="100" typeahead="answer.identifiers.shortname as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-loading="true" typeahead-on-select="ui.search.select($item)">
 					</div>
-					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+					<button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-search"></span></button>
 				</form>
 			</div><!--/.nav-collapse -->
 		</div>

@@ -75,7 +75,9 @@
 <div class="alert alert-warning" ng-show="ui.status.status == 'error'" ng-bind="ui.status.message"></div>
 
 <div class="row" ng-show="ui.params.total > 1">
-	<p>Tools from {{ui.params.start + 1}} to {{ui.params.limit + ui.params.start}} on {{ui.params.total}} available</p>
+	<div class="col-xs-12">
+		<p>Tools from <span ng-bind="ui.parameters.start + 1"></span> to <span ng-bind="ui.parameters.limit + ui.parameters.start"></span> on <span ng-bind="ui.parameters.total"></span> available</p>
+	</div>
 </div>
 
 <hr />

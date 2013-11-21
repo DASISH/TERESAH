@@ -1,18 +1,19 @@
+<div class="container">
+	<div class="page-header">
+		<h1>Welcome on DASISH Tool Registry</h1>
+	<!--<p style="text-align:right;"><img src="../API/pie/descriptions/Default" height="300" /></p>-->
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<p>Tools from <span ng-bind="ui.parameters.start + 1"></span> to <span ng-bind="ui.parameters.limit + ui.parameters.start"></span> on <span ng-bind="ui.parameters.total"></span> available</p>
+		</div>
+	</div>
 
+	<hr />
 
-  <div class="container">
-	<h1>Welcome on DASISH Tool Registry</h1>
-    <!--<p style="text-align:right;"><img src="../API/pie/descriptions/Default" height="300" /></p>-->
-  </div>
+	<section class="itemList" items="results.items"></section>
 
-<div class="row">
-	<p>Tools from {{ui.parameters.start + 1}} to {{ui.parameters.limit + ui.parameters.start}} on {{ui.parameters.total}} available</p>
-</div>
-
-<hr />
-
-<section class="itemList" items="results.items"></section>
-
-<div class="row" ng-show="ui.pages.total > 1">
-	<pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+	<div class="row" ng-show="ui.pages.total > 1">
+		<pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+	</div>
 </div>
