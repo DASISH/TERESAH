@@ -42,7 +42,7 @@
 		 *
 		 * @return (int) Number of item affected by given request
 		 */
-		function nbrTotal($req = "FROM tool USE INDEX(PRIMARY)", $params = array(), $rowCount = false) {
+		static function nbrTotal($req = "FROM tool USE INDEX(PRIMARY)", $params = array(), $rowCount = false) {
 			$req = self::DB()->prepare("SELECT COUNT(*) as cnt ".$req);
 			$req->execute($params);
 			if($rowCount) {
@@ -62,6 +62,7 @@
 		 *		- case_insensitivity : plain text is case insensible if set to false or unset (default)
 		 *		- limit : limit of items returned by functions. Up limit is 50
 		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- orderBy : MySQL order by title or identifier (default)
 		 *		- description : if set to true, returns descriptions in results
 		 *		- descriptionSize : size of the description chunk (default : 140)
 		 *		- limited : limits a normal search to title, description or keyword 
@@ -72,7 +73,7 @@
 		 *
 		 * @return (array) options with normalized or default values, (case) sensitivity SQL option to insert in a sql request
 		 */
-		private function options($get, $queryNeeded = False) {
+		private static function options($get, $queryNeeded = False) {
 			$options = array();
 			
 			#Query
@@ -179,13 +180,14 @@
 		 *		- description : if set to true, returns descriptions in results
 		 *		- descriptionSize : size of the description chunk (default : 140)
 		 *		- start : item to start from in a MySQL query
+		 *		- orderBy : MySQL order by title or identifier (default)
 		 *
 		 * @param $get	Params given through POST or GET
 		 *
 		 * @return (array) Returns an array of arrays with informations on descriptions
 		 *			array("title", "description" => array("text", "provider"), "identifiers" => array("id", "shortname"), "applicationType");
 		 */
-		function all($get) {
+		static function all($get) {
 			#####
 			#
 			#
@@ -250,7 +252,27 @@
 			// $ret["parameters"]["total"] = self::nbrTotal();
 			return $ret;
 		}
-		function general($get) {
+		
+		/**
+		 *	Plain text / general search
+		 *
+		 *	Available and used options :
+		 *		- (required) request : plain text research
+		 *		- case_insensitivity : plain text is case insensible if set to false or unset (default)
+		 *		- limit : limit of items returned by functions. Up limit is 50
+		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- description : if set to true, returns descriptions in results
+		 *		- descriptionSize : size of the description chunk (default : 140)
+		 *		- limited : limits a normal search to title, description or keyword 
+		 *		- start : item to start from in a MySQL query
+		 *		- orderBy : MySQL order by title or identifier (default)
+		 *
+		 * @param $get				Params given through POST or GET
+		 *
+		 * @return (array) Returns an array of arrays with informations on descriptions
+		 *			array("title", "description" => array("text", "provider"), "identifiers" => array("id", "shortname"), "applicationType");
+		 */
+		static function general($get) {
 			#####
 			#
 			#
@@ -362,29 +384,28 @@
 			
 			return $ret;
 		}
-		function fieldContent($fieldType,$get) {
-			##########
-			#
-			#	fieldtype : 
-			#		*	Suite
-			#		*	Feature
-			#		*	Platform
-			#		*	Keyword
-			#		*	Project
-			#		*	Standard
-			#		*	Publication
-			#		*	Developer
-			#		*	ApplicationType
-			#		*	ToolType
-			#		*	Organization
-			#		*	LicenceType
-			#		*	Licence
-			#
-			##########
+		
+		/**
+		 *	Plain text / general search for labels (Facet content)
+		 *
+		 *	Available and used options :
+		 *		- (required) request : plain text research
+		 *		- case_insensitivity : plain text is case insensible if set to false or unset (default)
+		 *		- limit : limit of items returned by functions. Up limit is 50
+		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- start : item to start from in a MySQL query
+		 *
+		 * @param $fieldType		Facet string identifier
+		 * @param $get				Params given through POST or GET
+		 *
+		 * @return (array) Returns an array of arrays with informations
+		 *			array("facets", "params");
+		 */
+		static function fieldContent($fieldType,$get) {
 			$dictionnaryApplicationType = array(	
 				"localDesktop" => "Desktop application",
 				"other" => "Other",
-				"unknown" => "Unkown",
+				"unknown" => "Unknown",
 				"webApplication" => "Web Application",
 				"webService" => "Web service"
 			);
@@ -455,7 +476,33 @@
 				return array("facets" => $facets, "params" => $options);
 			}
 		}
-		function faceted($get) {
+		
+		/**
+		 *	Faceted search function
+		 *
+		 *
+		 *	More details on the structure of request can be found at API/faq. Else :
+		 *				facets = array(
+		 *					"TableShortcut" (self::dict) => array(
+		 *						"request" => array(numeric identifier of label 1, numeric identifier of label 2),
+		 *						"optionnal" => if set, AND or OR given facet
+		 *						"mode" => if set, AND or OR given values
+		 *				),
+		 *
+		 *
+		 *	Available and used options :
+		 *		- limit : limit of items returned by functions. Up limit is 50
+		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- orderBy : MySQL order by title or identifier (default)
+		 *		- limited : limits a normal search to title, description or keyword 
+		 *		- start : item to start from in a MySQL query
+		 
+		 * @param $get	Params given through POST or GET
+		 *
+		 * @return (array) Returns an array of arrays with informations on descriptions
+		 *			array("title", "description" => array("text", "provider"), "identifiers" => array("id", "shortname"), "applicationType");
+		 */
+		static function faceted($get) {
 			###########################
 			#
 			#	FACETED RESEARCH FUNCTION
