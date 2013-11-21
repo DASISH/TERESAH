@@ -1,12 +1,29 @@
 <?php
 class Facets {
-	##Getting DB
+	/**
+	 * Facets class handles the get, insert, linking functions of facets
+	 *
+	 *
+	 */
+	 
+	/**
+	 *	Get the DB in a PDO way, can be called through self::DB()->PdoFunctions
+	 * @return PDO php object
+	 */
 	private static function DB() {
 		global $DB;
 		return $DB;
 	}
 	
-	function information($facet = false, $all = false) {
+		
+	/**
+	 *	Get informations about facets
+	 *
+	 * @param $facet 	(Optional) If set, return data about chosen $facet
+	 * @param $all 		(Optional) If set, empty facets will be still returned
+	 * @return Array including a facetTotal, a facetLegend and a facetParam value
+	 */
+	static function information($facet = false, $all = false) {
 		$return = array();
 		if($facet) {
 			$dict = Helper::facet($facet, true);
@@ -48,7 +65,17 @@ class Facets {
 
 	
 	
-	function insert($name, $data = false) {
+		
+	/**
+	 *	Insert a new label in the facet list or return data which are needed
+	 *
+	 * @param $name		Name of the facet
+	 * @param $data 	(Optional) If set, empty facets will be still returned. Keys of the data depends on the facet.
+	 * @return 
+	 * 		If data is false, return a list of field such as "fieldName" => array("legend", "type", "not_required")
+	 * 		If data is true, return a common status array with identifier of the new label inside
+	 */
+	static function insert($name, $data = false) {
 		switch ($name) {
 			#####
 			#
@@ -189,8 +216,22 @@ class Facets {
 			return $require;
 		}
 	}
-	
-	function get($name, $id, $mode = "Default") {
+		
+	/**
+	 *	Get functions of label
+	 *
+	 * @param $name		Name of the facet
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	static function get($name, $id, $mode = "Default") {
 		switch ($name) {
 			#####
 			#
@@ -240,7 +281,21 @@ class Facets {
 				return false;
 		}
 	}
-	private function getVideo($id, $mode = "Default") {
+	
+	/**
+	 *	Get functions for Video facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getVideo($id, $mode = "Default") {
 
 		#REVERSE MODE : Get only data about a developer with developer_uid = $id
 		if($mode == "ReverseNameOnly") {
@@ -282,7 +337,20 @@ class Facets {
 		}
 	}
 
-	private function getDevelopers($id, $mode = "Default") {
+	/**
+	 *	Get functions for Developers facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getDevelopers($id, $mode = "Default") {
 
 		#REVERSE MODE : Get only data about a developer with developer_uid = $id
 		if($mode == "ReverseNameOnly") {
@@ -328,7 +396,20 @@ class Facets {
 	}
 
 
-	private function getPublications($id, $mode = "Default") {
+	/**
+	 *	Get functions for Publications facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getPublications($id, $mode = "Default") {
 		#REVERSE MODE : Get only data about a keyword with ID = X
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT p.reference as name FROM publication p WHERE p.publication_uid = ? LIMIT 1";
@@ -367,7 +448,20 @@ class Facets {
 		}
 	}
 
-	private function getFeatures($id, $mode = "Default") {
+	/**
+	 *	Get functions for Features facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getFeatures($id, $mode = "Default") {
 		#REVERSE MODE : Get only data about a keyword with ID = X
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT f.name FROM feature f WHERE f.feature_uid = ? LIMIT 1";
@@ -408,7 +502,21 @@ class Facets {
 			return false;
 		}
 	}		
-	private function getProjects($id, $mode = "Default") {
+	
+	/**
+	 *	Get functions for Projects facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getProjects($id, $mode = "Default") {
 		#REVERSE MODE : Get only data about a keyword with ID = X
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT  p.title as name FROM project p WHERE p.project_uid = ? LIMIT 1";
@@ -451,7 +559,20 @@ class Facets {
 		}
 	}
 
-	private function getStandards($id, $mode = "Default") {
+	/**
+	 *	Get functions for Standards facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getStandards($id, $mode = "Default") {
 		#REVERSE MODE : Get only data about a keyword with ID = X
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT s.title as name FROM standard s WHERE s.standard_uid = ? LIMIT 1";
@@ -494,7 +615,20 @@ class Facets {
 		}
 	}
 
-	private function getApplicationType($id, $mode = "Default") {
+	/**
+	 *	Get functions for Application Type facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getApplicationType($id, $mode = "Default") {
 		$dictionnary = array(	
 			"localDesktop" => "Desktop application",
 			"other" => "Other",
@@ -530,9 +664,20 @@ class Facets {
 		}
 	}
 
-
-
-	private function getKeywords($id, $mode = "Default") {
+	/**
+	 *	Get functions for Keywords facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getKeywords($id, $mode = "Default") {
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT k.keyword as name FROM keyword k WHERE k.keyword_uid = ? LIMIT 1";
 		} elseif($mode == "Reverse") { 
@@ -577,7 +722,20 @@ class Facets {
 		}
 	}
 
-	private function getLicenceType($id, $mode = "Default") {
+	/**
+	 *	Get functions for Licence Type facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getLicenceType($id, $mode = "Default") {
 		###################################
 		#
 		#	MODES :
@@ -625,7 +783,20 @@ class Facets {
 		return $ret;
 	}
 
-	private function getSuite($id, $mode = "Default") {
+	/**
+	 *	Get functions for Suite facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getSuite($id, $mode = "Default") {
 		###################################
 		#
 		#	MODES :
@@ -673,7 +844,21 @@ class Facets {
 		return $ret;
 	}
 
-	private function getToolType($id, $mode = "Default") {
+
+	/**
+	 *	Get functions for Tool Type facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getToolType($id, $mode = "Default") {
 		###################################
 		#
 		#	MODES :
@@ -720,7 +905,21 @@ class Facets {
 		return $ret;
 	}
 
-	private function getPlatform($id, $mode = "Default") {
+
+	/**
+	 *	Get functions for Platform facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getPlatform($id, $mode = "Default") {
 		#Default return is false :
 		$ret = false;
 		
@@ -760,7 +959,21 @@ class Facets {
 		return $ret;			
 	}
 
-	private function getLicence($id, $mode = "Default") {
+
+	/**
+	 *	Get functions for Licence facet table
+	 *
+	 * @param $id 		Either a label numeric identifier if mode is not Default, or a tool numeric identifier
+	 * @param $mode 	Mode of the function :
+	 *						- ReverseNameOnly 	: Get only the title or the name of a label identified by $id
+	 *						- Reverse 			: Get only data about a label identified by $id
+	 *						- Default			: Get keyword for tool identified by $id (Default)
+	 * @return 
+	 * 		Default				 Return an array of identifier and tool name
+	 *		ReverseNameOnly 	@string
+	 *		Reverse				Return details about a label
+	 */
+	private static function getLicence($id, $mode = "Default") {
 		#Default return is false :
 		$ret = false;
 		
