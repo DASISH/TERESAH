@@ -1,5 +1,18 @@
 <?php
 	class Search {
+	/**
+	 * Handles all research functionalities
+	 *
+	 *
+	 */
+	 
+		/**
+		 *	From a prepare PDO MySQL string and an array of data, output a correct / normalized MySQL query
+		 *
+		 * @param $string		MySQL PDO Prepare string which would be used like self::DB()->prepare($string)
+		 * @param $data			MySQL input for req PDO command 
+		 * @return MySQL request string
+		 */
 		private static function debug($string, $data) {
 			
 			$indexed=$data==array_values($data);
@@ -10,10 +23,25 @@
 			}
 			return $string;
 		}
+	 
+		/**
+		 *	Get the DB in a PDO way, can be called through self::DB()->PdoFunctions
+		 * @return PDO php object
+		 */
 		private static function DB() {
 			global $DB;
 			return $DB;
 		}
+		
+		/**
+		 *	Return amount of item which could be returned by given request
+		 *
+		 * @param $req			MySQL Request, shouldn't include "SELECT". Default on tool table
+		 * @param $params		MySQL input for req PDO command 
+		 * @param $rowCount		Use MySQL PDO rowcount function instead of COUNT(*) MYSQL parameter
+		 *
+		 * @return (int) Number of item affected by given request
+		 */
 		function nbrTotal($req = "FROM tool USE INDEX(PRIMARY)", $params = array(), $rowCount = false) {
 			$req = self::DB()->prepare("SELECT COUNT(*) as cnt ".$req);
 			$req->execute($params);
@@ -25,6 +53,25 @@
 			}
 		}
 		
+		
+		/**
+		 *	Format and check for options
+		 *
+		 *	Available and used options :
+		 *		- request : plain text research
+		 *		- case_insensitivity : plain text is case insensible if set to false or unset (default)
+		 *		- limit : limit of items returned by functions. Up limit is 50
+		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- description : if set to true, returns descriptions in results
+		 *		- descriptionSize : size of the description chunk (default : 140)
+		 *		- limited : limits a normal search to title, description or keyword 
+		 *		- start : item to start from in a MySQL query
+		 *
+		 * @param $get				Params given through POST or GET
+		 * @param $queryNeeded		If set to true, the given function needs a request parameter at the top of this submited array data. Would send back a status error
+		 *
+		 * @return (array) options with normalized or default values, (case) sensitivity SQL option to insert in a sql request
+		 */
 		private function options($get, $queryNeeded = False) {
 			$options = array();
 			
@@ -123,7 +170,21 @@
 			return array($options, $sensitivity);
 		}
 		
-		#Returns all tools
+		/**
+		 *	Format and check for options
+		 *
+		 *	Available and used options :
+		 *		- limit : limit of items returned by functions. Up limit is 50
+		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- description : if set to true, returns descriptions in results
+		 *		- descriptionSize : size of the description chunk (default : 140)
+		 *		- start : item to start from in a MySQL query
+		 *
+		 * @param $get	Params given through POST or GET
+		 *
+		 * @return (array) Returns an array of arrays with informations on descriptions
+		 *			array("title", "description" => array("text", "provider"), "identifiers" => array("id", "shortname"), "applicationType");
+		 */
 		function all($get) {
 			#####
 			#
