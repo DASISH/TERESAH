@@ -1,10 +1,40 @@
 <?php
 	class Description {
+	/**
+	 * Description class handles the insert and get functions for descriptions
+	 *
+	 *
+	 */
+	 
+		/**
+		 *	Get the DB in a PDO way, can be called through self::DB()->PdoFunctions
+		 * @return PDO php object
+		 */
 		private static function DB() {
 			global $DB;
 			return $DB;
 		}
-		function insert($toolUID, $data) {
+		
+		/**
+		 *	Insert a description for a tool, wether external or internal
+		 *
+		 *
+		 * @require	$_SESSION["user"]["id"]	Numeric Identifier of a logged in User
+		 *
+		 * @param $toolUID 					Numeric identifier of the tool about which the description is
+		 *
+		 * @param $data["provider"] 		(Optional) If set, defines the description as an external description. Should be a name
+		 * @param $data["source"] 			(Optional) Uri of the external description
+		 *
+		 * @param $data["description"] 		Text of the description
+		 * @param $data["name"] 			Title of the tool
+		 * @param $data["version"] 			Version of the tool
+		 * @param $data["homepage"] 		URI of the homepage of the tool
+		 * @param $data["available_from"] 	Date from which the tool has been available on the market
+		 *
+		 * @return Common status message with array["identifier"]["id"] value to retrieve the new description
+		 */
+		private function insert($toolUID, $data) {
 			$ret = "Nothing happends";
 			if(isset($data["provider"])) {
 				#If we have a Data Provider, it is an external Description
@@ -36,6 +66,19 @@
 			}
 			return $ret;
 		}
+		
+		/**
+		 *	Get descriptions of a tool
+		 *
+		 *
+		 * @require	$_SESSION["user"]["id"]	Numeric Identifier of a logged in User
+		 *
+		 * @param $toolUID 		Numeric identifier of the tool about which the description is
+		 * @param $external 	(Optional) Includes external descriptions (Default : True)
+		 * @param $userName 	(Optional) If set to true, returns the data about the user ["user"] = array("name", "id")
+		 *
+		 * @return array() of formatted descriptions with metadata
+		 */
 		function get($toolUID, $external = true, $userName = false) {
 			$userName = true;
 			#We first fetch our description
