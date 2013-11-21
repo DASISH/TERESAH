@@ -32,7 +32,7 @@
 		 *
 		 * @return clean string
 		 */
-	private function getShorname($str, $replace=array("'"), $delimiter='-') {
+	private static function getShorname($str, $replace=array("'"), $delimiter='-') {
 		setlocale(LC_ALL, 'en_US.UTF8');
 		if( !empty($replace) ) {
 			$str = str_replace((array)$replace, ' ', $str);
@@ -58,7 +58,7 @@
 		 *
 		 * @return void
 		 */
-	function delete($toolUID) {
+	static function delete($toolUID) {
 		$req = "DELETE FROM tool WHERE tool_uid = ? LIMIT 1";
 		$req = self::DB()->prepare($req);
 		$req->execute(array($toolUID));
@@ -79,7 +79,7 @@
 		 *
 		 * @return array Status message with uid and shortname of the new tool
 		 */
-		function insert($data) {
+		static function insert($data) {
 			if(!isset($data["name"])) {
 				return array("Error" => "The tool couldn't be save because no name was given", "fieldsError" => "name");
 			}
@@ -107,7 +107,7 @@
 		 *
 		 * @return array Status message 
 		 */
-		function linkFacets($data) {
+		static function linkFacets($data) {
 			if(!isset($data["facet"]) && !isset($data["element"]) && !isset($data["tool"])) {
 				return array("status" => "error", "message" => "One facet couldn't be save. Missing data");
 			}
@@ -161,7 +161,7 @@
 		 *
 		 * @return array Status message 
 		 */
-		function get($ref, $options) {
+		static function get($ref, $options) {
 			#Setting request, following $ref is the id or the shortname
 			if(is_numeric($ref)) {
 				$req = "SELECT tool_uid as tool_id, shortname as tool_shortname FROM tool WHERE tool_uid = ? LIMIT 1";
