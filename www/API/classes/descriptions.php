@@ -34,8 +34,8 @@
 		 *
 		 * @return Common status message with array["identifier"]["id"] value to retrieve the new description
 		 */
-		private function insert($toolUID, $data) {
-			$ret = "Nothing happends";
+		private static function insert($toolUID, $data) {
+			$ret = false;
 			if(isset($data["provider"])) {
 				#If we have a Data Provider, it is an external Description
 				$req = "INSERT INTO external_description VALUES ('', ?, ?, ?, ?); ";
@@ -79,7 +79,7 @@
 		 *
 		 * @return array() of formatted descriptions with metadata
 		 */
-		function get($toolUID, $external = true, $userName = false) {
+		static function get($toolUID, $external = true, $userName = false) {
 			$userName = true;
 			#We first fetch our description
 			
