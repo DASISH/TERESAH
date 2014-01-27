@@ -42,12 +42,12 @@ $app->get('/user/edit/:user_uid', function ($user_uid) use ($app){
 $app->post('/user/edit/:user_uid', function ($user_uid) use ($app) {
     
 	$result = AdminUser::update($user_uid,
-								$app->request->post('name'),
-								$app->request->post('mail'),
-								$app->request->post('login'),
-								$app->request->post('password'),
-								$app->request->post('user_active') == 'on' ? 1 : 0,
-								$app->request->post('user_admin') == 'on' ? 1 : 0);
+                                    $app->request->post('name'),
+                                    $app->request->post('mail'),
+                                    $app->request->post('login'),
+                                    $app->request->post('password'),
+                                    $app->request->post('user_active') == 'on' ? 1 : 0,
+                                    $app->request->post('user_admin') == 'on' ? 1 : 0);
 	
 	if(isset($result['success'])) {
 		$app->flash('success', $result['success']);
@@ -72,13 +72,13 @@ $app->get('/user/add', function () use ($app){
 /* Add user post */
 $app->post('/user/add', function () use ($app) {
 
-    $result = AdminUser::create($app->request->post('name'), 
-							  	$app->request->post('mail'), 
-								$app->request->post('login'), 
-								$app->request->post('password'),
-								$app->request->post('user_active') == 'on' ? 1 : 0,
-								$app->request->post('user_admin') == 'on' ? 1 : 0);
-	
+        $result = AdminUser::create($app->request->post('name'), 
+                                    $app->request->post('mail'), 
+                                    $app->request->post('login'), 
+                                    $app->request->post('password'),
+                                    $app->request->post('user_active') == 'on' ? 1 : 0,
+                                    $app->request->post('user_admin') == 'on' ? 1 : 0);
+
 	if(isset($result['success'])) {
 		$app->flash('success', $result['success']);
 		$app->redirect($app->urlFor('user_list'));
@@ -105,7 +105,7 @@ $app->get('/log', function () {
 /* List platforms */
 $app->get('/platform', function () { 
 
-	$fields = array('Name' => 'name');
+    $fields = array('Name' => 'name');
 
     display('facets_list.php', array('facet' => 'platform', 'title' => 'Platforms', 'facet_uid' => 'platform_uid', 'fields' => $fields, 'items' => AdminFacets::getAllPlatforms()));
 })->name('platform_list');
@@ -113,7 +113,7 @@ $app->get('/platform', function () {
 /* List keywords */
 $app->get('/keyword', function () { 
 
-	$fields = array('Keyword' => 'keyword', 'Source URI' => 'source_uri', 'Source taxonomy' => 'source_taxonomy');
+    $fields = array('Keyword' => 'keyword', 'Source URI' => 'source_uri', 'Source taxonomy' => 'source_taxonomy');
 
     display('facets_list.php', array('facet' => 'keyword', 'title' => 'Keywords', 'facet_uid' => 'keyword_uid', 'fields' => $fields, 'items' => AdminFacets::getAllKeywords()));
 })->name('keyword_list');
@@ -121,7 +121,7 @@ $app->get('/keyword', function () {
 /* List developers */
 $app->get('/developer', function () { 
 
-	$fields = array('Name' => 'name', 'Contact' => 'contact', 'Type' => 'type');
+    $fields = array('Name' => 'name', 'Contact' => 'contact', 'Type' => 'type');
 
     display('facets_list.php', array('facet' => 'developer', 'title' => 'Developers', 'facet_uid' => 'developer_uid', 'fields' => $fields, 'items' => AdminFacets::getAllDevelopers()));
 })->name('developer_list');
@@ -129,7 +129,7 @@ $app->get('/developer', function () {
 /* List tool types */
 $app->get('/tool-type', function () { 
 
-	$fields = array('Tool type' => 'tool_type', 'Source URI' => 'source_uri');
+    $fields = array('Tool type' => 'tool_type', 'Source URI' => 'source_uri');
 
     display('facets_list.php', array('facet' => 'tool-type', 'title' => 'Tool types', 'facet_uid' => 'tool_type_uid', 'fields' => $fields, 'items' => AdminFacets::GetAllToolTypes()));
 })->name('tool_type_list');
@@ -137,7 +137,7 @@ $app->get('/tool-type', function () {
 /* List licenses */
 $app->get('/license', function () { 
 
-	$fields = array('Text' => 'text', 'Type' => 'type');
+    $fields = array('Text' => 'text', 'Type' => 'type');
 
     display('facets_list.php', array('facet' => 'license', 'title' => 'Licenses', 'facet_uid' => 'licence_uid', 'fields' => $fields, 'items' => AdminFacets::getAllLicenses()));
 })->name('license_list');
@@ -145,7 +145,7 @@ $app->get('/license', function () {
 /* List licenses */
 $app->get('/license-type', function () { 
 
-	$fields = array('Type' => 'type');
+    $fields = array('Type' => 'type');
 
     display('facets_list.php', array('facet' => 'license-type', 'title' => 'License types', 'facet_uid' => 'licence_type_uid', 'fields' => $fields, 'items' => AdminFacets::getAllLicenseTypes()));
 })->name('license_type_list');
