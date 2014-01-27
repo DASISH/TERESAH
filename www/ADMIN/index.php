@@ -28,7 +28,7 @@ $app->log->setLevel(\Slim\Log::DEBUG);
 $app->add(new Slim\Middleware\SessionCookie(array('secret' => 'tools_registry_secret')));
 
 #classes
-include 'classes/tool.php';
+include 'classes/admintool.php';
 include 'classes/adminuser.php';
 include 'classes/adminfacets.php';
 include 'classes/statistics.php';

@@ -11,12 +11,12 @@ $app->get('/', function (){
 //								Tool									   //
 /////////////////////////////////////////////////////////////////////////////
 
-$app->get('/tool', function () use ($tool){ 
-    display('tool_list.php', array('tools' => $tool->listAll()));
+$app->get('/tool', function (){ 
+    display('tool_list.php', array('tools' => AdminTool::listAll()));
 });
 
-$app->get('/tool/:shortname', function ($shortname) use ($tool){ 
-    display('forms/tool_edit.php', array('tool' => $tool->getTool($shortname)));
+$app->get('/tool/:shortname', function ($shortname){ 
+    display('forms/tool_edit.php', array('tool' => AdminTool::getTool($shortname)));
 });
 
 /////////////////////////////////////////////////////////////////////////////
@@ -31,11 +31,11 @@ $app->get('/user', function () {
 /* Edit user */
 $app->get('/user/edit/:user_uid', function ($user_uid) use ($app){ 
 
-	$form_address = $app->urlFor('user_edit_post', array('user_uid' => $user_uid));
+    $form_address = $app->urlFor('user_edit_post', array('user_uid' => $user_uid));
 
     display('forms/user_edit.php', array('user' => AdminUser::getUserByID($user_uid), 
-										 'form_address' => $form_address,
-										 'title' => 'Edit user'));
+                                        'form_address' => $form_address,
+                                        'title' => 'Edit user'));
 })->name('user_edit');
 
 /* Edit user post */
@@ -65,8 +65,8 @@ $app->get('/user/add', function () use ($app){
 	$form_address = $app->urlFor('user_add_post');
 
 	display('forms/user_edit.php', array('user' => array(), 
-										 'form_address' => $form_address, 
-										 'title' => 'Add user'));
+                                            'form_address' => $form_address, 
+                                            'title' => 'Add user'));
 })->name('user_add');
 
 /* Add user post */

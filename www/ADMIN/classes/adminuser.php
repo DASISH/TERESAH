@@ -10,7 +10,7 @@ class AdminUser extends User{
 	static function listAll() {
 		
 		$result = array();
-        $query = "SELECT user_uid, name, mail, login, active, admin FROM user ORDER BY login ASC";
+                $query = "SELECT user_uid, name, mail, login, active, admin FROM user ORDER BY login ASC";
 		$req = self::DB()->prepare($query);
 		$req->execute();
 		$users = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -24,7 +24,7 @@ class AdminUser extends User{
 	
 	static function getUserByID($user_uid) {
 		
-        $query = "SELECT user_uid, name, mail, login, active, admin FROM user WHERE user_uid = $user_uid";
+                $query = "SELECT user_uid, name, mail, login, active, admin FROM user WHERE user_uid = $user_uid";
 		$req = self::DB()->prepare($query);
 		$req->execute();
 		$user = $req->fetch(PDO::FETCH_ASSOC);
@@ -36,7 +36,7 @@ class AdminUser extends User{
 	
 	static function getUserByLogin($login) {
 		
-        $query = "SELECT user_uid, name, mail, login, active, admin FROM user WHERE login = $login";
+                $query = "SELECT user_uid, name, mail, login, active, admin FROM user WHERE login = $login";
 		$req = self::DB()->prepare($query);
 		$req->execute();
 		$user = $req->fetch(PDO::FETCH_ASSOC);
@@ -49,7 +49,7 @@ class AdminUser extends User{
 	static function getOpenIDForUser($user_uid) {
 	
 		$result = array();
-        $query = "SELECT provider, external_uid FROM user_oauth WHERE user_uid = $user_uid";
+                $query = "SELECT provider, external_uid FROM user_oauth WHERE user_uid = $user_uid";
 		$req = self::DB()->prepare($query);
 		$req->execute();
 		$openIds = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -111,7 +111,7 @@ class AdminUser extends User{
 	
 	static function activate($user_uid, $action) {
 
-        $query = "UPDATE user SET active = '$action' WHERE user_uid = $user_uid";
+                $query = "UPDATE user SET active = '$action' WHERE user_uid = $user_uid";
 		$req = self::DB()->prepare($query);
 		$req->execute();
 		
