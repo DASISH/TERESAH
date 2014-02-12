@@ -13,7 +13,7 @@
             <th class="sorting_disabled">&nbsp;</th>
             <?php foreach ($fields as $title => $field): ?>
                 <th><?php print $title; ?></th>				
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </tr>
     </thead>
     <tbody>
@@ -22,7 +22,7 @@
             <td><input type="checkbox" value="<?php print $item[$facet_uid]; ?>" name="id[]" /></td>			
             <?php foreach ($fields as $title => $field): ?>
                     <td><a href="<?php print $facet;?>/edit/<?php print $item[$facet_uid]; ?>"><?php print $item[$field]; ?></a></td>
-            <? endforeach; ?>            
+            <?php endforeach; ?>            
         </tr>
         <?php endforeach; ?>
     </tbody>
