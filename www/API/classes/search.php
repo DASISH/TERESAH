@@ -167,7 +167,7 @@
 			} else { 
 				$options["start"] = (int) $get["start"]; 
 			}
-			
+                        			
 			return array($options, $sensitivity);
 		}
 		
@@ -357,6 +357,14 @@
 			$options["results"] = $req->rowCount();
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
 			$options["total"] = self::nbrTotal($totalReq, $paramReq, true);
+                        
+                        #SET TO LABEL
+                        if($options["limit"] + $options["start"] > $options["total"]) {
+                                $options["to"] = $options["total"];
+                        } else {
+                                $options["to"] = $options["limit"] + $options["start"];
+                        }   
+                        
 			$ret = array("response" => array(), "parameters" => $options);
 			
 			#Formating
@@ -381,7 +389,7 @@
 					$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 				}
                         }	
-			
+                        			
 			return $ret;
 		}
 		
