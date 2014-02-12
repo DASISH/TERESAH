@@ -14,10 +14,12 @@
 			$data = Search::general($filtered);
 			if(isset($data["Error"])) {
 				$app->response()->status(400);
-			} else {
+			} else if(!empty($data["response"])){
 				$data["status"] = "success";
 				return jP($data); 
-			}
+			} else {
+                            return jP(array("status" => "error", "message" => "No results found")); 
+                        }
 		}
 		return jP(array("status" => "error", "message" => "No input given")); 
 		

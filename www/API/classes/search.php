@@ -380,7 +380,7 @@
 					}
 					$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 				}
-		}	
+                        }	
 			
 			return $ret;
 		}
