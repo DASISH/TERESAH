@@ -4,6 +4,7 @@
 //Main									   //
 /////////////////////////////////////////////////////////////////////////////
 $app->get('/', function (){ 
+
     display('statistics.php', array('statistics' => Statistics::all()));
 });
 

@@ -12,6 +12,7 @@ require_once "../API/conf/config.php";
 require_once '../API/classes/log.php';
 require_once '../API/classes/user.php';
 require_once '../API/classes/facets.php';
+require_once '../API/classes/helper.php';
 require_once '../common/SQL.PDO.php';
 require_once '../common/Slim/Slim.php';
 require_once '../common/Slim/Middleware.php';
