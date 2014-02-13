@@ -1,6 +1,6 @@
 TERESAH
-DASISH Task 2.3
 =======================
+Developed in DASISH Task 2.3
 
 ### Warning
 This readme is only written for Ubuntu/Debian machine. It has been tested on a VM using Ubuntu 12.10
@@ -30,12 +30,12 @@ In your terminal, do :
 
 	cd ~/
 	mkdir dev
-	git clone https://github.com/PonteIneptique/DASISHT23.git
+	git clone https://github.com/DASISH/TERESAH.git
 	
 Then we need to configure your apache
 
 	cd /etc/apache2/sites-enabled
-	sudo cp ~/dev/DASISHT23/www/API.config ./api
+	sudo cp ~/dev/TERESAH/www/API.config ./api
 	sudo rm 000-default
 	sudo ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
 
@@ -51,7 +51,7 @@ If your server doesn't start and you get an arror about 127.0.1.1 http://ze-soft
 
 In your terminal, follow these steps :
 
-	cd ~/dev/DASISHT23/
+	cd ~/dev/TERESAH/
 	mysql --user=root --password=root < ./DataModel/sql/install.sql 
 	mysql --user=root --password=root < ./DataModel/sql/scheme.sql 
 	
