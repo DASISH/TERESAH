@@ -14,10 +14,12 @@
 			$data = Search::general($filtered);
 			if(isset($data["Error"])) {
 				$app->response()->status(400);
-			} else {
+			} else if(!empty($data["response"])){
 				$data["status"] = "success";
 				return jP($data); 
-			}
+			} else {
+                            return jP(array("status" => "error", "message" => "No results found")); 
+                        }
 		}
 		return jP(array("status" => "error", "message" => "No input given")); 
 		
@@ -44,6 +46,20 @@
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {
+			if(count($data["parameters"]["facets"]) > 0 && isset($filtered["retrieveLabel"])) {
+				//We are dependant on facet now
+				$require->req("facet");
+				
+				foreach($data["parameters"]["facets"] as $fParam => &$val) {
+					$temp = array();
+					//print_r($val);
+					foreach($val["request"] as $t => $label) {
+						//echo $fParam;
+						$temp[$label] = Facets::get($fParam, $label, "ReverseNameOnly");
+					}
+					$data["parameters"]["facets"][$fParam]["request"] = $temp;
+				}
+			}
 			return jP($data); 
 		}
 	});
@@ -61,10 +77,24 @@
 		}
 		
 		$data = Search::faceted($input);
+
 		if(isset($data["Error"])) {
-			return jP($data);
-			//$app->response()->status(400);
+			$app->response()->status(400);
 		} else {
+			if(count($data["parameters"]["facets"]) > 0 && isset($input["retrieveLabel"])) {
+				//We are dependant on facet now
+				$require->req("facet");
+				
+				foreach($data["parameters"]["facets"] as $fParam => &$val) {
+					$temp = array();
+					//print_r($val);
+					foreach($val["request"] as $t => $label) {
+						//echo $fParam;
+						$temp[$label] = Facets::get($fParam, $label, "ReverseNameOnly");
+					}
+					$data["parameters"]["facets"][$fParam]["request"] = $temp;
+				}
+			}
 			return jP($data); 
 		}
 	});

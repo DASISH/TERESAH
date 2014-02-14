@@ -1,19 +1,28 @@
 <?php
 	class Graphic {
+	/**
+	 * Visualisation class
+	 *
+	 *
+	 */
+	 
+		/**
+		 *	Get the DB in a PDO way, can be called through self::DB()->PdoFunctions
+		 * @return PDO php object
+		 */
 		private static function DB() {
 			global $DB;
 			return $DB;
 		}
 		
-		function pimage($MyData) {
-			return new pImage(400,400,$MyData);
-		}
-		
-		function ppie($myPicture,$MyData) {
-			return new pPie($myPicture,$MyData);
-		}
-		
-		function descriptions($mode = "Default") {
+	 
+		/**
+		 *	Draw a picture from the description
+		 *
+		 * @param $mode	Default return a representation of registries in the DB, ByTool returns an amount of description by tool.
+		 * @return PNG image
+		 */
+		static function descriptions($mode = "Default") {
 			###
 			#
 			#	Default : Get descriptions by repository

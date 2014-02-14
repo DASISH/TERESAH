@@ -1,8 +1,16 @@
 <?php
 	class Tool {
 	
-
-	##Getting DB
+	/**
+	 * Tool class
+	 *
+	 *
+	 */
+	 
+		/**
+		 *	Get the DB in a PDO way, can be called through self::DB()->PdoFunctions
+		 * @return PDO php object
+		 */
 	private static function DB() {
 		global $DB;
 		return $DB;
@@ -15,7 +23,16 @@
 	############
 		
 	
-	private function getShorname($str, $replace=array("'"), $delimiter='-') {
+		/**
+		 *	Generate a shortname for a tool
+		 *
+		 * @param $str			Name of the tool
+		 * @param $replace		(Optional) Array of element which should be replaced by $delimiter. Default array("'")
+		 * @param $delimiter	(Optional) Delimiter. Default "-"
+		 *
+		 * @return clean string
+		 */
+	private static function getShorname($str, $replace=array("'"), $delimiter='-') {
 		setlocale(LC_ALL, 'en_US.UTF8');
 		if( !empty($replace) ) {
 			$str = str_replace((array)$replace, ' ', $str);
@@ -34,7 +51,14 @@
 	#		DELETE
 	#
 	#############
-	function delete($toolUID) {
+		/**
+		 *	Delete a tool
+		 *
+		 * @param $toolUID		Numeric identifier of the tool
+		 *
+		 * @return void
+		 */
+	static function delete($toolUID) {
 		$req = "DELETE FROM tool WHERE tool_uid = ? LIMIT 1";
 		$req = self::DB()->prepare($req);
 		$req->execute(array($toolUID));
@@ -48,9 +72,14 @@
 	###########
 	
 		
-
-		
-		function insert($data) {
+		/**
+		 *Insert a tool
+		 *
+		 * @param string $data["name"]		Name of the tool
+		 *
+		 * @return array Status message with uid and shortname of the new tool
+		 */
+		static function insert($data) {
 			if(!isset($data["name"])) {
 				return array("Error" => "The tool couldn't be save because no name was given", "fieldsError" => "name");
 			}
@@ -69,7 +98,16 @@
 			
 		}
 		
-		function linkFacets($data) {
+		/**
+		 *Insert a tool
+		 *
+		 * @param string $data["facet"]		String identifier of the facet
+		 * @param string $data["element"]	Numeric identifier of a label
+		 * @param string $data["tool"]		Numeric identifier of a tool
+		 *
+		 * @return array Status message 
+		 */
+		static function linkFacets($data) {
 			if(!isset($data["facet"]) && !isset($data["element"]) && !isset($data["tool"])) {
 				return array("status" => "error", "message" => "One facet couldn't be save. Missing data");
 			}
@@ -99,7 +137,31 @@
 
 
 		
-		function get($ref, $options) {
+		
+		/**
+		 * Get  a tool
+		 *
+		 *	Available facets :
+		 *		- keyword
+		 *		- type
+		 *		- platform
+		 *		- developer
+		 *		- projects
+		 *		- suite
+		 *		- standards
+		 *		- video
+		 *		- features
+		 *		- publications
+		 *		- licence
+		 *		- applicationType
+		 *
+		 * @param string $ref				String or numeric identifier of the tool
+		 * @param string $options			Facets to show :
+		 *
+		 *
+		 * @return array Status message 
+		 */
+		static function get($ref, $options) {
 			#Setting request, following $ref is the id or the shortname
 			if(is_numeric($ref)) {
 				$req = "SELECT tool_uid as tool_id, shortname as tool_shortname FROM tool WHERE tool_uid = ? LIMIT 1";

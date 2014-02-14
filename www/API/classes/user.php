@@ -1,11 +1,28 @@
 <?php
 	class User {
+	/**
+	 * User class
+	 *
+	 *
+	 */
+	 
+		/**
+		 *	Get the DB in a PDO way, can be called through self::DB()->PdoFunctions
+		 * @return PDO php object
+		 */
 		private static function DB() {
 			global $DB;
 			return $DB;
 		}
 		
-		function login($post) {
+		/**
+		 *	Log a user in
+		 *
+		 * @param $post["password"]		Password User
+		 * @param $post["user"]			User identifier
+		 * @return Status
+		 */
+		static function login($post) {
 			$pw = hash('sha256', $post["password"]);
 			try {
 				$req = self::DB()->prepare("SELECT name as Name, mail as Mail, user_uid as UID FROM user WHERE login = ? AND password = ?");
@@ -21,7 +38,17 @@
 			}
 
 		}
-		function signup($post, $id = false) {
+		
+		/**
+		 *	Sign a user up
+		 *
+		 * @param $post["password"]		User's Password
+		 * @param $post["user"]			User's Identifier
+		 * @param $post["mail"]			User's mail
+		 * @param $post["name"]			User's name
+		 * @return Status
+		 */
+		static function signup($post, $id = false) {
 			if(isset($post["mail"]) && isset($post["password"]) && isset($post["name"]) && isset($post["user"])) {
 				$req = "INSERT INTO user (`user_uid`,`name`,`mail`,`login`,`password`,`active`,`admin`) VALUES (NULL, ?, ? , ? , ?, NULL, NULL )";
 				$req = self::DB()->prepare($req);
@@ -43,7 +70,15 @@
 			}
 		}
 		
-		function oAuthLogin($data, $provider) {
+		/**
+		 *	Sign a user in using oAuth. Sign up the user if he doesnt exist.
+		 *
+		 * @param $provider				Provider Identifier
+		 * @param $post["email"]		User's mail
+		 * @param $post["name"]			User's name
+		 * @return Status and User's Data
+		 */
+		static function oAuthLogin($data, $provider) {
 			//uid
 			$data = (array) $data;
 			if(!isset($data["name"])) {
@@ -73,7 +108,15 @@
 			}
 		}
 		
-		function oAuth2($GET, $server, $return = false) {
+		/**
+		 *	oAuth2 functionalities
+		 *
+		 *	https://github.com/php-loep/oauth2-client
+		 * 
+		 *	@param $server	Server name 
+		 *	@return array 
+		 */
+		static function oAuth2($GET, $server, $return = false) {
 			switch($server) {
 				case "facebook":
 					$provider = new League\OAuth2\Client\Provider\Facebook(array(
@@ -143,7 +186,15 @@
 				}
 			}
 		}
-		function oAuth1($GET, $prov, $return = false) {
+		/**
+		 *	oAuth1 functionalities
+		 *
+		 *	https://github.com/php-loep/oauth1-client
+		 * 
+		 *	@param $server	Server name 
+		 *	@return array 
+		 */
+		static function oAuth1($GET, $prov, $return = false) {
 			switch($prov) {
 				case "twitter":
 					

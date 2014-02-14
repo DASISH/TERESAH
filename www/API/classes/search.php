@@ -1,10 +1,48 @@
 <?php
 	class Search {
+	/**
+	 * Handles all research functionalities
+	 *
+	 *
+	 */
+	 
+		/**
+		 *	From a prepare PDO MySQL string and an array of data, output a correct / normalized MySQL query
+		 *
+		 * @param $string		MySQL PDO Prepare string which would be used like self::DB()->prepare($string)
+		 * @param $data			MySQL input for req PDO command 
+		 * @return MySQL request string
+		 */
+		private static function debug($string, $data) {
+			
+			$indexed=$data==array_values($data);
+			foreach($data as $k=>$v) {
+				if(is_string($v)) $v="'$v'";
+				if($indexed) $string=preg_replace('/\?/',$v,$string,1);
+				else $string=str_replace(":$k",$v,$string);
+			}
+			return $string;
+		}
+	 
+		/**
+		 *	Get the DB in a PDO way, can be called through self::DB()->PdoFunctions
+		 * @return PDO php object
+		 */
 		private static function DB() {
 			global $DB;
 			return $DB;
 		}
-		function nbrTotal($req = "FROM tool USE INDEX(PRIMARY)", $params = array(), $rowCount = false) {
+		
+		/**
+		 *	Return amount of item which could be returned by given request
+		 *
+		 * @param $req			MySQL Request, shouldn't include "SELECT". Default on tool table
+		 * @param $params		MySQL input for req PDO command 
+		 * @param $rowCount		Use MySQL PDO rowcount function instead of COUNT(*) MYSQL parameter
+		 *
+		 * @return (int) Number of item affected by given request
+		 */
+		static function nbrTotal($req = "FROM tool USE INDEX(PRIMARY)", $params = array(), $rowCount = false) {
 			$req = self::DB()->prepare("SELECT COUNT(*) as cnt ".$req);
 			$req->execute($params);
 			if($rowCount) {
@@ -15,7 +53,27 @@
 			}
 		}
 		
-		private function options($get, $queryNeeded = False) {
+		
+		/**
+		 *	Format and check for options
+		 *
+		 *	Available and used options :
+		 *		- request : plain text research
+		 *		- case_insensitivity : plain text is case insensible if set to false or unset (default)
+		 *		- limit : limit of items returned by functions. Up limit is 50
+		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- orderBy : MySQL order by title or identifier (default)
+		 *		- description : if set to true, returns descriptions in results
+		 *		- descriptionSize : size of the description chunk (default : 140)
+		 *		- limited : limits a normal search to title, description or keyword 
+		 *		- start : item to start from in a MySQL query
+		 *
+		 * @param $get				Params given through POST or GET
+		 * @param $queryNeeded		If set to true, the given function needs a request parameter at the top of this submited array data. Would send back a status error
+		 *
+		 * @return (array) options with normalized or default values, (case) sensitivity SQL option to insert in a sql request
+		 */
+		private static function options($get, $queryNeeded = False) {
 			$options = array();
 			
 			#Query
@@ -109,12 +167,27 @@
 			} else { 
 				$options["start"] = (int) $get["start"]; 
 			}
-			
+                        			
 			return array($options, $sensitivity);
 		}
 		
-		#Returns all tools
-		function all($get) {
+		/**
+		 *	Format and check for options
+		 *
+		 *	Available and used options :
+		 *		- limit : limit of items returned by functions. Up limit is 50
+		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- description : if set to true, returns descriptions in results
+		 *		- descriptionSize : size of the description chunk (default : 140)
+		 *		- start : item to start from in a MySQL query
+		 *		- orderBy : MySQL order by title or identifier (default)
+		 *
+		 * @param $get	Params given through POST or GET
+		 *
+		 * @return (array) Returns an array of arrays with informations on descriptions
+		 *			array("title", "description" => array("text", "provider"), "identifiers" => array("id", "shortname"), "applicationType");
+		 */
+		static function all($get) {
 			#####
 			#
 			#
@@ -179,7 +252,27 @@
 			// $ret["parameters"]["total"] = self::nbrTotal();
 			return $ret;
 		}
-		function general($get) {
+		
+		/**
+		 *	Plain text / general search
+		 *
+		 *	Available and used options :
+		 *		- (required) request : plain text research
+		 *		- case_insensitivity : plain text is case insensible if set to false or unset (default)
+		 *		- limit : limit of items returned by functions. Up limit is 50
+		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- description : if set to true, returns descriptions in results
+		 *		- descriptionSize : size of the description chunk (default : 140)
+		 *		- limited : limits a normal search to title, description or keyword 
+		 *		- start : item to start from in a MySQL query
+		 *		- orderBy : MySQL order by title or identifier (default)
+		 *
+		 * @param $get				Params given through POST or GET
+		 *
+		 * @return (array) Returns an array of arrays with informations on descriptions
+		 *			array("title", "description" => array("text", "provider"), "identifiers" => array("id", "shortname"), "applicationType");
+		 */
+		static function general($get) {
 			#####
 			#
 			#
@@ -264,6 +357,14 @@
 			$options["results"] = $req->rowCount();
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
 			$options["total"] = self::nbrTotal($totalReq, $paramReq, true);
+                        
+                        #SET TO LABEL
+                        if($options["limit"] + $options["start"] > $options["total"]) {
+                                $options["to"] = $options["total"];
+                        } else {
+                                $options["to"] = $options["limit"] + $options["start"];
+                        }   
+                        
 			$ret = array("response" => array(), "parameters" => $options);
 			
 			#Formating
@@ -287,33 +388,32 @@
 					}
 					$ret["response"][] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 				}
-		}	
-			
+                        }	
+                        			
 			return $ret;
 		}
-		function fieldContent($fieldType,$get) {
-			##########
-			#
-			#	fieldtype : 
-			#		*	Suite
-			#		*	Feature
-			#		*	Platform
-			#		*	Keyword
-			#		*	Project
-			#		*	Standard
-			#		*	Publication
-			#		*	Developer
-			#		*	ApplicationType
-			#		*	ToolType
-			#		*	Organization
-			#		*	LicenceType
-			#		*	Licence
-			#
-			##########
+		
+		/**
+		 *	Plain text / general search for labels (Facet content)
+		 *
+		 *	Available and used options :
+		 *		- (required) request : plain text research
+		 *		- case_insensitivity : plain text is case insensible if set to false or unset (default)
+		 *		- limit : limit of items returned by functions. Up limit is 50
+		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- start : item to start from in a MySQL query
+		 *
+		 * @param $fieldType		Facet string identifier
+		 * @param $get				Params given through POST or GET
+		 *
+		 * @return (array) Returns an array of arrays with informations
+		 *			array("facets", "params");
+		 */
+		static function fieldContent($fieldType,$get) {
 			$dictionnaryApplicationType = array(	
 				"localDesktop" => "Desktop application",
 				"other" => "Other",
-				"unknown" => "Unkown",
+				"unknown" => "Unknown",
 				"webApplication" => "Web Application",
 				"webService" => "Web service"
 			);
@@ -384,7 +484,33 @@
 				return array("facets" => $facets, "params" => $options);
 			}
 		}
-		function faceted($get) {
+		
+		/**
+		 *	Faceted search function
+		 *
+		 *
+		 *	More details on the structure of request can be found at API/faq. Else :
+		 *				facets = array(
+		 *					"TableShortcut" (self::dict) => array(
+		 *						"request" => array(numeric identifier of label 1, numeric identifier of label 2),
+		 *						"optionnal" => if set, AND or OR given facet
+		 *						"mode" => if set, AND or OR given values
+		 *				),
+		 *
+		 *
+		 *	Available and used options :
+		 *		- limit : limit of items returned by functions. Up limit is 50
+		 *		- order : MySQL order (DESC or ASC by default)
+		 *		- orderBy : MySQL order by title or identifier (default)
+		 *		- limited : limits a normal search to title, description or keyword 
+		 *		- start : item to start from in a MySQL query
+		 
+		 * @param $get	Params given through POST or GET
+		 *
+		 * @return (array) Returns an array of arrays with informations on descriptions
+		 *			array("title", "description" => array("text", "provider"), "identifiers" => array("id", "shortname"), "applicationType");
+		 */
+		static function faceted($get) {
 			###########################
 			#
 			#	FACETED RESEARCH FUNCTION
@@ -402,6 +528,7 @@
 			#
 			############################
 			
+			$realParams = array();
 			#Get Options
 			$opt = self::options($get);
 			$options = $opt[0];
@@ -415,6 +542,7 @@
 				foreach($get["facets"] as $key => $o) {
 					#We check that there is more than one option into the said facet array
 					if(is_array($o) && array_key_exists("request", $o) && is_array($o["request"]) && count($o["request"]) > 0) {
+						$realParams[$key] = array("request" => $o["request"]);
 						$dic = Helper::table($key);
 						if(array_key_exists("Error", $dic)) {
 							return $dic;
@@ -441,17 +569,31 @@
 						} else {
 							if(isset($o["optional"])) {
 								$joinText = "LEFT OUTER JOIN";
+								$realParams[$key]["optional"] = true;
 							} else {
 								$joinText = "INNER JOIN";
 							}
 							#This where clause is equal to a = $ OR = $
 							if(isset($o["mode"]) && $o["mode"] == "OR")	{
-							
-								#We add this join request to our join array
-								$joins[] =  " ".$joinText." ".$dic["link"]["table"]." ON t.UID = ".$dic["link"]["name"].".".$dic["link"]["tool"] . " ";
-								
-								#We add this join request to our WHERE array
-								$where[] = " ".$dic["link"]["name"].".".$dic["link"]["item"]." IN (".$inQuery.") ";
+								$realParams[$key]["mode"] = "OR";
+								if($dic["table"]["name"] != "licence_type") {
+									#We add this join request to our join array
+									$joins[] =  " ".$joinText." ".$dic["link"]["name"]." ON t.tool_uid = ".$dic["link"]["name"].".".$dic["link"]["tool"] . " ";
+									
+									#We add this join request to our WHERE array
+									$where[] = " ".$dic["link"]["name"].".".$dic["link"]["item"]." IN (".$inQuery.") ";
+								} else {
+									#We add this join request to our join array
+									
+									$joins[]  = " ".$joinText." ( 
+													SELECT tool_has_licence.tool_uid 
+													FROM licence, tool_has_licence 
+													WHERE licence.licence_type_uid IN (".$inQuery.") 
+													GROUP BY tool_has_licence.tool_uid 
+												) licence ON licence.tool_uid = t.tool_uid 
+									
+									";
+								}
 								
 								#For each value we add it to our exec end array which will be added to exec array (used in ->execute(array()))
 								#We do so because WHERE normal parameters are at the end of the request
@@ -459,18 +601,33 @@
 									$execEnd[]  = $id;
 								}
 							} else {
-							#This where clause is equal to Tool has all of this kind of facets
-							$joins[] = " ".$joinText."
-										(
-											SELECT  ".$dic["link"]["tool"] . "
-											FROM    ".$dic["link"]["name"]."
-											WHERE   ".$dic["link"]["item"]." IN (".$inQuery.")
-											GROUP   BY ".$dic["link"]["tool"] . "
-											HAVING  COUNT(DISTINCT ".$dic["link"]["item"].") = ".$i."
-										) ".$dic["link"]["name"]." ON ".$dic["link"]["name"].".".$dic["link"]["tool"] . " = t.tool_uid";
-								#For each value we add it to our exec array which will be used in ->execute(array())
-								foreach($val as $id) {
-									$exec[]  = $id;
+								if($dic["table"]["name"] == "licence_type") {
+									$joins[]  = " ".$joinText." ( 
+													SELECT tool_has_licence.tool_uid 
+													FROM licence, tool_has_licence 
+													WHERE licence.licence_type_uid IN (".$inQuery.") 
+													GROUP BY tool_has_licence.tool_uid 
+													HAVING COUNT(DISTINCT licence_type_uid) = ".$i."
+												) licence ON licence.tool_uid = t.tool_uid 
+									
+									";
+										foreach($val as $id) {
+											$exec[]  = $id;
+										}
+								} else {
+									#This where clause is equal to Tool has all of this kind of facets
+									$joins[] = " ".$joinText."
+												(
+													SELECT  ".$dic["link"]["tool"] . "
+													FROM    ".$dic["link"]["name"]."
+													WHERE   ".$dic["link"]["item"]." IN (".$inQuery.")
+													GROUP   BY ".$dic["link"]["tool"] . "
+													HAVING  COUNT(DISTINCT ".$dic["link"]["item"].") = ".$i."
+												) ".$dic["link"]["name"]." ON ".$dic["link"]["name"].".".$dic["link"]["tool"] . " = t.tool_uid";
+										#For each value we add it to our exec array which will be used in ->execute(array())
+										foreach($val as $id) {
+											$exec[]  = $id;
+										}
 								}
 							}
 						}
@@ -521,11 +678,11 @@
 			#Generate the order system for the request
 			switch($options["orderBy"]) {
 				case "identifier":
-					$ordering = "t.tool_uid";
+					$ordering = "t.tool_uid ";
 					break;
 				case "title":
 				default:
-					$ordering = "d.title";
+					$ordering = "d.title  COLLATE utf8_general_ci";
 					break;
 			}
 			#We write the request
@@ -537,10 +694,11 @@
 					GROUP BY d.tool_uid ";
 			$req .=	" ORDER BY ".$ordering." ".$options["order"]." ";
 			$req .=	" LIMIT ".$options["start"]." , ".$options["limit"];
-					// print($req);
-					// print_r($exec);
-			#print($req);
+			
 			#We execute it
+			//self::debug($req, $exec);
+			
+			$debug = self::debug($req, $exec);
 			$req = self::DB()->prepare($req);
 			$req->execute($exec);
 			
@@ -551,9 +709,14 @@
 			#We fetch the data
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
 			
+			//Unset unavailable options
+			unset($options["request"], $options["case_insentivity"], $options["description"], $options["descriptionSize"]);
 			
 			#We create our own return array
 			$ret = array("response" => array(), "parameters" => $options);
+			if(isset($realParams)) {
+				$ret["parameters"]["facets"] = $realParams;
+			}
 			#For each answer we format it
 			foreach($data as &$answer) {
 				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
@@ -561,8 +724,9 @@
 			#We return
 			$ret["parameters"]["total"] = self::nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
 			
-			$ret["parameters"]["url"] = urldecode(http_build_query($get));
+			$ret["parameters"]["url"] = urldecode(http_build_query(array("facets" => $realParams, "orderBy" => $options["orderBy"], "order" => $options["order"])));
 			
+			$ret["debug"] = preg_replace('/\s+/', ' ', $debug);
 			return $ret;
 		}
 		

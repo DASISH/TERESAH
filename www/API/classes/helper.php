@@ -1,6 +1,17 @@
 <?php
 	class Helper {
-		function table($k) {
+	/**
+	 * Helper class which can be used by any other class.
+	 *
+	 *
+	 */
+		/**
+		 *	Returns an array of sql information about a facets 
+		 *
+		 * @param $k	Facet string identifier
+		 * @return array with table name and link table inside || status message
+		 */
+		static function table($k) {
 			$dict = array(
 				#option value	=> Table Name, Text field (if many = array with [0] as title for it), PKey, Table for join (false if not), fields for joint (tool,item)
 				"Suite" => array("suite", "name", "suite_uid", "tool_has_suite", array("tool_uid", "suite_uid")),
@@ -34,7 +45,15 @@
 				return array("status" => "error", "message" => "Unknown ".$k." facet");
 			}
 		}
-		function facet($facet = false, $facetTable = false) {
+		
+		/**
+		 *	Returns (optionally the MySQL table,) the param string and the legend for a facet or for each facets
+		 *
+		 * @param $facet 		(optional) Name of the facet for which we seek an information
+		 * @param $facetTable 	(optional) Return a facetTable
+		 * @return array(). If facetEnum is not false, it means that this facet is a MySQL ENUM
+		 */
+		static function facet($facet = false, $facetTable = false) {
 			$dict = array(
 				#option value	=> Table Name, Legend
 				"Suite" => array("suite", "Suite"),
