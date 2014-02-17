@@ -34,6 +34,8 @@ var Search = portal.controller('SearchCtrl', ['$scope', 'ui',  'Item', 'Restangu
 					$scope.ui.status.status = "success";
 				} else {
 					$scope.ui.status = data;
+                                        $scope.results = '';
+                                        $scope.ui.params.total = 0;
 				}
 			});
 		},
