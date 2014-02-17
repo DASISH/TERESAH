@@ -15,4 +15,7 @@
 
 /crawling/SQL/tests
 
+/www/UI/API
+/www/UI/ADMIN
+
 *.pyc
