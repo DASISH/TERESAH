@@ -13,8 +13,12 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 			select : function(item) {
 				$location.path('/tool/'+item.identifiers.shortname)
 			},
-			go : function() {
-				$location.path('/search/general/?case_insensitivity=1&limited=title&request='+item.identifiers.shortname)
+			go : function(item) {
+                            if(item == undefined){
+                                window.location.href = '#/search/general?case_insensitivity=1&limited=title&request='+$scope.ui.search.input;
+                            }else{
+                                $location.path('/search/general?case_insensitivity=1&limited=title&request='+item.identifiers.shortname);
+                            }
 			}
 		},
 		routes : {
