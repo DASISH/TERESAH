@@ -213,6 +213,8 @@
 					<dd ng-repeat="os in item.platform" ng-bind="os"></dd>
 				<dt ng-show="item.developers">Developer(s)</dt>
 					<dd ng-repeat="developer in item.developers" ng-bind="developer.name"></dd>
+                                <dt ng-show="item.similar">Similar</dt>
+                                        <dd ng-repeat="similar in item.similar" ng-bind="similar.shortname"></dd>        
 			</dl>
 			<section ng-show="ui.quickLinking.show" class="form-horizontal" role="form">
 				<div class="form-group">

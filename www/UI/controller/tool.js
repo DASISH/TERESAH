@@ -181,6 +181,13 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', '$rootScope',
 				show : false
 			}
 		},
+                similar : {
+			show : true,
+			filter : {
+				input : null,
+				show : false
+			}
+		},
 		projects : {
 			show : true,
 			filter : {
