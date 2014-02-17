@@ -3,7 +3,7 @@ var Search = portal.controller('SearchCtrl', ['$scope', 'ui',  'Item', 'Restangu
 	$scope.ui = {
 		params : {
 			request : null,
-			case_insensitivity : false,
+			case_insensitivity : true,
 			description : false,
 			orderBy : "title",
 			order : "ASC",
