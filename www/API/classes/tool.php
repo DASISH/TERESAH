@@ -181,7 +181,11 @@
 							"descriptions" => Description::get($data["tool_id"], true),
 							"parameters" => $options
 						);
-						
+				if(isset($options["similar"])) {
+					$ret["similar"] = Tool::similar($data["tool_id"]);
+					if(!$ret["similar"]) { unset($ret["similar"]); }
+				}
+                                
 				if(isset($options["keyword"])) {
 					$ret["keyword"] = Facets::get("Keyword", $data["tool_id"]);
 					if(!$ret["keyword"]) { unset($ret["keyword"]); }
@@ -246,5 +250,23 @@
 			return $ret;
 			
 		}
+                
+                static function similar($ref){
+                    $query = "SELECT distinct tool_has_keyword.tool_uid, tool.shortname, count(*) as matches
+                                FROM tool_has_keyword
+                                INNER JOIN tool ON tool.tool_uid = tool_has_keyword.tool_uid
+                                WHERE tool_has_keyword.keyword_uid IN (
+                                        SELECT tool_has_keyword.keyword_uid FROM tool_has_keyword 
+                                        INNER JOIN keyword ON tool_has_keyword.keyword_uid = keyword.keyword_uid
+                                    WHERE keyword.source_taxonomy NOT IN ('cost' , 'status', 'price', 'availability', 'costbracket')
+                                        AND tool_uid = :id
+                                ) 
+                                AND tool_has_keyword.tool_uid != :id
+                                GROUP BY tool_has_keyword.tool_uid
+                                ORDER BY matches desc, tool_has_keyword.tool_uid desc LIMIT 10";
+                    $req = self::DB()->prepare($query);
+                    $req->execute(array(':id'=>$ref));
+                    return $req->fetchAll(PDO::FETCH_ASSOC);
+                }
 	}
 ?>
