@@ -872,7 +872,7 @@ class Facets {
 		$ret = false;
 		
 		if($mode == "ReverseNameOnly") {
-			$req = "SELECT t.tool_type_uid AS identifier, t.tool_type as name FROM tool_type t WHERE t.tool_type_uid = ? LIMIT 1";	
+			$req = "SELECT t.tool_type_uid AS identifier, t.tool_type as name FROM tool_type t WHERE t.tool_type_uid = ? LIMIT 1 GROUP BY t.tool_type_uid";	
 			
 		} elseif($mode == "Reverse") {
 		
@@ -881,7 +881,7 @@ class Facets {
 		} else {
 		
 			#In default mode, $id is an int
-			$req = "SELECT t.tool_type_uid AS identifier, t.tool_type as type, t.source_uri as uri FROM tool_type t, tool_has_tool_type tt WHERE tt.tool_type_uid = t.tool_type_uid AND tt.tool_uid = ?";
+			$req = "SELECT t.tool_type_uid AS identifier, t.tool_type as type, t.source_uri as uri FROM tool_type t, tool_has_tool_type tt WHERE tt.tool_type_uid = t.tool_type_uid AND tt.tool_uid = ? GROUP BY t.tool_type_uid";
 		
 		}
 			$req = self::DB()->prepare($req);
