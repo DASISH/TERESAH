@@ -48,7 +48,7 @@
 						<a class="btn" ng-repeat="prov in item.keyword | kTaxonomies" ng-click="ui.keywords.taxonomy.selected = prov" ng-class="{'btn-primary': (ui.keywords.taxonomy.selected == prov), 'btn-success' : (ui.keywords.taxonomy.selected != prov)}" ng-bind="prov" style="text-transform:capitalize;"></a>
 					</div>
 					<ul  class="list-inline" style="margin-top:10px;" ng-show="ui.keywords.show">
-                                            <li ng-repeat="kw in item.keyword |filter:{provider.domain : ui.keywords.provider.selected, provider.taxonomy : ui.keywords.taxonomy.selected}"  class="badge" style="margin-right:10px; margin-bottom:5px; text-transform:capitalize;"  ><a style="color:#FFF;" ng-href="#/search/faceted?facets[Keyword][request][0]={{kw.identifier}}&orderBy=title&order=ASC" ng-bind="kw.keyword"></a></li>
+                                            <li ng-repeat="kw in item.keyword |filter:{provider.domain : ui.keywords.provider.selected, provider.taxonomy : ui.keywords.taxonomy.selected}"  class="badge" style="margin-right:10px; margin-bottom:5px; text-transform:capitalize;"  ><a style="color:#FFF;" ng-href="#/facet/Keyword/{{kw.identifier}}" ng-bind="kw.keyword"></a></li>
 					</ul>
 					<hr />
 				</section>
@@ -198,7 +198,7 @@
 			<h2>Details</h2>
 			<dl ng-show="!ui.quickLinking.show">
 				<dt ng-show="item.type">Tool Type</dt>
-					<dd ng-repeat="type in item.type" legend="{{type.uri}}"><a ng-href="#/search/faceted?facets[ToolType][request][0]={{type.identifier}}&orderBy=title&order=ASC" ng-bind="type.type"></a></dd>
+					<dd ng-repeat="type in item.type" legend="{{type.uri}}"><a ng-href="#/facet/ToolType/{{type.identifier}}" ng-bind="type.type"></a></dd>
 				<dt ng-show="item.licence">Licence</dt>
 					<dd ng-repeat="licence in item.licence" ng-bind="licence.name"></dd>
 				<dt ng-show="item.licence">Licence Type</dt>
@@ -212,7 +212,7 @@
 				<dt ng-show="item.platform">Platform(s)</dt>
 					<dd ng-repeat="os in item.platform" ng-bind="os"></dd>
 				<dt ng-show="item.developers">Developer(s)</dt>
-                                <dd ng-repeat="developer in item.developers"><a ng-href="#/search/faceted?facets[Developer][request][0]={{developer.identifier}}&orderBy=title&order=ASC" ng-bind="developer.name"></a></dd>
+                                <dd ng-repeat="developer in item.developers"><a ng-href="#/facet/Developer/{{developer.identifier}}" ng-bind="developer.name"></a></dd>
                                 <dt ng-show="item.similar">Similar tools</dt>
                                         <dd ng-repeat="similar in item.similar"><a ng-href="#/tool/{{similar.shortname}}" ng-bind="similar.title"></dd>        
 			</dl>
