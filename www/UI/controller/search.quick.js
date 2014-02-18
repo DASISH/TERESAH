@@ -3,7 +3,7 @@ var Search = portal.controller('SearchCtrl', ['$scope', 'ui',  'Item', 'Restangu
 	$scope.ui = {
 		params : {
 			request : null,
-			case_insensitivity : true,
+			case_sensitivity : false,
 			description : false,
 			orderBy : "title",
 			order : "ASC",
@@ -22,7 +22,10 @@ var Search = portal.controller('SearchCtrl', ['$scope', 'ui',  'Item', 'Restangu
 			}
 		},
 		search : function(start) {
-			if(!(start)) { 
+                        //set param for case insensitivity
+                        $scope.ui.params.case_insensitivity = !$scope.ui.params.case_sensitivity;
+			
+                        if(!(start)) { 
 				$scope.ui.params.start = 0;
 			} else {
 				$scope.ui.params.start = start;

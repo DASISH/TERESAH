@@ -876,7 +876,7 @@ class Facets {
 			
 		} elseif($mode == "Reverse") {
 		
-			$req = "SELECT t.tool_type_uid AS identifier, t.tool_type as name, t.source_uri as uri FROM tool_type t WHERE t.tool_type_uid = ? LIMIT 1";			
+			$req = "SELECT t.tool_type as name, t.source_uri as uri FROM tool_type t WHERE t.tool_type_uid = ? LIMIT 1";			
 		
 		} else {
 		
