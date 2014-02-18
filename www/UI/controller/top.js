@@ -4,7 +4,9 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 			typeahead : function(str) {
 				var defer = $q.defer();
 				$item.resolver.search.normal({request : str, limit : 10, case_insensitivity : true, limited: "title"}, function(data) {
-					defer.resolve(data.response);
+                                    if(data.response != undefined){
+                                        defer.resolve(data.response);
+                                    }
 				});
 				return defer.promise;
 			},

@@ -252,9 +252,10 @@
 		}
                 
                 static function similar($ref){
-                    $query = "SELECT distinct tool_has_keyword.tool_uid, tool.shortname, count(*) as matches
+                    $query = "SELECT DISTINCT tool_has_keyword.tool_uid, tool.shortname, description.title, count(*) AS matches
                                 FROM tool_has_keyword
                                 INNER JOIN tool ON tool.tool_uid = tool_has_keyword.tool_uid
+                                LEFT JOIN description ON description.tool_uid = tool.tool_uid
                                 WHERE tool_has_keyword.keyword_uid IN (
                                         SELECT tool_has_keyword.keyword_uid FROM tool_has_keyword 
                                         INNER JOIN keyword ON tool_has_keyword.keyword_uid = keyword.keyword_uid
@@ -263,7 +264,8 @@
                                 ) 
                                 AND tool_has_keyword.tool_uid != :id
                                 GROUP BY tool_has_keyword.tool_uid
-                                ORDER BY matches desc, tool_has_keyword.tool_uid desc LIMIT 10";
+                                ORDER BY matches desc, tool_has_keyword.tool_uid DESC
+                                LIMIT 5";
                     $req = self::DB()->prepare($query);
                     $req->execute(array(':id'=>$ref));
                     return $req->fetchAll(PDO::FETCH_ASSOC);
