@@ -2,9 +2,9 @@
 	<div class="page-header">
 		<div class="pull-right">
 			<div class="btn-group btn-group-sm">
-				<a class="btn btn-sm btn-default" ng-click="ui.page = 'Details'" ng-class="{'btn-primary': (ui.page == 'Details')}">Details</a>
-				<a class="btn btn-sm btn-default" ng-href="#/link/{{item.identifier.id}}" ng-show="ui.user.data.signedin">Add a label</a>
-				<a class="btn btn-sm btn-default" ng-click="ui.page = 'Forum&Comments'" ng-class="{'btn-primary': (ui.page == 'Forum&Comments')}">Forum</a>
+				<a class="btn btn-sm btn-default" ng-click="ui.page = 'Details'" ng-class="{'btn-primary': (ui.page == 'Details')}">{{ 'details' | translate }}</a>
+				<a class="btn btn-sm btn-default" ng-href="#/link/{{item.identifier.id}}" ng-show="ui.user.data.signedin">{{ 'add a label' | translate }}</a>
+				<a class="btn btn-sm btn-default" ng-click="ui.page = 'Forum&Comments'" ng-class="{'btn-primary': (ui.page == 'Forum&Comments')}">{{ 'forum' | translate }}</a>
 			</div>
 		</div>
 		<h1 ng-bind="item.descriptions.title"></h1>
@@ -24,7 +24,7 @@
 			</section>
 			<div class="col-lg-12">
 				<section id="keywords"  ng-show="item.keyword[0] && !(ui.sections.list['Keywords'])">
-					<h2>Keywords
+					<h2>{{ 'keywords' | translate }}
 						<div class="pull-right">
 							<span class="btn btn-default" ng-click="ui.sections.toggle('Keywords')"><span class="glyphicon glyphicon-eye-close"></span></span>
 							<span class="dropdown">
@@ -32,8 +32,8 @@
 									<span class="glyphicon glyphicon-cog"></span>
 								</span>
 								<ul class="dropdown-menu">
-									<li><a ng-click="ui.keywords.provider.show = !ui.keywords.provider.show">Providers</a></li>
-									<li><a ng-click="ui.keywords.taxonomy.show = !ui.keywords.taxonomy.show">Taxonomies</a></li>
+									<li><a ng-click="ui.keywords.provider.show = !ui.keywords.provider.show">{{ 'providers' | translate }}</a></li>
+									<li><a ng-click="ui.keywords.taxonomy.show = !ui.keywords.taxonomy.show">{{ 'taxonomies' | translate }}</a></li>
 									<li><a ng-click="ui.keywords.show = !ui.keywords.show">Hide/Show</a></li>
 								</ul>
 							</span>
@@ -195,7 +195,7 @@
 			<div class="pull-right" ng-show="ui.user.data.signedin">
 				<a class="btn btn-default" ng-class="{'btn-primary' : ui.quickLinking.show}" ng-click="ui.quickLinking.get()"><span class="glyphicon glyphicon-link"></span></a>
 			</div>
-			<h2>Details</h2>
+			<h2>{{ 'details' | translate }}</h2>
 			<dl ng-show="!ui.quickLinking.show">
 				<dt ng-show="item.type">Tool Type</dt>
 					<dd ng-repeat="type in item.type" legend="{{type.uri}}"><a ng-href="#/facet/ToolType/{{type.identifier}}" ng-bind="type.type"></a></dd>

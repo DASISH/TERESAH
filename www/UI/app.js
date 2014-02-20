@@ -1,4 +1,4 @@
-var portal = angular.module('toolRegistry', ['ui.bootstrap', 'restangular', 'ngCookies', 'ngSanitize']);
+var portal = angular.module('toolRegistry', ['ui.bootstrap', 'restangular', 'ngCookies', 'ngSanitize', 'pascalprecht.translate']);
 portal.
 	config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
@@ -33,3 +33,9 @@ portal.config(function(RestangularProvider) {
 		return newResponse;
 	});
 });
+
+portal.config(['$translateProvider', function ($translateProvider) {
+    $translateProvider.translations('en', i18n_en);
+    $translateProvider.translations('sv', i18n_sv);   
+    $translateProvider.preferredLanguage('en');
+ }]);
