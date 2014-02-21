@@ -35,7 +35,14 @@ portal.config(function(RestangularProvider) {
 });
 
 portal.config(['$translateProvider', function ($translateProvider) {
-    $translateProvider.translations('en', i18n_en);
-    $translateProvider.translations('sv', i18n_sv);   
-    $translateProvider.preferredLanguage('en');
+    $translateProvider
+            .translations('en', i18n_en)
+            .translations('sv', i18n_sv)   
+            .registerAvailableLanguageKeys(['en', 'sv'], {
+                'en_US': 'en',
+                'en_UK': 'en',
+                'se_SE': 'sv'
+                })
+            .fallbackLanguage('en')
+            .determinePreferredLanguage();
  }]);
