@@ -9,7 +9,7 @@
 		if(isset($data["Error"])) {
 			$app->response()->status(400);
 		} else {
-			$data["facet"] = Facets::get($facet, $facetID);
+			$data["facet"]["currentFacet"] = Facets::get($facet, $facetID, "ReverseNameAndID");
 			$data["facet"]["facet"] = Helper::facet($facet);
 			unset($data["parameters"]["url"],$data["parameters"]["facets"]);
 			return jP($data); 

@@ -2,12 +2,12 @@
   <li><a href="#/">Home</a></li>
   <li><a href="#/facet">Browse by facet</a></li>
   <li><a href="#/facet/{{results.facet.facet.facetParam}}" ng-bind="results.facet.facet.facetLegend"></a></li>
-  <li><a href="#/facet/{{results.facet.facet.facetParam}}/{{results.facet.identifier}}" ng-bind="results.facet.name || results.facet.keyword"></a></li>
+  <li><a href="#/facet/{{results.facet.facet.facetParam}}/{{results.facet.currentFacet.identifier}}" ng-bind="results.facet.currentFacet.name || results.facet.keyword"></a></li>
 </ol>
 
 <section id="viewHeader">
 	<div class="page-header">
-		<h1><span ng-bind="results.facet.name || results.facet.keyword"></span> <small ng-bind="'Browse by ' + results.facet.facet.facetLegend"></small></h1>
+		<h1><span ng-bind="results.facet.currentFacet.name || results.facet.keyword"></span> <small ng-bind="'Browse by ' + results.facet.facet.facetLegend"></small></h1>
 		
 		<section ng-show="results.facet.provider">
 			<dl class="dl-horizontal">

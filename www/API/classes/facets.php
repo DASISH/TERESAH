@@ -300,7 +300,9 @@ class Facets {
 		#REVERSE MODE : Get only data about a developer with developer_uid = $id
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT v.title FROM video v WHERE v.video_uid = ? LIMIT 1";
-		} elseif($mode == "Reverse") {
+                } elseif($mode == "ReverseNameAndID") {
+                        $req = "SELECT v.video_uid as identifier, v.title as name FROM video v WHERE v.video_uid = ? LIMIT 1";
+                } elseif($mode == "Reverse") {
 			$req = "SELECT v.video_uid as UID, v.title, v.description, v.video_provider, v.video_link FROM video v WHERE v.video_uid = ? LIMIT 1";
 		#DEFAULT MODE : Get keyword for tool
 		} else {
@@ -316,6 +318,8 @@ class Facets {
 			$ret = array();
 			if($mode == "ReverseNameOnly") {
 				$ret = $data["title"];
+                        } elseif($mode == "ReverseNameAndID") {
+                                $ret = $data[0];
 			} else {
 				foreach($data as &$video) {
 					$ret[] = array(
@@ -355,7 +359,9 @@ class Facets {
 		#REVERSE MODE : Get only data about a developer with developer_uid = $id
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT d.name FROM developer d WHERE d.developer_uid = ? LIMIT 1";
-		} elseif($mode == "Reverse") {
+		} elseif($mode == "ReverseNameAndID") {
+                        $req = "SELECT d.developer_uid as identifier, d.name as name FROM developer d WHERE d.developer_uid = ? LIMIT 1";                     
+                } elseif($mode == "Reverse") {
 			$req = "SELECT d.developer_uid as UID, d.name, d.contact FROM developer d WHERE d.developer_uid = ? LIMIT 1";
 		#DEFAULT MODE : Get keyword for tool
 		} else {
@@ -371,6 +377,8 @@ class Facets {
 			$ret = array();
 			if($mode == "ReverseNameOnly") {
 				$ret = $data[0]["name"];
+                        } elseif($mode == "ReverseNameAndID") {
+                            $ret = $data[0];
 			} else {
 				foreach($data as &$keyword) {
 					if($keyword["contact"] != null) {
@@ -413,7 +421,9 @@ class Facets {
 		#REVERSE MODE : Get only data about a keyword with ID = X
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT p.reference as name FROM publication p WHERE p.publication_uid = ? LIMIT 1";
-		} elseif($mode == "Reverse") {
+		} elseif($mode == "ReverseNameAndID") {
+                        $req = "SELECT p.publication_uid as identifier, p.reference as name FROM publication p WHERE p.publication_uid = ? LIMIT 1";                                    
+                } elseif($mode == "Reverse") {
 			$req = "SELECT p.publication_uid as UID, p.reference as name FROM publication p WHERE p.publication_uid = ? LIMIT 1";
 		
 		#DEFAULT MODE : Get keyword for tool
@@ -432,7 +442,9 @@ class Facets {
 			$ret = array();
 			if($mode == "ReverseNameOnly") {
 				$ret = $data[0]["name"];
-			} else {
+			} elseif($mode == "ReverseNameAndID") {
+                            $ret = $data[0];
+                        } else {
 				foreach($data as &$keyword) {
 					$ret[] = array(
 						"name" => $keyword["name"],
@@ -465,7 +477,9 @@ class Facets {
 		#REVERSE MODE : Get only data about a keyword with ID = X
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT f.name FROM feature f WHERE f.feature_uid = ? LIMIT 1";
-		} elseif($mode == "Reverse") {
+		} elseif($mode == "ReverseNameAndID") {
+                    $req = "SELECT f.feature_uid as identifier, f.name as name FROM feature f WHERE f.feature_uid = ? LIMIT 1";
+                } elseif($mode == "Reverse") {
 			$req = "SELECT f.feature_uid as UID, f.name, f.description FROM feature f WHERE f.feature_uid = ? LIMIT 1";
 		
 		#DEFAULT MODE : Get keyword for tool
@@ -484,7 +498,9 @@ class Facets {
 			$ret = array();
 			if($mode == "ReverseNameOnly") {
 				$ret = $data[0]["name"];
-			} else {
+			} elseif($mode == "ReverseNameAndID") {
+                            $ret = $data[0];
+                        } else {
 				foreach($data as &$keyword) {
 					$ret[] = array(
 						"name" => $keyword["name"],
@@ -519,8 +535,10 @@ class Facets {
 	private static function getProjects($id, $mode = "Default") {
 		#REVERSE MODE : Get only data about a keyword with ID = X
 		if($mode == "ReverseNameOnly") {
-			$req = "SELECT  p.title as name FROM project p WHERE p.project_uid = ? LIMIT 1";
-		} elseif($mode == "Reverse") {
+			$req = "SELECT p.title as name FROM project p WHERE p.project_uid = ? LIMIT 1";
+		} elseif($mode == "ReverseNameAndID") {
+                    	$req = "SELECT p.project_uid as identifier, p.title as name FROM project p WHERE p.project_uid = ? LIMIT 1";
+                } elseif($mode == "Reverse") {
 			$req = "SELECT p.project_uid as UID, p.title as name, p.description, p.contact  FROM project p WHERE p.project_uid = ? LIMIT 1";
 		
 		#DEFAULT MODE : Get keyword for tool
@@ -539,7 +557,9 @@ class Facets {
 			$ret = array();
 			if($mode == "ReverseNameOnly") {
 				$ret = $data[0]["name"];
-			} else {
+			} elseif($mode == "ReverseNameAndID") {
+                            $ret = $data[0];
+                        } else {
 				foreach($data as &$keyword) {
 					$ret[] = array(
 						"name" => $keyword["name"],
@@ -576,7 +596,9 @@ class Facets {
 		#REVERSE MODE : Get only data about a keyword with ID = X
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT s.title as name FROM standard s WHERE s.standard_uid = ? LIMIT 1";
-		} elseif($mode == "Reverse") {
+		} elseif($mode == "ReverseNameAndID") {
+                    $req = "SELECT s.standard_uid as identifier, s.title as name FROM standard s WHERE s.standard_uid = ? LIMIT 1";
+                } elseif($mode == "Reverse") {
 			$req = "SELECT s.standard_uid as UID, s.title as name, s.version, s.source  FROM standard s WHERE s.standard_uid = ? LIMIT 1";
 		
 		#DEFAULT MODE : Get keyword for tool
@@ -595,7 +617,9 @@ class Facets {
 			$ret = array();
 			if($mode == "ReverseNameOnly") {
 				$ret = $data[0]["name"];
-			} else {
+			} elseif($mode == "ReverseNameAndID") {
+                            $ret = $data[0];
+                        } else {
 				foreach($data as &$keyword) {
 					$ret[] = array(
 						"name" => $keyword["name"],
@@ -643,7 +667,9 @@ class Facets {
 						);
 		} elseif($mode == "ReverseNameOnly") {
 			return $dictionnary[$id];
-		} else {
+		} elseif($mode == "ReverseNameAndID") {
+                    return array("name" => $dictionnary[$id], "identifier" => $id);
+                } else {
 			$req = "SELECT d.application_type as UID, d.application_type as name FROM tool_application_type d WHERE d.tool_uid = ? GROUP BY application_type";
 		}
 		$req = self::DB()->prepare($req);
@@ -680,7 +706,9 @@ class Facets {
 	private static function getKeywords($id, $mode = "Default") {
 		if($mode == "ReverseNameOnly") {
 			$req = "SELECT k.keyword as name FROM keyword k WHERE k.keyword_uid = ? LIMIT 1";
-		} elseif($mode == "Reverse") { 
+		} elseif($mode == "ReverseNameAndID") {
+                    $req = "SELECT k.keyword_uid as identifier, k.keyword as name FROM keyword k WHERE k.keyword_uid = ? LIMIT 1";
+                } elseif($mode == "Reverse") { 
 			$req = "SELECT k.keyword_uid, k.keyword, k.source_uri as sourceURI, k.source_taxonomy as sourceTaxonomy FROM keyword k WHERE k.keyword_uid = ? LIMIT 1";
 		} else {
 			$req = "SELECT k.keyword_uid, k.keyword, k.source_uri as sourceURI, k.source_taxonomy as sourceTaxonomy FROM keyword k, tool_has_keyword tk WHERE tk.keyword_uid = k.keyword_uid AND tk.tool_uid = ?";
@@ -693,7 +721,9 @@ class Facets {
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
 			if($mode == "ReverseNameOnly") {
 				$ret = $data[0]["name"];
-			} else {
+			} elseif($mode == "ReverseNameAndID") {
+                            $ret = $data[0];
+                        } else {
 				$ret = array();
 				foreach($data as &$keyword) {
 					if($keyword["sourceURI"] != "") {
@@ -752,7 +782,9 @@ class Facets {
 		
 			$req = "SELECT l.type as name FROM licence_type l WHERE l.licence_type_uid = ? LIMIT 1";
 			
-		} elseif($mode == "Reverse") {
+		} elseif($mode == "ReverseNameAndID") {
+                    $req = "SELECT l.licence_type_uid as identifier, l.type as name FROM licence_type l WHERE l.licence_type_uid = ? LIMIT 1";
+                } elseif($mode == "Reverse") {
 		
 			$req = "SELECT l.type as name, l.licence_type_uid as uid FROM licence_type l WHERE l.licence_type_uid = ? LIMIT 1";			
 		
@@ -772,7 +804,9 @@ class Facets {
 			$ret = array();
 			if($mode == "ReverseNameOnly") {
 				$ret = $data[0]["name"];
-			} else {
+			} elseif($mode == "ReverseNameAndID") {
+                            $ret = $data[0];
+                        } else {
 				foreach($data as &$type) {
 					$ret[] = $type;
 				}
@@ -813,7 +847,9 @@ class Facets {
 		
 			$req = "SELECT s.name FROM suite s WHERE s.suite_uid = ? LIMIT 1";
 			
-		} elseif($mode == "Reverse") {
+		} elseif($mode == "ReverseNameAndID") {
+                    $req = "SELECT s.suite_uid as identifier, s.name as name FROM suite s WHERE s.suite_uid = ? LIMIT 1";
+                } elseif($mode == "Reverse") {
 		
 			$req = "SELECT s.name, s.suite_uid as uid FROM suite s WHERE s.suite_uid = ? LIMIT 1";			
 		
@@ -833,7 +869,9 @@ class Facets {
 			$ret = array();
 			if($mode == "ReverseNameOnly") {
 				$ret = $data[0]["name"];
-			} else {
+			} elseif($mode == "ReverseNameAndID") {
+                            $ret = $data[0];
+                        } else {
 				foreach($data as &$type) {
 					$ret[] = $type;
 				}
@@ -872,9 +910,11 @@ class Facets {
 		$ret = false;
 		
 		if($mode == "ReverseNameOnly") {
-			$req = "SELECT t.tool_type_uid AS identifier, t.tool_type as name FROM tool_type t WHERE t.tool_type_uid = ? LIMIT 1 GROUP BY t.tool_type_uid";	
+			$req = "SELECT t.tool_type_uid AS identifier, t.tool_type as name FROM tool_type t WHERE t.tool_type_uid = ? GROUP BY t.tool_type_uid LIMIT 1 ";	
 			
-		} elseif($mode == "Reverse") {
+		} elseif($mode == "ReverseNameAndID") {
+                    $req = "SELECT t.tool_type_uid AS identifier, t.tool_type as name FROM tool_type t WHERE t.tool_type_uid = ? GROUP BY t.tool_type_uid LIMIT 1 ";
+                } elseif($mode == "Reverse") {
 		
 			$req = "SELECT t.tool_type as name, t.source_uri as uri FROM tool_type t WHERE t.tool_type_uid = ? LIMIT 1";			
 		
@@ -893,8 +933,10 @@ class Facets {
 		
 			$ret = array();
 			if($mode == "ReverseNameOnly") {
-				$ret = $data[0]["name"];
-			} else {
+				$ret = $data[0]["name"];                                
+			} elseif($mode == "ReverseNameAndID") {
+                            $ret = $data[0];
+                        } else {
 				foreach($data as &$type) {
 					$ret[] = $type;
 				}
@@ -927,7 +969,9 @@ class Facets {
 		
 			$req = "SELECT p.name as name FROM platform p WHERE p.platform_uid = ? LIMIT 1";
 			
-		} elseif($mode == "Reverse") {
+		} elseif($mode == "ReverseNameAndID") {
+                    $req = "SELECT p.platform_uid as identifier, p.name as name FROM platform p WHERE p.platform_uid = ? LIMIT 1";
+                } elseif($mode == "Reverse") {
 			$req = "SELECT p.name as platform FROM platform p WHERE p.platform_uid = ? LIMIT 1";
 			#Request
 		} else {
@@ -947,7 +991,9 @@ class Facets {
 			#Format data
 			if($mode == "ReverseNameOnly") {
 				$ret = $data[0]["name"];
-			} else {
+			} elseif($mode == "ReverseNameAndID") {
+                            $ret = $data[0];
+                        } else {
 				$ret = array();
 				foreach($data as &$v) {
 					$ret[] = $v["platform"];
@@ -991,7 +1037,19 @@ class Facets {
 				$ret = $data["name"];
 			}
 			
-		} elseif($mode == "Default") {
+		} elseif($mode == "ReverseNameAndID") {
+                    $req = "SELECT l.licence_uid as identifier, l.text as name FROM licence l WHERE l.licence_uid = ? LIMIT 1";
+                    $req = self::DB()->prepare($req);
+                    $req->execute(array($id));
+
+                    #If we got data
+                    if($req->rowCount() > 0) {
+                            #Fetching data
+                            $data = $req->fetch(PDO::FETCH_ASSOC);
+                            #Format data
+                            $ret = $data;
+                    }
+                } elseif($mode == "Default") {
 			#Request
 			$req = "SELECT l.text, lt.type FROM licence l, tool_has_licence tl, licence_type lt WHERE tl.tool_uid = ? AND l.licence_uid = tl.licence_uid AND lt.licence_type_uid = l.licence_type_uid";
 			$req = self::DB()->prepare($req);
