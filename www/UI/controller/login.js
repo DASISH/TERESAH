@@ -10,6 +10,7 @@ var Login = portal.controller('LoginCtrl', ['$scope', 'ui',  'Item', '$rootScope
 						o = {name : data.Name, mail: data.Mail, signedin : true };
 						$root.user = o;
 						$scope.ui.user =  o;
+                                                $window.location.href = '/';
 					}
 				});
 				
