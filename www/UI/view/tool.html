@@ -26,10 +26,15 @@
 				<section id="keywords"  ng-show="item.keyword[0] && !(ui.sections.list['Keywords'])">
 					<h2>{{ 'keywords' | translate }}
 						<div class="pull-right">
-							<span class="btn btn-default" ng-click="ui.sections.toggle('Keywords')"><span class="glyphicon glyphicon-eye-close"></span></span>
+							<span class="btn btn-default" ng-click="ui.sections.toggle('Keywords')">
+                                                            <span class="glyphicon glyphicon-eye-close">                                                                
+                                                            </span>                                     
+                                                            {{ 'hide block' | translate }}
+                                                        </span>
 							<span class="dropdown">
 								<span class="dropdown-toggle btn btn-default">
 									<span class="glyphicon glyphicon-cog"></span>
+                                                                        {{ 'options' | translate }}
 								</span>
 								<ul class="dropdown-menu">
 									<li><a ng-click="ui.keywords.provider.show = !ui.keywords.provider.show">{{ 'providers' | translate }}</a></li>
@@ -102,7 +107,7 @@
 					</div>
 					<hr />
 				</section>
-				<section id="projects" ng-show="item.features[0] && !(ui.sections.list['Features'])">
+				<section id="features" ng-show="item.features[0] && !(ui.sections.list['Features'])">
 					<h2>Features
 						<div class="pull-right">
 							<span class="btn btn-default" ng-click="ui.sections.toggle('Features')"><span class="glyphicon glyphicon-eye-close"></span></span>
