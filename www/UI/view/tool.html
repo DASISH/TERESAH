@@ -219,7 +219,7 @@
 				<dt ng-show="item.developers">Developer(s)</dt>
                                 <dd ng-repeat="developer in item.developers"><a ng-href="#/facet/Developer/{{developer.identifier}}" ng-bind="developer.name"></a></dd>
                                 <dt ng-show="item.similar">Similar tools</dt>
-                                        <dd ng-repeat="similar in item.similar"><a ng-href="#/tool/{{similar.shortname}}" ng-bind="similar.title"></dd>        
+                                <dd ng-repeat="similar in item.similar"><a ng-href="#/tool/{{similar.shortname}}" ng-bind="similar.title"></a></dd>        
 			</dl>
 			<section ng-show="ui.quickLinking.show" class="form-horizontal" role="form">
 				<div class="form-group">

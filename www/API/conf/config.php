@@ -9,7 +9,7 @@
 	define("Wserver", "localhost");
 	define("Wport", "3306");
 	define("Wuser", "root");
-	define("Wpassword", "root");
+	define("Wpassword", "");
 	define("Wtable", "tools_registry");
 
 	##
