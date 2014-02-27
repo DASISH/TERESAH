@@ -2,6 +2,9 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 	$scope.results = false;
 		
 	$scope.ui = {
+		parameters : {
+
+		},
 		url : {
 			val : null, 
 			enable : true, 
@@ -35,6 +38,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 									$scope.ui.facets.error = "No results";
 								} else {
 									$scope.ui.url.val = data.parameters.url;
+									$scope.ui.parameters = data.parameters;
 									$ui.url.set(data.parameters.url);
 									$scope.results = { items : data.response }
 									$scope.ui.pages.totalItem = data.parameters.total;
@@ -118,6 +122,7 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 							$scope.ui.facets.error = "No results";
 						} else {
 							$scope.ui.url.val = data.parameters.url;
+							$scope.ui.parameters = data.parameters;
 							$ui.url.set(data.parameters.url);
 							$scope.results = { items : data.response }
 							$scope.ui.pages.totalItem = data.parameters.total;

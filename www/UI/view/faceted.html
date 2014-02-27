@@ -90,6 +90,7 @@
 					<div class="alert alert-warning">{{ui.facets.error}}</div>
 				</section>
 				<section id="viewContent" ng-show="results.items">
+					<p>Tools from <span ng-bind="ui.parameters.start + 1"></span> to <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> on <span ng-bind="ui.parameters.total"></span> available</p>
 					<hr />
 					
 					<section class="itemList" items="results.items"></section>
