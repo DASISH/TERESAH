@@ -1,5 +1,29 @@
 <?php
 	#print "Description.php is here";
+
+	$app->get('/share/:toolUID', function ($toolUID) use ($require, $app) { 
+		$app->contentType('application/json');
+		$require->req(array("tool"));
+		$tool = Tool::get($toolUID, $app->request->get());
+		header('Content-Type: text/html');
+		echo '
+		<!DOCTYPE html>
+		<html lang="en">
+			<head>
+				<meta charset="utf-8">
+				<title>DASISH-TERESAH | '.$tool["descriptions"]["title"].'</title>
+				<meta property="og:title" content="'.$tool["descriptions"]["title"].'" />
+				<meta property="og:site_name" content="DASISH-TERESAH" />
+				<meta property="og:description" content="'.$tool["descriptions"]["description"][0]["text"].'" />
+				<meta http-equiv="refresh" content="1; url=http://'.$_SERVER['HTTP_HOST'].'/UI/#/tool/'.$tool["identifier"]["shortname"].'" />
+			</head>
+			<body>
+				'.nl2br($tool["descriptions"]["description"][0]["text"]).'
+			</body>
+		</html>';
+		exit();
+	} );
+
 	$app->get('/tool/:toolUID', function ($toolUID) use ($require, $app) { 
 		$app->contentType('application/json');
 		$require->req(array("tool"));

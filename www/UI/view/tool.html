@@ -274,6 +274,27 @@
 			</section>
 			<hr />
 		</section>
+		<section id="share">
+			<h2 ng-bind="'share' | translate"></h2>
+			<a target="_blank" ng-href="http://www.facebook.com/sharer.php?u={{ui.share}}">
+				<span class="icon-stack">
+					<i class="icon-check-empty icon-stack-base"></i>
+					<i class="icon-facebook"></i>
+				</span></a>
+			 | 
+			<a target="_blank" ng-href="https://plus.google.com/share?url={{ui.share}}">
+				<span class="icon-stack">
+					<i class="icon-check-empty icon-stack-base"></i>
+					<i class="icon-google-plus"></i>
+				</span></a>
+			 | 
+			<a target="_blank" ng-href="http://twitter.com/share?text=DASISH-TERESAH%20{{item.descriptions.title}}&url={{ui.share}}">
+				<span class="icon-stack">
+					<i class="icon-check-empty icon-stack-base"></i>
+					<i class="icon-twitter"></i>
+				</span></a>
+			
+		</section>
 		<section id="availableDescriptions" ng-show="item.descriptions.description[1]">
 			<h2>Available Descriptions</h2>
 			<div class="btn-group btn-group-sm btn-block  btn-group-justified">

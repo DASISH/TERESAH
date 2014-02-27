@@ -14,6 +14,6 @@ var i18n_sv = {
     'providers': 'Providers',
     'taxonomies': 'Taxonomier',
     'add': 'Lägg till',
-    
+    'share' : 'share'
 
 };

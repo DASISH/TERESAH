@@ -7,6 +7,7 @@ var Tool = portal.controller('ToolCtrl', ['$scope', 'ui',  'Item', '$rootScope',
 		$scope.item.desc = $scope.item.descriptions.description[0];
 	}
 	$scope.ui = {
+		share : "http://"+document.domain+"/API/share/" + $scope.item.identifier.shortname,
 		quickLinking : {
 			status : {
 				show : false,

@@ -14,4 +14,5 @@ var i18n_en = {
     'providers': 'Providers',
     'taxonomies': 'Taxonomies',
     'add': 'Add',
+    'share' : 'Share'
 };
