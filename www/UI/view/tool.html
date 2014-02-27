@@ -319,7 +319,11 @@
 			<hr />
 		</section>
 		<section id="blocks" ng-show="ui.user.data.signedin">
-			<span class="pull-right btn btn-default" ng-click="ui.description.edit.show = !ui.description.edit.show;"><span class="glyphicon" ng-class="{'glyphicon-eye-close' : ui.description.edit.show,'glyphicon-eye-open' : !ui.description.edit.show}"></span></span>
+			<span class="pull-right btn btn-default" ng-click="ui.description.edit.show = !ui.description.edit.show;">
+                            <span class="glyphicon" ng-class="{'glyphicon-eye-close' : ui.description.edit.show,'glyphicon-eye-open' : !ui.description.edit.show}"></span>
+                            <span ng-show="ui.description.edit.show">hide</span>
+                            <span ng-show="!ui.description.edit.show">show</span>
+                        </span>
 			<h2>Edit description</h2>
 			<form role="form" ng-submit="ui.description.edit.submit()" ng-show="ui.description.edit.show ">
 				<div class="alert alert-danger" ng-bind="ui.description.edit.response.Error" ng-show="ui.description.edit.response.Error"></div>
