@@ -114,7 +114,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					if(opt.page) {
 						opt.start = opt.page * 20 - 20;
 					}
-					
+
 					return Item.routes.browse.facet.one(facet).get(opt).then(function (data) {
 						if(callback) {	callback(data.original);	}
 						Item.data = data.original;
@@ -331,7 +331,8 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 				},
 				faceted : function(options, callback) {
 					
-						if(typeof(callback)==='undefined') callback = false;
+					if(typeof(callback)==='undefined') callback = false;
+					options.description = true;
 					
 					return Item.routes.search.faceted.post(options).then(function(data) {
 						Item.data = data.original;
@@ -342,6 +343,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 				facetedGet :  function(options, callback) {
 					
 					if(typeof(callback)==='undefined') callback = false;
+					options.description = true;
 					
 					return Restangular.one('search/faceted/?'+options).get().then(function(data) {
 						Item.data = data.original;
