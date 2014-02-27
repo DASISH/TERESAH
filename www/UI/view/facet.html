@@ -6,9 +6,9 @@
 
 <section id="viewHeader">
 	<div class="page-header">
-		<h1><span ng-bind="results.facet.facetLegend"></span> <small>Browse facets</small></h1>		
+		<h1><span ng-bind="results.facet.facetLegend"></span> <small>Browse facets</small></h1>	
 		
-		<p>Facet's elements from <span ng-bind="ui.parameters.start + 1"></span> to <span ng-bind="ui.parameters.limit + ui.parameters.start"></span> on <span ng-bind="results.facet.facetTotal"></span> available</p>
+		<p>Facet's elements from <span ng-bind="ui.parameters.start + 1"></span> to <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> on <span ng-bind="ui.parameters.total"></span> available</p>
 	</div>
 </section>
 <section id="viewContent" ng-show="results.items">

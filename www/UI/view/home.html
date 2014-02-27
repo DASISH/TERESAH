@@ -5,7 +5,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<p>Tools from <span ng-bind="ui.parameters.start + 1"></span> to <span ng-bind="ui.parameters.limit + ui.parameters.start"></span> on <span ng-bind="ui.parameters.total"></span> available</p>
+		<p>Tools from <span ng-bind="ui.parameters.start + 1"></span> to <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> on <span ng-bind="ui.parameters.total"></span> available</p>
 		</div>
 	</div>
 
