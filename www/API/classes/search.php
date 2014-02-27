@@ -379,7 +379,7 @@
 		 * @return (array) Returns an array of arrays with tool and their description if asked
 		 *
 		 */
-		private function descriptionFormating($data, $options) {
+		private static function descriptionFormating($data, $options) {
 			$ret = array();
 			if(!isset($options["description"]) || ($options["description"] == false)) {
 				##If no description asked :
