@@ -11,7 +11,6 @@ var FacetCtrl = portal.controller('FacetCtrl', ['$scope', 'ui', '$route', 'Item'
 			change : function(page) {
 				
 				$item.resolver.browse.facet($route.current.params.facet, {'page': page}, function(data) {
-					console.log(data);
 					$scope.results.items = data.facets;
 					$scope.ui.parameters = data.params;
 				});

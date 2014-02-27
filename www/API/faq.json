@@ -321,6 +321,16 @@
 						"default" : "title",
 						"definition" : "Order item either by 'title' or 'identifier'",
 						"type" : "ENUM(title,identifier)"
+					},{
+						"name" : "description",
+						"default" : "false",
+						"definition" : "If set to true, will return a shorten description for the tool",
+						"type" : "BOOLEAN"
+					},{
+						"name" : "descriptionSize",
+						"default" : "140",
+						"definition" : "Characters Length of the description returned",
+						"type" : "INT"
 					}
 				],
 				"example" : "/facet/Keyword/1"
@@ -537,6 +547,16 @@
 						"definition" : "Get label's name back from query",
 						"type" : "BOOLEAN",
 						"required" : false
+					},{
+						"name" : "description",
+						"default" : "false",
+						"definition" : "If set to true, will return a shorten description for the tool",
+						"type" : "BOOLEAN"
+					},{
+						"name" : "descriptionSize",
+						"default" : "140",
+						"definition" : "Characters Length of the description returned",
+						"type" : "INT"
 					}
 				],
 				"example" : "/search/faceted/?facets[Licence][request][0]=22"

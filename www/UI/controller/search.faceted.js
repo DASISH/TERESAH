@@ -1,10 +1,6 @@
 var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restangular', '$rootScope', function($scope, $ui, $item, $rest, $root) {
 	$scope.results = false;
-	
-	$scope.$watch('ui.pages.total', function(v) {
-		console.log(v);
-	});
-	
+		
 	$scope.ui = {
 		url : {
 			val : null, 
@@ -20,6 +16,11 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 						if(!(options.match("\&retrieveLabel")))
 						{
 							options += "&retrieveLabel";
+						}
+
+						if(!(options.match("\&description")))
+						{
+							options += "&description=true";
 						}
 						$item.resolver.search.facetedGet(options, function(data) {
 							if(data.status == "error") {
@@ -47,8 +48,6 @@ var Faceted = portal.controller('FacetedCtrl', ['$scope', 'ui',  'Item', 'Restan
 								angular.forEach(v.request, function(labelName, idLabel) {
 									this[idLabel] = {name : labelName, active : true, id : idLabel};
 								}, tmp);
-								console.log(v);
-								console.log(k);
 								angular.extend($scope.ui.facets.used[k], {active : true, possibilities : tmp, facetParam: k});
 								if(v.mode) { if(v.mode == "AND") { modeVal = true; } else {  modeVal = false; }} else { modeVal = true; }
 								if(v.optional) { if(v.optional == "1") { optionalVal = true; } else {  optionalVal = false; }} else { optionalVal = true; }
