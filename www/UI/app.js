@@ -40,9 +40,9 @@ portal.config(['$translateProvider', function ($translateProvider) {
             .translations('sv', i18n_sv)   
             .registerAvailableLanguageKeys(['en', 'sv'], {
                 'en_US': 'en',
-                'en_UK': 'en',
-                'se_SE': 'sv'
+                'en_UK': 'en', 
+                'se_SE': 'sv',
                 })
-            .fallbackLanguage('en')
-            .determinePreferredLanguage();
+    $translateProvider.preferredLanguage('en');
+    $translateProvider.determinePreferredLanguage();
  }]);

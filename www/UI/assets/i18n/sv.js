@@ -66,6 +66,16 @@ var i18n_sv = {
     'message':'Meddelande',
     'reply':'Svara',
     'date':'Datum',
-    'user':'Användare'    
-
+    'user':'Användare',    
+    'a-z':'A-Ö',
+    'z-a':'Ö-A',
+    'order by':'Sortera efter',
+    'keyword':'Nyckelord',
+    'showing':'Visar',
+    'to':'till',
+    'of':'av',
+    'found':'hittade',
+    'case sensitive':'Case sensitive',
+    'show description':'Show description',
+    'search input':'Search input'
 };

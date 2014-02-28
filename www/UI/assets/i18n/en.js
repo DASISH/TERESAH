@@ -66,5 +66,16 @@ var i18n_en = {
     'message':'Message',
     'reply':'Reply',
     'date':'Date',
-    'user':'User'
+    'user':'User',
+    'a-z':'A-Z',
+    'z-a':'Z-A',
+    'order by':'Order by',
+    'keyword':'Keyword',
+    'showing':'Showing',
+    'to':'to',
+    'of':'of',
+    'found':'found',
+    'case sensitive':'Case sensitive',
+    'show description':'Show description',
+    'search input':'Search input'
 };
