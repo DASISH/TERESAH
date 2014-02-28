@@ -2,14 +2,14 @@
 	<div class="page-header">
 		<div class="pull-right">
 			<div class="btn-group btn-group-sm">
-				<a class="btn btn-sm btn-default"  ng-href="#/tool/{{item.identifier.shortname}}">Return to tool</a>
-				<a class="btn btn-primary" ng-click="ui.form.save()">Save</a>
+				<a class="btn btn-sm btn-default"  ng-href="#/tool/{{item.identifier.shortname}}">{{ 'return to tool' | translate }}</a>
+				<a class="btn btn-primary" ng-click="ui.form.save()">{{ 'save' | translate }}</a>
 			</div>
 		</div>
 		<h1 ng-bind="item.descriptions.title"></h1>
 	</div>
 </section>
-<h2>Metadata</h2>
+<h2>{{ 'metadata' | translate }}</h2>
 <div class="row">
 	<div class="col-lg-3" id="facetList">
 		<div class="panel-group">
@@ -32,10 +32,10 @@
 									{{facet.facetLegend}}
 									<div class="pull-right panel-form row">
 										<div class="col-lg-3">
-											<input type="text" class="form-control input-sm" ng-model="facet.filter" placeholder="Filter your {{facet.facetLegend}}" ng-change="facet.possibilities = ui.facets.search(facet)"/>
+											<input type="text" class="form-control input-sm" ng-model="facet.filter" placeholder="{{ 'filter your' | translate }} {{facet.facetLegend}}" ng-change="facet.possibilities = ui.facets.search(facet)"/>
 										</div>
-										<a class="btn btn-sm  btn-default" ng-class="{'btn-warning' : ui.facets.new.form.active[facet.facetParam]}" ng-click="ui.facets.new.form.get(facet.facetParam)">New</a>
-										<a class="btn btn-sm  btn-default" ng-class="{'active' : !facet.option.case_insensitivity}" ng-click="facet.option.case_insensitivity = !facet.option.case_insensitivity; facet.possibilities = ui.facets.search(facet);">Case Sens.</a>
+										<a class="btn btn-sm  btn-default" ng-class="{'btn-warning' : ui.facets.new.form.active[facet.facetParam]}" ng-click="ui.facets.new.form.get(facet.facetParam)">{{ 'new' | translate }}</a>
+										<a class="btn btn-sm  btn-default" ng-class="{'active' : !facet.option.case_insensitivity}" ng-click="facet.option.case_insensitivity = !facet.option.case_insensitivity; facet.possibilities = ui.facets.search(facet);">{{ 'case sensitive' | translate }}</a>
 										<button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="facet.active = !facet.active;">&times;</button>
 									</div>
 								</div>
@@ -59,7 +59,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-lg-offset-2 col-lg-10">
-										<button type="submit" class="btn btn-primary">Save and link to tool</button>
+										<button type="submit" class="btn btn-primary">{{ 'save and link to tool' | translate }}</button>
 									</div>
 								</div>
 							</form>
@@ -75,5 +75,5 @@
 </div>
 <hr />
 <div class="row">
-	<a class="btn btn-primary" ng-click="ui.form.save()">Save</a>
+	<a class="btn btn-primary" ng-click="ui.form.save()">{{ 'save' | translate }}</a>
 </div>

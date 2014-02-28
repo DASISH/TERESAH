@@ -7,31 +7,31 @@
 	<div class="row">
 		<div class="form-horizontal" role="form">
 			<div class="form-group">
-				<label for="nameOfTool" class="col-lg-2 control-label">Name of the tool</label>
+				<label for="nameOfTool" class="col-lg-2 control-label">{{ 'name of the tool' | translate }}</label>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="nameOfTool" ng-model="ui.form.fields.name" placeholder="Name"/>
+					<input type="text" class="form-control" id="nameOfTool" ng-model="ui.form.fields.name" placeholder="{{ 'name' | translate }}"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="homepageOfTool" class="col-lg-2 control-label">Homepage</label>
+				<label for="homepageOfTool" class="col-lg-2 control-label">{{ 'homepage' | translate }}</label>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="homepageOfTool" ng-model="ui.form.fields.homepage" placeholder="Homepage"/>
+					<input type="text" class="form-control" id="homepageOfTool" ng-model="ui.form.fields.homepage" placeholder="{{ 'homepage' | translate }}"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="versionOfTool" class="col-lg-2 control-label">Version</label>
+				<label for="versionOfTool" class="col-lg-2 control-label">{{ 'version' | translate }}</label>
 				<div class="col-lg-10">
 					<input type="text" class="form-control" id="versionOfTool" ng-model="ui.form.fields.version" placeholder="Version"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="availableOfTool" class="col-lg-2 control-label">Available from</label>
+				<label for="availableOfTool" class="col-lg-2 control-label">{{ 'available from' | translate }}</label>
 				<div class="col-lg-10">
 					<input type="text" class="form-control" id="availableOfTool" ng-model="ui.form.fields.available_from" placeholder="Date"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="descOfTool" class="col-lg-2 control-label">Description</label>
+				<label for="descOfTool" class="col-lg-2 control-label">{{ 'description' | translate }}</label>
 				<div class="col-lg-10">
 					<textarea class="form-control" id="descOfTool" ng-model="ui.form.fields.description"></textarea>
 				</div>
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<hr />
-	<h2>Metadata</h2>
+	<h2>{{ 'metadata' | translate }}</h2>
 	<div class="row">
 		<div class="col-lg-3" id="facetList">
 			<div class="panel-group">
@@ -64,7 +64,7 @@
 											<div class="col-lg-3">
 												<input type="text" class="form-control input-sm" ng-model="facet.filter" placeholder="Filter your {{facet.facetLegend}}" ng-change="facet.possibilities = ui.facets.search(facet)"/>
 											</div>
-											<a class="btn btn-sm  btn-default" ng-class="{'active' : !facet.option.case_insensitivity}" ng-click="facet.option.case_insensitivity = !facet.option.case_insensitivity; facet.possibilities = ui.facets.search(facet);">Case Sens.</a>
+											<a class="btn btn-sm  btn-default" ng-class="{'active' : !facet.option.case_insensitivity}" ng-click="facet.option.case_insensitivity = !facet.option.case_insensitivity; facet.possibilities = ui.facets.search(facet);">{{ 'case sensitive' | translate }}</a>
 											<button type="button" class="close" data-dismiss="alert" aria-hidden="true"  ng-click="facet.active = !facet.active;">&times;</button>
 										</div>
 									</div>
@@ -91,6 +91,6 @@
 	<hr />
 	<div class="row">
 		<div class="row alert alert-warning" ng-show="ui.form.return.Error || ui.form.return.description.Error" ng-bind="ui.form.return.Error || ui.form.return.description.Error"></div>
-		<a class="btn btn-primary" ng-click="ui.form.save()">Save</a>
+		<a class="btn btn-primary" ng-click="ui.form.save()">{{ 'save' | translate }}</a>
 	</div>
 </form>
