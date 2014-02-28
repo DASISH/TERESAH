@@ -39,17 +39,17 @@
 								<ul class="dropdown-menu">
 									<li><a ng-click="ui.keywords.provider.show = !ui.keywords.provider.show">{{ 'providers' | translate }}</a></li>
 									<li><a ng-click="ui.keywords.taxonomy.show = !ui.keywords.taxonomy.show">{{ 'taxonomies' | translate }}</a></li>
-									<li><a ng-click="ui.keywords.show = !ui.keywords.show">Hide/Show</a></li>
+									<li><a ng-click="ui.keywords.show = !ui.keywords.show">{{ 'hide show' | translate }}</a></li>
 								</ul>
 							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-block  btn-group-justified" ng-show="ui.keywords.provider.show">
-						<a class="btn" ng-click="ui.keywords.provider.selected = null" ng-class="{'btn-primary': (!ui.keywords.provider.selected), 'btn-success' : ui.keywords.provider.selected}">All Providers</a>
+						<a class="btn" ng-click="ui.keywords.provider.selected = null" ng-class="{'btn-primary': (!ui.keywords.provider.selected), 'btn-success' : ui.keywords.provider.selected}">{{ 'all providers' | translate }}</a>
 						<a class="btn" ng-repeat="prov in item.keyword | kProviders" ng-click="ui.keywords.provider.selected = prov" ng-class="{'btn-primary': (ui.keywords.provider.selected == prov), 'btn-success' : (ui.keywords.provider.selected != prov)}" ng-bind="prov"></a>
 					</div>
 					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.keywords.taxonomy.show">
-						<a class="btn" ng-click="ui.keywords.taxonomy.selected = null" ng-class="{'btn-primary': (!ui.keywords.taxonomy.selected), 'btn-success' : ui.keywords.taxonomy.selected}">All Taxonomies</a>
+						<a class="btn" ng-click="ui.keywords.taxonomy.selected = null" ng-class="{'btn-primary': (!ui.keywords.taxonomy.selected), 'btn-success' : ui.keywords.taxonomy.selected}">{{ 'all taxonomies' | translate }}</a>
 						<a class="btn" ng-repeat="prov in item.keyword | kTaxonomies" ng-click="ui.keywords.taxonomy.selected = prov" ng-class="{'btn-primary': (ui.keywords.taxonomy.selected == prov), 'btn-success' : (ui.keywords.taxonomy.selected != prov)}" ng-bind="prov" style="text-transform:capitalize;"></a>
 					</div>
 					<ul  class="list-inline" style="margin-top:10px;" ng-show="ui.keywords.show">
@@ -58,7 +58,7 @@
 					<hr />
 				</section>
 				<section id="publications"  ng-show="item.publications[0] && !(ui.sections.list['Publications'])">
-					<h2>Publications
+					<h2>{{ 'publications' | translate }}
 						<div class="pull-right">
 							<span class="btn btn-default" ng-click="ui.sections.toggle('Publications')"><span class="glyphicon glyphicon-eye-close"></span></span>
 							<span class="dropdown">
@@ -67,13 +67,13 @@
 								</span>
 								<ul class="dropdown-menu">
 									<li><a ng-click="ui.publications.filter.show = !ui.publications.filter.show">Filter</a></li>
-									<li><a ng-click="ui.publications.show = !ui.publications.show">Hide/Show</a></li>
+									<li><a ng-click="ui.publications.show = !ui.publications.show">{{ 'hide show' | translate }}</a></li>
 								</ul>
 							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.publications.filter.show">
-						<input class="form-control" type="text" ng-model="ui.publications.filter.input" placeholder="Filter the publications" />
+						<input class="form-control" type="text" ng-model="ui.publications.filter.input" placeholder="{{ 'filter the publications' | translate }}" />
 					</div>
 					<div style="margin-top:10px;" ng-show="ui.publications.show">
 						<p ng-repeat="pub in item.publications |filter:ui.publications.filter.input" ng-bind="pub.name"></p>
@@ -81,7 +81,7 @@
 					<hr />
 				</section>
 				<section id="projects" ng-show="item.projects[0] && !(ui.sections.list['Projects'])">
-					<h2>Projects
+					<h2>{{ 'projects' | translate }}
 						<div class="pull-right">
 							<span class="btn btn-default" ng-click="ui.sections.toggle('Projects')"><span class="glyphicon glyphicon-eye-close"></span></span>
 							<span class="dropdown">
@@ -90,25 +90,25 @@
 								</span>
 								<ul class="dropdown-menu">
 									<li><a ng-click="ui.projects.filter.show = !ui.projects.filter.show">Filter</a></li>
-									<li><a ng-click="ui.projects.show = !ui.projects.show">Hide/Show</a></li>
+									<li><a ng-click="ui.projects.show = !ui.projects.show">{{ 'hide show' | translate }}</a></li>
 								</ul>
 							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.projects.filter.show">
-						<input class="form-control" type="text" ng-model="ui.projects.filter.input" placeholder="Filter the projects" />
+						<input class="form-control" type="text" ng-model="ui.projects.filter.input" placeholder="{{ 'filter the projects' | translate }}" />
 					</div>
 					<div style="margin-top:10px;" ng-show="ui.projects.show">
 						<div ng-repeat="pub in item.projects |filter:ui.projects.filter.input">
 							<h5 ng-bind="pub.name"></h5>
-							<p><small  ng-bind="pub.informations.description"></small> <small>Contact : <a ng-href="mailto:{{pub.informations.contact}}" ng-bind="pub.informations.contact"></a></small></p>
+							<p><small  ng-bind="pub.informations.description"></small> <small>{{ 'contact' | translate }} : <a ng-href="mailto:{{pub.informations.contact}}" ng-bind="pub.informations.contact"></a></small></p>
 							
 						</div>
 					</div>
 					<hr />
 				</section>
 				<section id="features" ng-show="item.features[0] && !(ui.sections.list['Features'])">
-					<h2>Features
+					<h2>{{ 'features' | translate }}
 						<div class="pull-right">
 							<span class="btn btn-default" ng-click="ui.sections.toggle('Features')"><span class="glyphicon glyphicon-eye-close"></span></span>
 							<span class="dropdown">
@@ -116,14 +116,14 @@
 									<span class="glyphicon glyphicon-cog"></span>
 								</span>
 								<ul class="dropdown-menu">
-									<li><a ng-click="ui.features.filter.show = !ui.features.filter.show">Filter</a></li>
-									<li><a ng-click="ui.features.show = !ui.features.show">Hide/Show</a></li>
+									<li><a ng-click="ui.features.filter.show = !ui.features.filter.show">{{ 'filter' | translate }}</a></li>
+									<li><a ng-click="ui.features.show = !ui.features.show">{{ 'hide show' | translate }}</a></li>
 								</ul>
 							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.features.filter.show">
-						<input class="form-control" type="text" ng-model="ui.features.filter.input" placeholder="Filter the features" />
+						<input class="form-control" type="text" ng-model="ui.features.filter.input" placeholder="{{ 'filter the features' | translate }}" />
 					</div>
 					<div style="margin-top:10px;" ng-show="ui.features.show">
 						<ul ng-repeat="pub in item.features |filter:ui.features.filter.input">
@@ -135,7 +135,7 @@
 					<hr />
 				</section>
 				<section id="standards" ng-show="item.standards[0] && !(ui.sections.list['Standards'])">
-					<h2>Standards
+					<h2>{{ 'standards' | translate }}
 						<div class="pull-right">
 							<span class="btn btn-default" ng-click="ui.sections.toggle('Standards')"><span class="glyphicon glyphicon-eye-close"></span></span>
 							<span class="dropdown">
@@ -143,14 +143,14 @@
 									<span class="glyphicon glyphicon-cog"></span>
 								</span>
 								<ul class="dropdown-menu">
-									<li><a ng-click="ui.standards.filter.show = !ui.standards.filter.show">Filter</a></li>
-									<li><a ng-click="ui.standards.show = !ui.standards.show">Hide/Show</a></li>
+									<li><a ng-click="ui.standards.filter.show = !ui.standards.filter.show">{{ 'filter' | translate }}</a></li>
+									<li><a ng-click="ui.standards.show = !ui.standards.show">{{ 'hide show' | translate }}</a></li>
 								</ul>
 							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.standards.filter.show">
-						<input class="form-control" type="text" ng-model="ui.standards.filter.input" placeholder="Filter the standards" />
+						<input class="form-control" type="text" ng-model="ui.standards.filter.input" placeholder="{{ 'filter the standards' | translate }}" />
 					</div>
 					<div style="margin-top:10px;" ng-show="ui.standards.show">
 						<ul ng-repeat="std in item.standards |filter:ui.standards.filter.input">
@@ -160,7 +160,7 @@
 					<hr />
 				</section>
 				<section id="videos" ng-show="item.videos[0] && !(ui.sections.list['Videos'])">
-					<h2>Video
+					<h2>{{ 'video' | translate }}
 						<div class="pull-right">
 							<span class="btn btn-default" ng-click="ui.sections.toggle('Videos')"><span class="glyphicon glyphicon-eye-close"></span></span>
 							<span class="dropdown">
@@ -168,19 +168,19 @@
 									<span class="glyphicon glyphicon-cog"></span>
 								</span>
 								<ul class="dropdown-menu">
-									<li><a ng-click="ui.videos.provider.show = !ui.videos.provider.show">Providers</a></li>
-									<li><a ng-click="ui.videos.filter.show = !ui.videos.filter.show">Filter</a></li>
-									<li><a ng-click="ui.videos.show = !ui.videos.show">Hide/Show</a></li>
+									<li><a ng-click="ui.videos.provider.show = !ui.videos.provider.show">{{ 'providers' | translate }}</a></li>
+									<li><a ng-click="ui.videos.filter.show = !ui.videos.filter.show">{{ 'filter' | translate }}</a></li>
+									<li><a ng-click="ui.videos.show = !ui.videos.show">{{ 'hide show' | translate }}</a></li>
 								</ul>
 							</span>
 						</div>
 					</h2>
 					<div class="btn-group btn-block  btn-group-justified" ng-show="ui.videos.provider.show">
-						<a class="btn" ng-click="ui.videos.provider.selected = null" ng-class="{'btn-primary': (!ui.videos.provider.selected), 'btn-success' : ui.videos.provider.selected}">All Providers</a>
+						<a class="btn" ng-click="ui.videos.provider.selected = null" ng-class="{'btn-primary': (!ui.videos.provider.selected), 'btn-success' : ui.videos.provider.selected}">{{ 'all providers' | translate }}</a>
 						<a class="btn" ng-repeat="prov in item.videos | vProviders" ng-click="ui.videos.provider.selected = prov; console.log(prov)" ng-class="{'btn-primary': (ui.videos.provider.selected == prov), 'btn-success' : (ui.videos.provider.selected != prov)}" ng-bind="prov"></a>
 					</div>
 					<div class="btn-group btn-group-sm btn-block  btn-group-justified" ng-show="ui.videos.filter.show">
-						<input class="form-control" type="text" ng-model="ui.videos.filter.input" placeholder="Filter the standards" />
+						<input class="form-control" type="text" ng-model="ui.videos.filter.input" placeholder="{{ 'filter the standards' | translate }}" />
 					</div>
 					<div style="margin-top:10px;" ng-show="ui.videos.show">
 						<div class="row">
@@ -202,30 +202,30 @@
 			</div>
 			<h2>{{ 'details' | translate }}</h2>
 			<dl ng-show="!ui.quickLinking.show">
-				<dt ng-show="item.type">Tool Type</dt>
+				<dt ng-show="item.type">{{ 'tool type' | translate }}</dt>
 					<dd ng-repeat="type in item.type" legend="{{type.uri}}"><a ng-href="#/facet/ToolType/{{type.identifier}}" ng-bind="type.type"></a></dd>
-				<dt ng-show="item.licence">Licence</dt>
+				<dt ng-show="item.licence">{{ 'licence' | translate }}</dt>
 					<dd ng-repeat="licence in item.licence" ng-bind="licence.name"></dd>
-				<dt ng-show="item.licence">Licence Type</dt>
+				<dt ng-show="item.licence">{{ 'licence type' | translate }}</dt>
 					<dd ng-repeat="licence in item.licence" ng-bind="licence.type"></dd>
-				<dt ng-show="item.suite">Suite</dt>
+				<dt ng-show="item.suite">{{ 'suite' | translate }}</dt>
 					<dd ng-repeat="suite in item.suite" ng-bind="suite.name"></dd>
-				<dt ng-show="item.descriptions.homepage">Homepage</dt>
+				<dt ng-show="item.descriptions.homepage">{{ 'homepage' | translate }}</dt>
 					<dd><a ng-href="{{item.descriptions.homepage}}" ng-bind="item.descriptions.homepage"></a></dd>
-				<dt ng-show="item.applicationType">Application Type(s)</dt>
+				<dt ng-show="item.applicationType">{{ 'application type(s)' | translate }}</dt>
 					<dd ng-repeat="os in item.applicationType" ng-bind="os.name"></dd>
-				<dt ng-show="item.platform">Platform(s)</dt>
+				<dt ng-show="item.platform">{{ 'platform(s)' | translate }}</dt>
 					<dd ng-repeat="os in item.platform" ng-bind="os"></dd>
-				<dt ng-show="item.developers">Developer(s)</dt>
+				<dt ng-show="item.developers">{{ 'developer(s)' | translate }}</dt>
                                 <dd ng-repeat="developer in item.developers"><a ng-href="#/facet/Developer/{{developer.identifier}}" ng-bind="developer.name"></a></dd>
-                                <dt ng-show="item.similar">Similar tools</dt>
+                                <dt ng-show="item.similar">{{ 'similar tools' | translate }}</dt>
                                 <dd ng-repeat="similar in item.similar"><a ng-href="#/tool/{{similar.shortname}}" ng-bind="similar.title"></a></dd>        
 			</dl>
 			<section ng-show="ui.quickLinking.show" class="form-horizontal" role="form">
 				<div class="form-group">
-					<label for="facetType" class="col-lg-4 control-label">Facet type</label>
+					<label for="facetType" class="col-lg-4 control-label">{{ 'facet type' | translate }}</label>
 					<div class="col-lg-8">
-						<select ng-model="ui.quickLinking.facets.facet"  ng-options="c.facetParam as c.facetLegend for c in ui.quickLinking.facets.facets" class="form-control" id="facetType" ng-change="ui.quickLinking.method = ''"><option value="">-- choose facet --</option></select>
+						<select ng-model="ui.quickLinking.facets.facet"  ng-options="c.facetParam as c.facetLegend for c in ui.quickLinking.facets.facets" class="form-control" id="facetType" ng-change="ui.quickLinking.method = ''"><option value="">-- {{ 'choose facet' | translate }} --</option></select>
 					</div>
 				</div>
 				<div class="form-group">
@@ -238,15 +238,15 @@
 				</div>
 				<section id="linkingForm" ng-show="ui.quickLinking.method == 'link'">
 					<div class="form-group">
-						<label for="searchModel" class="col-lg-4">Query</label>
+						<label for="searchModel" class="col-lg-4">{{ 'query' | translate }}</label>
 						<div class="col-lg-8">
 							<input class="form-control" ng-model="ui.quickLinking.search.model" placeholder="Type something here" id="searchModel" ng-change="ui.quickLinking.search.search(ui.quickLinking.facets.facet)" />
 						</div>
 					</div>
 					<div class="form-group" ng-repeat="label in ui.quickLinking.search.items">
 						<div class="col-lg-4" style="text-align:center;">
-							<a class="btn btn-sm btn-default" ng-click="ui.quickLinking.link(ui.quickLinking.facets.facet, label.id)" ng-show="!ui.quickLinking.applied[ui.quickLinking.facets.facet][label.id]">Add</a>
-							<span class="btn btn-sm btn-success" ng-show="ui.quickLinking.applied[ui.quickLinking.facets.facet][label.id]">Applied</span>
+							<a class="btn btn-sm btn-default" ng-click="ui.quickLinking.link(ui.quickLinking.facets.facet, label.id)" ng-show="!ui.quickLinking.applied[ui.quickLinking.facets.facet][label.id]">{{ 'add' | translate }}</a>
+							<span class="btn btn-sm btn-success" ng-show="ui.quickLinking.applied[ui.quickLinking.facets.facet][label.id]">{{ 'applied' | translate }}</span>
 						</div>
 						<div class="col-lg-8" ng-bind="label.name">
 						</div>
@@ -254,7 +254,7 @@
 				</section>
 				<section id="newFacetForm" ng-show="ui.quickLinking.method == 'new'">
 					<div class="alert alert-warning" ng-show="ui.quickLinking.new.nofield">
-						This facet is not available for new entries.
+						{{ 'this facet is not available for new entries.' | translate }}
 					</div>
 					<form class="form-horizontal" ng-submit="ui.quickLinking.new.submit(ui.quickLinking.facets.facet)" ng-show="!ui.quickLinking.new.nofield">
 					
@@ -266,7 +266,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<button type="submit" class="btn btn-primary">Save and link to tool</button>
+								<button type="submit" class="btn btn-primary">{{ 'save and link to tool' | translate }}</button>
 							</div>
 						</div>
 					</form>
@@ -296,14 +296,14 @@
 			
 		</section>
 		<section id="availableDescriptions" ng-show="item.descriptions.description[1]">
-			<h2>Available Descriptions</h2>
+			<h2>{{ 'available descriptions' | translate }}</h2>
 			<div class="btn-group btn-group-sm btn-block  btn-group-justified">
 				<a class="btn btn-sm btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)" ng-bind="desc.provider"></a>
 			</div>
 			<hr />
 		</section>
 		<section id="RDF">
-			<h2>Structured Descriptor Document</h2>
+			<h2>{{ 'structured descriptor document' | translate }}</h2>
 			<div class="btn-group btn-group-sm btn-block  btn-group-justified">
 				<a class="btn btn-sm btn-block" rel="alternate" type="application/rdf+xml" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/xml">RDF/XML format</a>
 				<a class="btn btn-sm btn-block" rel="alternate" type="text/rdf+n3" ng-href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/turtle">N3/Turtle</a>
@@ -312,7 +312,7 @@
 			</div>
 		</section>
 		<section id="blocks" ng-show="ui.sections.active > 0">
-			<h2>Available blocks</h2>
+			<h2>{{ 'available blocks' | translate }}</h2>
 			<div class="btn-group btn-group-sm btn-block  btn-group-justified">
 				<a class="btn btn-sm btn-block" ng-repeat="key in ui.sections.list" ng-show="key" ng-click="ui.sections.toggle(key)" ng-bind="key"></a>
 			</div>
@@ -321,35 +321,35 @@
 		<section id="blocks" ng-show="ui.user.data.signedin">
 			<span class="pull-right btn btn-default" ng-click="ui.description.edit.show = !ui.description.edit.show;">
                             <span class="glyphicon" ng-class="{'glyphicon-eye-close' : ui.description.edit.show,'glyphicon-eye-open' : !ui.description.edit.show}"></span>
-                            <span ng-show="ui.description.edit.show">hide</span>
-                            <span ng-show="!ui.description.edit.show">show</span>
+                            <span ng-show="ui.description.edit.show">{{ 'hide' | translate }}</span>
+                            <span ng-show="!ui.description.edit.show">{{ 'show' | translate }}<</span>
                         </span>
-			<h2>Edit description</h2>
+			<h2>{{ 'edit description' | translate }}</h2>
 			<form role="form" ng-submit="ui.description.edit.submit()" ng-show="ui.description.edit.show ">
 				<div class="alert alert-danger" ng-bind="ui.description.edit.response.Error" ng-show="ui.description.edit.response.Error"></div>
 				<div class="alert alert-success" ng-bind="ui.description.edit.response.Success" ng-show="ui.description.edit.response.Success"></div>
 
 				<div class="form-group">
-					<label for="tTitle">Title</label>
+					<label for="tTitle">{{ 'title' | translate }}<</label>
 					<input type="text" class="form-control" id="tTitle" placeholder="Title" ng-model="ui.description.edit.data.name">
 				</div>
 				<div class="form-group">
-					<label for="tDescription">Description</label>
+					<label for="tDescription">{{ 'description' | translate }}</label>
 					<textarea class="form-control" id="tDescription" placeholder="Description" ng-model="ui.description.edit.data.description"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="tVersion">Version</label>
+					<label for="tVersion">{{ 'version' | translate }}</label>
 					<input type="text" class="form-control" id="tVersion" placeholder="Version" ng-model="ui.description.edit.data.version">
 				</div>
 				<div class="form-group">
-					<label for="tHomepage">Homepage</label>
+					<label for="tHomepage">{{ 'homepage' | translate }}</label>
 					<input type="url" class="form-control" id="tHomepage" placeholder="Homepage" ng-model="ui.description.edit.data.homepage">
 				</div>
 				<div class="form-group">
-					<label for="tAvail">Available from</label>
+					<label for="tAvail">{{ 'available from' | translate }}</label>
 					<input type="date" class="form-control" id="tAvail" placeholder="YYYY-MM-DD" ng-model="ui.description.edit.data.available_from">
 				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
+				<button type="submit" class="btn btn-default">{{ 'submit' | translate }}</button>
 			</form>
 
 			<hr />
@@ -366,25 +366,25 @@
 
 		<div>
 			<div class="btn-group">
-				<button type="button" class="btn btn-default" ng-class="{'btn-primary' : ui.forum.active}" ng-click="ui.forum.activate();">Forum</button>
-				<button type="button" class="btn btn-default" ng-class="{'btn-primary' : ui.comments.active}" ng-click="ui.comments.activate();">Comments</button>
+				<button type="button" class="btn btn-default" ng-class="{'btn-primary' : ui.forum.active}" ng-click="ui.forum.activate();">{{ 'forum' | translate }}</button>
+				<button type="button" class="btn btn-default" ng-class="{'btn-primary' : ui.comments.active}" ng-click="ui.comments.activate();">{{ 'comments' | translate }}</button>
 			</div>
 			
 			<div ng-show="ui.forum.active" class="pull-right">
-				<button ng-show="ui.forum.topic.active" ng-click="ui.forum.topic.active = false" class="btn btn-warning">Close topic</button>
-				<button class="btn btn-primary" ng-click="ui.forum.form.active = !ui.forum.form.active" ng-show="ui.forum.active && !ui.forum.topic.active && ui.user.data.signedin">New Subject</button>
-				<button class="btn btn-primary" ng-click="ui.forum.form.active = !ui.forum.form.active" ng-show="ui.forum.active && ui.forum.topic.active && ui.user.data.signedin">Close Subject</button>
+				<button ng-show="ui.forum.topic.active" ng-click="ui.forum.topic.active = false" class="btn btn-warning">{{ 'close topic' | translate }}</button>
+				<button class="btn btn-primary" ng-click="ui.forum.form.active = !ui.forum.form.active" ng-show="ui.forum.active && !ui.forum.topic.active && ui.user.data.signedin">{{ 'new Subject' | translate }}</button>
+				<button class="btn btn-primary" ng-click="ui.forum.form.active = !ui.forum.form.active" ng-show="ui.forum.active && ui.forum.topic.active && ui.user.data.signedin">{{ 'close Subject' | translate }}</button>
 			</div>
 			<div ng-show="ui.comments.active" class="pull-right">
-				<button class="btn btn-primary"  ng-click="ui.comments.form.active = true" ng-show="!ui.comments.form.active && ui.user.data.signedin">New Comment</button>
-				<button class="btn btn-primary"  ng-click="ui.comments.form.active = false" ng-show="ui.comments.form.active">Close form</button>
+				<button class="btn btn-primary"  ng-click="ui.comments.form.active = true" ng-show="!ui.comments.form.active && ui.user.data.signedin">{{ 'new Comment' | translate }}</button>
+				<button class="btn btn-primary"  ng-click="ui.comments.form.active = false" ng-show="ui.comments.form.active">{{ 'close form' | translate }}</button>
 			</div>
 		</div>
 
 	</div>
 
 	<div class="row" ng-show="ui.comments.active">
-		<h2>Comments</h2>
+		<h2>{{ 'comments' | translate }}</h2>
 		<div class="container " style="margin-bottom:40px;" ng-show="ui.comments.list && !ui.comments.form.active">
 			<div class="row col-lg-10 col-lg-offset-1" ng-repeat="comment in ui.comments.list">
 				<div class="container">
@@ -404,20 +404,20 @@
 				<hr />
 				<div class="alert alert-success" ng-show="ui.comments.form.error">{{ui.comments.form.error}}</div>
 				<div class="form-group">
-					<label for="title" class="col-lg-2 control-label">Title</label>
+					<label for="title" class="col-lg-2 control-label">{{ 'title' | translate }}</label>
 					<div class="col-lg-10">
-						<input type="text" ng-model="ui.comments.form.data.title" class="form-control" id="title" placeholder="Title">
+						<input type="text" ng-model="ui.comments.form.data.title" class="form-control" id="title" placeholder="{{ 'title' | translate }}">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="Message" class="col-lg-2 control-label">Message</label>
+					<label for="Message" class="col-lg-2 control-label">{{ 'message' | translate }}</label>
 					<div class="col-lg-10">
 						<textarea ng-model="ui.comments.form.data.text" id="Message" class="form-control"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
-						<button type="submit" class="btn btn-default">Comment</button>
+						<button type="submit" class="btn btn-default">{{ 'comment' | translate }}</button>
 					</div>
 				</div>
 			</form>
@@ -440,25 +440,25 @@
 				</div>
 			</div>
 			<div class="row col-lg-10 col-lg-offset-1">
-				<button class="btn btn-primary" ng-click="ui.forum.topic.form.active = !ui.forum.topic.form.active" ng-show="!ui.forum.topic.form.active">Reply</button>
+				<button class="btn btn-primary" ng-click="ui.forum.topic.form.active = !ui.forum.topic.form.active" ng-show="!ui.forum.topic.form.active">{{ 'reply' | translate }}</button>
 				<hr />
 				<form class="form-horizontal" role="form" ng-submit="ui.forum.topic.form.submit()" ng-show="ui.forum.topic.form.active">
 					<div class="alert alert-success" ng-show="ui.forum.topic.form.error">{{ui.forum.topic.form.error}}</div>
 					<div class="form-group">
-						<label for="title" class="col-lg-2 control-label">Title</label>
+						<label for="title" class="col-lg-2 control-label">{{ 'title' | translate }}</label>
 						<div class="col-lg-10">
-							<input type="text" ng-model="ui.forum.topic.form.data.title" class="form-control" id="title" placeholder="Title">
+							<input type="text" ng-model="ui.forum.topic.form.data.title" class="form-control" id="title" placeholder="{{ 'title' | translate }}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="Message" class="col-lg-2 control-label">Message</label>
+						<label for="Message" class="col-lg-2 control-label">{{ 'message' | translate }}</label>
 						<div class="col-lg-10">
 							<textarea ng-model="ui.forum.topic.form.data.text" id="Message" class="form-control"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-lg-offset-2 col-lg-10">
-							<button type="submit" class="btn btn-default">Reply</button>
+							<button type="submit" class="btn btn-default">{{ 'reply' | translate }}</button>
 						</div>
 					</div>
 				</form>
@@ -469,20 +469,20 @@
 			<form class="form-horizontal" role="form" ng-submit="ui.forum.form.submit()" ng-show="ui.forum.form.active">
 				<div class="alert alert-success" ng-show="ui.forum.form.error">{{ui.forum.topic.form.error}}</div>
 				<div class="form-group">
-					<label for="title" class="col-lg-2 control-label">Title</label>
+					<label for="title" class="col-lg-2 control-label">{{ 'title' | translate }}</label>
 					<div class="col-lg-10">
-						<input type="text" ng-model="ui.forum.form.data.title" class="form-control" id="title" placeholder="Title">
+						<input type="text" ng-model="ui.forum.form.data.title" class="form-control" id="title" placeholder="{{ 'title' | translate }}">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="Message" class="col-lg-2 control-label">Message</label>
+					<label for="Message" class="col-lg-2 control-label">{{ 'message' | translate }}</label>
 					<div class="col-lg-10">
 						<textarea ng-model="ui.forum.form.data.text" id="Message" class="form-control"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
-						<button type="submit" class="btn btn-default">New topic</button>
+						<button type="submit" class="btn btn-default">{{ 'new topic' | translate }}</button>
 					</div>
 				</div>
 			</form>
@@ -490,7 +490,7 @@
 		
 		<table class="table table-striped">
 			<thead>
-				<tr><th>Date</th><th>Title</th><th>User</th></tr>
+				<tr><th>{{ 'date' | translate }}</th><th>{{ 'title' | translate }}</th><th>{{ 'user' | translate }}</th></tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="topic in ui.forum.list">
