@@ -6,6 +6,7 @@ portal.
 		when('/link/:toolId', {templateUrl: './view/link.html', controller:"LinkCtrl", reloadOnSearch: false, resolve: LinkCtrler.resolveLinkCtrl}).
 		when('/add', {templateUrl: './view/tool.insert.html', controller:"AddToolCtrl", reloadOnSearch: false, resolve: AddTool.resolveAddTool}).
 		when('/login/', {templateUrl: './view/login.html', controller:"LoginCtrl"}).
+                when('/profile/', {templateUrl: './view/profile.html', controller:"ProfileCtrl"}).
 		when('/about/rdf/', {templateUrl: './view/rdf.html'}).
 		when('/about/api/', {templateUrl: './view/apiFaq.html', controller:"apiFaqCtrl", resolve: apiFaq.resolveAPIFAQ}).
 		when('/search/faceted', {templateUrl: './view/faceted.html', controller:"FacetedCtrl", reloadOnSearch: false, resolve: Faceted.resolveFaceted}).
