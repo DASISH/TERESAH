@@ -15,8 +15,8 @@
 				<meta property="og:title" content="'.$tool["descriptions"]["title"].'" />
 				<meta property="og:site_name" content="DASISH-TERESAH" />
 				<meta property="og:description" content="'.$tool["descriptions"]["description"][0]["text"].'" />
-				<meta http-equiv="refresh" content="1; url=http://'.$_SERVER['HTTP_HOST'].'/UI/#/tool/'.$tool["identifier"]["shortname"].'" />
-			</head>
+                                <meta http-equiv="refresh" content="1; url=http://'.$_SERVER['HTTP_HOST'].'/#/tool/'.$tool["identifier"]["shortname"].'" />			
+</head>
 			<body>
 				'.nl2br($tool["descriptions"]["description"][0]["text"]).'
 			</body>
