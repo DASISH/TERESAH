@@ -33,26 +33,26 @@
 			
 				
 			<div class="btn-group btn-block btn-group-justified btn-col-group">
-				<span class="btn"><b>Order by</b></span>
+				<span class="btn"><b>{{ 'order by' | translate }}</b></span>
 				<span class="btn btn-default" ng-class="{'btn-primary' : ui.facets.params.orderBy == 'title'}"  ng-click="ui.facets.params.orderBy = 'title';">
-					Title
+					{{ 'title' | translate }}
 				</span>
 				<span class="btn btn-default" ng-class="{'btn-primary' : ui.facets.params.orderBy == 'identifier'}"  ng-click="ui.facets.params.orderBy = 'identifier';">
-					Date
+					{{ 'date' | translate }}
 				</span>
 			</div>
 			<div class="btn-group btn-block btn-group-justified">
 				<span class="btn"><b>Order</b></span>
 				<span class="btn btn-default" ng-class="{'btn-primary' : ui.facets.params.order == 'ASC'}"  ng-click="ui.facets.params.order = 'ASC';">
-					A-Z
+					{{ 'a-z' | translate }}
 				</span>
 				<span class="btn btn-default" ng-class="{'btn-primary' : ui.facets.params.order == 'DESC'}"  ng-click="ui.facets.params.order = 'DESC';">
-					Z-A
+					{{ 'z-a' | translate }}
 				</span>
 			</div>
 			<hr />
 			<p>
-			<button ng-click="ui.facets.submit()" class="btn btn-primary btn-lg btn-block">Search</button>
+			<button ng-click="ui.facets.submit()" class="btn btn-primary btn-lg btn-block">{{ 'search' | translate }}</button>
 			</p>
 		</div>
 		<div class="col-lg-9">
@@ -69,7 +69,7 @@
 									</div>
 									<div class="panel-body">
 										<div class="btn-group btn-group-sm" style="margin-bottom:5px;">
-											<a class="btn btn-default" ng-class="{'active' : !facet.option.case_insensitivity}" ng-click="facet.option.case_insensitivity = !facet.option.case_insensitivity; facet.possibilities = ui.facets.search(facet);">Case Sens.</a>
+											<a class="btn btn-default" ng-class="{'active' : !facet.option.case_insensitivity}" ng-click="facet.option.case_insensitivity = !facet.option.case_insensitivity; facet.possibilities = ui.facets.search(facet);">{{ 'case sensitive' | translate }}</a>
 										</div>
 										
 										<input type="text" class="form-control" ng-model="facet.filter" placeholder="Filter your {{facet.facetLegend}}" ng-change="facet.possibilities = ui.facets.search(facet)"/>
@@ -90,7 +90,7 @@
 					<div class="alert alert-warning">{{ui.facets.error}}</div>
 				</section>
 				<section id="viewContent" ng-show="results.items">
-					<p>Tools from <span ng-bind="ui.parameters.start + 1"></span> to <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> on <span ng-bind="ui.parameters.total"></span> available</p>
+					<p>Tools from <span ng-bind="ui.parameters.start + 1"></span> {{ 'to' | translate }} <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> on <span ng-bind="ui.parameters.total"></span> available</p>
 					<hr />
 					
 					<section class="itemList" items="results.items"></section>
