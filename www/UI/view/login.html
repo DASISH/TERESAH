@@ -30,7 +30,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-6">
-			<h2>Sign in</h2>
+			<h2>{{ 'sign in' | translate }}</h2>
 			<form class="form-signin" ng-submit="ui.login.submit()">
 				<input class="form-control" type="text" name="user" ng-model="ui.login.inputs.user" autofocus="" placeholder="{{ 'username' | translate }}">
 				<input class="form-control" type="password" name="password" ng-model="ui.login.inputs.password" placeholder="{{ 'password' | translate }}">

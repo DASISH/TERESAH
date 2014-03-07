@@ -10,16 +10,16 @@
 						</h4>
 					<section class="list-group-options">
 					
-						<span ng-bind="facet.facetTotal"></span> label(s) available
+						<span ng-bind="facet.facetTotal"></span> {{ 'label(s) available' | translate }}
 						<hr />
 						<div ng-click="ui.facets.options[facet.facetParam].inclusive = !ui.facets.options[facet.facetParam].inclusive;" class="btn-col-group">
-							<span class="btn"><b>Inclusive</b></span>
+							<span class="btn"><b>{{ 'inclusive' | translate }}</b></span>
 							<span class="btn pull-right" ng-class="{'btn-default' : !(ui.facets.options[facet.facetParam].inclusive), 'btn-primary' : (ui.facets.options[facet.facetParam].inclusive)}" >
 								<span class="glyphicon glyphicon-off"></span>
 							</span>
 						</div>
 						<div ng-click="ui.facets.options[facet.facetParam].optional = !ui.facets.options[facet.facetParam].optional;">
-							<span class="btn"><b>Optional</b></span>
+							<span class="btn"><b>{{ 'optional' | translate }}</b></span>
 							<span class="btn pull-right" ng-class="{'btn-default' : !(ui.facets.options[facet.facetParam].optional), 'btn-primary' : (ui.facets.options[facet.facetParam].optional)}" >
 								<span class="glyphicon glyphicon-off"></span>
 							</span>
@@ -90,7 +90,7 @@
 					<div class="alert alert-warning">{{ui.facets.error}}</div>
 				</section>
 				<section id="viewContent" ng-show="results.items">
-					<p>Tools from <span ng-bind="ui.parameters.start + 1"></span> {{ 'to' | translate }} <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> on <span ng-bind="ui.parameters.total"></span> available</p>
+					<p>Tools from <span ng-bind="ui.parameters.start + 1"></span> {{ 'to' | translate }} <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> on <span ng-bind="ui.parameters.total"></span> {{ 'available' | translate }}</p>
 					<hr />
 					
 					<section class="itemList" items="results.items"></section>

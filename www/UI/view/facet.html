@@ -1,14 +1,14 @@
 <ol class="breadcrumb">
-  <li><a href="#/">Home</a></li>
-  <li><a href="#/facet">Browse by facet</a></li>
+  <li><a href="#/">{{ 'home' | translate }}</a></li>
+  <li><a href="#/facet">{{ 'browse by facet' | translate }}</a></li>
   <li><a ng-href="#/facet/{{results.facet.facetParam}}" ng-bind="results.facet.facetLegend"></a></li>
 </ol>
 
 <section id="viewHeader">
 	<div class="page-header">
-		<h1><span ng-bind="results.facet.facetLegend"></span> <small>Browse facets</small></h1>	
+		<h1><span ng-bind="results.facet.facetLegend"></span> <small>{{ 'browse facets' | translate }}</small></h1>	
 		
-		<p>Facet's elements from <span ng-bind="ui.parameters.start + 1"></span> to <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> on <span ng-bind="ui.parameters.total"></span> available</p>
+		<p>{{ 'facets elements from' | translate }} <span ng-bind="ui.parameters.start + 1"></span> {{ 'to' | translate }} <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> {{ 'on' | translate }} <span ng-bind="ui.parameters.total"></span> {{ 'available' | translate }}</p>
 	</div>
 </section>
 <section id="viewContent" ng-show="results.items">
