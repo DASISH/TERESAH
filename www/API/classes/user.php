@@ -50,7 +50,20 @@
 		 */
 		static function signup($post, $id = false) {
 			if(isset($post["mail"]) && isset($post["password"]) && isset($post["name"]) && isset($post["user"])) {
-				$req = "INSERT INTO user (`user_uid`,`name`,`mail`,`login`,`password`,`active`,`admin`) VALUES (NULL, ?, ? , ? , ?, NULL, NULL )";
+				//Check for existing username/mail
+                                $req = "SELECT mail, login from user WHERE mail = ? OR login = ?";
+                                $req = self::DB()->prepare($req);
+                                $req->execute(array($post["mail"], $post["user"]));
+                                if($req->rowCount() >= 1) {
+                                    $u = $req->fetch(PDO::FETCH_ASSOC);
+                                    if($post["mail"] == $u["mail"]){
+                                        return array("status" => "error", "message" => "Email already in use");
+                                    }else if($post["user"] == $u["login"]){
+                                        return array("status" => "error", "message" => "Username already in use");
+                                    }
+                                }
+                                
+                                $req = "INSERT INTO user (`user_uid`,`name`,`mail`,`login`,`password`,`active`,`admin`) VALUES (NULL, ?, ? , ? , ?, NULL, NULL )";
 				$req = self::DB()->prepare($req);
 				$req->execute(array($post["name"], $post["mail"], $post["user"], hash("sha256", $post["password"])));
 				
