@@ -103,5 +103,8 @@ var i18n_en = {
     'facets elements from':'Facet´s elements from',
     'taxonomy':'Taxonomy',
     'source':'Source',
-    'type':'Type'
+    'type':'Type',
+    'New password':'New password',
+    're-type password':'Re-type password',
+    'update profile':'Update profile'
 };

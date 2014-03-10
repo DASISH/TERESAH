@@ -103,5 +103,8 @@ var i18n_sv = {
     'facets elements from':'Facet´s elements from',
     'taxonomy':'Taxonomy',
     'source':'Källa',
-    'type':'Typ'    
+    'type':'Typ',
+    'New password':'New password',
+    're-type password':'Re-type password',
+    'update profile':'Update profile'
 };

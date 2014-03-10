@@ -1,30 +1,30 @@
 <div class="container" ng-show="$parent.user.signedin == true">    
     <form class="form-horizontal" role="form" ng-show="$parent.user.signedin" ng-submit="ui.profile.submit()">
         <div class="form-group">
-            <label for="inputName1" class="col-lg-2 control-label">Name</label>
+            <label for="inputName1" class="col-lg-2 control-label">{{ 'name' | translate }}</label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputName1" ng-model="ui.user.data.name" placeholder="Name">
+                <input type="text" class="form-control" id="inputName1" ng-model="ui.user.data.name" placeholder="{{ 'name' | translate }}">
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail1" class="col-lg-2 control-label">Email</label>
+            <label for="inputEmail1" class="col-lg-2 control-label">{{ 'email' | translate }}</label>
             <div class="col-lg-10">
-                <input type="email" class="form-control" id="inputEmail1"  ng-model="ui.user.data.mail" placeholder="Email">
+                <input type="email" class="form-control" id="inputEmail1"  ng-model="ui.user.data.mail" placeholder="{{ 'email' | translate }}">
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword1" class="col-lg-2 control-label">New password</label>
+            <label for="inputPassword1" class="col-lg-2 control-label">{{ 'new password' | translate }}</label>
             <div class="col-lg-10">
-                <input type="password" class="form-control" id="inputPassword1" ng-model="todo" placeholder="Password">
+                <input type="password" class="form-control" id="inputPassword1" ng-model="todo" placeholder="{{ 'password' | translate }}">
             </div>
-            <label for="inputPassword2" class="col-lg-2 control-label">Re-type password</label>
+            <label for="inputPassword2" class="col-lg-2 control-label">{{ 're-type password' | translate }}</label>
             <div class="col-lg-10">
-                <input type="password2" class="form-control" id="inputPassword2" ng-model="todo" placeholder="Password">
+                <input type="password2" class="form-control" id="inputPassword2" ng-model="todo" placeholder="{{ 're-type password' | translate }}">
             </div>
         </div>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
-                <button type="submit" class="btn btn-primary btn-block">Update profile</button>
+                <button type="submit" class="btn btn-primary btn-block">{{ 'update profile' | translate }}</button>
             </div>
         </div>
     </form>
