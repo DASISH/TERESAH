@@ -6,6 +6,8 @@ var Login = portal.controller('LoginCtrl', ['$scope', 'ui',  'Item', '$rootScope
 			
 				$item.resolver.user.signin($scope.ui.login.inputs, function(data) {
 					if(data.error || data.signin == false) {
+                                            $scope.ui.login.status =  data.status;
+                                            $scope.ui.login.message =  data.message;
 					} else {
 						o = {name : data.Name, mail: data.Mail, signedin : true };
 						$root.user = o;
@@ -15,6 +17,8 @@ var Login = portal.controller('LoginCtrl', ['$scope', 'ui',  'Item', '$rootScope
 				});
 				
 			},
+			message : false,
+			status : false,                        
 			inputs : {}
 		},
 		signup : {

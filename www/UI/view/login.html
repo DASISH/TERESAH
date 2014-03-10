@@ -1,81 +1,82 @@
 <div class="row" ng-show="!$parent.user.signedin">
-	<div class="row">
-		<h2>{{ 'use your social network' | translate }} :</h2>
-		<ul class="list-unstyled list-inline lead">
-			<li>
-				<span class="icon-stack" ng-click="ui.user.oAuth('Facebook')">
-					<i class="icon-check-empty icon-stack-base"></i>
-					<i class="icon-facebook"></i>
-				</span>
-			</li>
-			<li>
-				<span class="icon-stack" ng-click="ui.user.oAuth('Github')">
-					<i class="icon-check-empty icon-stack-base"></i>
-					<i class="icon-github"></i>
-				</span>
-			</li>
-			<li>
-				<span class="icon-stack" ng-click="ui.user.oAuth('Twitter')">
-					<i class="icon-check-empty icon-stack-base"></i>
-					<i class="icon-twitter"></i>
-				</span>
-			</li>
-			<li>
-				<span class="icon-stack" ng-click="ui.user.oAuth('Google')">
-					<i class="icon-check-empty icon-stack-base"></i>
-					<i class="icon-google-plus"></i>
-				</span>
-			</li>
-		</ul>
-	</div>
-	<div class="row">
-		<div class="col-lg-6">
-			<h2>{{ 'sign in' | translate }}</h2>
-			<form class="form-signin" ng-submit="ui.login.submit()">
-				<input class="form-control" type="text" name="user" ng-model="ui.login.inputs.user" autofocus="" placeholder="{{ 'username' | translate }}">
-				<input class="form-control" type="password" name="password" ng-model="ui.login.inputs.password" placeholder="{{ 'password' | translate }}">
-				<button class="btn btn-lg btn-primary btn-block" type="submit">{{ 'sign in' | translate }}</button>
-			</form>
-		</div>
-		<div class="col-lg-6">
-			<h2>Sign up</h2>
-			<div class="alert" ng-class="{'alert-success' : (ui.signup.status == 'success'), 'alert-warning' : (ui.signup.status == 'error')}" ng-show="ui.signup.message" ng-bind="ui.signup.message"></div>
-			<form class="form-horizontal" role="form" ng-show="!ui.signup.message.success" ng-submit="ui.signup.submit()">
-				<div class="form-group">
-					<label for="inputName1" class="col-lg-2 control-label">{{ 'name' | translate }}</label>
-					<div class="col-lg-10">
-						<input type="text" class="form-control" id="inputName1" ng-model="ui.signup.inputs.name" placeholder="{{ 'name' | translate }}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail1" class="col-lg-2 control-label">{{ 'email' | translate }}</label>
-					<div class="col-lg-10">
-						<input type="email" class="form-control" id="inputEmail1"  ng-model="ui.signup.inputs.mail" placeholder="{{ 'email' | translate }}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputUsername1" class="col-lg-2 control-label">{{ 'username' | translate }}</label>
-					<div class="col-lg-10">
-						<input type="text" class="form-control" id="inputUsername1"  ng-model="ui.signup.inputs.user" placeholder="{{ 'username' | translate }}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputPassword1" class="col-lg-2 control-label">{{ 'password' | translate }}</label>
-					<div class="col-lg-10">
-						<input type="password" class="form-control" id="inputPassword1" ng-model="ui.signup.inputs.password" placeholder="{{ 'password' | translate }}">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-lg-offset-2 col-lg-10">
-						<button type="submit" class="btn btn-primary btn-block">{{ 'sign up' | translate }}</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+    <div class="row">
+        <h2>{{ 'use your social network' | translate }} :</h2>
+        <ul class="list-unstyled list-inline lead">
+            <li>
+                <span class="icon-stack" ng-click="ui.user.oAuth('Facebook')">
+                    <i class="icon-check-empty icon-stack-base"></i>
+                    <i class="icon-facebook"></i>
+                </span>
+            </li>
+            <li>
+                <span class="icon-stack" ng-click="ui.user.oAuth('Github')">
+                    <i class="icon-check-empty icon-stack-base"></i>
+                    <i class="icon-github"></i>
+                </span>
+            </li>
+            <li>
+                <span class="icon-stack" ng-click="ui.user.oAuth('Twitter')">
+                    <i class="icon-check-empty icon-stack-base"></i>
+                    <i class="icon-twitter"></i>
+                </span>
+            </li>
+            <li>
+                <span class="icon-stack" ng-click="ui.user.oAuth('Google')">
+                    <i class="icon-check-empty icon-stack-base"></i>
+                    <i class="icon-google-plus"></i>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>{{ 'sign in' | translate }}</h2>
+            <div class="alert" ng-class="{'alert-success' : (ui.login.status == 'success'), 'alert-warning' : (ui.login.status == 'error')}" ng-show="ui.login.message" ng-bind="ui.login.message"></div>
+            <form class="form-signin" ng-submit="ui.login.submit()">
+                <input class="form-control" type="text" name="user" ng-model="ui.login.inputs.user" autofocus="" placeholder="{{ 'username' | translate }}">
+                <input class="form-control" type="password" name="password" ng-model="ui.login.inputs.password" placeholder="{{ 'password' | translate }}">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">{{ 'sign in' | translate }}</button>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <h2>Sign up</h2>
+            <div class="alert" ng-class="{'alert-success' : (ui.signup.status == 'success'), 'alert-warning' : (ui.signup.status == 'error')}" ng-show="ui.signup.message" ng-bind="ui.signup.message"></div>
+            <form class="form-horizontal" role="form" ng-show="!ui.signup.message.success" ng-submit="ui.signup.submit()">
+                <div class="form-group">
+                    <label for="inputName1" class="col-lg-2 control-label">{{ 'name' | translate }}</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputName1" ng-model="ui.signup.inputs.name" placeholder="{{ 'name' | translate }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-2 control-label">{{ 'email' | translate }}</label>
+                    <div class="col-lg-10">
+                        <input type="email" class="form-control" id="inputEmail1"  ng-model="ui.signup.inputs.mail" placeholder="{{ 'email' | translate }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputUsername1" class="col-lg-2 control-label">{{ 'username' | translate }}</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputUsername1"  ng-model="ui.signup.inputs.user" placeholder="{{ 'username' | translate }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword1" class="col-lg-2 control-label">{{ 'password' | translate }}</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" id="inputPassword1" ng-model="ui.signup.inputs.password" placeholder="{{ 'password' | translate }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-primary btn-block">{{ 'sign up' | translate }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <div class="container" ng-show="$parent.user.signedin == true">
-	<div class="alert alert-info">
-		{{ 'signed in!' | translate }}
-	</div>
+    <div class="alert alert-info">
+        {{ 'signed in!' | translate }}
+    </div>
 </div>
