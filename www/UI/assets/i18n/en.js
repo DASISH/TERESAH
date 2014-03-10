@@ -104,7 +104,8 @@ var i18n_en = {
     'taxonomy':'Taxonomy',
     'source':'Source',
     'type':'Type',
-    'New password':'New password',
+    'new password':'New password',
     're-type password':'Re-type password',
-    'update profile':'Update profile'
+    'update profile':'Update profile',
+    'or':'or'
 };

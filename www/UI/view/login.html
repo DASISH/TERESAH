@@ -33,7 +33,7 @@
             <h2>{{ 'sign in' | translate }}</h2>
             <div class="alert" ng-class="{'alert-success' : (ui.login.status == 'success'), 'alert-warning' : (ui.login.status == 'error')}" ng-show="ui.login.message" ng-bind="ui.login.message"></div>
             <form class="form-signin" ng-submit="ui.login.submit()">
-                <input class="form-control" type="text" name="user" ng-model="ui.login.inputs.user" autofocus="" placeholder="{{ 'username' | translate }}">
+                <input class="form-control" type="text" name="user" ng-model="ui.login.inputs.user" autofocus="" placeholder="{{ 'username' | translate }} {{ 'or' | translate }} {{ 'email' | translate }}">
                 <input class="form-control" type="password" name="password" ng-model="ui.login.inputs.password" placeholder="{{ 'password' | translate }}">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">{{ 'sign in' | translate }}</button>
             </form>

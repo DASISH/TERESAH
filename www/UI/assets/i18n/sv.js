@@ -106,5 +106,6 @@ var i18n_sv = {
     'type':'Typ',
     'New password':'New password',
     're-type password':'Re-type password',
-    'update profile':'Update profile'
+    'update profile':'Update profile',
+    'or':'eller'
 };

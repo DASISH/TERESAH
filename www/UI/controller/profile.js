@@ -4,6 +4,11 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
                         data : {
                                 
                         }
+                },
+                profile:{
+                    submit: function() {
+                        console.log('submit profile')
+                    }
                 }
         }
         $ui.user.signedin(function (data) {

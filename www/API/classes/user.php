@@ -86,6 +86,17 @@ class User{
             return array("status" => "error", "message" => "A field is missing");
         }
     }
+    
+    function update($user_uid, $name, $email, $password){
+        $req = "UPDATE user SET name = ?, mail = ?, password = ? WHERE user_uid = ?";
+        $req = self::DB()->prepare($req);
+        $req->execute(array($name, $mail, $user, hash("sha256", $post["password"])));
+        if ($req->rowCount() == 1){
+            return array("status" => "success", "message" => "Profile updated");
+        }else{
+            return array("status" => "error", "message" => "Failed to update profile");
+        }
+    }
 
     /**
      * 	Sign a user in using oAuth. Sign up the user if he doesnt exist.
