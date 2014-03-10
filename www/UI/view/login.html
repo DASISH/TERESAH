@@ -39,7 +39,7 @@
             </form>
         </div>
         <div class="col-lg-6">
-            <h2>Sign up</h2>
+            <h2>{{ 'sign up' | translate }}</h2>
             <div class="alert" ng-class="{'alert-success' : (ui.signup.status == 'success'), 'alert-warning' : (ui.signup.status == 'error')}" ng-show="ui.signup.message" ng-bind="ui.signup.message"></div>
             <form class="form-horizontal" role="form" ng-show="!ui.signup.message.success" ng-submit="ui.signup.submit()">
                 <div class="form-group">
