@@ -2,7 +2,6 @@ var Home = portal.controller('HomeCtrl', ['$scope', 'ui',  'Item', function($sco
 	$scope.results = {
 		items: $item.data.response
 	}
-	console.log($scope.results)
 	$scope.ui = {
 		parameters : $item.data.parameters,
 		pages : {
