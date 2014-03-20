@@ -39,19 +39,18 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li ng-class="ui.routes.getRoute('HomeCtrl')"><a href="#/">{{ 'home' | translate }}</a></li>
-					<li ng-class="ui.routes.getRoute('facetListCtrl')"><a href="#/facet">{{ 'browse' | translate }}</a></li>
+					<li ng-class="ui.routes.getRoute('HomeCtrl')"><a href="#/" ng-bind=" 'home' | translate "></a></li>
+					<li ng-class="ui.routes.getRoute('facetListCtrl')"><a href="#/facet" ng-bind="'browse' | translate"></a></li>
 					<li class="dropdown">
 					  <a class="dropdown-toggle">{{ 'search' | translate }}</a>
 					  <ul class="dropdown-menu">
-							<li ng-class="ui.routes.getRoute('SearchCtrl')"><a href="#/search/general">{{ 'general' | translate }}</a></li>
-							<li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="#/search/faceted">{{ 'faceted' | translate }}</a></li>
+							<li ng-class="ui.routes.getRoute('SearchCtrl')"><a href="#/search/general" ng-bind=" 'general' | translate"></a></li>
+							<li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="#/search/faceted" ng-bind=" 'faceted' | translate"></a></li>
 					  </ul>
 					</li>
-					<li ng-class="ui.routes.getRoute('AddToolCtrl')" ng-show="ui.user.data.signedin"><a href="#/add">{{ 'Add' | translate }}</a></li>
+					<li ng-class="ui.routes.getRoute('AddToolCtrl')" ng-show="ui.user.data.signedin"><a href="#/add" ng-bind=" 'Add' | translate"></a></li>
 					<li class="dropdown">
-					  <a class="dropdown-toggle">
-						{{ 'about' | translate }}
+					  <a class="dropdown-toggle"ng-bind=" 'about' | translate">
 					  </a>
 					  <ul class="dropdown-menu">
 						<li ng-class="ui.routes.getRoute('rdf')"><a href="#/about/rdf/">RDF</a></li>
@@ -61,9 +60,9 @@
 				</ul>
                                 <div class="nav navbar-nav navbar-right" style="padding-top:0.5em;"><a href="http://dasish.eu"><img src="./assets/img/dasish_header_logo.png" alt="DASISH logo"></a></div>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="pull-right" ng-show="ui.user.data.signedin"><a><span class="glyphicon glyphicon-user"></span> <span ng-bind="ui.user.data.name.substr(0,7);"></span><span ng-show="ui.user.data.name.length > 7"></span>...</a></li>
-                                        <li class="pull-right" ng-show="ui.user.data.signedin"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> <span>{{ 'sign out' | translate }}</span></a></li>
-                                        <li class="pull-right" ng-show="!ui.user.data.signedin"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> <span>{{ 'sign in' | translate }}</span></a></li>
+					<li class="pull-right" ng-show="ui.user.data.signedin"><a  href="#/profile"><span class="glyphicon glyphicon-user"></span> <span ng-bind="ui.user.data.name.substr(0,7);"></span><span ng-show="ui.user.data.name.length > 7"></span></a></li>
+                    <li class="pull-right" ng-show="ui.user.data.signedin"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> <span ng-bind=" 'sign out' | translate"></span></a></li>
+                    <li class="pull-right" ng-show="!ui.user.data.signedin"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> <span ng-bind="'sign in' | translate "></span></a></li>
 				</ul>
 				<form class="navbar-form navbar-right hidden-sm" ng-submit="ui.search.go()">
 					<div class="form-group">

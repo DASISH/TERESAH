@@ -1,14 +1,34 @@
 <?php
 
-$app->post('/profile/', function () {
+$app->post('/profile/', function () use ($require, $app) {
 
     if (!isset($_SESSION["user"]["id"])) {
         jP(array("status" => "error", "message" => "You need to be logged in to use this function"));
         exit();
     }
 
-    User::update($obj.id, $obj.name, $obj.mail, $obj.password);
-    exit;
+	$require->req("user");
+		
+	if(count($app->request->post()) > 0) {
+		$input = $app->request->post();
+	} elseif(count($app->request()->getBody()) > 0) {
+		$input = $app->request()->getBody();
+	} else {
+		$app->response()->status(400);
+	}
+
+	$post = array();
+	if(isset($input["name"])) {
+		$post["name"] = $input["name"];
+	}
+	if(isset($input["mail"])) {
+		$post["mail"] = $input["mail"];
+	}
+	if(isset($input["password"])) {
+		$post["password"] = $input["password"];
+	}
+
+    jP(User::update($_SESSION["user"]["id"], $post));
 });
 
 ?>

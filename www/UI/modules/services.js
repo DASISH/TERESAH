@@ -83,7 +83,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 			user : {
 				signin : Restangular.all("login/"),
 				signup : Restangular.all("signup/"),
-                                profile : Restangular.all("profile/")
+                profile : Restangular.all("profile/")
 			},
 			oAuth : Restangular.all("oAuth"),
 			faq : Restangular.all("faq")
@@ -374,27 +374,25 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 					});
 					
 				},
-                                profile: {
-                                    edit: function(opt, callback) {
-                                        if (typeof (callback) === 'undefined')
-                                            callback = false;
-                                        if (typeof (opt) === 'undefined') {
-                                            return {Error: "No input given"};
-                                        } else {
-                                            console.log("in Item.resolver.user.profile.edit");
-                                            return Item.routes.user.profile.post().then(function(data) {
-                                                /*
-                                                if (callback) {
-                                                    return callback(data);
-                                                }
-                                                Item.data = data.original;
-                                                return data.original;
-                                                */
-                                            });
-                                        }
-                                    }
+                profile: {
+                    edit: function(opt, callback) {
+                        if (typeof (callback) === 'undefined')
+                            callback = false;
+                        if (typeof (opt) === 'undefined') {
+                            return {Error: "No input given"};
+                        } else {
+                            console.log("in Item.resolver.user.profile.edit");
+                            return Item.routes.user.profile.post(opt).then(function(data) {
+                                if (callback !== false) {
+                                    return callback(data);
                                 }
-                        },
+                                Item.data = data.original;
+                                return data.original;
+                            });
+                        }
+                    }
+                }
+        },
 			faq : function(callback) {
 				if(typeof(callback)==='undefined') callback = false;
 				

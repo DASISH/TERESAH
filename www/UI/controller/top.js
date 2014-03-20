@@ -57,6 +57,12 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 	$scope.$on('$routeChangeStart', function(next, current) { 
 		$scope.ui.routes.active = current.controller;
 	});
+
+	$root.$on("USER_UPDATE", function(event, data){
+		console.log(data);
+		$scope.ui.user.data = data;
+		$root.user = data;
+	});
 	
 	//Watch for rootscope.user.signedin
 	$scope.$watch('user.signedin', function(status) {

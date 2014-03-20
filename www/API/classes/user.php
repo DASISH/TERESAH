@@ -87,15 +87,48 @@ class User{
         }
     }
     
-    static function update($user_uid, $name, $email, $password){
-        $req = "UPDATE user SET name = ?, mail = ?, password = ? WHERE user_uid = ?";
-        $req = self::DB()->prepare($req);
-        $req->execute(array($name, $mail, $user, hash("sha256", $post["password"])));
-        if ($req->rowCount() == 1){
-            return array("status" => "success", "message" => "Profile updated");
-        }else{
-            return array("status" => "error", "message" => "Failed to update profile");
+
+    /**
+     *  Update a user
+     *
+     * @param $user_uid             User's UID
+     * @param $post["mail"]         User's mail
+     * @param $post["name"]         User's name
+     * @param $post["password"]     User's password
+     * @return Status and User's data
+     */
+    static function update($user_uid, $input) {
+        $exec = $input;
+        $exec["uid"] = $user_uid;
+
+        if(count($input) == 0) {
+            return array("status" => "error", "message" => "No field for profile update");
         }
+
+        if(isset($exec["password"])) {
+            $exec["password"] = hash("sha256", $exec["password"]);
+        }
+
+        $update = array();
+        foreach ($input as $field => &$value) {
+            $update[] = " " . $field . " = :" . $field . " ";
+        }
+
+        $req = "UPDATE user SET " . implode(" , ", $update) . " WHERE user_uid = :uid ";
+        $req = self::DB()->prepare($req);
+        $req->execute($exec);
+        if ($req->rowCount() == 1 || $req->rowCount() == 2) {
+            if(isset($exec["name"])) {
+                $_SESSION["user"]["name"] = $input["name"];
+            }
+            if(isset($exec["mail"])) {
+                $_SESSION["user"]["mail"] = $input["mail"];
+            }
+            return array("status" => "success", "message" => "Profile updated", "user" => $_SESSION["user"]);
+        }
+        
+        return array("status" => "error", "message" => "Failed to update profile");
+        
     }
 
     /**
