@@ -59,6 +59,7 @@
 	require_once './routes/oauth.php';
 	require_once './routes/forum.php';
 	require_once './routes/faq.php';
+        require_once './routes/profile.php';
 	header('Content-Type: application/json');
 	$app->run();
 ?>

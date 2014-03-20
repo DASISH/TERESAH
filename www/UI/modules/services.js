@@ -60,7 +60,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 				return str.join("&");
 				},
 		//
-		//Ressource part
+		//Resource part
 		//
 		routes : {
 			tools : {
@@ -82,7 +82,8 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 			},
 			user : {
 				signin : Restangular.all("login/"),
-				signup : Restangular.all("signup/")
+				signup : Restangular.all("signup/"),
+                                profile : Restangular.all("profile/")
 			},
 			oAuth : Restangular.all("oAuth"),
 			faq : Restangular.all("faq")
@@ -143,7 +144,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 						} else {
 							return Item.routes.tools.all.all(toolId).all("edit").post(opt).then(function(data) {
 								if(callback) { return callback(data); }
-								Item.data = data.original;
+								Item.data = data.original;                                                                
 								return data.original;
 							});
 						}
@@ -372,8 +373,28 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
 						return data.original;
 					});
 					
-				}
-			},
+				},
+                                profile: {
+                                    edit: function(opt, callback) {
+                                        if (typeof (callback) === 'undefined')
+                                            callback = false;
+                                        if (typeof (opt) === 'undefined') {
+                                            return {Error: "No input given"};
+                                        } else {
+                                            console.log("in Item.resolver.user.profile.edit");
+                                            return Item.routes.user.profile.post().then(function(data) {
+                                                /*
+                                                if (callback) {
+                                                    return callback(data);
+                                                }
+                                                Item.data = data.original;
+                                                return data.original;
+                                                */
+                                            });
+                                        }
+                                    }
+                                }
+                        },
 			faq : function(callback) {
 				if(typeof(callback)==='undefined') callback = false;
 				

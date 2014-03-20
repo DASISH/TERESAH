@@ -87,7 +87,7 @@ class User{
         }
     }
     
-    function update($user_uid, $name, $email, $password){
+    static function update($user_uid, $name, $email, $password){
         $req = "UPDATE user SET name = ?, mail = ?, password = ? WHERE user_uid = ?";
         $req = self::DB()->prepare($req);
         $req->execute(array($name, $mail, $user, hash("sha256", $post["password"])));
