@@ -117,6 +117,15 @@ class AdminUser extends User{
 		
 		LOG::insert('update', $_SESSION['user']['id'], 'user', $user_uid);
 	}
+        
+        static function getAPIApplications() {
+        
+            $query = "SELECT * from api_key_application where status = 0";
+            $req = self::DB()->prepare($query);
+            $req->execute();
+            
+            return $req->fetchAll(PDO::FETCH_ASSOC);
+        }
 }
 
 ?>
