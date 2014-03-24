@@ -13,16 +13,18 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
                 if($scope.ui.profile.userdata.newpassword1 !== $scope.ui.profile.userdata.newpassword2) {
                     $scope.ui.profile.response = {Error : "Passwords don't match"};
                     return false;
-                } else if (typeof $scope.ui.profile.userdata.newpassword1.length === "undefined" || $scope.ui.profile.userdata.newpassword1.length === 0) {
+                } else if (typeof $scope.ui.profile.userdata.newpassword1 === "undefined") {
+                    //Nothing
+                } else if ($scope.ui.profile.userdata.newpassword1.length === 0) { 
                     //Nothing
                 } else {
                     input["password"] = $scope.ui.profile.userdata.newpassword1;
                     //$scope.ui.profile.response = {Success : false, Error : false};
                 }
-                if($scope.ui.profile.userdata.mail != "")   {
+                if($scope.ui.profile.userdata.mail !== "")   {
                     input["mail"] = $scope.ui.profile.userdata.mail;
                 }
-                if($scope.ui.profile.userdata.name != "")   {
+                if($scope.ui.profile.userdata.name !== "")   {
                     input["name"] = $scope.ui.profile.userdata.name;
                 }
                 $item.resolver.user.profile.edit(input, function(data) {
@@ -40,7 +42,7 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
             },
             response: {
                 Success : false,
-                Error : false,
+                Error : false
             }
         }
     };
@@ -48,7 +50,7 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
     $ui.title("Profile");
 }]);
 Profile.resolveProfile = {
-    itemData: function($route, ui) {
+    itemData: function(ui) {
         this.data = ui.user.signedin();
         return this.data;
     },
@@ -57,4 +59,4 @@ Profile.resolveProfile = {
         $timeout(delay.resolve, 1000);
         return delay.promise;
     }
-}
+};
