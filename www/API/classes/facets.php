@@ -557,6 +557,7 @@ class Facets {
 			$ret = array();
 			if($mode == "ReverseNameOnly") {
 				$ret = $data[0]["name"];
+
 			} elseif($mode == "ReverseNameAndID") {
                             $ret = $data[0];
                         } else {
@@ -778,17 +779,13 @@ class Facets {
 		#Default return is false :
 		$ret = false;
 		
-		if($mode == "ReverseNameOnly") {
-		
-			$req = "SELECT l.type as name FROM licence_type l WHERE l.licence_type_uid = ? LIMIT 1";
-			
+		if($mode == "ReverseNameOnly") {		
+			$req = "SELECT l.type as name FROM licence_type l WHERE l.licence_type_uid = ? LIMIT 1";			
 		} elseif($mode == "ReverseNameAndID") {
                     $req = "SELECT l.licence_type_uid as identifier, l.type as name FROM licence_type l WHERE l.licence_type_uid = ? LIMIT 1";
-                } elseif($mode == "Reverse") {
-		
+                } elseif($mode == "Reverse") {		
 			$req = "SELECT l.type as name, l.licence_type_uid as uid FROM licence_type l WHERE l.licence_type_uid = ? LIMIT 1";			
-		
-		} else {
+                } else {
 			return false;
 			#In default mode, $id is an int
 			$req = "SELECT l.type as name, l.licence_type_uid as uid FROM  licence_type l, licence ll, tool_has_licence thl WHERE l.licence_type_uid = ll.licence_type_uid AND ll.licence_uid = thl.licence_uid AND thl.tool_uid = ?";
@@ -843,18 +840,13 @@ class Facets {
 		#Default return is false :
 		$ret = false;
 		
-		if($mode == "ReverseNameOnly") {
-		
+		if($mode == "ReverseNameOnly") {		
 			$req = "SELECT s.name FROM suite s WHERE s.suite_uid = ? LIMIT 1";
-			
 		} elseif($mode == "ReverseNameAndID") {
                     $req = "SELECT s.suite_uid as identifier, s.name as name FROM suite s WHERE s.suite_uid = ? LIMIT 1";
-                } elseif($mode == "Reverse") {
-		
+                } elseif($mode == "Reverse") {		
 			$req = "SELECT s.name, s.suite_uid as uid FROM suite s WHERE s.suite_uid = ? LIMIT 1";			
-		
-		} else {
-		
+		} else {		
 			#In default mode, $id is an int
 			$req = "SELECT s.name as name, s.suite_uid as uid FROM suite s, tool_has_suite ts WHERE ts.suite_uid = s.suite_uid AND ts.tool_uid = ?";
 		
@@ -914,10 +906,8 @@ class Facets {
 			
 		} elseif($mode == "ReverseNameAndID") {
                     $req = "SELECT t.tool_type_uid AS identifier, t.tool_type as name FROM tool_type t WHERE t.tool_type_uid = ? GROUP BY t.tool_type_uid LIMIT 1 ";
-                } elseif($mode == "Reverse") {
-		
+                } elseif($mode == "Reverse") {		
 			$req = "SELECT t.tool_type as name, t.source_uri as uri FROM tool_type t WHERE t.tool_type_uid = ? LIMIT 1";			
-		
 		} else {
 		
 			#In default mode, $id is an int
@@ -965,10 +955,8 @@ class Facets {
 		#Default return is false :
 		$ret = false;
 		
-		if($mode == "ReverseNameOnly") {
-		
+		if($mode == "ReverseNameOnly") {		
 			$req = "SELECT p.name as name FROM platform p WHERE p.platform_uid = ? LIMIT 1";
-			
 		} elseif($mode == "ReverseNameAndID") {
                     $req = "SELECT p.platform_uid as identifier, p.name as name FROM platform p WHERE p.platform_uid = ? LIMIT 1";
                 } elseif($mode == "Reverse") {
@@ -1035,8 +1023,7 @@ class Facets {
 				$data = $req->fetch(PDO::FETCH_ASSOC);
 				#Format data
 				$ret = $data["name"];
-			}
-			
+			}			
 		} elseif($mode == "ReverseNameAndID") {
                     $req = "SELECT l.licence_uid as identifier, l.text as name FROM licence l WHERE l.licence_uid = ? LIMIT 1";
                     $req = self::DB()->prepare($req);

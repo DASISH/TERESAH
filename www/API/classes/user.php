@@ -1,4 +1,5 @@
 <?php
+
 class User{
     /**
      * User class

@@ -401,8 +401,8 @@
 					}
 					$ret[] = array("title" => $answer["title"], "description" => array("text"=>$desc, "provider"=>$provider), "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 				}
-            }
-            return $ret;
+                    }
+                    return $ret;
 		}
 
 		/**
@@ -733,12 +733,18 @@
 			$data = $req->fetchAll(PDO::FETCH_ASSOC);
 			
 			//Unset unavailable options
-			unset($options["request"], $options["case_insentivity"]);
+
+			unset($options["request"], $options["case_insentivity"], $options["description"], $options["descriptionSize"]);
 			
 			#We create our own return array
 			$ret = array("response" => array(), "parameters" => $options);
 			if(isset($realParams)) {
 				$ret["parameters"]["facets"] = $realParams;
+
+			}
+			#For each answer we format it
+			foreach($data as &$answer) {
+				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
 			}
 
 			#Formating
@@ -748,9 +754,8 @@
 			$ret["parameters"]["total"] = self::nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
 			
 			$ret["parameters"]["url"] = urldecode(http_build_query(array("facets" => $realParams, "orderBy" => $options["orderBy"], "order" => $options["order"])));
-			
-			#$ret["debug"] = preg_replace('/\s+/', ' ', $debug);
-			
+		
+			$ret["debug"] = preg_replace('/\s+/', ' ', $debug);
 			return $ret;
 		}
 		

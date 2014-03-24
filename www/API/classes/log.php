@@ -22,7 +22,7 @@ class Log {
 	 */
     public static function listAll(){
         $result = array();
-        $query = "SELECT l.system_log_uid, l.table, l.action, l.timestamp, l.table_uid, u.login FROM system_log l, user u                      
+        $query = "SELECT l.system_log_uid, l.table, l.action, l.timestamp, l.table_uid, u.login FROM system_log l                      
                   INNER JOIN user u ON l.user_uid = u.user_uid";
 		$req = self::DB()->prepare($query);
 		$req->execute();
