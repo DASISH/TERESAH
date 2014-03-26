@@ -46,21 +46,10 @@
 		} else {
 			$app->response()->status(400);
 		}
-		
-		if(isset($input["mail"]) && isset($input["password"]) && isset($input["name"]) && isset($input["user"]))
-		{
-			$data = User::signup($input);
-			
-			if(isset($data["Success"])) {
-				return jP($data);
-			} else {
-				return jP($data);
-			}
-		}
-		else
-		{
-			$app->response()->status(401);
-		}
+		                 
+                $data = User::signup($input);
+                return jP($data);
+               
 	})->via('POST')->name('signup');
 
 	$app->get('/cookie/', function () use ($app) { 
