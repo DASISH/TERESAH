@@ -13,18 +13,13 @@
         </thead>
         <tbody>
             <?php foreach ($applications as $application): ?>
-                <tr>
-                    <td><?php print $application['name']; ?></a></td>
-                    <td>
+                <tr class="<?php print $application['status'] == '1' ? 'success' : 'warning'; ?>">
+                    <td><?php print $application['user_name']; ?></a></td>
+                    <td width="100" class="text-center">
                         <?php if ($application['status'] == '1'): ?>
                             <?php print 'approved' ?>
-                        <?php else: ?>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <input type="checkbox" name="user_application" id="user_application_<?php print $application["api_application_uid"];?>">
-                                </span>
-                                <input type="text" class="form-control" value="Active user">
-                            </div>
+                        <?php else: ?>                            
+                            <input type="checkbox" name="user_application_<?php print $application["api_key_application_uid"]; ?>" id="user_application_<?php print $application["api_key_application_uid"]; ?>">
                         <?php endif; ?>
                     </td>            
                 </tr>

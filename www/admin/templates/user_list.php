@@ -19,15 +19,15 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($users as $user): ?>
-        <tr>
-			<td><input type="checkbox" value="<?php print $user['user_uid']; ?>" name="id[]" /></td>
-            <td><a href="user/edit/<?php print $user['user_uid']; ?>"><?php print $user['login']; ?></a></td>
-            <td><?php print $user['name']; ?></td>
-            <td><?php print $user['mail']; ?></td>
-			<td><?php print $user['active'] == 1 ? 'x' : ''; ?></td>
-			<td><?php print $user['admin'] == 1 ? 'x' : ''; ?></td>
-        </tr>
+        <?php foreach ($users as $user): ?>
+            <tr>
+                <td><input type="checkbox" value="<?php print $user['user_uid']; ?>" name="id[]" /></td>
+                <td><a href="user/edit/<?php print $user['user_uid']; ?>"><?php print $user['login']; ?></a></td>
+                <td><?php print $user['name']; ?></td>
+                <td><?php print $user['mail']; ?></td>
+                <td><?php print $user['active'] == 1 ? 'x' : ''; ?></td>
+                <td><?php print $user['user_level_text']; ?></td>
+            </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
