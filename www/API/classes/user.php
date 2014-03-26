@@ -50,7 +50,12 @@ class User{
      * @return Status
      */
     static function signup($post, $id = false){
-        if (isset($post["mail"]) && isset($post["password"]) && isset($post["name"]) && isset($post["user"])){
+        if (isset($post["mail"]) && isset($post["password"]) && isset($post["password2"]) && isset($post["name"]) && isset($post["user"])){
+            
+            //Check password match
+            if($post["password"] != $post["password2"])
+                    return array("status" => "error", "message" => "Passwords don't match");
+
             //Check for existing username/mail
             $req = "SELECT mail, login from user WHERE LOWER(mail) = ? OR LOWER(login) = ?";
             $req = self::DB()->prepare($req);

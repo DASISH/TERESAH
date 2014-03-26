@@ -86,6 +86,7 @@ var i18n_sv = {
     'email address':'Email address',
     'username':'Användarnamn',
     'password':'Lösenord',
+    'repeat password':'Repetera lösenord',
     'sign up':'Sign up',
     'signed in!':'Signed in!',
     'use your social network':'Use your social network',
