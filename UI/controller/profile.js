@@ -17,9 +17,10 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
                     //Nothing
                 } else if ($scope.ui.profile.userdata.newpassword1.length === 0) { 
                     //Nothing
+                //} else if(!/#.*^(?=.{8,64})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#/.test($scope.ui.profile.userdata.newpassword1)) {
+                //    $scope.ui.profile.response = {Error : "Password must be between 8 and 64 characters, have at least one lowercase letter, one uppercase letter and one number"};
                 } else {
                     input["password"] = $scope.ui.profile.userdata.newpassword1;
-                    //$scope.ui.profile.response = {Success : false, Error : false};
                 }
                 if($scope.ui.profile.userdata.mail !== "")   {
                     input["mail"] = $scope.ui.profile.userdata.mail;
@@ -38,7 +39,7 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
                     }
                     $scope.ui.profile.userdata.newpassword1 = "";
                     $scope.ui.profile.userdata.newpassword2 = "";
-                });                    
+                });           
             },
             response: {
                 Success : false,
