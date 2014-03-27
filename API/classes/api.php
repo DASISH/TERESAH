@@ -233,7 +233,7 @@ class API {
         try{
             $req = self::DB()->prepare($query);
             $req->execute($exec);
-            $data = $req-fetchAll(PDO::FETCH_ASSOC);
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e){
             Die('Need to handle this error. $e has all the details');
         }
@@ -242,7 +242,38 @@ class API {
             return array("success" => true, "data" => $data);
         }
         else{
-            return array("success" => false, "status" => "error", "message" => "Failed to create keys");
+            return array("success" => false, "status" => "error", "message" => "Failed to get keys");
+        }
+    }
+
+    /**
+     *  Verify Keys secret and keys false
+     *
+     * @param $secret           Key ID
+     * @param $public           User Name
+     * @param $domain           User Name
+     * @return Boolean
+     */
+    static public function Verify($public_key, $private_key, $domain) {
+        $exec = array(
+                "public_key" => $public_key,
+                "private_key" => $private_key,
+                "domain" => $domain,
+            );
+        $query = "SELECT user_uid FROM `api_key` WHERE public_key = :public_key AND private_key = :private_key AND domain = :domain LIMIT 1";
+
+        try{
+            $req = self::DB()->prepare($query);
+            $req->execute($exec);
+        } catch (Exception $e){
+            Die('Need to handle this error. $e has all the details');
+        }
+
+        if ($req->rowCount() == 1){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 }
