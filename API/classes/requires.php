@@ -67,6 +67,9 @@
 				case "log":
 					$this->r("log.php");
 				break;
+				case "api":
+					$this->r("api.php");
+				break;
 			}
 		}
 	

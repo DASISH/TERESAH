@@ -3,8 +3,7 @@
 $app->post('/profile/', function () use ($require, $app) {
 
     if (!isset($_SESSION["user"]["id"])) {
-        jP(array("status" => "error", "message" => "You need to be logged in to use this function"));
-        exit();
+        return jP(array("status" => "error", "message" => "You need to be logged in to use this function"));
     }
 
 	$require->req("user");
@@ -28,7 +27,7 @@ $app->post('/profile/', function () use ($require, $app) {
 		$post["password"] = $input["password"];
 	}
 
-    jP(User::update($_SESSION["user"]["id"], $post));
+    return jP(User::update($_SESSION["user"]["id"], $post));
 });
 
 ?>
