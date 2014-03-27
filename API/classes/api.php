@@ -73,7 +73,7 @@ class API {
      * @param $key              API KEY ID
      * @return Status
      */
-    static public function Update($key){
+    static public function Delete($key){
         $exec = array();
         $exec["api_key_uid"] = $key;
         $query = "
@@ -107,7 +107,7 @@ class API {
      * @return Status + Keys
      */
     static public function Insert($domain, $userId, $userName){
-        $keys = self::Generate($domain, $userName)
+        $keys = self::Generate($domain, $userName);
         $exec = $keys;
         $exec["user_uid"] = $userId;
         $exec["domain"] = $domain;
@@ -187,7 +187,7 @@ class API {
      * @return Status + Keys
      */
     static public function Confirm($keyId, $userName){
-        $keys = self::Generate($domain, $userName)
+        $keys = self::Generate($domain, $userName);
         $exec = $keys;
         $exec["api_key_uid"] = $keyId;
         $query = "
@@ -221,7 +221,7 @@ class API {
      * @param $keyId            User Name
      * @return Status + Keys
      */
-    static public function List($userId = false){
+    static public function Get($userId = false) {
         $exec = array();
         $query = "SELECT * FROM `api_key` ";
 
