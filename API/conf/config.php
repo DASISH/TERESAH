@@ -18,6 +18,7 @@
 	#
 	#####
 	define("MODE", "Test");
+	define("SALT", "dfjn oplkgnwsdokgnpnewfaopfnsoiedfboiusngv;cmvxbv ciybeawaoifnslkdvbuiyawbdslkhbc\ iwlauerhgciuqwch eiouwagbiuceu,xawoisehxibywageciyhgweiu");
 	
 	##
 	#

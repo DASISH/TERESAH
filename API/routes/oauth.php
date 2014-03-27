@@ -20,7 +20,7 @@
 			$app->redirect($data["Location"]);
 		} else {
 			$app->contentType('application/json');
-			jP($data);
+			return jP($data);
 		}
 	} );
 	$app->get('/oAuth/Facebook', function () use ($require, $app) { 
@@ -41,7 +41,7 @@
 			$app->redirect($data["Location"]);
 		} else {
 			$app->contentType('application/json');
-			jP($data);
+			return jP($data);
 		}
 	} );
 	$app->get('/oAuth/Github', function () use ($require, $app) { 
@@ -62,7 +62,7 @@
 			$app->redirect($data["Location"]);
 		} else {
 			$app->contentType('application/json');
-			jP($data);
+			return jP($data);
 		}
 	} );
 	$app->get('/oAuth/Twitter', function () use ($require, $app) { 
@@ -87,7 +87,7 @@
 			$app->redirect($data["Location"]);
 		} else {
 			$app->contentType('application/json');
-			jP($data);
+			return jP($data);
 		}
 	} );
 ?>

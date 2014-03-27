@@ -2,7 +2,7 @@
 	$app->get('/topic/:topicUID', function ($topicUID) use ($require, $app) { 
 		$app->contentType('application/json');
 		$require->req(array("comment"));
-		jP(array("topic" => Comment::topic($topicUID))); 
+		return jP(array("topic" => Comment::topic($topicUID))); 
 	} );
 	
 	
@@ -19,6 +19,6 @@
 			return $app->response()->status(400);
 		}
 		
-		jP(array("topic" => Comment::reply($toolUID, $topicUID, $input))); 
+		return jP(array("topic" => Comment::reply($toolUID, $topicUID, $input))); 
 	} );
 ?>

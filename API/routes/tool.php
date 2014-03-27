@@ -27,7 +27,7 @@
 	$app->get('/tool/:toolUID', function ($toolUID) use ($require, $app) { 
 		$app->contentType('application/json');
 		$require->req(array("tool"));
-		jP(Tool::get($toolUID, $app->request->get())); 
+		return jP(Tool::get($toolUID, $app->request->get())); 
 	} );
 	
 	$app->get('/tool/', function () use ($require, $app) { 
@@ -51,13 +51,13 @@
 	$app->get('/tool/:toolUID/comments', function ($toolUID) use ($require, $app) { 
 		$app->contentType('application/json');
 		$require->req(array("comment"));
-		jP(array("comments" => Comment::get($toolUID))); 
+		return jP(array("comments" => Comment::get($toolUID))); 
 	} );
 	
 	$app->get('/tool/:toolUID/forum', function ($toolUID) use ($require, $app) { 
 		$app->contentType('application/json');
 		$require->req(array("comment"));
-		jP(array("comments" => Comment::get($toolUID, 2))); 
+		return jP(array("comments" => Comment::get($toolUID, 2))); 
 	} );
 	
 	$app->post('/tool/:toolUID/comments', function ($toolUID) use ($require, $app) { 
@@ -72,7 +72,7 @@
 		}
 		
 		$require->req(array("comment", "log"));
-		jP(Comment::insert($toolUID, $input)); 
+		return jP(Comment::insert($toolUID, $input)); 
 	} );
 	
 	$app->post('/tool/:toolUID/forum', function ($toolUID) use ($require, $app) { 
@@ -86,7 +86,7 @@
 			return $app->response()->status(400);
 		}
 		
-		jP(Comment::insert($toolUID, $input, 2)); 
+		return jP(Comment::insert($toolUID, $input, 2)); 
 	} );
 
 #############
@@ -99,8 +99,7 @@
 		$require->req(array("tool", "helper", "log"));
 		
 		if(!isset($_SESSION["user"]["id"])) {
-			jP(array("status" => "error", "message" => "You need to be logged in to use this function"));
-			exit();
+			return jP(array("status" => "error", "message" => "You need to be logged in to use this function"));
 		}	
 		
 		if(count($app->request->post()) > 0) {
@@ -114,16 +113,14 @@
 		foreach($input["facets"] as $i) {
 			$item[] = Tool::linkFacets(array("element" => $i["element"], "facet" => $i["facet"], "tool" => $input["tool"]));
 		}
-		jP($item);
-		exit;
+		return jP($item);
 	});
 	$app->post('/tool/:toolId/edit', function ($toolId) use ($require, $app) { 
 		$app->contentType('application/json');
 		$require->req(array("helper", "description", "log"));
 		
 		if(!isset($_SESSION["user"]["id"])) {
-			jP(array("status" => "error" , "message" => "You need to be logged in to use this function"));
-			exit();
+			return jP(array("status" => "error" , "message" => "You need to be logged in to use this function"));
 		}	
 		
 		if(count($app->request->post()) > 0) {
@@ -134,8 +131,7 @@
 			return $app->response()->status(400);
 		}
 		$item = Description::insert($toolId, $input);
-		jP($item);
-		exit;
+		return jP($item);
 	});
 	
 	$app->post('/tool/', function () use ($require, $app) { 
@@ -143,8 +139,7 @@
 		$require->req(array("tool", "log"));
 		
 		if(!isset($_SESSION["user"]["id"])) {
-			jP(array("status" => "error", "message" => "You need to be logged in to use this function"));
-			exit();
+			return jP(array("status" => "error", "message" => "You need to be logged in to use this function"));
 		}
 		
 		if(count($app->request->post()) > 0) {
@@ -157,14 +152,12 @@
 		
 		$item = Tool::insert($input);
 		if(isset($item["Error"])) {
-			jP($item);
-			exit();
+			return jP($item);
 		} else {
 			$item["description"] = Description::insert($item["uid"], $input);
 			if(isset($item["description"]["Error"])) {
 				Tool::delete($item["uid"]);
-				jP(array($item, $input));
-				exit();
+				return jP(array($item, $input));
 			}
 			else {
 				$facets = array();
@@ -188,7 +181,7 @@
 						}
 					}
 				}
-				jP(array($item, $input, $facets));
+				return jP(array($item, $input, $facets));
 			}
 		}
 	} );

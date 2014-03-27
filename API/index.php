@@ -1,6 +1,7 @@
 <?php
 	session_cache_limiter(false);
 	session_start();
+	/*
     if (isset($_SERVER['HTTP_ORIGIN'])) {
         header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
         header('Access-Control-Allow-Credentials: true');
@@ -16,6 +17,7 @@
             header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 
     }
+    */
 	
 	//oAuth
 	require_once('assets/oAuth2/vendor/autoload.php');
@@ -34,8 +36,21 @@
 	require_once './classes/requires.php';
 
 	#json Print_R
-	function jP($array, $session = true) {
-		print(json_encode($array));
+	function jP($variables = false, $methods = "OPTIONS, GET, POST", $status = false) {
+		$app = Slim\Slim::getInstance();
+		$app->contentType('application/json');
+		$response = $app->response();
+		$response->header('Access-Control-Allow-Origin', '*');
+		$response->header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, X-authentication, X-client');
+		$response->header('Access-Control-Allow-Methods', $methods);
+
+		if($status != false) {
+			$app->response()->status($status);
+		}
+		if($variables !== false) {
+			echo json_encode($variables);
+		}
+		return true;
 	}
     
 	#Start the framework
@@ -59,7 +74,7 @@
 	require_once './routes/oauth.php';
 	require_once './routes/forum.php';
 	require_once './routes/faq.php';
-        require_once './routes/profile.php';
-	header('Content-Type: application/json');
+    require_once './routes/profile.php';
+
 	$app->run();
 ?>
