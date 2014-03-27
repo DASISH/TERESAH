@@ -1,4 +1,17 @@
 <?php
+
+/*
+if(!isset($_SESSION['user'])) {
+    //redirect to login page
+    header( 'Location: http://teresah.dev.dasish.eu/#/login' );
+    die();
+}
+else if ($_SESSION['user']['level'] != '4') {
+    header('HTTP/1.1 403 Forbidden');
+    die();
+}
+*/
+
 define("DASISH", true);
 
 define("BASE_PATH", '/admin/');
