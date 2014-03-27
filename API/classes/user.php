@@ -51,11 +51,44 @@ class User{
      */
     static function signup($post, $id = false){
         
-        if (isset($post["mail"]) && isset($post["password"]) && isset($post["password2"]) && isset($post["name"]) && isset($post["user"])){
+            $message = "";
+            $separator = "";
+            
+            if (!isset($post["name"])){                
+                $message .= "Name";
+                $separator = ", ";
+            }
+            if (!isset($post["mail"])){                
+                $message .= $separator."Mail";
+                $separator = ", ";
+            }
+            if (!isset($post["user"])){                
+                $message .= $separator."Username";
+                $separator = ", ";
+            }
+            if (!isset($post["password"])){                
+                $message .= $separator."Password";
+                $separator = ", ";
+            }
+            if (!isset($post["password2"])){                
+                $message .= $separator."Password verification";
+                $separator = ", ";
+            }
+        
+        if ($message == ""){
             
             //Check password match
             if($post["password"] != $post["password2"]) {
                 return array("status" => "error", "message" => "Passwords don't match");
+            }
+            
+            if (!preg_match("#.*^(?=.{8,64})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#", $post["password"])){
+                return array("status" => "error", "message" => "Password must be between 8 and 64 characters, have at least one lowercase letter, one uppercase letter and one number");
+            }
+            
+            //Check password length
+            if(strlen($post["password"]) < 7) {
+                return array("status" => "error", "message" => "Password must be at least 7 characters");
             }
             
             //Check for existing username/mail
@@ -91,7 +124,7 @@ class User{
             }
         }
         else{
-            return array("status" => "error", "message" => "A field is missing");
+            return array("status" => "error", "message" => "Mandatory fields missing: ".$message);
         }
     }
     

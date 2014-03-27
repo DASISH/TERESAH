@@ -101,3 +101,26 @@
         <?php endif; ?>
     </tbody>
 </table>
+
+<hr/>
+
+<h3>Registered API Keys</h3>
+
+<table class="sortable table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Public Key</th>
+            <th>Private Key</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (isset($user['api_keys'])) : ?>
+            <?php foreach ($user['api_keys'] as $api_key): ?>
+                <tr>
+                    <td><?php print $api_key['public_key']; ?></a></td>
+                    <td><?php print $api_key['private_key']; ?></td>            
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </tbody>
+</table>

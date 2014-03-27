@@ -34,7 +34,8 @@ class AdminUser {
         $user = $req->fetch(PDO::FETCH_ASSOC);
 
         $user['openID'] = self::getOpenIDForUser($user_uid);
-
+        $user['api_keys'] = self::getAPIKeysForUser($user_uid);
+        
         return $user;
     }
 
@@ -65,6 +66,21 @@ class AdminUser {
         return $result;
     }
 
+    static function getAPIKeysForUser($user_uid) {
+
+        $result = array();
+        $query = "SELECT public_key, private_key FROM api_key WHERE user_uid = $user_uid";
+        $req = self::DB()->prepare($query);
+        $req->execute();
+        $keys = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($keys as $key) {
+            $result[] = $key;
+        }
+
+        return $result;
+    }
+    
     static function create($name, $mail, $login, $password, $active, $user_level) {
 
         try {
