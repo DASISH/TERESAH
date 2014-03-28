@@ -41,6 +41,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?php print BASE_PATH; ?>settings"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
                 <li><a href="<?php print BASE_PATH; ?>stuff">Stuff</a></li>
+                <li><a href="<?php print BASE_PATH; ?>signout"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
