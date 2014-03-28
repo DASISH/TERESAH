@@ -50,25 +50,4 @@ $app->post('/user/add', function () use ($app) {
         $app->flash('error', $result['error']);
     }
 })->name('user_add_post');
-
-$app->get('/user/api_applications', function() use ($app) {
-
-    $applications = AdminUser::getAPIApplications();
-
-    foreach ($applications as &$application) {
-        $user = AdminUser::getUserByID($application["user_uid"]);
-        $application["user_name"] = $user["name"];
-    }
-
-    display('forms/user_api_applications.php', array('applications' => $applications,
-        'title' => 'API Key Applications'));
-})->name('user_api_applications');
-
-$app->post('/user/api_applications', function() use ($app) {
-
-    foreach ($app->request->params() as $key => $value) {
-        $application_id = strtok($key, 'user_application_');
-        AdminUser::approveAPIKeyApplication(($application_id));
-    }
-})->name('user_api_applications_post');
 ?>

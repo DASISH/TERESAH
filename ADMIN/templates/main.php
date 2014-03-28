@@ -36,7 +36,7 @@
                 </li>
                 <li<?php if(is_in_active_path('user')):?> class="active"<?php endif;?>><a href="<?php print BASE_PATH; ?>user">Users</a></li>
                 <li<?php if(is_in_active_path('log')):?> class="active"<?php endif;?>><a href="<?php print BASE_PATH; ?>log">Logs</a></li>
-                <li><a href="#">API Keys</a></li>
+                <li><a href="<?php print BASE_PATH; ?>api_keys">API Keys</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?php print BASE_PATH; ?>settings"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>

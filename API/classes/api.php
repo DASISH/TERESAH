@@ -31,7 +31,6 @@ class API {
         return array("public_key" => $key_public, "private_key" => $key_secrete);
     }
 
-
     /**
      *  Update domain for a user's key
      *
@@ -186,8 +185,18 @@ class API {
      * @param $userName            User Name
      * @return Status + Keys
      */
-    static public function Confirm($keyId, $userName){
-        $keys = self::Generate($domain, $userName);
+    static public function Confirm($keyId){
+        
+        try {
+            $query = "SELECT login FROM api_key a INNER JOIN user u ON a.user_uid = u.user_uid WHERE api_key_uid = ?";
+            $req = self::DB()->prepare($query);
+            $req->execute(array($keyId));
+            $username = $req->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e){
+            Die($e);
+        }
+        
+        $keys = self::Generate($domain, $username['login']);
         $exec = $keys;
         $exec["api_key_uid"] = $keyId;
         $query = "
@@ -238,7 +247,7 @@ class API {
             Die('Need to handle this error. $e has all the details');
         }
 
-        if ($req->rowCount() == 1){
+        if ($req->rowCount() != 0){
             return array("success" => true, "data" => $data);
         }
         else{
