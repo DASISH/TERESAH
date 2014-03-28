@@ -51,29 +51,29 @@ class User{
      */
     static function signup($post, $id = false){
         
-            $message = "";
-            $separator = "";
-            
-            if (!isset($post["name"])){                
-                $message .= "Name";
-                $separator = ", ";
-            }
-            if (!isset($post["mail"])){                
-                $message .= $separator."Mail";
-                $separator = ", ";
-            }
-            if (!isset($post["user"])){                
-                $message .= $separator."Username";
-                $separator = ", ";
-            }
-            if (!isset($post["password"])){                
-                $message .= $separator."Password";
-                $separator = ", ";
-            }
-            if (!isset($post["password2"])){                
-                $message .= $separator."Password verification";
-                $separator = ", ";
-            }
+        $message = "";
+        $separator = "";
+
+        if (!isset($post["name"])){                
+            $message .= "Name";
+            $separator = ", ";
+        }
+        if (!isset($post["mail"])){                
+            $message .= $separator."Mail";
+            $separator = ", ";
+        }
+        if (!isset($post["user"])){                
+            $message .= $separator."Username";
+            $separator = ", ";
+        }
+        if (!isset($post["password"])){                
+            $message .= $separator."Password";
+            $separator = ", ";
+        }
+        if (!isset($post["password2"])){                
+            $message .= $separator."Password verification";
+            $separator = ", ";
+        }
         
         if ($message == ""){
             
@@ -145,8 +145,12 @@ class User{
             return array("status" => "error", "message" => "No field for profile update");
         }
 
-        if(isset($exec["password"])) {
-            $exec["password"] = hash("sha256", $exec["password"]);
+        if(array_key_exists("password", $exec)) {
+            if(self::checkPasswordComplexity($exec["password"])){
+                $exec["password"] = hash("sha256", $exec["password"]);
+            }else{
+                return array("status" => "error", "message" => "Password must be between 8 and 64 characters, have at least one lowercase letter, one uppercase letter and one number");
+            }
         }
 
         $update = array();
