@@ -82,7 +82,7 @@ class User{
                 return array("status" => "error", "message" => "Passwords don't match");
             }
             
-            if (!preg_match("#.*^(?=.{8,64})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#", $post["password"])){
+            if (!self::checkPasswordComplexity($post["password"])){
                 return array("status" => "error", "message" => "Password must be between 8 and 64 characters, have at least one lowercase letter, one uppercase letter and one number");
             }
             
@@ -105,7 +105,7 @@ class User{
                 }
             }
 
-            $req = "INSERT INTO user (`user_uid`,`name`,`mail`,`login`,`password`,`active`,`user_level`) VALUES (NULL, ?, ? , ? , ?, 1, 1 )";
+            $req = "INSERT INTO user (`user_uid`,`name`,`mail`,`login`,`password`,`active`,`user_level`) VALUES (NULL, ?, ? , ? , ?, 1, 0)";
             $req = self::DB()->prepare($req);
             $req->execute(array($post["name"], $post["mail"], $post["user"], hash("sha256", $post["password"])));
 
@@ -128,7 +128,6 @@ class User{
         }
     }
     
-
     /**
      *  Update a user
      *
@@ -172,6 +171,16 @@ class User{
         
     }
 
+    /**
+     * Checks the passoword compelxity
+     * 
+     * @param type $password the passowrd string to check
+     * @return true if passowrd complexity is valid
+     */
+    private static function checkPasswordComplexity($password){
+         return preg_match("#.*^(?=.{8,64})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#", $password);
+    }
+    
     /**
      * 	Sign a user in using oAuth. Sign up the user if he doesnt exist.
      *

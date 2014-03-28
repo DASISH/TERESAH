@@ -1,7 +1,6 @@
 <div class="container" ng-show="$parent.user.signedin == true">
     <form class="form-horizontal" role="form" ng-show="$parent.user.signedin" ng-submit="ui.profile.submit()">
-        <div class="alert alert-danger" ng-bind="ui.profile.response.Error" ng-show="ui.profile.response.Error"></div>
-        <div class="alert alert-success" ng-bind="ui.profile.response.Success" ng-show="ui.profile.response.Success"></div>
+        <div class="alert" ng-class="{'alert-success' : (ui.profile.status == 'success'), 'alert-warning' : (ui.profile.status == 'error')}" ng-show="ui.profile.message" ng-bind="ui.profile.message"></div>
         <div class="form-group">
             <label for="inputName1" class="col-lg-2 control-label" ng-bind=" 'name' | translate"></label>
             <div class="col-lg-10">

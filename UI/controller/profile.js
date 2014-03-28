@@ -6,9 +6,13 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
             userdata: {
             },
             submit: function() {                    
+                
+             
                 input = {};
                 
                 error = false;
+ 
+                
                 
                 if($scope.ui.profile.userdata.newpassword1 !== $scope.ui.profile.userdata.newpassword2) {
                     $scope.ui.profile.response = {Error : "Passwords don't match"};
@@ -29,6 +33,8 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
                     input["name"] = $scope.ui.profile.userdata.name;
                 }
                 $item.resolver.user.profile.edit(input, function(data) {
+                    $scope.ui.profile.status = data.status;
+                    $scope.ui.profile.message = data.message;                       
                     $scope.ui.profile.response = data;
                     if(typeof data.user !== "undefined") {
                         $ui.user.data = data.user;
@@ -41,10 +47,8 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
                     $scope.ui.profile.userdata.newpassword2 = "";
                 });           
             },
-            response: {
-                Success : false,
-                Error : false
-            }
+            message: false,
+            status: false            
         }
     };
     $scope.ui.profile.placeholder =  $ui.user.data;
