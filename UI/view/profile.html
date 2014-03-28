@@ -1,4 +1,7 @@
 <div class="container" ng-show="$parent.user.signedin == true">
+    
+    <h2>Edit Profile</h2>
+    
     <form class="form-horizontal" role="form" ng-show="$parent.user.signedin" ng-submit="ui.profile.submit()">
         <div class="alert" ng-class="{'alert-success' : (ui.profile.status == 'success'), 'alert-warning' : (ui.profile.status == 'error')}" ng-show="ui.profile.message" ng-bind="ui.profile.message"></div>
         <div class="form-group">
