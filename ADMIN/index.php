@@ -1,6 +1,9 @@
 <?php
 
 /*
+session_cache_limiter(false);
+session_start();
+
 if(!isset($_SESSION['user'])) {
     //redirect to login page
     header( 'Location: http://teresah.dev.dasish.eu/#/login' );
@@ -25,6 +28,7 @@ require_once "../API/conf/config.php";
 require_once '../API/classes/log.php';
 require_once '../API/classes/user.php';
 require_once '../API/classes/facets.php';
+require_once '../API/classes/api.php';
 require_once '../API/classes/helper.php';
 require_once '../common/SQL.PDO.php';
 require_once '../common/Slim/Slim.php';
@@ -53,6 +57,7 @@ require_once './routes/user.php';
 require_once './routes/tool.php';
 require_once './routes/log.php';
 require_once './routes/facet.php';
+require_once './routes/api_key.php';
 
 #flash messages
 include 'flash_messages.php';
