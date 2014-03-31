@@ -108,5 +108,9 @@ var i18n_en = {
     'new password':'New password',
     're-type password':'Re-type password',
     'update profile':'Update profile',
-    'or':'or'
+    'or':'or',
+    'apply for api key':'Apply for API key',
+    'domain':'Domain',
+    'apply':'apply',
+    'Admin':'Admin'
 };

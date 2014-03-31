@@ -6,13 +6,9 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
             userdata: {
             },
             submit: function() {                    
-                
              
                 input = {};
-                
                 error = false;
- 
-                
                 
                 if($scope.ui.profile.userdata.newpassword1 !== $scope.ui.profile.userdata.newpassword2) {
                     $scope.ui.profile.response = {Error : "Passwords don't match"};
@@ -45,6 +41,25 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
                     }
                     $scope.ui.profile.userdata.newpassword1 = "";
                     $scope.ui.profile.userdata.newpassword2 = "";
+                });           
+            },
+            apply: function() {
+                
+                input = {};
+                
+                if(!$scope.ui.profile.apply.domain) {
+                    $scope.ui.profile.apply.message = {Error : "Domain is mandatory"};
+                    $scope.ui.profile.apply.status = "error";
+                    return false;
+                }
+                else
+                    input["domain"] = $scope.ui.profile.apply.domain;
+                
+                $item.resolver.user.profile.apply_for_key(input, function(data) {
+                    console.log(data);
+                    $scope.ui.profile.apply.status = data.status;
+                    $scope.ui.profile.apply.message = data.message;    
+                    $scope.ui.profile.userdata.keys = data.data;
                 });           
             },
             message: false,

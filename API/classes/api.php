@@ -144,10 +144,10 @@ class API {
      *
      * @param $domain           Domain Name
      * @param $userID           User ID
-     * @param $userName         User Name
      * @return Status
      */
-    static public function Apply($domain, $userId, $userName){
+    static public function Apply($domain, $userId){
+        
         $exec = array("public_key" => "", "private_key" => "" ,"user_uid" => $userId, "domain" => $domain);
         $query = "INSERT INTO `api_key`
                 (

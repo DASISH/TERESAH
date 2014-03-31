@@ -21,7 +21,10 @@
 				$app->setEncryptedCookie('t23-i',$d["UID"], "2 days");
 				$app->setCookie('logged',$d["Name"], "20 minutes", null,  COOKIE_DOMAIN);
 				
-				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"]);
+                                $keys = User::getAPIKeysForID($d["UID"]);
+                                $d["Keys"] = $keys;
+                                
+				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "level" => $d["Level"], "keys" => $keys);
 				
 				return jP($d);
 			} else {

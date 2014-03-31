@@ -108,5 +108,9 @@ var i18n_sv = {
     'New password':'New password',
     're-type password':'Re-type password',
     'update profile':'Update profile',
-    'or':'eller'
+    'or':'eller',
+    'apply for api key':'Ansök om API-nyckel',
+    'domain':'Domän',
+    'apply':'ansök',
+    'Admin':'Admin'
 };

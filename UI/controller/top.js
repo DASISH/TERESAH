@@ -34,7 +34,7 @@ var Top = portal.controller('TopCtrl', ['$scope', "$q", "$location", "$route", "
 		user : {
 			data : false,
 			signedin : function () { $ui.user.signedin(function(data) {
-					o = {name : data.name, mail: data.mail, signedin : true };
+					o = {name : data.name, mail: data.mail, signedin : true, level: data.level };
 					$root.user = o;
 					$scope.ui.user.data = o;
 				}); 

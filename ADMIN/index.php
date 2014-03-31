@@ -1,22 +1,6 @@
 <?php
 
-/*
-session_cache_limiter(false);
-session_start();
-
-if(!isset($_SESSION['user'])) {
-    //redirect to login page
-    header( 'Location: http://teresah.dev.dasish.eu/#/login' );
-    die();
-}
-else if ($_SESSION['user']['level'] != '4') {
-    header('HTTP/1.1 403 Forbidden');
-    die();
-}
-*/
-
 define("DASISH", true);
-
 define("BASE_PATH", '/admin/');
 
 error_reporting(E_ALL);
@@ -44,6 +28,20 @@ $app = new \Slim\Slim();
 
 $app->log->setLevel(\Slim\Log::DEBUG);
 $app->add(new Slim\Middleware\SessionCookie(array('secret' => 'tools_registry_secret')));
+
+session_cache_limiter(false);
+session_start();
+
+if(MODE != "Test"){
+    if(!isset($_SESSION['user'])) {
+        //redirect to login page
+        $app->redirect('/login');
+        die();
+    }
+    else if ($_SESSION['user']['level'] != '4') {
+        $app->halt(403, "You don't have permission to view this page");
+    }
+}
 
 #classes
 include 'classes/admintool.php';
