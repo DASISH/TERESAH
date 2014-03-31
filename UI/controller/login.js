@@ -3,9 +3,12 @@ var Login = portal.controller('LoginCtrl', ['$scope', 'ui', 'Item', '$rootScope'
         $scope.ui = {
             login: {
                 submit: function() {
-
-                    $item.resolver.user.signin($scope.ui.login.inputs, function(data) {
-                        if (data.error || data.signin == false) {
+                    //Angular does not suport binding for autofilled values
+                    //https://github.com/angular/angular.js/issues/1460
+                    //Workaround:
+                    var params = {user:document.getElementsByName('user')[0].value, password: document.getElementsByName('password')[0].value};
+                    $item.resolver.user.signin(params, function(data) {
+                        if (data.signin == false || data.error) {
                             $scope.ui.login.status = data.status;
                             $scope.ui.login.message = data.message;
                         } else {
