@@ -428,5 +428,58 @@ class User{
             // Step 1
         }
     }
+    
+    /**
+     * Generates a email verification token for a user
+     * @param type $user_uid The users id
+     * @return string token string
+     */
+    static function getEmailVarificationToken($user_uid){
+        try{
+            $req = self::DB()->prepare("SELECT * FROM user WHERE usier_uid = ?");
+            $req->execute(array($user_uid));
+        } catch (Exception $e){
+            Die('Need to handle this error. $e has all the details');
+        }
+
+        if ($req->rowCount() == 1){
+            $fields = $req->fetch(PDO::FETCH_ASSOC);
+            $token = hash("sha256", $user_uid.$fields['mail'].$fields['username']);
+            return $token;
+        }
+        else{
+            return array("status" => "error", "message" => "Usier does not exist");
+        }        
+    }
+    
+    /**
+     * Verifies the email token for a user and upgrades the user level
+     * @param type $user_uid
+     * @param type $token
+     * @return boolean true if token is valid
+     */
+    static function verifyEmailToken($user_uid, $token){
+        try{
+            $req = self::DB()->prepare("SELECT * FROM user WHERE usier_uid = ?");
+            $req->execute(array($user_uid));
+        } catch (Exception $e){
+            Die('Need to handle this error. $e has all the details');
+        }
+
+        if ($req->rowCount() == 1){
+            $fields = $req->fetch(PDO::FETCH_ASSOC);
+            if(hash("sha256", $user_uid.$fields['mail'].$fields['username']) == $token){
+                $req = self::DB()->prepare(" UPDATE user SET user_level = 1 WHERE user_uid = ?");
+                $req->execute(array($user_uid));               
+                return true;
+                
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }        
+    }
+}    
 }
 ?>
