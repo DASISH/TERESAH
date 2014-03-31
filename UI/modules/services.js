@@ -444,6 +444,11 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
                             callback(data);
                         }
                         return data.original;
+                    }, function(data) {
+                        if (callback) {
+                            callback(data.data);
+                        }
+                        //return data.original;                                            
                     });
 
                 },
@@ -476,16 +481,16 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
                             });
                         }
                     },
-                    apply_for_key: function(opt, callback) {  
+                    apply_for_key: function(opt, callback) {
                         if (typeof (callback) === 'undefined')
                             callback = false;
                         if (typeof (opt) === 'undefined') {
                             return {Error: "No input given"};
                         } else {
-                            return Item.routes.user.api_key_application.post(opt).then(function(data) {                                
-                                if(callback)
-                                    return callback(data);                                
-                            });     
+                            return Item.routes.user.api_key_application.post(opt).then(function(data) {
+                                if (callback)
+                                    return callback(data);
+                            });
                         }
                     }
                 }

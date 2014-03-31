@@ -54,23 +54,23 @@ class User{
         $message = "";
         $separator = "";
 
-        if (!isset($post["name"])){                
+        if (!isset($post["name"]) || empty($post["name"])){                
             $message .= "Name";
             $separator = ", ";
         }
-        if (!isset($post["mail"])){                
+        if (!isset($post["mail"]) || empty($post["mail"])){                
             $message .= $separator."Mail";
             $separator = ", ";
         }
-        if (!isset($post["user"])){                
+        if (!isset($post["user"]) || empty($post["user"])){                
             $message .= $separator."Username";
             $separator = ", ";
         }
-        if (!isset($post["password"])){                
+        if (!isset($post["password"]) || empty($post["password"])){                
             $message .= $separator."Password";
             $separator = ", ";
         }
-        if (!isset($post["password2"])){                
+        if (!isset($post["password2"]) || empty($post["password2"])){                
             $message .= $separator."Password verification";
             $separator = ", ";
         }

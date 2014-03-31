@@ -28,6 +28,9 @@
 				
 				return jP($d);
 			} else {
+                                if($data["status"] == "error"){
+                                    $app->response()->status(401);
+                                }
 				return jP($data);
 			}
 			
@@ -35,6 +38,7 @@
 		else
 		{
 			$app->response()->status(401);
+                        return jP(array("signin" => false, "status" => "error", "message" => "Username/password needed"));
 		}
 	})->via('POST')->name('login');
 	
