@@ -197,20 +197,11 @@ class API {
         }
         
         $keys = self::Generate($username['login']);
-        $exec = $keys;
-        $exec["api_key_uid"] = $keyId;
-        $query = "
-            UPDATE 
-                `api_key`
-            SET
-                `public_key` = :public_key,
-                `private_key` = :private_key,
-            WHERE
-                `api_key_uid` = :api_key_uid
-            ";
+                
+        $query = "UPDATE api_key SET public_key = ?, private_key = ? WHERE api_key_uid = ?";
         try{
             $req = self::DB()->prepare($query);
-            $req->execute($exec);
+            $req->execute(array($keys['public_key'], $keys['private_key'], $keyId));
         } catch (Exception $e){
             Die('Need to handle this error. $e has all the details');
         }

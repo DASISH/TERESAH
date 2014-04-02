@@ -16,10 +16,11 @@ $app->get('/api_keys', function() use ($app) {
 
 $app->post('/api_keys', function() use ($app) {
     
-    foreach ($app->request->params() as $key => $value) {
+    foreach ($app->request->params() as $key => $value) {        
         $id = strtok($key, 'key_');
         API::Confirm($id);
     }
+    $app->redirect($app->urlFor('api_keys'));
     
 })->name('api_keys_post');
 

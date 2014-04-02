@@ -8,6 +8,7 @@
         <thead>
             <tr>
                 <th>User</th>
+                <th>Domain</th>
                 <th>Public</th>
                 <th>Private</th>            
             </tr>
@@ -16,6 +17,7 @@
             <?php foreach ($keys as $key): ?>
                 <tr class="<?php print $key['private_key'] == '' ? 'warning' : ''; ?>">
                     <td><?php print $key['user_name']; ?></a></td>
+                    <td><?php print $key['domain']; ?></a></td>
                     <td><?php print $key['public_key']; ?></a></td>
                     <td width="100" class="text-center">
                         <?php if ($key['private_key'] != ''): ?>
