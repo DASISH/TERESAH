@@ -13,19 +13,19 @@
         <div class="form-group">
             <label for="inputEmail1" class="col-lg-2 control-label" ng-bind="  'email' | translate"></label>
             <div class="col-lg-10">
-                <input type="email" class="form-control" id="inputEmail1"  ng-model="ui.profile.userdata.mail" placeholder="{{ui.profile.placeholder.mail}}">
+                <input type="email" class="form-control" id="inputEmail1"  ng-model="ui.profile.userdata.mail" placeholder="{{ui.profile.placeholder.mail}}" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
             <label for="inputPassword1" class="col-lg-2 control-label" ng-bind=" 'new password' | translate"></label>
             <div class="col-lg-10">
-                <input type="password" class="form-control" id="inputPassword1" ng-model="ui.profile.userdata.newpassword1" placeholder="{{ 'password' | translate }}">
+                <input type="password" class="form-control" id="inputPassword1" ng-model="ui.profile.userdata.newpassword1" placeholder="{{ 'password' | translate }}" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
             <label for="inputPassword2" class="col-lg-2 control-label" ng-bind=" 're-type password' | translate"></label>
             <div class="col-lg-10">
-                <input type="password" class="form-control" id="inputPassword2" ng-model="ui.profile.userdata.newpassword2" placeholder="{{ 're-type password' | translate }}">
+                <input type="password" class="form-control" id="inputPassword2" ng-model="ui.profile.userdata.newpassword2" placeholder="{{ 're-type password' | translate }}" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
