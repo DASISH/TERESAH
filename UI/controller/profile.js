@@ -62,9 +62,11 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
                     }
                     else {
                         
-                        domain_exists = false;
+                        console.log(domain);
+                        
+                        //check if domain is already applied for
                         for (index = 0; index < $scope.ui.profile.placeholder.keys.length; ++index) {
-                            if (!domain === $scope.ui.profile.placeholder.keys[index]["domain"]) {
+                            if (domain === $scope.ui.profile.placeholder.keys[index]["domain"]) {
                                 $scope.ui.profile.apply.message = "Domain already applied for";
                                 $scope.ui.profile.apply.status = "error";
 
