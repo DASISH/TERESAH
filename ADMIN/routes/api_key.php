@@ -4,8 +4,6 @@ $app->get('/api_keys', function() use ($app) {
 
     $result = API::Get();
     
-    var_dump($result);
-    
     $all = $result['data'];
 
     foreach ($all as &$key) {

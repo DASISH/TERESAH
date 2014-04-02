@@ -38,9 +38,7 @@ $app->post('/api_key_application/', function () use ($require, $app){
         return jP(array("status" => "error", "message" => "You need to be logged in to use this function"));
     }
 
-    $require->req("api");
-
-     if (count($app->request->post()) > 0){
+    if (count($app->request->post()) > 0){
         $input = $app->request->post();
     }
     elseif (count($app->request()->getBody()) > 0){
@@ -50,7 +48,21 @@ $app->post('/api_key_application/', function () use ($require, $app){
         $app->response()->status(400);
     }
     
-    return jP(API::Apply($input["domain"], $_SESSION["user"]["id"]));
+    
+    if(!isset($input["domain"])){
+        return jP(array("status" => "error", "message" => "Domain is mandatory"));
+    }
+        
+    $require->req("api");
+        
+    $result = API::Apply($input["domain"], $_SESSION["user"]["id"]);
+    
+    if($result['status'] == 'success')
+    {
+        $_SESSION['user']['keys'][] = array("domain" => $input["domain"], "public_key" => null, "private_key" => null);
+    }
+    
+    return jP($result);
     
 });
 ?>

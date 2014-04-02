@@ -1,9 +1,9 @@
-<div class="container" ng-show="$parent.user.signedin == true">
+<div class="container" ng-show="$parent.user.signedin === true">
 
     <h2>Edit Profile</h2>
 
     <form class="form-horizontal" role="form" ng-show="$parent.user.signedin" ng-submit="ui.profile.submit()">
-        <div class="alert" ng-class="{'alert-success' : (ui.profile.status == 'success'), 'alert-warning' : (ui.profile.status == 'error')}" ng-show="ui.profile.message" ng-bind="ui.profile.message"></div>
+        <div class="alert" ng-class="{'alert-success' : (ui.profile.status === 'success'), 'alert-warning' : (ui.profile.status === 'error')}" ng-show="ui.profile.message" ng-bind="ui.profile.message"></div>
         <div class="form-group">
             <label for="inputName1" class="col-lg-2 control-label" ng-bind=" 'name' | translate"></label>
             <div class="col-lg-10">
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
+            <div class="col-lg-offset-2 col-lg-2">
                 <button type="submit" class="btn btn-primary btn-block" ng-bind=" 'update profile' | translate"></button>
             </div>
         </div>
@@ -43,12 +43,14 @@
     <table class="sortable table table-striped table-bordered">
         <thead>
             <tr>
+                <th>Domain</th>
                 <th>Public Key</th>
                 <th>Private Key</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="key in ui.profile.placeholder.keys">
+                <td ng-bind="key.domain"></td>
                 <td ng-bind="key.public_key"></td>
                 <td ng-bind="key.private_key"></td>
             </tr>
@@ -61,11 +63,11 @@
     <h3>Apply for API Key</h3>
     
     <form class="form-horizontal" role="form" ng-show="$parent.user.signedin" ng-submit="ui.profile.apply()">
-        <div class="alert" ng-class="{'alert-success' : (ui.profile.apply.status == 'success'), 'alert-warning' : (ui.profile.apply.status == 'error')}" ng-show="ui.profile.apply.message" ng-bind="ui.profile.apply.message"></div>
+        <div class="alert" ng-class="{'alert-success' : (ui.profile.apply.status === 'success'), 'alert-warning' : (ui.profile.apply.status === 'error')}" ng-show="ui.profile.apply.message" ng-bind="ui.profile.apply.message"></div>
         <div class="form-group">
-            <label for="inputDomain" class="col-lg-2 control-label" ng-model="ui.profile.apply.domain" ng-bind=" 'domain' | translate"></label>
+            <label for="inputDomain" class="col-lg-2 control-label" ng-bind=" 'domain' | translate"></label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputDomain">
+                <input type="text" class="form-control" id="inputDomain" ng-model="ui.profile.apply.domain" >
             </div>
         </div>
         <div class="form-group">

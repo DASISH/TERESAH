@@ -22,7 +22,7 @@ class API {
      * @param $userName         User Name
      * @return Keys
      */
-    static private function Generate($domain, $userName) {
+    static private function Generate($userName) {
         $key_secrete = time() * time() / rand(1,8) + SALT;
         $key_public  = $userName + SALT;
         $key_secrete = hash('sha256', $key_secrete);
@@ -106,7 +106,7 @@ class API {
      * @return Status + Keys
      */
     static public function Insert($domain, $userId, $userName){
-        $keys = self::Generate($domain, $userName);
+        $keys = self::Generate($userName);
         $exec = $keys;
         $exec["user_uid"] = $userId;
         $exec["domain"] = $domain;
@@ -148,7 +148,7 @@ class API {
      */
     static public function Apply($domain, $userId){
         
-        $exec = array("public_key" => "", "private_key" => "" ,"user_uid" => $userId, "domain" => $domain);
+        $exec = array("public_key" => null, "private_key" => null ,"user_uid" => $userId, "domain" => $domain);
         $query = "INSERT INTO `api_key`
                 (
                 `public_key`,
@@ -171,10 +171,10 @@ class API {
         }
 
         if ($req->rowCount() == 1){
-            return array("success" => true);
+            return array("status" => "success", "message" => "Application sent");
         }
         else{
-            return array("success" => false, "status" => "error", "message" => "Failed to apply for keys");
+            return array("status" => "error", "message" => "Failed to apply for keys");
         }
     }
 
@@ -196,7 +196,7 @@ class API {
             Die($e);
         }
         
-        $keys = self::Generate($domain, $username['login']);
+        $keys = self::Generate($username['login']);
         $exec = $keys;
         $exec["api_key_uid"] = $keyId;
         $query = "

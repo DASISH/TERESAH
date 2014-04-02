@@ -189,7 +189,7 @@ class User{
     static function getAPIKeysForID($user_uid) {
 
         $result = array();
-        $query = "SELECT public_key, private_key FROM api_key WHERE user_uid = $user_uid";
+        $query = "SELECT domain, public_key, private_key FROM api_key WHERE user_uid = $user_uid";
         $req = self::DB()->prepare($query);
         $req->execute();
         $keys = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -481,5 +481,4 @@ class User{
         }        
     }
 }    
-}
 ?>
