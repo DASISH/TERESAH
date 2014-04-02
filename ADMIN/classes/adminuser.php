@@ -16,13 +16,14 @@ class AdminUser {
         $users = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($users as $user) {
-            if($user['user_level'] == '1') { $user['user_level_text'] = '1 - Authenticated user'; }
+            if($user['user_level'] == '0') { $user['user_level_text'] = '0 - Unauthenticated user'; }
+            else if($user['user_level'] == '1') { $user['user_level_text'] = '1 - Authenticated user'; }
             else if($user['user_level'] == '2') { $user['user_level_text'] = '2 - Collaborator'; }
             else if($user['user_level'] == '3') { $user['user_level_text'] = '3 - Supervisor'; }
             else if($user['user_level'] == '4') { $user['user_level_text'] = '4 - Administrator'; }
             $result[$user['login']] = $user;
         }
-
+        
         return $result;
     }
 
