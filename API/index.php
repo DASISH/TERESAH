@@ -57,6 +57,7 @@
 	\Slim\Slim::registerAutoloader();
 	$app = new \Slim\Slim(
 			array(
+                          'debug'=>true,
 		'cookies.encrypt' => true,
 		'cookies.secret_key' => '(ecwccx_)4q8f3q^3vsq)@0l%v=y%r390%ke+l7pjdwj75v8f)fp@ba2#1z7)eyjl!-3y2mb@*euaaf+*5+4r(!9iw2w)o1akx!w+8x^#y+y5kureo5!4q6a8*44_r($plnkqi$d9k-(s@zwlgwa34',
 		'cookies.cipher' => MCRYPT_RIJNDAEL_256,
@@ -74,7 +75,8 @@
 	require_once './routes/oauth.php';
 	require_once './routes/forum.php';
 	require_once './routes/faq.php';
-    require_once './routes/profile.php';
+        require_once './routes/profile.php';
+        require_once './routes/user.php';
 
 	$app->run();
 ?>

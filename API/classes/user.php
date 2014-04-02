@@ -436,7 +436,7 @@ class User{
      */
     static function getEmailVarificationToken($user_uid){
         try{
-            $req = self::DB()->prepare("SELECT * FROM user WHERE usier_uid = ?");
+            $req = self::DB()->prepare("SELECT * FROM user WHERE user_uid = ?");
             $req->execute(array($user_uid));
         } catch (Exception $e){
             Die('Need to handle this error. $e has all the details');
@@ -444,11 +444,11 @@ class User{
 
         if ($req->rowCount() == 1){
             $fields = $req->fetch(PDO::FETCH_ASSOC);
-            $token = hash("sha256", $user_uid.$fields['mail'].$fields['username']);
+            $token = hash("sha256", $user_uid.$fields['mail'].$fields['login']);
             return $token;
         }
         else{
-            return array("status" => "error", "message" => "Usier does not exist");
+            return array("status" => "error", "message" => "User does not exist");
         }        
     }
     
@@ -460,7 +460,7 @@ class User{
      */
     static function verifyEmailToken($user_uid, $token){
         try{
-            $req = self::DB()->prepare("SELECT * FROM user WHERE usier_uid = ?");
+            $req = self::DB()->prepare("SELECT * FROM user WHERE user_uid = ?");
             $req->execute(array($user_uid));
         } catch (Exception $e){
             Die('Need to handle this error. $e has all the details');
@@ -468,16 +468,23 @@ class User{
 
         if ($req->rowCount() == 1){
             $fields = $req->fetch(PDO::FETCH_ASSOC);
-            if(hash("sha256", $user_uid.$fields['mail'].$fields['username']) == $token){
-                $req = self::DB()->prepare(" UPDATE user SET user_level = 1 WHERE user_uid = ?");
-                $req->execute(array($user_uid));               
-                return true;
+            if(intval($fields['user_level']) >= 1){
+                //The user is verified. this will do a automatic login
+                self::login(array('login'=> $fields['login'], 'password'=>$fields['pasword']));
+                return array('status'=>'verified', 'message'=>'user is already verified');
+            }
+            if(hash("sha256", $user_uid.$fields['mail'].$fields['login']) == $token){
+                $req = self::DB()->prepare("UPDATE user SET user_level = 1 WHERE user_uid = ?");
+                $req->execute(array($user_uid));
+                //The user is verified. this will do a automatic login
+                self::login(array('login'=> $fields['login'], 'password'=>$fields['pasword']));                
+                return array('status'=>'verified');
                 
             }else{
-                return false;
+                return array('status'=>'error', 'message'=>'token is not valid');
             }
         }else{
-            return false;
+            return array('status'=>'error', 'message'=>'user not found');
         }        
     }
 }    
