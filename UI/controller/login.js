@@ -12,13 +12,12 @@ var Login = portal.controller('LoginCtrl', ['$scope', 'ui', 'Item', '$rootScope'
                             $scope.ui.login.status = data.status;
                             $scope.ui.login.message = data.message;
                         } else {
-                            o = {name: data.Name, mail: data.Mail, level: data.Level, keys: data.Keys, signedin: true};
+                            o = {name: data.Name, mail: data.Mail, login: data.Login, level: data.Level, keys: data.Keys, signedin: true};
                             $root.user = o;
                             $scope.ui.user = o;
                             $window.location.href = '/';
                         }
                     });
-
                 },
                 message: false,
                 status: false,
