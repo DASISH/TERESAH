@@ -17,7 +17,7 @@
                                 $keys = User::getAPIKeysForID($d['UID']);
                                 $data["Keys"] = $keys;
                                 
-				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "level" => $d["Level"], "keys" => $keys);
+				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "login" => $d["Login"], "level" => $d["Level"], "keys" => $keys);
 				
 			}
 			$app->redirect($data["Location"]);
@@ -41,7 +41,7 @@
                                 $keys = User::getAPIKeysForID($d['UID']);
                                 $data["Keys"] = $keys;  
                                 
-				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "level" => $d["Level"], "keys" => $keys);
+				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "login" => $d["Login"], "level" => $d["Level"], "keys" => $keys);
 				
 			}
 			$app->redirect($data["Location"]);
@@ -65,7 +65,7 @@
                                 $keys = User::getAPIKeysForID($d['UID']);
                                 $data["Keys"] = $keys;
                                 
-				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "level" => $d["Level"], "keys" => $keys);
+				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "login" => $d["Login"], "level" => $d["Level"], "keys" => $keys);
 				
 			}
 			$app->redirect($data["Location"]);
@@ -93,7 +93,7 @@
                                 $keys = User::getAPIKeysForID($d['UID']);
                                 $data["Keys"] = $keys;
                                 
-				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "level" => $d["Level"], "keys" => $keys);
+				$_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "login" => $d["Login"], "level" => $d["Level"], "keys" => $keys);
 				
 			}
 			$app->redirect($data["Location"]);

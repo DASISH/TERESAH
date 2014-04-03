@@ -34,6 +34,9 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
                     if ($scope.ui.profile.userdata.name !== "") {
                         input["name"] = $scope.ui.profile.userdata.name;
                     }
+                    if ($scope.ui.profile.userdata.login !== "") {
+                        input["login"] = $scope.ui.profile.userdata.login;
+                    }
                     $item.resolver.user.profile.edit(input, function(data) {
                         $scope.ui.profile.status = data.status;
                         $scope.ui.profile.message = data.message;
@@ -98,6 +101,8 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
             }
         };
         $scope.ui.profile.placeholder = $ui.user.data;
+
+        console.log($ui.user.data);
 
         for (index = 0; index < $scope.ui.profile.placeholder.keys.length; ++index) {
             if (!$scope.ui.profile.placeholder.keys[index]["public_key"] ||

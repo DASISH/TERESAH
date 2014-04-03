@@ -17,6 +17,12 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="inputLogin1" class="col-lg-2 control-label" ng-bind="  'username' | translate"></label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputLogin1"  ng-model="ui.profile.userdata.login" placeholder="{{ui.profile.placeholder.login}}" autocomplete="off">
+            </div>
+        </div>
+        <div class="form-group">
             <label for="inputPassword1" class="col-lg-2 control-label" ng-bind=" 'new password' | translate"></label>
             <div class="col-lg-10">
                 <input type="password" class="form-control" id="inputPassword1" ng-model="ui.profile.userdata.newpassword1" placeholder="{{ 'password' | translate }}" autocomplete="off">

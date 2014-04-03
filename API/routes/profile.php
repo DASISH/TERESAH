@@ -25,6 +25,9 @@ $app->post('/profile/', function () use ($require, $app){
     if (isset($input["mail"])){
         $post["mail"] = $input["mail"];
     }
+    if (isset($input["login"])){
+        $post["login"] = $input["login"];
+    }
     if (isset($input["password"])){
         $post["password"] = $input["password"];
     }

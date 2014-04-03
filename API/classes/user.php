@@ -26,7 +26,7 @@ class User{
     static function login($post){
         $pw = hash('sha256', $post["password"]);
         try{
-            $req = self::DB()->prepare("SELECT name as Name, mail as Mail, user_uid as UID, user_level as Level FROM user WHERE (login = ? OR mail = ?) AND password = ?");
+            $req = self::DB()->prepare("SELECT name as Name, mail as Mail, user_uid as UID, user_level as Level, login as Login FROM user WHERE (login = ? OR mail = ?) AND password = ?");
             $req->execute(array($post["user"], $post["user"], $pw));
         } catch (Exception $e){
             Die('Need to handle this error. $e has all the details');
@@ -229,14 +229,14 @@ class User{
         if (!isset($data["email"])){
             $data["email"] = $data["nickname"];
         }
-        $req = self::DB()->prepare("SELECT u.name as Name, u.mail as Mail, u.user_uid as UID, u.user_level as Level FROM user_oauth uo, user u WHERE u.user_uid = uo.user_uid AND uo.provider = ? AND uo.external_uid = ? LIMIT 1");
+        $req = self::DB()->prepare("SELECT u.name as Name, u.mail as Mail, u.user_uid as UID, u.user_level as Level, u.login as Login FROM user_oauth uo, user u WHERE u.user_uid = uo.user_uid AND uo.provider = ? AND uo.external_uid = ? LIMIT 1");
         $req->execute(array($provider, $data["uid"]));
         if ($req->rowCount() >= 1){
             $d = $req->fetch(PDO::FETCH_ASSOC);
                    
             $keys = self::getAPIKeysForID($d['UID']);
             
-            $_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "level" => $d["Level"], "keys" => $keys);
+            $_SESSION["user"] = array("id" => $d["UID"], "name" => $d["Name"], "mail" => $d["Mail"], "login" => $d["Login"], "level" => $d["Level"], "keys" => $keys);
             return array("signin" => true, "data" => $d);
         }
         else{
@@ -244,7 +244,7 @@ class User{
             if ($sign["status"] == "success"){
                 $req = self::DB()->prepare("INSERT INTO user_oauth VALUES (NULL, ?, ?, ?)");
                 $req->execute(array($sign["uid"], $provider, $data["uid"]));
-                $_SESSION["user"] = array("id" => $sign["uid"], "name" => $data["name"], "mail" => $data["email"], "level" => 1, "keys" => array());
+                $_SESSION["user"] = array("id" => $sign["uid"], "name" => $data["name"], "mail" => $data["email"], "login" => $data["email"], "level" => 1, "keys" => array());
                 Log::insert("insert", $sign["uid"], "user", self::DB()->lastInsertId());
                 return array("signin" => true, "data" => array("UID" => $sign, "Name" => $data["name"], "Mail" => $data["email"]));
             }

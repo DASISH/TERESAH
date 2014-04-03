@@ -18,7 +18,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
                 if (ui.user.data == false) {
                     if ($cookies.logged) {
                         Restangular.one("cookie/").get().then(function(data) {
-                            data = {name: data.name, id: data.id, mail: data.mail, level: data.level, keys: data.keys}
+                            data = {name: data.name, id: data.id, mail: data.mail, login: data.login, level: data.level, keys: data.keys}
                             ui.user.data = data;
                             if (callback) {
                                 return callback(ui.user.data);
