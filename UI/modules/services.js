@@ -87,6 +87,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
                 signin: Restangular.all("login/"),
                 signup: Restangular.all("signup/"),
                 profile: Restangular.all("profile/"),
+                verify: Restangular.all("verify/"),
                 api_key_application: Restangular.all("api_key_application/")
             },
             oAuth: Restangular.all("oAuth"),
