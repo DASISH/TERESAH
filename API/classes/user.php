@@ -145,6 +145,11 @@ class User{
             return array("status" => "error", "message" => "No field for profile update");
         }
 
+        if(!self::checkLoginAvailability($input['login'])) {
+            return array("status" => "error", "message" => "Username is not available");
+        }
+
+        
         if(array_key_exists("password", $exec)) {
             if(self::checkPasswordComplexity($exec["password"])){
                 $exec["password"] = hash("sha256", $exec["password"]);
@@ -184,6 +189,15 @@ class User{
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
         
         return $result['login'];
+    }
+    
+    static function checkLoginAvailability($login){
+        
+        $query = "SELECT * FROM user WHERE login = ?";
+        $req = self::DB()->prepare($query);
+        $req->execute(array($login));
+
+        return $req->rowCount() != 0 ? false : true;
     }
 
     static function getAPIKeysForID($user_uid) {
