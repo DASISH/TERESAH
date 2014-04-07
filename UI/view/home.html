@@ -10,7 +10,10 @@
 	</div>
 
 	<hr />
-
+	<div class="row" ng-show="ui.pages.total > 1">
+		<pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+	</div>
+        
 	<section class="itemList" items="results.items"></section>
 
 	<div class="row" ng-show="ui.pages.total > 1">
