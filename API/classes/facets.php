@@ -1078,5 +1078,14 @@ class Facets {
 		#Only one return
 		return $ret;			
 	}
+        
+        static function getCloud(){
+            
+            $req = "select tt.tool_type_uid as id, tt.tool_type as text, count(t.tool_uid) as weight from tool_type tt inner join tool_has_tool_type t on tt.tool_type_uid = t.tool_type_uid group by text";
+            $req = self::DB()->prepare($req);
+            $req->execute(array());
+			
+            return $req->fetchAll(PDO::FETCH_ASSOC);
+        }
 }
 ?>

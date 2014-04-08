@@ -85,4 +85,16 @@
 			return jP($data); 
 		}
 	});
+        
+        $app->get('/cloud', function () use ($require, $app) {
+
+            $require->req(array("facet"));
+            $result = Facets::getCloud();
+
+            for ($i = 0; $i < count($result); $i++) {
+                $result[$i]["link"] = "#/facet/ToolType/".$result[$i]["id"];
+            }
+
+            return jP($result);
+        });
 ?>

@@ -11,8 +11,22 @@ ul.oauth li span{
     cursor:pointer;
 }
 
+/* Jumbotron
+-------------------------------------------------- */
 
-/* Sticky footer styles
+.jumbotron {
+    margin-top: 80px;
+}
+
+.jumbotron h2, p {
+    text-align: center;    
+}
+
+.jumbotron p {
+    font-size: 15px;
+}
+
+/* Sticky footer styles 
 -------------------------------------------------- */
 
 html,
@@ -23,22 +37,25 @@ body {
 
 /* Wrapper for page content to push down footer */
 #wrap {
+    padding-top: 60px;
     min-height: 100%;
     height: auto !important;
     height: 100%;
     /* Negative indent footer by it's height */
-    margin: 0 auto -60px;
+    
 }
 
 /* Set the fixed height of the footer here */
 #push,
 #footer {
     height: 60px;
+
 }
 
 #footer {
     background-color: #222;
     border-color: #080808;    
+    margin-top: -60px;
 }
 
 #footer a {

@@ -74,7 +74,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
             },
             facets: {
                 list: Restangular.all("facet/"),
-                search: Restangular.all("facet")
+                search: Restangular.all("facet"),                
             },
             browse: {
                 facet: Restangular.all("facet")
@@ -91,7 +91,8 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
                 api_key_application: Restangular.all("api_key_application/")
             },
             oAuth: Restangular.all("oAuth"),
-            faq: Restangular.all("faq")
+            faq: Restangular.all("faq"),
+            cloud: Restangular.all("cloud")
         },
         //Return Part
         resolver: {
@@ -340,7 +341,7 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
                         }
                         return data.original;
                     });
-                },
+                },                
                 search: {
                 },
                 facet: {
@@ -507,9 +508,20 @@ portal.factory("ui", function($window, $rootScope, $cookies, Restangular, $locat
                     return data.original;
                 });
 
+            },
+            cloud: function(callback) {
+                if (typeof (callback) === 'undefined'){
+                    callback = false;
+                }
+                return Item.routes.cloud.getList().then(function(data) {
+                    if (callback) {
+                        callback(data.original);
+                    }
+                    return data.original;
+                });
             }
         }
-    }
+    };
 
     return Item;
 });

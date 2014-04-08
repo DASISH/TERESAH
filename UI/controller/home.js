@@ -1,34 +1,22 @@
 var Home = portal.controller('HomeCtrl', ['$scope', 'ui',  'Item', function($scope, $ui, $item) {
-	$scope.results = {
-		items: $item.data.response
-	}
-	$scope.ui = {
-		parameters : $item.data.parameters,
-		pages : {
-			current : 1,
-			itemPerPage : 20,
-			change : function(page) {
-				
-				$item.resolver.tools.all({'page': page}, function(data) {
-					console.log(data);
-					$scope.results.items = data.response;
-					$scope.ui.parameters = data.parameters;
-				});
-			}
-		}
-	};
 	
+        $scope.cloud = $item.data;
+        
 	$ui.user.signedin();
 	
+        $("#cloud").jQCloud($scope.cloud);
+        
 	$ui.title("Home");
 	
 	//exec
 }]);
 Home.resolveHome = {
-	itemData: function($route, Item) {
-		this.data = Item.resolver.tools.all({'page': 1});
-		return this.data;
-	},
+        itemData: function($route, Item) {
+            Item.resolver.cloud(function(data) {
+                Item.data = data;
+            });
+            return Item.data;
+        },
 	delay: function($q, $timeout) {
 		var delay = $q.defer();
 		$timeout(delay.resolve, 1000);

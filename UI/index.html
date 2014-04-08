@@ -7,12 +7,13 @@
         <meta name="author" content="">
         <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-        <title>DASISH Tool Registry</title>
+        <title>TERESAH</title>
 
         <link href="./assets/css/bootstrap.css" rel="stylesheet" />
         <link href="./assets/css/font-awesome.min.css" rel="stylesheet" />
         <link href="./assets/css/font-awesome-ie7.min.css" rel="stylesheet" />
         <link href="./assets/css/fontello.css" rel="stylesheet" />
+        <link href="./assets/css/jqcloud.css" rel="stylesheet" />
         <link href="./assets/css/teresah.css" rel="stylesheet" />
 
         <link rel="alternate" type="application/rdf+xml" href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/xml" title="Structured Descriptor Document (RDF/XML format)" />
@@ -76,7 +77,7 @@
 
         <div id="wrap">
             <div class="container" ng-view>
-            </div>
+            </div>                
             <div id="push"></div>
         </div>
         
@@ -93,6 +94,8 @@
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.0.0/lodash.js"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script>
         <script type="text/javascript" src="./assets/js/angular-translate.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <script type="text/javascript" src="./assets/js/jqcloud-1.0.4.js"></script>
         <script type="text/javascript" src="./assets/i18n/en.js"></script>
         <script type="text/javascript" src="./assets/i18n/sv.js"></script>
 
@@ -116,7 +119,7 @@
         <script type="text/javascript" src="./controller/search.quick.js"></script>
         <script type="text/javascript" src="./controller/profile.js"></script>
         <script type="text/javascript" src="./controller/verify.js"></script>
-
+        
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
             <h3>I'm a modal!</h3>

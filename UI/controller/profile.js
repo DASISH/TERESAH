@@ -65,8 +65,6 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
                     }
                     else {
                         
-                        console.log(domain);
-                        
                         //check if domain is already applied for
                         for (index = 0; index < $scope.ui.profile.placeholder.keys.length; ++index) {
                             if (domain === $scope.ui.profile.placeholder.keys[index]["domain"]) {
@@ -101,8 +99,6 @@ var Profile = portal.controller('ProfileCtrl', ['$scope', 'ui', 'Item', '$rootSc
             }
         };
         $scope.ui.profile.placeholder = $ui.user.data;
-
-        console.log($ui.user.data);
 
         for (index = 0; index < $scope.ui.profile.placeholder.keys.length; ++index) {
             if (!$scope.ui.profile.placeholder.keys[index]["public_key"] ||
