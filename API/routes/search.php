@@ -18,8 +18,8 @@
 				$data["status"] = "success";
 				return jP($data); 
 			} else {
-                            return jP(array("status" => "error", "message" => "No results found")); 
-                        }
+            	return jP(array("status" => "error", "message" => "No results found")); 
+            }
 		}
 		return jP(array("status" => "error", "message" => "No input given")); 
 		
@@ -62,6 +62,10 @@
 			}
 			return jP($data); 
 		}
+	});
+	
+	$app->options('/search/faceted/', function () {
+		return options(true); 
 	});
 	
 	$app->post('/search/faceted/', function () use ($require, $app) {

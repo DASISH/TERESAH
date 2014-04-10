@@ -52,6 +52,28 @@
 		}
 		return true;
 	}
+
+	function options($api_restricted = false, $method = "OPTIONS, GET, POST") {
+		$app = Slim\Slim::getInstance();
+		$app->contentType('application/json');
+		$response = $app->response();
+		if($api_restricted == true) {
+			//Check that the domain is ok
+			$public_key = $app->request->header("authorization");
+			$domain = $app->request->getHost();
+			$private_key = $app->request->header("private");
+
+
+			//And that the authorization is good
+			$response->header('Access-Control-Allow-Origin', $domain);
+		} else {
+			$response->header('Access-Control-Allow-Origin', '*');
+		}
+		$response->header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, X-authentication, X-client');
+		$response->header('Access-Control-Allow-Methods', $methods);
+		return true;
+	}
+
     
 	#Start the framework
 	\Slim\Slim::registerAutoloader();
