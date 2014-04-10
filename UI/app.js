@@ -2,6 +2,7 @@ var portal = angular.module('toolRegistry', ['ui.bootstrap', 'restangular', 'ngC
 portal.
 	config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
+                when('/registry', {templateUrl: './view/registry.html', controller:"RegistryCtrl", reloadOnSearch: false, resolve: Registry.resolveRegistry}).
 		when('/tool/:toolId', {templateUrl: './view/tool.html', controller:"ToolCtrl", reloadOnSearch: false, resolve: Tool.resolveTool}).
 		when('/link/:toolId', {templateUrl: './view/link.html', controller:"LinkCtrl", reloadOnSearch: false, resolve: LinkCtrler.resolveLinkCtrl}).
 		when('/add', {templateUrl: './view/tool.insert.html', controller:"AddToolCtrl", reloadOnSearch: false, resolve: AddTool.resolveAddTool}).

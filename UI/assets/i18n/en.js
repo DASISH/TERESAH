@@ -100,6 +100,7 @@ var i18n_en = {
     'inclusive':'Inclusive',
     'optional':'Optional',
     'browse by facet':'Browse by facet',
+    'browse all':'Browse all',
     'browse facets':'Browse facets',
     'facets elements from':'Facet´s elements from',
     'taxonomy':'Taxonomy',

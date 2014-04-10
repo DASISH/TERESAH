@@ -1,29 +1,29 @@
 <ol class="breadcrumb">
-  <li><a href="#/">{{ 'home' | translate }}</a></li>
-  <li><a href="#/facet">{{ 'browse by facet' | translate }}</a></li>
-  <li><a ng-href="#/facet/{{results.facet.facetParam}}" ng-bind="results.facet.facetLegend"></a></li>
+    <li><a href="#/">{{ 'home' | translate }}</a></li>
+    <li><a href="#/facet">{{ 'browse by facet' | translate }}</a></li>
+    <li><a ng-href="#/facet/{{results.facet.facetParam}}" ng-bind="results.facet.facetLegend"></a></li>
 </ol>
 
 <section id="viewHeader">
-	<div class="page-header">
-		<h1><span ng-bind="results.facet.facetLegend"></span> <small>{{ 'browse facets' | translate }}</small></h1>	
-		
-		<p>{{ 'facets elements from' | translate }} <span ng-bind="ui.parameters.start + 1"></span> {{ 'to' | translate }} <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> {{ 'on' | translate }} <span ng-bind="ui.parameters.total"></span> {{ 'available' | translate }}</p>
-	</div>
+    <div class="page-header">
+        <h1><span ng-bind="results.facet.facetLegend"></span> <small>{{ 'browse facets' | translate }}</small></h1>	
+
+        <p>{{ 'facets elements from' | translate }} <span ng-bind="ui.parameters.start + 1"></span> {{ 'to' | translate }} <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> {{ 'on' | translate }} <span ng-bind="ui.parameters.total"></span> {{ 'available' | translate }}</p>
+    </div>
 </section>
 <section id="viewContent" ng-show="results.items">
-        <div class="row">
-		<pagination total-items="results.facet.facetTotal" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
-	</div>
-        <div class="row no-desc" ng-repeat="item in results.items">
-		<div class="row" >
-			<div class="col-lg-12">
-				<em><a ng-href="#/facet/{{results.facet.facetParam}}/{{item.id}}" ng-bind="item.name"></a></em>
-				<hr style="margin:5px;"/>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<pagination total-items="results.facet.facetTotal" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
-	</div>
+    <div class="row">
+        <pagination total-items="results.facet.facetTotal" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+    </div>
+    <div class="row no-desc" ng-repeat="item in results.items">
+        <div class="row" >
+            <div class="col-lg-12">
+                <em><a ng-href="#/facet/{{results.facet.facetParam}}/{{item.id}}" ng-bind="item.name"></a></em>
+                <hr style="margin:5px;"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <pagination total-items="results.facet.facetTotal" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+    </div>
 </section>
