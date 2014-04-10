@@ -18,7 +18,7 @@ ul.oauth li span{
     margin-top: 80px;
 }
 
-.jumbotron h2, p {
+.jumbotron h2, .jumbotron p {
     text-align: center;    
 }
 

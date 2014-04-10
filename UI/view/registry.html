@@ -1,0 +1,24 @@
+<ol class="breadcrumb">
+    <li><a href="#/">{{ 'home' | translate }}</a></li>
+    <li><a href="#/registry">{{ 'browse' | translate }}</a></li>
+</ol>
+
+<section id="viewHeader">
+    <div class="page-header">
+        <h1>Browse</h1>	
+        <p>{{ 'tools from' | translate }} <span ng-bind="ui.parameters.start + 1"></span> {{ 'to' | translate }} <span ng-bind="ui.parameters.limit + ui.parameters.start" ng-show="ui.parameters.total > 20"></span><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> {{ 'on' | translate }} <span ng-bind="ui.parameters.total"></span> {{ 'available' | translate }}</p>
+    </div>
+</section>
+
+
+<section id="viewContent" ng-show="results.items">
+    <div class="row" ng-show="ui.pages.total > 1">
+        <pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+    </div>
+
+    <section class="itemList" items="results.items"></section>
+
+    <div class="row" ng-show="ui.pages.total > 1">
+        <pagination total-items="ui.parameters.total" items-per-page="ui.pages.itemPerPage" page="ui.pages.current" max-size="5" class="pagination-small" boundary-links="true" rotate="false" on-select-page="ui.pages.change(page)" num-pages="ui.pages.total"></pagination>
+    </div>
+</section>

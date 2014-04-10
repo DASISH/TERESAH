@@ -99,6 +99,7 @@ var i18n_sv = {
     'label(s) available':'label(s) available',
     'inclusive':'Inkluderande',
     'optional':'Valfri',
+    'browse all':'Browse all',
     'browse by facet':'Browse by facet',
     'browse facets':'Browse facets',
     'facets elements from':'Facet´s elements from',

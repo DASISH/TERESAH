@@ -41,7 +41,13 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li ng-class="ui.routes.getRoute('HomeCtrl')"><a href="#/" ng-bind=" 'home' | translate"></a></li>
-                        <li ng-class="ui.routes.getRoute('facetListCtrl')"><a href="#/facet" ng-bind="'browse' | translate"></a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle">{{ 'browse' | translate }}</a>
+                            <ul class="dropdown-menu">
+                                <li ng-class="ui.routes.getRoute('RegistryCtrl')"><a href="#/registry" ng-bind=" 'browse all' | translate"></a></li>
+                                <li ng-class="ui.routes.getRoute('facetListCtrl')"><a href="#/facet" ng-bind="'browse facets' | translate"></a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle">{{ 'search' | translate }}</a>
                             <ul class="dropdown-menu">
@@ -80,7 +86,7 @@
             </div>                
             <div id="push"></div>
         </div>
-        
+
         <!-- Site footer -->
         <div id="footer">
             <div class="col-centered"><a class="col-centered" href="http://dasish.eu"><img class="col-centered" src="./assets/img/dasish_header_logo.png" alt="DASISH logo"></a></div>				
@@ -105,6 +111,7 @@
         <script type="text/javascript" src="./modules/filter.js"></script>
         <script type="text/javascript" src="./modules/directives.js"></script>
 
+        <script type="text/javascript" src="./controller/registry.js"></script>
         <script type="text/javascript" src="./controller/tool.js"></script>
         <script type="text/javascript" src="./controller/link.js"></script>
         <script type="text/javascript" src="./controller/tool.insert.js"></script>
@@ -119,7 +126,7 @@
         <script type="text/javascript" src="./controller/search.quick.js"></script>
         <script type="text/javascript" src="./controller/profile.js"></script>
         <script type="text/javascript" src="./controller/verify.js"></script>
-        
+
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
             <h3>I'm a modal!</h3>
