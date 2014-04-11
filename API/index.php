@@ -53,25 +53,32 @@
 		return true;
 	}
 
-	function options($api_restricted = false, $method = "OPTIONS, GET, POST") {
+	function options($api_restricted = false, $methods = "OPTIONS, POST") {
 		$app = Slim\Slim::getInstance();
-		$app->contentType('application/json');
+		$app->contentType('text/html');
 		$response = $app->response();
-		if($api_restricted == true) {
-			//Check that the domain is ok
-			$public_key = $app->request->header("authorization");
-			$domain = $app->request->getHost();
-			$private_key = $app->request->header("private");
-
-
-			//And that the authorization is good
-			$response->header('Access-Control-Allow-Origin', $domain);
-		} else {
-			$response->header('Access-Control-Allow-Origin', '*');
-		}
 		$response->header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, X-authentication, X-client');
 		$response->header('Access-Control-Allow-Methods', $methods);
-		return true;
+
+		if($api_restricted == true) {
+			//Check that the domain is ok
+			//$public_key = $app->request->header("authorization");
+			$domain = $app->request->getHost();
+			$scheme = $app->request->getScheme();
+			//$private_key = $app->request->header("private");
+			//And that the authorization is good
+			$authorization = true;
+			if($authorization == false) {
+				$response->header('Access-Control-Allow-Origin', $scheme . "://" . $_SERVER['SERVER_NAME']);
+				$app->response()->status(403);
+			} else {
+				$response->header('Access-Control-Allow-Origin', $scheme . "://" . $domain);
+				$app->response()->status(200);
+			}
+		} else {
+			$response->header('Access-Control-Allow-Origin', '*');
+			$app->response()->status(200);
+		}
 	}
 
     
