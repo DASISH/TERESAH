@@ -22,4 +22,9 @@ $app->get('/tool/:shortname', function ($shortname) {
                             )
             );
 });
+
+$app->get('/registry', function () use ($app){ 
+    display('registry.php', array('tools' => Search::all($app->request->get())));
+});
+
 ?>

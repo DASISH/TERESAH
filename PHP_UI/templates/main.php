@@ -16,12 +16,12 @@
         <link href="/assets/css/jqcloud.css" rel="stylesheet" />
         <link href="/assets/css/teresah.css" rel="stylesheet" />
 
-		<!--
+	<!--
         <link rel="alternate" type="application/rdf+xml" href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/xml" title="Structured Descriptor Document (RDF/XML format)" />
         <link rel="alternate" type="text/rdf+n3" href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/turtle" title="Structured Descriptor Document (N3/Turtle format)" />
         <link rel="alternate" type="application/json+rdf" href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/json" title="Structured Descriptor Document (RDF/JSON format)" />
         <link rel="alternate" type="text/plain" href="http://rdf.tools.dasish.org/tool/{{item.identifier.shortname}}/ntriples" title="Structured Descriptor Document (N-Triples format)" />
-		-->
+	-->
     </head>
 
     <body>
@@ -34,44 +34,43 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">TERESAH</a>
+                    <a class="navbar-brand" href="/">TERESAH</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="#/" ng-bind=" 'home' | translate"></a></li>
+                        <li><a href="/"><?php print $i18n['home'];?></a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle">{{ 'browse' | translate }}</a>
+                            <a class="dropdown-toggle"><?php print $i18n['browse'];?></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#/registry" ng-bind=" 'browse all' | translate"></a></li>
-                                <li><a href="#/facet" ng-bind="'browse facets' | translate"></a></li>
+                                <li><a href="/registry"><?php print $i18n['browse all'];?></a></li>
+                                <li><a href="/facet"><?php print $i18n['browse facets'];?></a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle">{{ 'search' | translate }}</a>
+                            <a class="dropdown-toggle"><?php print $i18n['search'];?></a>
                             <ul class="dropdown-menu">
-                                <li ng-class="ui.routes.getRoute('SearchCtrl')"><a href="#/search/general" ng-bind=" 'general' | translate"></a></li>
-                                <li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="#/search/faceted" ng-bind=" 'faceted' | translate"></a></li>
+                                <li ng-class="ui.routes.getRoute('SearchCtrl')"><a href="/search/general"><?php print $i18n['general'];?></a></li>
+                                <li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="/search/faceted"><?php print $i18n['faceted'];?></a></li>
                             </ul>
                         </li>
-                        <li ng-class="ui.routes.getRoute('AddToolCtrl')" ng-show="ui.user.data.signedin"><a href="#/add" ng-bind=" 'Add' | translate"></a></li>
+                        <li ng-class="ui.routes.getRoute('AddToolCtrl')" ng-show="ui.user.data.signedin"><a href="/add"><?php print $i18n['add'];?></a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" ng-bind=" 'about' | translate">
-                            </a>
+                            <a class="dropdown-toggle"><?php print $i18n['about'];?></a>
                             <ul class="dropdown-menu">
-                                <li ng-class="ui.routes.getRoute('rdf')"><a href="#/about/rdf/">RDF</a></li>
-                                <li ng-class="ui.routes.getRoute('API')"><a href="#/about/api/">API</a></li>
+                                <li><a href="/about/rdf/">RDF</a></li>
+                                <li><a href="/about/api/">API</a></li>
                             </ul>
                         </li>
-                        <li ng-show="ui.user.data.level === '4'"><a href="admin" ng-bind=" 'Admin' | translate"></a></li>
+                        <li ng-show="ui.user.data.level === '4'"><a href="/admin"><?php print $i18n['Admin'];?></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="pull-right" ng-show="ui.user.data.signedin"><a  href="#/profile"><span class="glyphicon glyphicon-user"></span> <span ng-bind="ui.user.data.name.substr(0, 7);"></span><span ng-show="ui.user.data.name.length > 7"></span></a></li>
-                        <li class="pull-right" ng-show="ui.user.data.signedin"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> <span ng-bind=" 'sign out' | translate"></span></a></li>
-                        <li class="pull-right" ng-show="!ui.user.data.signedin"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> <span ng-bind="'sign in' | translate"></span></a></li>
+                        <li class="pull-right" ng-show="ui.user.data.signedin"><a  href="/profile"><span class="glyphicon glyphicon-user"></span> <span ng-bind="ui.user.data.name.substr(0, 7);"></span><span ng-show="ui.user.data.name.length > 7"></span></a></li>
+                        <li class="pull-right" ng-show="ui.user.data.signedin"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> <span><?php print $i18n['sign out'];?></span></a></li>
+                        <li class="pull-right" ng-show="!ui.user.data.signedin"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> <span><?php print $i18n['sign in'];?></span></a></li>
                     </ul>
                     <form class="navbar-form navbar-right hidden-sm" ng-submit="ui.search.go()">
                         <div class="form-group">
-                            <input type="text" placeholder="{{ 'search' | translate }}" name="quicksearch"  ng-model="ui.search.input" class="form-control input-sm" typeahead-wait-ms="100" typeahead="answer.identifiers.shortname as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-loading="true" typeahead-on-select="ui.search.select($item)">
+                            <input type="text" placeholder="<?php print $i18n['search'];?>" name="quicksearch"  ng-model="ui.search.input" class="form-control input-sm" typeahead-wait-ms="100" typeahead="answer.identifiers.shortname as answer.title for answer in ui.search.typeahead($viewValue)" typeahead-loading="true" typeahead-on-select="ui.search.select($item)">
                         </div>
                         <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-search"></span></button>
                     </form>
@@ -81,14 +80,14 @@
 
         <div id="wrap">
             <div class="container">
-				<?php print $content;?>
+		<?php print $content;?>
             </div>                
             <div id="push"></div>
         </div>
 
         <!-- Site footer -->
         <div id="footer">
-            <div class="col-centered"><a class="col-centered" href="http://dasish.eu"><img class="col-centered" src="./assets/img/dasish_header_logo.png" alt="DASISH logo"></a></div>				
+            <div class="col-centered"><a class="col-centered" href="http://dasish.eu"><img class="col-centered" src="/assets/img/dasish_header_logo.png" alt="DASISH logo"></a></div>				
         </div>
 
         <!-- Bootstrap core JavaScript -->
