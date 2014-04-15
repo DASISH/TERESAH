@@ -57,13 +57,15 @@ include('routes/tool.php');
  * @param string $variables variables to pass to template
  */
 function display($template, $variables) {
-    
     $app = Slim\Slim::getInstance();
+    
+    $dummyUser = array('signin' => true, 'data'=> array('level' => 1, 'Name'=>'Kalle Anka'));
+    
     ob_start();
     $variables['i18n'] = i18nParse(getPreferedLanguage());
     $app->render($template, $variables);
     $content = ob_get_clean();	
-    $app->render('main.php', array('content' => $content));
+    $app->render('main.php', array('content' => $content, 'user' => $dummyUser));
 }
 
 $app->run();

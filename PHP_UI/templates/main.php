@@ -36,37 +36,41 @@
                     </button>
                     <a class="navbar-brand" href="/">TERESAH</a>
                 </div>
-                <div class="collapse navbar-collapse">
+                <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="/"><?php print $i18n['home'];?></a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle"><?php print $i18n['browse'];?></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php print $i18n['browse'];?><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/registry"><?php print $i18n['browse all'];?></a></li>
                                 <li><a href="/facet"><?php print $i18n['browse facets'];?></a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle"><?php print $i18n['search'];?></a>
+                            <a class="dropdown-toggle"><?php print $i18n['search'];?><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li ng-class="ui.routes.getRoute('SearchCtrl')"><a href="/search/general"><?php print $i18n['general'];?></a></li>
                                 <li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="/search/faceted"><?php print $i18n['faceted'];?></a></li>
                             </ul>
                         </li>
+                        <?php if($user['data']['level'] >= 3):?>
                         <li ng-class="ui.routes.getRoute('AddToolCtrl')" ng-show="ui.user.data.signedin"><a href="/add"><?php print $i18n['add'];?></a></li>
+                        <?php endif;?>
                         <li class="dropdown">
-                            <a class="dropdown-toggle"><?php print $i18n['about'];?></a>
+                            <a class="dropdown-toggle"><?php print $i18n['about'];?><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/about/rdf/">RDF</a></li>
                                 <li><a href="/about/api/">API</a></li>
                             </ul>
                         </li>
-                        <li ng-show="ui.user.data.level === '4'"><a href="/admin"><?php print $i18n['Admin'];?></a></li>
+                        <?php if($user['data']['level'] == 4):?>
+                        <li><a href="/admin"><?php print $i18n['Admin'];?></a></li>
+                        <?php endif;?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="pull-right" ng-show="ui.user.data.signedin"><a  href="/profile"><span class="glyphicon glyphicon-user"></span> <span ng-bind="ui.user.data.name.substr(0, 7);"></span><span ng-show="ui.user.data.name.length > 7"></span></a></li>
-                        <li class="pull-right" ng-show="ui.user.data.signedin"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> <span><?php print $i18n['sign out'];?></span></a></li>
-                        <li class="pull-right" ng-show="!ui.user.data.signedin"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> <span><?php print $i18n['sign in'];?></span></a></li>
+                        <?php if($user['signin']):?><li class="pull-right"><a  href="/profile"><span class="glyphicon glyphicon-user"></span> <span></span><span><?php print $user['data']['Name'];?></span></a></li><?php endif;?>
+                        <?php if($user['signin']):?><li class="pull-right"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> <span><?php print $i18n['sign out'];?></span></a></li><?php endif;?>
+                        <?php if(!$user['signin']):?><li class="pull-right"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> <span><?php print $i18n['sign in'];?></span></a></li><?php endif;?>
                     </ul>
                     <form class="navbar-form navbar-right hidden-sm" ng-submit="ui.search.go()">
                         <div class="form-group">
@@ -91,33 +95,35 @@
         </div>
 
         <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
         <script type="text/javascript" src="./assets/js/angular.min.js"></script>
         <script type="text/javascript" src="./assets/js/angular.sanitize.js"></script>
         <script type="text/javascript" src="./assets/js/angular.cookie.js"></script>
+        <script type="text/javascript" src="./assets/js/angular.bootstrap.min.js"></script>
         <script type="text/javascript" src="./assets/js/angular.bootstrap.tpls.min.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.0.0/lodash.js"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script>
         <script type="text/javascript" src="./assets/js/angular-translate.min.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        
         <script type="text/javascript" src="./assets/js/jqcloud-1.0.4.js"></script>
+        
+        <!--
         <script type="text/javascript" src="./assets/i18n/en.js"></script>
         <script type="text/javascript" src="./assets/i18n/sv.js"></script>
 
+        
         <script type="text/javascript" src="./app.js"></script>
 
         <script type="text/javascript" src="./modules/services.js"></script>
         <script type="text/javascript" src="./modules/filter.js"></script>
         <script type="text/javascript" src="./modules/directives.js"></script>
 
-        <script type="text/javascript" src="./controller/registry.js"></script>
         <script type="text/javascript" src="./controller/tool.js"></script>
         <script type="text/javascript" src="./controller/link.js"></script>
         <script type="text/javascript" src="./controller/tool.insert.js"></script>
         <script type="text/javascript" src="./controller/top.js"></script>
-        <script type="text/javascript" src="./controller/home.js"></script>
-        <script type="text/javascript" src="./controller/apiFaq.js"></script>
         <script type="text/javascript" src="./controller/search.faceted.js"></script>
-
+        -->
 
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
