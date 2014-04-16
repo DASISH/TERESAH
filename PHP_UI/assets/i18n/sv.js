@@ -87,7 +87,7 @@ var i18n_sv = {
     'username':'Användarnamn',
     'password':'Lösenord',
     'repeat password':'Repetera lösenord',
-    'sign up':'Sign up',
+    'Sign up':'Registrera',
     'signed in!':'Signed in!',
     'use your social network':'Use your social network',
     'return to tool':'Return to tool',
@@ -113,5 +113,6 @@ var i18n_sv = {
     'apply for api key':'Ansök om API-nyckel',
     'domain':'Domän',
     'apply':'ansök',
-    'Admin':'Admin'
+    'Admin':'Admin',
+    'Not a user' : 'Inte registrerad'
 };

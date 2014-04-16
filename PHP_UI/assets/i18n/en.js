@@ -87,7 +87,7 @@ var i18n_en = {
     'username':'Username',
     'password':'Password',
     'repeat password':'Repeat password',
-    'sign up':'Sign up',
+    'Sign up':'Sign up',
     'signed in!':'Signed in!',
     'use your social network':'Use your social network',
     'return to tool':'Return to tool',
@@ -113,5 +113,6 @@ var i18n_en = {
     'apply for api key':'Apply for API key',
     'domain':'Domain',
     'apply':'apply',
-    'Admin':'Admin'
+    'Admin':'Admin',
+    'Not a user' : 'Not a user'
 };

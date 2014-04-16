@@ -46,8 +46,9 @@ if(MODE != "Test"){
 
 
 #routes
-include('routes/info.php');
-include('routes/tool.php');
+include('routes/info.route.php');
+include('routes/tool.route.php');
+include('routes/login.route.php');
 
 /**
  * Render all content in the main.php template using
@@ -65,7 +66,7 @@ function display($template, $variables) {
     $variables['i18n'] = i18nParse(getPreferedLanguage());
     $app->render($template, $variables);
     $content = ob_get_clean();	
-    $app->render('main.php', array('content' => $content, 'user' => $dummyUser));
+    $app->render('main.tpl.php', array('content' => $content, 'user' => $dummyUser));
 }
 
 $app->run();
