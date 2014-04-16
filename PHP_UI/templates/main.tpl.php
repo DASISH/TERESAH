@@ -101,6 +101,11 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script type="text/javascript" src="./assets/js/bootstrap.js"></script>
         <script type="text/javascript" src="./assets/js/jqcloud-1.0.4.js"></script>
-             
+
+        <!-- Initialize cloud -->
+        <script type="text/javascript">
+            $("#cloud").jQCloud(<?php print $cloud; ?>);
+        </script>
+        
     </body>
 </html>

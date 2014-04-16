@@ -64,11 +64,17 @@ function display($template, $variables) {
     //$dummyUser = array('level' => 1, 'name' => 'Kalle Anka', 'email' => 'test@test.com', 'login' => 'kalle');
     //$_SESSION['user'] = $dummyUser;
     
+    $cloud = Facets::getCloud();
+
+    for ($i = 0; $i < count($cloud); $i++) {
+        $cloud[$i]["link"] = "/facet/ToolType/".$cloud[$i]["id"];
+    }
+        
     ob_start();
     $variables['i18n'] = i18nParse(getPreferedLanguage());
     $app->render($template, $variables);
     $content = ob_get_clean();	
-    $app->render('main.tpl.php', array('content' => $content));
+    $app->render('main.tpl.php', array('content' => $content, 'cloud' => json_encode($cloud)));
 }
 
 $app->run();
