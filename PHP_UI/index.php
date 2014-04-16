@@ -61,14 +61,14 @@ include('routes/profile.route.php');
 function display($template, $variables) {
     $app = Slim\Slim::getInstance();
     
-    $dummyUser = array('level' => 1, 'name' => 'Kalle Anka', 'email' => 'test@test.com', 'login' => 'kalle');
-    $_SESSION['user'] = $dummyUser;
+    //$dummyUser = array('level' => 1, 'name' => 'Kalle Anka', 'email' => 'test@test.com', 'login' => 'kalle');
+    //$_SESSION['user'] = $dummyUser;
     
     ob_start();
     $variables['i18n'] = i18nParse(getPreferedLanguage());
     $app->render($template, $variables);
     $content = ob_get_clean();	
-    $app->render('main.tpl.php', array('content' => $content, 'user' => $dummyUser));
+    $app->render('main.tpl.php', array('content' => $content));
 }
 
 $app->run();

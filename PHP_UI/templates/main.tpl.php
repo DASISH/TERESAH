@@ -25,7 +25,6 @@
     </head>
 
     <body>
-
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -68,8 +67,8 @@
                         <?php endif;?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <?php if(isset($_SESSION['user'])):?><li class="pull-right"><a  href="/profile"><span class="glyphicon glyphicon-user"></span> <span></span><span><?php print $user['name'];?></span></a></li><?php endif;?>
-                        <?php if(isset($_SESSION['user'])):?><li class="pull-right"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> <span><?php print $i18n['sign out'];?></span></a></li><?php endif;?>
+                        <?php if(isset($_SESSION['user'])):?><li class="pull-right"><a  href="/profile"><span class="glyphicon glyphicon-user"></span> <span></span><span><?php print $_SESSION['user']['name'];?></span></a></li><?php endif;?>
+                        <?php if(isset($_SESSION['user'])):?><li class="pull-right"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> <span><?php print $i18n['sign out'];?></span></a></li><?php endif;?>
                         <?php if(!isset($_SESSION['user'])):?><li class="pull-right"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> <span><?php print $i18n['sign in'];?></span></a></li><?php endif;?>
                     </ul>
                     <form class="navbar-form navbar-right hidden-sm" ng-submit="ui.search.go()">

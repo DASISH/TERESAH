@@ -15,7 +15,7 @@
         <div class="form-group">
             <label for="email" class="col-lg-2 control-label"><?php print $i18n['email']; ?></label>
             <div class="col-lg-10">
-                <input type="email" class="form-control" id="email" placeholder="<?php print $_SESSION['user']['email']; ?>" autocomplete="off">
+                <input type="email" class="form-control" id="email" placeholder="<?php print $_SESSION['user']['mail']; ?>" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
