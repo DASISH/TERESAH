@@ -53,7 +53,7 @@
                                 <li ng-class="ui.routes.getRoute('FacetedCtrl')"><a href="/search/faceted"><?php print $i18n['faceted'];?></a></li>
                             </ul>
                         </li>
-                        <?php if($user['data']['level'] >= 3):?>
+                        <?php if($_SESSION['user']['level'] >= 3):?>
                         <li ng-class="ui.routes.getRoute('AddToolCtrl')" ng-show="ui.user.data.signedin"><a href="/add"><?php print $i18n['add'];?></a></li>
                         <?php endif;?>
                         <li class="dropdown">
@@ -63,14 +63,14 @@
                                 <li><a href="/about/api/">API</a></li>
                             </ul>
                         </li>
-                        <?php if($user['data']['level'] == 4):?>
+                        <?php if($_SESSION['user']['level'] == 4):?>
                         <li><a href="/admin"><?php print $i18n['Admin'];?></a></li>
                         <?php endif;?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <?php if($user['signin']):?><li class="pull-right"><a  href="/profile"><span class="glyphicon glyphicon-user"></span> <span></span><span><?php print $user['data']['Name'];?></span></a></li><?php endif;?>
-                        <?php if($user['signin']):?><li class="pull-right"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> <span><?php print $i18n['sign out'];?></span></a></li><?php endif;?>
-                        <?php if(!$user['signin']):?><li class="pull-right"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> <span><?php print $i18n['sign in'];?></span></a></li><?php endif;?>
+                        <?php if(isset($_SESSION['user'])):?><li class="pull-right"><a  href="/profile"><span class="glyphicon glyphicon-user"></span> <span></span><span><?php print $user['name'];?></span></a></li><?php endif;?>
+                        <?php if(isset($_SESSION['user'])):?><li class="pull-right"><a ng-click="ui.user.signout()"><span class="glyphicon glyphicon-log-out"></span> <span><?php print $i18n['sign out'];?></span></a></li><?php endif;?>
+                        <?php if(!isset($_SESSION['user'])):?><li class="pull-right"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> <span><?php print $i18n['sign in'];?></span></a></li><?php endif;?>
                     </ul>
                     <form class="navbar-form navbar-right hidden-sm" ng-submit="ui.search.go()">
                         <div class="form-group">

@@ -49,6 +49,7 @@ if(MODE != "Test"){
 include('routes/info.route.php');
 include('routes/tool.route.php');
 include('routes/login.route.php');
+include('routes/profile.route.php');
 
 /**
  * Render all content in the main.php template using
@@ -60,7 +61,8 @@ include('routes/login.route.php');
 function display($template, $variables) {
     $app = Slim\Slim::getInstance();
     
-    $dummyUser = array('signin' => true, 'data'=> array('level' => 1, 'Name'=>'Kalle Anka'));
+    $dummyUser = array('level' => 1, 'name' => 'Kalle Anka', 'email' => 'test@test.com', 'login' => 'kalle');
+    $_SESSION['user'] = $dummyUser;
     
     ob_start();
     $variables['i18n'] = i18nParse(getPreferedLanguage());

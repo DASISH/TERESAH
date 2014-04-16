@@ -86,6 +86,7 @@ var i18n_en = {
     'email address':'Email address',
     'username':'Username',
     'password':'Password',
+    'New password':'New password',
     'repeat password':'Repeat password',
     'Sign up':'Sign up',
     'signed in!':'Signed in!',
