@@ -50,6 +50,7 @@ include('routes/info.route.php');
 include('routes/tool.route.php');
 include('routes/login.route.php');
 include('routes/profile.route.php');
+include('routes/facet.route.php');
 
 /**
  * Render all content in the main.php template using
