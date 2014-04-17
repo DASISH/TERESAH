@@ -32,38 +32,38 @@
     <div class="row">
         <div class="col-lg-6">
             <h2><?php print $i18n['Sign up']; ?></h2>
-            <?php if (isset($alert)) { ?>
-                <div class="alert <?php print $alert['class']; ?>"><?php print $alert['message']; ?></div>
-            <?php } ?>
+            <?php if(isset($alert)) : ?>
+                <div class="alert alert-<?php print $alert['status']; ?> text-center"><?php print $alert['message']; ?></div>		
+            <?php endif; ?>
             <form class="form-horizontal" role="form" action="/signup" method="post">
                 <div class="form-group">
                     <label for="name" class="col-lg-4"><?php print $i18n['name']; ?></label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="name" placeholder="<?php print $i18n['name']; ?>">
+                        <input type="text" class="form-control" name="name" id="name" <?php if(isset($fields['name'])) : ?> value="<?php print $fields['name']; ?>" <?php endif; ?> placeholder="<?php print $i18n['name']; ?>">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="email" class="col-lg-4"><?php print $i18n['email']; ?></label>
+                    <label for="mail" class="col-lg-4"><?php print $i18n['email']; ?></label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" id="email" placeholder="<?php print $i18n['email']; ?>">
+                        <input type="mail" class="form-control" name="mail" id="mail" <?php if(isset($fields['mail'])) : ?> value="<?php print $fields['mail']; ?>" <?php endif; ?> placeholder="<?php print $i18n['email']; ?>">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="username" class="col-lg-4"><?php print $i18n['username']; ?></label>
+                    <label for="user" class="col-lg-4"><?php print $i18n['username']; ?></label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="username" placeholder="<?php print $i18n['username']; ?>" autocomplete="off">
+                        <input type="text" class="form-control" name="user" id="user" <?php if(isset($fields['user'])) : ?> value="<?php print $fields['user']; ?>" <?php endif; ?> placeholder="<?php print $i18n['username']; ?>" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password1" class="col-lg-4"><?php print $i18n['password']; ?></label>
+                    <label for="password" class="col-lg-4"><?php print $i18n['password']; ?></label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password1" placeholder="<?php print $i18n['password']; ?>" autocomplete="off">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="<?php print $i18n['password']; ?>" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password2" class="col-lg-4"><?php print $i18n['repeat password']; ?></label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password2" placeholder="<?php print $i18n['repeat password']; ?>" autocomplete="off">
+                        <input type="password" class="form-control" name="password2" id="password2" placeholder="<?php print $i18n['repeat password']; ?>" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group">

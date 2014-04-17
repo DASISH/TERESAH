@@ -120,7 +120,7 @@ class User{
                 }
             }
             else{
-                return array("status" => "error", "message" => "Error during sign up. Please contact DASISH or retry.");
+                return array("status" => "error", "message" => "Error during sign up. Please contact TERESAH or retry.");
             }
         }
         else{

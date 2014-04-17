@@ -31,9 +31,9 @@
     <div class="row">
         <div class="col-lg-6">
             <h2><?php print $i18n['sign in']; ?></h2>
-            <?php if (isset($alert)) { ?>
-                <div class="alert <?php print $alert['class']; ?>"><?php print $alert['message']; ?></div>
-            <?php } ?>
+            <?php if(isset($alert)) : ?>
+                <div class="alert alert-<?php print $alert['status']; ?> text-center"><?php print $alert['message']; ?></div>		
+            <?php endif; ?>
             <form class="form-signin" action="/login" method="post">
                 <input class="form-control" type="text" name="user" autofocus="" placeholder="<?php print $i18n['username'] . " " . $i18n['or'] . " " . $i18n['email']; ?>">
                 <input class="form-control" type="password" name="password" placeholder="<?php print $i18n['password']; ?>">
