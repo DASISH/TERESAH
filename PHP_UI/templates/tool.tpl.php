@@ -24,6 +24,7 @@
                 </section>
                 <?php endforeach;?>
                 <div class="col-lg-12">
+                    <?php if(isset($tool['keyword'])):?>
                     <section id="keywords"  ng-show="item.keyword[0] && !(ui.sections.list['Keywords'])">
                         <h2><?php print $i18n['keywords']; ?>
 
@@ -34,6 +35,8 @@
                         </ul>
                         <hr />
                     </section>
+                    <?php endif;?>
+                    <?php if(isset($tool['publications'])):?>
                     <section id="publications"  ng-show="item.publications[0] && !(ui.sections.list['Publications'])">
                         <h2><?php print $i18n['publications']; ?>
                             <div class="pull-right">
@@ -57,6 +60,8 @@
                         </div>
                         <hr />
                     </section>
+                    <?php endif;?>
+                    <?php if(isset($tool['projects'])):?>
                     <section id="projects" ng-show="item.projects[0] && !(ui.sections.list['Projects'])">
                         <h2><?php print $i18n['projects']; ?>
                             <div class="pull-right">
@@ -84,6 +89,8 @@
                         </div>
                         <hr />
                     </section>
+                    <?php endif;?>
+                    <?php if(isset($tool['features'])):?>
                     <section id="features" ng-show="item.features[0] && !(ui.sections.list['Features'])">
                         <h2><?php print $i18n['features']; ?>
                             <div class="pull-right">
@@ -111,6 +118,8 @@
                         </div>
                         <hr />
                     </section>
+                    <?php endif;?>
+                    <?php if(isset($tool['standards'])):?>
                     <section id="standards" ng-show="item.standards[0] && !(ui.sections.list['Standards'])">
                         <h2><?php print $i18n['standards']; ?>
                             <div class="pull-right">
@@ -136,6 +145,8 @@
                         </div>
                         <hr />
                     </section>
+                    <?php endif;?>
+                    <?php if(isset($tool['videos'])):?>
                     <section id="videos" ng-show="item.videos[0] && !(ui.sections.list['Videos'])">
                         <h2><?php print $i18n['video']; ?>
                             <div class="pull-right">
@@ -169,6 +180,7 @@
                         </div>
                         <hr />
                     </section>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
@@ -266,7 +278,11 @@
             <section id="availableDescriptions" ng-show="item.descriptions.description[1]">
                 <h2><?php print $i18n['available descriptions'];?></h2>
                 <div class="btn-group btn-group-sm btn-block  btn-group-justified">
-                    <a class="btn btn-sm btn-block" ng-repeat="desc in item.descriptions.description" ng-click="ui.changeDesc(desc)" ng-bind="desc.provider"></a>
+                    <ul>
+                    <?php foreach($tool['descriptions']['description'] as $description):?>
+                    <li><a onClick="ui.changeDesc(desc)"><?php print $description['provider'];?></a></li>
+                    <?php endforeach;?>
+                    </ul>
                 </div>
                 <hr />
             </section>
@@ -284,6 +300,3 @@
     </div>
 </section>
 
-<pre>
-    <?php print_r($tool); ?>
-</pre>
