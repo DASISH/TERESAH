@@ -181,65 +181,65 @@
 							"descriptions" => Description::get($data["tool_id"], true),
 							"parameters" => $options
 						);
-				if(isset($options["similar"])) {
+				if(isset($options["similar"]) || isset($options["all"])) {
 					$ret["similar"] = Tool::similar($data["tool_id"]);
 					if(!$ret["similar"]) { unset($ret["similar"]); }
 				}
                                 
-				if(isset($options["keyword"])) {
+				if(isset($options["keyword"]) || isset($options["all"])) {
 					$ret["keyword"] = Facets::get("Keyword", $data["tool_id"]);
 					if(!$ret["keyword"]) { unset($ret["keyword"]); }
 				}
-				if(isset($options["type"])) {
+				if(isset($options["type"]) || isset($options["all"])) {
 					$ret["type"] = Facets::get("ToolType", $data["tool_id"]);
 					if(!$ret["type"]) { unset($ret["type"]); }
 				}
-				if(isset($options["platform"])) {
+				if(isset($options["platform"]) || isset($options["all"])) {
 					$ret["platform"] = Facets::get("Platform", $data["tool_id"]);
 					if(!$ret["platform"]) { unset($ret["platform"]); }
 				}
 				
-				if(isset($options["developer"])) {
+				if(isset($options["developer"]) || isset($options["all"])) {
 					$ret["developers"] = Facets::get("Developer", $data["tool_id"]);
 					if(!$ret["developers"]) { unset($ret["developers"]); }
 				}
 				
-				if(isset($options["projects"])) {
+				if(isset($options["projects"]) || isset($options["all"])) {
 					$ret["projects"] = Facets::get("Project", $data["tool_id"]);
 					if(!$ret["projects"]) { unset($ret["projects"]); }
 				}
 				
-				if(isset($options["suite"])) {
+				if(isset($options["suite"]) || isset($options["all"])) {
 					$ret["suite"] = Facets::get("Suite", $data["tool_id"]);
 					if(!$ret["suite"]) { unset($ret["suite"]); }
 				}
 				
-				if(isset($options["standards"])) {
+				if(isset($options["standards"]) || isset($options["all"])) {
 					$ret["standards"] = Facets::get("Standard", $data["tool_id"]);
 					if(!$ret["standards"]) { unset($ret["standards"]); }
 				}
 				
-				if(isset($options["video"])) {
+				if(isset($options["video"]) || isset($options["all"])) {
 					$ret["videos"] = Facets::get("Video", $data["tool_id"]);
 					if(!$ret["videos"]) { unset($ret["videos"]); }
 				}
 				
-				if(isset($options["features"])) {
+				if(isset($options["features"]) || isset($options["all"])) {
 					$ret["features"] = Facets::get("Feature", $data["tool_id"]);
 					if(!$ret["features"]) { unset($ret["features"]); }
 				}
 				
-				if(isset($options["publications"])) {
+				if(isset($options["publications"]) || isset($options["all"])) {
 					$ret["publications"] = Facets::get("Publication", $data["tool_id"]);
 					if(!$ret["publications"]) { unset($ret["publications"]); }
 				}
 				
-				if(isset($options["licence"])) {
+				if(isset($options["licence"]) || isset($options["all"])) {
 					$ret["licence"] = Facets::get("Licence", $data["tool_id"]);
 					if(!$ret["licence"]) { unset($ret["licence"]); }
 				}
 				
-				if(isset($options["applicationType"])) {
+				if(isset($options["applicationType"]) || isset($options["all"])) {
 					$ret["applicationType"] = Facets::get("ApplicationType", $data["tool_id"]);
 					if(!$ret["applicationType"]) { unset($ret["applicationType"]); }
 				}
