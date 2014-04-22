@@ -145,12 +145,13 @@ class User{
             return array("status" => "error", "message" => "No field for profile update");
         }
 
-        if(!self::checkLoginAvailability($input['login'])) {
-            return array("status" => "error", "message" => "Username is not available");
+        if(isset($input['login'])) {
+            if(!self::checkLoginAvailability($input['login'])) {
+                return array("status" => "error", "message" => "Username is not available");
+            }
         }
-
         
-        if(array_key_exists("password", $exec)) {
+        if(isset($exec['password'])) {
             if(self::checkPasswordComplexity($exec["password"])){
                 $exec["password"] = hash("sha256", $exec["password"]);
             }else{

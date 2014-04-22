@@ -10,8 +10,6 @@ $app->get('/login', function () use ($app) {
 
 $app->post('/login', function () use ($app) {
 
-    global $DB;
-
     if (count($app->request->post()) > 0) {
         $input = $app->request->post();
     } elseif (count($app->request()->getBody()) > 0) {
@@ -51,8 +49,6 @@ $app->get('/signup', function () use ($app) {
 });
 
 $app->post('/signup', function () use ($app) {
-
-    global $DB;
 
     if (count($app->request->post()) > 0) {
         $post = $app->request->post();

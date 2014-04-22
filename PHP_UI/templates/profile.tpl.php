@@ -2,38 +2,38 @@
 
     <h2>Edit Profile</h2>
 
-    <form class="form-horizontal" role="form" action="/profile" method="post">
-        <?php if (isset($alert)) { ?>
-            <div class="alert <?php print $alert['class']; ?>"><?php print $alert['message']; ?></div>
-        <?php } ?>
+    <form class="form-horizontal" role="form" action="./profile" method="post">
+        <?php if(isset($alert) && $alert['form'] == 'profile') : ?>
+            <div class="alert alert-<?php print $alert['status']; ?> text-center"><?php print $alert['message']; ?></div>		
+        <?php endif; ?>
         <div class="form-group">
             <label for="name" class="col-lg-2 control-label"><?php print $i18n['name']; ?></label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="name" placeholder="<?php print $_SESSION['user']['name']; ?>">
+                <input type="text" class="form-control" name="name" id="name" placeholder="<?php print $_SESSION['user']['name']; ?>" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
-            <label for="email" class="col-lg-2 control-label"><?php print $i18n['email']; ?></label>
+            <label for="mail" class="col-lg-2 control-label"><?php print $i18n['email']; ?></label>
             <div class="col-lg-10">
-                <input type="email" class="form-control" id="email" placeholder="<?php print $_SESSION['user']['mail']; ?>" autocomplete="off">
+                <input type="email" class="form-control" name="mail" id="mail" placeholder="<?php print $_SESSION['user']['mail']; ?>" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
             <label for="login" class="col-lg-2 control-label"><?php print $i18n['username']; ?></label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="login" placeholder="<?php print $_SESSION['user']['login']; ?>" autocomplete="off">
+                <input type="text" class="form-control" name="login" id="login" placeholder="<?php print $_SESSION['user']['login']; ?>" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
             <label for="password1" class="col-lg-2 control-label"><?php print $i18n['password']; ?></label>
             <div class="col-lg-10">
-                <input type="password" class="form-control" id="password1"placeholder="<?php print $i18n['New password']; ?>" autocomplete="off">
+                <input type="password" class="form-control" name="password1" id="password1" placeholder="<?php print $i18n['New password']; ?>" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
             <label for="password2" class="col-lg-2 control-label"><?php print $i18n['repeat password']; ?></label>
             <div class="col-lg-10">
-                <input type="password" class="form-control" id="password2" placeholder="<?php print $i18n['repeat password']; ?>" autocomplete="off">
+                <input type="password" class="form-control" name="password2" id="password2" placeholder="<?php print $i18n['repeat password']; ?>" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
@@ -73,9 +73,9 @@
     <h3>Apply for API Key</h3>
 
     <form class="form-horizontal" role="form" action="/profile/apply" method="post">
-        <?php if (isset($alert)) { ?>
-            <div class="alert <?php print $alert['class']; ?>"><?php print $alert['message']; ?></div>
-        <?php } ?>
+        <?php if(isset($alert) && $alert['form'] == 'apply') : ?>
+            <div class="alert alert-<?php print $alert['status']; ?> text-center"><?php print $alert['message']; ?></div>		
+        <?php endif; ?>
         <div class="form-group">
             <label for="domain" class="col-lg-2 control-label"><?php print $i18n['domain']; ?></label>
             <div class="col-lg-10">
