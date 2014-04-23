@@ -2,7 +2,7 @@
 
     <h2>Edit Profile</h2>
 
-    <form class="form-horizontal" role="form" action="./profile" method="post">
+    <form class="form-horizontal" role="form" action="/profile" method="post">
         <?php if(isset($alert) && $alert['form'] == 'profile') : ?>
             <div class="alert alert-<?php print $alert['status']; ?> text-center"><?php print $alert['message']; ?></div>		
         <?php endif; ?>
@@ -79,7 +79,7 @@
         <div class="form-group">
             <label for="domain" class="col-lg-2 control-label"><?php print $i18n['domain']; ?></label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="domain">
+                <input type="text" class="form-control" name="domain" id="domain">
             </div>
         </div>
         <div class="form-group">

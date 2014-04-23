@@ -29,6 +29,7 @@ $app->post('/profile', function () use ($app) {
     
     if ($input['password1'] != $input['password2']) {
         display('profile.tpl.php', array('alert' => array('status' => 'danger',  'form' => 'profile', 'message' => "Passwords doesn't match"), 'keys' => User::getAPIKeysForID($_SESSION['user']['id'])));
+        exit;        
     }
     
     $post = array();
@@ -62,3 +63,48 @@ $app->post('/profile', function () use ($app) {
         display('profile.tpl.php', array('alert' => array('status' => 'danger',  'form' => 'profile', 'message' => $data['message']), 'fields' => $post, 'keys' => User::getAPIKeysForID($_SESSION['user']['id'])));
     }
 });
+
+$app->post('/profile/apply', function () use ($app) {
+    
+    if (!isset($_SESSION["user"]["id"])){
+        $app->redirect('/login');
+    }
+
+    if (count($app->request->post()) > 0){
+        $input = $app->request->post();
+    }
+    elseif (count($app->request()->getBody()) > 0){
+        $input = $app->request()->getBody();
+    }
+    else{
+        $app->response()->status(400);
+    }
+    
+    $keys = User::getAPIKeysForID($_SESSION['user']['id']);
+    
+    if (!isset($input['domain']) || empty($input['domain'])) {
+        display('profile.tpl.php', array('alert' => array('status' => 'danger',  'form' => 'apply', 'message' => "Domain is mandatory"), 'keys' => $keys));
+        exit;
+    }
+    
+    foreach($keys as $key)
+    {
+        if($key['domain'] == $input['domain']) {
+            display('profile.tpl.php', array('alert' => array('status' => 'danger',  'form' => 'apply', 'message' => "Domain already applied for"), 'keys' => $keys));
+            exit;
+        }
+    }
+    
+    $data = API::Apply($input["domain"], $_SESSION["user"]["id"]);
+    
+    if ($data['status'] == 'success') {          
+        $keys[] = array('domain' => $input['domain'], 'public_key' => 'application pending', 'private_key' => 'application pending');        
+        display('profile.tpl.php', array('alert' => array('status' => 'success',  'form' => 'apply', 'message' => $data['message']), 'keys' => $keys));
+    } else {
+        display('profile.tpl.php', array('alert' => array('status' => 'danger',  'form' => 'apply', 'message' => $data['message']), 'keys' => $keys));
+    }
+});
+
+function getKeys() {
+    
+}

@@ -204,15 +204,19 @@ class User{
     static function getAPIKeysForID($user_uid) {
 
         $result = array();
-        $query = "SELECT domain, public_key, private_key FROM api_key WHERE user_uid = $user_uid";
-        $req = self::DB()->prepare($query);
-        $req->execute();
-        $keys = $req->fetchAll(PDO::FETCH_ASSOC);
+        
+        $data = API::Get($user_uid);
+        if($data['success']) {
+            $keys = $data['data'];
 
-        foreach ($keys as $key) {
-            $result[] = $key;
+            foreach ($keys as $key) {     
+                if(empty($key['public_key'])) {
+                    $key['public_key'] = 'application pending';
+                    $key['private_key'] = 'application pending';
+                }                    
+                $result[] = $key;
+            }
         }
-
         return $result;    
     }
     

@@ -227,7 +227,7 @@ class API {
 
         if($userId !== false) {
             $query .= "WHERE `user_uid` = :user_uid";
-            $exec["userId"] = $userId;
+            $exec["user_uid"] = $userId;
         }
 
         try{
