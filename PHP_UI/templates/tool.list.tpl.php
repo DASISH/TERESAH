@@ -1,12 +1,16 @@
 <ol class="breadcrumb">
 <?php foreach($breadcrumb as $link=>$label):?>
+    <?php if($link):?>
     <li><a href="<?php print $link;?>"><?php print i18n($label);?></a></li>
+    <?php else: ?>
+    <li><?php print i18n($label);?></li>
+    <?php endif;?>
 <?php endforeach;?>
 </ol>
 
 <section id="viewHeader">
     <div class="page-header">
-        <h1><?php print i18n('browse');?></h1>	
+        <h1><?php print $title;?></h1>	
         <p><?php print i18n('tools from');?> <?php print $tools['parameters']['start']+1; ?> <?php print i18n('to');?> <?php print $tools['parameters']['limit']+$tools['parameters']['start']; ?><span ng-bind="ui.parameters.total" ng-show="ui.parameters.total < 20"></span> <?php print i18n('of');?> <?php print $tools['parameters']['total']; ?> <?php print i18n('available');?></p>
     </div>
 </section>
