@@ -87,6 +87,17 @@
 
         <div id="wrap">
             <div class="container">
+                <?php if(isset($breadcrumb)):?>
+                <ol class="breadcrumb">
+                <?php foreach($breadcrumb as $link=>$label):?>
+                    <?php if($link):?>
+                    <li><a href="<?php print $link;?>"><?php print i18n($label);?></a></li>
+                    <?php else: ?>
+                    <li><?php print i18n($label);?></li>
+                    <?php endif;?>
+                <?php endforeach;?>
+                </ol>  
+                <?php endif;?>
                 <?php print $content; ?>
             </div>                
             <div id="push"></div>

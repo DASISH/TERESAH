@@ -1,13 +1,3 @@
-<ol class="breadcrumb">
-<?php foreach($breadcrumb as $link=>$label):?>
-    <?php if($link):?>
-    <li><a href="<?php print $link;?>"><?php print i18n($label);?></a></li>
-    <?php else: ?>
-    <li><?php print i18n($label);?></li>
-    <?php endif;?>
-<?php endforeach;?>
-</ol>
-
 <section id="viewHeader">
     <div class="page-header">
         <h1><?php print $title;?></h1>	

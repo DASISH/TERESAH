@@ -1,5 +1,15 @@
 <?php
 
+$app->get('/facet', function () use ($app){
+        $data = Facets::information();
+        if(isset($data["Error"])) {
+                $app->response()->status(400);
+        }else{
+            $breadcrumb = array('/'=>'home', ''=>'browse facets');
+            display('facet.tpl.php', array('data' => $data, 'breadcrumb'=>$breadcrumb));
+        }
+});
+
 $app->get('/facet/:facet/:facetID', function ($facet, $facetID) use ($app){
     $facets = $app->request->get();
     $facets["description"] = 1;
