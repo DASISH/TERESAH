@@ -10,9 +10,8 @@
     </div>
 </section>
 
-<section ng-show="ui.page == 'Details'">
+<section>
     <div class="row">
-
         <div class="col-lg-8">
             <div class="row">
                 <?php foreach($tool['descriptions']['description'] as $description):?>
@@ -245,7 +244,7 @@
                     <?php endforeach;?>
                     <?php endif;?>
                     
-                    <?php if($tool['similar']):?>
+                    <?php if(array_key_exists('similar', $tool)):?>
                     <dt><?php print $i18n['similar tools']; ?></dt>
                     <?php foreach($tool['similar'] as $similar):?>
                     <dd><a href="/tool/<?php print $similar['shortname'];?>"><?php print $similar['title'];?></a></dd>   

@@ -5,6 +5,8 @@ $app->get('/tool/:shortname', function ($shortname) {
 });
 
 $app->get('/registry', function () use ($app) {
-    display('registry.tpl.php', array('tools' => Search::all($app->request->get())));
+    $tools = Search::all($app->request->get());
+    $breadcrumb = array('/'=>'home', '/registry'=>'browse');
+    display('tool.list.tpl.php', array('tools' => $tools, 'breadcrumb'=>$breadcrumb));
 });
 ?>

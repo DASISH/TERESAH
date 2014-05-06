@@ -2,6 +2,7 @@
 
 $app->get('/facet/:facet/:facetID', function ($facet, $facetID) use ($app){
     $facets = $app->request->get();
+    $facets["description"] = 1;
     $facets["facets"][$facet]["request"][] = $facetID;
     $data = Search::faceted($facets);
     if (isset($data["Error"])){
@@ -11,6 +12,9 @@ $app->get('/facet/:facet/:facetID', function ($facet, $facetID) use ($app){
         $data["facet"]["currentFacet"] = Facets::get($facet, $facetID, "ReverseNameAndID");
         $data["facet"]["facet"] = Helper::facet($facet);
         unset($data["parameters"]["url"], $data["parameters"]["facets"]);
-        display('facet.list.tpl.php', array('result' => $data));
+        
+        $breadcrumb = array('/'=>'home', '/facet'=>'browse facets');
+
+        display('tool.list.tpl.php', array('tools' => $data, 'breadcrumb'=>$breadcrumb));
     }
 });

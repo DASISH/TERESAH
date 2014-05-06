@@ -44,13 +44,14 @@ if(MODE != "Test"){
     }
 }
 
-
 #routes
 include('routes/info.route.php');
 include('routes/tool.route.php');
 include('routes/login.route.php');
 include('routes/profile.route.php');
 include('routes/facet.route.php');
+
+ $i18nStrings = i18nParse(getPreferedLanguage());
 
 /**
  * Render all content in the main.php template using
@@ -72,13 +73,23 @@ function display($template, $variables) {
     }
         
     ob_start();
-    $variables['i18n'] = i18nParse(getPreferedLanguage());
+    global $i18nStrings;
+    $variables['i18n'] = $i18nStrings;
     $app->render($template, $variables);
     $content = ob_get_clean();	
     $app->render('main.tpl.php', array('content' => $content, 'cloud' => json_encode($cloud)));
 }
 
 $app->run();
+
+function i18n($t){
+    global $i18nStrings;
+    if(array_key_exists($t, $i18nStrings)){
+        return $i18nStrings[$t];
+    }else{
+        return $t;
+    }
+}
 
 /**
  * Detects the prefered language of the defined i18n files

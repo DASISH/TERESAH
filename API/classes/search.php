@@ -544,6 +544,7 @@
 			#Get Options
 			$opt = self::options($get);
 			$options = $opt[0];
+                        print_r($get);
 			$sensitivity = $opt[1];
 			if(isset($get["facets"]) and count($get["facets"]) > 0) {
 				$joins = array();
@@ -734,7 +735,7 @@
 			
 			//Unset unavailable options
 
-			unset($options["request"], $options["case_insentivity"], $options["description"], $options["descriptionSize"]);
+			unset($options["request"], $options["case_insentivity"]);
 			
 			#We create our own return array
 			$ret = array("response" => array(), "parameters" => $options);
@@ -744,12 +745,15 @@
 			}
 			#For each answer we format it
 			foreach($data as &$answer) {
-				$ret["response"][] = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
+                            //print_r($answer);
+                            $item = array("title" => $answer["title"], "identifiers" => array("id" => $answer["UID"], "shortname" => $answer["shortname"]), "applicationType" => $answer["application_type"]);
+                            $ret["response"][] = $item;
 			}
 
 			#Formating
 			$ret["response"] = self::descriptionFormating($data, $options);
-
+                        
+                        
 			#We return
 			$ret["parameters"]["total"] = self::nbrTotal("FROM description d INNER JOIN tool t ON t.tool_uid = d.tool_uid ".implode($joins, " ")." ".$where." GROUP BY d.tool_uid", $exec, true);
 			
