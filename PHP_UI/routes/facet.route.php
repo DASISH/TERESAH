@@ -10,6 +10,21 @@ $app->get('/facet', function () use ($app){
         }
 });
 
+$app->get('/facet/:facet/', function ($facet) use ($app) {
+
+
+
+        $options = $app->request->get();
+        $data = Search::fieldContent($facet, $options);
+        if(isset($data["Error"])) {
+                $app->response()->status(400);
+        } else {
+                $data["facet"] = Facets::information($facet);
+                $breadcrumb = array('/'=>'home', '/facet'=>'browse facets', ''=>$data["facet"]["facetLegend"]);
+                display('facet.list.tpl.php', array('data' => $data, 'breadcrumb'=>$breadcrumb));
+        }
+});
+
 $app->get('/facet/:facet/:facetID', function ($facet, $facetID) use ($app){
     $facets = $app->request->get();
     $facets["description"] = 1;
@@ -21,9 +36,6 @@ $app->get('/facet/:facet/:facetID', function ($facet, $facetID) use ($app){
     else{
         $data["facet"]["currentFacet"] = Facets::get($facet, $facetID, "ReverseNameAndID");
         $data["facet"]["facet"] = Helper::facet($facet);
-        unset($data["parameters"]["url"], $data["parameters"]["facets"]);
-        
-
         
         $breadcrumb = array('/'=>'home', '/facet'=>'browse facets', '/facet/'.$data["facet"]["facet"]["facetParam"]=>$data["facet"]["facet"]["facetLegend"], ''=>$data["facet"]["currentFacet"]["name"]);
 
