@@ -14,4 +14,18 @@ return array(
 	*/
 
 	"debug" => true,
+
+  /*
+  |--------------------------------------------------------------------------
+  | Encryption Key
+  |--------------------------------------------------------------------------
+  |
+  | This key is used by the Illuminate encrypter service and should be set
+  | to a random, at least 64 characters long string, otherwise these 
+  | encrypted strings will not be safe. Please do this before deploying 
+  | an application!
+  |
+  */
+
+  "key" => $_ENV["ENCRYPTION_KEY"],
 );
