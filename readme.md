@@ -1,21 +1,17 @@
-## Laravel PHP Framework
+# TERESAH
 
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/version.png)](https://packagist.org/packages/laravel/framework) [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.png)](https://packagist.org/packages/laravel/framework) [![Build Status](https://travis-ci.org/laravel/framework.png)](https://travis-ci.org/laravel/framework) [![License](https://poser.pugx.org/laravel/framework/license.png)](https://packagist.org/packages/laravel/framework)
+_Developed in DASISH Task 2.3._
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+TERESAH (Tools E-Registry for E-Social science, Arts and Humanities) is a cross-community tools knowledge registry aimed at researchers in the Social Sciences and Humanities (SSH). It aims to provide an authoritative listing of the software tools currently in use in those domains, and to allow their users to make transparent the methods and applications behind them.
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+TERESAH has been developed as part of the Data Service Infrastructure for the Social Sciences and Humanities (DASISH), a Seventh Framework Programme funded project. DASISH collaborates with the five ESFRI Infrastructures in the field of Social Science and Humanities (CESSDA, CLARIN, DARIAH, ESS, and SHARE). The tools and knowledge registry is aimed at researchers from all disciplines and sectors, research infrastructure builders and users, as well as IT personnel. It includes information about tools, services, methodologies, and current standards and makes use of existing social media for dissemination and discussions.
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+TERESAH is written primarily in PHP and uses the [Laravel PHP framework](http://laravel.com/) as a robust foundation and to ease common tasks used in the majority of web projects.
 
-## Official Documentation
+---
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+### Laravel PHP framework
 
-### Contributing To Laravel
+Laravel is a free, open source PHP web application framework, designed for the development of MVC web applications with expressive, elegant syntax. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching. Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications.
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Documentation for the Laravel PHP framework can be found on the [Laravel website](http://laravel.com/docs).
