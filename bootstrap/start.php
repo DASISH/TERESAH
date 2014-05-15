@@ -25,7 +25,7 @@ $app = new Illuminate\Foundation\Application;
 */
 
 $env = $app->detectEnvironment(array(
-  "development" => array("*.local", "*.localhost"), 
+  "development" => array("teresah", "*.local", "*.localhost"), 
 ));
 
 /*
