@@ -95,7 +95,7 @@ return array(
 	|
 	*/
 
-	"cookie" => "laravel_session",
+	"cookie" => "teresah_session",
 
 	/*
 	|--------------------------------------------------------------------------
