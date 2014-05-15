@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'default' => 'production',
+	"default" => "production",
 
 	/*
 	|--------------------------------------------------------------------------
@@ -26,17 +26,15 @@ return array(
 	|
 	*/
 
-	'connections' => array(
-
-		'production' => array(
-			'host'      => '',
-			'username'  => '',
-			'password'  => '',
-			'key'       => '',
-			'keyphrase' => '',
-			'root'      => '/var/www',
+	"connections" => array(
+		"production" => array(
+			"host"      => "",
+			"username"  => "",
+			"password"  => "",
+			"key"       => "",
+			"keyphrase" => "",
+			"root"      => "/var/www",
 		),
-
 	),
 
 	/*
@@ -50,10 +48,7 @@ return array(
 	|
 	*/
 
-	'groups' => array(
-
-		'web' => array('production')
-
+	"groups" => array(
+		"web" => array("production")
 	),
-
 );

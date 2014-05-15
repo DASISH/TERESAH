@@ -12,7 +12,4 @@ return array(
 	| that are included on basically every request into the application.
 	|
 	*/
-
-
-
 );

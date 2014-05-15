@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'file',
+	"driver" => "file",
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'path' => storage_path().'/cache',
+	"path" => storage_path()."/cache",
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-	'connection' => null,
+	"connection" => null,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'table' => 'cache',
+	"table" => "cache",
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,10 +67,8 @@ return array(
 	|
 	*/
 
-	'memcached' => array(
-
-		array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 100),
-
+	"memcached" => array(
+		array("host" => "127.0.0.1", "port" => 11211, "weight" => 100),
 	),
 
 	/*
@@ -84,6 +82,5 @@ return array(
 	|
 	*/
 
-	'prefix' => 'laravel',
-
+	"prefix" => "laravel",
 );

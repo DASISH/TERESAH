@@ -12,12 +12,10 @@
 */
 
 ClassLoader::addDirectories(array(
-
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
-
+	app_path()."/commands",
+	app_path()."/controllers",
+	app_path()."/models",
+	app_path()."/database/seeds",
 ));
 
 /*
@@ -31,7 +29,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+Log::useFiles(storage_path()."/logs/laravel.log");
 
 /*
 |--------------------------------------------------------------------------
@@ -78,4 +76,4 @@ App::down(function()
 |
 */
 
-require app_path().'/filters.php';
+require app_path()."/filters.php";

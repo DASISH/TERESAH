@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'default' => 'sync',
+	"default" => "sync",
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,40 +28,38 @@ return array(
 	|
 	*/
 
-	'connections' => array(
-
-		'sync' => array(
-			'driver' => 'sync',
+	"connections" => array(
+		"sync" => array(
+			"driver" => "sync",
 		),
 
-		'beanstalkd' => array(
-			'driver' => 'beanstalkd',
-			'host'   => 'localhost',
-			'queue'  => 'default',
-			'ttr'    => 60,
+		"beanstalkd" => array(
+			"driver" => "beanstalkd",
+			"host"   => "localhost",
+			"queue"  => "default",
+			"ttr"    => 60,
 		),
 
-		'sqs' => array(
-			'driver' => 'sqs',
-			'key'    => 'your-public-key',
-			'secret' => 'your-secret-key',
-			'queue'  => 'your-queue-url',
-			'region' => 'us-east-1',
+		"sqs" => array(
+			"driver" => "sqs",
+			"key"    => "your-public-key",
+			"secret" => "your-secret-key",
+			"queue"  => "your-queue-url",
+			"region" => "us-east-1",
 		),
 
-		'iron' => array(
-			'driver'  => 'iron',
-			'host'    => 'mq-aws-us-east-1.iron.io',
-			'token'   => 'your-token',
-			'project' => 'your-project-id',
-			'queue'   => 'your-queue-name',
+		"iron" => array(
+			"driver"  => "iron",
+			"host"    => "mq-aws-us-east-1.iron.io",
+			"token"   => "your-token",
+			"project" => "your-project-id",
+			"queue"   => "your-queue-name",
 		),
 
-		'redis' => array(
-			'driver' => 'redis',
-			'queue'  => 'default',
+		"redis" => array(
+			"driver" => "redis",
+			"queue"  => "default",
 		),
-
 	),
 
 	/*
@@ -75,10 +73,7 @@ return array(
 	|
 	*/
 
-	'failed' => array(
-
-		'database' => 'mysql', 'table' => 'failed_jobs',
-
+	"failed" => array(
+		"database" => "mysql", "table" => "failed_jobs",
 	),
-
 );

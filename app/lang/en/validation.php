@@ -82,9 +82,9 @@ return array(
 	|
 	*/
 
-	'custom' => array(
-		'attribute-name' => array(
-			'rule-name' => 'custom-message',
+	"custom" => array(
+		"attribute-name" => array(
+			"rule-name" => "custom-message",
 		),
 	),
 
@@ -99,6 +99,5 @@ return array(
 	|
 	*/
 
-	'attributes' => array(),
-
+	"attributes" => array(),
 );
