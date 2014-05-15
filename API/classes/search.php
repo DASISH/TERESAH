@@ -722,7 +722,7 @@
 			#We execute it
 			//self::debug($req, $exec);
 			
-			$debug = self::debug($req, $exec);
+			//$debug = self::debug($req, $exec);
 			$req = self::DB()->prepare($req);
 			$req->execute($exec);
 			
@@ -759,7 +759,7 @@
 			
 			$ret["parameters"]["url"] = urldecode(http_build_query(array("facets" => $realParams, "orderBy" => $options["orderBy"], "order" => $options["order"])));
 		
-			$ret["debug"] = preg_replace('/\s+/', ' ', $debug);
+			//$ret["debug"] = preg_replace('/\s+/', ' ', $debug);
 			return $ret;
 		}
 		
