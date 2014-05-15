@@ -544,7 +544,7 @@
 			#Get Options
 			$opt = self::options($get);
 			$options = $opt[0];
-                        print_r($get);
+                        //print_r($get);
 			$sensitivity = $opt[1];
 			if(isset($get["facets"]) and count($get["facets"]) > 0) {
 				$joins = array();
