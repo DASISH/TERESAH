@@ -40,12 +40,15 @@ return array(
 	|
 	*/
 	"paths" => array(
+    "app/assets/fonts",
 		"app/assets/javascripts",
 		"app/assets/stylesheets",
 		"app/assets/images",
+    "lib/assets/fonts",
 		"lib/assets/javascripts",
 		"lib/assets/stylesheets",
 		"lib/assets/images",
+    "provider/assets/fonts",
 		"provider/assets/javascripts",
 		"provider/assets/stylesheets",
 		"provider/assets/images"
@@ -63,6 +66,7 @@ return array(
 	|
 	*/
 	"mimes" => array(
+      "fonts"       => array(".eot", ".svg", ".ttf", ".woff"),
 	    "javascripts" => array(".js", ".js.coffee", ".coffee", ".html", ".min.js"),
 	    "stylesheets" => array(".css", ".css.less", ".css.sass", ".css.scss", ".less", ".sass", ".scss", ".min.css"),
 	),
@@ -78,9 +82,11 @@ return array(
 	|
 	*/
 	"filters" => array(
-		".min.js" => array(
-
-		),
+    ".eot" => array(),
+    ".svg" => array(),
+    ".ttf" => array(),
+    ".woff" => array(),
+		".min.js" => array(),
 		".min.css" => array(
 			new Codesleeve\AssetPipeline\Filters\URLRewrite(App::make("url")->to("/")),
 		),
