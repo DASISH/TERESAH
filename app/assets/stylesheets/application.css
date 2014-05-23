@@ -12,5 +12,6 @@
  *= require bootstrap
  *= require font-awesome
  *= require fontello
+ *= require jqcloud
  *= require_tree .
  */

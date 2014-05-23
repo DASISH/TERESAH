@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require bootstrap
+//= require jqcloud
 //= require_tree .
