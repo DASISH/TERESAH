@@ -15,3 +15,7 @@ TERESAH is written primarily in PHP and uses the [Laravel PHP framework](http://
 Laravel is a free, open source PHP web application framework, designed for the development of MVC web applications with expressive, elegant syntax. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching. Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications.
 
 Documentation for the Laravel PHP framework can be found on the [Laravel website](http://laravel.com/docs).
+
+## Guidelines for contributing
+
+To ensure consistency throughout the source code, follow the coding conventions defined by the [PHP Framework Interop Group](http://www.php-fig.org/) (especially [PSR-1](http://www.php-fig.org/psr/psr-1/) and [PSR-2](http://www.php-fig.org/psr/psr-2/)) for the PHP.
