@@ -252,7 +252,7 @@ return array(
     | what is actually going on here.
     |
     */
-    "javascript_include_tag" => new Codesleeve\AssetPipeline\Composers\JavascriptComposer,
+    "javascript_include_tag" => new Teresah\AssetPipeline\Composers\JavascriptComposer,
 
     /*
     |--------------------------------------------------------------------------
@@ -266,7 +266,7 @@ return array(
     | what is actually going on here.
     |
     */
-    "stylesheet_link_tag" => new Codesleeve\AssetPipeline\Composers\StylesheetComposer,
+    "stylesheet_link_tag" => new Teresah\AssetPipeline\Composers\StylesheetComposer,
 
     /*
     |--------------------------------------------------------------------------
@@ -280,7 +280,7 @@ return array(
     | what is actually going on here.
     |
     */
-    "image_tag" => new Codesleeve\AssetPipeline\Composers\ImageComposer,
+    "image_tag" => new Teresah\AssetPipeline\Composers\ImageComposer,
 
     /*
     |--------------------------------------------------------------------------
