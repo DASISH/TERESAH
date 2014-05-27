@@ -1,0 +1,108 @@
+.form-signin {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+ul.oauth li span {
+    cursor: pointer;
+}
+
+/* Jumbotron
+-------------------------------------------------- */
+
+.jumbotron {
+    margin-top: 80px;
+}
+
+.jumbotron h2, 
+.jumbotron p {
+    text-align: center;    
+}
+
+.jumbotron p {
+    font-size: 15px;
+}
+
+/* Sticky footer styles 
+-------------------------------------------------- */
+
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    padding-top: 60px;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;
+}
+
+#footer {
+    background-color: #222;
+    border-color: #080808;    
+    margin-top: -60px;
+}
+
+#footer a {
+    padding-top: 10px;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+.panel-info > .panel-heading {
+    color: #000;
+    border-bottom-width: 0;
+}
+
+.panel-heading > .pull-right {
+    margin-bottom: 0;
+    margin-top: 0;
+    color: inherit;
+    font-size: 85%;
+    line-height: inherit;
+}
+
+.panel-heading > .pull-right > a {
+    color: inherit;
+}
+
+.panel-heading > .pull-right > a:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.panel-facet {
+    margin-bottom: 0;
+}
+
+.panel-facet .panel-footer {
+    /*padding:0;*/
+}
