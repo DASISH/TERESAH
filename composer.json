@@ -7,6 +7,9 @@
         "laravel/framework": "4.1.*", 
         "codesleeve/asset-pipeline": "dev-master"
     },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    },
     "autoload": {
         "classmap": [
             "app/commands",
