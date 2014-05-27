@@ -56,6 +56,19 @@ return array(
 
     /*
     |--------------------------------------------------------------------------
+    | Application Available Locales
+    |--------------------------------------------------------------------------
+    |
+    | The application available locales determines the available translations
+    | for the translation service provider. Include all of the locales which 
+    | will be supported by the application.
+    |
+    */
+
+    "available_locales" => array("en"),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Fallback Locale
     |--------------------------------------------------------------------------
     |

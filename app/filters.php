@@ -77,3 +77,17 @@ Route::filter("csrf", function()
         throw new Illuminate\Session\TokenMismatchException;
     }
 });
+
+Route::filter("setLocale", function()
+{
+    $locale = Route::input("locale");
+
+    if (in_array($locale, Config::get("app.available_locales"))) {
+        App::setLocale($locale);
+    } elseif(empty($locale)) {
+        App::setLocale(Config::get("app.locale", "en"));
+        return Redirect::to("/".App::getLocale());
+    } else {
+        return App::abort(404);
+    }
+});
