@@ -52,6 +52,7 @@ class User extends Eloquent implements UserInterface
         parent::boot();
 
         self::observe(new ActivityObserver);
+        self::observe(new UserObserver);
 
         # FIXME/TODO: The public static "bootValidatingTrait()" function
         # in the Validating trait (Watson/Validating/ValidatingTrait.php) 
