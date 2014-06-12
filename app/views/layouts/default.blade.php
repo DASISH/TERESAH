@@ -7,8 +7,11 @@
         <div class="container">
             @yield("content")
         </div>
+        <!-- /container -->
+
         <div id="push"></div>
     </div>
+    <!-- /wrap -->
 
     @include("shared._footer")
 </body>

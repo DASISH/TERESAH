@@ -8,6 +8,7 @@
             </button>
             {{ link_to_route("pages.show", Lang::get("views/pages/navigation.teresah.name"), array("locale" => App::getLocale(), "path" => "/"), array("class" => "navbar-brand", "title" => Lang::get("views/pages/navigation.teresah.title"))) }} 
         </div>
+        <!-- /navbar-header -->
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -35,17 +36,25 @@
                     </ul>
                 </li>
             </ul>
+            <!-- /nav.navbar-nav -->
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="pull-right"><a href="#" title="{{ Lang::get("views/pages/navigation.login.title") }}"><span class="glyphicon glyphicon-log-in"></span> <span>{{ Lang::get("views/pages/navigation.login.name") }}</span></a></li>
             </ul>
+            <!-- /nav.navbar-nav.navbar-right -->
 
             <form class="navbar-form navbar-right hidden-sm">
                 <div class="form-group">
                     <input type="text" placeholder="{{ Lang::get("views/pages/navigation.search.placeholder") }}" name="quicksearch" class="form-control input-sm">
                 </div>
+                <!-- /form-group -->
+
                 <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-search"></span></button>
             </form>
+            <!-- /navbar-form.navbar-right.hidden-sm -->
         </div>
+        <!-- /navbar-collapse.collapse -->
     </div>
+    <!-- /container -->
 </div>
+<!-- /navbar.navbar-inverse.navbar-fixed-top -->
