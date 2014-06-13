@@ -1,7 +1,6 @@
 <?php
 
 return array(
-    "heading" => "Sign up",
     "name" => array(
         "label" => "Name", 
         "placeholder" => "Name"

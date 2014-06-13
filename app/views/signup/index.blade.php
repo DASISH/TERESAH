@@ -3,7 +3,7 @@
 @section("content")
     <div class="row">
         <div class="col-md-6 col-centered">
-            <h1 class="text-center">{{ Lang::get("views/signup/form.heading") }}</h1>
+            <h1 class="text-center">{{ Lang::get("views/signup/index.heading") }}</h1>
 
             @include("shared._error_messages")
             @include("signup._form")
