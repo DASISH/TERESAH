@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Request;
-
 class Activity extends Eloquent
 {
     const CREATED = 1;
@@ -34,30 +32,10 @@ class Activity extends Eloquent
         $model->activity()->create(array(
             "action" => $action,
             "user_id" => self::getUserId($model),
-            "ip_address" => self::getIpAddress(),
-            "user_agent" => self::getUserAgent(),
-            "referer" => self::getReferer()
+            "ip_address" => BaseHelper::getIpAddress(),
+            "user_agent" => BaseHelper::getUserAgent(),
+            "referer" => BaseHelper::getReferer()
         ));
-    }
-
-    private static function getIpAddress()
-    {
-        if (!empty(Request::getClientIp())) {
-            return Request::getClientIp();
-        } else {
-            # Otherwise return the IP address of the current server
-            return Request::server("SERVER_ADDR");
-        }
-    }
-
-    private static function getReferer()
-    {
-        return Request::server("HTTP_REFERER");
-    }
-
-    private static function getUserAgent()
-    {
-        return Request::server("HTTP_USER_AGENT");
     }
 
     private static function getUserId($model)
