@@ -26,6 +26,6 @@
 <!-- /nav.navbar-nav -->
 
 <ul class="nav navbar-nav navbar-right">
-    <li class="pull-right"><a href="{{ URL::route("{locale?}.signup.index", array("locale" => App::getLocale())) }}" title="{{ Lang::get("views/pages/navigation.login.title") }}" title="{{ Lang::get("views/pages/navigation.login.title") }}"><span class="glyphicon glyphicon-log-in"></span> <span>{{ Lang::get("views/pages/navigation.login.name") }}</span></a></li>
+    <li class="pull-right"><a href="{{ URL::route("sessions.create", array("locale" => App::getLocale())) }}" title="{{ Lang::get("views/pages/navigation.login.title") }}" title="{{ Lang::get("views/pages/navigation.login.title") }}"><span class="glyphicon glyphicon-log-in"></span> <span>{{ Lang::get("views/pages/navigation.login.name") }}</span></a></li>
 </ul>
 <!-- /nav.navbar-nav.navbar-right -->

@@ -96,6 +96,11 @@ class User extends Eloquent implements UserInterface
         return $this->hasMany("Activity");
     }
 
+    public function logins()
+    {
+        return $this->hasMany("Login");
+    }
+
     /**
      * Get the unique identifier for the user.
      *
@@ -191,7 +196,7 @@ class User extends Eloquent implements UserInterface
      */
     private function hashPassword()
     {
-        if (isset($this->password)) {
+        if (isset($this->password) && $this->password != $this->getOriginal("password")) {
             $this->password = Hash::make($this->password);
         }
     }

@@ -13,6 +13,21 @@
 
 Route::group(array("prefix" => "{locale?}", "before" => "setLocale"), function() {
 
+    Route::get("login", array(
+        "as" => "sessions.create",
+        "uses" => "SessionsController@create"
+    ));
+
+    Route::post("login", array(
+        "as" => "sessions.store",
+        "uses" => "SessionsController@store"
+    ));
+
+    Route::get("logout", array(
+        "as" => "sessions.destroy",
+        "uses" => "SessionsController@destroy"
+    ));
+
     Route::resource("signup", "SignupController", array(
         "only" => array("index", "store")
     ));
