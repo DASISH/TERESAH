@@ -2,8 +2,12 @@
 
 class BaseController extends Controller
 {
+    protected $skipAuthentication = array();
+
     public function __construct()
     {
+        $this->beforeFilter("auth", array("except" => 
+            $this->skipAuthentication));
         $this->beforeFilter("csrf", array("on" => 
             "post", "put", "patch", "delete"));
     }
