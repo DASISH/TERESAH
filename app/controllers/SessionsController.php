@@ -2,6 +2,7 @@
 
 class SessionsController extends BaseController
 {
+    protected $skipAuthentication = array("create", "store", "destroy");
     protected $user;
 
     public function __construct(User $user)

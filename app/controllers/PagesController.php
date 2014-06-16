@@ -2,6 +2,8 @@
 
 class PagesController extends BaseController
 {
+    protected $skipAuthentication = array("show");
+
     /**
      * Display the specified static view.
      *
