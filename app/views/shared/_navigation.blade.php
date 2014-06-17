@@ -26,6 +26,16 @@
 <!-- /nav.navbar-nav -->
 
 <ul class="nav navbar-nav navbar-right">
-    <li class="pull-right"><a href="{{ URL::route("sessions.create", array("locale" => App::getLocale())) }}" title="{{ Lang::get("views/pages/navigation.login.title") }}" title="{{ Lang::get("views/pages/navigation.login.title") }}"><span class="glyphicon glyphicon-log-in"></span> <span>{{ Lang::get("views/pages/navigation.login.name") }}</span></a></li>
+    @if (Auth::check())
+        <li class="dropdown pull-right">
+            <a class="dropdown-toggle" data-toggle="dropdown" title="{{{ Auth::user()->name }}}">{{{ Auth::user()->name }}}<b class="caret"></b></a>
+
+            <ul class="dropdown-menu">
+                <li><a href="{{ URL::route("sessions.destroy", array("locale" => App::getLocale())) }}" title="{{ Lang::get("views/pages/navigation.logout.title") }}" title="{{ Lang::get("views/pages/navigation.logout.title") }}"><span class="glyphicon glyphicon-log-out"></span> <span>{{ Lang::get("views/pages/navigation.logout.name") }}</span></a></li>
+            </ul>
+        </li>
+    @else
+        <li class="pull-right"><a href="{{ URL::route("sessions.create", array("locale" => App::getLocale())) }}" title="{{ Lang::get("views/pages/navigation.login.title") }}" title="{{ Lang::get("views/pages/navigation.login.title") }}"><span class="glyphicon glyphicon-log-in"></span> <span>{{ Lang::get("views/pages/navigation.login.name") }}</span></a></li>
+    @endif
 </ul>
 <!-- /nav.navbar-nav.navbar-right -->

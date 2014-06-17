@@ -59,4 +59,8 @@ return array(
         "name" => "Sign in", 
         "title" => "Login"
     ),
+    "logout" => array(
+        "name" => "Logout", 
+        "title" => "Logout"
+    ),
 );
