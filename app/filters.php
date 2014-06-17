@@ -35,7 +35,10 @@ App::after(function($request, $response)
 
 Route::filter("auth", function()
 {
-    if (Auth::guest()) return Redirect::guest(App::getLocale()."/login");
+    if (Auth::guest()) {
+        return Redirect::guest(App::getLocale()."/login")
+            ->with("info", Lang::get("controllers/sessions.auth.info"));
+    }
 });
 
 
