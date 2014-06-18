@@ -101,6 +101,11 @@ class User extends Eloquent implements UserInterface
         return $this->hasMany("Login");
     }
 
+    public function tools()
+    {
+        return $this->hasMany("Tool");
+    }
+
     /**
      * Get the unique identifier for the user.
      *
