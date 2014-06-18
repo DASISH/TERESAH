@@ -43,9 +43,9 @@ class Activity extends Eloquent
         if (get_class($model) == "User") {
             return $model->id;
         } else {
-            # TODO: Should we return $model->user()->id() 
-            # instead of the Auth::id()?
-            return Auth::id();
+            # TODO: Should we return Auth::id() 
+            # instead of the $model->user->id?
+            return $model->user->id;
         }
     }
 }
