@@ -32,10 +32,16 @@ Route::group(array("prefix" => "{locale?}", "before" => "setLocale"), function()
         "only" => array("index", "store")
     ));
     
-    Route::resource("profile", "ProfileController", array(
-        "only" => array("index", "store")
+    Route::get("profile", array(
+        "as" => "profile.index",
+        "uses" => "ProfileController@index"        
     ));
-
+    
+    Route::post("profile", array(
+        "as" => "profile.store",
+        "uses" => "ProfileController@store"
+    ));
+    
     # Catch all route for the static pages
     Route::get("{path?}", array(
         "as" => "pages.show", 

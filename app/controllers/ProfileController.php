@@ -7,8 +7,8 @@ class ProfileController extends BaseController {
     public function __construct(User $user)
     {
         parent::__construct();
-
-        $this->user = Auth::user;
+                
+        $this->user = Auth::user();
     }
     
     /**
@@ -18,6 +18,12 @@ class ProfileController extends BaseController {
      */
     public function index()
     {
+        # Redirect to login if user is not set
+        if(!Auth::user())
+        {
+            return Redirect::route("pages.show", array("locale" => App::getLocale(), "path" => "login"));
+        }
+        
         return View::make("profile.index")->withUser($this->user);
     }
 
@@ -28,13 +34,19 @@ class ProfileController extends BaseController {
      */
     public function store()
     {
+        # Redirect to login if user is not set
+        if(!Auth::user())
+        {
+            return Redirect::route("pages.show", array("locale" => App::getLocale(), "path" => "login"));
+        }
+        
         $user = $this->user->fill(Input::all());
 
         if ($user->save()) {
-            return Redirect::route("pages.show", array("locale" => App::getLocale(), "path" => "/"))
+            return Redirect::route("profile.index", array("locale" => App::getLocale()))
                 ->with("success", Lang::get("controllers/profile.store.success"));
         } else {
-            return Redirect::route("{locale?}.profile.index", array("locale" => App::getLocale()))
+            return Redirect::route("profile.index", array("locale" => App::getLocale()))
                 ->withErrors($user->getErrors())->withInput();
         }
     }

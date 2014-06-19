@@ -100,6 +100,11 @@ class User extends Eloquent implements UserInterface
     {
         return $this->hasMany("Login");
     }
+    
+    public function apiKeys()
+    {
+        return $this->hasMany("ApiKey");
+    }
 
     /**
      * Get the unique identifier for the user.

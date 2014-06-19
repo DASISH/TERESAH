@@ -1,4 +1,4 @@
-{{ Form::model($user, array("route" => array("{locale?}.profile.store", "locale" => App::getLocale()), "class" => "form-horizontal", "role" => "form")) }}
+{{ Form::model($user, array("route" => array("profile.store", "locale" => App::getLocale()), "class" => "form-horizontal", "role" => "form")) }}
     <div class="form-group">
         {{ Form::label("name", Lang::get("views/profile/form.name.label"), array("class" => "col-sm-3 control-label")) }}
 
