@@ -31,6 +31,10 @@ Route::group(array("prefix" => "{locale?}", "before" => "setLocale"), function()
     Route::resource("signup", "SignupController", array(
         "only" => array("index", "store")
     ));
+    
+    Route::resource("profile", "ProfileController", array(
+        "only" => array("index", "store")
+    ));
 
     # Catch all route for the static pages
     Route::get("{path?}", array(
