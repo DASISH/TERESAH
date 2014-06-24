@@ -6,6 +6,7 @@
     <div id="wrap">
         <div class="container">
             @include("shared._messages")
+            @yield("breadcrumb")
             @yield("content")
         </div>
         <!-- /container -->
