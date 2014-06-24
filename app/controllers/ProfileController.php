@@ -1,7 +1,7 @@
 <?php
 
-class ProfileController extends BaseController {
-
+class ProfileController extends BaseController
+{
     protected $user;
 
     public function __construct(User $user)
@@ -10,7 +10,7 @@ class ProfileController extends BaseController {
                 
         $this->user = Auth::user();
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -19,11 +19,10 @@ class ProfileController extends BaseController {
     public function index()
     {
         # Redirect to login if user is not set
-        if(!Auth::user())
-        {
+        if (!Auth::user()) {
             return Redirect::route("pages.show", array("locale" => App::getLocale(), "path" => "login"));
         }
-        
+
         return View::make("profile.index")->withUser($this->user);
     }
 
@@ -35,11 +34,10 @@ class ProfileController extends BaseController {
     public function store()
     {
         # Redirect to login if user is not set
-        if(!Auth::user())
-        {
+        if (!Auth::user()) {
             return Redirect::route("pages.show", array("locale" => App::getLocale(), "path" => "login"));
         }
-        
+
         $user = $this->user->fill(Input::all());
 
         if ($user->save()) {

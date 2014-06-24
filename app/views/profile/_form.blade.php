@@ -42,6 +42,6 @@
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
             {{ Form::submit(Lang::get("views/profile/form.submit"), array("class" => "btn btn-primary")) }}
-        </div>             
+        </div>
     </div>
 {{ Form::close() }}
