@@ -60,7 +60,7 @@ return array(
         "title" => "Login"
     ),
     "logout" => array(
-        "name" => "Logout", 
+        "name" => "Logout",
         "title" => "Logout"
     ),
 );
