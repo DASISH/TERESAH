@@ -55,6 +55,10 @@ return array(
             "title" => "RDF"
         )
     ),
+    "edit_user_profile" => array(
+        "name" => "Edit user profile",
+        "title" => "Edit user profile"
+    ),
     "login" => array(
         "name" => "Sign in", 
         "title" => "Login"
