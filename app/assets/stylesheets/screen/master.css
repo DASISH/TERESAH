@@ -1,108 +1,69 @@
-.form-signin {
-    padding: 0;
-    margin: 0;
-}
+/* TERESAH screen styles
+---------------------------------------------------------------------------- */
 
-a {
-    cursor: pointer;
-}
+/* Global definitions
+---------------------------------------------------------------------------- */
 
-ul.oauth li span {
-    cursor: pointer;
-}
-
-/* Jumbotron
--------------------------------------------------- */
-
-.jumbotron {
-    margin-top: 80px;
-}
-
-.jumbotron h2, 
-.jumbotron p {
-    text-align: center;    
-}
-
-.jumbotron p {
-    font-size: 15px;
-}
-
-/* Sticky footer styles 
--------------------------------------------------- */
-
-html,
 body {
-    height: 100%;
-    /* The html and body elements cannot have any padding or margin. */
-}
-
-/* Wrapper for page content to push down footer */
-#wrap {
-    padding-top: 60px;
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    /* Negative indent footer by it's height */
-}
-
-/* Set the fixed height of the footer here */
-#push,
-#footer {
-    height: 60px;
-}
-
-#footer {
-    background-color: #222;
-    border-color: #080808;    
-    margin-top: -60px;
-}
-
-#footer a {
-    padding-top: 10px;
-}
-
-.col-centered {
-    float: none;
-    margin: 0 auto;
-    display: block;
-}
-
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-    #footer {
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
-
-.panel-info > .panel-heading {
+    background-color: #fff;
     color: #000;
-    border-bottom-width: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.5em;
+    position: relative;
 }
 
-.panel-heading > .pull-right {
-    margin-bottom: 0;
-    margin-top: 0;
-    color: inherit;
-    font-size: 85%;
-    line-height: inherit;
-}
-
-.panel-heading > .pull-right > a {
-    color: inherit;
-}
-
-.panel-heading > .pull-right > a:hover {
-    color: inherit;
+a:link,
+a:visited {
+    color: #428bca;
+    outline: none;
     text-decoration: none;
 }
 
-.panel-facet {
-    margin-bottom: 0;
+a:hover,
+a:visited:hover {
+    color: #2a6496;
+    text-decoration: underline;
 }
 
-.panel-facet .panel-footer {
-    /*padding:0;*/
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+/* Content
+---------------------------------------------------------------------------- */
+
+#content #cloud {
+    height: 350px;
+    margin: 0 auto;
+    text-align: center;
+    width: 850px;
+}
+
+#content .jumbotron {
+    text-align: center;
+}
+
+#content .jumbotron h1 {
+    font-size: 30px;
+}
+
+#content .jumbotron p {
+    font-size: 15px;
+}
+
+/* Footer
+---------------------------------------------------------------------------- */
+
+#footer {
+    background-color: #222;
+    border-color: #080808;
+    bottom: 0;
+    padding: 5px 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
 }

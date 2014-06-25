@@ -3,17 +3,12 @@
 <body>
     @include("shared._header")
 
-    <div id="wrap">
-        <div class="container">
-            @include("shared._messages")
-            @yield("breadcrumb")
-            @yield("content")
-        </div>
-        <!-- /container -->
-
-        <div id="push"></div>
-    </div>
-    <!-- /wrap -->
+    <main id="content" class="container" role="main">
+        @include("shared._messages")
+        @yield("breadcrumb")
+        @yield("content")
+    </main>
+    <!-- /content.container -->
 
     @include("shared._footer")
 </body>
