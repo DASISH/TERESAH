@@ -15,9 +15,9 @@ class SessionsController extends BaseController
     /**
      * Show the form for creating a new session.
      *
-     * /{locale}/login
+     * GET /{locale}/login
      * 
-     * @return Response
+     * @return View
      */
     public function create()
     {
@@ -27,9 +27,9 @@ class SessionsController extends BaseController
     /**
      * Create/store a new session for the user.
      *
-     * /{locale}/login
+     * POST /{locale}/login
      * 
-     * @return Response
+     * @return Redirect
      */
     public function store()
     {
@@ -55,9 +55,9 @@ class SessionsController extends BaseController
     /**
      * Destroy the current session and redirect to "home".
      *
-     * /{locale}/logout
+     * GET /{locale}/logout
      * 
-     * @return Response
+     * @return Redirect
      */
     public function destroy()
     {

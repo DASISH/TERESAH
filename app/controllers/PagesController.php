@@ -7,7 +7,9 @@ class PagesController extends BaseController
     /**
      * Display the specified static view.
      *
-     * @return Response
+     * GET /{locale}/{path}
+     * 
+     * @return View
      */
     public function show()
     {
@@ -23,7 +25,7 @@ class PagesController extends BaseController
      * "View::make()" methods, or do we need to filter out possible 
      * directory traversal attacks from the "requestPath" variable?
      * 
-     * @return Response
+     * @return View
      */
     private function matchStaticView()
     {

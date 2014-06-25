@@ -15,9 +15,9 @@ class SignupController extends BaseController
     /**
      * Show the form for creating a new user.
      *
-     * /{locale}/signup
+     * GET /{locale}/signup
      * 
-     * @return Response
+     * @return View
      */
     public function index()
     {
@@ -27,9 +27,9 @@ class SignupController extends BaseController
     /**
      * Store a newly created user in storage.
      *
-     * /{locale}/signup
+     * POST /{locale}/signup
      * 
-     * @return Response
+     * @return Redirect
      */
     public function store()
     {
