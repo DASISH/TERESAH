@@ -56,8 +56,8 @@ return array(
         )
     ),
     "edit_user_profile" => array(
-        "name" => "Edit user profile",
-        "title" => "Edit user profile"
+        "name" => "Edit Profile",
+        "title" => "Edit Profile"
     ),
     "login" => array(
         "name" => "Sign in", 

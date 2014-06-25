@@ -28,18 +28,18 @@ Route::group(array("prefix" => "{locale?}", "before" => "setLocale"), function()
         "uses" => "SessionsController@destroy"
     ));
 
+    Route::get("profile", array(
+        "as" => "users.edit",
+        "uses" => "UsersController@edit"
+    ));
+
+    Route::put("profile", array(
+        "as" => "users.update",
+        "uses" => "UsersController@update"
+    ));
+
     Route::resource("signup", "SignupController", array(
         "only" => array("index", "store")
-    ));
-
-    Route::get("profile", array(
-        "as" => "profile.index",
-        "uses" => "ProfileController@index"
-    ));
-
-    Route::post("profile", array(
-        "as" => "profile.store",
-        "uses" => "ProfileController@store"
     ));
 
     # Catch all route for the static pages
