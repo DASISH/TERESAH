@@ -2,6 +2,7 @@
 
 class BaseController extends Controller
 {
+    protected $layout = "layouts.default";
     protected $skipAuthentication = array();
 
     public function __construct()
