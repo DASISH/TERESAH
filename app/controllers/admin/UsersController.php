@@ -23,7 +23,7 @@ class UsersController extends AdminController
      */
     public function index()
     {
-        $users = $this->user->orderBy("created_at", "DESC")->paginate(20);
+        $users = $this->user->with("logins")->orderBy("created_at", "DESC")->paginate(20);
 
         return View::make("admin.users.index", compact("users"));
     }

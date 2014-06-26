@@ -10,6 +10,7 @@ return array(
         "locale" => "Locale",
         "created_at" => "Created",
         "updated_at" => "Updated",
-        "active" => "Active"
+        "active" => "Active",
+        "logins" => "Logins"
     )
 );
