@@ -42,6 +42,14 @@ Route::group(array("prefix" => "{locale?}", "before" => "setLocale"), function()
         "only" => array("index", "store")
     ));
 
+    # Routing for the administrative section
+    Route::group(array("prefix" => "admin"), function() {
+        Route::get("/", array(
+            "as" => "admin.root",
+            "uses" => "Admin\ActivitiesController@index"
+        ));
+    });
+
     # Catch all route for the static pages
     Route::get("{path?}", array(
         "as" => "pages.show", 

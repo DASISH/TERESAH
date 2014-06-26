@@ -33,8 +33,29 @@ a:visited:hover {
   margin: 0 auto;
 }
 
+/* Header
+---------------------------------------------------------------------------- */
+
+#header .message {
+    padding: 15px;
+    text-align: center;
+}
+
+#header .message.warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+}
+
+#header .message p {
+    margin: 0;
+}
+
 /* Content
 ---------------------------------------------------------------------------- */
+
+#content {
+  margin-bottom: 50px;
+}
 
 #content #cloud {
     height: 350px;
@@ -66,4 +87,5 @@ a:visited:hover {
     position: fixed;
     text-align: center;
     width: 100%;
+    z-index: 200;
 }

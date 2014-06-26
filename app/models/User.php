@@ -187,6 +187,16 @@ class User extends Eloquent implements UserInterface
     }
 
     /**
+     * Check if the user is an administrator.
+     *
+     * @return boolean
+     */
+    public function isAdministrator()
+    {
+        return $this->user_level == self::ADMINISTRATOR;
+    }
+
+    /**
      * Disables the validation rules for password and 
      * password confirmation. Used mainly when updating
      * the user record.
