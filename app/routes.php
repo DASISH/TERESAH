@@ -48,6 +48,10 @@ Route::group(array("prefix" => "{locale?}", "before" => "setLocale"), function()
             "as" => "admin.root",
             "uses" => "Admin\ActivitiesController@index"
         ));
+        Route::get("/users", array(
+            "as" => "admin.users",
+            "uses" => "Admin\UsersController@index"
+        ));
     });
 
     # Catch all route for the static pages
