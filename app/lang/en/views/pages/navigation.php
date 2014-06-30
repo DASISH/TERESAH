@@ -17,7 +17,7 @@ return array(
                 "name" => "Create a new user account",
                 "title" => "Create a new user account"
             ),
-            "list" => array(
+            "index" => array(
                 "name" => "List all users",
                 "title" => "List all users"
             )

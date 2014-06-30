@@ -16,8 +16,8 @@
                         <th>{{ Lang::get("views/admin/users/index.table.locale") }}</th>
                         <th>{{ Lang::get("views/admin/users/index.table.created_at") }}</th>
                         <th>{{ Lang::get("views/admin/users/index.table.updated_at") }}</th>
-                        <th>{{ Lang::get("views/admin/users/index.table.active") }}</th>   
-                        <th>{{ Lang::get("views/admin/users/index.table.logins") }}</th>  
+                        <th>{{ Lang::get("views/admin/users/index.table.active") }}</th>
+                        <th>{{ Lang::get("views/admin/users/index.table.logins") }}</th>
                     </tr>
                 </thead>
 

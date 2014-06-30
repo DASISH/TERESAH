@@ -3,7 +3,7 @@
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.users.title") }}">{{ Lang::get("views/pages/navigation.admin.users.name") }}<b class="caret"></b></a>
         <ul class="dropdown-menu">
-            <li><a href="{{ URL::route("admin.users", array("locale" => App::getLocale())) }}" title="{{ Lang::get("views/pages/navigation.admin.users.list.title") }}">{{ Lang::get("views/pages/navigation.admin.users.list.name") }}</a></li>
+            <li>{{ link_to_route("{locale?}.admin.users.index", Lang::get("views/pages/navigation.admin.users.index.name"), array("locale" => App::getLocale()), array("title" => Lang::get("views/pages/navigation.admin.users.index.title"))) }}</li>
             <li><a href="#" title="{{ Lang::get("views/pages/navigation.admin.users.create.title") }}">{{ Lang::get("views/pages/navigation.admin.users.create.name") }}</a></li>
         </ul>
     </li>

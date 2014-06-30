@@ -6,11 +6,15 @@ return array(
     "table" => array(
         "id" => "ID",
         "name" => "Name",
-        "email_address" => "Email",
+        "email_address" => "Email address",
         "locale" => "Locale",
-        "created_at" => "Created",
-        "updated_at" => "Updated",
+        "created_at" => "Created at (in UTC)",
+        "updated_at" => "Updated at (in UTC)",
         "active" => "Active",
         "logins" => "Logins"
+    ),
+    "active" => array(
+        "yes" => "Yes",
+        "no" => "No"
     )
 );
