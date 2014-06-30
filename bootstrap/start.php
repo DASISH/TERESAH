@@ -24,17 +24,15 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+if (strtoupper(substr(PHP_OS, 0, 3)) === "WIN") {
     $env = $app->detectEnvironment(function() {
         return "development";
-    });    
-}else{
+    });
+} else {
     $env = $app->detectEnvironment(array(
         "development" => array("teresah", "*.local", "*.localhost"), 
     ));
 }
-
-
 
 /*
 |--------------------------------------------------------------------------
