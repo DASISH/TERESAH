@@ -15,7 +15,7 @@ class SessionsController extends BaseController
     /**
      * Show the form for creating a new session.
      *
-     * GET /{locale}/login
+     * GET /login
      * 
      * @return View
      */
@@ -27,7 +27,7 @@ class SessionsController extends BaseController
     /**
      * Create/store a new session for the user.
      *
-     * POST /{locale}/login
+     * POST /login
      * 
      * @return Redirect
      */
@@ -43,11 +43,11 @@ class SessionsController extends BaseController
         if (Auth::attempt($credentials, true)) {
             Login::log(Auth::user(), Auth::viaRemember());
 
-            return Redirect::intended("/".App::getLocale())
+            return Redirect::intended("/")
                 ->with("success", Lang::get("controllers/sessions.store.success"));
         }
 
-        return Redirect::route("sessions.create", array("locale" => App::getLocale()))
+        return Redirect::route("sessions.create")
             ->withErrors(array(Lang::get("controllers/sessions.store.error")))
             ->with("simple_error_message", true)->withInput();
     }
@@ -55,7 +55,7 @@ class SessionsController extends BaseController
     /**
      * Destroy the current session and redirect to "home".
      *
-     * GET /{locale}/logout
+     * GET /logout
      * 
      * @return Redirect
      */
@@ -63,7 +63,7 @@ class SessionsController extends BaseController
     {
         Auth::logout();
 
-        return Redirect::route("pages.show", array("locale" => App::getLocale(), "path" => "/"))
+        return Redirect::route("pages.show", array("path" => "/"))
             ->with("success", Lang::get("controllers/sessions.destroy.success"));
     }
 }

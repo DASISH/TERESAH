@@ -1,4 +1,4 @@
-{{ Form::open(array("route" => array("sessions.store", "locale" => App::getLocale()), "class" => "form-horizontal", "role" => "form")) }}
+{{ Form::open(array("route" => "sessions.store", "class" => "form-horizontal", "role" => "form")) }}
     <div class="form-group">
         {{ Form::label("email_address", Lang::get("views/sessions/form.email_address.label"), array("class" => "col-sm-3 control-label")) }}
 
@@ -17,7 +17,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-            {{ Form::submit(Lang::get("views/sessions/form.submit"), array("class" => "btn btn-primary")) }} &ndash; {{ Lang::get("views/sessions/form.sign_up.not_a_user") }} {{ link_to_route("{locale?}.signup.index", Lang::get("views/sessions/form.sign_up.name"), array("locale" => App::getLocale()), array("title" => Lang::get("views/sessions/form.sign_up.title"))) }}
+            {{ Form::submit(Lang::get("views/sessions/form.submit"), array("class" => "btn btn-primary")) }} &ndash; {{ Lang::get("views/sessions/form.sign_up.not_a_user") }} {{ link_to_route("signup.index", Lang::get("views/sessions/form.sign_up.name"), null, array("title" => Lang::get("views/sessions/form.sign_up.title"))) }}
         </div>             
     </div>
 {{ Form::close() }}

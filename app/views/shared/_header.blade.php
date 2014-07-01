@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            {{ link_to_route("pages.show", Lang::get("views/pages/navigation.teresah.name"), array("locale" => App::getLocale(), "path" => "/"), array("class" => "navbar-brand", "title" => Lang::get("views/pages/navigation.teresah.title"))) }} 
+            {{ link_to_route("pages.show", Lang::get("views/pages/navigation.teresah.name"), array("path" => "/"), array("class" => "navbar-brand", "title" => Lang::get("views/pages/navigation.teresah.title"))) }} 
         </div>
         <!-- /navbar-header -->
 

@@ -36,7 +36,7 @@ App::after(function($request, $response)
 Route::filter("auth", function()
 {
     if (Auth::guest()) {
-        return Redirect::guest(App::getLocale()."/login")
+        return Redirect::guest("/login")
             ->with("info", Lang::get("controllers/sessions.auth.info"));
     }
 });
@@ -60,7 +60,7 @@ Route::filter("auth.basic", function()
 
 Route::filter("guest", function()
 {
-    if (Auth::check()) return Redirect::to("/".App::getLocale());
+    if (Auth::check()) return Redirect::to("/");
 });
 
 /*
@@ -78,19 +78,5 @@ Route::filter("csrf", function()
 {
     if (Session::token() != Input::get("_token")) {
         throw new Illuminate\Session\TokenMismatchException;
-    }
-});
-
-Route::filter("setLocale", function()
-{
-    $locale = Route::input("locale");
-
-    if (in_array($locale, Config::get("app.available_locales"))) {
-        App::setLocale($locale);
-    } elseif(empty($locale)) {
-        App::setLocale(Config::get("app.locale", "en"));
-        return Redirect::to("/".App::getLocale());
-    } else {
-        return App::abort(404);
     }
 });

@@ -14,7 +14,7 @@ class UsersController extends BaseController
     /**
      * Display an authenticated user's profile.
      *
-     * GET /{locale}/profile
+     * GET /profile
      * 
      * @return View
      */
@@ -26,7 +26,7 @@ class UsersController extends BaseController
     /**
      * Update (store) an authenticated user's profile.
      *
-     * PUT/PATCH /{locale}/profile
+     * PUT/PATCH /profile
      * 
      * @return Redirect
      */
@@ -35,10 +35,10 @@ class UsersController extends BaseController
         $user = $this->user->fill(Input::all());
 
         if ($user->save()) {
-            return Redirect::route("users.edit", array("locale" => App::getLocale()))
+            return Redirect::route("users.edit")
                 ->with("success", Lang::get("controllers/users.update.success"));
         } else {
-            return Redirect::route("users.edit", array("locale" => App::getLocale()))
+            return Redirect::route("users.edit")
                 ->withErrors($user->getErrors())->withInput();
         }
     }

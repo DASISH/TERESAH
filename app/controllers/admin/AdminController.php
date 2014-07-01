@@ -1,7 +1,6 @@
 <?php namespace Admin;
 
 use BaseController;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
@@ -20,7 +19,7 @@ class AdminController extends BaseController
     public function authorize()
     {
         if (!Auth::user()->isAdministrator()) {
-            return Redirect::route("pages.show", array("locale" => App::getLocale(), "path" => "/"))
+            return Redirect::route("pages.show", array("path" => "/"))
                 ->with("warning", Lang::get("controllers/admin/admin.authorize.warning"));
         }
     }

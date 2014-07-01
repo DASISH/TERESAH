@@ -17,7 +17,7 @@ class UsersController extends AdminController
     /**
      * Returns all user records.
      *
-     * GET /{locale}/admin/users
+     * GET /admin/users
      * 
      * @return View
      */

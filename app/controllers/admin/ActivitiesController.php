@@ -17,7 +17,7 @@ class ActivitiesController extends AdminController
     /**
      * Returns all activity records.
      *
-     * GET /{locale}/admin
+     * GET /admin
      * 
      * @return View
      */

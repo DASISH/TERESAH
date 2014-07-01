@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            {{ link_to_route("admin.root", Lang::get("views/pages/navigation.teresah.name"), array("locale" => App::getLocale()), array("class" => "navbar-brand", "title" => Lang::get("views/pages/navigation.teresah.title"))) }} 
+            {{ link_to_route("admin.root", Lang::get("views/pages/navigation.teresah.name"), null, array("class" => "navbar-brand", "title" => Lang::get("views/pages/navigation.teresah.title"))) }} 
         </div>
         <!-- /navbar-header -->
 

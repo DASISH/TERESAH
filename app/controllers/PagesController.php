@@ -7,7 +7,7 @@ class PagesController extends BaseController
     /**
      * Display the specified static view.
      *
-     * GET /{locale}/{path}
+     * GET /{path}
      * 
      * @return View
      */
@@ -29,10 +29,11 @@ class PagesController extends BaseController
      */
     private function matchStaticView()
     {
+        $locale = App::getLocale();
         $appPath = rtrim(app_path(), "/");
         $requestPath = rtrim(mb_strtolower(Request::path()), "/");
-        $fullStaticViewPath = "{$appPath}/views/pages/{$requestPath}";
-        $staticViewFilename = "pages/{$requestPath}";
+        $fullStaticViewPath = "{$appPath}/views/pages/{$locale}/{$requestPath}";
+        $staticViewFilename = "pages/{$locale}/{$requestPath}";
 
         if (is_dir($fullStaticViewPath)) {
             $staticViewFilename .= "/index";

@@ -1,4 +1,4 @@
-{{ Form::model($user, array("route" => array("users.update", "locale" => App::getLocale()), "method" => "put", "class" => "form-horizontal", "role" => "form")) }}
+{{ Form::model($user, array("route" => "users.update", "method" => "put", "class" => "form-horizontal", "role" => "form")) }}
     <div class="form-group">
         {{ Form::label("name", Lang::get("views/users/form.name.label"), array("class" => "col-sm-3 control-label")) }}
 

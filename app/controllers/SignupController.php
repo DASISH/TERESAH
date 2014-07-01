@@ -15,7 +15,7 @@ class SignupController extends BaseController
     /**
      * Show the form for creating a new user.
      *
-     * GET /{locale}/signup
+     * GET /signup
      * 
      * @return View
      */
@@ -27,7 +27,7 @@ class SignupController extends BaseController
     /**
      * Store a newly created user in storage.
      *
-     * POST /{locale}/signup
+     * POST /signup
      * 
      * @return Redirect
      */
@@ -36,10 +36,10 @@ class SignupController extends BaseController
         $user = $this->user->fill(Input::all());
 
         if ($user->save()) {
-            return Redirect::route("pages.show", array("locale" => App::getLocale(), "path" => "/"))
+            return Redirect::route("pages.show", array("path" => "/"))
                 ->with("success", Lang::get("controllers/signup.store.success"));
         } else {
-            return Redirect::route("{locale?}.signup.index", array("locale" => App::getLocale()))
+            return Redirect::route("signup.index")
                 ->withErrors($user->getErrors())->withInput();
         }
     }
