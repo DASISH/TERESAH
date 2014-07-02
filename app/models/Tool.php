@@ -20,26 +20,12 @@ class Tool extends Eloquent
         "user_id" => "required|integer"
     );
 
-    # Add unique identifier to the rules when performing 
-    # validation. Otherwise if the model already exists 
-    # and it has unique validations, it is going to fail
-    # the validation.
-    protected $injectUniqueIdentifier = true;
-
     public static function boot()
     {
-        parent::boot();
-
         self::observe(new ActivityObserver);
         self::observe(new ToolObserver);
 
-        # FIXME/TODO: The public static "bootValidatingTrait()" function
-        # in the Validating trait (Watson/Validating/ValidatingTrait.php) 
-        # doesn't seem to work at the moment. Using the following
-        # "workaround" in order to use the ValidatingObserver.
-        # 
-        self::observe(new ValidatingObserver);
-        # End of the "workaround"
+        parent::boot();
     }
 
     public function activity()

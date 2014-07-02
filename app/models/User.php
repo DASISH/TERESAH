@@ -41,26 +41,10 @@ class User extends Eloquent implements UserInterface
         # "locale": validation rule specified in boot()
     );
 
-    # Add unique identifier to the rules when performing 
-    # validation. Otherwise if the model already exists 
-    # and it has unique validations, it is going to fail
-    # the validation.
-    protected $injectUniqueIdentifier = true;
-
     public static function boot()
     {
-        parent::boot();
-
         self::observe(new ActivityObserver);
         self::observe(new UserObserver);
-
-        # FIXME/TODO: The public static "bootValidatingTrait()" function
-        # in the Validating trait (Watson/Validating/ValidatingTrait.php) 
-        # doesn't seem to work at the moment. Using the following
-        # "workaround" in order to use the ValidatingObserver.
-        # 
-        self::observe(new ValidatingObserver);
-        # End of the "workaround"
 
         static::saving(function($model) {
             # Due the dynamic nature of the available locales,
@@ -77,13 +61,12 @@ class User extends Eloquent implements UserInterface
 
             if ($model->isValid()) {
                 $model->hashPassword();
+                $model->disablePasswordValidation();
                 $model->purgeRedundantAttributes();
-
-                return true;
-            } else {
-                return false;
             }
         });
+
+        parent::boot();
     }
 
     public function activity()

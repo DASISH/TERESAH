@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "40c64f67b5ce6d5886db7f5ca932b791",
+    "hash": "9cd015135f4f43fe1f06d4b66ee52d08",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2040,31 +2040,33 @@
         },
         {
             "name": "watson/validating",
-            "version": "0.7.8",
+            "version": "0.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dwightwatson/validating.git",
-                "reference": "15b2d945c6d9adc89ae971ede2486ef8d1d7351a"
+                "reference": "2c29727b62e0d5a348edc39ff609b47ec2aa3022"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/15b2d945c6d9adc89ae971ede2486ef8d1d7351a",
-                "reference": "15b2d945c6d9adc89ae971ede2486ef8d1d7351a",
+                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/2c29727b62e0d5a348edc39ff609b47ec2aa3022",
+                "reference": "2c29727b62e0d5a348edc39ff609b47ec2aa3022",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "4.2.x",
-                "illuminate/validation": "4.2.x",
+                "illuminate/database": "~4.2.6",
+                "illuminate/events": "~4.2.6",
+                "illuminate/support": "~4.2.6",
+                "illuminate/validation": "~4.2.6",
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "mockery/mockery": "0.9.x",
-                "phpunit/phpunit": "4.1.x"
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.1.*"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Watson\\Validating": "src/"
+                "psr-4": {
+                    "Watson\\Validating\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2083,7 +2085,7 @@
                 "laravel",
                 "validation"
             ],
-            "time": "2014-06-09 07:01:20"
+            "time": "2014-07-02 07:25:31"
         }
     ],
     "packages-dev": [
