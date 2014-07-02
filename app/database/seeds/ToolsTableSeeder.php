@@ -66,8 +66,10 @@ class ToolsTableSeeder extends Seeder
 
         DB::table("tools")->delete();
 
+        $userId = User::first()->id;
+
         foreach ($tools as $tool) {
-            $tool["user_id"] = User::first()->id;
+            $tool["user_id"] = $userId;
             Tool::create($tool);
         }
     }
