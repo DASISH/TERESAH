@@ -40,7 +40,9 @@ class Activity extends Eloquent
 
     private static function getUserId($model)
     {
-        if (get_class($model) == "User") {
+        $userModels = array("Signup", "User");
+
+        if (in_array(get_class($model), $userModels)) {
             return $model->id;
         } else {
             # TODO: Should we return Auth::id() 

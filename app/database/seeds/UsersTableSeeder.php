@@ -43,7 +43,7 @@ class UsersTableSeeder extends Seeder
         DB::table("users")->delete();
 
         foreach ($users as $user) {
-            User::create($user);
+            Signup::create($user);
         }
     }
 }

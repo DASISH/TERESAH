@@ -5,7 +5,7 @@ class SignupController extends BaseController
     protected $skipAuthentication = array("index", "store");
     protected $user;
 
-    public function __construct(User $user)
+    public function __construct(Signup $user)
     {
         parent::__construct();
 
