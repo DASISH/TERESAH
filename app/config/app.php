@@ -132,6 +132,7 @@ return array(
         "Illuminate\Validation\ValidationServiceProvider",
         "Illuminate\View\ViewServiceProvider",
         "Illuminate\Workbench\WorkbenchServiceProvider",
+        "Barryvdh\Debugbar\ServiceProvider",
         "Codesleeve\AssetPipeline\AssetPipelineServiceProvider",
     ),
 
@@ -171,6 +172,7 @@ return array(
         "Cookie"          => "Illuminate\Support\Facades\Cookie",
         "Crypt"           => "Illuminate\Support\Facades\Crypt",
         "DB"              => "Illuminate\Support\Facades\DB",
+        "Debugbar"        => "Barryvdh\Debugbar\Facade",
         "Eloquent"        => "Illuminate\Database\Eloquent\Model",
         "Event"           => "Illuminate\Support\Facades\Event",
         "File"            => "Illuminate\Support\Facades\File",

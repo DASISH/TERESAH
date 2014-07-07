@@ -4,8 +4,60 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9cd015135f4f43fe1f06d4b66ee52d08",
+    "hash": "1ede64aff171063486be24ab4c0dfff1",
     "packages": [
+        {
+            "name": "barryvdh/laravel-debugbar",
+            "version": "v1.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-debugbar.git",
+                "reference": "23e17f9c939d85b3880ed65109040fc5c2b8562f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/23e17f9c939d85b3880ed65109040fc5c2b8562f",
+                "reference": "23e17f9c939d85b3880ed65109040fc5c2b8562f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "~4.0",
+                "illuminate/support": "~4.0",
+                "maximebf/debugbar": "1.9.x",
+                "php": ">=5.3.0",
+                "symfony/finder": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Barryvdh\\Debugbar": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "PHP Debugbar integration for Laravel",
+            "keywords": [
+                "debug",
+                "debugbar",
+                "laravel",
+                "profiler",
+                "webprofiler"
+            ],
+            "time": "2014-06-24 08:55:57"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "1.0.2",
@@ -644,6 +696,56 @@
             "time": "2013-12-23 23:28:02"
         },
         {
+            "name": "maximebf/debugbar",
+            "version": "1.9.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maximebf/php-debugbar.git",
+                "reference": "ab02c692d2bdad1009639f6ba319576af590620c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/ab02c692d2bdad1009639f6ba319576af590620c",
+                "reference": "ab02c692d2bdad1009639f6ba319576af590620c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "kriswallsmith/assetic": "The best way to manage assets",
+                "monolog/monolog": "Log using Monolog",
+                "predis/predis": "Redis storage"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "DebugBar": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Bouroumeau-Fuseau",
+                    "email": "maxime.bouroumeau@gmail.com",
+                    "homepage": "http://maximebf.com"
+                }
+            ],
+            "description": "Debug bar in the browser for php application",
+            "homepage": "https://github.com/maximebf/php-debugbar",
+            "keywords": [
+                "debug"
+            ],
+            "time": "2014-04-25 16:30:40"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.10.0",
             "source": {
@@ -903,22 +1005,24 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "0.3.6",
+            "version": "0.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "0ea31d9b65d49a8661e93bec19f44e989bd34c69"
+                "reference": "8b8c62f278e363b75ddcacaf5803710232fbd3e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/0ea31d9b65d49a8661e93bec19f44e989bd34c69",
-                "reference": "0ea31d9b65d49a8661e93bec19f44e989bd34c69",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/8b8c62f278e363b75ddcacaf5803710232fbd3e4",
+                "reference": "8b8c62f278e363b75ddcacaf5803710232fbd3e4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.0.0"
             },
             "require-dev": {
+                "phing/phing": "2.7.*",
+                "phpunit/phpunit": "4.0.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
             "suggest": {
@@ -994,7 +1098,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2014-02-28 16:05:05"
+            "time": "2014-07-05 16:36:21"
         },
         {
             "name": "predis/predis",
