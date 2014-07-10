@@ -8,6 +8,7 @@ return array(
         "action" => "Action",
         "user" => "User",
         "user_id" => "User ID",
+        "metadata" => "Metadata",
         "ip_address" => "IP Address",
         "user_agent" => "User Agent",
         "referer" => "Referer",
