@@ -99,5 +99,11 @@ return array(
     |
     */
 
-    "attributes" => array(),
+    "attributes" => array_merge(
+        Lang::get("models/activity.attributes"),
+        Lang::get("models/apikey.attributes"),
+        Lang::get("models/login.attributes"),
+        Lang::get("models/tool.attributes"),
+        Lang::get("models/user.attributes")
+    ),
 );

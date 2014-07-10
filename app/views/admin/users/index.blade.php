@@ -10,14 +10,14 @@
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>{{ Lang::get("views/admin/users/index.table.id") }}</th>
-                        <th>{{ Lang::get("views/admin/users/index.table.name") }}</th>
-                        <th>{{ Lang::get("views/admin/users/index.table.email_address") }}</th>
-                        <th>{{ Lang::get("views/admin/users/index.table.locale") }}</th>
-                        <th>{{ Lang::get("views/admin/users/index.table.created_at") }}</th>
-                        <th>{{ Lang::get("views/admin/users/index.table.updated_at") }}</th>
-                        <th>{{ Lang::get("views/admin/users/index.table.active") }}</th>
-                        <th>{{ Lang::get("views/admin/users/index.table.logins") }}</th>
+                        <th>{{ Lang::get("models/user.attributes.id") }}</th>
+                        <th>{{ Lang::get("models/user.attributes.name") }}</th>
+                        <th>{{ Lang::get("models/user.attributes.email_address") }}</th>
+                        <th>{{ Lang::get("models/user.attributes.locale") }}</th>
+                        <th>{{ Lang::get("models/user.attributes.created_at") }}</th>
+                        <th>{{ Lang::get("models/user.attributes.updated_at") }}</th>
+                        <th>{{ Lang::get("models/user.attributes.active") }}</th>
+                        <th>{{ Lang::get("models/user.attributes.logins") }}</th>
                     </tr>
                 </thead>
 
