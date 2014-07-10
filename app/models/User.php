@@ -79,6 +79,11 @@ class User extends Eloquent implements UserInterface
         return $this->hasMany("Activity");
     }
 
+    public function dataSources()
+    {
+        return $this->hasMany("DataSource");
+    }
+
     public function logins()
     {
         return $this->hasMany("Login");

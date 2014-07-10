@@ -76,6 +76,14 @@ a:visited:hover {
     font-size: 15px;
 }
 
+#content dl dt {
+    margin-top: 10px;
+}
+
+#content dl dt:first-child {
+    margin-top: 0;
+}
+
 /* Footer
 ---------------------------------------------------------------------------- */
 

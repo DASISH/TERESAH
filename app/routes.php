@@ -42,6 +42,18 @@ Route::resource("signup", "SignupController", array(
 
 # Routing for the administrative section
 Route::group(array("prefix" => "admin"), function() {
+    Route::get("data-sources/{id}/delete", array(
+        "as" => "admin.data-sources.delete",
+        "uses" => "Admin\DataSourcesController@delete"
+    ));
+
+    Route::resource("data-sources", "Admin\DataSourcesController", array(
+        "only" => array(
+            "index", "show", "create", "store",
+            "edit", "update", "delete", "destroy"
+        )
+    ));
+
     Route::resource("users", "Admin\UsersController", array(
         "only" => array("index")
     ));

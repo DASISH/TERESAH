@@ -1,6 +1,13 @@
 <ul class="nav navbar-nav">
     <li>{{ link_to_route("admin.root", Lang::get("views/pages/navigation.admin.dashboard.name"), null, array("title" => Lang::get("views/pages/navigation.admin.dashboard.title"))) }}</li>
     <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.data_sources.title") }}">{{ Lang::get("views/pages/navigation.admin.data_sources.name") }}<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li>{{ link_to_route("admin.data-sources.index", Lang::get("views/pages/navigation.admin.data_sources.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.data_sources.index.title"))) }}</li>
+            <li>{{ link_to_route("admin.data-sources.create", Lang::get("views/pages/navigation.admin.data_sources.create.name"), null, array("title" => Lang::get("views/pages/navigation.admin.data_sources.create.title"))) }}</li>
+        </ul>
+    </li>
+    <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.users.title") }}">{{ Lang::get("views/pages/navigation.admin.users.name") }}<b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li>{{ link_to_route("admin.users.index", Lang::get("views/pages/navigation.admin.users.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.users.index.title"))) }}</li>

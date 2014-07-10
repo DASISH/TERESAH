@@ -10,6 +10,22 @@ return array(
             "name" => "Dashboard",
             "title" => "Dashboard"
         ),
+        "data_sources" => array(
+            "name" => "Data Sources",
+            "title" => "Data Sources",
+            "create" => array(
+                "name" => "Add a Data Source",
+                "title" => "Add a Data Source"
+            ),
+            "edit" => array(
+                "name" => "Edit Data Source",
+                "title" => "Edit Data Source"
+            ),
+            "index" => array(
+                "name" => "List Data Sources",
+                "title" => "List Data Sources"
+            )
+        ),
         "users" => array(
             "name" => "Users",
             "title" => "Users",
