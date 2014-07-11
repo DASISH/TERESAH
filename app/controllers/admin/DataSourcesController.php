@@ -2,6 +2,7 @@
 
 use DataSource;
 use User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
@@ -69,7 +70,7 @@ class DataSourcesController extends AdminController
      */
     public function store()
     {
-        $user = $this->user->currentUser();
+        $user = Auth::user();
         $dataSource = $this->dataSource->fill(Input::all());
 
         if ($user->dataSources()->save($dataSource)) {
