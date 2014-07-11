@@ -1,4 +1,4 @@
-Welcome to TERESAH, {{ $user->getFirstName() }}!
+Welcome to TERESAH, {{ $user->firstName }}!
 
 Thank you for registering to TERESAH (Tools E-Registry for E-Social science, Arts and Humanities). As a registered user, you will be able to contribute to TERESAH.
 

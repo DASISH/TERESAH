@@ -124,7 +124,7 @@ class User extends Eloquent implements UserInterface
      *
      * @return string
      */
-    public function getFirstName()
+    public function getFirstNameAttribute()
     {
         $name = explode(" ", $this->name, 2);
 
@@ -136,7 +136,7 @@ class User extends Eloquent implements UserInterface
      *
      * @return string
      */
-    public function getLastName()
+    public function getLastNameAttribute()
     {
         $name = explode(" ", $this->name, 2);
 
