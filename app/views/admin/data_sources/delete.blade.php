@@ -6,7 +6,7 @@
             <h1 class="text-center">{{ Lang::get("views/admin/data_sources/delete.heading", array("name" => e($dataSource->name))) }}</h1>
 
             <div class="panel panel-default">
-                {{ Form::model($dataSource, array("route" => array("admin.data-sources.destroy", "id" => $dataSource->id), "method" => "delete", "class" => "form-horizontal", "role" => "form")) }}
+                {{ Form::model($dataSource, array("route" => array("admin.data-sources.destroy", "id" => $dataSource->id), "method" => "delete", "role" => "form")) }}
                     <div class="panel-body">
                         <p>{{ Lang::get("views/admin/data_sources/delete.message", array("name" => e($dataSource->name))) }}</p>
                     </div>
