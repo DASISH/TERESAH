@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Request;
-
 class BaseHelper
 {
     public static function getIpAddress()
