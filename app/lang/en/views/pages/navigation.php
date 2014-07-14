@@ -30,12 +30,16 @@ return array(
             "name" => "Users",
             "title" => "Users",
             "create" => array(
-                "name" => "Create a new user account",
-                "title" => "Create a new user account"
+                "name" => "Create a new User Account",
+                "title" => "Create a new User Account"
+            ),
+            "edit" => array(
+                "name" => "Edit User Account",
+                "title" => "Edit User Account"
             ),
             "index" => array(
-                "name" => "List all users",
-                "title" => "List all users"
+                "name" => "List User Accounts",
+                "title" => "List User Accounts"
             )
         ),
         "switch" => array(

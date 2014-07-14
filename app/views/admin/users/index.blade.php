@@ -2,8 +2,8 @@
 
 @section("content")
     <div class="row">
-        <div class="col-md-12">
-            <h1>{{ Lang::get("views/admin/users/index.heading") }}</h1>
+        <div class="col-sm-12">
+            <h1>{{ Lang::get("views/admin/users/index.heading") }} {{ link_to_route("admin.users.create", Lang::get("views/pages/navigation.admin.users.create.name"), null, array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/pages/navigation.admin.users.create.title"))) }}</h1>
 
             <p>{{ Lang::get("views/admin/users/index.listing_results", array("from" => $users->getFrom(), "to" => $users->getTo(), "total" => $users->getTotal())) }}</p>
 
@@ -18,6 +18,7 @@
                         <th>{{ Lang::get("models/user.attributes.updated_at") }}</th>
                         <th>{{ Lang::get("models/user.attributes.active") }}</th>
                         <th>{{ Lang::get("models/user.attributes.logins") }}</th>
+                        <th>{{ Lang::get("views/admin/users/index.actions.name") }}</th>
                     </tr>
                 </thead>
 
@@ -31,7 +32,7 @@
 
             {{ $users->links() }}
         </div>
-        <!-- /col-md-12 -->
+        <!-- /col-sm-12 -->
     </div>
     <!-- /row -->
 @stop

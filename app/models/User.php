@@ -177,6 +177,36 @@ class User extends Eloquent implements UserInterface
     }
 
     /**
+     * Check if the user is an authenticated user.
+     *
+     * @return boolean
+     */
+    public function isAuthenticatedUser()
+    {
+        return $this->user_level == self::AUTHENTICATED_USER;
+    }
+
+    /**
+     * Check if the user is a collaborator.
+     *
+     * @return boolean
+     */
+    public function isCollaborator()
+    {
+        return $this->user_level == self::COLLABORATOR;
+    }
+
+    /**
+     * Check if the user is a supervisor.
+     *
+     * @return boolean
+     */
+    public function isSupervisor()
+    {
+        return $this->user_level == self::SUPERVISOR;
+    }
+
+    /**
      * Check if the user is an administrator.
      *
      * @return boolean
@@ -186,6 +216,27 @@ class User extends Eloquent implements UserInterface
         return $this->user_level == self::ADMINISTRATOR;
     }
 
+    public function userLevelName()
+    {
+        switch ($this->user_level) {
+            case $this->isAuthenticatedUser():
+                return "authenticated_user";
+                break;
+
+            case $this->isCollaborator():
+                return "collaborator";
+                break;
+
+            case $this->isSupervisor():
+                return "supervisor";
+                break;
+
+            case $this->isAdministrator():
+                return "administrator";
+                break;
+        }
+    }
+
     /**
      * Disables the validation rules for password and 
      * password confirmation. Used mainly when updating
@@ -193,7 +244,7 @@ class User extends Eloquent implements UserInterface
      *
      * @return void
      */
-    private function disablePasswordValidation()
+    public function disablePasswordValidation()
     {
         unset($this->rules["password"]);
         unset($this->rules["password_confirmation"]);

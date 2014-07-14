@@ -11,7 +11,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.users.title") }}">{{ Lang::get("views/pages/navigation.admin.users.name") }}<b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li>{{ link_to_route("admin.users.index", Lang::get("views/pages/navigation.admin.users.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.users.index.title"))) }}</li>
-            <li><a href="#" title="{{ Lang::get("views/pages/navigation.admin.users.create.title") }}">{{ Lang::get("views/pages/navigation.admin.users.create.name") }}</a></li>
+            <li>{{ link_to_route("admin.users.create", Lang::get("views/pages/navigation.admin.users.create.name"), null, array("title" => Lang::get("views/pages/navigation.admin.users.create.title"))) }}</li>
         </ul>
     </li>
 </ul>

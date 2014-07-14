@@ -54,8 +54,16 @@ Route::group(array("prefix" => "admin"), function() {
         )
     ));
 
+    Route::get("users/{id}/delete", array(
+        "as" => "admin.users.delete",
+        "uses" => "Admin\UsersController@delete"
+    ));
+
     Route::resource("users", "Admin\UsersController", array(
-        "only" => array("index")
+        "only" => array(
+            "index", "show", "create", "store",
+            "edit", "update", "destroy"
+        )
     ));
 
     Route::get("/", array(
