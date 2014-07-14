@@ -20,6 +20,5 @@ return array(
     "password_confirmation" => array(
         "label" => "Password confirmation", 
         "placeholder" => "Repeat password"
-    ),
-    "submit" => "Sign up",
+    )
 );

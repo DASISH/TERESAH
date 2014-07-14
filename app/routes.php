@@ -36,8 +36,13 @@ Route::put("profile", array(
     "uses" => "UsersController@update"
 ));
 
+Route::get("signup", array(
+    "as" => "signup.create",
+    "uses" => "SignupController@create"
+));
+
 Route::resource("signup", "SignupController", array(
-    "only" => array("index", "store")
+    "only" => array("store")
 ));
 
 # Routing for the administrative section

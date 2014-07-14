@@ -2,7 +2,7 @@
 
 class SignupController extends BaseController
 {
-    protected $skipAuthentication = array("index", "store");
+    protected $skipAuthentication = array("create", "store");
     protected $user;
 
     public function __construct(Signup $user)
@@ -19,9 +19,9 @@ class SignupController extends BaseController
      * 
      * @return View
      */
-    public function index()
+    public function create()
     {
-        return View::make("signup.index")->withUser($this->user);
+        return View::make("signup.create")->withUser($this->user);
     }
 
     /**
@@ -41,7 +41,7 @@ class SignupController extends BaseController
             return Redirect::route("pages.show", array("path" => "/"))
                 ->with("success", Lang::get("controllers/signup.store.success"));
         } else {
-            return Redirect::route("signup.index")
+            return Redirect::route("signup.create")
                 ->withErrors($user->getErrors())->withInput();
         }
     }
