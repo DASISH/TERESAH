@@ -13,6 +13,14 @@ return array(
         "label" => "Email address", 
         "placeholder" => "Email address"
     ),
+    "password" => array(
+        "label" => "Password", 
+        "placeholder" => "Password"
+    ),
+    "password_confirmation" => array(
+        "label" => "Password confirmation", 
+        "placeholder" => "Repeat password"
+    ),
     "active" => array(
         "label" => "User Account State",
         "name" => "Active"

@@ -24,14 +24,14 @@
             @if ($action == "create")
                 <div class="row">
                     <div class="col-sm-6 form-group">
-                        {{ Form::label("password", Lang::get("views/signup/form.password.label")) }}
-                        {{ Form::password("password", array("class" => "form-control", "placeholder" => Lang::get("views/signup/form.password.placeholder"))) }}
+                        {{ Form::label("password", Lang::get("views/admin/users/form.password.label")) }}
+                        {{ Form::password("password", array("class" => "form-control", "placeholder" => Lang::get("views/admin/users/form.password.placeholder"))) }}
                     </div>
                     <!-- /col-sm-6.form-group -->
 
                     <div class="col-sm-6 form-group">
-                        {{ Form::label("password_confirmation", Lang::get("views/signup/form.password_confirmation.label")) }}
-                        {{ Form::password("password_confirmation", array("class" => "form-control", "placeholder" => Lang::get("views/signup/form.password_confirmation.placeholder"))) }}
+                        {{ Form::label("password_confirmation", Lang::get("views/admin/users/form.password_confirmation.label")) }}
+                        {{ Form::password("password_confirmation", array("class" => "form-control", "placeholder" => Lang::get("views/admin/users/form.password_confirmation.placeholder"))) }}
                     </div>
                     <!-- /col-sm-6.form-group -->
                 </div>
