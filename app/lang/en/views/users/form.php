@@ -11,6 +11,5 @@ return array(
     "email_address" => array(
         "label" => "Email address", 
         "placeholder" => "Email address"
-    ),
-    "submit" => "Update profile",
+    )
 );
