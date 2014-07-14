@@ -50,7 +50,7 @@ Route::group(array("prefix" => "admin"), function() {
     Route::resource("data-sources", "Admin\DataSourcesController", array(
         "only" => array(
             "index", "show", "create", "store",
-            "edit", "update", "delete", "destroy"
+            "edit", "update", "destroy"
         )
     ));
 
