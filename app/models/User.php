@@ -37,8 +37,10 @@ class User extends Eloquent implements UserInterface
         "email_address" => "required|unique:users|email|max:255",
         "password" => "required|confirmed|min:8",
         "password_confirmation" => "required|min:8",
-        "name" => "required|max:255"
+        "name" => "required|max:255",
         # "locale": validation rule specified in boot()
+        "active" => "required|boolean",
+        "user_level" => "required|in:1,2,3,4"
     );
 
     public static function boot()

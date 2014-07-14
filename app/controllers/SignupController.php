@@ -34,6 +34,8 @@ class SignupController extends BaseController
     public function store()
     {
         $user = $this->user->fill(Input::all());
+        $user->active = true;
+        $user->user_level = User::AUTHENTICATED_USER;
 
         if ($user->save()) {
             return Redirect::route("pages.show", array("path" => "/"))
