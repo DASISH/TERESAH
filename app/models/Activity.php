@@ -28,6 +28,40 @@ class Activity extends Eloquent
         return $this->belongsTo("User");
     }
 
+    public function actionName()
+    {
+        switch ($this->action) {
+            case $this->isCreated():
+                return "created";
+                break;
+
+            case $this->isUpdated():
+                return "updated";
+                break;
+
+            case $this->isDeleted():
+                return "deleted";
+                break;
+
+            case $this->isRestored():
+                return "restored";
+                break;
+        }
+    }
+
+    public function existsIn($activities = array())
+    {
+        foreach ($activities as $activity) {
+            if ($activity->target_type == $this->target_type &&
+                $activity->target_id == $this->target_id &&
+                $activity->action == self::DELETED) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function getMetadata()
     {
         return json_decode($this->metadata, true);
@@ -42,6 +76,44 @@ class Activity extends Eloquent
     public function getPreviousNameAttribute()
     {
         return isset($this->getMetadata()["previous_name"]) ? $this->getMetadata()["previous_name"] : null;
+    }
+
+    public function isCreated()
+    {
+        return $this->action == self::CREATED;
+    }
+
+    public function isUpdated()
+    {
+        return $this->action == self::UPDATED;
+    }
+
+    public function isDeleted()
+    {
+        return $this->action == self::DELETED;
+    }
+
+    public function isRestored()
+    {
+        return $this->action == self::RESTORED;
+    }
+
+    public static function deletedActivities()
+    {
+        $table = "activities";
+        $joinTable = "joined_activities";
+
+        return self::select(
+                "{$table}.target_type", "{$table}.target_id", 
+                "{$table}.action", "{$table}.created_at"
+            )->leftJoin("{$table} as {$joinTable}", function($join) use ($table, $joinTable) {
+                $join->on("{$table}.target_type", "=", "{$joinTable}.target_type")
+                     ->on("{$table}.target_id", "=", "{$joinTable}.target_id")
+                     ->on("{$table}.created_at", "<", "{$joinTable}.created_at");
+            })
+            ->whereIn("{$table}.action", array(self::DELETED, self::RESTORED))
+            ->whereNull("{$joinTable}.created_at")
+            ->get();
     }
 
     public static function log($model, $action)

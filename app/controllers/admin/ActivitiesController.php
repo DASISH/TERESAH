@@ -23,8 +23,12 @@ class ActivitiesController extends AdminController
      */
     public function index()
     {
-        $activities = $this->activity->with("user")->orderBy("created_at", "DESC")->paginate(20);
+        $activities = $this->activity->with("user")
+            ->orderBy("id", "DESC")
+            ->orderBy("created_at", "DESC")
+            ->paginate(20);
+        $deletedActivities = $this->activity->deletedActivities();
 
-        return View::make("admin.activities.index", compact("activities"));
+        return View::make("admin.activities.index", compact("activities", "deletedActivities"));
     }
 }

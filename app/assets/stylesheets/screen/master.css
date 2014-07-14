@@ -76,6 +76,12 @@ a:visited:hover {
     font-size: 15px;
 }
 
+#content .information {
+    color: #aaa;
+    display: block;
+    font-size: 12px;
+}
+
 #content dl dt {
     margin-top: 10px;
 }
