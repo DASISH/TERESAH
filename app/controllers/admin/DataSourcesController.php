@@ -1,7 +1,6 @@
 <?php namespace Admin;
 
 use DataSource;
-use User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
@@ -13,12 +12,12 @@ class DataSourcesController extends AdminController
     protected $dataSource;
     protected $user;
 
-    public function __construct(DataSource $dataSource, User $user)
+    public function __construct(DataSource $dataSource)
     {
         parent::__construct();
 
         $this->dataSource = $dataSource;
-        $this->user = $user;
+        $this->user = Auth::user();
     }
 
     /**
@@ -70,10 +69,9 @@ class DataSourcesController extends AdminController
      */
     public function store()
     {
-        $user = Auth::user();
         $dataSource = $this->dataSource->fill(Input::all());
 
-        if ($user->dataSources()->save($dataSource)) {
+        if ($this->user->dataSources()->save($dataSource)) {
             return Redirect::route("admin.data-sources.index")
                 ->with("success", Lang::get("controllers/admin/data_sources.store.success"));
         } else {
