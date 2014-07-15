@@ -134,6 +134,7 @@ return array(
         "Illuminate\Workbench\WorkbenchServiceProvider",
         "Barryvdh\Debugbar\ServiceProvider",
         "Codesleeve\AssetPipeline\AssetPipelineServiceProvider",
+        "Watson\Active\ActiveServiceProvider",
     ),
 
     /*
@@ -161,6 +162,7 @@ return array(
     */
 
     "aliases" => array(
+        "Active"          => "Watson\Active\Facades\Active",
         "App"             => "Illuminate\Support\Facades\App",
         "Artisan"         => "Illuminate\Support\Facades\Artisan",
         "Auth"            => "Illuminate\Support\Facades\Auth",
