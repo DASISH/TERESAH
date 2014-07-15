@@ -8,6 +8,13 @@
         </ul>
     </li>
     <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.tools.title") }}">{{ Lang::get("views/pages/navigation.admin.tools.name") }}<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li>{{ link_to_route("admin.tools.index", Lang::get("views/pages/navigation.admin.tools.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.tools.index.title"))) }}</li>
+            <li>{{ link_to_route("admin.tools.create", Lang::get("views/pages/navigation.admin.tools.create.name"), null, array("title" => Lang::get("views/pages/navigation.admin.tools.create.title"))) }}</li>
+        </ul>
+    </li>
+    <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.users.title") }}">{{ Lang::get("views/pages/navigation.admin.users.name") }}<b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li>{{ link_to_route("admin.users.index", Lang::get("views/pages/navigation.admin.users.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.users.index.title"))) }}</li>

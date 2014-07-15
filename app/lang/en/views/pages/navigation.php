@@ -26,6 +26,22 @@ return array(
                 "title" => "List Data Sources"
             )
         ),
+        "tools" => array(
+            "name" => "Tools",
+            "title" => "Tools",
+            "create" => array(
+                "name" => "Add a Tool",
+                "title" => "Add a Tool"
+            ),
+            "edit" => array(
+                "name" => "Edit Tool",
+                "title" => "Edit Tool"
+            ),
+            "index" => array(
+                "name" => "List Tools",
+                "title" => "List Tools"
+            )
+        ),
         "users" => array(
             "name" => "Users",
             "title" => "Users",
