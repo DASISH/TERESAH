@@ -11,6 +11,7 @@
 // The available directives right now are require, require_directory, and require_tree
 //
 //= require jquery
+//= require jquery.autosize
 //= require bootstrap
 //= require jqcloud
 //= require_tree .
