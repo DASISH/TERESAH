@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery.autosize
 //= require bootstrap
+//= require editable
 //= require jqcloud
 //= require_tree .

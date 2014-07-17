@@ -10,6 +10,7 @@
  * but before any files alphabetically greater than 'application.css' 
  *
  *= require bootstrap
+ *= require editable
  *= require font-awesome
  *= require fontello
  *= require jqcloud
