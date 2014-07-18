@@ -120,20 +120,6 @@ class UsersController extends AdminController
     }
 
     /**
-     * Show the confirmation form for deleting a User Account.
-     *
-     * GET /admin/users/{id}/delete
-     *
-     * @param  int $id
-     * @return View
-     */
-    public function delete($id)
-    {
-        return View::make("admin.users.delete")
-            ->with("user", $this->user->find($id));
-    }
-
-    /**
      * Remove the specified User Account from storage.
      *
      * DELETE /admin/users/{id}

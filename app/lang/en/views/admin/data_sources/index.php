@@ -15,7 +15,8 @@ return array(
         ),
         "delete" => array(
             "name" => "Delete",
-            "title" => "Delete Data Source"
+            "title" => "Delete Data Source",
+            "confirm" => "Are you sure you want to delete the Data Source \":name\"?"
         )
     )
 );

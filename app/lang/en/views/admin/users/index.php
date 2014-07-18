@@ -15,7 +15,8 @@ return array(
         ),
         "delete" => array(
             "name" => "Delete",
-            "title" => "Delete User"
+            "title" => "Delete User",
+            "confirm" => "Are you sure you want to delete the User Account \":name\"?"
         )
     )
 );

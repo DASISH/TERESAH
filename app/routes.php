@@ -46,46 +46,14 @@ Route::resource("signup", "SignupController", array(
 ));
 
 # Routing for the administrative section
-Route::group(array("prefix" => "admin"), function() {
-    Route::get("data-sources/{id}/delete", array(
-        "as" => "admin.data-sources.delete",
-        "uses" => "Admin\DataSourcesController@delete"
-    ));
-
-    Route::resource("data-sources", "Admin\DataSourcesController", array(
-        "only" => array(
-            "index", "show", "create", "store",
-            "edit", "update", "destroy"
-        )
-    ));
-
-    Route::get("tools/{id}/delete", array(
-        "as" => "admin.tools.delete",
-        "uses" => "Admin\ToolsController@delete"
-    ));
-
-    Route::resource("tools", "Admin\ToolsController", array(
-        "only" => array(
-            "index", "show", "create", "store",
-            "edit", "update", "destroy"
-        )
-    ));
-
-    Route::get("users/{id}/delete", array(
-        "as" => "admin.users.delete",
-        "uses" => "Admin\UsersController@delete"
-    ));
-
-    Route::resource("users", "Admin\UsersController", array(
-        "only" => array(
-            "index", "show", "create", "store",
-            "edit", "update", "destroy"
-        )
-    ));
+Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
+    Route::resource("data-sources", "DataSourcesController");
+    Route::resource("tools", "ToolsController");
+    Route::resource("users", "UsersController");
 
     Route::get("/", array(
         "as" => "admin.root",
-        "uses" => "Admin\ActivitiesController@index"
+        "uses" => "ActivitiesController@index"
     ));
 });
 

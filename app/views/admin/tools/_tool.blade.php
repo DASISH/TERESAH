@@ -8,6 +8,6 @@
     <td>
         <a href="{{ URL::route("admin.tools.show", array("id" => $tool->id)) }}" title="{{ Lang::get("views/admin/tools/index.actions.show.title") }}"><span class="glyphicon glyphicon-info-sign"></span></a> 
         <a href="{{ URL::route("admin.tools.edit", array("id" => $tool->id)) }}" title="{{ Lang::get("views/admin/tools/index.actions.edit.title") }}"><span class="glyphicon glyphicon-pencil"></span></a> 
-        <a href="{{ URL::route("admin.tools.delete", array("id" => $tool->id)) }}" title="{{ Lang::get("views/admin/tools/index.actions.delete.title") }}"><span class="glyphicon glyphicon-remove"></span></a>
+        <a href="{{ URL::route("admin.tools.destroy", array("id" => $tool->id)) }}" data-method="delete" data-confirm="{{ e(Lang::get("views/admin/tools/index.actions.delete.confirm", array("name" => $tool->name))) }}" rel="nofollow" title="{{ Lang::get("views/admin/tools/index.actions.delete.title") }}"><span class="glyphicon glyphicon-remove"></span></a>
     </td>
 </tr>

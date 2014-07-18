@@ -119,20 +119,6 @@ class ToolsController extends AdminController
     }
 
     /**
-     * Show the confirmation form for deleting a Tool.
-     *
-     * GET /admin/tools/{id}/delete
-     *
-     * @param  int $id
-     * @return View
-     */
-    public function delete($id)
-    {
-        return View::make("admin.tools.delete")
-            ->with("tool", $this->tool->find($id));
-    }
-
-    /**
      * Remove the specified Tool from storage.
      *
      * DELETE /admin/tools/{id}

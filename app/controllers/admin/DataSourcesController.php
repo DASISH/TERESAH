@@ -116,20 +116,6 @@ class DataSourcesController extends AdminController
     }
 
     /**
-     * Show the confirmation form for deleting a Data Source.
-     *
-     * GET /admin/data-sources/{id}/delete
-     *
-     * @param  int $id
-     * @return View
-     */
-    public function delete($id)
-    {
-        return View::make("admin.data_sources.delete")
-            ->with("dataSource", $this->dataSource->find($id));
-    }
-
-    /**
      * Remove the specified Data Source from storage.
      *
      * DELETE /admin/data-sources/{id}

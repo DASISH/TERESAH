@@ -15,7 +15,8 @@ return array(
         ),
         "delete" => array(
             "name" => "Delete",
-            "title" => "Delete Tool"
+            "title" => "Delete Tool",
+            "confirm" => "Are you sure you want to delete the Tool \":name\"?"
         )
     )
 );
