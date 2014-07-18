@@ -3,27 +3,28 @@
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Watson\Validating\ValidatingTrait;
 
-class DataSource extends Eloquent
+class Data extends Eloquent
 {
     use SoftDeletingTrait;
     use ValidatingTrait;
 
     protected $dates = array("deleted_at");
     protected $fillable = array(
-        "name",
-        "description",
-        "homepage",
-        "user_id"
+        "key",
+        "value"
     );
 
     /**
      * Validation rules for the model
      */
     protected $rules = array(
-        "name" => "required|unique:data_sources|max:255",
-        "description" => "sometimes|max:1024",
-        "homepage" => "sometimes|url",
-        "user_id" => "required|integer"
+        "data_source_id" => "required|integer",
+        "tool_id" => "required|integer",
+        "user_id" => "required|integer",
+        "key" => "required|max:255",
+        # TODO: Review the validation rule for the
+        # value (is 2048 characters too much / enough?)
+        "value" => "required|max:2048"
     );
 
     public static function boot()
@@ -43,29 +44,18 @@ class DataSource extends Eloquent
         return $this->hasMany("Activity");
     }
 
-    public function data()
+    public function dataSource()
     {
-        return $this->hasMany("Data");
+        return $this->belongsTo("DataSource");
     }
 
-    public function tools()
+    public function tool()
     {
-        return $this->belongsToMany("Tool", "tool_data_sources")->withTimestamps();
+        return $this->belongsTo("Tool");
     }
 
     public function user()
     {
         return $this->belongsTo("User");
-    }
-
-    /**
-     * Returns "nicely" formatted version of the homepage 
-     * address.
-     *
-     * @return string
-     */
-    public function getSourceAttribute()
-    {
-        return parse_url($this->homepage)["host"];
     }
 }

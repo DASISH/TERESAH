@@ -38,9 +38,24 @@ class Tool extends Eloquent
         return $this->hasMany("Activity");
     }
 
+    public function data()
+    {
+        return $this->hasMany("Data");
+    }
+
+    public function dataSources()
+    {
+        return $this->belongsToMany("DataSource", "tool_data_sources")->withTimestamps();
+    }
+
     public function user()
     {
         return $this->belongsTo("User");
+    }
+
+    public function getAbbreviation($length = 4)
+    {
+        return substr(preg_replace("~\b(\w)|.~", "$1", $this->name), 0, $length);
     }
 
     public static function generateSlug($string, $replace = array("'"), $delimiter = "-")
