@@ -39,15 +39,14 @@ class DataSourcesController extends AdminController
     {
         $this->tool = $this->tool->find($toolId);
         $this->getDataSources();
-        $this->dataSource = $this->dataSource->first();
+        $this->dataSource = $this->dataSources->first();
 
         # Share the view with the show action
         return View::make("admin.tools.data_sources.show")
             ->with("tool", $this->tool)
-            ->with("dataSource", $this->dataSource)
             ->with("dataSources", $this->dataSources)
-            ->with("dataToolName", $this->getDataValue("name"))
-            ->with("dataToolDescription", $this->getDataValue("description"));
+            ->with("dataSource", $this->dataSource)
+            ->with("dataSourceData", $this->tool->data()->where("data_source_id", $this->dataSource->id)->get());
     }
 
     /**
@@ -66,10 +65,9 @@ class DataSourcesController extends AdminController
 
         return View::make("admin.tools.data_sources.show")
             ->with("tool", $this->tool)
-            ->with("dataSource", $this->dataSource)
             ->with("dataSources", $this->dataSources)
-            ->with("dataToolName", $this->getDataValue("name"))
-            ->with("dataToolDescription", $this->getDataValue("description"));
+            ->with("dataSource", $this->dataSource)
+            ->with("dataSourceData", $this->tool->data()->where("data_source_id", $this->dataSource->id)->get());
     }
 
     /**

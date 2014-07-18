@@ -58,6 +58,16 @@ class DataSource extends Eloquent
         return $this->belongsTo("User");
     }
 
+    public function getDataValue($key, $toolId)
+    {
+        $data = $this->data()->where("tool_id", $toolId)->lists("value", "key");
+
+        # TODO: Add case-insensitive search for the array key
+        if (array_key_exists($key, $data)) {
+            return $data[$key];
+        }
+    }
+
     /**
      * Returns "nicely" formatted version of the homepage 
      * address.

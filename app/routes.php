@@ -45,6 +45,17 @@ Route::resource("signup", "SignupController", array(
     "only" => array("store")
 ));
 
+Route::resource("tools", "ToolsController", array(
+    "only" => array("index", "show")
+));
+
+# Route grouping for the Tools namespace
+Route::group(array("namespace" => "Tools"), function() {
+    Route::resource("tools.data-sources", "DataSourcesController", array(
+        "only" => array("show")
+    ));
+});
+
 # Routing for the administrative section
 Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
     Route::resource("data-sources", "DataSourcesController");

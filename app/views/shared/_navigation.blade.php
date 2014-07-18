@@ -3,7 +3,7 @@
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.browse.title") }}">{{ Lang::get("views/pages/navigation.browse.name") }}<b class="caret"></b></a>
         <ul class="dropdown-menu">
-            <li><a href="#" title="{{ Lang::get("views/pages/navigation.browse.all.title") }}">{{ Lang::get("views/pages/navigation.browse.all.name") }}</a></li>
+            <li>{{ link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.title"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))) }}</li>
             <li><a href="#" title="{{ Lang::get("views/pages/navigation.browse.facets.title") }}">{{ Lang::get("views/pages/navigation.browse.facets.name") }}</a></li>
         </ul>
     </li>

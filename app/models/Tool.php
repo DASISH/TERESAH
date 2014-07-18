@@ -58,6 +58,16 @@ class Tool extends Eloquent
         return substr(preg_replace("~\b(\w)|.~", "$1", $this->name), 0, $length);
     }
 
+    public function getDataValue($key)
+    {
+        $data = $this->data->lists("value", "key");
+
+        # TODO: Add case-insensitive search for the array key
+        if (array_key_exists($key, $data)) {
+            return $data[$key];
+        }
+    }
+
     public static function generateSlug($string, $replace = array("'"), $delimiter = "-")
     {
         setlocale(LC_ALL, "en_US.UTF8");

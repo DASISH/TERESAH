@@ -118,6 +118,69 @@ a:visited:hover {
     margin-top: 0;
 }
 
+#content .symbol {
+    /* Use CSS3 Flexbox to vertically align the content */
+        -ms-flex-align: center;
+        -moz-box-align: center; /* Old syntax */
+        -webkit-box-align: center; /* Old syntax */
+        -webkit-align-items: center;
+    align-items: center;
+    background-color: #fff;
+        -ms-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -o-border-radius: 50%;
+        -webkit-border-radius: 50%;
+    border: 3px solid #428bca;
+    border-radius: 50%;
+        display: -ms-flexbox; /* Old syntax */
+        display: -ms-flex;
+        display: -moz-box; /* Old syntax */
+        display: -moz-flex;
+        display: -webkit-box; /* Old syntax */
+        display: -webkit-flex;
+    color: #428bca;
+    display: flex;
+    height: 48px;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    width: 48px;
+}
+
+#content .symbol:hover, 
+#content .symbol:visited:hover {
+    background-color: #428bca;
+    color: #fff;
+    text-decoration: none;
+}
+
+#content .symbol abbr {
+    border: none;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+}
+
+#content article header {
+    margin-bottom: 25px;
+}
+
+#content article header .symbol {
+    float: left;
+    margin: 0 15px 0 0;
+}
+
+#content .listing article {
+    border-top: 1px solid #f5f5f5;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#content .listing article:first-child {
+    border: none;
+}
+
 /* Footer
 ---------------------------------------------------------------------------- */
 

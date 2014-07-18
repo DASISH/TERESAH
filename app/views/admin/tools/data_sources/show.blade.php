@@ -1,9 +1,16 @@
 @extends("layouts.admin")
 
 @section("content")
-    <div class="row">
+    <article class="row">
         <div class="col-sm-12">
-            <h1>{{{ $tool->name }}} {{ link_to_route("admin.tools.edit", Lang::get("views/pages/navigation.admin.tools.edit.name"), array("id" => $tool->id), array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/pages/navigation.admin.tools.edit.title"))) }}</h1>
+            <header>
+                <div class="symbol">
+                    <abbr title="{{{ $tool->name }}}">{{{ $tool->getAbbreviation() }}}</abbr>
+                </div>
+                <!-- /symbol -->
+
+                <h1>{{{ $tool->name }}} {{ link_to_route("admin.tools.edit", Lang::get("views/pages/navigation.admin.tools.edit.name"), array("id" => $tool->id), array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/pages/navigation.admin.tools.edit.title"))) }}</h1>
+            </header>
 
             @include("admin.tools._navigation")
 
@@ -14,17 +21,17 @@
 
                         <div class="tab-content">
                             <div class="tab-pane active">
-                                @if (!empty($dataToolName))
+                                @if (!empty($dataToolName = $dataSource->getDataValue("name", $tool->id)))
                                     <h2>{{{ $dataToolName }}}</h2>
 
-                                    @if (!empty($dataToolDescription))
+                                    @if (!empty($dataToolDescription = $dataSource->getDataValue("description", $tool->id)))
                                         <p>{{{ $dataToolDescription }}}</p>
                                     @endif
 
                                     <hr />
                                 @endif
 
-                                @if (!$dataSource->data->isEmpty())
+                                @if (!$dataSourceData->isEmpty())
                                     <h3>{{ Lang::get("views/admin/tools/data_sources/show.heading.available_data") }} {{ link_to_route("admin.tools.data-sources.data.create", Lang::get("views/admin/tools/data_sources/navigation.data.create.name"), array($tool->id, $dataSource->id), array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/admin/tools/data_sources/navigation.data.create.title"))) }}</h3>
 
                                     <table class="table table-bordered table-hover table-striped">
@@ -38,7 +45,7 @@
                                         </thead>
 
                                         <tbody>
-                                            @foreach ($dataSource->data as $data)
+                                            @foreach ($dataSourceData as $data)
                                                 @include("admin.tools.data_sources.data._data", compact("data"))
                                             @endforeach
                                         </tbody>
@@ -66,6 +73,6 @@
             <!-- /tab-content -->
         </div>
         <!-- /col-sm-12 -->
-    </div>
+    </article>
     <!-- /row -->
 @stop
