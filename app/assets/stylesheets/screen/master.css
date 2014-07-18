@@ -82,6 +82,34 @@ a:visited:hover {
     font-size: 12px;
 }
 
+#content .nav.nav-tabs.data-sources a:link, 
+#content .nav.nav-tabs.data-sources a:visited {
+    font-weight: bold;
+    text-align: left;
+}
+
+#content .nav.nav-tabs.data-sources a span.source {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+#content .nav.nav-tabs.data-sources .dropdown-menu a:link, 
+#content .nav.nav-tabs.data-sources .dropdown-menu a:visited {
+    font-weight: normal;
+}
+
+#content .tab-content {
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    padding: 15px;
+}
+
+#content .tab-content .tab-pane .tab-content  {
+    border: none;
+}
+
 #content dl dt {
     margin-top: 10px;
 }

@@ -49,6 +49,21 @@ Route::resource("signup", "SignupController", array(
 Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
     Route::resource("data-sources", "DataSourcesController");
     Route::resource("tools", "ToolsController");
+
+    # Route grouping for the Admin\Tools namespace
+    Route::group(array("namespace" => "Tools"), function() {
+        Route::resource("tools.data-sources", "DataSourcesController", array(
+            "only" => array("index", "show", "create", "store", "destroy")
+        ));
+
+        # Route grouping for the Admin\Tools\DataSources namespace
+        Route::group(array("namespace" => "DataSources"), function() {
+            Route::resource("tools.data-sources.data", "DataController", array(
+                "only" => array("create", "store", "edit", "update", "destroy")
+            ));
+        });
+    });
+
     Route::resource("users", "UsersController");
 
     Route::get("/", array(

@@ -5,8 +5,10 @@
         <div class="col-sm-12">
             <h1>{{{ $tool->name }}} {{ link_to_route("admin.tools.edit", Lang::get("views/pages/navigation.admin.tools.edit.name"), array("id" => $tool->id), array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/pages/navigation.admin.tools.edit.title"))) }}</h1>
 
-            <div class="panel panel-default">
-                <div class="panel-body">
+            @include("admin.tools._navigation")
+
+            <div class="tab-content">
+                <div class="tab-pane active">
                     <dl>
                         <dt>{{ Lang::get("models/tool.attributes.name") }}</dt>
                         <dd>{{{ $tool->name }}}</dd>
@@ -24,9 +26,9 @@
                         <dd>{{{ $tool->updated_at }}}</dd>
                     </dl>
                 </div>
-                <!-- /panel-body -->
+                <!-- /tab-pane.active -->
             </div>
-            <!-- /panel.panel-default -->
+            <!-- /tab-content -->
         </div>
         <!-- /col-sm-12 -->
     </div>
