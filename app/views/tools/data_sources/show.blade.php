@@ -7,7 +7,7 @@
 )))
 
 @section("content")
-    <article class="row">
+    <article class="row" itemscope itemtype="http://schema.org/SoftwareApplication">
         <div class="col-sm-12">
             <header>
                 <div class="symbol">
@@ -15,7 +15,7 @@
                 </div>
                 <!-- /symbol -->
 
-                <h1>{{{ $tool->name }}} <small>{{ Lang::get("views/tools/data_sources/show.on") }}</small></h1>
+                <h1 itemprop="name">{{{ $tool->name }}} <small>{{ Lang::get("views/tools/data_sources/show.on") }}</small></h1>
             </header>
 
             @if (!$dataSources->isEmpty())
