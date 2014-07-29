@@ -23,7 +23,7 @@ class ToolsController extends BaseController
      */
     public function index()
     {
-        $tools = $this->tool->with("data")->orderBy("name", "ASC")->paginate(20);
+        $tools = $this->tool->with("data")->has('data', '>', 0)->orderBy("name", "ASC")->paginate(20);
 
         return View::make("tools.index", compact("tools"));
     }
