@@ -32,7 +32,11 @@ class DataSourcesController extends BaseController
      */
     public function show($toolId, $id)
     {
-        $this->tool = $this->tool->find($toolId);
+        if(is_numeric($toolId)) {
+            $this->tool = $this->tool->find($toolId);
+        } else {
+            $this->tool = $this->tool->where('slug', '=', $toolId)->first();
+        }
         $this->dataSources = $this->tool->dataSources()
             ->orderBy("data_sources.name", "ASC")->get();
         $this->dataSource = $this->tool->dataSources->find($id);
