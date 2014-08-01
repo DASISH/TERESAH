@@ -16,7 +16,7 @@
     <meta name="viewport" content="width = device-width, initial-scale = 1.0" />
 
 <!-- Favicon -->
-    <link href="/assets/favicon.png" rel="icon" type="image/x-icon" />
+    <link href="{{ url('/') }}/assets/favicon.png" rel="icon" type="image/x-icon" />
 
 <!-- Stylesheets -->
     {{ stylesheet_link_tag() }}
