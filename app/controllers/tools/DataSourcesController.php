@@ -26,7 +26,7 @@ class DataSourcesController extends BaseController
      *
      * GET /tools/{toolId}/data-sources/{id}
      *
-     * @param  int $toolId
+     * @param  mixed $toolId
      * @param  int $id
      * @return View
      */

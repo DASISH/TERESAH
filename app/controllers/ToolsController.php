@@ -33,7 +33,7 @@ class ToolsController extends BaseController
      *
      * GET /tools/{id}
      *
-     * @param  int $id
+     * @param  mixed $id
      * @return Redirect
      */
     public function show($id)
