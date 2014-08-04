@@ -33,13 +33,15 @@
                             <hr />
                         @endif
 
-                        @if (!$dataSourceData->isEmpty())
+                        @if (count($dataSourceData))
                             <h3>{{ Lang::get("views/tools/data_sources/show.heading.available_data") }}</h3>
 
                             <dl>  
-                                @foreach ($dataSourceData as $data)
-                                    <dt>{{{ $data->key }}}</dt>
-                                    <dd>{{{ $data->value }}}</dd>
+                                @foreach ($dataSourceData as $key => $values)
+                                    <dt>{{{ $key }}}</dt>
+                                    @foreach ($values as $value)
+                                    <dd>{{{ $value }}}</dd>
+                                    @endforeach
                                 @endforeach
                             </dl>
                         @else

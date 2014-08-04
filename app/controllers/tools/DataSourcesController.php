@@ -41,10 +41,20 @@ class DataSourcesController extends BaseController
             ->orderBy("data_sources.name", "ASC")->get();
         $this->dataSource = $this->tool->dataSources->find($id);
 
+        $data = $this->tool->data()->where("data_source_id", $this->dataSource->id)->get();
+        
+        
+        
+        $dataSourceData = array();
+        foreach($data as $d) {
+            $dataSourceData[$d['key']][] = $d['value'];
+        }
+
+        
         return View::make("tools.data_sources.show")
             ->with("tool", $this->tool)
             ->with("dataSources", $this->dataSources)
             ->with("dataSource", $this->dataSource)
-            ->with("dataSourceData", $this->tool->data()->where("data_source_id", $this->dataSource->id)->get());
+            ->with("dataSourceData", $dataSourceData);
     }
 }
