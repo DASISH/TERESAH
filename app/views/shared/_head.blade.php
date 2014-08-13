@@ -2,8 +2,10 @@
 
 <html dir="ltr" lang="{{ App::getLocale() }}">
 
-<!-- TERESAH {{ Lang::get("views/shared/messages.current_version.message") }} {{ PageHelper::getCurrentCommitId() }} -->
-<!-- Environment: {{ App::environment() }} -->
+@if (PageHelper::showVersionInformation())
+    <!-- TERESAH {{ Lang::get("views/shared/messages.current_version.message") }} {{ PageHelper::getCurrentCommitId() }} -->
+    <!-- Environment: {{ App::environment() }} -->
+@endif
 
 <head>
     <meta charset="utf-8" />

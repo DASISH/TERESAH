@@ -25,4 +25,19 @@ class PageHelper
 
         return "<meta name=\"robots\" content=\"{$content}\" />\n";
     }
+
+    public static function showVersionInformation()
+    {
+        switch (App::environment()) {
+            case "development":
+            case "staging":
+            case "test":
+                return true;
+                break;
+
+            default:
+                return false;
+                break;
+        }
+    }    
 }
