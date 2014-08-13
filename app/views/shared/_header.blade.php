@@ -1,4 +1,6 @@
 <header id="header" class="navbar navbar-inverse navbar-static-top" role="banner">
+    @include("shared._version_information")
+
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

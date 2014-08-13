@@ -1,8 +1,12 @@
 <header id="header" class="navbar navbar-inverse navbar-static-top" role="banner">
-    <div class="message warning">
+    @include("shared._version_information")
+
+    <div class="message warning alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ Lang::get("views/shared/messages.close") }}</span></button>
+
         <p><strong>{{ Lang::get("views/shared/messages.admin.warning.highlight") }}</strong> {{ Lang::get("views/shared/messages.admin.warning.message") }}</p>
     </div>
-    <!-- /message.warning -->
+    <!-- /message.warning.alert-dismissible -->
 
     <div class="container">
         <div class="navbar-header">
