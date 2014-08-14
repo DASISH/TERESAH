@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9cd8e6059a6a5db0a132a5a76b52e6a2",
+    "hash": "124bdedb43458cefb5617ec53222a958",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2122,16 +2122,16 @@
         },
         {
             "name": "watson/active",
-            "version": "1.2.2",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dwightwatson/active.git",
-                "reference": "0eb3812b3511aead6d6a433edfc8311aa86a87c6"
+                "reference": "bb7c081c2b514fac90fbfc511c0813e14de5f846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dwightwatson/active/zipball/0eb3812b3511aead6d6a433edfc8311aa86a87c6",
-                "reference": "0eb3812b3511aead6d6a433edfc8311aa86a87c6",
+                "url": "https://api.github.com/repos/dwightwatson/active/zipball/bb7c081c2b514fac90fbfc511c0813e14de5f846",
+                "reference": "bb7c081c2b514fac90fbfc511c0813e14de5f846",
                 "shasum": ""
             },
             "require": {
@@ -2169,7 +2169,7 @@
                 "laravel",
                 "routing"
             ],
-            "time": "2014-07-10 01:47:16"
+            "time": "2014-07-24 10:29:52"
         },
         {
             "name": "watson/validating",
