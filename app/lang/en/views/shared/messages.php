@@ -9,7 +9,12 @@ return array(
     ),
     "close" => "Close",
     "current_version" => array(
-        "error" => "Error: Unable to retrieve the current commit ID.",
-        "message" => "version (current commit ID):"
+        "commit_id" => array(
+            "error" => "Error: Unable to retrieve the current commit ID.",
+            "message" => "version (current commit ID):"
+        ),
+        "commit_date" => array(
+            "error" => "Error: Unable to retrieve the current commit date."
+        )
     )
 );

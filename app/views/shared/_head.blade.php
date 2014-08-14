@@ -3,7 +3,7 @@
 <html dir="ltr" lang="{{ App::getLocale() }}">
 
 @if (PageHelper::showVersionInformation())
-    <!-- TERESAH {{ Lang::get("views/shared/messages.current_version.message") }} {{ PageHelper::getCurrentCommitId() }} -->
+    <!-- TERESAH {{ Lang::get("views/shared/messages.current_version.commit_id.message") }} {{ PageHelper::getCurrentCommitId() }} ({{ PageHelper::getCurrentCommitDate() }}) -->
     <!-- Environment: {{ App::environment() }} -->
 @endif
 

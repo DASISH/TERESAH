@@ -22,6 +22,11 @@ class BaseHelper
         return Request::server("HTTP_USER_AGENT");
     }
 
+    public static function isFunctionAvailable($function)
+    {
+        return (function_exists($function) && !in_array($function, explode(",", ini_get("disabled_functions"))));
+    }
+
     public static function mapAvailableLocalesForSelect()
     {
         $availableLocales = array(
