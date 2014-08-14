@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "124bdedb43458cefb5617ec53222a958",
+    "hash": "88d66e765556d89dbbb57d22a0845ad0",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2173,16 +2173,16 @@
         },
         {
             "name": "watson/validating",
-            "version": "0.9.2",
+            "version": "0.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dwightwatson/validating.git",
-                "reference": "2c29727b62e0d5a348edc39ff609b47ec2aa3022"
+                "reference": "eb16e6799dd5f47b10381d5d181696e90804e12d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/2c29727b62e0d5a348edc39ff609b47ec2aa3022",
-                "reference": "2c29727b62e0d5a348edc39ff609b47ec2aa3022",
+                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/eb16e6799dd5f47b10381d5d181696e90804e12d",
+                "reference": "eb16e6799dd5f47b10381d5d181696e90804e12d",
                 "shasum": ""
             },
             "require": {
@@ -2218,7 +2218,7 @@
                 "laravel",
                 "validation"
             ],
-            "time": "2014-07-02 07:25:31"
+            "time": "2014-07-20 01:32:25"
         }
     ],
     "packages-dev": [
