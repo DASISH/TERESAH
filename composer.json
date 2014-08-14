@@ -4,7 +4,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "laravel/framework": "4.2.6", 
+        "laravel/framework": "4.2.8", 
         "barryvdh/laravel-debugbar": "1.6.5",
         "codesleeve/asset-pipeline": "dev-master",
         "watson/active": "1.2.2",
