@@ -4,33 +4,32 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bcf8367d61c9eff02dc1dc2eb18f60b7",
+    "hash": "9cd8e6059a6a5db0a132a5a76b52e6a2",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v1.6.5",
+            "version": "v1.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "23e17f9c939d85b3880ed65109040fc5c2b8562f"
+                "reference": "ccf9ababfb2b5ddbf8c3ece2ca3fc9989b11ec0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/23e17f9c939d85b3880ed65109040fc5c2b8562f",
-                "reference": "23e17f9c939d85b3880ed65109040fc5c2b8562f",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/ccf9ababfb2b5ddbf8c3ece2ca3fc9989b11ec0d",
+                "reference": "ccf9ababfb2b5ddbf8c3ece2ca3fc9989b11ec0d",
                 "shasum": ""
             },
             "require": {
-                "illuminate/filesystem": "~4.0",
-                "illuminate/support": "~4.0",
-                "maximebf/debugbar": "1.9.x",
+                "laravel/framework": "~4.0",
+                "maximebf/debugbar": "~1.9",
                 "php": ">=5.3.0",
                 "symfony/finder": "~2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -56,7 +55,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2014-06-24 08:55:57"
+            "time": "2014-08-09 20:41:59"
         },
         {
             "name": "classpreloader/classpreloader",
