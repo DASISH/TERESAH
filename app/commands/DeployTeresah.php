@@ -56,18 +56,6 @@ class DeployTeresah extends Command {
 	}
 
 	/**
-	 * Get the console command arguments.
-	 *
-	 * @return array
-	 */
-	protected function getArguments()
-	{
-		return array(
-			//array('connection', InputArgument::REQUIRED, 'Deploys to staging.'),
-		);
-	}
-
-	/**
 	 * Get the console command options.
 	 *
 	 * @return array

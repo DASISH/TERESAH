@@ -26,7 +26,24 @@ return array(
     |
     */
 
-    "connections" => $_ENV["CONNECTIONS"],
+    "connections" => array(
+        "production" => array(
+            "host"      => $_ENV["CONNECTIONS.production.host"],
+            "username"  => $_ENV["CONNECTIONS.production.username"],
+            "password"  => $_ENV["CONNECTIONS.production.password"],
+            "key"       => $_ENV["CONNECTIONS.production.key"],
+            "keyphrase" => $_ENV["CONNECTIONS.production.keyphrase"],
+            "root"      => $_ENV["CONNECTIONS.production.root"],
+        ),
+        "staging" => array(
+            "host"      => $_ENV["CONNECTIONS.staging.host"],
+            "username"  => $_ENV["CONNECTIONS.staging.username"],
+            "password"  => $_ENV["CONNECTIONS.staging.password"],
+            "key"       => $_ENV["CONNECTIONS.staging.key"],
+            "keyphrase" => $_ENV["CONNECTIONS.staging.keyphrase"],
+            "root"      => $_ENV["CONNECTIONS.staging.root"],
+        ),        
+    ), 
 
     /*
     |--------------------------------------------------------------------------
