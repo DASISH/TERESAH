@@ -64,4 +64,7 @@
         <!-- /col-sm-12 -->
     </article>
     <!-- /row -->
+    
+@include("shared._share")
+
 @stop
