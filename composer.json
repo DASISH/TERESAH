@@ -8,7 +8,8 @@
         "barryvdh/laravel-debugbar": "1.6.7",
         "codesleeve/asset-pipeline": "dev-master",
         "watson/active": "1.2.4",
-        "watson/validating": "0.9.5"
+        "watson/validating": "0.9.5",
+        "easyrdf/easyrdf": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "4.2.0"

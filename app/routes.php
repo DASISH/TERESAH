@@ -45,6 +45,9 @@ Route::resource("signup", "SignupController", array(
     "only" => array("store")
 ));
 
+# Get tool in other formats (eg RDF)
+Route::get("tools/{id}.{format}", "ToolsController@export");
+
 Route::resource("tools", "ToolsController", array(
     "only" => array("index", "show")
 ));
@@ -82,6 +85,9 @@ Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
         "uses" => "ActivitiesController@index"
     ));
 });
+
+
+
 
 # Catch all route for the static pages
 Route::get("{path?}", array(
