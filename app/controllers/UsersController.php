@@ -32,7 +32,13 @@ class UsersController extends BaseController
      */
     public function update()
     {
-        $user = $this->user->fill(Input::all());
+        if(empty(Input::get("password"))){
+            $user = $this->user->fill(Input::except("password", "password_confirmation"));
+        }
+        else{
+            $user = $this->user->fill(Input::all());
+        }
+        
 
         if ($user->save()) {
             return Redirect::route("users.edit")
