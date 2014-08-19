@@ -38,7 +38,12 @@ a:visited:hover {
 
 #header .message {
     padding: 15px;
+    position: relative;
     text-align: center;
+}
+
+#header .message.alert-dismissible {
+    padding-right: 35px;
 }
 
 #header .message.info {
