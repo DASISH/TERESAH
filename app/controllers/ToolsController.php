@@ -67,7 +67,7 @@ class ToolsController extends BaseController {
         } else {
             $this->tool = $this->tool->where("slug", "=", $id)->first();
         }
-        $this->dataSource = $this->tool->dataSources()
+        $this->dataSources = $this->tool->dataSources()
                         ->orderBy("data_sources.name", "ASC")->get();
 
         if (in_array(strtolower($format), EasyRdf_Format::getFormats())) {
@@ -77,16 +77,25 @@ class ToolsController extends BaseController {
             $t = $graph->resource($uri, "http://schema.org/SoftwareApplication");
             $t->set("dc:title", $this->tool->name);
 
+            foreach ($this->tool->dataSources as $data_source) {
+
+                $data = $this->tool->data()->where("data_source_id", $data_source->id)->get();
+                foreach ($data as $d) {
+                    $t->add("dc:".$d["key"], $d["key"] . ":" . $d["value"]);
+                }
+            }
+
             $contents = $graph->serialise($format);
 
             $statusCode = 200;
         } else {
-            $contents = $format." is not suported";
+            $contents = $format . " is not suported. \nSuported formats: ".
+                    implode(", ", EasyRdf_Format::getFormats());
             $statusCode = 400;
         }
         $response = Response::make($contents, $statusCode);
-        
-        switch($format) {
+
+        switch ($format) {
             case "rdfxml":
                 $response->header("Content-Type", "text/xml");
                 break;
@@ -102,7 +111,7 @@ class ToolsController extends BaseController {
             default:
                 $response->header("Content-Type", "text/plain");
         }
-        
+
         return $response;
     }
 
