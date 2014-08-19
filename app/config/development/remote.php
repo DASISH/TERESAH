@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    "default" => "production",
+    "default" => "staging",
 
     /*
     |--------------------------------------------------------------------------
@@ -27,15 +27,15 @@ return array(
     */
 
     "connections" => array(
-        "production" => array(
-            "host"      => "",
-            "username"  => "",
-            "password"  => "",
-            "key"       => "",
-            "keyphrase" => "",
-            "root"      => "/var/www",
-        ),
-    ),
+        "staging" => array(
+            "host"      => $_ENV["DEPLOY_SERVERS.staging.host"],
+            "username"  => $_ENV["DEPLOY_SERVERS.staging.username"],
+            "password"  => $_ENV["DEPLOY_SERVERS.staging.password"],
+            "key"       => $_ENV["DEPLOY_SERVERS.staging.key"],
+            "keyphrase" => $_ENV["DEPLOY_SERVERS.staging.keyphrase"],
+            "root"      => $_ENV["DEPLOY_SERVERS.staging.root"],
+        )
+    ), 
 
     /*
     |--------------------------------------------------------------------------
@@ -49,6 +49,6 @@ return array(
     */
 
     "groups" => array(
-        "web" => array("production")
+        "web" => array("staging", "production")
     ),
 );

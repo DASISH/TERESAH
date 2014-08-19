@@ -11,4 +11,4 @@
 |
 */
 
-Artisan::add(new DeployTeresah);
+Artisan::add(new Deploy);
