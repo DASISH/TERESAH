@@ -62,16 +62,17 @@
             @endif
         </div>
         <!-- /col-sm-12 -->
-        <div class="col-sm-12">
-            <p>
-                <a href="{{ URL::to("/tools/" . $tool->slug . ".rdfxml") }}" class="btn btn-default btn-sm" role="button">RDF/XML</a>
-                <a href="{{ URL::to("/tools/" . $tool->slug . ".turtle") }}" class="btn btn-default btn-sm" role="button">RDF/Turtle</a>
-                <a href="{{ URL::to("/tools/" . $tool->slug . ".jsonld") }}" class="btn btn-default btn-sm" role="button">RDF/JsonLD</a>
-            </p>
-        </div>
+
     </article>
     <!-- /row -->
-    
+
+    <div class="col-sm-6">
+        <p>
+            <a href="{{ URL::to("/tools/" . $tool->slug . ".rdfxml") }}" class="btn btn-default btn-sm" role="button">RDF/XML</a>
+            <a href="{{ URL::to("/tools/" . $tool->slug . ".turtle") }}" class="btn btn-default btn-sm" role="button">RDF/Turtle</a>
+            <a href="{{ URL::to("/tools/" . $tool->slug . ".jsonld") }}" class="btn btn-default btn-sm" role="button">RDF/JsonLD</a>
+        </p>
+    </div>
 @include("shared._share")
 
 @stop
