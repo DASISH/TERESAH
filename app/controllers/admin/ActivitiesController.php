@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\View;
 
 class ActivitiesController extends AdminController
 {
+    protected $accessControlList = array(
+        "administrator" => array("*"),
+        "supervisor" => array("index")
+    );
+
     protected $activity;
 
     public function __construct(Activity $activity)

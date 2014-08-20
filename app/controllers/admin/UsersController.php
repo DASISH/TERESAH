@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\View;
 
 class UsersController extends AdminController
 {
+    protected $accessControlList = array(
+        "administrator" => array("*")
+    );
+
     protected $user;
 
     public function __construct(User $user)

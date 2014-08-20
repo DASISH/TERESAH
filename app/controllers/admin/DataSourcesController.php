@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\View;
 
 class DataSourcesController extends AdminController
 {
+    protected $accessControlList = array(
+        "administrator" => array("*")
+    );
+
     protected $dataSource;
     protected $user;
 
