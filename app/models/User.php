@@ -280,4 +280,15 @@ class User extends Eloquent implements UserInterface
             unset($this->password_confirmation);
         }
     }
+    
+    public static function getUserByEmail($email_address)
+    {
+        $users = User::where("email_address", "=", $email_address)->take(1)->get();
+        if(count($users) == 0)
+        {
+            return null;
+        } else {
+            return $users[0];
+        }
+    }
 }

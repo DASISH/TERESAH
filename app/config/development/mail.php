@@ -28,7 +28,7 @@ return array(
     |
     */
 
-    "host" => "localhost",
+    "host" => "smtp.gu.se",
 
     /*
     |--------------------------------------------------------------------------
@@ -80,5 +80,5 @@ return array(
     |
     */
 
-    "pretend" => true,
+    "pretend" => false,
 );

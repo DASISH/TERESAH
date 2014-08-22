@@ -45,6 +45,31 @@ Route::resource("signup", "SignupController", array(
     "only" => array("store")
 ));
 
+Route::get("reset-password", array(
+    "as" => "signup.reset",
+    "uses" => "SignupController@resetPassword"
+));
+
+Route::post("reset-password", array(
+    "as" => "signup.resetSend",
+    "uses" => "SignupController@resetPasswordSendToken"
+));
+
+Route::get("reset-password/{id}/{token}", array(
+    "as" => "signup.resetValidate",
+    "uses" => "SignupController@resetPasswordValidateToken"
+));
+
+Route::get("reset-password/update", array(
+    "as" => "signup.reset.form",
+    "uses" => "SignupController@resetPasswordForm"
+));
+
+Route::put("reset-password/update", array(
+    "as" => "signup.reset.store",
+    "uses" => "SignupController@resetPasswordStore"
+));
+
 # Get tool in other formats (eg RDF)
 Route::get("tools/{id}.{format}", "ToolsController@export");
 

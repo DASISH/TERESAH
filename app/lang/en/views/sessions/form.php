@@ -10,6 +10,10 @@ return array(
         "placeholder" => "Password"
     ),
     "submit" => "Sign in",
+    "forgot_password" => array(
+        "name" => "Forgot password",
+        "title" => "Forgot password"
+    ),
     "sign_up" => array(
         "not_a_user" => "Not a user?",
         "name" => "Sign up",
