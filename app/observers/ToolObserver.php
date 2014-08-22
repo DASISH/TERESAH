@@ -4,6 +4,6 @@ class ToolObserver
 {
     public function saving($tool)
     {
-        $tool->slug = Tool::generateSlug($tool->name);
+        $tool->slug = BaseHelper::generateSlug($tool->name);
     }
 }

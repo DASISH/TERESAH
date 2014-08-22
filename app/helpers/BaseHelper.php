@@ -2,6 +2,22 @@
 
 class BaseHelper
 {
+    public static function generateSlug($string, $replace = array("'"), $delimiter = "-")
+    {
+        setlocale(LC_ALL, "en_US.UTF8");
+
+        if (!empty($replace)) {
+            $string = str_replace((array)$replace, " ", $string);
+        }
+
+        $slug = iconv("UTF-8", "ASCII//TRANSLIT", $string);
+        $slug = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", "", $slug);
+        $slug = strtolower(trim($slug, "-"));
+        $slug = preg_replace("/[\/_|+ -]+/", $delimiter, $slug);
+
+        return $slug;
+    }
+
     public static function getIpAddress()
     {
         if (!empty(Request::getClientIp())) {
