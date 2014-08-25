@@ -14,6 +14,9 @@
 
             @include("shared._error_messages")
         </div>
+        <div>
+            {{ $alphaList }}
+        </div>
         <!-- /col-sm-12 -->
     </div>
     <!-- /row -->

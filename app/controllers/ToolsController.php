@@ -21,9 +21,10 @@ class ToolsController extends BaseController {
      * @return View
      */
     public function index() {
-        $tools = $this->tool->with("data")->has('data', '>', 0)->orderBy("name", "ASC")->paginate(20);
+        $tools = $this->tool->has('data', '>', 0)->orderBy("name", "ASC")->paginate(20);
 
-        return View::make("tools.index", compact("tools"));
+        return View::make("tools.index", compact("tools"))
+                ->with("alphaList", $this->listByAlphabet());
     }
 
     /**
@@ -52,6 +53,34 @@ class ToolsController extends BaseController {
         }
     }
 
+    /**
+     * Lists all tools starting with a specified caracter
+     * 
+     * @param char $startsWith the caracter the name of the tool start with
+     * @return view
+     */
+    public function byAlphabet($startsWith) {
+        $tools = $this->tool
+                ->has('data', '>', 0)
+                ->where("name", "LIKE" ,"$startsWith%")
+                ->orderBy("name", "ASC")->paginate(20);
+
+        return View::make("tools.index", compact("tools"))
+                ->with("alphaList", $this->listByAlphabet());        
+    }
+    
+    /**
+     * Generates a list with unique first caracters for all tools
+     * @return View
+     */
+    public function listByAlphabet() {
+        $caracters = $this->tool->select(DB::raw("LEFT(UCASE(name), 1) AS caracter"))->has('data', '>', 0)
+                      ->groupBy(DB::raw("caracter"))
+                      ->orderBy("name", "ASC")->get();
+        return View::make("tools._by_alphabet", compact("caracters"));
+    }
+    
+    
     /**
      * Exports a tool to other formats
      * 
