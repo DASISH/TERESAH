@@ -130,7 +130,7 @@ class SignupController extends BaseController
                     ->withErrors(Lang::get("views/signup/reset.invalid_token"));
         } else {
             Auth::login($user);
-            return Redirect::route("signup.reset.form");
+            return Redirect::route("signup.resetForm");
         }
     }
     
@@ -143,7 +143,7 @@ class SignupController extends BaseController
      */
     public function resetPasswordForm()
     {
-        return View::make("signup.reset_update")->withUser($this->user);;
+        return View::make("signup.reset_update")->withUser($this->user);
     }
     
     /**
@@ -161,7 +161,7 @@ class SignupController extends BaseController
             return Redirect::route("pages.show", array("path" => "/"))
                 ->with("success", Lang::get("views/signup/reset.password_updated"));
         } else {
-            return Redirect::route("reset-password/update")
+            return Redirect::route("signup.resetForm")
                 ->withErrors($user->getErrors())->withInput();
         }
     }

@@ -61,12 +61,12 @@ Route::get("reset-password/{id}/{token}", array(
 ));
 
 Route::get("reset-password/update", array(
-    "as" => "signup.reset.form",
+    "as" => "signup.resetForm",
     "uses" => "SignupController@resetPasswordForm"
 ));
 
 Route::put("reset-password/update", array(
-    "as" => "signup.reset.store",
+    "as" => "signup.resetStore",
     "uses" => "SignupController@resetPasswordStore"
 ));
 

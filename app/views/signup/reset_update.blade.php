@@ -9,7 +9,7 @@
             @include("signup._reset_update_form", array(
                 $action = "reset-update",
                 $options = array(
-                  "route" => "signup.reset.store",
+                  "route" => "signup.resetStore",
                   "method" => "put",
                   "role" => "form"
                 )
