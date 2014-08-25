@@ -15,4 +15,6 @@
 //= require bootstrap
 //= require editable
 //= require jqcloud
+//= require typeahead.jquery
+//= require bloodhound
 //= require_tree .
