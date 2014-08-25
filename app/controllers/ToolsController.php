@@ -2,7 +2,7 @@
 
 class ToolsController extends BaseController {
 
-    protected $skipAuthentication = array("index", "show", "export");
+    protected $skipAuthentication = array("index", "show", "export", "byAlphabet", "listByAlphabet");
     protected $tool;
     protected $dataSource;
 
@@ -76,7 +76,8 @@ class ToolsController extends BaseController {
     public function listByAlphabet() {
         $caracters = $this->tool->select(DB::raw("LEFT(UCASE(name), 1) AS caracter"))->has('data', '>', 0)
                       ->groupBy(DB::raw("caracter"))
-                      ->orderBy("name", "ASC")->get();
+                      ->orderBy("name", "ASC")->lists('caracter');
+        
         return View::make("tools._by_alphabet", compact("caracters"));
     }
     
