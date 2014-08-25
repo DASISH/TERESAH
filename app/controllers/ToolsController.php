@@ -61,7 +61,7 @@ class ToolsController extends BaseController {
      */
     public function byAlphabet($startsWith) {
         $tools = $this->tool
-                ->has('data', '>', 0)
+                ->has("data", ">", 0)
                 ->where("name", "LIKE" ,"$startsWith%")
                 ->orderBy("name", "ASC")->paginate(20);
 
@@ -89,7 +89,8 @@ class ToolsController extends BaseController {
      */
     public function quicksearch($query) {
         return $this->tool
-                ->has('data', '>', 0)
+                ->select("name", "slug")
+                ->has("data", ">", 0)
                 ->where("name", "LIKE" ,"%$query%")
                 ->orderBy("name", "ASC")->get();        
     }
