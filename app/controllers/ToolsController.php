@@ -2,7 +2,7 @@
 
 class ToolsController extends BaseController {
 
-    protected $skipAuthentication = array("index", "show", "export", "byAlphabet", "listByAlphabet");
+    protected $skipAuthentication = array("index", "show", "export", "byAlphabet", "listByAlphabet", "quicksearch");
     protected $tool;
     protected $dataSource;
 
@@ -79,6 +79,19 @@ class ToolsController extends BaseController {
                       ->orderBy("name", "ASC")->lists('caracter');
         
         return View::make("tools._by_alphabet", compact("caracters"));
+    }
+    
+    /**
+     * Search tool name for quicksearch
+     * 
+     * @param type $query string to match in tool name
+     * @return Array
+     */
+    public function quicksearch($query) {
+        return $this->tool
+                ->has('data', '>', 0)
+                ->where("name", "LIKE" ,"%$query%")
+                ->orderBy("name", "ASC")->get();        
     }
     
     

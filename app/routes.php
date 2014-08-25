@@ -76,6 +76,9 @@ Route::get("tools/{id}.{format}", "ToolsController@export");
 #Browse by alphabet
 Route::get("tools/by-alphabets/{caracter}", "ToolsController@byAlphabet");
 
+#Quicksearch
+Route::get("tools/quicksearch/{query}", "ToolsController@quicksearch");
+
 Route::resource("tools", "ToolsController", array(
     "only" => array("index", "show")
 ));
@@ -84,7 +87,7 @@ Route::resource("tools", "ToolsController", array(
 Route::group(array("namespace" => "Tools"), function() {
     Route::resource("tools.data-sources", "DataSourcesController", array(
         "only" => array("show")
-    ));
+    ));   
 });
 
 # Routing for the administrative section

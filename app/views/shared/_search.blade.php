@@ -1,6 +1,6 @@
 <form class="navbar-form navbar-right hidden-sm">
     <div class="form-group">
-        <input type="text" placeholder="{{ Lang::get("views/pages/navigation.search.placeholder") }}" name="quicksearch" class="form-control input-sm" disabled>
+        <input type="text" id="quicksearch" placeholder="{{ Lang::get("views/pages/navigation.search.placeholder") }}" name="quicksearch" class="form-control input-sm typeahead">
     </div>
     <!-- /form-group -->
 
