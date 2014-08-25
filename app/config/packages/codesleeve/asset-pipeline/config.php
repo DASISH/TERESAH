@@ -51,7 +51,8 @@ return array(
         "provider/assets/fonts",
         "provider/assets/javascripts",
         "provider/assets/stylesheets",
-        "provider/assets/images"
+        "provider/assets/images",
+        "vendor/twitter/typeahead.js/dist"
     ),
 
     /*
