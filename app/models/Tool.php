@@ -10,7 +10,8 @@ class Tool extends Eloquent
 
     protected $dates = array("deleted_at");
     protected $fillable = array("name", "user_id");
-
+    protected $appends = array("url");
+    
     /**
      * Validation rules for the model
      */
@@ -47,7 +48,7 @@ class Tool extends Eloquent
     {
         return $this->belongsToMany("DataSource", "tool_data_sources")->withTimestamps();
     }
-
+    
     public function user()
     {
         return $this->belongsTo("User");
@@ -66,5 +67,10 @@ class Tool extends Eloquent
         if (array_key_exists($key, $data)) {
             return $data[$key];
         }
+    }
+
+    public function getUrlAttribute()
+    {
+        return URL::to("/tools/" . $this->slug);
     }
 }
