@@ -53,6 +53,10 @@ class ToolsController extends BaseController {
         }
     }
 
+    public function byFacet($type, $value) {
+        
+    }
+    
     /**
      * Lists all tools starting with a specified caracter
      * 
