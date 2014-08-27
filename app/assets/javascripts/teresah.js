@@ -37,6 +37,7 @@ $(document).ready(function() {
         }
     });
 
+    //set up quicksearch
     var tools = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -46,7 +47,7 @@ $(document).ready(function() {
     tools.initialize();
 
     $('#quicksearch').typeahead(null, {
-        name: 'best-pictures',
+        name: 'Tools',
         displayKey: 'name',
         source: tools.ttAdapter(),
         templates: {
@@ -56,8 +57,10 @@ $(document).ready(function() {
                 '</div>'
             ].join('\n'),
             suggestion: function(data) {
-                return '<p><a href="/tools/' + data.slug + '"><strong>' + data.name + '</strong></a></p>';
+                return '<p><a href="' + data.url + '"><strong>' + data.name + '</strong></a></p>';
             }
         }
-    });
+        }).on('typeahead:selected', function (obj, datum) {
+            window.location.href = datum.url;
+        });
 });
