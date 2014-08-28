@@ -55,7 +55,7 @@ Route::post("request-password", array(
     "uses" => "PasswordResetController@send"
 ));
 
-Route::get("request-password/{id}/{token}", array(
+Route::get("request-password/{token}", array(
     "as" => "request-password.validate",
     "uses" => "PasswordResetController@validate"
 ));

@@ -182,6 +182,48 @@ class User extends Eloquent implements UserInterface
     }
 
     /**
+     * Get the token value for password reset.
+     *
+     * @return string
+     */
+    public function getPasswordResetToken()
+    {
+        return $this->password_reset_token;
+    }
+
+    /**
+     * Set the token value for password reset.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setPasswordResetToken($value)
+    {
+        $this->password_reset_token = $value;
+    }
+    
+    /**
+     * Get the token value for password reset.
+     *
+     * @return string
+     */
+    public function getPasswordResetSentAt()
+    {
+        return $this->password_reset_token;
+    }
+
+    /**
+     * Set the token value for password reset.
+     *
+     * @param  timestamp  $value
+     * @return void
+     */
+    public function setPasswordResetSentAt($value)
+    {
+        $this->password_reset_sent_at = $value;
+    }
+    
+    /**
      * Check if the user is an authenticated user.
      *
      * @return boolean
@@ -288,6 +330,18 @@ class User extends Eloquent implements UserInterface
         {
             return null;
         } else {
+            return $users[0];
+        }
+    }
+    
+    public static function getUserByResetToken($token)
+    {
+        $users = User::where("password_reset_token", "=", $token)->take(1)->get();
+        if(count($users) == 0) {
+            return null;
+        } else if(time() - strtotime($users[0]->password_reset_sent_at) > 604800) {
+            return null; //Check so token is not older than a week 
+        } else {            
             return $users[0];
         }
     }
