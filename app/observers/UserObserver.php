@@ -7,7 +7,7 @@ class UserObserver
         $locale = App::getLocale();
 
         # TODO: Use queue when sending e-mail messages
-        Mail::send("mailers.signup.welcome_{$locale}", 
+        Mail::send(array("text" => "mailers.signup.welcome_{$locale}"), 
             array("user" => $user), function($message) use ($user) {
             $message->to($user->email_address, $user->name);
             $message->subject("[TERESAH] ".Lang::get("mailers/signup.welcome.subject"));

@@ -71,7 +71,7 @@ class PasswordResetController extends BaseController {
                 $locale = App::getLocale();
 
                 # TODO: Use queue when sending e-mail messages
-                Mail::send("mailers.password-reset.request_{$locale}", 
+                Mail::send(array("text"=> "mailers.password-reset.request_{$locale}"), 
                     array("url" => $url, "user" => $user), function($message) use ($user) {
                     $message->to($user->email_address, $user->name);
                     $message->subject("[TERESAH] ".Lang::get("mailers/password-reset.request.subject"));
