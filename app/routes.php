@@ -45,29 +45,29 @@ Route::resource("signup", "SignupController", array(
     "only" => array("store")
 ));
 
+Route::get("request-password", array(
+    "as" => "request-password.request",
+    "uses" => "PasswordResetController@request"
+));
+
+Route::post("request-password", array(
+    "as" => "request-password.send",
+    "uses" => "PasswordResetController@send"
+));
+
+Route::get("request-password/{id}/{token}", array(
+    "as" => "request-password.validate",
+    "uses" => "PasswordResetController@validate"
+));
+
 Route::get("reset-password", array(
-    "as" => "signup.reset",
-    "uses" => "SignupController@resetPassword"
+    "as" => "reset-password.reset",
+    "uses" => "PasswordResetController@reset"
 ));
 
-Route::post("reset-password", array(
-    "as" => "signup.resetSend",
-    "uses" => "SignupController@resetPasswordSendToken"
-));
-
-Route::get("reset-password/{id}/{token}", array(
-    "as" => "signup.resetValidate",
-    "uses" => "SignupController@resetPasswordValidateToken"
-));
-
-Route::get("reset-password/update", array(
-    "as" => "signup.resetForm",
-    "uses" => "SignupController@resetPasswordForm"
-));
-
-Route::put("reset-password/update", array(
-    "as" => "signup.resetStore",
-    "uses" => "SignupController@resetPasswordStore"
+Route::put("reset-password", array(
+    "as" => "reset-password.update",
+    "uses" => "PasswordResetController@update"
 ));
 
 # Get tool in other formats (eg RDF)

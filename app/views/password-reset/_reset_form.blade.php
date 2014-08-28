@@ -19,7 +19,7 @@
         <!-- /panel-body -->
 
         <div class="panel-footer">
-            {{ Form::submit(Lang::get("views/signup/reset.form.submit"), array("class" => "btn btn-primary")) }}
+            {{ Form::submit(Lang::get("views/password-reset/reset.form.submit"), array("class" => "btn btn-primary")) }}
         </div>
         <!-- /panel-footer -->
     {{ Form::close() }}

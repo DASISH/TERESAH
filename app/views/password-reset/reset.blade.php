@@ -3,13 +3,14 @@
 @section("content")
     <div class="row">
         <div class="col-sm-8 col-centered">
-            <h1 class="text-center">{{ Lang::get("views/signup/reset.heading") }}</h1>
+            <h1 class="text-center">{{ Lang::get("views/password-reset/reset.heading") }}</h1>
 
             @include("shared._error_messages")
-            @include("signup._reset_form", array(
-                $action = "reset-password",
+            @include("password-reset._reset_form", array(
+                $action = "reset",
                 $options = array(
-                  "route" => "signup.reset",
+                  "route" => "reset-password.update",
+                  "method" => "put",
                   "role" => "form"
                 )
             ))

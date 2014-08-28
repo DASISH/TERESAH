@@ -17,7 +17,7 @@
 
         <div class="panel-footer">
             {{ Form::submit(Lang::get("views/sessions/form.submit"), array("class" => "btn btn-primary")) }} 
-            &ndash; {{ link_to_route("signup.reset", Lang::get("views/sessions/form.forgot_password.name"), null, array("title" => Lang::get("views/sessions/form.forgot_password.title"))) }}
+            &ndash; {{ link_to_route("request-password.request", Lang::get("views/sessions/form.forgot_password.name"), null, array("title" => Lang::get("views/sessions/form.forgot_password.title"))) }}
             &ndash; {{ Lang::get("views/sessions/form.sign_up.not_a_user") }} {{ link_to_route("signup.create", Lang::get("views/sessions/form.sign_up.name"), null, array("title" => Lang::get("views/sessions/form.sign_up.title"))) }}
         </div>
         <!-- /panel-footer -->
