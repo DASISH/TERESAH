@@ -127,9 +127,11 @@ class ToolsController extends BaseController {
 
             foreach ($this->tool->dataSources as $data_source) {
 
-                $data = $this->tool->data()->where("data_source_id", $data_source->id)->get();
+                $data = $this->tool->data()
+                        ->where("data_source_id", $data_source->id)
+                        ->with("dataType")->get();
                 foreach ($data as $d) {
-                    $t->add("dc:".$d["key"], $d["key"] . ":" . $d["value"]);
+                    $t->add($d->dataType->rdf_mapping, $d["value"]);
                 }
             }
 
