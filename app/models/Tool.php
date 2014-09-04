@@ -10,8 +10,7 @@ class Tool extends Eloquent
 
     protected $dates = array("deleted_at");
     protected $fillable = array("name", "user_id");
-    protected $appends = array("url");
-    
+
     /**
      * Validation rules for the model
      */
@@ -48,29 +47,19 @@ class Tool extends Eloquent
     {
         return $this->belongsToMany("DataSource", "tool_data_sources")->withTimestamps();
     }
-    
+
+    public function dataTypes()
+    {
+        return $this->hasManyThrough("DataType", "Data");
+    }
+
     public function user()
     {
         return $this->belongsTo("User");
     }
 
-    public function getAbbreviation($length = 4)
+    public function getAbbreviationAttribute()
     {
-        return substr(preg_replace("~\b(\w)|.~", "$1", $this->name), 0, $length);
-    }
-
-    public function getDataValue($key)
-    {
-        $data = $this->data->lists("value", "key");
-
-        # TODO: Add case-insensitive search for the array key
-        if (array_key_exists($key, $data)) {
-            return $data[$key];
-        }
-    }
-
-    public function getUrlAttribute()
-    {
-        return URL::to("/tools/" . $this->slug);
+        return substr(preg_replace("~\b(\w)|.~", "$1", $this->name), 0, 4);
     }
 }

@@ -6,6 +6,17 @@ class UsersTableSeeder extends Seeder
     {
         $users = array(
             array(
+                "email_address" => "teresah@dasish.eu",
+                "password" => "password",
+                "password_confirmation" => "password",
+                "name" => "TERESAH",
+                "locale" => "en",
+                "active" => true,
+                "user_level" => 4,
+                "created_at" => new DateTime,
+                "updated_at" => new DateTime
+            ),
+            array(
                 "email_address" => "admin@example.org",
                 "password" => "password",
                 "password_confirmation" => "password",

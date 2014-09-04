@@ -2,8 +2,8 @@
     {{ Form::model($data, $options) }}
         <div class="panel-body">
             <div class="form-group">
-                {{ Form::label("key", Lang::get("views/admin/tools/data_sources/data/form.key.label")) }}
-                {{ Form::text("key", null, array("class" => "form-control", "placeholder" => Lang::get("views/admin/tools/data_sources/data/form.key.placeholder"))) }}
+                {{ Form::label("data_type_id", Lang::get("views/admin/tools/data_sources/data/form.data_type.label")) }}
+                {{ Form::select("data_type_id", $dataTypes, null, array("class" => "form-control")) }}
             </div>
             <!-- /form-group -->
 

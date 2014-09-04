@@ -3,7 +3,7 @@
         <div class="panel-body">
             <div class="form-group">
                 {{ Form::label("data_source_id", Lang::get("views/admin/tools/data_sources/form.select_data_source.label")) }}
-                {{ Form::select("data_source_id", $availableDataSources, null, array("class" => "form-control")) }}
+                {{ Form::select("data_source_id", $dataSources, null, array("class" => "form-control")) }}
             </div>
             <!-- /form-group -->
         </div>

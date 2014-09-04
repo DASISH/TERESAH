@@ -1,9 +1,9 @@
 <?php
 
 return array(
-    "key" => array(
-        "label" => "Key name", 
-        "placeholder" => "Key name"
+    "data_type" => array(
+        "label" => "Data Type", 
+        "placeholder" => "Data Type"
     ),
     "value" => array(
         "label" => "Value", 

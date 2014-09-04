@@ -92,6 +92,7 @@ Route::group(array("namespace" => "Tools"), function() {
 
 # Routing for the administrative section
 Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
+    Route::resource("data-types", "DataTypesController");
     Route::resource("data-sources", "DataSourcesController");
     Route::resource("tools", "ToolsController");
 
@@ -116,9 +117,6 @@ Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
         "uses" => "ActivitiesController@index"
     ));
 });
-
-
-
 
 # Catch all route for the static pages
 Route::get("{path?}", array(

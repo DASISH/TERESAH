@@ -2,6 +2,7 @@
 
 use Data;
 use DataSource;
+use DataType;
 use Tool;
 use Admin\AdminController;
 use Illuminate\Support\Facades\Auth;
@@ -23,14 +24,20 @@ class DataController extends AdminController
     protected $data;
     protected $user;
 
-    public function __construct(Tool $tool, DataSource $dataSource, Data $data)
+    public function __construct(Tool $tool, DataSource $dataSource, DataType $dataType, Data $data)
     {
         parent::__construct();
 
         $this->tool = $tool;
         $this->dataSource = $dataSource;
+        $this->dataType = $dataType;
         $this->data = $data;
         $this->user = Auth::user();
+
+        $this->beforeFilter("@findToolAndDataSource");
+        $this->beforeFilter("@findData", array(
+            "only" => array("edit", "update", "destroy")
+        ));
     }
 
     /**
@@ -45,11 +52,10 @@ class DataController extends AdminController
      */
     public function create($toolId, $dataSourceId)
     {
-        $this->findToolAndDataSource($toolId, $dataSourceId);
-
         return View::make("admin.tools.data_sources.data.create")
             ->with("tool", $this->tool)
             ->with("dataSource", $this->dataSource)
+            ->with("dataTypes", $this->getDataTypes())
             ->with("data", $this->data);
     }
 
@@ -63,10 +69,9 @@ class DataController extends AdminController
      */
     public function store($toolId, $dataSourceId)
     {
-        $this->findToolAndDataSource($toolId, $dataSourceId);
-
         $this->data->fill(Input::all());
         $this->data->dataSource()->associate($this->dataSource);
+        $this->data->dataType()->associate($this->dataType->find(Input::get("data_type_id")));
         $this->data->tool()->associate($this->tool);
 
         if ($this->user->data()->save($this->data)) {
@@ -91,12 +96,10 @@ class DataController extends AdminController
      */
     public function edit($toolId, $dataSourceId, $id)
     {
-        $this->findToolAndDataSource($toolId, $dataSourceId);
-        $this->data = $this->data->find($id);
-
         return View::make("admin.tools.data_sources.data.edit")
             ->with("tool", $this->tool)
             ->with("dataSource", $this->dataSource)
+            ->with("dataTypes", $this->getDataTypes())
             ->with("data", $this->data);
     }
 
@@ -113,16 +116,13 @@ class DataController extends AdminController
      */
     public function update($toolId, $dataSourceId, $id)
     {
-        $this->findToolAndDataSource($toolId, $dataSourceId);
-        $this->data = $this->data->find($id);
-
         if (Request::ajax()) {
             $input = Input::all();
             $this->data->$input["name"] = $input["value"];
         } else {
             $this->data->fill(Input::all());
         }
-        
+
         $this->data->dataSource()->associate($this->dataSource);
         $this->data->tool()->associate($this->tool);
         $this->data->user()->associate($this->user);
@@ -157,9 +157,6 @@ class DataController extends AdminController
      */
     public function destroy($toolId, $dataSourceId, $id)
     {
-        $this->findToolAndDataSource($toolId, $dataSourceId);
-        $this->data = $this->data->find($id);
-
         if ($this->data->delete()) {
             return Redirect::route("admin.tools.data-sources.show", array($toolId, $dataSourceId))
                 ->with("success", Lang::get("controllers/admin/tools/data_sources/data.destroy.success"));
@@ -169,10 +166,20 @@ class DataController extends AdminController
         }
     }
 
-    private function findToolAndDataSource($toolId, $dataSourceId)
+    public function getDataTypes()
     {
-        $this->tool = $this->tool->find($toolId);
+        return $this->dataType->orderBy("label", "ASC")->lists("label", "id");
+    }
+
+    public function findData($route, $request)
+    {
+        $this->data = $this->data->find($route->getParameter("data"));
+    }
+
+    public function findToolAndDataSource($route, $request)
+    {
+        $this->tool = $this->tool->find($route->getParameter("tools"));
         $this->dataSource = $this->tool->dataSources()
-            ->wherePivot("data_source_id", $dataSourceId)->first();
+            ->wherePivot("data_source_id", $route->getParameter("data_sources"))->first();
     }
 }

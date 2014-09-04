@@ -9,10 +9,7 @@ class Data extends Eloquent
     use ValidatingTrait;
 
     protected $dates = array("deleted_at");
-    protected $fillable = array(
-        "key",
-        "value"
-    );
+    protected $fillable = array("data_type_id", "value");
 
     /**
      * Validation rules for the model
@@ -21,7 +18,7 @@ class Data extends Eloquent
         "data_source_id" => "required|integer",
         "tool_id" => "required|integer",
         "user_id" => "required|integer",
-        "key" => "required|max:255",
+        "data_type_id" => "required|integer",
         # TODO: Review the validation rule for the
         # value (is 2048 characters too much / enough?)
         "value" => "required|max:2048"
@@ -47,6 +44,11 @@ class Data extends Eloquent
     public function dataSource()
     {
         return $this->belongsTo("DataSource");
+    }
+
+    public function dataType()
+    {
+        return $this->belongsTo("DataType");
     }
 
     public function tool()

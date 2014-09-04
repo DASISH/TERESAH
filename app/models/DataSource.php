@@ -58,16 +58,6 @@ class DataSource extends Eloquent
         return $this->belongsTo("User");
     }
 
-    public function getDataValue($key, $toolId)
-    {
-        $data = $this->data()->where("tool_id", $toolId)->lists("value", "key");
-
-        # TODO: Add case-insensitive search for the array key
-        if (array_key_exists($key, $data)) {
-            return $data[$key];
-        }
-    }
-
     /**
      * Returns "nicely" formatted version of the homepage 
      * address.
@@ -77,5 +67,15 @@ class DataSource extends Eloquent
     public function getSourceAttribute()
     {
         return parse_url($this->homepage)["host"];
+    }
+
+    public function getLatestToolDataFor($toolId, $column = "name")
+    {
+        return $this->data()->join("data_types", "data_types.id", "=", "data.data_type_id")
+            ->where("data.tool_id", "=", $toolId)
+            ->where("data_types.slug", "=", $column)
+            ->whereNull("data_types.deleted_at")
+            ->orderBy("data.updated_at", "DESC")
+            ->pluck("value");
     }
 }

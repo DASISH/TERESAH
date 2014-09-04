@@ -5,7 +5,7 @@
         <div class="col-sm-12">
             <header>
                 <div class="symbol">
-                    <abbr title="{{{ $tool->name }}}">{{{ $tool->getAbbreviation() }}}</abbr>
+                    <abbr title="{{{ $tool->name }}}">{{{ $tool->abbreviation }}}</abbr>
                 </div>
                 <!-- /symbol -->
 
@@ -16,51 +16,53 @@
 
             <div class="tab-content">
                 <div class="tab-pane active">
-                    @if (!$dataSources->isEmpty())
-                        @include("admin.tools.data_sources._navigation", compact("dataSources"))
+                    @if (!$tool->dataSources->isEmpty())
+                        @include("admin.tools.data_sources._navigation", array("dataSources" => $tool->dataSources))
 
-                        <div class="tab-content">
-                            <div class="tab-pane active">
-                                @if (!empty($dataToolName = $dataSource->getDataValue("name", $tool->id)))
-                                    <h2>{{{ $dataToolName }}}</h2>
+                        @foreach ($tool->dataSources as $dataSource)
+                            <div class="tab-content">
+                                <div class="tab-pane{{ Active::path(ltrim(parse_url(URL::route("admin.tools.data-sources.show", array($tool->id, $dataSource->id)))["path"], "/"), " active") }}">
+                                    @if (!$dataSource->data->isEmpty())
+                                        @if ($name = $dataSource->getLatestToolDataFor($tool->id, "name"))
+                                            <h2>{{{ $name }}}</h2>
+                                        @endif
 
-                                    @if (!empty($dataToolDescription = $dataSource->getDataValue("description", $tool->id)))
-                                        <p>{{{ $dataToolDescription }}}</p>
+                                        @if ($description = $dataSource->getLatestToolDataFor($tool->id, "description"))
+                                            <p>{{{ $description }}}</p>
+                                        @endif
+
+                                        <hr />
+
+                                        <h3>{{ Lang::get("views/admin/tools/data_sources/show.heading.available_data") }} {{ link_to_route("admin.tools.data-sources.data.create", Lang::get("views/admin/tools/data_sources/navigation.data.create.name"), array($tool->id, $dataSource->id), array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/admin/tools/data_sources/navigation.data.create.title"))) }}</h3>
+
+                                        <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>{{ Lang::get("models/data.attributes.data_type") }}</th>
+                                                    <th>{{ Lang::get("models/data.attributes.value") }}</th>
+                                                    <th>{{ Lang::get("models/data.attributes.user") }}</th>
+                                                    <th>{{ Lang::get("views/admin/tools/data_sources/show.actions.name") }}</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                @foreach ($dataSource->data as $data)
+                                                    @include("admin.tools.data_sources.data._data", compact("data"))
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        <!-- /table.table-bordered.table-hover.table-striped -->
+                                    @else
+                                        <div class="alert alert-info">
+                                            <p class="text-center">{{ Lang::get("views/admin/tools/data_sources/show.messages.no_data") }} {{ link_to_route("admin.tools.data-sources.data.create", Lang::get("views/admin/tools/data_sources/navigation.data.create.name"), array($tool->id, $dataSource->id), array("title" => Lang::get("views/admin/tools/data_sources/navigation.data.create.title"))) }}?</p>
+                                        </div>
+                                        <!-- /alert.alert-info -->
                                     @endif
-
-                                    <hr />
-                                @endif
-
-                                @if (!$dataSourceData->isEmpty())
-                                    <h3>{{ Lang::get("views/admin/tools/data_sources/show.heading.available_data") }} {{ link_to_route("admin.tools.data-sources.data.create", Lang::get("views/admin/tools/data_sources/navigation.data.create.name"), array($tool->id, $dataSource->id), array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/admin/tools/data_sources/navigation.data.create.title"))) }}</h3>
-
-                                    <table class="table table-bordered table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>{{ Lang::get("models/data.attributes.key") }}</th>
-                                                <th>{{ Lang::get("models/data.attributes.value") }}</th>
-                                                <th>{{ Lang::get("models/data.attributes.user") }}</th>
-                                                <th>{{ Lang::get("views/admin/tools/data_sources/show.actions.name") }}</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            @foreach ($dataSourceData as $data)
-                                                @include("admin.tools.data_sources.data._data", compact("data"))
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                    <!-- /table.table-bordered.table-hover.table-striped -->
-                                @else
-                                    <div class="alert alert-info">
-                                        <p class="text-center">{{ Lang::get("views/admin/tools/data_sources/show.messages.no_data") }} {{ link_to_route("admin.tools.data-sources.data.create", Lang::get("views/admin/tools/data_sources/navigation.data.create.name"), array($tool->id, $dataSource->id), array("title" => Lang::get("views/admin/tools/data_sources/navigation.data.create.title"))) }}?</p>
-                                    </div>
-                                    <!-- /alert.alert-info -->
-                                @endif
+                                </div>
+                                <!-- /tab-pane -->
                             </div>
-                            <!-- /tab-pane.active -->
-                        </div>
-                        <!-- /tab-content -->
+                            <!-- /tab-content -->
+                        @endforeach
                     @else
                         <div class="alert alert-info">
                             <p class="text-center">{{ Lang::get("views/admin/tools/data_sources/show.messages.no_data_sources") }} {{ link_to_route("admin.tools.data-sources.create", Lang::get("views/admin/tools/data_sources/navigation.create.name"), array($tool->id), array("title" => Lang::get("views/admin/tools/data_sources/navigation.create.title"))) }}?</p>

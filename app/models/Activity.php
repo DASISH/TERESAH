@@ -130,7 +130,7 @@ class Activity extends Eloquent
 
     private static function detectName($model)
     {
-        $detectedAttributes = array("name", "title", "key");
+        $detectedAttributes = array("name", "label", "title", "key");
 
         foreach ($detectedAttributes as $attribute) {
             if (isset($model->attributes[$attribute])) {

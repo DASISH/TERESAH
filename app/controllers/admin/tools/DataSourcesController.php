@@ -17,7 +17,6 @@ class DataSourcesController extends AdminController
 
     protected $tool;
     protected $dataSource;
-    protected $dataSources;
     protected $user;
 
     public function __construct(Tool $tool, DataSource $dataSource)
@@ -26,8 +25,14 @@ class DataSourcesController extends AdminController
 
         $this->tool = $tool;
         $this->dataSource = $dataSource;
-        $this->dataSources = $dataSource;
         $this->user = Auth::user();
+
+        $this->beforeFilter("@findTool", array(
+            "only" => array("create", "store", "destroy")
+        ));
+        $this->beforeFilter("@findToolWithAssociatedData", array(
+            "only" => array("index", "show")
+        ));
     }
 
     /**
@@ -41,16 +46,9 @@ class DataSourcesController extends AdminController
      */
     public function index($toolId)
     {
-        $this->tool = $this->tool->find($toolId);
-        $this->getDataSources();
-        $this->dataSource = $this->dataSources->first();
-
         # Share the view with the show action
         return View::make("admin.tools.data_sources.show")
-            ->with("tool", $this->tool)
-            ->with("dataSources", $this->dataSources)
-            ->with("dataSource", $this->dataSource)
-            ->with("dataSourceData", $this->tool->data()->where("data_source_id", $this->dataSource->id)->get());
+            ->with("tool", $this->tool);
     }
 
     /**
@@ -64,14 +62,8 @@ class DataSourcesController extends AdminController
      */
     public function show($toolId, $id)
     {
-        $this->findToolAndDataSource($toolId, $id);
-        $this->getDataSources();
-
         return View::make("admin.tools.data_sources.show")
-            ->with("tool", $this->tool)
-            ->with("dataSources", $this->dataSources)
-            ->with("dataSource", $this->dataSource)
-            ->with("dataSourceData", $this->tool->data()->where("data_source_id", $this->dataSource->id)->get());
+            ->with("tool", $this->tool);
     }
 
     /**
@@ -85,11 +77,11 @@ class DataSourcesController extends AdminController
      */
     public function create($toolId)
     {
-        $tool = $this->tool->find($toolId);
-        $dataSource = $this->dataSource;
-        $availableDataSources = $this->dataSource->orderBy("name", "ASC")->lists("name", "id");
-
-        return View::make("admin.tools.data_sources.create", compact("tool", "dataSource", "availableDataSources"));
+        return View::make("admin.tools.data_sources.create", array(
+            "tool" => $this->tool, 
+            "dataSource" => $this->dataSource, 
+            "dataSources" => $this->getDataSources()
+        ));
     }
 
     /**
@@ -103,13 +95,12 @@ class DataSourcesController extends AdminController
      */
     public function store($toolId)
     {
-        $tool = $this->tool->find($toolId);
         $dataSourceId = Input::get("data_source_id");
 
         # TODO: Check for the existing relationship
 
         try {
-            $tool->dataSources()->attach($dataSourceId);
+            $this->tool->dataSources()->attach($dataSourceId);
 
             return Redirect::route("admin.tools.data-sources.show", array($toolId, $dataSourceId))
                 ->with("success", Lang::get("controllers/admin/tools/data_sources.store.success"));
@@ -132,11 +123,10 @@ class DataSourcesController extends AdminController
      */
     public function destroy($toolId, $id)
     {
-        $tool = $this->tool->find($toolId);
-        $dataSource = $tool->dataSources()->wherePivot("data_source_id", $id)->first();
+        $dataSource = $this->tool->dataSources()->wherePivot("data_source_id", $id)->first();
 
         try {
-            $tool->dataSources()->detach($dataSource->id);
+            $this->tool->dataSources()->detach($dataSource->id);
 
             return Redirect::route("admin.tools.data-sources.index", $toolId)
                 ->with("success", Lang::get("controllers/admin/tools/data_sources.destroy.success"));
@@ -147,25 +137,21 @@ class DataSourcesController extends AdminController
         }
     }
 
-    private function findToolAndDataSource($toolId, $id)
+    public function findTool($route, $request)
     {
-        $this->tool = $this->tool->find($toolId);
-        $this->dataSource = $this->tool->dataSources()
-            ->wherePivot("data_source_id", $id)->first();
+        $this->tool = $this->tool->find($route->getParameter("tools"));
     }
 
-    private function getDataSources()
+    public function findToolWithAssociatedData($route, $request)
     {
-        $this->dataSources = $this->tool->dataSources()
-            ->orderBy("data_sources.name", "ASC")->get();
+        $toolId = $route->getParameter("tools");
+        $this->tool = $this->tool->with(array("user", "dataSources.data" => function($query) use($toolId) {
+            $query->where("data.tool_id", "=", $toolId);
+        }, "dataSources.data.user", "dataSources.data.dataType"))->find($toolId);
     }
 
-    private function getDataValue($key)
+    public function getDataSources()
     {
-        $data = $this->dataSource->data->lists("value", "key");
-
-        if (array_key_exists($key, $data)) {
-            return $data[$key];
-        }
+        return $this->dataSource->orderBy("name", "ASC")->lists("name", "id");
     }
 }

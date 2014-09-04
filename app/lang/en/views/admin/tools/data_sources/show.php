@@ -13,7 +13,7 @@ return array(
         "delete" => array(
             "name" => "Delete",
             "title" => "Delete Data",
-            "confirm" => "Are you sure you want to delete the Data entry \":key\"?"
+            "confirm" => "Are you sure you want to delete the Data Type entry \":label\"?"
         )
     ),
     "messages" => array(

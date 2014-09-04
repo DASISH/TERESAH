@@ -11,49 +11,51 @@
         <div class="col-sm-12">
             <header>
                 <div class="symbol">
-                    <abbr title="{{{ $tool->name }}}">{{{ $tool->getAbbreviation() }}}</abbr>
+                    <abbr title="{{{ $tool->name }}}">{{{ $tool->abbreviation }}}</abbr>
                 </div>
                 <!-- /symbol -->
 
                 <h1 itemprop="name">{{{ $tool->name }}} <small>{{ Lang::get("views/tools/data_sources/show.on") }}</small></h1>
             </header>
 
-            @if (!$dataSources->isEmpty())
-                @include("tools.data_sources._navigation", compact("dataSources"))
+            @if (!$tool->dataSources->isEmpty())
+                @include("tools.data_sources._navigation", array("dataSources" => $tool->dataSources))
 
-                <div class="tab-content">
-                    <div class="tab-pane active">
-                        @if (!empty($dataToolName = $dataSource->getDataValue("name", $tool->id)))
-                            <h2>{{{ $dataToolName }}}</h2>
+                @foreach ($tool->dataSources as $dataSource)
+                    <div class="tab-content">
+                        <div class="tab-pane{{ Active::path(ltrim(parse_url(URL::route("tools.data-sources.show", array($tool->id, $dataSource->id)))["path"], "/"), " active") }}">
+                            @if (!$dataSource->data->isEmpty())
+                                @if ($name = $dataSource->getLatestToolDataFor($tool->id, "name"))
+                                    <h2>{{{ $name }}}</h2>
+                                @endif
 
-                            @if (!empty($dataToolDescription = $dataSource->getDataValue("description", $tool->id)))
-                                <p>{{{ $dataToolDescription }}}</p>
-                            @endif
+                                @if ($description = $dataSource->getLatestToolDataFor($tool->id, "description"))
+                                    <p>{{{ $description }}}</p>
+                                @endif
 
-                            <hr />
-                        @endif
+                                <hr />
 
-                        @if (count($dataSourceData))
-                            <h3>{{ Lang::get("views/tools/data_sources/show.heading.available_data") }}</h3>
+                                <h3>{{ Lang::get("views/tools/data_sources/show.heading.available_data") }}</h3>
 
-                            <dl>  
-                                @foreach ($dataSourceData as $key => $values)
-                                    <dt>{{{ $key }}}</dt>
-                                    @foreach ($values as $value)
-                                    <dd>{{{ $value }}}</dd>
+                                <dl>
+                                    @foreach ($dataSource->data as $data)
+                                        @if ($data->dataType)
+                                            <dt>{{{ $data->dataType->label }}}</dt>
+                                            <dd>{{{ $data->value }}}</dd>
+                                        @endif
                                     @endforeach
-                                @endforeach
-                            </dl>
-                        @else
-                            <div class="alert alert-info">
-                                <p class="text-center">{{ Lang::get("views/tools/data_sources/show.messages.no_data") }}</p>
-                            </div>
-                            <!-- /alert.alert-info -->
-                        @endif
+                                </dl>
+                            @else
+                                <div class="alert alert-info">
+                                    <p class="text-center">{{ Lang::get("views/tools/data_sources/show.messages.no_data") }}</p>
+                                </div>
+                                <!-- /alert.alert-info -->
+                            @endif
+                        </div>
+                        <!-- /tab-pane -->
                     </div>
-                    <!-- /tab-pane.active -->
-                </div>
-                <!-- /tab-content -->
+                    <!-- /tab-content -->
+                @endforeach
             @else
                 <div class="alert alert-info">
                     <p class="text-center">{{ Lang::get("views/tools/data_sources/show.messages.no_data_sources") }}</p>
@@ -62,7 +64,6 @@
             @endif
         </div>
         <!-- /col-sm-12 -->
-
     </article>
     <!-- /row -->
 
@@ -73,6 +74,6 @@
             <a href="{{ URL::to("/tools/" . $tool->slug . ".jsonld") }}" class="btn btn-default btn-sm" role="button">RDF/JsonLD</a>
         </p>
     </div>
-@include("shared._share")
 
+    @include("shared._share")
 @stop

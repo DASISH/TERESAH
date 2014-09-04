@@ -26,6 +26,22 @@ return array(
                 "title" => "List Data Sources"
             )
         ),
+        "data_types" => array(
+            "name" => "Data Types",
+            "title" => "Data Types",
+            "create" => array(
+                "name" => "Add a Data Type",
+                "title" => "Add a Data Type"
+            ),
+            "edit" => array(
+                "name" => "Edit Data Type",
+                "title" => "Edit Data Type"
+            ),
+            "index" => array(
+                "name" => "List Data Types",
+                "title" => "List Data Types"
+            )
+        ),
         "tools" => array(
             "name" => "Tools",
             "title" => "Tools",
