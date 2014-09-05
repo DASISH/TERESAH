@@ -98,6 +98,9 @@ return array(
         "facets" => array(
             "name" => "Browse facets", 
             "title" => "Browse facets"
+        ),
+        "by-alphabet" => array(
+            "name" => "By alphabet"
         )
     ),
     "search" => array(

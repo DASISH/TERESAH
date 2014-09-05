@@ -2,7 +2,7 @@
 
 class ToolsController extends BaseController {
 
-    protected $skipAuthentication = array("index", "show", "export", "byAlphabet", "listByAlphabet", "quicksearch");
+    protected $skipAuthentication = array("index", "show", "export", "byAlphabet", "byFacet", "listByAlphabet", "quicksearch");
     protected $tool;
     protected $dataSource;
 
@@ -54,7 +54,18 @@ class ToolsController extends BaseController {
     }
 
     public function byFacet($type, $value) {
+        //dd($type);
+        $dataType = DataType::select("id")->where("slug", $type)->pluck("id");
         
+        $tools = $this->tool
+                ->whereHas("data", function($query) use($dataType, $value) {
+                    $query->where("value", $value)
+                          ->where("data_type_id",$dataType);
+                })
+                ->orderBy("name", "ASC")->paginate(20);    
+                
+        return View::make("tools.index", compact("tools"))
+                ->with("alphaList", $this->listByAlphabet());                    
     }
     
     /**
@@ -69,20 +80,20 @@ class ToolsController extends BaseController {
                 ->where("name", "LIKE" ,"$startsWith%")
                 ->orderBy("name", "ASC")->paginate(20);
 
-        return View::make("tools.index", compact("tools"))
-                ->with("alphaList", $this->listByAlphabet());        
+        return View::make("tools.by-alphabet.index", compact("tools"))
+                ->with("alphaList", $this->listByAlphabet($startsWith))->with('startsWith', $startsWith);        
     }
     
     /**
      * Generates a list with unique first caracters for all tools
      * @return View
      */
-    public function listByAlphabet() {
+    public function listByAlphabet($selected = null) {
         $caracters = $this->tool->select(DB::raw("LEFT(UCASE(name), 1) AS caracter"))->has('data', '>', 0)
                       ->groupBy(DB::raw("caracter"))
                       ->orderBy("name", "ASC")->lists('caracter');
         
-        return View::make("tools._by_alphabet", compact("caracters"));
+        return View::make("tools._by_alphabet", compact("caracters"))->with('selected', $selected);
     }
     
     /**
@@ -131,7 +142,7 @@ class ToolsController extends BaseController {
                         ->where("data_source_id", $data_source->id)
                         ->with("dataType")->get();
                 foreach ($data as $d) {
-                    $t->add($d->dataType->rdf_mapping, $d["value"]);
+                    $t->add($d->dataType->rdf_mapping, $d->value);
                 }
             }
 
