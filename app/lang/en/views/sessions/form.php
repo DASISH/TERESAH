@@ -18,5 +18,10 @@ return array(
         "not_a_user" => "Not a user?",
         "name" => "Sign up",
         "title" => "Sign up"
+    ),
+    "sign_in" => array(
+        "facebook" => "Sign in via Facebook",
+        "googleplus" => "Sign in via Google Plus",
+        "linkedin" => "Sign in via Linked In"
     )
 );
