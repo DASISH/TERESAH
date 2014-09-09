@@ -24,3 +24,15 @@
     {{ Form::close() }}
 </div>
 <!-- /panel.panel-default -->
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="col-sm-5 col-centered">
+            <a href="{{route("login.facebook")}}">{{ image_tag("64-facebook.png", array("alt" => Lang::get("views/sessions/form.sign_in.facebook"), "width" => 50, "height" => 50)) }}</a>
+            <a href="{{route("login.google")}}">{{ image_tag("64-googleplus.png", array("alt" => Lang::get("views/sessions/form.sign_in.googleplus"), "width" => 50, "height" => 50)) }}</a>
+            <a href="{{route("login.linkedin")}}">{{ image_tag("64-linkedin.png", array("alt" => Lang::get("views/sessions/form.sign_in.linkedin"), "width" => 50, "height" => 50)) }}</a>
+        </div>
+        <!-- /col-sm-5.col-centered -->
+    </div>
+    <!-- /panel-body -->
+</div>
+<!-- /panel.panel-default -->

@@ -121,6 +121,27 @@ Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
     ));
 });
 
+#Routing for OAuth Login
+Route::get("login/facebook", array(
+    "as" => "login.facebook",
+    "uses" => "OAuthController@facebook"
+));
+
+Route::get("login/google", array(
+    "as" => "login.google",
+    "uses" => "OAuthController@google"
+));
+
+Route::get("login/twitter", array(
+    "as" => "login.twitter",
+    "uses" => "OAuthController@twitter"
+));
+
+Route::get("login/linkedin", array(
+    "as" => "login.linkedin",
+    "uses" => "OAuthController@linkedin"
+));
+
 # Catch all route for the static pages
 Route::get("{path?}", array(
     "as" => "pages.show", 
