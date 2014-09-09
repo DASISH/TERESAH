@@ -9,7 +9,7 @@ class Data extends Eloquent
     use ValidatingTrait;
 
     protected $dates = array("deleted_at");
-    protected $fillable = array("data_type_id", "value");
+    protected $fillable = array("data_type_id", "user_id", "tool_id", "data_source_id", "value");
 
     /**
      * Validation rules for the model
