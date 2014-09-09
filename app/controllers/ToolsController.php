@@ -59,7 +59,7 @@ class ToolsController extends BaseController {
         
         $tools = $this->tool
                 ->whereHas("data", function($query) use($dataType, $value) {
-                    $query->where("value", $value)
+                    $query->where("slug", $value)
                           ->where("data_type_id",$dataType);
                 })
                 ->orderBy("name", "ASC")->paginate(20);    

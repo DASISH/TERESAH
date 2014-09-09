@@ -19,6 +19,7 @@ class Data extends Eloquent
         "tool_id" => "required|integer",
         "user_id" => "required|integer",
         "data_type_id" => "required|integer",
+        "slug" => "required|max:255",
         # TODO: Review the validation rule for the
         # value (is 2048 characters too much / enough?)
         "value" => "required|max:2048"
@@ -27,6 +28,7 @@ class Data extends Eloquent
     public static function boot()
     {
         self::observe(new ActivityObserver);
+        self::observe(new DataObserver);
 
         parent::boot();
     }

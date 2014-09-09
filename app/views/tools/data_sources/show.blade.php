@@ -41,7 +41,7 @@
                                     @foreach ($dataSource->data as $data)
                                         @if ($data->dataType)
                                             <dt>{{{ $data->dataType->label }}}</dt>
-                                            <dd>{{{ $data->value }}}</dd>
+                                            <dd><a href="{{ URL::to("/tools/by-facet/" . $data->dataType->slug . "/" . $data->slug) }}">{{{ $data->value }}}</a></dd>
                                         @endif
                                     @endforeach
                                 </dl>

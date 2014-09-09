@@ -76,6 +76,9 @@ Route::get("tools/{id}.{format}", "ToolsController@export");
 #Browse by alphabet
 Route::get("tools/by-alphabets/{caracter}", "ToolsController@byAlphabet");
 
+#Browse by facet
+Route::get("tools/by-facet/{facet}/{value}", "ToolsController@byFacet");
+
 #Quicksearch
 Route::get("tools/quicksearch/{query}", "ToolsController@quicksearch");
 
