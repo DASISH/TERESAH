@@ -46,7 +46,7 @@ class ToolsController extends BaseController {
                         ->orderBy("data_sources.name", "ASC")->first();
 
         if (isset($this->dataSource)) {
-            return Redirect::route("tools.data-sources.show", array($id, $this->dataSource->id));
+            return Redirect::route("tools.data-sources.show", array($this->tool->id, $this->dataSource->id));
         } else {
             return Redirect::route("tools.index")
                             ->with("info", Lang::get("controllers/tools.show.no_data_sources_available"));
