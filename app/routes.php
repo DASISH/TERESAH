@@ -132,11 +132,6 @@ Route::get("login/google", array(
     "uses" => "OAuthController@google"
 ));
 
-Route::get("login/twitter", array(
-    "as" => "login.twitter",
-    "uses" => "OAuthController@twitter"
-));
-
 Route::get("login/linkedin", array(
     "as" => "login.linkedin",
     "uses" => "OAuthController@linkedin"

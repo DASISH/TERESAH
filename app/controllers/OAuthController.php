@@ -2,7 +2,7 @@
 
 class OAuthController extends BaseController {
 
-    protected $skipAuthentication = array("facebook", "google", "twitter", "linkedin");
+    protected $skipAuthentication = array("facebook", "google", "linkedin");
     
     /**
      * Authorizes a user by facebook oauth login
