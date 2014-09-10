@@ -6,7 +6,8 @@ return array(
     ),
     "store" => array(
         "error" => "Incorrect email address or password. Please try again (and make sure your caps lock is off).",
-        "success" => "Logged in successfully."
+        "success" => "Logged in successfully.",
+        "blocked" => "Unauthorized access request. User is blocked."
     ),
     "destroy" => array(
         "success" => "Logged out."

@@ -35,7 +35,8 @@ class SessionsController extends BaseController
     {
         $credentials = array(
             "email_address" => Input::get("email_address"),
-            "password" => Input::get("password")
+            "password" => Input::get("password"),
+            "active" => true
         );
 
         # Try to authenticate the user and "remember" the login
@@ -46,7 +47,20 @@ class SessionsController extends BaseController
             return Redirect::intended("/")
                 ->with("success", Lang::get("controllers/sessions.store.success"));
         }
-
+        else #check if user is blocked            
+        {
+            $user = User::getUserByEmail(Input::get("email_address"));
+                        
+            if($user != null){
+                if(!$user->active)
+                {
+                    return Redirect::route("sessions.create")
+                        ->withErrors(array(Lang::get("controllers/sessions.store.blocked")))
+                        ->with("simple_error_message", true)->withInput();
+                }
+            }
+        }
+        
         return Redirect::route("sessions.create")
             ->withErrors(array(Lang::get("controllers/sessions.store.error")))
             ->with("simple_error_message", true)->withInput();
