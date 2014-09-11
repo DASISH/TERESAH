@@ -142,7 +142,11 @@ class ToolsController extends BaseController {
                         ->where("data_source_id", $data_source->id)
                         ->with("dataType")->get();
                 foreach ($data as $d) {
-                    $t->add($d->dataType->rdf_mapping, $d->value);
+                    if(filter_var($d->value, FILTER_VALIDATE_URL)){
+                        $t->addResource($d->dataType->rdf_mapping, $d->value);
+                    }else{
+                        $t->add($d->dataType->rdf_mapping, $d->value);
+                    }
                 }
             }
 
