@@ -155,7 +155,15 @@ class OAuthController extends BaseController {
                     ->withErrors($user->getErrors());
             } 
         }
-
-        Auth::login($user);        
+        else if(!$user->active)
+        {
+            return Redirect::route("signup.create")
+                ->withErrors(Lang::get("controllers/sessions.store.blocked"));
+        }
+        else
+        {
+            Auth::login($user);     
+            Login::log(Auth::user(), Auth::viaRemember());
+        }
     }
 }
