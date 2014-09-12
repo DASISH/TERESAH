@@ -18,6 +18,11 @@
                 {{ Form::text("rdf_mapping", null, array("class" => "form-control", "placeholder" => Lang::get("views/admin/data_types/form.rdf_mapping.placeholder"))) }}
             </div>
             <!-- /form-group -->
+            <div class="form-group">
+                {{ Form::label("linkable", Lang::get("views/admin/data_types/form.linkable.label")) }}
+                {{ Form::checkbox("linkable", null, true) }}
+            </div>
+            <!-- /form-group -->            
         </div>
         <!-- /panel-body -->
 

@@ -14,6 +14,7 @@
                         <th>{{ Lang::get("models/datatype.attributes.label") }}</th>
                         <th>{{ Lang::get("models/datatype.attributes.slug") }}</th>
                         <th>{{ Lang::get("models/datatype.attributes.rdf_mapping") }}</th>
+                        <th>{{ Lang::get("models/datatype.attributes.linkable") }}</th>
                         <th>{{ Lang::get("models/datatype.attributes.user") }}</th>
                         <th>{{ Lang::get("models/datatype.attributes.created_at") }}</th>
                         <th>{{ Lang::get("models/datatype.attributes.updated_at") }}</th>

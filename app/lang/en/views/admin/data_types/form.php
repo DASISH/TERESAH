@@ -12,5 +12,9 @@ return array(
     "rdf_mapping" => array(
         "label" => "RDF mapping", 
         "placeholder" => "RDF mapping"
+    ),
+    "linkable" => array(
+        "label" => "Linkable", 
+        "placeholder" => ""
     )
 );

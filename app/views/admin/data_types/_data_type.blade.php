@@ -3,6 +3,7 @@
     <td>{{ link_to_route("admin.data-types.show", e($dataType->label), array("id" => $dataType->id), array("title" => Lang::get("views/admin/data_types/index.actions.show.title"))) }}</td>
     <td>{{{ $dataType->slug }}}</td>
     <td>{{{ $dataType->rdf_mapping }}}</td>
+    <td>{{{ ($dataType->linkable) ? Lang::get("models/datatype.linkable.yes") : Lang::get("models/datatype.linkable.no") }}}</td>  
     <td>{{ link_to_route("admin.users.show", e($dataType->user->name), array("id" => $dataType->user->id), array("title" => e($dataType->user->name))) }}</td>
     <td>{{{ $dataType->created_at }}}</td>
     <td>{{{ $dataType->updated_at }}}</td>

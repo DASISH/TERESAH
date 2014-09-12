@@ -41,10 +41,13 @@
                                     @foreach ($dataSource->data as $data)
                                         @if ($data->dataType)
                                             <dt>{{{ $data->dataType->label }}}</dt>
+                                            
                                             @if (filter_var($data->value, FILTER_VALIDATE_URL))
                                                 <dd><a href="{{ $data->value }}">{{{ $data->value }}}</a></dd>
-                                            @else
+                                            @elseif($data->dataType->linkable)
                                                 <dd><a href="{{ URL::to("/tools/by-facet/" . $data->dataType->slug . "/" . $data->slug) }}">{{{ $data->value }}}</a></dd>
+                                            @else
+                                                <dd>{{{ $data->value }}}</dd>
                                             @endif
                                         @endif
                                     @endforeach

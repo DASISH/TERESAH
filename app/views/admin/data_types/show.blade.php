@@ -19,7 +19,10 @@
 
                         <dt>{{ Lang::get("models/datatype.attributes.rdf_mapping") }}</dt>
                         <dd>{{ link_to($dataType->rdf_mapping, null, array("title" => e($dataType->label))) }}</dd>
-
+                        
+                        <dt>{{ Lang::get("models/datatype.attributes.linkable") }}</dt>
+                        <dd>{{{ ($dataType->linkable) ? Lang::get("models/datatype.linkable.yes") : Lang::get("models/datatype.linkable.no") }}}</dd>
+                        
                         <dt>{{ Lang::get("models/datatype.attributes.user") }}</dt>
                         <dd>{{ link_to_route("admin.users.show", e($dataType->user->name), array("id" => $dataType->user->id), array("title" => e($dataType->user->name))) }}</dd>
 
