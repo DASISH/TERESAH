@@ -12,7 +12,8 @@ class DataType extends Eloquent
     protected $fillable = array(
         "label",
         "description",
-        "rdf_mapping"
+        "rdf_mapping",
+        "linkable"
     );
 
     /**
@@ -23,7 +24,8 @@ class DataType extends Eloquent
         "label" => "required|unique:data_types|max:255",
         "slug" => "required|unique:data_types|max:255",
         "description" => "sometimes|max:1024",
-        "rdf_mapping" => "sometimes|url|max:255"
+        "rdf_mapping" => "sometimes|url|max:255",
+        "linkable" => "sometimes|boolean"
     );
 
     public static function boot()

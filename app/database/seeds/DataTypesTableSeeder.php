@@ -6,10 +6,10 @@ class DataTypesTableSeeder extends Seeder
     {
         $userId = User::first()->id;
         $dataTypes = array(
-            array("label" => "Name", "rdf_mapping" => "http://purl.org/dc/elements/1.1/title"),
-            array("label" => "Title", "rdf_mapping" => "http://purl.org/dc/elements/1.1/title"),
-            array("label" => "Description", "rdf_mapping" => "http://purl.org/dc/elements/1.1/description"),
-            array("label" => "Homepage", "rdf_mapping" => "http://schema.org/url"),
+            array("label" => "Name", "rdf_mapping" => "http://purl.org/dc/elements/1.1/title", "linkable" => false),
+            array("label" => "Title", "rdf_mapping" => "http://purl.org/dc/elements/1.1/title", "linkable" => false),
+            array("label" => "Description", "rdf_mapping" => "http://purl.org/dc/elements/1.1/description", "linkable" => false),
+            array("label" => "Homepage", "rdf_mapping" => "http://schema.org/url", "linkable" => false),
             array("label" => "Developer", "rdf_mapping" => "http://purl.org/dc/elements/1.1/creator"),
             array("label" => "Keyword", "rdf_mapping" => "http://purl.org/dc/elements/1.1/subject"),
             array("label" => "License", "rdf_mapping" => "http://purl.org/dc/terms/license"),
