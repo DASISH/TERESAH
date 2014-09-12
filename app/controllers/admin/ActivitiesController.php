@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\View;
 class ActivitiesController extends AdminController
 {
     protected $accessControlList = array(
-        "administrator" => array("*"),
-        "supervisor" => array("index")
+        "authenticated_user" => array(),
+        "collaborator" => array(),
+        "supervisor" => array("*"),
+        "administrator" => array("*")
     );
 
     protected $activity;

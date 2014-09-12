@@ -74,6 +74,14 @@ return array(
                 "title" => "List User Accounts"
             )
         ),
+        "activities" => array(
+            "name" => "Activities",
+            "title" => "Activities",            
+            "index" => array(
+                "name" => "List Activities",
+                "title" => "List Activities"
+            )
+        ),
         "switch" => array(
             "name" => "Browse TERESAH",
             "title" => "Switch to browse TERESAH"

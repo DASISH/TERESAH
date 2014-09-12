@@ -113,11 +113,12 @@ Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
         });
     });
 
-    Route::resource("users", "UsersController");
+    Route::resource("users", "UsersController");    
+    Route::resource("activities", "ActivitiesController");
 
     Route::get("/", array(
         "as" => "admin.root",
-        "uses" => "ActivitiesController@index"
+        "uses" => "ToolsController@index"
     ));
 });
 

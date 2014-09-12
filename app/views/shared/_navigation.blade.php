@@ -31,7 +31,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" title="{{{ Auth::user()->name }}}">{{{ Auth::user()->name }}}<b class="caret"></b></a>
 
             <ul class="dropdown-menu">
-                @if (Auth::user()->isAdministrator())
+                @if (Auth::user()->hasAdminAccess())
                     <li>{{ link_to_route("admin.root", Lang::get("views/pages/navigation.switch.name"), null, array("title" => Lang::get("views/pages/navigation.switch.title"))) }}</li>
                 @endif
                 <li><a href="{{ URL::route("users.edit") }}" title="{{ Lang::get("views/pages/navigation.edit_user_profile.title") }}"><span class="glyphicon glyphicon-user"></span> <span>{{ Lang::get("views/pages/navigation.edit_user_profile.name") }}</span></a></li>

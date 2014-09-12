@@ -267,6 +267,16 @@ class User extends Eloquent implements UserInterface
     {
         return $this->user_level == self::ADMINISTRATOR;
     }
+    
+    /**
+     * Check if the user is of sufficient level to access Admin section
+     *
+     * @return boolean
+     */
+    public function hasAdminAccess()
+    {
+        return $this->isAdministrator() || $this->isSupervisor() || $this->isCollaborator();
+    }
 
     public function userLevelName()
     {

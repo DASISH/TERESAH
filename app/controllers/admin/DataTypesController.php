@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\View;
 class DataTypesController extends AdminController
 {
     protected $accessControlList = array(
+        "authenticated_user" => array(),
+        "collaborator" => array("index", "show", "create", "edit", "store", "update"),
+        "supervisor" => array("*"),
         "administrator" => array("*")
     );
 

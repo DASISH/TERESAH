@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\View;
 class UsersController extends AdminController
 {
     protected $accessControlList = array(
+        "authenticated_user" => array(),
+        "collaborator" => array(),
+        "supervisor" => array(),
         "administrator" => array("*")
     );
 
