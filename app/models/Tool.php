@@ -58,6 +58,13 @@ class Tool extends Eloquent
         return $this->belongsTo("User");
     }
 
+    public function scopeOfDataValue($query, $value)
+    {
+        return $query->where('data', function($q) use($value){
+                    $q->where('value', 'like', "%$value%");
+        });
+    }    
+    
     public function getAbbreviationAttribute()
     {
         return substr(preg_replace("~\b(\w)|.~", "$1", $this->name), 0, 4);
