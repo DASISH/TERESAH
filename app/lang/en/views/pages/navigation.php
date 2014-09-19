@@ -22,8 +22,8 @@ return array(
                 "title" => "Edit Data Source"
             ),
             "index" => array(
-                "name" => "List Data Sources",
-                "title" => "List Data Sources"
+                "name" => "Manage Data Sources",
+                "title" => "Manage Data Sources"
             )
         ),
         "data_types" => array(
@@ -38,8 +38,8 @@ return array(
                 "title" => "Edit Data Type"
             ),
             "index" => array(
-                "name" => "List Data Types",
-                "title" => "List Data Types"
+                "name" => "Manage Data Types",
+                "title" => "Manage Data Types"
             )
         ),
         "tools" => array(
@@ -54,8 +54,8 @@ return array(
                 "title" => "Edit Tool"
             ),
             "index" => array(
-                "name" => "List Tools",
-                "title" => "List Tools"
+                "name" => "Manage Tools",
+                "title" => "Manage Tools"
             )
         ),
         "users" => array(
@@ -70,8 +70,8 @@ return array(
                 "title" => "Edit User Account"
             ),
             "index" => array(
-                "name" => "List User Accounts",
-                "title" => "List User Accounts"
+                "name" => "Manage User Accounts",
+                "title" => "Manage User Accounts"
             )
         ),
         "switch" => array(
