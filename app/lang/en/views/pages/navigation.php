@@ -6,9 +6,9 @@ return array(
         "title" => "Home"
     ),
     "admin" => array(
-        "dashboard" => array(
-            "name" => "Dashboard",
-            "title" => "Dashboard"
+        "activities" => array(
+            "name" => "Activities",
+            "title" => "Activities"
         ),
         "data_sources" => array(
             "name" => "Data Sources",
@@ -72,14 +72,6 @@ return array(
             "index" => array(
                 "name" => "List User Accounts",
                 "title" => "List User Accounts"
-            )
-        ),
-        "activities" => array(
-            "name" => "Activities",
-            "title" => "Activities",            
-            "index" => array(
-                "name" => "List Activities",
-                "title" => "List Activities"
             )
         ),
         "switch" => array(
