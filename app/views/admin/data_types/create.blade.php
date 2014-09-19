@@ -2,7 +2,7 @@
 
 @section("breadcrumb", BreadcrumbHelper::renderAdmin(array(
     link_to_route("admin.data-types.index", Lang::get("views/pages/navigation.admin.data_types.name"), array(), array("title" => Lang::get("views/pages/navigation.admin.data_types.title"))),
-    Lang::get("views/pages/navigation.admin.data-types.create.name")
+    Lang::get("views/pages/navigation.admin.data_types.create.name")
 )))
 
 @section("content")

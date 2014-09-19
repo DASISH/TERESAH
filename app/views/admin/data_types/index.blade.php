@@ -1,7 +1,7 @@
 @extends("layouts.admin")
 
 @section("breadcrumb", BreadcrumbHelper::renderAdmin(array(
-    Lang::get("views/pages/navigation.admin.data-types.name")
+    Lang::get("views/pages/navigation.admin.data_types.name")
 )))
 
 @section("content")
