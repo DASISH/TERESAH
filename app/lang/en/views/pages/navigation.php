@@ -6,13 +6,25 @@ return array(
         "title" => "Home"
     ),
     "admin" => array(
+        "home" => array(
+            "name" => "Admin home",
+            "title" => "Admin home"
+        ),
         "dashboard" => array(
             "name" => "Dashboard",
             "title" => "Dashboard"
         ),
+        "activities" => array(
+            "name" => "Activities",
+            "title" => "Activities"
+        ),
         "data_sources" => array(
             "name" => "Data Sources",
             "title" => "Data Sources",
+            "show" => array(
+                "name" => "View Data Source",
+                "title" => "View Data Source"
+            ),
             "create" => array(
                 "name" => "Add a Data Source",
                 "title" => "Add a Data Source"
@@ -22,13 +34,17 @@ return array(
                 "title" => "Edit Data Source"
             ),
             "index" => array(
-                "name" => "List Data Sources",
-                "title" => "List Data Sources"
+                "name" => "Manage Data Sources",
+                "title" => "Manage Data Sources"
             )
         ),
         "data_types" => array(
             "name" => "Data Types",
             "title" => "Data Types",
+            "show" => array(
+                "name" => "View Data Type",
+                "title" => "View Data Type"
+            ),
             "create" => array(
                 "name" => "Add a Data Type",
                 "title" => "Add a Data Type"
@@ -38,13 +54,17 @@ return array(
                 "title" => "Edit Data Type"
             ),
             "index" => array(
-                "name" => "List Data Types",
-                "title" => "List Data Types"
+                "name" => "Manage Data Types",
+                "title" => "Manage Data Types"
             )
         ),
         "tools" => array(
             "name" => "Tools",
             "title" => "Tools",
+            "show" => array(
+                "name" => "View Tool",
+                "title" => "View Tool"
+            ),
             "create" => array(
                 "name" => "Add a Tool",
                 "title" => "Add a Tool"
@@ -54,13 +74,17 @@ return array(
                 "title" => "Edit Tool"
             ),
             "index" => array(
-                "name" => "List Tools",
-                "title" => "List Tools"
+                "name" => "Manage Tools",
+                "title" => "Manage Tools"
             )
         ),
         "users" => array(
             "name" => "Users",
             "title" => "Users",
+            "show" => array(
+                "name" => "View User Account",
+                "title" => "View User Account"
+            ),
             "create" => array(
                 "name" => "Create a new User Account",
                 "title" => "Create a new User Account"
@@ -70,16 +94,8 @@ return array(
                 "title" => "Edit User Account"
             ),
             "index" => array(
-                "name" => "List User Accounts",
-                "title" => "List User Accounts"
-            )
-        ),
-        "activities" => array(
-            "name" => "Activities",
-            "title" => "Activities",            
-            "index" => array(
-                "name" => "List Activities",
-                "title" => "List Activities"
+                "name" => "Manage User Accounts",
+                "title" => "Manage User Accounts"
             )
         ),
         "switch" => array(
