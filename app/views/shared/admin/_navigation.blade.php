@@ -1,23 +1,28 @@
 <ul class="nav navbar-nav">
-    <li>{{ link_to_route("admin.root", Lang::get("views/pages/navigation.admin.dashboard.name"), null, array("title" => Lang::get("views/pages/navigation.admin.dashboard.title"))) }}</li>
-    @if (Auth::user()->isAdministrator() || Auth::user()->isSupervisor() || Auth::user()->isCollaborator())
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.data_types.title") }}">{{ Lang::get("views/pages/navigation.admin.data_types.name") }}<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li>{{ link_to_route("admin.data-types.index", Lang::get("views/pages/navigation.admin.data_types.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.data_types.index.title"))) }}</li>
-            <li>{{ link_to_route("admin.data-types.create", Lang::get("views/pages/navigation.admin.data_types.create.name"), null, array("title" => Lang::get("views/pages/navigation.admin.data_types.create.title"))) }}</li>
-        </ul>
-    </li>
-    @endif
     @if (Auth::user()->isAdministrator() || Auth::user()->isSupervisor())
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.data_sources.title") }}">{{ Lang::get("views/pages/navigation.admin.data_sources.name") }}<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li>{{ link_to_route("admin.data-sources.index", Lang::get("views/pages/navigation.admin.data_sources.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.data_sources.index.title"))) }}</li>
-            <li>{{ link_to_route("admin.data-sources.create", Lang::get("views/pages/navigation.admin.data_sources.create.name"), null, array("title" => Lang::get("views/pages/navigation.admin.data_sources.create.title"))) }}</li>
-        </ul>
-    </li>
+        <li>{{ link_to_route("admin.activities.index", Lang::get("views/pages/navigation.admin.activities.name"), null, array("title" => Lang::get("views/pages/navigation.admin.activities.title"))) }}</li>
     @endif
+
+    @if (Auth::user()->isAdministrator() || Auth::user()->isSupervisor() || Auth::user()->isCollaborator())
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.data_types.title") }}">{{ Lang::get("views/pages/navigation.admin.data_types.name") }}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>{{ link_to_route("admin.data-types.index", Lang::get("views/pages/navigation.admin.data_types.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.data_types.index.title"))) }}</li>
+                <li>{{ link_to_route("admin.data-types.create", Lang::get("views/pages/navigation.admin.data_types.create.name"), null, array("title" => Lang::get("views/pages/navigation.admin.data_types.create.title"))) }}</li>
+            </ul>
+        </li>
+    @endif
+
+    @if (Auth::user()->isAdministrator() || Auth::user()->isSupervisor())
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.data_sources.title") }}">{{ Lang::get("views/pages/navigation.admin.data_sources.name") }}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>{{ link_to_route("admin.data-sources.index", Lang::get("views/pages/navigation.admin.data_sources.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.data_sources.index.title"))) }}</li>
+                <li>{{ link_to_route("admin.data-sources.create", Lang::get("views/pages/navigation.admin.data_sources.create.name"), null, array("title" => Lang::get("views/pages/navigation.admin.data_sources.create.title"))) }}</li>
+            </ul>
+        </li>
+    @endif
+
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.tools.title") }}">{{ Lang::get("views/pages/navigation.admin.tools.name") }}<b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -25,22 +30,15 @@
             <li>{{ link_to_route("admin.tools.create", Lang::get("views/pages/navigation.admin.tools.create.name"), null, array("title" => Lang::get("views/pages/navigation.admin.tools.create.title"))) }}</li>
         </ul>
     </li>
+
     @if (Auth::user()->isAdministrator())
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.users.title") }}">{{ Lang::get("views/pages/navigation.admin.users.name") }}<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li>{{ link_to_route("admin.users.index", Lang::get("views/pages/navigation.admin.users.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.users.index.title"))) }}</li>
-            <li>{{ link_to_route("admin.users.create", Lang::get("views/pages/navigation.admin.users.create.name"), null, array("title" => Lang::get("views/pages/navigation.admin.users.create.title"))) }}</li>
-        </ul>
-    </li>
-    @endif
-    @if (Auth::user()->isAdministrator() || Auth::user()->isSupervisor())
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.activities.title") }}">{{ Lang::get("views/pages/navigation.admin.activities.name") }}<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li>{{ link_to_route("admin.activities.index", Lang::get("views/pages/navigation.admin.activities.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.activities.index.title"))) }}</li>
-        </ul>
-    </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.admin.users.title") }}">{{ Lang::get("views/pages/navigation.admin.users.name") }}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>{{ link_to_route("admin.users.index", Lang::get("views/pages/navigation.admin.users.index.name"), null, array("title" => Lang::get("views/pages/navigation.admin.users.index.title"))) }}</li>
+                <li>{{ link_to_route("admin.users.create", Lang::get("views/pages/navigation.admin.users.create.name"), null, array("title" => Lang::get("views/pages/navigation.admin.users.create.title"))) }}</li>
+            </ul>
+        </li>
     @endif
 </ul>
 <!-- /nav.navbar-nav -->
