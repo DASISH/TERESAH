@@ -1,5 +1,10 @@
 @extends("layouts.admin")
 
+@section("breadcrumb", BreadcrumbHelper::renderAdmin(array(
+    link_to_route("admin.users.index", Lang::get("views/pages/navigation.admin.users.name"), array(), array("title" => Lang::get("views/pages/navigation.admin.users.title"))),
+    Lang::get("views/pages/navigation.admin.users.show.name")
+)))
+
 @section("content")
     <div class="row">
         <div class="col-sm-12">
