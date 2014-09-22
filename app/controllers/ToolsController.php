@@ -99,33 +99,46 @@ class ToolsController extends BaseController {
     
     public function search($query = null) {
         $query = Input::get("query", $query);
+        $tool_ids = array();
+
+        $types = DataType::select("id", "slug", "Label")
+                    ->where("linkable", true)
+                    ->has("data", ">", 0)->get();
+        
         if($query == null) {
-            $tools = $this->tool->has("data", ">", 0)
-                    ->orderBy("name", "ASC")->paginate(20);
+            $tools = $this->tool->has("data", ">", 0);
+            $tool_id_query = Tool::has("data", ">", 0);
         }else{
-            $tools = $this->tool->matchingString($query)
-                    ->orderBy("name", "ASC")->paginate(20);
-            $tool_ids = Tool::matchingString($query)->lists('id');
+            $tools = $this->tool->matchingString($query);
+            $tool_id_query = Tool::matchingString($query);
         }
+
+        foreach($types as $type) {
+            if(Input::has($type->slug)){
+
+                $values = ArgumentsHelper::getArgumentValues($type->slug);
+                foreach($values as $value){
+                    $tools->haveFacet($type->id, $value);
+
+                    $tool_id_query->haveFacet($type->id, $value)->lists('id');
+                }
+            }
+        }
+
+        $tool_ids = $tool_id_query->lists('id');
+        
+        $tools = $tools->orderBy("name", "ASC")->paginate(20);
         
         $facetList = array();
         
-        $types = DataType::select("id", "slug", "Label")
-                            ->where("linkable", "=", true)
-                            ->has("data", ">", 0)->get();
-        
         foreach($types as $type) {
             if($type->slug) {
-                if($query == null) {
-                    $type->values = Data::select("value", "slug", DB::raw("count(tool_id) as total"))
-                                        ->where("data_type_id", $type->id)    
-                                        ->groupBy("value")->orderBy("total", "DESC")->get();
-                } else {
-                    $type->values = Data::select("value", "slug", DB::raw("count(tool_id) as total"))
-                                        ->where("data_type_id", $type->id)    
-                                        ->whereIn("tool_id", $tool_ids)
-                                        ->groupBy("value")->orderBy("total", "DESC")->get();                    
+                $result =  Data::select("value", "slug", DB::raw("count(tool_id) as total"))
+                                        ->where("data_type_id", $type->id);
+                if(count($tool_ids) > 0) {
+                    $result->whereIn("tool_id", $tool_ids);           
                 }
+                $type->values = $result->groupBy("value")->orderBy("total", "DESC")->get();
                 $facetList[] = $type;
             }
         }

@@ -67,9 +67,16 @@ class Tool extends Eloquent
     
     public function scopeMatchingString($query, $value)
     {
-        return $query->whereHas("data", function($query) use($value){
+        return $query->where("name", "LIKE", "%$value%")->whereHas("data", function($query) use($value){
             $query->where("value", "LIKE", "%$value%");
-        })->orWhere("name", "LIKE", "%$value%");
+        });
+    }
+    
+    public function scopeHaveFacet($query, $data_type_id, $value)
+    {
+        return $query->whereHas("data", function($query) use($value, $data_type_id){
+            $query->where("slug", $value)->where("data_type_id", $data_type_id);
+        });
     }    
     
     public function getAbbreviationAttribute()

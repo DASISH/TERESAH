@@ -29,6 +29,15 @@ class ArgumentsHelper
         return $arguments;
     }    
     
+    public static function getArgumentValues($key) {
+        $arguments = Input::all();
+        if(array_key_exists($key, $arguments) && strpos(urldecode($arguments[$key]), ',') !== FALSE){
+            return explode(',', urldecode($arguments[$key]));
+        }else{
+            return array($arguments[$key]);
+        }
+    }        
+    
     public static function keyValueActive($key, $value) {
         $arguments = Input::all();
         if(array_key_exists($key, $arguments)){

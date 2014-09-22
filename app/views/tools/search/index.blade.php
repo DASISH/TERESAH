@@ -9,17 +9,22 @@
     
     <div class="col-md-3">
         @foreach ($facetList as $facet)
-        <h3>{{ $facet->Label }}</h3>
-        <ul class="list-group">
-            @foreach ($facet->values as $value)
-              @if(ArgumentsHelper::keyValueActive($facet->slug, $value->slug)) 
-                <li class="list-group-item">{{ link_to_route("tools.search", "", ArgumentsHelper::removeKeyValue($facet->slug, $value->slug), array("class" => "btn btn-default btn-xs glyphicon glyphicon-minus")) }}<span class="badge"><strong>{{ $value->total }}</span>{{ $value->value }}</strong></li>
-              @else
-                <li class="list-group-item"><span class="badge">{{ $value->total }}</span>{{ link_to_route('tools.search', $value->value, ArgumentsHelper::addKeyValue($facet->slug, $value->slug)), null }}</li>
-              @endif
-            @endforeach
+            @if(count($facet->values) > 0)
+            <h3>{{ $facet->Label }}</h3>
+            <ul class="list-group">
+                @foreach ($facet->values as $value)
+                  @if(ArgumentsHelper::keyValueActive($facet->slug, $value->slug)) 
+                    <li class="list-group-item">{{ link_to_route("tools.search", "", ArgumentsHelper::removeKeyValue($facet->slug, $value->slug), array("class" => "btn btn-default btn-xs glyphicon glyphicon-minus")) }}<span class="badge"><strong>{{ $value->total }}</span>{{ $value->value }}</strong></li>
+                  @else
+                    <li class="list-group-item"><span class="badge">{{ $value->total }}</span>{{ link_to_route('tools.search', $value->value, ArgumentsHelper::addKeyValue($facet->slug, $value->slug)), null }}</li>
+                  @endif
+                @endforeach
+
+
+            </ul>
+            @endif
         @endforeach
-        </ul>
+        
     </div>
     <div class="col-md-8">
         {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "form-inline")) }}
