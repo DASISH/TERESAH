@@ -83,7 +83,10 @@ Route::get("tools/by-facet/{facet}/{value}", "ToolsController@byFacet");
 Route::get("tools/quicksearch/{query}", "ToolsController@quicksearch");
 
 #Search
-Route::get("search", "ToolsController@search");
+Route::get("search", array(
+    "as" => "tools.search",
+    "uses" => "ToolsController@search"
+));
 Route::get("search/{query}", "ToolsController@search");
 
 Route::resource("tools", "ToolsController", array(

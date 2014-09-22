@@ -1,8 +1,7 @@
 @extends("layouts.default")
 
 @section("breadcrumb", BreadcrumbHelper::render(array(
-    Lang::get("views/pages/navigation.browse.name"), 
-    Lang::get("views/pages/navigation.browse.all.name")
+    Lang::get("views/pages/navigation.search.name")
 )))
 
 @section("content")
@@ -13,18 +12,19 @@
         <h3>{{ $facet->Label }}</h3>
         <ul class="list-group">
             @foreach ($facet->values as $value)
-            <li class="list-group-item"><span class="badge">{{ $value->total }}</span>{{ $value->value }}</li>
+            <li class="list-group-item"><a href="#"><span class="badge">{{ $value->total }}</span>{{ $value->value }}</a></li>
             @endforeach
         @endforeach
         </ul>
     </div>
     <div class="col-md-8">
-        <form class="navbar-form navbar-left" role="search">
+        {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "form-inline")) }}
           <div class="form-group">
             {{ Form::text("query", $query, array("class" => "form-control", "placeholder" => Lang::get("views/tools/search/form.search.placeholder"))) }}
+            {{ Form::submit(Lang::get("views/tools/search/form.search.label"), array("class"=>"btn btn-primary glyphicon glyphicon-search")) }}
           </div>
-          <button type="submit" class="btn btn-primary glyphicon glyphicon-search"> {{ Lang::get("views/tools/search/form.search.label") }}</button>
-        </form>
+          
+        {{ Form::close() }}
         
         <div class="row">
             <div class="col-sm-12">

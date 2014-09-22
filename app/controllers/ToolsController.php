@@ -98,18 +98,22 @@ class ToolsController extends BaseController {
     }
     
     public function search($query = null) {
+        $query = Input::get("query", $query);
         if($query == null) {
             $tools = $this->tool->has("data", ">", 0)
                     ->orderBy("name", "ASC")->paginate(20);
         }else{
-            $tools = $this->tool->ofDataValue($query);
-            
-    
+            $tools = $this->tool->matchingString($query)
+                    
+                    ->orderBy("name", "ASC")->paginate(20);
         }
         
         $facetList = array();
         
-        $types = DataType::select("id", "slug", "Label")->where("linkable", "=", true)->has("data", ">", 0)->get();
+        $types = DataType::select("id", "slug", "Label")
+                            ->where("linkable", "=", true)
+                            ->has("data", ">", 0)->get();
+        
         foreach($types as $type) {
             if($type->slug) {
                 $type->values = Data::select("value", "slug", DB::raw("count(tool_id) as total"))

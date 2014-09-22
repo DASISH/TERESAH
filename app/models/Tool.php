@@ -58,11 +58,18 @@ class Tool extends Eloquent
         return $this->belongsTo("User");
     }
 
-    public function scopeOfDataValue($query, $value)
+    public function scopeHaveDataValueLike($query, $value)
     {
-        return $query->where('data', function($q) use($value){
-                    $q->where('value', 'like', "%$value%");
+        return $query->whereHas("data", function($query) use($value){
+            $query->where("value", "like", "%$value%");
         });
+    }
+    
+    public function scopeMatchingString($query, $value)
+    {
+        return $query->whereHas("data", function($query) use($value){
+            $query->where("value", "LIKE", "%$value%");
+        })->orWhere("name", "LIKE", "%$value%");
     }    
     
     public function getAbbreviationAttribute()

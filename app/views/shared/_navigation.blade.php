@@ -7,13 +7,7 @@
             <li><a href="#" title="{{ Lang::get("views/pages/navigation.browse.facets.title") }}">{{ Lang::get("views/pages/navigation.browse.facets.name") }}</a></li>
         </ul>
     </li>
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.search.title") }}">{{ Lang::get("views/pages/navigation.search.name") }}<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li><a href="#" title="{{ Lang::get("views/pages/navigation.search.general.title") }}">{{ Lang::get("views/pages/navigation.search.general.name") }}</a></li>
-            <li><a href="#" title="{{ Lang::get("views/pages/navigation.search.faceted.title") }}">{{ Lang::get("views/pages/navigation.search.faceted.name") }}</a></li>
-        </ul>
-    </li>
+    <li>{{ link_to_route("tools.search", Lang::get("views/pages/navigation.search.title"),null, array("title" => Lang::get("views/pages/navigation.search.title"))) }}</li>
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.about.title") }}">{{ Lang::get("views/pages/navigation.about.name") }}<b class="caret"></b></a>
         <ul class="dropdown-menu">
