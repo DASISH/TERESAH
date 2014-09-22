@@ -19,8 +19,6 @@
                     <li class="list-group-item"><span class="badge">{{ $value->total }}</span>{{ link_to_route('tools.search', $value->value, ArgumentsHelper::addKeyValue($facet->slug, $value->slug), array("rel" => "nofollow")) }}</li>
                   @endif
                 @endforeach
-
-
             </ul>
             @endif
         @endforeach

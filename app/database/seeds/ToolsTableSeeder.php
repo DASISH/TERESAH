@@ -48,6 +48,7 @@ class ToolsTableSeeder extends Seeder
             array("name" => "Anvil"),
             array("name" => "ArcExplorer"),
             array("name" => "ArcGis"),
+            array("name" => "QGIS"),
             array("name" => "ArcView"),
             array("name" => "Archeosurveyor"),
             array("name" => "Archive-It"),

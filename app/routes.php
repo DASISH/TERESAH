@@ -87,7 +87,6 @@ Route::get("search", array(
     "as" => "tools.search",
     "uses" => "ToolsController@search"
 ));
-Route::get("search/{query}", "ToolsController@search");
 
 Route::resource("tools", "ToolsController", array(
     "only" => array("index", "show")
