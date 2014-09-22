@@ -104,8 +104,8 @@ class ToolsController extends BaseController {
                     ->orderBy("name", "ASC")->paginate(20);
         }else{
             $tools = $this->tool->matchingString($query)
-                    
                     ->orderBy("name", "ASC")->paginate(20);
+            $tool_ids = Tool::matchingString($query)->lists('id');
         }
         
         $facetList = array();
@@ -116,9 +116,16 @@ class ToolsController extends BaseController {
         
         foreach($types as $type) {
             if($type->slug) {
-                $type->values = Data::select("value", "slug", DB::raw("count(tool_id) as total"))
-                                            ->where("data_type_id", $type->id)
-                                            ->groupBy("value")->orderBy("total", "DESC")->get();
+                if($query == null) {
+                    $type->values = Data::select("value", "slug", DB::raw("count(tool_id) as total"))
+                                        ->where("data_type_id", $type->id)    
+                                        ->groupBy("value")->orderBy("total", "DESC")->get();
+                } else {
+                    $type->values = Data::select("value", "slug", DB::raw("count(tool_id) as total"))
+                                        ->where("data_type_id", $type->id)    
+                                        ->whereIn("tool_id", $tool_ids)
+                                        ->groupBy("value")->orderBy("total", "DESC")->get();                    
+                }
                 $facetList[] = $type;
             }
         }

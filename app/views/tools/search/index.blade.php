@@ -12,7 +12,11 @@
         <h3>{{ $facet->Label }}</h3>
         <ul class="list-group">
             @foreach ($facet->values as $value)
-            <li class="list-group-item"><a href="#"><span class="badge">{{ $value->total }}</span>{{ $value->value }}</a></li>
+              @if(ArgumentsHelper::keyValueActive($facet->slug, $value->slug)) 
+                <li class="list-group-item">{{ link_to_route("tools.search", "", ArgumentsHelper::removeKeyValue($facet->slug, $value->slug), array("class" => "btn btn-default btn-xs glyphicon glyphicon-minus")) }}<span class="badge"><strong>{{ $value->total }}</span>{{ $value->value }}</strong></li>
+              @else
+                <li class="list-group-item"><span class="badge">{{ $value->total }}</span>{{ link_to_route('tools.search', $value->value, ArgumentsHelper::addKeyValue($facet->slug, $value->slug)), null }}</li>
+              @endif
             @endforeach
         @endforeach
         </ul>
