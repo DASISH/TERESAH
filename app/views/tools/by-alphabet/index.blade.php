@@ -1,9 +1,8 @@
 @extends("layouts.default")
 
 @section("breadcrumb", BreadcrumbHelper::render(array(
-    Lang::get("views/pages/navigation.browse.name"), 
-    Lang::get("views/pages/navigation.browse.by-alphabet.name"),
-    $startsWith
+    link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
+    Lang::get("views/pages/navigation.browse.by-alphabet.name")." - ".$startsWith
 )))
 
 @section("content")

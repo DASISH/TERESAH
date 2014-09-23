@@ -1,7 +1,6 @@
 @extends("layouts.default")
 
 @section("breadcrumb", BreadcrumbHelper::render(array(
-    Lang::get("views/pages/navigation.browse.name"), 
     Lang::get("views/pages/navigation.browse.all.name")
 )))
 
