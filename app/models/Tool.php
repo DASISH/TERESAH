@@ -67,7 +67,7 @@ class Tool extends Eloquent
     
     public function scopeMatchingString($query, $value)
     {
-        return $query->where("name", "LIKE", "%$value%")->whereHas("data", function($query) use($value){
+        return $query->where("name", "LIKE", "%$value%")->orWhereHas("data", function($query) use($value){
             $query->where("value", "LIKE", "%$value%");
         });
     }
