@@ -325,7 +325,7 @@ class User extends Eloquent implements UserInterface
      *
      * @return void
      */
-    private function hashPassword()
+    public function hashPassword()
     {
         if (isset($this->password) && $this->password != $this->getOriginal("password")) {
             $this->password = Hash::make($this->password);
@@ -339,13 +339,13 @@ class User extends Eloquent implements UserInterface
      *
      * @return void
      */
-    private function purgeRedundantAttributes()
+    public function purgeRedundantAttributes()
     {
         if (isset($this->password_confirmation)) {
             unset($this->password_confirmation);
         }
     }
-    
+
     public static function getUserByEmail($email_address)
     {
         $users = User::where("email_address", "=", $email_address)->take(1)->get();
