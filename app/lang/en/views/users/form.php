@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    "heading" => "Profile details",
     "name" => array(
         "label" => "Name", 
         "placeholder" => "Name"

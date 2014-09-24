@@ -1,3 +1,4 @@
+<h3>{{ Lang::get("views/users/form.heading") }}</h3>
 <div class="panel panel-default">
     {{ Form::model($user, $options) }}
         <div class="panel-body">
