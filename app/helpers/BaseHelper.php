@@ -55,4 +55,16 @@ class BaseHelper
 
         return $availableLocales;
     }
+
+    public static function secureHash($input, $algorithm = "sha256")
+    {
+        $salt = Config::get("app.key");
+
+        return hash($algorithm, "{$salt}{$input}".strrev($salt));
+    }
+
+    public static function secureRandom($length = 64)
+    {
+        return str_shuffle(str_random($length));
+    }
 }

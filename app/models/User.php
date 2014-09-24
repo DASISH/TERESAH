@@ -27,7 +27,10 @@ class User extends Eloquent implements UserInterface
         "password",
         "password_confirmation",
         "active",
-        "user_level"
+        "user_level",
+        "remember_token",
+        "password_reset_token",
+        "password_reset_sent_at"
     );
 
     /**
@@ -81,6 +84,11 @@ class User extends Eloquent implements UserInterface
         return $this->hasMany("Activity");
     }
 
+    public function apiKeys()
+    {
+        return $this->hasMany("ApiKey");
+    }
+
     public function data()
     {
         return $this->hasMany("Data");
@@ -101,14 +109,14 @@ class User extends Eloquent implements UserInterface
         return $this->hasMany("Login");
     }
 
-    public function apiKeys()
-    {
-        return $this->hasMany("ApiKey");
-    }
-
     public function tools()
     {
         return $this->hasMany("Tool");
+    }
+
+    public function scopeActiveUsers($query)
+    {
+        return $query->where("active", "=", true);
     }
 
     /**
@@ -348,7 +356,7 @@ class User extends Eloquent implements UserInterface
             return $users[0];
         }
     }
-    
+
     public static function getUserByResetToken($token)
     {
         $users = User::where("password_reset_token", "=", $token)->take(1)->get();
