@@ -2,7 +2,7 @@
 
 class ToolsController extends BaseController {
 
-    protected $skipAuthentication = array("index", "show", "export", "byAlphabet", "byFacet", "listByAlphabet", "search", "quicksearch");
+    protected $skipAuthentication = array("index", "show", "export", "byAlphabet", "listFacetTypes", "listFacetValues", "byFacet", "listByAlphabet", "search", "quicksearch");
     protected $tool;
     protected $dataSource;
 
@@ -54,18 +54,19 @@ class ToolsController extends BaseController {
     }
 
     public function byFacet($type, $value) {
-        //dd($type);
-        $dataType = DataType::select("id")->where("slug", $type)->pluck("id");
+        $dataType = DataType::where("slug", $type)->first();
+        $data = Data::where("slug", $value)->first();
         
         $tools = $this->tool
                 ->whereHas("data", function($query) use($dataType, $value) {
                     $query->where("slug", $value)
-                          ->where("data_type_id",$dataType);
+                          ->where("data_type_id",$dataType->id);
                 })
                 ->orderBy("name", "ASC")->paginate(20);    
                 
-        return View::make("tools.index", compact("tools"))
-                ->with("alphaList", $this->listByAlphabet());                    
+        return View::make("tools.by-facet.by-data-value", compact("tools"))
+                ->with("dataType", $dataType)
+                ->with("data", $data);                    
     }
     
     /**
@@ -84,7 +85,7 @@ class ToolsController extends BaseController {
                 ->with("alphaList", $this->listByAlphabet($startsWith))
                 ->with("startsWith", $startsWith);        
     }
-    
+       
     /**
      * Generates a list with unique first caracters for all tools
      * @return View

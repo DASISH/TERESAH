@@ -14,7 +14,7 @@
             <ul class="list-group">
                 @foreach ($facet->values as $value)
                   @if(ArgumentsHelper::keyValueActive($facet->slug, $value->slug)) 
-                    <li class="list-group-item">{{ link_to_route("tools.search", "", ArgumentsHelper::removeKeyValue($facet->slug, $value->slug), array("class" => "btn btn-default btn-xs glyphicon glyphicon-minus", "rel" => "nofollow")) }}<span class="badge"><strong>{{ $value->total }}</span>{{ $value->value }}</strong></li>
+                    <li class="list-group-item text-primary">{{ link_to_route("tools.search", "", ArgumentsHelper::removeKeyValue($facet->slug, $value->slug), array("class" => "btn btn-default btn-xs glyphicon glyphicon-remove", "rel" => "nofollow")) }}<span class="badge"><strong>{{ $value->total }}</span>{{ $value->value }}</strong></li>
                   @else
                     <li class="list-group-item"><span class="badge">{{ $value->total }}</span>{{ link_to_route('tools.search', $value->value, ArgumentsHelper::addKeyValue($facet->slug, $value->slug), array("rel" => "nofollow")) }}</li>
                   @endif

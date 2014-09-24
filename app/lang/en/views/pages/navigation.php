@@ -125,6 +125,9 @@ return array(
         ),
         "by-alphabet" => array(
             "name" => "By alphabet"
+        ),
+        "by-facet" => array(
+            "name" => "By facet"
         )
     ),
     "search" => array(

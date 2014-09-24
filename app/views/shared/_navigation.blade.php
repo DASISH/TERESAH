@@ -4,7 +4,8 @@
         <a class="dropdown-toggle" data-toggle="dropdown" title="{{ Lang::get("views/pages/navigation.browse.title") }}">{{ Lang::get("views/pages/navigation.browse.name") }}<b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li>{{ link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.title"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))) }}</li>
-            <li><a href="#" title="{{ Lang::get("views/pages/navigation.browse.facets.title") }}">{{ Lang::get("views/pages/navigation.browse.facets.name") }}</a></li>
+            <li>{{ link_to_route("by-facet", Lang::get("views/pages/navigation.browse.facets.title"), null, array("title" => Lang::get("views/pages/navigation.browse.facets.title"))) }}</li>
+            
         </ul>
     </li>
     <li>{{ link_to_route("tools.search", Lang::get("views/pages/navigation.search.title"),null, array("title" => Lang::get("views/pages/navigation.search.title"))) }}</li>

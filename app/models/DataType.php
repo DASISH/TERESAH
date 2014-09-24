@@ -56,6 +56,11 @@ class DataType extends Eloquent
         return $this->belongsTo("User");
     }
 
+    public function scopeIsLinkable($query)
+    {
+        return $query->where("linkable", true);
+    }    
+    
     /**
      * Normalize the data type label.
      *
