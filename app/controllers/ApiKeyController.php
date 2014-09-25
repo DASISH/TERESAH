@@ -44,15 +44,19 @@ class ApiKeyController extends \BaseController {
      * @return Redirect
      */
     public function destroy($id)
-    {
-        $key = ApiKey::find($id);
-
-        if ($key->delete()) {
-            return Redirect::route("users.edit")
-                ->with("success", Lang::get("controllers/api-key.destroy.success"));
+    {               
+        $key = $this->user->apiKeys()->find($id);
+        
+        if($key !== null){            
+            if ($key->delete()) {
+                return Redirect::route("users.edit")
+                    ->with("success", Lang::get("controllers/api-key.destroy.success"));
+            } else {
+                return Redirect::route("users.edit", $id)
+                    ->with("error", Lang::get("controllers/api-key.destroy.error"));
+            }        
         } else {
-            return Redirect::route("users.edit", $id)
-                ->with("error", Lang::get("controllers/api-key.destroy.error"));
-        }
+            App::abort(404);
+        }        
     }
 }
