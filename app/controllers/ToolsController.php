@@ -53,6 +53,12 @@ class ToolsController extends BaseController {
         }
     }
 
+    /**
+     * Lists all Tools linked to a specific data value and data type
+     * @param type $type data_type slug
+     * @param type $value data value
+     * @return type View
+     */
     public function byFacet($type, $value) {
         $dataType = DataType::where("slug", $type)->first();
         $data = Data::where("slug", $value)->first();
@@ -88,16 +94,25 @@ class ToolsController extends BaseController {
        
     /**
      * Generates a list with unique first caracters for all tools
+     * 
+     * @param char selected selected character
      * @return View
      */
     public function listByAlphabet($selected = null) {
         $caracters = $this->tool->select(DB::raw("LEFT(UCASE(name), 1) AS caracter"))->has('data', '>', 0)
                       ->groupBy(DB::raw("caracter"))
-                      ->orderBy("name", "ASC")->lists('caracter');
+                      ->orderBy("caracter", "ASC")->lists('caracter');
         
         return View::make("tools._by_alphabet", compact("caracters"))->with('selected', $selected);
     }
     
+    /**
+     * Search for tool and facet filter
+     * GET /tools/search
+     * 
+     * @param type $query search query to match against tool name and data vales
+     * @return type View
+     */
     public function search($query = null) {
         $query = Input::get("query", $query);
         $tool_ids = array();
