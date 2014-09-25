@@ -11,8 +11,13 @@ class DataTypeController extends BaseController {
         $this->dataType = $dataType;
     }
     
+    /**
+     * Lists all linkable datatypes
+     * @return type
+     */
     public function index(){
-        $dataTypes = DataType::isLinkable()->orderBy("label", "ASC")->get();
+        $dataTypes = DataType::isLinkable()->has('data', '>', 0)
+                ->orderBy("label", "ASC")->get();
         
         return View::make("tools.by-facet.index", compact("dataTypes"));
     }
