@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2477c89387aded5f044c7dca20b107a4",
+    "hash": "8173b28cb5b197ec854dc5ca5b516169",
     "packages": [
         {
             "name": "artdarek/oauth-4-laravel",
@@ -967,17 +967,17 @@
         },
         {
             "name": "ml/json-ld",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "target-dir": "ML/JsonLD",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lanthaler/JsonLD.git",
-                "reference": "a5289f418ea60d7c8155e0e9853183f782f6eb00"
+                "reference": "10a03f7dec0f4a7db6b2e6e6230cdfb7cce562a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lanthaler/JsonLD/zipball/a5289f418ea60d7c8155e0e9853183f782f6eb00",
-                "reference": "a5289f418ea60d7c8155e0e9853183f782f6eb00",
+                "url": "https://api.github.com/repos/lanthaler/JsonLD/zipball/10a03f7dec0f4a7db6b2e6e6230cdfb7cce562a2",
+                "reference": "10a03f7dec0f4a7db6b2e6e6230cdfb7cce562a2",
                 "shasum": ""
             },
             "require": {
@@ -1012,7 +1012,7 @@
                 "JSON-LD",
                 "jsonld"
             ],
-            "time": "2014-07-07 15:10:43"
+            "time": "2014-09-15 10:41:19"
         },
         {
             "name": "monolog/monolog",
