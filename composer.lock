@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8173b28cb5b197ec854dc5ca5b516169",
+    "hash": "2492b2c52231d408728041e6149c7758",
     "packages": [
         {
             "name": "artdarek/oauth-4-laravel",
@@ -2477,16 +2477,16 @@
         },
         {
             "name": "watson/validating",
-            "version": "0.9.5",
+            "version": "0.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dwightwatson/validating.git",
-                "reference": "eb16e6799dd5f47b10381d5d181696e90804e12d"
+                "reference": "4f28569cf318f8aff2ea38b5e5695103ff4cb226"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/eb16e6799dd5f47b10381d5d181696e90804e12d",
-                "reference": "eb16e6799dd5f47b10381d5d181696e90804e12d",
+                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/4f28569cf318f8aff2ea38b5e5695103ff4cb226",
+                "reference": "4f28569cf318f8aff2ea38b5e5695103ff4cb226",
                 "shasum": ""
             },
             "require": {
@@ -2522,7 +2522,7 @@
                 "laravel",
                 "validation"
             ],
-            "time": "2014-07-20 01:32:25"
+            "time": "2014-09-23 06:33:46"
         }
     ],
     "packages-dev": [
