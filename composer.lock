@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad10c4db04e711287dd12c06707ecaa3",
+    "hash": "2477c89387aded5f044c7dca20b107a4",
     "packages": [
         {
             "name": "artdarek/oauth-4-laravel",
@@ -56,34 +56,37 @@
         },
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v1.6.7",
+            "version": "v1.7.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "ccf9ababfb2b5ddbf8c3ece2ca3fc9989b11ec0d"
+                "reference": "1f6f74832546841915a052b535dfb3d6957ac7c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/ccf9ababfb2b5ddbf8c3ece2ca3fc9989b11ec0d",
-                "reference": "ccf9ababfb2b5ddbf8c3ece2ca3fc9989b11ec0d",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/1f6f74832546841915a052b535dfb3d6957ac7c9",
+                "reference": "1f6f74832546841915a052b535dfb3d6957ac7c9",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "~4.0",
-                "maximebf/debugbar": "~1.9",
+                "laravel/framework": "~4.0|5.0",
+                "maximebf/debugbar": "~1.9.15",
                 "php": ">=5.3.0",
                 "symfony/finder": "~2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Barryvdh\\Debugbar": "src/"
-                }
+                "psr-4": {
+                    "Barryvdh\\Debugbar\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -103,7 +106,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2014-08-09 20:41:59"
+            "time": "2014-09-15 09:59:30"
         },
         {
             "name": "classpreloader/classpreloader",

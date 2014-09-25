@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "laravel/framework": "4.2.9",
-        "barryvdh/laravel-debugbar": "1.6.7",
+        "barryvdh/laravel-debugbar": "1.7.7",
         "codesleeve/asset-pipeline": "dev-master",
         "easyrdf/easyrdf": "0.8.0",
         "ml/json-ld": "1.0.2",
@@ -37,8 +37,7 @@
         ],
         "post-update-cmd": [
             "php artisan clear-compiled",
-            "php artisan optimize",
-            "php artisan debugbar:publish"
+            "php artisan optimize"
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
