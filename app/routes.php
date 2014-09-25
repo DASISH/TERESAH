@@ -104,6 +104,8 @@ Route::get("tools/by-facet/{facet}/{value}", array(
     "uses" => "ToolsController@byFacet"
 ));
 
+Route::get("datacloud.json", "DataController@dataCloud");
+
 #Quicksearch
 Route::get("tools/quicksearch/{query}", "ToolsController@quicksearch");
 
