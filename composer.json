@@ -4,7 +4,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "laravel/framework": "4.2.8", 
+        "laravel/framework": "4.2.9",
         "barryvdh/laravel-debugbar": "1.6.7",
         "codesleeve/asset-pipeline": "dev-master",
         "easyrdf/easyrdf": "0.8.0",

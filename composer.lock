@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3d4a04b664d224ce5b28ef4845d22e49",
+    "hash": "ad10c4db04e711287dd12c06707ecaa3",
     "packages": [
         {
             "name": "artdarek/oauth-4-laravel",
@@ -196,7 +196,7 @@
             ],
             "authors": [
                 {
-                    "name": "Kelt",
+                    "name": "Kelt Dockins",
                     "email": "kelt@dockins.org",
                     "homepage": "http://www.keltdockins.com",
                     "role": "Developer"
@@ -238,7 +238,7 @@
             ],
             "authors": [
                 {
-                    "name": "Kelt",
+                    "name": "Kelt Dockins",
                     "email": "kelt@codesleeve.com"
                 }
             ],
@@ -465,7 +465,7 @@
             "authors": [
                 {
                     "name": "Anthony Ferrara",
-                    "email": "ircmaxell@ircmaxell.com",
+                    "email": "ircmaxell@php.net",
                     "homepage": "http://blog.ircmaxell.com"
                 }
             ],
@@ -598,16 +598,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v4.2.8",
+            "version": "v4.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e60ea917ab862254a6db37fa9cb8933138c1e73c"
+                "reference": "14665bc3c38c3ec24a12c904d013a663dc4a1d8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e60ea917ab862254a6db37fa9cb8933138c1e73c",
-                "reference": "e60ea917ab862254a6db37fa9cb8933138c1e73c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/14665bc3c38c3ec24a12c904d013a663dc4a1d8f",
+                "reference": "14665bc3c38c3ec24a12c904d013a663dc4a1d8f",
                 "shasum": ""
             },
             "require": {
@@ -709,7 +709,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-08-05 19:52:17"
+            "time": "2014-09-15 02:45:24"
         },
         {
             "name": "leafo/lessphp",
@@ -3229,8 +3229,7 @@
                 },
                 {
                     "name": "Adam Harvey",
-                    "email": "aharvey@php.net",
-                    "role": "Lead"
+                    "email": "aharvey@php.net"
                 },
                 {
                     "name": "Bernhard Schussek",
@@ -3328,13 +3327,18 @@
             "time": "2014-08-31 03:22:04"
         }
     ],
-    "aliases": [],
+    "aliases": [
+
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "codesleeve/asset-pipeline": 20,
         "artdarek/oauth-4-laravel": 20
     },
-    "prefer-stable": false,
-    "platform": [],
-    "platform-dev": []
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
 }
