@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2492b2c52231d408728041e6149c7758",
+    "hash": "458efcdd8a567df8545870ac27f2deaa",
     "packages": [
         {
             "name": "artdarek/oauth-4-laravel",
-            "version": "dev-master",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/artdarek/oauth-4-laravel.git",
-                "reference": "12d27a1ae6925ebe2731de4d1896bb0c62b49c48"
+                "reference": "3415ad8bc558d2969b700e05f694f3adeb8eb543"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/artdarek/oauth-4-laravel/zipball/12d27a1ae6925ebe2731de4d1896bb0c62b49c48",
-                "reference": "12d27a1ae6925ebe2731de4d1896bb0c62b49c48",
+                "url": "https://api.github.com/repos/artdarek/oauth-4-laravel/zipball/3415ad8bc558d2969b700e05f694f3adeb8eb543",
+                "reference": "3415ad8bc558d2969b700e05f694f3adeb8eb543",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "oauth",
                 "php"
             ],
-            "time": "2014-08-07 07:18:32"
+            "time": "2014-08-06 12:45:48"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -3335,8 +3335,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "codesleeve/asset-pipeline": 20,
-        "artdarek/oauth-4-laravel": 20
+        "codesleeve/asset-pipeline": 20
     },
     "platform": [
 
