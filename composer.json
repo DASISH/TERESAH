@@ -9,6 +9,7 @@
         "barryvdh/laravel-debugbar": "1.7.7",
         "codesleeve/asset-pipeline": "dev-master",
         "easyrdf/easyrdf": "0.8.0",
+        "graham-campbell/markdown": "2.0.4",
         "ml/json-ld": "1.0.3",
         "twitter/typeahead.js": "0.10.5",
         "watson/active": "1.2.4",
