@@ -41,7 +41,7 @@ class ApiKeyController extends \BaseController {
         
         if($key != null){      
             
-            $key->description = Input::get("description");
+            $key->description = Input::get("value");
             
             if ($key->save()) {
                 return Response::json(array("status" => 200), 200);
