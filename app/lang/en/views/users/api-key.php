@@ -4,6 +4,7 @@ return array(
     "heading" => "API keys",
     "api-key" => "Key",
     "created_at" => "Created at",
+    "description" => "Description",
     "actions" => array(
         "name" => "Actions",
         "remove" => array(

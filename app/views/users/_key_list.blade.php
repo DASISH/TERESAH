@@ -4,8 +4,8 @@
         <thead>
             <tr>
                 <th>{{ Lang::get("views/users/api-key.api-key") }}</th>           
-                <th width="25%">{{ Lang::get("views/users/api-key.created_at") }}</th>                
-                <th width="5%">{{ Lang::get("views/users/api-key.actions.name") }}</th>
+                <th>{{ Lang::get("views/users/api-key.description") }}</th>        
+                <th>{{ Lang::get("views/users/api-key.actions.name") }}</th>
             </tr>
         </thead>
 
@@ -18,7 +18,7 @@
     <!-- /table.table-bordered.table-hover.table-striped -->
     
     <div class="panel-footer">
-        <a href="{{ URL::route("api-key.apply") }}" title="{{ Lang::get("views/users/api-key.apply") }}"><span class="btn btn-primary">{{ Lang::get("views/users/api-key.apply") }}</span></a> 
+        <a href="{{ URL::route("api-key.create") }}" title="{{ Lang::get("views/users/api-key.apply") }}"><span class="btn btn-primary">{{ Lang::get("views/users/api-key.apply") }}</span></a> 
     </div>
     <!-- /panel-footer -->
 </div>
