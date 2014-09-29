@@ -67,7 +67,7 @@ $(document).ready(function() {
                     '</div>'
                 ].join('\n'),
                 suggestion: function(data) {
-                    return '<p><a href="' + data.url + '"><span class="glyphicon glyphicon-wrench" /><strong>' + data.name + '</strong></a></p>';
+                    return '<a class="quicksearch-sugestion" href="' + data.url + '"><span class="glyphicon glyphicon-wrench" />' + data.name + '</a>';
                 }
             }
         },
@@ -82,7 +82,7 @@ $(document).ready(function() {
                     '</div>'
                 ].join('\n'),
                 suggestion: function(data) {
-                    return '<p><a href="' + data.url + '"><span class="glyphicon glyphicon-tag" /><strong>' + data.name + '</strong></a></p>';
+                    return '<a class="quicksearch-sugestion" href="' + data.url + '"><span class="glyphicon glyphicon-tag" />' + data.name + '</a>';
                 }
             }
         }        

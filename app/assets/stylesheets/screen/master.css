@@ -277,6 +277,12 @@ span.twitter-typeahead {
   top: 28px !important;
 }
 
+/* Quicksearch
+---------------------------------------------------------------------------- */
+.quicksearch-sugestion{
+    margin-left: 0.8em;
+}
+
 /* Search
 ---------------------------------------------------------------------------- */
 ul.facets li a.btn{
