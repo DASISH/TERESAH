@@ -7,10 +7,11 @@
                 array($key->id), 
                 array(
                     "class" => "editable", 
-                    "key-pk" => $key->id, 
+                    "data-pk" => $key->id, 
                     "data-name" => "description", 
                     "data-url" => URL::route("api-key.update", array($key->id)), 
-                    "data-type" => "text"
+                    "data-type" => "text",
+                    "data-emptytext" => Lang::get("views/users/api-key.description-empty")
                 )                
             ) 
         }}

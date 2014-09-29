@@ -5,6 +5,7 @@ return array(
     "api-key" => "Key",
     "created_at" => "Created at",
     "description" => "Description",
+    "description-empty" => "Click to add description",
     "actions" => array(
         "name" => "Actions",
         "remove" => array(
