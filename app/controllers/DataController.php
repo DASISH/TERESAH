@@ -2,7 +2,7 @@
 
 class DataController extends BaseController {
 
-    protected $skipAuthentication = array("valuesByType", "dataCloud");
+    protected $skipAuthentication = array("valuesByType", "dataCloud", "quicksearch");
     protected $data;
 
     public function __construct(Data $data) {
@@ -11,6 +11,12 @@ class DataController extends BaseController {
         $this->data= $data;
     }
     
+    /**
+     * Show data values matching a specific dataType
+     * 
+     * @param type $type slug for the dataType
+     * @return View
+     */
     public function valuesByType($type){
         $dataType = DataType::where("slug", $type)->first();
         
@@ -23,8 +29,36 @@ class DataController extends BaseController {
     }
     
     /**
+     * Search data value for quicksearch
+     * 
+     * @param type $query string to match in tool name
+     * @return json
+     */
+    public function quicksearch($query) {
+        $matches = $this->data
+                    ->with("dataType")
+
+                    ->whereHas('dataType', function($q){
+                        $q->where('linkable', '1');
+                    })
+                    ->where("value", "LIKE" ,"%$query%")
+                    ->groupBy("slug", "data_type_id")
+                    ->orderBy("value", "ASC")->get();
+                    
+        $result = array();
+        foreach($matches as $match) {
+            $obj = new stdClass();
+            $obj->name = $match->value;
+            $obj->type = $match->data_type->label;
+            $obj->url = route('tools.by-facet', array($match->data_type->slug, $match->slug));
+            $result[] = $obj;
+        }
+        return $result;
+    }
+    
+    /**
      * Get the data used for the jqCloud
-     * @return type json
+     * @return json
      */
     public function dataCloud(){
         $result = array();

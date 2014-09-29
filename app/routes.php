@@ -102,6 +102,7 @@ Route::get("datacloud.json", "DataController@dataCloud");
 
 #Quicksearch
 Route::get("tools/quicksearch/{query}", "ToolsController@quicksearch");
+Route::get("data/quicksearch/{query}", "DataController@quicksearch");
 
 #Search
 Route::get("search", array(

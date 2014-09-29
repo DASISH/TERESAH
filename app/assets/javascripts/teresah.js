@@ -43,24 +43,50 @@ $(document).ready(function() {
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: '/tools/quicksearch/%QUERY'
     });
-
     tools.initialize();
+    
+    var data = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: '/data/quicksearch/%QUERY'
+    });
+    data.initialize();
+    
 
-    $('#quicksearch').typeahead(null, {
-        name: 'Tools',
-        displayKey: 'name',
-        source: tools.ttAdapter(),
-        templates: {
-            empty: [
-                '<div class="empty-message">',
-                'no results found',
-                '</div>'
-            ].join('\n'),
-            suggestion: function(data) {
-                return '<p><a href="/tools/' + data.slug + '"><strong>' + data.name + '</strong></a></p>';
+    $('#quicksearch').typeahead({
+            highlight: true
+        },
+        {
+            name: 'Tools',
+            displayKey: 'name',
+            source: tools.ttAdapter(),
+            templates: {
+                empty: [
+                    '<div class="empty-message">',
+                    '',
+                    '</div>'
+                ].join('\n'),
+                suggestion: function(data) {
+                    return '<p><a href="' + data.url + '"><span class="glyphicon glyphicon-wrench" /><strong>' + data.name + '</strong></a></p>';
+                }
             }
-        }
-        }).on('typeahead:selected', function (obj, datum) {
+        },
+        {
+            name: 'Facet',
+            displayKey: 'name',
+            source: data.ttAdapter(),
+            templates: {
+                empty: [
+                    '<div class="empty-message">',
+                    'no results found',
+                    '</div>'
+                ].join('\n'),
+                suggestion: function(data) {
+                    return '<p><a href="' + data.url + '"><span class="glyphicon glyphicon-tag" /><strong>' + data.name + '</strong></a></p>';
+                }
+            }
+        }        
+        ).on('typeahead:selected', function (obj, datum) {
             window.location.href = datum.url;
         });
 });

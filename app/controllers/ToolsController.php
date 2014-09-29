@@ -172,11 +172,19 @@ class ToolsController extends BaseController {
      * @return Array
      */
     public function quicksearch($query) {
-        return $this->tool
-                ->select("name", "slug")
-                ->has("data", ">", 0)
-                ->where("name", "LIKE" ,"%$query%")
-                ->orderBy("name", "ASC")->get();        
+        $matches = $this->tool
+                    ->select("name", "slug")
+                    ->has("data", ">", 0)
+                    ->where("name", "LIKE" ,"%$query%")
+                    ->orderBy("name", "ASC")->get();       
+        $result = array();
+        foreach($matches as $match) {
+            $obj = new stdClass();
+            $obj->name = $match->name;
+            $obj->url = url("/")."/tools/".$match->slug;
+            $result[] = $obj;
+        }
+        return $result;
     }
     
     
