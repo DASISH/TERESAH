@@ -35,6 +35,24 @@ class ApiKeyController extends \BaseController {
         }
     }
 
+    public function update($id)
+    { 
+        $key = $this->user->apiKeys()->find($id);
+        
+        if($key != null){      
+            
+            $key->description = Input::get("description");
+            
+            if ($key->save()) {
+                return Response::json(array("status" => 200), 200);
+            } else {
+                return Response::json($key->getErrors(), 400);
+            }        
+        } else {
+            App::abort(404);
+        }        
+    }
+    
     /**
      * Remove the specified ApiKey from storage.
      *
@@ -46,8 +64,8 @@ class ApiKeyController extends \BaseController {
     public function destroy($id)
     {               
         $key = $this->user->apiKeys()->find($id);
-        
-        if($key !== null){            
+      
+        if($key != null){            
             if ($key->delete()) {
                 return Redirect::route("users.edit")
                     ->with("success", Lang::get("controllers/api-key.destroy.success"));

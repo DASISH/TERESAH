@@ -132,10 +132,11 @@ return array(
         "Illuminate\Validation\ValidationServiceProvider",
         "Illuminate\View\ViewServiceProvider",
         "Illuminate\Workbench\WorkbenchServiceProvider",
+        "Artdarek\OAuth\OAuthServiceProvider",
         "Barryvdh\Debugbar\ServiceProvider",
         "Codesleeve\AssetPipeline\AssetPipelineServiceProvider",
-        "Watson\Active\ActiveServiceProvider",
-        "Artdarek\OAuth\OAuthServiceProvider"
+        "GrahamCampbell\Markdown\MarkdownServiceProvider",
+        "Watson\Active\ActiveServiceProvider"
     ),
 
     /*
@@ -186,6 +187,7 @@ return array(
         "Lang"            => "Illuminate\Support\Facades\Lang",
         "Log"             => "Illuminate\Support\Facades\Log",
         "Mail"            => "Illuminate\Support\Facades\Mail",
+        "Markdown"        => "GrahamCampbell\Markdown\Facades\Markdown",
         "OAuth"           => "Artdarek\OAuth\Facade\OAuth",
         "Paginator"       => "Illuminate\Support\Facades\Paginator",
         "Password"        => "Illuminate\Support\Facades\Password",

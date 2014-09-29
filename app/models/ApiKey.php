@@ -8,11 +8,12 @@ class ApiKey extends Eloquent
 
     # protected $table = "api_keys";
     protected $dates = array("deleted_at");
-    protected $fillable = array("token", "enabled");
+    protected $fillable = array("token", "enabled", "description");
 
     protected $rules = array(
         "token" => "required|unique:api_keys|max:64",
-        "enabled" => "required|boolean"
+        "enabled" => "required|boolean",
+        "description" => "max:255"
     );
 
     public static function boot()

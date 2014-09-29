@@ -36,14 +36,8 @@ Route::put("profile", array(
     "uses" => "UsersController@update"
 ));
 
-Route::get("api_key/apply", array(
-    "as" => "api-key.apply",
-    "uses" => "ApiKeyController@create"
-));
-
-Route::delete("api_key/{id}", array(
-    "as" => "api-key.destroy",
-    "uses" => "ApiKeyController@destroy"
+Route::resource("api-key", "ApiKeyController", array(
+    "only" => array("create", "update", "destroy")
 ));
 
 Route::get("signup", array(
