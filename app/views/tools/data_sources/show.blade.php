@@ -1,9 +1,16 @@
 @extends("layouts.default")
 
-@section("breadcrumb", BreadcrumbHelper::render(array(
-    link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
-    e($tool->name)
-)))
+@if(str_contains(URL::previous(), 'search'))
+    @section("breadcrumb", BreadcrumbHelper::render(array(
+        link_to(URL::previous(), Lang::get("views/pages/navigation.search.name")),
+        e($tool->name)
+    )))
+@else
+    @section("breadcrumb", BreadcrumbHelper::render(array(
+        link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
+        e($tool->name)
+    )))
+@endif
 
 @section("content")
     <article class="row" itemscope itemtype="http://schema.org/SoftwareApplication">

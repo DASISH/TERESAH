@@ -4,6 +4,7 @@ use DataSource;
 use Tool;
 use BaseController;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\URL;
 
 class DataSourcesController extends BaseController
 {
