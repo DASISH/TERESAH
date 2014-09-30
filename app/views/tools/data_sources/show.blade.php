@@ -33,22 +33,23 @@
                                 @endif
 
                                 <hr />
-
+                                
                                 <h3>{{ Lang::get("views/tools/data_sources/show.heading.available_data") }}</h3>
-
+                                
                                 <dl>
-                                    @foreach ($dataSource->data as $data)
-                                        @if ($data->dataType)
-                                            <dt>{{{ $data->dataType->label }}}</dt>
-                                            
-                                            @if (filter_var($data->value, FILTER_VALIDATE_URL))
-                                                <dd><a href="{{ $data->value }}">{{{ $data->value }}}</a></dd>
-                                            @elseif($data->dataType->linkable)
-                                                <dd><a href="{{ URL::to("/tools/by-facet/" . $data->dataType->slug . "/" . $data->slug) }}">{{{ $data->value }}}</a></dd>
-                                            @else
-                                                <dd>{{{ $data->value }}}</dd>
-                                            @endif
-                                        @endif
+                                    @foreach ($dataSource->groupedData as $label => $dataList)
+                                            <dt>{{{ $label }}}</dt>
+                                            @foreach ($dataList as $data)
+                                                @if ($data->dataType) 
+                                                    @if (filter_var($data->value, FILTER_VALIDATE_URL))
+                                                        <dd>{{ link_to($data->value, $data->value) }}</dd>
+                                                    @elseif($data->dataType->linkable)
+                                                        <dd>{{ link_to_route('tools.by-facet', $data->value, array($data->dataType->slug, $data->slug)) }}</dd>
+                                                    @else
+                                                        <dd>{{{ $data->value }}}</dd>
+                                                    @endif
+                                                @endif
+                                            @endforeach
                                     @endforeach
                                 </dl>
                             @else

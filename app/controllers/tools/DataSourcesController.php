@@ -34,6 +34,16 @@ class DataSourcesController extends BaseController
             $query->where("data.tool_id", "=", $toolId);
         }, "dataSources.data.user", "dataSources.data.dataType"))->find($toolId);
 
+        foreach($this->tool->dataSources as $id => $dataSource) {
+            $groupedData = array();
+            foreach($dataSource->data as $data) {
+                $groupedData[$data->dataType->label][] = $data;
+            }
+            ksort($groupedData);
+            
+            $this->tool->dataSources[$id]->groupedData = $groupedData;
+        }
+        
         return View::make("tools.data_sources.show")
             ->with("tool", $this->tool);
     }
