@@ -176,7 +176,8 @@ class ToolsController extends BaseController {
                     ->select("name", "slug")
                     ->has("data", ">", 0)
                     ->where("name", "LIKE" ,"%$query%")
-                    ->orderBy("name", "ASC")->get();       
+                    ->orderBy("name", "ASC")
+                    ->take(5)->get();       
         $result = array();
         foreach($matches as $match) {
             $obj = new stdClass();
