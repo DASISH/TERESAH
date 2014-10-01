@@ -45,6 +45,14 @@ class ArgumentsHelper
             return in_array($value, $values);
         } 
         return false;
-    }    
+    }
+    
+    public static function setValues($keyValues = array()) {
+        $arguments = Input::all();
+        foreach($keyValues as $key => $value) {
+            $arguments[$key] = $value;
+        }
+        return $arguments;
+    }
 }
             
