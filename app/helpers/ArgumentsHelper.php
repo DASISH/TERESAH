@@ -2,6 +2,13 @@
 
 class ArgumentsHelper
 {
+    /**
+     * Adds a value to a new parameter or adds it to the list of an existing
+     * 
+     * @param string $key
+     * @param string $value
+     * @return Array
+     */
     public static function addKeyValue($key, $value) {
         $arguments = Input::all();
         if(array_key_exists($key, $arguments)){
@@ -12,6 +19,13 @@ class ArgumentsHelper
         return $arguments;
     }
  
+    /**
+     * Removes value from list or deletes key if value becomes empty
+     * 
+     * @param string $key
+     * @param string $value
+     * @return Array
+     */
     public static function removeKeyValue($key, $value) {
         $arguments = Input::all();
         if(array_key_exists($key, $arguments)){
@@ -29,6 +43,12 @@ class ArgumentsHelper
         return $arguments;
     }    
     
+    /**
+     * Get a list of values for a specific key and returns them as an array
+     * 
+     * @param string $key
+     * @return Array
+     */
     public static function getArgumentValues($key) {
         $arguments = Input::all();
         if(array_key_exists($key, $arguments) && strpos(urldecode($arguments[$key]), ',') !== FALSE){
@@ -38,6 +58,14 @@ class ArgumentsHelper
         }
     }        
     
+    /**
+     * Checks if a specified value is set for a paramter
+     * Also checks if its in a comma separetd list
+     * 
+     * @param type $key key to lock for
+     * @param type $value expected value or value in list
+     * @return boolean
+     */
     public static function keyValueActive($key, $value) {
         $arguments = Input::all();
         if(array_key_exists($key, $arguments)){
@@ -47,6 +75,12 @@ class ArgumentsHelper
         return false;
     }
     
+    /**
+     * Sets a set of specified values and keep all existing
+     * 
+     * @param Array $keyValues key-value pairs for values to set
+     * @return Array
+     */
     public static function setValues($keyValues = array()) {
         $arguments = Input::all();
         foreach($keyValues as $key => $value) {
