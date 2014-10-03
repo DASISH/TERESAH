@@ -32,7 +32,7 @@ class DataSourcesController extends BaseController
     public function show($toolId, $id)
     {
         $this->tool = $this->tool->with(array("user", "dataSources.data" => function($query) use($toolId) {
-            $query->where("data.tool_id", "=", $toolId);
+            $query->where("data.tool_id", "=", $toolId)->orderBy("data.value", "ASC");
         }, "dataSources.data.user", "dataSources.data.dataType"))->find($toolId);
 
         foreach($this->tool->dataSources as $id => $dataSource) {
