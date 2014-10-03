@@ -19,13 +19,15 @@
                 <li role="presentation">{{ link_to_action("ToolsController@index", "Name ".Lang::get("descending"), ArgumentsHelper::setValues(array("sortBy"=>"name", "order"=>"desc")), array("class"=>"active")) }}</li>
                 <li role="presentation">{{ link_to_action("ToolsController@index", "Name ".Lang::get("accending"), ArgumentsHelper::setValues(array("sortBy"=>"name", "order"=>"asc"))) }}</li>
               </ul>
-            </div>               
+            </div>          
+            
+             <div>
+                {{ $alphaList }}
+            </div>
             
             @include("shared._error_messages")
         </div>
-        <div>
-            {{ $alphaList }}
-        </div>
+
         <!-- /col-sm-12 -->
     </div>
     <!-- /row -->

@@ -66,9 +66,11 @@ class DataController extends BaseController {
         
         $dataTypes = DataType::isLinkable()->get();
         
+        $base = URL::to('tools/by-facet');
+        
         foreach ($dataTypes as $type) {
             $dataResult = $this->data->select("data.value AS text", 
-                                         DB::raw("CONCAT('/tools/by-facet/', '".$type->slug."', '/', slug) AS link"),
+                                         DB::raw("CONCAT('".$base."/', '".$type->slug."', '/', slug) AS link"),
                                          DB::raw("COUNT(slug) AS weight"))
                                     ->where("data_type_id", $type->id)
                                     ->groupBy("slug")->get()->toArray();
