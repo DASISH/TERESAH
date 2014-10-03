@@ -10,7 +10,8 @@
     <div class="col-md-3">
         @foreach ($facetList as $facet)
             @if(count($facet->values) > 0)
-            <h3>{{ $facet->Label }}</h3>
+            <h3{{empty($facet->description) ? '' : ' title="'.$facet->description.'"'}}>{{ $facet->Label }}</h3>
+            <p class="description hidden">{{$facet->description}}APA</p>
             <ul class="list-group facets">
                 @foreach ($facet->values as $value)
                   @if(ArgumentsHelper::keyValueActive($facet->slug, $value->slug)) 

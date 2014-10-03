@@ -35,6 +35,7 @@ class ToolsController extends BaseController {
             $sortBy = "name";
         }
         
+        
         $tools = $this->tool->has("data", ">", 0)
                 ->orderBy($sortBy, $order)
                 ->paginate(20);
@@ -133,7 +134,7 @@ class ToolsController extends BaseController {
         $query = Input::get("query", $query);
         $tool_ids = array();
 
-        $types = DataType::select("id", "slug", "Label")
+        $types = DataType::select("id", "slug", "Label", "description")
                     ->where("linkable", true)
                     ->has("data", ">", 0)->get();
         
