@@ -30,7 +30,7 @@
                 
                 @if (Auth::user() != null)
                 <span style="float:right">
-                    @if (Auth::user()->toolUsages()->where("tool_id", "=", $tool->id)->count() != 0)
+                    @if (Auth::user()->toolUsages->contains($tool->id))
                         <a data-callback="{{ URL::route("tools.unuse", array("toolID" => $tool->id)) }}" data-action="DELETE" title="{{ Lang::get("views/tools/data_sources/show.unuse.title") }}" id="toolUsageButton">
                             <button type="button" class="btn btn-success">{{ Lang::get("views/tools/data_sources/show.unuse.title") }}</button>
                         </a>
