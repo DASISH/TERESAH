@@ -89,4 +89,33 @@ $(document).ready(function() {
         ).on('typeahead:selected', function (obj, datum) {
             window.location.href = datum.url;
         });
+        
+        //add listener to tool usage button
+        $("#toolUsageButton").on("click", function(event) {
+            var link = $(this);
+            $.ajax({
+                type: link.attr("data-action"),
+                url:link.attr("data-callback"),
+                dataType: "json",
+                success: function(data){
+                    link.attr("data-action", data.action);
+                    link.attr("data-callback", data.callback);
+                    link.attr("title", data.title);
+                    
+                    var button = link.children().first();
+                    button.text(data.title);
+                    if(data.action === "GET")
+                    {
+                        button.removeClass("btn-success");
+                        button.addClass("btn-primary");
+                    }
+                    else
+                    {
+                        button.removeClass("btn-primary");
+                        button.addClass("btn-success");
+                    }
+                }
+            });
+            event.preventDefault();
+        });
 });

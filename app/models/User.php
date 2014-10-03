@@ -113,6 +113,11 @@ class User extends Eloquent implements UserInterface
     {
         return $this->hasMany("Tool");
     }
+    
+    public function toolUsages()
+    {
+        return $this->belongsToMany("Tool")->withTimestamps();;
+    }
 
     public function scopeActiveUsers($query)
     {

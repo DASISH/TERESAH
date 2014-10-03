@@ -15,6 +15,20 @@
                 <!-- /symbol -->
 
                 <h1 itemprop="name">{{{ $tool->name }}} <small>{{ Lang::get("views/tools/data_sources/show.on") }}</small></h1>
+                
+                @if (Auth::user() != null)
+                <span style="float:right">
+                    @if (Auth::user()->toolUsages()->where("tool_id", "=", $tool->id)->count() != 0)
+                        <a data-callback="{{ URL::route("tools.unuse", array("toolID" => $tool->id)) }}" data-action="DELETE" title="{{ Lang::get("views/tools/data_sources/show.unuse.title") }}" id="toolUsageButton">
+                            <button type="button" class="btn btn-success">{{ Lang::get("views/tools/data_sources/show.unuse.title") }}</button>
+                        </a>
+                    @else
+                        <a data-callback="{{ URL::route("tools.use", array("toolID" => $tool->id)) }}" data-action="GET" title="{{ Lang::get("views/tools/data_sources/show.use.title") }}" id="toolUsageButton">
+                            <button type="button" class="btn btn-primary">{{ Lang::get("views/tools/data_sources/show.use.title") }}</button>
+                        </a>    
+                    @endif
+                </span>
+                @endif
             </header>
 
             @if (!$tool->dataSources->isEmpty())

@@ -121,6 +121,20 @@ Route::group(array("namespace" => "Tools"), function() {
     ));   
 });
 
+#Tool usage
+Route::get("tools/popular}", array(
+    "as" => "tools.popular",
+    "uses" => "ToolUsageController@index"
+));
+Route::get("tools/use/{toolID}", array(
+    "as" => "tools.use",
+    "uses" => "ToolUsageController@create"
+));
+Route::delete("tools/use/{toolID}", array(
+    "as" => "tools.unuse",
+    "uses" => "ToolUsageController@destroy"
+));
+
 # Routing for the administrative section
 Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
     Route::resource("data-types", "DataTypesController");
