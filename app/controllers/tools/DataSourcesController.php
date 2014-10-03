@@ -4,6 +4,7 @@ use DataSource;
 use Tool;
 use BaseController;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\URL;
 
 class DataSourcesController extends BaseController
 {
@@ -31,9 +32,19 @@ class DataSourcesController extends BaseController
     public function show($toolId, $id)
     {
         $this->tool = $this->tool->with(array("user", "dataSources.data" => function($query) use($toolId) {
-            $query->where("data.tool_id", "=", $toolId);
+            $query->where("data.tool_id", "=", $toolId)->orderBy("data.value", "ASC");
         }, "dataSources.data.user", "dataSources.data.dataType"))->find($toolId);
 
+        foreach($this->tool->dataSources as $id => $dataSource) {
+            $groupedData = array();
+            foreach($dataSource->data as $data) {
+                $groupedData[$data->dataType->label][] = $data;
+            }
+            ksort($groupedData);
+            
+            $this->tool->dataSources[$id]->groupedData = $groupedData;
+        }
+        
         return View::make("tools.data_sources.show")
             ->with("tool", $this->tool);
     }

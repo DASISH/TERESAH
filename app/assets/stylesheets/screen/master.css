@@ -283,6 +283,10 @@ span.twitter-typeahead {
     margin-left: 0.8em;
 }
 
+.quicksearch-sugestion .glyphicon{
+    margin-right: 0.2em;
+}
+
 /* Search
 ---------------------------------------------------------------------------- */
 ul.facets li a.btn{

@@ -1,9 +1,21 @@
 @extends("layouts.default")
 
-@section("breadcrumb", BreadcrumbHelper::render(array(
-    link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
-    e($tool->name)
-)))
+@if(str_contains(URL::previous(), 'search'))
+    @section("breadcrumb", BreadcrumbHelper::render(array(
+        link_to(URL::previous(), Lang::get("views/pages/navigation.search.name")),
+        e($tool->name)
+    )))
+@elseif(str_contains(URL::previous(), 'by-facet'))
+    @section("breadcrumb", BreadcrumbHelper::render(array(
+        link_to(URL::previous(), Lang::get("views/pages/navigation.browse.by-facet.name")),
+        e($tool->name)
+    )))
+@else
+    @section("breadcrumb", BreadcrumbHelper::render(array(
+        link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
+        e($tool->name)
+    )))
+@endif
 
 @section("content")
     <article class="row" itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -14,7 +26,7 @@
                 </div>
                 <!-- /symbol -->
 
-                <h1 itemprop="name">{{{ $tool->name }}} <small>{{ Lang::get("views/tools/data_sources/show.on") }}</small></h1>
+                <h1><span itemprop="name">{{{ $tool->name }}}</span> <small>{{ Lang::get("views/tools/data_sources/show.on") }}</small></h1>
                 
                 @if (Auth::user() != null)
                 <span style="float:right">
@@ -43,26 +55,27 @@
                                 @endif
 
                                 @if ($description = $dataSource->getLatestToolDataFor($tool->id, "description"))
-                                    <p>{{{ $description }}}</p>
+                                    <p property="description">{{{ $description }}}</p>
                                 @endif
 
                                 <hr />
-
+                                
                                 <h3>{{ Lang::get("views/tools/data_sources/show.heading.available_data") }}</h3>
-
+                                
                                 <dl>
-                                    @foreach ($dataSource->data as $data)
-                                        @if ($data->dataType)
-                                            <dt>{{{ $data->dataType->label }}}</dt>
-                                            
-                                            @if (filter_var($data->value, FILTER_VALIDATE_URL))
-                                                <dd><a href="{{ $data->value }}">{{{ $data->value }}}</a></dd>
-                                            @elseif($data->dataType->linkable)
-                                                <dd><a href="{{ URL::to("/tools/by-facet/" . $data->dataType->slug . "/" . $data->slug) }}">{{{ $data->value }}}</a></dd>
-                                            @else
-                                                <dd>{{{ $data->value }}}</dd>
-                                            @endif
-                                        @endif
+                                    @foreach ($dataSource->groupedData as $label => $dataList)
+                                            <dt>{{{ $label }}}</dt>
+                                            @foreach ($dataList as $data)
+                                                @if ($data->dataType) 
+                                                    @if (filter_var($data->value, FILTER_VALIDATE_URL))
+                                                        <dd>{{ link_to($data->value, $data->value, array("property"=>$data->dataType->rdf_mapping)) }}</dd>
+                                                    @elseif($data->dataType->linkable)
+                                                        <dd>{{ link_to_route('tools.by-facet', $data->value, array($data->dataType->slug, $data->slug), array("property"=>$data->dataType->rdf_mapping)) }}</dd>
+                                                    @else
+                                                        <dd property="{{$data->dataType->rdf_mapping}}">{{{ $data->value }}}</dd>
+                                                    @endif
+                                                @endif
+                                            @endforeach
                                     @endforeach
                                 </dl>
                             @else
@@ -89,9 +102,9 @@
 
     <div class="col-sm-6">
         <p>
-            <a href="{{ URL::to("/tools/" . $tool->slug . ".rdfxml") }}" class="btn btn-default btn-sm" role="button">RDF/XML</a>
-            <a href="{{ URL::to("/tools/" . $tool->slug . ".turtle") }}" class="btn btn-default btn-sm" role="button">RDF/Turtle</a>
-            <a href="{{ URL::to("/tools/" . $tool->slug . ".jsonld") }}" class="btn btn-default btn-sm" role="button">RDF/JsonLD</a>
+            {{ link_to_route('tools.export', "RDF/XML", array($tool->slug, "rdfxml"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
+            {{ link_to_route('tools.export', "RDF/Turtle", array($tool->slug, "turtle"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
+            {{ link_to_route('tools.export', "RDF/JsonLD", array($tool->slug, "jsonld"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
         </p>
     </div>
 

@@ -78,11 +78,11 @@ $(document).ready(function() {
             templates: {
                 empty: [
                     '<div class="empty-message">',
-                    'no results found',
+                    '',
                     '</div>'
                 ].join('\n'),
                 suggestion: function(data) {
-                    return '<a class="quicksearch-sugestion" href="' + data.url + '"><span class="glyphicon glyphicon-tag" />' + data.name + '</a>';
+                    return '<a class="quicksearch-sugestion" href="' + data.url + '" title="'+data.type+': '+data.name+'"><span class="glyphicon glyphicon-tag" />' + data.name + '</a>';
                 }
             }
         }        

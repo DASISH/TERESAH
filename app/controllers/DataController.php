@@ -43,7 +43,8 @@ class DataController extends BaseController {
                     })
                     ->where("value", "LIKE" ,"%$query%")
                     ->groupBy("slug", "data_type_id")
-                    ->orderBy("value", "ASC")->get();
+                    ->orderBy("value", "ASC")
+                    ->take(5)->get();
                     
         $result = array();
         foreach($matches as $match) {

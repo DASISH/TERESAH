@@ -75,7 +75,10 @@ Route::put("reset-password", array(
 ));
 
 # Get tool in other formats (eg RDF)
-Route::get("tools/{id}.{format}", "ToolsController@export");
+Route::get("tools/{id}.{format}", array(
+    "as" => "tools.export",
+    "uses" => "ToolsController@export"
+));
 
 #Browse by alphabet
 Route::get("tools/by-alphabets/{caracter}", "ToolsController@byAlphabet");

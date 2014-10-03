@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Input;
 
 class ToolsController extends BaseController {
 
@@ -21,8 +22,23 @@ class ToolsController extends BaseController {
      * @return View
      */
     public function index() {
-        $tools = $this->tool->has('data', '>', 0)->orderBy("name", "ASC")->paginate(20);
-
+        $sortBy = strtolower(Input::get("sortBy", "name"));
+        $order  = strtolower(Input::get("order", "asc"));
+        
+        $sortableFields = array("name");
+        
+        if($order != "asc" && $order != "desc") {
+            $order = "asc";
+        }
+        
+        if(in_array($sortBy, $sortableFields) == false){
+            $sortBy = "name";
+        }
+        
+        $tools = $this->tool->has("data", ">", 0)
+                ->orderBy($sortBy, $order)
+                ->paginate(20);
+        
         return View::make("tools.index", compact("tools"))
                 ->with("alphaList", $this->listByAlphabet());
     }
@@ -176,7 +192,8 @@ class ToolsController extends BaseController {
                     ->select("name", "slug")
                     ->has("data", ">", 0)
                     ->where("name", "LIKE" ,"%$query%")
-                    ->orderBy("name", "ASC")->get();       
+                    ->orderBy("name", "ASC")
+                    ->take(5)->get();       
         $result = array();
         foreach($matches as $match) {
             $obj = new stdClass();
