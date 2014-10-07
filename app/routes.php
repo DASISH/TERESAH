@@ -101,6 +101,20 @@ Route::get("tools/by-facet/{facet}/{value}", array(
     "uses" => "ToolsController@byFacet"
 ));
 
+#Tool usage
+Route::get("tools/popular", array(
+    "as" => "tools.popular",
+    "uses" => "ToolUsageController@index"
+));
+Route::get("tools/use/{toolID}", array(
+    "as" => "tools.use",
+    "uses" => "ToolUsageController@create"
+));
+Route::delete("tools/use/{toolID}", array(
+    "as" => "tools.unuse",
+    "uses" => "ToolUsageController@destroy"
+));
+
 Route::get("datacloud.json", "DataController@dataCloud");
 
 #Quicksearch
@@ -123,20 +137,6 @@ Route::group(array("namespace" => "Tools"), function() {
         "only" => array("show")
     ));   
 });
-
-#Tool usage
-Route::get("tools/popular}", array(
-    "as" => "tools.popular",
-    "uses" => "ToolUsageController@index"
-));
-Route::get("tools/use/{toolID}", array(
-    "as" => "tools.use",
-    "uses" => "ToolUsageController@create"
-));
-Route::delete("tools/use/{toolID}", array(
-    "as" => "tools.unuse",
-    "uses" => "ToolUsageController@destroy"
-));
 
 # Routing for the administrative section
 Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {

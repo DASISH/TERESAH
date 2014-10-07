@@ -128,6 +128,10 @@ return array(
         ),
         "by-facet" => array(
             "name" => "By facet"
+        ),
+        "popular" => array(
+            "name" => "Most popular tools",
+            "title" => "Most popular"
         )
     ),
     "search" => array(

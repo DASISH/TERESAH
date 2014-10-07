@@ -5,7 +5,7 @@
         <ul class="dropdown-menu">
             <li>{{ link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.title"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))) }}</li>
             <li>{{ link_to_route("by-facet", Lang::get("views/pages/navigation.browse.facets.title"), null, array("title" => Lang::get("views/pages/navigation.browse.facets.title"))) }}</li>
-            
+            <li>{{ link_to_route("tools.popular", Lang::get("views/pages/navigation.browse.popular.title"), null, array("title" => Lang::get("views/pages/navigation.browse.popular.title"))) }}</li>
         </ul>
     </li>
     <li>{{ link_to_route("tools.search", Lang::get("views/pages/navigation.search.title"),null, array("title" => Lang::get("views/pages/navigation.search.title"))) }}</li>
