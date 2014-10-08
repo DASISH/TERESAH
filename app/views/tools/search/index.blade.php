@@ -57,7 +57,7 @@
 
         <div class="row">
             <div class="col-sm-12">
-                {{ $tools->links() }}
+                {{ $tools->appends(Input::all())->links() }}
             </div>
             <!-- /col-sm-12 -->
         </div>

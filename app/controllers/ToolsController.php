@@ -151,13 +151,25 @@ class ToolsController extends BaseController {
         
         if($query != null) {
             $parts = explode(" ", $query);
-            foreach ($parts as $q) {
-                $tool_id_query->matchingString($q);
+            
+            $tool_ids = $tool_id_query->lists("id");
+            
+            if(count($tool_ids) > 0) {
+                $string_match_query = Tool::whereIn("id", $tool_ids);
+            }else{
+                $string_match_query = Tool::has("data", ">", 0);
             }
+            
+            foreach ($parts as $q) {
+                $string_match_query->matchingString($q);
+            }
+            
+            $string_matched_tool_ids = $string_match_query->lists("id");
+            $tool_ids = array_intersect($string_matched_tool_ids, $tool_ids);
+        }else{
+            $tool_ids = $tool_id_query->lists("id");
         }
 
-        $tool_ids = $tool_id_query->lists('id');
-        
         $tools = $this->tool->whereIn("id", $tool_ids)->orderBy("name", "ASC")->paginate(20);
         
         $facetList = array();
