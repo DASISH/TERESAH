@@ -134,33 +134,31 @@ class ToolsController extends BaseController {
         $query = Input::get("query", $query);
         $tool_ids = array();
 
+        $tool_id_query = Tool::has("data", ">", 0);
+        
         $types = DataType::select("id", "slug", "Label", "description")
                     ->where("linkable", true)
                     ->has("data", ">", 0)->get();
         
-        if($query == null) {
-            $tools = $this->tool->has("data", ">", 0);
-            $tool_id_query = Tool::has("data", ">", 0);
-        }else{
-            $tools = $this->tool->matchingString($query);
-            $tool_id_query = Tool::matchingString($query);
-        }
-
         foreach($types as $type) {
             if(Input::has($type->slug)){
-
                 $values = ArgumentsHelper::getArgumentValues($type->slug);
                 foreach($values as $value){
-                    $tools->haveFacet($type->id, $value);
-
-                    $tool_id_query->haveFacet($type->id, $value)->lists('id');
+                    $tool_id_query->haveFacet($type->id, $value);
                 }
+            }
+        }
+        
+        if($query != null) {
+            $parts = explode(" ", $query);
+            foreach ($parts as $q) {
+                $tool_id_query->matchingString($q);
             }
         }
 
         $tool_ids = $tool_id_query->lists('id');
         
-        $tools = $tools->orderBy("name", "ASC")->paginate(20);
+        $tools = $this->tool->whereIn("id", $tool_ids)->orderBy("name", "ASC")->paginate(20);
         
         $facetList = array();
         

@@ -29,9 +29,13 @@
         {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "form-inline")) }}
           <div class="form-group">
             {{ Form::text("query", $query, array("class" => "form-control", "placeholder" => Lang::get("views/tools/search/form.search.placeholder"))) }}
+            @foreach ($facetList as $facet)
+              @if(Input::has($facet->slug))
+                {{ Form::hidden($facet->slug, Input::get($facet->slug)) }}
+              @endif
+            @endforeach            
             {{ Form::submit(Lang::get("views/tools/search/form.search.label"), array("class"=>"btn btn-primary glyphicon glyphicon-search")) }}
           </div>
-          
         {{ Form::close() }}
         
         <div class="row">
