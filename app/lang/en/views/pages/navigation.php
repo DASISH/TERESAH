@@ -167,6 +167,14 @@ return array(
         "name" => "Edit Profile",
         "title" => "Edit Profile"
     ),
+    "edit_user_api_keys" => array(
+        "name" => "Manage API Keys",
+        "title" => "Manage API Keys"
+    ),
+    "edit_user_tools" => array(
+        "name" => "My Tools",
+        "title" => "My Tools"
+    ),
     "switch" => array(
         "name" => "Manage TERESAH",
         "title" => "Switch to administrative section of TERESAH"

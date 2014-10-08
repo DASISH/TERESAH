@@ -36,6 +36,16 @@ Route::put("profile", array(
     "uses" => "UsersController@update"
 ));
 
+Route::get("profile/api-keys", array(
+    "as" => "users.keys",
+    "uses" => "UsersController@keys"
+));
+
+Route::get("profile/my-tools", array(
+    "as" => "users.tools",
+    "uses" => "UsersController@tools"
+));
+
 Route::resource("api-key", "ApiKeyController", array(
     "only" => array("create", "update", "destroy")
 ));

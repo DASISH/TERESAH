@@ -10,6 +10,11 @@
         link_to(URL::previous(), Lang::get("views/pages/navigation.browse.by-facet.name")),
         e($tool->name)
     )))
+@elseif(str_contains(URL::previous(), 'my-tools'))
+    @section("breadcrumb", BreadcrumbHelper::render(array(
+        link_to(URL::previous(), Lang::get("views/users/tools.name")),
+        e($tool->name)
+    )))    
 @else
     @section("breadcrumb", BreadcrumbHelper::render(array(
         link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),

@@ -48,4 +48,28 @@ class UsersController extends BaseController
                 ->withErrors($user->getErrors())->withInput();
         }
     }
+    
+    /**
+     * Display a listing of an authenticated user's api keys.
+     *
+     * GET /profile/api-keys
+     * 
+     * @return View
+     */
+    public function keys()
+    {
+        return View::make("users.api_key")->withUser($this->user);
+    }
+    
+        /**
+     * Display a listing of an authenticated user's tools.
+     *
+     * GET /profile/my-tools
+     * 
+     * @return View
+     */
+    public function tools()
+    {
+        return View::make("users.tools")->with("tools", $this->user->toolUsages);
+    }
 }

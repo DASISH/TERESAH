@@ -30,6 +30,8 @@
                     <li>{{ link_to_route("admin.root", Lang::get("views/pages/navigation.switch.name"), null, array("title" => Lang::get("views/pages/navigation.switch.title"))) }}</li>
                 @endif
                 <li><a href="{{ URL::route("users.edit") }}" title="{{ Lang::get("views/pages/navigation.edit_user_profile.title") }}"><span class="glyphicon glyphicon-user"></span> <span>{{ Lang::get("views/pages/navigation.edit_user_profile.name") }}</span></a></li>
+                <li><a href="{{ URL::route("users.keys") }}" title="{{ Lang::get("views/pages/navigation.edit_user_api_keys.title") }}"><span class="glyphicon glyphicon-cog"></span> <span>{{ Lang::get("views/pages/navigation.edit_user_api_keys.name") }}</span></a></li>
+                <li><a href="{{ URL::route("users.tools") }}" title="{{ Lang::get("views/pages/navigation.edit_user_tools.title") }}"><span class="glyphicon glyphicon-list-alt"></span> <span>{{ Lang::get("views/pages/navigation.edit_user_tools.name") }}</span></a></li>
                 <li><a href="{{ URL::route("sessions.destroy") }}" title="{{ Lang::get("views/pages/navigation.logout.title") }}" title="{{ Lang::get("views/pages/navigation.logout.title") }}"><span class="glyphicon glyphicon-log-out"></span> <span>{{ Lang::get("views/pages/navigation.logout.name") }}</span></a></li>
             </ul>
         </li>
