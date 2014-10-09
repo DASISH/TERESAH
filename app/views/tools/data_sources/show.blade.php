@@ -34,17 +34,23 @@
                 <h1><span itemprop="name">{{{ $tool->name }}}</span> <small>{{ Lang::get("views/tools/data_sources/show.on") }}</small></h1>
                 
                 @if (Auth::user() != null)
-                <span style="float:right">
-                    @if (Auth::user()->toolUsages->contains($tool->id))
-                        <a data-callback="{{ URL::route("tools.unuse", array("toolID" => $tool->id)) }}" data-action="DELETE" title="{{ Lang::get("views/tools/data_sources/show.unuse.title") }}" id="toolUsageButton">
-                            <button type="button" class="btn btn-success">{{ Lang::get("views/tools/data_sources/show.unuse.title") }}</button>
-                        </a>
-                    @else
-                        <a data-callback="{{ URL::route("tools.use", array("toolID" => $tool->id)) }}" data-action="GET" title="{{ Lang::get("views/tools/data_sources/show.use.title") }}" id="toolUsageButton">
-                            <button type="button" class="btn btn-primary">{{ Lang::get("views/tools/data_sources/show.use.title") }}</button>
-                        </a>    
-                    @endif
-                </span>
+                    <span style="float:right; margin-left: 10px">
+                        @if (Auth::user()->hasAdminAccess())
+                            {{ link_to_route("admin.tools.edit", Lang::get("views/pages/navigation.admin.tools.edit.name"), array("id" => $tool->id), array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/pages/navigation.admin.tools.edit.title"))) }}
+                        @endif 
+                    </span>    
+                
+                    <span style="float:right">
+                        @if (Auth::user()->toolUsages->contains($tool->id))
+                            <a data-callback="{{ URL::route("tools.unuse", array("toolID" => $tool->id)) }}" data-action="DELETE" title="{{ Lang::get("views/tools/data_sources/show.unuse.title") }}" id="toolUsageButton">
+                                <button type="button" class="btn btn-success">{{ Lang::get("views/tools/data_sources/show.unuse.title") }}</button>
+                            </a>
+                        @else
+                            <a data-callback="{{ URL::route("tools.use", array("toolID" => $tool->id)) }}" data-action="GET" title="{{ Lang::get("views/tools/data_sources/show.use.title") }}" id="toolUsageButton">
+                                <button type="button" class="btn btn-primary">{{ Lang::get("views/tools/data_sources/show.use.title") }}</button>
+                            </a>    
+                        @endif
+                    </span>
                 @endif
             </header>
 
