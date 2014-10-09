@@ -13,7 +13,7 @@ class DataTypesTableSeeder extends Seeder
             array("label" => "Developer", "rdf_mapping" => "http://purl.org/dc/elements/1.1/creator"),
             array("label" => "Keyword", "rdf_mapping" => "http://purl.org/dc/elements/1.1/subject"),
             array("label" => "License", "rdf_mapping" => "http://purl.org/dc/terms/license"),
-            array("label" => "Platform", "rdf_mapping" => "https://schema.org/operatingSystem"),
+            array("label" => "Platform", "rdf_mapping" => "http://schema.org/operatingSystem"),
             array("label" => "Standard", "rdf_mapping" => "http://purl.org/dc/terms/conformsTo"),
             array("label" => "Tool Type", "rdf_mapping" => "http://purl.org/dc/elements/1.1/type")
         );
