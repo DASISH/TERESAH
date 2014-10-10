@@ -150,14 +150,17 @@ class ToolsController extends BaseController {
         }
         
         if($query != null) {
-            $parts = explode(" ", $query);
-            
             $tool_ids = $tool_id_query->lists("id");
             
             if(count($tool_ids) > 0) {
                 $string_match_query = Tool::whereIn("id", $tool_ids);
             }else{
                 $string_match_query = Tool::has("data", ">", 0);
+            }
+            if(str_contains($query, " ")) {
+                $parts = explode(" ", $query);
+            }else{
+                $parts = array($query);
             }
             
             foreach ($parts as $q) {
@@ -170,7 +173,11 @@ class ToolsController extends BaseController {
             $tool_ids = $tool_id_query->lists("id");
         }
 
-        $tools = $this->tool->whereIn("id", $tool_ids)->orderBy("name", "ASC")->paginate(20);
+        if(count($tool_ids) > 0) {
+            $tools = $this->tool->whereIn("id", $tool_ids)->orderBy("name", "ASC")->paginate(20);
+        }else{
+            $tools = array();
+        }
         
         $facetList = array();
         
@@ -242,15 +249,27 @@ class ToolsController extends BaseController {
             $t->set("dc:title", $this->tool->name);
 
             foreach ($this->tool->dataSources as $data_source) {
-
+                //dd($data_source);
+                $t->addResource("http://schema.org/provider", $data_source->homepage);
+                
+                $ds = $graph->resource($data_source->homepage, "http://schema.org/provider");
+                
                 $data = $this->tool->data()
                         ->where("data_source_id", $data_source->id)
                         ->with("dataType")->get();
                 foreach ($data as $d) {
                     if(filter_var($d->value, FILTER_VALIDATE_URL)){
-                        $t->addResource($d->dataType->rdf_mapping, $d->value);
+                        if(!empty($d->dataType->rdf_mapping)){
+                            $ds->addResource($d->dataType->rdf_mapping, $d->value);
+                        }else{
+                            $ds->addResource(action("DataController@valuesByType", $d->dataType->slug), $d->value);
+                        }
                     }else{
-                        $t->add($d->dataType->rdf_mapping, $d->value);
+                        if(!empty($d->dataType->rdf_mapping)){
+                            $ds->add($d->dataType->rdf_mapping, $d->value);
+                        }else{
+                            $ds->add(action("DataController@valuesByType", $d->dataType->slug), $d->value);
+                        }                        
                     }
                 }
             }

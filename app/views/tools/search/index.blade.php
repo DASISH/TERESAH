@@ -40,8 +40,9 @@
         
         <div class="row">
             <div class="col-sm-12">
+                @if (count($tools) > 0)
                 <p>{{ Lang::get("views/tools/index.listing_results", array("from" => $tools->getFrom(), "to" => $tools->getTo(), "total" => $tools->getTotal())) }}</p>
-
+                @endif
                 @include("shared._error_messages")
             </div>
             <!-- /col-sm-12 -->
@@ -49,15 +50,19 @@
         <!-- /row -->
 
         <div class="listing">
-            @foreach ($tools as $tool)
-                @include("tools._tool", compact("tool"))
-            @endforeach
+            @if (count($tools) > 0)
+                @foreach ($tools as $tool)
+                    @include("tools._tool", compact("tool"))
+                @endforeach
+            @endif
         </div>
         <!-- /listing -->
 
         <div class="row">
             <div class="col-sm-12">
+                @if (count($tools) > 0)
                 {{ $tools->appends(Input::all())->links() }}
+                @endif
             </div>
             <!-- /col-sm-12 -->
         </div>
