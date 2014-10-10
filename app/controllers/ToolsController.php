@@ -182,15 +182,13 @@ class ToolsController extends BaseController {
         $facetList = array();
         
         foreach($types as $type) {
-            if($type->slug) {
-                $result =  Data::select("value", "slug", DB::raw("count(tool_id) as total"))
-                                        ->where("data_type_id", $type->id);
-                if(count($tool_ids) > 0) {
-                    $result->whereIn("tool_id", $tool_ids);           
-                }
-                $type->values = $result->groupBy("value")->orderBy("total", "DESC")->get();
-                $facetList[] = $type;
+            $result =  Data::select("value", "slug", DB::raw("count(tool_id) as total"))
+                                    ->where("data_type_id", $type->id);
+            if(count($tool_ids) > 0) {
+                $result->whereIn("tool_id", $tool_ids);           
             }
+            $type->values = $result->groupBy("value")->orderBy("total", "DESC")->get();
+            $facetList[] = $type;
         }
         
         return View::make("tools.search.index", compact("tools"))
