@@ -187,7 +187,8 @@ class ToolsController extends BaseController {
             if(count($tool_ids) > 0) {
                 $result->whereIn("tool_id", $tool_ids);           
             }
-            $type->values = $result->groupBy("value")->orderBy("total", "DESC")->get();
+            $limit = Input::get($type->slug."-limit", 5);
+            $type->values = $result->groupBy("value")->orderBy("total", "DESC")->paginate($limit);
             $facetList[] = $type;
         }
         

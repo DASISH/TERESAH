@@ -15,11 +15,14 @@
             <ul class="list-group facets">
                 @foreach ($facet->values as $value)
                   @if(ArgumentsHelper::keyValueActive($facet->slug, $value->slug)) 
-                  <li class="list-group-item text-primary active">{{ link_to_route("tools.search", "", ArgumentsHelper::removeKeyValue($facet->slug, $value->slug), array("class" => "btn btn-default btn-xs glyphicon glyphicon-remove", "rel" => "nofollow")) }}<span class="badge"><strong>{{ $value->total }}</span>{{ $value->value }}</strong></li>
+                    <li class="list-group-item text-primary active">{{ link_to_route("tools.search", "", ArgumentsHelper::removeKeyValue($facet->slug, $value->slug), array("class" => "btn btn-default btn-xs glyphicon glyphicon-remove", "rel" => "nofollow")) }}<span class="badge"><strong>{{ $value->total }}</span>{{ $value->value }}</strong></li>
                   @else
                     <li class="list-group-item"><span class="badge">{{ $value->total }}</span>{{ link_to_route('tools.search', $value->value, ArgumentsHelper::addKeyValue($facet->slug, $value->slug), array("rel" => "nofollow")) }}</li>
                   @endif
                 @endforeach
+                @if($facet->values->getTotal() > $facet->values->getPerPage())
+                    {{ link_to_route("tools.search", Lang::get("views/tools/search/index.list_more", array("num" => 5)), ArgumentsHelper::setValues(array($facet->slug."-limit" => ($facet->values->getPerPage() + 5))), array("rel" => "nofollow")) }}
+                @endif
             </ul>
             @endif
         @endforeach
