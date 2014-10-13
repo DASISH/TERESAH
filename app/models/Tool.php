@@ -62,6 +62,11 @@ class Tool extends Eloquent
     {
         return $this->belongsToMany("User")->withTimestamps();
     }
+    
+    public function similarTools()
+    {
+        return $this->belongsToMany("Tool", "similar_tools", "tool_id")->withTimestamps();
+    }
 
     public function scopeHaveDataValueLike($query, $value)
     {
