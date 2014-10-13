@@ -32,8 +32,14 @@ class OAuthController extends BaseController {
 
             $this->validateUser($result["email"], $result["name"], substr($result["locale"], 0, 2));      
             
-            return Redirect::intended("/")
-            ->with("success", Lang::get("controllers/sessions.store.success"));  
+            if(Session::get("previous_url") !== null){
+                return Redirect::intended(SESSION::pull("previous_url"))
+                    ->with("success", Lang::get("controllers/sessions.store.success"));
+            }
+            else{
+                return Redirect::intended("/")
+                    ->with("success", Lang::get("controllers/sessions.store.success"));
+            }
         }
         // if not ask for permission first
         else {
@@ -73,8 +79,14 @@ class OAuthController extends BaseController {
 
             $this->validateUser($result["email"], $result["name"], $result["locale"]);            
             
-            return Redirect::intended("/")
-            ->with("success", Lang::get("controllers/sessions.store.success"));  
+            if(Session::get("previous_url") !== null){
+                return Redirect::intended(SESSION::pull("previous_url"))
+                    ->with("success", Lang::get("controllers/sessions.store.success"));
+            }
+            else{
+                return Redirect::intended("/")
+                    ->with("success", Lang::get("controllers/sessions.store.success"));
+            }
         }
         // if not ask for permission first
         else {
@@ -111,8 +123,14 @@ class OAuthController extends BaseController {
             
             $this->validateUser($email, $result["firstName"]." ".$result["lastName"], "en");           
 
-            return Redirect::intended("/")
-            ->with("success", Lang::get("controllers/sessions.store.success"));  
+            if(Session::get("previous_url") !== null){
+                return Redirect::intended(SESSION::pull("previous_url"))
+                    ->with("success", Lang::get("controllers/sessions.store.success"));
+            }
+            else{
+                return Redirect::intended("/")
+                    ->with("success", Lang::get("controllers/sessions.store.success"));
+            } 
             
         }// if not ask for permission first
         else {
