@@ -68,6 +68,10 @@ class Tool extends Eloquent
         return $this->belongsToMany("Tool", "similar_tools", "tool_id")->withTimestamps();
     }
 
+    public function allSimilarTools(){   
+        return $this->computedMatch();
+    }
+    
     public function scopeHaveDataValueLike($query, $value)
     {
         return $query->whereHas("data", function($query) use($value){
@@ -82,6 +86,27 @@ class Tool extends Eloquent
         });
     }
     
+    public function scopeComputedMatch($query)
+    {
+        $computed = Tool::select("tools.id", "tools.name", "tools.slug", DB::raw("COUNT(*) AS matches"))
+                    ->join("data", "data.tool_id", "=", "tools.id")
+                    ->whereRaw("CONCAT(data.data_type_id, data.slug) IN(SELECT CONCAT(d.data_type_id, d.slug) FROM data d WHERE d.tool_id = $this->id)")
+                    ->groupBy("tools.id")
+                    ->orderBy("matches", "DESC")
+                    ->where("tools.id", "!=", $this->id)
+                    ->get();
+        
+        $similar = array();
+        foreach($computed as $c) {
+            if($c["matches"] > 1) {
+                $similar[] = $c["id"];
+            }
+        }
+        
+        $query->whereIn("id", $similar);
+    }
+
+
     public function scopeHaveFacet($query, $data_type_id, $value)
     {
         return $query->whereHas("data", function($query) use($value, $data_type_id){

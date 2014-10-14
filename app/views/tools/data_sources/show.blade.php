@@ -24,7 +24,7 @@
 
 @section("content")
     <article class="row" itemscope itemtype="http://schema.org/SoftwareApplication">
-        <div class="col-sm-12">
+        <div class="col-sm-8">
             <header>
                 <div class="symbol">
                     <abbr title="{{{ $tool->name }}}">{{{ $tool->abbreviation }}}</abbr>
@@ -108,9 +108,31 @@
             @endif
         </div>
         <!-- /col-sm-12 -->
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  @if (count($similarTools) > 0)
+                    <h3>{{ Lang::get("views/tools/data_sources/show.similar_tools") }}</h3>
+                    <ul class="list-group">
+                    @foreach($similarTools as $tool)
+                        <li class="list-group-item">{{ link_to_route("tools.show", e($tool->name), $tool->slug, array("title" => e($tool->name))) }}</li>
+                    @endforeach
+                    </ul>
+                  @endif
+                  <h3>{{ Lang::get("views/tools/data_sources/show.share") }}</h3>
+                  @include("shared._share")
+                  
+                  <h3>{{ Lang::get("views/tools/data_sources/show.export") }}</h3>
+                  {{ link_to_route('tools.export', "RDF/XML", array($tool->slug, "rdfxml"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
+                  {{ link_to_route('tools.export', "RDF/Turtle", array($tool->slug, "turtle"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
+                  {{ link_to_route('tools.export', "RDF/JsonLD", array($tool->slug, "jsonld"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
+                </div>
+            </div>
+        </div>
+        <!-- /col-sm-4 -->
     </article>
     <!-- /row -->
-
+    <!--
     <div class="col-sm-6">
         <p>
             {{ link_to_route('tools.export', "RDF/XML", array($tool->slug, "rdfxml"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
@@ -119,5 +141,6 @@
         </p>
     </div>
 
-    @include("shared._share")
+    
+    -->
 @stop

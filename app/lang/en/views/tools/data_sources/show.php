@@ -14,5 +14,8 @@ return array(
     ),
     "unuse" => array(
         "title" => "Remove from 'My Tools'"
-    )
+    ),
+    "similar_tools" => "Similar Tools",
+    "share" => "Share",
+    "export" => "Export"
 );

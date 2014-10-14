@@ -31,21 +31,31 @@ class DataSourcesController extends BaseController
      */
     public function show($toolId, $id)
     {
+        if (!is_numeric($toolId)) {
+            $toolId = Tool::where("slug", $toolId)->first()->id;
+            //dd($toolId);
+        }
         $this->tool = $this->tool->with(array("user", "dataSources.data" => function($query) use($toolId) {
+            //dd($toolId);
             $query->where("data.tool_id", "=", $toolId)->orderBy("data.value", "ASC");
         }, "dataSources.data.user", "dataSources.data.dataType"))->find($toolId);
-
-        foreach($this->tool->dataSources as $id => $dataSource) {
+        
+        
+        
+        foreach($this->tool->dataSources as $dataSourceId => $dataSource) {
             $groupedData = array();
             foreach($dataSource->data as $data) {
                 $groupedData[$data->dataType->label][] = $data;
             }
             ksort($groupedData);
             
-            $this->tool->dataSources[$id]->groupedData = $groupedData;
+            $this->tool->dataSources[$dataSourceId]->groupedData = $groupedData;
         }
         
+        //dd($this->tool->dataSources[0]->groupedData);
+        
         return View::make("tools.data_sources.show")
-            ->with("tool", $this->tool);
+            ->with("tool", $this->tool)
+            ->with("similarTools", $this->tool->allSimilarTools()->get());
     }
 }
