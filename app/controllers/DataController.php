@@ -72,11 +72,23 @@ class DataController extends BaseController {
             $dataResult = $this->data->select("data.value AS text", 
                                          DB::raw("CONCAT('".$base."/', '".$type->slug."', '/', slug) AS link"),
                                          DB::raw("COUNT(slug) AS weight"))
-                                    ->where("data_type_id", $type->id)
+                                    ->where("data_type_id", $type->id)                                    
                                     ->groupBy("slug")->get()->toArray();
             $result = array_merge($dataResult, $result);
         }
         
-        return $result;
+        $return = array();
+        foreach($result as $value)
+        {
+            if($value["weight"] >= Config::get("teresah.word_cloud_threshold"))
+                $return[] = $value;           
+        }
+                
+        usort($return, function($a, $b){
+            return $a["weight"] - $b["weight"];
+        });
+        
+        array_splice($return, Config::get("teresah.word_cloud_count"));
+        return $return;
     }
 }

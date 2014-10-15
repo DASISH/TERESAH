@@ -123,9 +123,18 @@
                   @include("shared._share")
                   
                   <h3>{{ Lang::get("views/tools/data_sources/show.export") }}</h3>
+                  @if(in_array("XML", $rdf_formats))
                   {{ link_to_route('tools.export', "RDF/XML", array($tool->slug, "rdfxml"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
+                  @endif
+                  @if(in_array("Turtle", $rdf_formats))
                   {{ link_to_route('tools.export', "RDF/Turtle", array($tool->slug, "turtle"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
+                  @endif
+                  @if(in_array("JsonLD", $rdf_formats))
                   {{ link_to_route('tools.export', "RDF/JsonLD", array($tool->slug, "jsonld"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
+                  @endif
+                  @if(in_array("nTriples", $rdf_formats))
+                  {{ link_to_route('tools.export', "RDF/N-Triples", array($tool->slug, "ntriples"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
+                  @endif
                 </div>
             </div>
         </div>

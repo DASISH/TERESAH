@@ -16,7 +16,7 @@ class ToolUsageController extends \BaseController {
                     ->select(array("tool_id", DB::raw("COUNT(*) as count")))
                     ->groupBy("tool_id")
                     ->orderBy("count", "desc")
-                    ->take(20)
+                    ->take(Config::get("teresah.popular_count"))
                     ->get();
 
         $tools = array();        

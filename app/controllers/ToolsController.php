@@ -38,7 +38,7 @@ class ToolsController extends BaseController {
         
         $tools = $this->tool->has("data", ">", 0)
                 ->orderBy($sortBy, $order)
-                ->paginate(20);
+                ->paginate(Config::get("teresah.browse_pager_size"));
         
         return View::make("tools.index", compact("tools"))
                 ->with("alphaList", $this->listByAlphabet());
@@ -85,7 +85,7 @@ class ToolsController extends BaseController {
                     $query->where("slug", $value)
                           ->where("data_type_id",$dataType->id);
                 })
-                ->orderBy("name", "ASC")->paginate(20);    
+                ->orderBy("name", "ASC")->paginate(Config::get("teresah.browse_pager_size"));    
                 
         return View::make("tools.by-facet.by-data-value", compact("tools"))
                 ->with("dataType", $dataType)
@@ -102,7 +102,7 @@ class ToolsController extends BaseController {
         $tools = $this->tool
                 ->has("data", ">", 0)
                 ->where("name", "LIKE" ,"$startsWith%")
-                ->orderBy("name", "ASC")->paginate(20);
+                ->orderBy("name", "ASC")->paginate(Config::get("teresah.browse_pager_size"));
 
         return View::make("tools.by-alphabet.index", compact("tools"))
                 ->with("alphaList", $this->listByAlphabet($startsWith))
@@ -174,7 +174,7 @@ class ToolsController extends BaseController {
         }
 
         if(count($tool_ids) > 0) {
-            $tools = $this->tool->whereIn("id", $tool_ids)->orderBy("name", "ASC")->paginate(20);
+            $tools = $this->tool->whereIn("id", $tool_ids)->orderBy("name", "ASC")->paginate(Config::get("teresah.search_pager_size"));
         }else{
             $tools = array();
         }
@@ -187,7 +187,7 @@ class ToolsController extends BaseController {
             if(count($tool_ids) > 0) {
                 $result->whereIn("tool_id", $tool_ids);           
             }
-            $limit = Input::get($type->slug."-limit", 5);
+            $limit = Input::get($type->slug."-limit", Config::get("teresah.search_facet_count"));
             $type->values = $result->groupBy("value")->orderBy("total", "DESC")->paginate($limit);
             $facetList[] = $type;
         }
@@ -210,7 +210,7 @@ class ToolsController extends BaseController {
                     ->has("data", ">", 0)
                     ->where("name", "LIKE" ,"%$query%")
                     ->orderBy("name", "ASC")
-                    ->take(5)->get();       
+                    ->take(Config::get("teresah.quicksearch_size"))->get();       
         $result = array();
         foreach($matches as $match) {
             $obj = new stdClass();

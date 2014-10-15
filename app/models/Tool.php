@@ -68,8 +68,19 @@ class Tool extends Eloquent
         return $this->belongsToMany("Tool", "similar_tools", "tool_id")->withTimestamps();
     }
 
-    public function allSimilarTools(){   
-        return $this->computedMatch();
+    public function allSimilarTools(){  
+                
+        $linked = $this->similarTools()->get();
+        $computed = $this->computedMatch()->get();
+        $counter = 0;
+        
+        while(count($linked) < Config::get("teresah.similar_count") && $counter < count($computed))
+        {
+            $linked[] = $computed[$counter];
+            $counter++;
+        }
+        
+        return $linked;
     }
     
     public function scopeHaveDataValueLike($query, $value)

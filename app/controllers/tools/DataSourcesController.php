@@ -5,6 +5,7 @@ use Tool;
 use BaseController;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Config;
 
 class DataSourcesController extends BaseController
 {
@@ -52,10 +53,9 @@ class DataSourcesController extends BaseController
             $this->tool->dataSources[$dataSourceId]->groupedData = $groupedData;
         }
         
-        //dd($this->tool->dataSources[0]->groupedData);
-        
         return View::make("tools.data_sources.show")
             ->with("tool", $this->tool)
-            ->with("similarTools", $this->tool->allSimilarTools()->get());
+            ->with("similarTools", $this->tool->allSimilarTools())
+            ->with("rdf_formats", Config::get("teresah.tool_rdf_formats"));
     }
 }

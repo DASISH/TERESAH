@@ -22,10 +22,18 @@
 
 @if (isset($tool))
 <!-- RDF alternatives -->
+    @if(in_array("XML", Config::get("teresah.tool_rdf_formats")))
     <link rel="alternate" type="application/rdf+xml" href="{{ URL::to("/tools/" . $tool->slug . ".rdfxml") }}" title="Structured Descriptor Document (RDF/XML format)" />
+    @endif
+    @if(in_array("Turtle", Config::get("teresah.tool_rdf_formats")))    
     <link rel="alternate" type="text/rdf+n3" href="{{ URL::to("/tools/" . $tool->slug . ".n3") }}" title="Structured Descriptor Document (N3/Turtle format)" />
+    @endif
+    @if(in_array("NTriples", Config::get("teresah.tool_rdf_formats")))  
     <link rel="alternate" type="text/plain" href="{{ URL::to("/tools/" . $tool->slug . ".ntriples") }}" title="Structured Descriptor Document (N-Triples format)" />
+    @endif
+    @if(in_array("JsonLD", Config::get("teresah.tool_rdf_formats")))     
     <link rel="alternate" type="application/ld+json" href="{{ URL::to("/tools/" . $tool->slug . ".jsonld") }}" title="Structured Descriptor Document (JSON-LD format)" />
+    @endif
 @endif
     
 <!-- Favicon -->
