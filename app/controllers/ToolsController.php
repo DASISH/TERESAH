@@ -62,6 +62,12 @@ class ToolsController extends BaseController {
         $this->dataSource = $this->tool->dataSources()
                         ->orderBy("data_sources.name", "ASC")->first();
 
+        //Hack to fix breadcrumb
+        if(Session::has("breadcrumb"))
+        {
+            Session::push("breadcrumb", e($this->tool->name));
+        }
+        
         if (isset($this->dataSource)) {
             return Redirect::route("tools.data-sources.show", array($this->tool->id, $this->dataSource->id));
         } else {
@@ -77,6 +83,7 @@ class ToolsController extends BaseController {
      * @return type View
      */
     public function byFacet($type, $value) {
+                
         $dataType = DataType::where("slug", $type)->first();
         $data = Data::where("slug", $value)->first();
         
@@ -86,7 +93,15 @@ class ToolsController extends BaseController {
                           ->where("data_type_id",$dataType->id);
                 })
                 ->orderBy("name", "ASC")->paginate(Config::get("teresah.browse_pager_size"));    
-                
+        
+        //Hack to solve breadcrumb issue
+        Session::put("breadcrumb", array(
+            link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
+            link_to_route("by-facet", Lang::get("views/pages/navigation.browse.by-facet.name")),
+            link_to_route("data.by-type", $dataType->label, $dataType->slug),
+            link_to_route("tools.by-facet", $data->value, array($dataType->slug, $data->value))
+        ));             
+        
         return View::make("tools.by-facet.by-data-value", compact("tools"))
                 ->with("dataType", $dataType)
                 ->with("data", $data);                    

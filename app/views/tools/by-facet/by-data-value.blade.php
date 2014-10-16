@@ -1,7 +1,7 @@
 @extends("layouts.default")
 
 @section("breadcrumb", BreadcrumbHelper::render(array(
-    Lang::get("views/pages/navigation.browse.name"),
+    link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
     link_to_route("by-facet", Lang::get("views/pages/navigation.browse.by-facet.name")),
     link_to_route("data.by-type", e($dataType->label), $dataType->slug, array("title" => e($dataType->label))),
     $data->value
