@@ -297,23 +297,7 @@ class ToolsController extends BaseController {
             $statusCode = 400;
         }
         $response = Response::make($contents, $statusCode);
-
-        switch ($format) {
-            case "rdfxml":
-                $response->header("Content-Type", "text/xml");
-                break;
-            case "json":
-                $response->header("Content-Type", "application/json");
-                break;
-            case "svg" :
-                $response->header("Content-Type", "image/svg+xml");
-                break;
-            case "png":
-                $response->header("Content-Type", "image/png");
-                break;
-            default:
-                $response->header("Content-Type", "text/plain");
-        }
+        $response->header("Content-Type", BaseHelper::getContentType($format));
 
         return $response;
     }

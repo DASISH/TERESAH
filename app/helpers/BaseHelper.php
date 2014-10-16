@@ -67,4 +67,24 @@ class BaseHelper
     {
         return str_shuffle(str_random($length));
     }
+    
+    public static function getContentType($format)
+    {
+        switch ($format) {
+            case "rdfxml":
+                return "text/xml";
+                break;
+            case "json":
+                return "application/json";
+                break;
+            case "svg" :
+                return "image/svg+xml";
+                break;
+            case "png":
+                return "image/png";
+                break;
+            default:
+                return "text/plain";
+        }
+    }
 }

@@ -90,6 +90,10 @@ Route::get("tools/{id}.{format}", array(
     "uses" => "ToolsController@export"
 ));
 
+Route::get("rdf/datatypes.{format}", array(
+    "uses" => "DataTypeController@export"
+));
+
 #Browse by alphabet
 Route::get("tools/by-alphabets/{caracter}", "ToolsController@byAlphabet");
 
