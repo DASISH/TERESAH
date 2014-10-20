@@ -230,76 +230,10 @@ class ToolsController extends BaseController {
         foreach($matches as $match) {
             $obj = new stdClass();
             $obj->name = $match->name;
+            $obj->id = $match->id;
             $obj->url = url("/")."/tools/".$match->slug;
             $result[] = $obj;
         }
         return $result;
     }
-    
-    
-    /**
-     * Exports a tool to other formats
-     * 
-     * GET /tools/{id}.{format}
-     * 
-     * @param mixed $id
-     * @param string $format
-     * @return View
-     */
-    public function export($id, $format) {
-        if (is_numeric($id)) {
-            $this->tool = $this->tool->find($id);
-        } else {
-            $this->tool = $this->tool->where("slug", "=", $id)->first();
-        }
-        $this->dataSources = $this->tool->dataSources()
-                        ->orderBy("data_sources.name", "ASC")->get();
-
-        if (in_array(strtolower($format), EasyRdf_Format::getFormats())) {
-            $uri = URL::to("/") . "/tools/" . $this->tool->slug;
-
-            $graph = new EasyRdf_Graph();
-            $t = $graph->resource($uri, "http://schema.org/SoftwareApplication");
-            $t->set("dc:title", $this->tool->name);
-
-            foreach ($this->tool->dataSources as $data_source) {
-                //dd($data_source);
-                $t->addResource("http://schema.org/provider", $data_source->homepage);
-                
-                $ds = $graph->resource($data_source->homepage, "http://schema.org/provider");
-                
-                $data = $this->tool->data()
-                        ->where("data_source_id", $data_source->id)
-                        ->with("dataType")->get();
-                foreach ($data as $d) {
-                    if(filter_var($d->value, FILTER_VALIDATE_URL)){
-                        if(!empty($d->dataType->rdf_mapping)){
-                            $ds->addResource($d->dataType->rdf_mapping, $d->value);
-                        }else{
-                            $ds->addResource(action("DataController@valuesByType", $d->dataType->slug), $d->value);
-                        }
-                    }else{
-                        if(!empty($d->dataType->rdf_mapping)){
-                            $ds->add($d->dataType->rdf_mapping, $d->value);
-                        }else{
-                            $ds->add(action("DataController@valuesByType", $d->dataType->slug), $d->value);
-                        }                        
-                    }
-                }
-            }
-
-            $contents = $graph->serialise($format);
-
-            $statusCode = 200;
-        } else {
-            $contents = $format . " is not suported. \nSuported formats: ".
-                    implode(", ", EasyRdf_Format::getFormats());
-            $statusCode = 400;
-        }
-        $response = Response::make($contents, $statusCode);
-        $response->header("Content-Type", BaseHelper::getContentType($format));
-
-        return $response;
-    }
-
 }

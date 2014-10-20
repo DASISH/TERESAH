@@ -87,11 +87,19 @@ Route::put("reset-password", array(
 # Get tool in other formats (eg RDF)
 Route::get("tools/{id}.{format}", array(
     "as" => "tools.export",
-    "uses" => "ToolsController@export"
+    "uses" => "RdfController@tool"
 ));
 
 Route::get("rdf/datatypes.{format}", array(
-    "uses" => "DataTypeController@export"
+    "uses" => "RdfController@datatypes"
+));
+
+Route::get("rdf/tools.{format}", array(
+    "uses" => "RdfController@tools"
+));
+
+Route::get("rdf/datasources.{format}", array(
+    "uses" => "RdfController@datasources"
 ));
 
 #Browse by alphabet

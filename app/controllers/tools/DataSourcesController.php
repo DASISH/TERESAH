@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Config;
 
 class DataSourcesController extends BaseController
 {
-    protected $skipAuthentication = array("show");
+    protected $skipAuthentication = array("show", "rdfIndex");
     protected $tool;
     protected $dataSource;
 
@@ -57,5 +57,5 @@ class DataSourcesController extends BaseController
             ->with("tool", $this->tool)
             ->with("similarTools", $this->tool->allSimilarTools())
             ->with("rdf_formats", Config::get("teresah.tool_rdf_formats"));
-    }
+    }  
 }
