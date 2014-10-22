@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3e0126dd9a55dabb4cda3b32db7d5c6f",
+    "hash": "db861d556edb44c1d70db375a7f3c272",
     "packages": [
         {
             "name": "artdarek/oauth-4-laravel",
@@ -383,16 +383,16 @@
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "d24439ada0704948deef0d3eda2ea20fd8db1747"
+                "reference": "c62365adc4488e1c35a8f45ea86f7d4a22bd58a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/d24439ada0704948deef0d3eda2ea20fd8db1747",
-                "reference": "d24439ada0704948deef0d3eda2ea20fd8db1747",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/c62365adc4488e1c35a8f45ea86f7d4a22bd58a0",
+                "reference": "c62365adc4488e1c35a8f45ea86f7d4a22bd58a0",
                 "shasum": ""
             },
             "type": "library",
@@ -418,7 +418,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2014-05-21 20:20:46"
+            "time": "2014-09-25 23:06:16"
         },
         {
             "name": "erusev/parsedown-extra",
@@ -524,21 +524,21 @@
         },
         {
             "name": "graham-campbell/markdown",
-            "version": "v2.0.4",
+            "version": "v2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrahamCampbell/Laravel-Markdown.git",
-                "reference": "2bbb6a353cc4bbc02f3bec106cdd6ae7ef816470"
+                "reference": "d316f586fcaf59ecdf9d2f60f26da277cd6c8e8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Markdown/zipball/2bbb6a353cc4bbc02f3bec106cdd6ae7ef816470",
-                "reference": "2bbb6a353cc4bbc02f3bec106cdd6ae7ef816470",
+                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Markdown/zipball/d316f586fcaf59ecdf9d2f60f26da277cd6c8e8d",
+                "reference": "d316f586fcaf59ecdf9d2f60f26da277cd6c8e8d",
                 "shasum": ""
             },
             "require": {
-                "erusev/parsedown": "~1.0.1",
-                "erusev/parsedown-extra": "~0.2.1",
+                "erusev/parsedown": "~1.1",
+                "erusev/parsedown-extra": "~0.2.2",
                 "illuminate/support": "~4.1",
                 "illuminate/view": "~4.1",
                 "php": ">=5.4.7"
@@ -547,11 +547,6 @@
                 "graham-campbell/testbench": "~1.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "GrahamCampbell\\Markdown\\": "src/"
@@ -567,7 +562,7 @@
                     "email": "graham@mineuk.com"
                 }
             ],
-            "description": "Markdown Is A Parsedown Extra Wrapper For Laravel 4.1+",
+            "description": "Markdown Is A Parsedown Extra Wrapper For Laravel 4.1/4.2",
             "keywords": [
                 "Graham Campbell",
                 "GrahamCampbell",
@@ -582,7 +577,7 @@
                 "parsedown extra wrapper",
                 "parsedown wrapper"
             ],
-            "time": "2014-08-28 17:11:32"
+            "time": "2014-10-05 14:49:46"
         },
         {
             "name": "ircmaxell/password-compat",
