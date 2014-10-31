@@ -13,8 +13,10 @@
             @include("shared._error_messages")
             @include("admin.data_types._form", array(
                 $action = "create",
+                $model = null,
                 $options = array(
                   "route" => "admin.data-types.store",
+                  "method" => "post",
                   "role" => "form"
                 )
             ))

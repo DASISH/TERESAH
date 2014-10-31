@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    {{ Form::model($dataType, $options) }}
+    {{ FormHelper::open($model, $options) }}
         <div class="panel-body">
             <div class="form-group">
                 {{ Form::label("label", Lang::get("views/admin/data_types/form.label.label")) }}
@@ -20,7 +20,7 @@
             <!-- /form-group -->
             <div class="form-group">
                 {{ Form::label("linkable", Lang::get("views/admin/data_types/form.linkable.label")) }}
-                {{ Form::checkbox("linkable", null, true) }}
+                {{ Form::checkbox("linkable", true) }}
             </div>
             <!-- /form-group -->            
         </div>

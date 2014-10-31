@@ -13,6 +13,7 @@
             @include("shared._error_messages")
             @include("admin.data_types._form", array(
                 $action = "edit",
+                $model = $dataType,
                 $options = array(
                   "route" => array("admin.data-types.update", $dataType->id),
                   "method" => "put",

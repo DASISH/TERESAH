@@ -1,11 +1,10 @@
 <?php namespace Admin;
 
-use DataType;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Services\DataTypeServiceInterface as DataTypeService;
 
 class DataTypesController extends AdminController
 {
@@ -16,15 +15,13 @@ class DataTypesController extends AdminController
         "administrator" => array("*")
     );
 
-    protected $dataType;
-    protected $user;
+    protected $dataTypeService;
 
-    public function __construct(DataType $dataType)
+    public function __construct(DataTypeService $dataTypeService)
     {
         parent::__construct();
 
-        $this->dataType = $dataType;
-        $this->user = Auth::user();
+        $this->dataTypeService = $dataTypeService;
     }
 
     /**
@@ -36,9 +33,8 @@ class DataTypesController extends AdminController
      */
     public function index()
     {
-        $dataTypes = $this->dataType->with("user")->orderBy("created_at", "DESC")->paginate(20);
-
-        return View::make("admin.data_types.index", compact("dataTypes"));
+        return View::make("admin.data_types.index")
+            ->with("dataTypes", $this->dataTypeService->all($with = array("user"), $perPage = 20));
     }
 
     /**
@@ -52,7 +48,7 @@ class DataTypesController extends AdminController
     public function show($id)
     {
         return View::make("admin.data_types.show")
-            ->with("dataType", $this->dataType->find($id));
+            ->with("dataType", $this->dataTypeService->find($id));
     }
 
     /**
@@ -64,7 +60,7 @@ class DataTypesController extends AdminController
      */
     public function create()
     {
-        return View::make("admin.data_types.create")->with("dataType", $this->dataType);
+        return View::make("admin.data_types.create");
     }
 
     /**
@@ -76,14 +72,12 @@ class DataTypesController extends AdminController
      */
     public function store()
     {
-        $dataType = $this->dataType->fill(Input::all());
-
-        if ($this->user->dataTypes()->save($dataType)) {
+        if ($this->dataTypeService->create($this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.data-types.index")
                 ->with("success", Lang::get("controllers/admin/data_types.store.success"));
         } else {
             return Redirect::route("admin.data-types.create")
-                ->withErrors($dataType->getErrors())->withInput();
+                ->withErrors($this->dataTypeService->errors())->withInput();
         }
     }
 
@@ -98,7 +92,7 @@ class DataTypesController extends AdminController
     public function edit($id)
     {
         return View::make("admin.data_types.edit")
-            ->with("dataType", $this->dataType->find($id));
+            ->with("dataType", $this->dataTypeService->find($id));
     }
 
     /**
@@ -111,14 +105,12 @@ class DataTypesController extends AdminController
      */
     public function update($id)
     {
-        $dataType = $this->dataType->find($id);
-
-        if ($dataType->update(Input::all())) {
+        if ($this->dataTypeService->update($id, $this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.data-types.index")
                 ->with("success", Lang::get("controllers/admin/data_types.update.success"));
         } else {
             return Redirect::route("admin.data-types.edit", $id)
-                ->withErrors($dataType->getErrors())->withInput();
+                ->withErrors($this->dataTypeService->errors())->withInput();
         }
     }
 
@@ -132,9 +124,7 @@ class DataTypesController extends AdminController
      */
     public function destroy($id)
     {
-        $dataType = $this->dataType->find($id);
-
-        if ($dataType->delete()) {
+        if ($this->dataTypeService->destroy($id)) {
             return Redirect::route("admin.data-types.index")
                 ->with("success", Lang::get("controllers/admin/data_types.destroy.success"));
         } else {
