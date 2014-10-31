@@ -1,11 +1,10 @@
 <?php namespace Admin;
 
-use DataSource;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Services\DataSourceServiceInterface as DataSourceService;
 
 class DataSourcesController extends AdminController
 {
@@ -16,15 +15,13 @@ class DataSourcesController extends AdminController
         "administrator" => array("*")
     );
 
-    protected $dataSource;
-    protected $user;
+    protected $dataSourceService;
 
-    public function __construct(DataSource $dataSource)
+    public function __construct(DataSourceService $dataSourceService)
     {
         parent::__construct();
 
-        $this->dataSource = $dataSource;
-        $this->user = Auth::user();
+        $this->dataSourceService = $dataSourceService;
     }
 
     /**
@@ -36,9 +33,8 @@ class DataSourcesController extends AdminController
      */
     public function index()
     {
-        $dataSources = $this->dataSource->with("user")->orderBy("created_at", "DESC")->paginate(20);
-
-        return View::make("admin.data_sources.index", compact("dataSources"));
+        return View::make("admin.data_sources.index")
+            ->with("dataSources", $this->dataSourceService->all($with = array("user"), $perPage = 20));
     }
 
     /**
@@ -52,7 +48,7 @@ class DataSourcesController extends AdminController
     public function show($id)
     {
         return View::make("admin.data_sources.show")
-            ->with("dataSource", $this->dataSource->find($id));
+            ->with("dataSource", $this->dataSourceService->find($id));
     }
 
     /**
@@ -64,7 +60,7 @@ class DataSourcesController extends AdminController
      */
     public function create()
     {
-        return View::make("admin.data_sources.create")->with("dataSource", $this->dataSource);
+        return View::make("admin.data_sources.create");
     }
 
     /**
@@ -76,14 +72,12 @@ class DataSourcesController extends AdminController
      */
     public function store()
     {
-        $dataSource = $this->dataSource->fill(Input::all());
-
-        if ($this->user->dataSources()->save($dataSource)) {
+        if ($this->dataSourceService->create($this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.data-sources.index")
                 ->with("success", Lang::get("controllers/admin/data_sources.store.success"));
         } else {
             return Redirect::route("admin.data-sources.create")
-                ->withErrors($dataSource->getErrors())->withInput();
+                ->withErrors($this->dataSourceService->errors())->withInput();
         }
     }
 
@@ -98,7 +92,7 @@ class DataSourcesController extends AdminController
     public function edit($id)
     {
         return View::make("admin.data_sources.edit")
-            ->with("dataSource", $this->dataSource->find($id));
+            ->with("dataSource", $this->dataSourceService->find($id));
     }
 
     /**
@@ -111,14 +105,12 @@ class DataSourcesController extends AdminController
      */
     public function update($id)
     {
-        $dataSource = $this->dataSource->find($id);
-
-        if ($dataSource->update(Input::all())) {
+        if ($this->dataSourceService->update($id, $this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.data-sources.index")
                 ->with("success", Lang::get("controllers/admin/data_sources.update.success"));
         } else {
             return Redirect::route("admin.data-sources.edit", $id)
-                ->withErrors($dataSource->getErrors())->withInput();
+                ->withErrors($this->dataSourceService->errors())->withInput();
         }
     }
 
@@ -132,9 +124,7 @@ class DataSourcesController extends AdminController
      */
     public function destroy($id)
     {
-        $dataSource = $this->dataSource->find($id);
-
-        if ($dataSource->delete()) {
+        if ($this->dataSourceService->destroy($id)) {
             return Redirect::route("admin.data-sources.index")
                 ->with("success", Lang::get("controllers/admin/data_sources.destroy.success"));
         } else {

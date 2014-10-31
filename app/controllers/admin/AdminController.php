@@ -42,4 +42,9 @@ class AdminController extends BaseController
                 ->with("warning", Lang::get("controllers/admin/admin.authorize.warning"));
         }
     }
+
+    protected function inputWithAuthenticatedUserId($input = array())
+    {
+        return array_merge($input, array("user_id" => Auth::user()->id));
+    }
 }
