@@ -27,6 +27,8 @@
             "app/libraries",
             "app/models",
             "app/observers",
+            "app/repositories",
+            "app/services",
             "app/database/migrations",
             "app/database/seeds",
             "app/tests/TestCase.php"
