@@ -182,6 +182,7 @@ Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
 
     Route::resource("users", "UsersController");    
     Route::resource("activities", "ActivitiesController");
+    Route::resource("harvest", "HarvestController");
 
     Route::get("/", array(
         "as" => "admin.root",

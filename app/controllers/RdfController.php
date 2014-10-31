@@ -146,6 +146,11 @@ class RdfController extends BaseController {
              $t->set("rdfs:label", $type->label);
              $t->set("dc:identifier", $type->slug);
              $t->set("dc:description", $type->description);
+             if($type->linkable){
+                 $t->set("dc:type", "linkable");
+             } else {
+                 $t->set("dc:type", "unlinkable");
+             }
         }
         
         $contents = $graph->serialise($format);

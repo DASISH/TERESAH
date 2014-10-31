@@ -72,11 +72,14 @@ class BaseHelper
     {
         switch ($format) {
             case "rdfxml":
-                return "text/xml";
+                return "application/rdf+xml";
                 break;
             case "json":
                 return "application/json";
                 break;
+            case "turtle":
+                return "text/turtle";
+                break;            
             case "svg" :
                 return "image/svg+xml";
                 break;
