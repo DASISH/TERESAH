@@ -8,7 +8,8 @@ class RepositoryServiceProvider extends ServiceProvider
         "Repositories\ActivityRepositoryInterface" => "Repositories\Eloquent\ActivityRepository",
         "Repositories\ApiKeyRepositoryInterface" => "Repositories\Eloquent\ApiKeyRepository",
         "Repositories\DataSourceRepositoryInterface" => "Repositories\Eloquent\DataSourceRepository",
-        "Repositories\DataTypeRepositoryInterface" => "Repositories\Eloquent\DataTypeRepository"
+        "Repositories\DataTypeRepositoryInterface" => "Repositories\Eloquent\DataTypeRepository",
+        "Repositories\ToolRepositoryInterface" => "Repositories\Eloquent\ToolRepository",
     );
 
     /**

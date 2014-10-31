@@ -8,7 +8,8 @@ class ServicesServiceProvider extends ServiceProvider
         "Services\ActivityServiceInterface" => "Services\ActivityService",
         "Services\ApiKeyServiceInterface" => "Services\ApiKeyService",
         "Services\DataSourceServiceInterface" => "Services\DataSourceService",
-        "Services\DataTypeServiceInterface" => "Services\DataTypeService"
+        "Services\DataTypeServiceInterface" => "Services\DataTypeService",
+        "Services\ToolServiceInterface" => "Services\ToolService",
     );
 
     /**
