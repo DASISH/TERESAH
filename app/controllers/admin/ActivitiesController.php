@@ -1,7 +1,7 @@
 <?php namespace Admin;
 
-use Activity;
 use Illuminate\Support\Facades\View;
+use Services\ActivityServiceInterface as ActivityService;
 
 class ActivitiesController extends AdminController
 {
@@ -12,13 +12,13 @@ class ActivitiesController extends AdminController
         "administrator" => array("*")
     );
 
-    protected $activity;
+    protected $activityService;
 
-    public function __construct(Activity $activity)
+    public function __construct(ActivityService $activityService)
     {
         parent::__construct();
 
-        $this->activity = $activity;
+        $this->activityService = $activityService;
     }
 
     /**
@@ -30,12 +30,9 @@ class ActivitiesController extends AdminController
      */
     public function index()
     {
-        $activities = $this->activity->with("user")
-            ->orderBy("id", "DESC")
-            ->orderBy("created_at", "DESC")
-            ->paginate(20);
-        $deletedActivities = $this->activity->deletedActivities();
-
-        return View::make("admin.activities.index", compact("activities", "deletedActivities"));
+        # TODO: Order Admin::ActivitiesController@index by id DESC and created_at DESC
+        return View::make("admin.activities.index")
+            ->with("activities", $this->activityService->all($with = array("user"), $perPage = 20))
+            ->with("deletedActivities", $this->activityService->getDeleted());
     }
 }
