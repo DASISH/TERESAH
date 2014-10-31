@@ -5,7 +5,8 @@ use Illuminate\Support\ServiceProvider;
 class ServicesServiceProvider extends ServiceProvider
 {
     protected $services = array(
-        "Services\ActivityServiceInterface" => "Services\ActivityService"
+        "Services\ActivityServiceInterface" => "Services\ActivityService",
+        "Services\ApiKeyServiceInterface" => "Services\ApiKeyService"
     );
 
     /**

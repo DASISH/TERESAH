@@ -1,19 +1,24 @@
 <?php
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Watson\Validating\ValidatingTrait;
 
 class ApiKey extends Eloquent
 {
     use SoftDeletingTrait;
+    use ValidatingTrait;
 
-    # protected $table = "api_keys";
     protected $dates = array("deleted_at");
-    protected $fillable = array("token", "enabled", "description");
+    protected $fillable = array("user_id", "token", "enabled", "description");
 
+    /**
+     * Validation rules for the model
+     */
     protected $rules = array(
-        "token" => "required|unique:api_keys|max:64",
+        "user_id" => "required|integer",
+        "token" => "required|unique:api_keys|alpha_dash|min:16|max:64",
         "enabled" => "required|boolean",
-        "description" => "max:255"
+        "description" => "sometimes|max:255"
     );
 
     public static function boot()
@@ -40,17 +45,15 @@ class ApiKey extends Eloquent
 
     public function getTokenAttribute($value)
     {
-        if (!isset($value)) {
-            $value = self::generateToken();
+        if ((!isset($value) && empty($value)) && !$this->isDirty("token")) {
+            return self::generateToken();
         }
 
         return $value;
     }
 
-    public static function generateToken($length = 64)
+    public static function generateToken($length = 32)
     {
-        # TODO: Should the generated API Key token 
-        # be around 16-32 characters long (instead of 64)?
         return mb_strtolower(BaseHelper::secureRandom($length));
     }
 }

@@ -5,7 +5,8 @@ use Illuminate\Support\ServiceProvider;
 class RepositoryServiceProvider extends ServiceProvider
 {
     protected $repositories = array(
-        "Repositories\ActivityRepositoryInterface" => "Repositories\Eloquent\ActivityRepository"
+        "Repositories\ActivityRepositoryInterface" => "Repositories\Eloquent\ActivityRepository",
+        "Repositories\ApiKeyRepositoryInterface" => "Repositories\Eloquent\ApiKeyRepository"
     );
 
     /**
