@@ -4,7 +4,9 @@ use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-    protected $repositories = array();
+    protected $repositories = array(
+        "Repositories\ActivityRepositoryInterface" => "Repositories\Eloquent\ActivityRepository"
+    );
 
     /**
      * Register the service provider.

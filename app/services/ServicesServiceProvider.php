@@ -4,7 +4,9 @@ use Illuminate\Support\ServiceProvider;
 
 class ServicesServiceProvider extends ServiceProvider
 {
-    protected $services = array();
+    protected $services = array(
+        "Services\ActivityServiceInterface" => "Services\ActivityService"
+    );
 
     /**
      * Register the service provider.
