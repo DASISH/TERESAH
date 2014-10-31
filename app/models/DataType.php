@@ -10,6 +10,7 @@ class DataType extends Eloquent
 
     protected $dates = array("deleted_at");
     protected $fillable = array(
+        "user_id",
         "label",
         "description",
         "rdf_mapping",
