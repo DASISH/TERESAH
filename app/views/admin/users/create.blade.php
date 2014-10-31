@@ -13,8 +13,10 @@
             @include("shared._error_messages")
             @include("admin.users._form", array(
                 $action = "create",
+                $model = null,
                 $options = array(
                   "route" => "admin.users.store",
+                  "method" => "post",
                   "role" => "form"
                 )
             ))

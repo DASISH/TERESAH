@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    {{ Form::model($user, $options) }}
+    {{ FormHelper::open($model, $options) }}
         <div class="panel-body">
             <div class="form-group">
                 {{ Form::label("name", Lang::get("views/admin/users/form.name.label")) }}
@@ -50,7 +50,7 @@
 
                     <div class="checkbox">
                         {{ Form::hidden("active", 0) }}
-                        <label>{{ Form::checkbox("active", true, $user->active) }} {{ Lang::get("views/admin/users/form.active.name") }}</label>
+                        <label>{{ Form::checkbox("active", true) }} {{ Lang::get("views/admin/users/form.active.name") }}</label>
                     </div>
                     <!-- /checkbox -->
                 </div>

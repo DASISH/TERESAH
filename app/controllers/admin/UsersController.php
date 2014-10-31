@@ -1,10 +1,10 @@
 <?php namespace Admin;
 
-use User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Services\UserServiceInterface as UserService;
 
 class UsersController extends AdminController
 {
@@ -15,13 +15,13 @@ class UsersController extends AdminController
         "administrator" => array("*")
     );
 
-    protected $user;
+    protected $userService;
 
-    public function __construct(User $user)
+    public function __construct(UserService $userService)
     {
         parent::__construct();
 
-        $this->user = $user;
+        $this->userService = $userService;
     }
 
     /**
@@ -33,12 +33,8 @@ class UsersController extends AdminController
      */
     public function index()
     {
-        $users = $this->user->with("logins")
-            ->orderBy("id", "DESC")
-            ->orderBy("created_at", "DESC")
-            ->paginate(20);
-
-        return View::make("admin.users.index", compact("users"));
+        return View::make("admin.users.index")
+            ->with("users", $this->userService->all($with = array("logins"), $perPage = 20));
     }
 
     /**
@@ -52,7 +48,7 @@ class UsersController extends AdminController
     public function show($id)
     {
         return View::make("admin.users.show")
-            ->with("user", $this->user->find($id));
+            ->with("user", $this->userService->find($id));
     }
 
     /**
@@ -64,7 +60,7 @@ class UsersController extends AdminController
      */
     public function create()
     {
-        return View::make("admin.users.create")->with("user", $this->user);
+        return View::make("admin.users.create");
     }
 
     /**
@@ -76,16 +72,12 @@ class UsersController extends AdminController
      */
     public function store()
     {
-        $user = $this->user->fill(Input::all());
-        $user->active = Input::get("active");
-        $user->user_level = Input::get("user_level");
-
-        if ($user->save()) {
+        if ($this->userService->create(Input::all())) {
             return Redirect::route("admin.users.index")
                 ->with("success", Lang::get("controllers/admin/users.store.success"));
         } else {
             return Redirect::route("admin.users.create")
-                ->withErrors($user->getErrors())->withInput();
+                ->withErrors($this->userService->errors())->withInput();
         }
     }
 
@@ -100,7 +92,7 @@ class UsersController extends AdminController
     public function edit($id)
     {
         return View::make("admin.users.edit")
-            ->with("user", $this->user->find($id));
+            ->with("user", $this->userService->find($id));
     }
 
     /**
@@ -113,16 +105,12 @@ class UsersController extends AdminController
      */
     public function update($id)
     {
-        $user = $this->user->find($id)->fill(Input::all());
-        $user->active = Input::get("active");
-        $user->user_level = Input::get("user_level");
-
-        if ($user->update()) {
+        if ($this->userService->update($id, Input::all())) {
             return Redirect::route("admin.users.index")
                 ->with("success", Lang::get("controllers/admin/users.update.success"));
         } else {
             return Redirect::route("admin.users.edit", $id)
-                ->withErrors($user->getErrors())->withInput();
+                ->withErrors($this->userService->errors())->withInput();
         }
     }
 
@@ -136,10 +124,7 @@ class UsersController extends AdminController
      */
     public function destroy($id)
     {
-        $user = $this->user->find($id);
-        $user->disablePasswordValidation();
-
-        if ($user->delete()) {
+        if ($this->userService->destroy($id)) {
             return Redirect::route("admin.users.index")
                 ->with("success", Lang::get("controllers/admin/users.destroy.success"));
         } else {

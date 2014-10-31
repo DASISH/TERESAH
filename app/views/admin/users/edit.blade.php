@@ -13,6 +13,7 @@
             @include("shared._error_messages")
             @include("admin.users._form", array(
                 $action = "edit",
+                $model = $user,
                 $options = array(
                   "route" => array("admin.users.update", $user->id),
                   "method" => "put",
