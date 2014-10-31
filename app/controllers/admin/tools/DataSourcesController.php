@@ -1,13 +1,12 @@
 <?php namespace Admin\Tools;
 
-use DataSource;
-use Tool;
 use Admin\AdminController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Services\DataSourceServiceInterface as DataSourceService;
+use Services\ToolServiceInterface as ToolService;
 
 class DataSourcesController extends AdminController
 {
@@ -15,24 +14,15 @@ class DataSourcesController extends AdminController
         "administrator" => array("*")
     );
 
-    protected $tool;
-    protected $dataSource;
-    protected $user;
+    protected $toolService;
+    protected $dataSourceService;
 
-    public function __construct(Tool $tool, DataSource $dataSource)
+    public function __construct(ToolService $toolService, DataSourceService $dataSourceService)
     {
         parent::__construct();
 
-        $this->tool = $tool;
-        $this->dataSource = $dataSource;
-        $this->user = Auth::user();
-
-        $this->beforeFilter("@findTool", array(
-            "only" => array("create", "store", "destroy")
-        ));
-        $this->beforeFilter("@findToolWithAssociatedData", array(
-            "only" => array("index", "show")
-        ));
+        $this->toolService = $toolService;
+        $this->dataSourceService = $dataSourceService;
     }
 
     /**
@@ -48,7 +38,7 @@ class DataSourcesController extends AdminController
     {
         # Share the view with the show action
         return View::make("admin.tools.data_sources.show")
-            ->with("tool", $this->tool);
+            ->with("tool", $this->toolService->findWithAssociatedData($toolId));
     }
 
     /**
@@ -63,7 +53,7 @@ class DataSourcesController extends AdminController
     public function show($toolId, $id)
     {
         return View::make("admin.tools.data_sources.show")
-            ->with("tool", $this->tool);
+            ->with("tool", $this->toolService->findWithAssociatedData($toolId));
     }
 
     /**
@@ -77,10 +67,10 @@ class DataSourcesController extends AdminController
      */
     public function create($toolId)
     {
+        # TODO: Abstract the lists() function out from the controller (function belongs to repository/service)
         return View::make("admin.tools.data_sources.create", array(
-            "tool" => $this->tool, 
-            "dataSource" => $this->dataSource, 
-            "dataSources" => $this->getDataSources()
+            "tool" => $this->toolService->find($toolId), 
+            "dataSources" => $this->dataSourceService->all()->lists("name", "id")
         ));
     }
 
@@ -95,17 +85,13 @@ class DataSourcesController extends AdminController
      */
     public function store($toolId)
     {
-        $dataSourceId = Input::get("data_source_id");
-
-        # TODO: Check for the existing relationship
-
         try {
-            $this->tool->dataSources()->attach($dataSourceId);
+            $dataSourceId = Input::get("data_source_id");
+            $this->toolService->attachDataSource($toolId, $dataSourceId);
 
             return Redirect::route("admin.tools.data-sources.show", array($toolId, $dataSourceId))
                 ->with("success", Lang::get("controllers/admin/tools/data_sources.store.success"));
         } catch(\Exception $exception) {
-            # TODO: Catch only database related exceptions?
             return Redirect::route("admin.tools.data-sources.create", $toolId)
                 ->with("error", Lang::get("controllers/admin/tools/data_sources.store.error"));
         }
@@ -123,35 +109,14 @@ class DataSourcesController extends AdminController
      */
     public function destroy($toolId, $id)
     {
-        $dataSource = $this->tool->dataSources()->wherePivot("data_source_id", $id)->first();
-
         try {
-            $this->tool->dataSources()->detach($dataSource->id);
+            $this->toolService->detachDataSource($toolId, $id);
 
             return Redirect::route("admin.tools.data-sources.index", $toolId)
                 ->with("success", Lang::get("controllers/admin/tools/data_sources.destroy.success"));
         } catch(\Exception $exception) {
-            # TODO: Catch only database related exceptions?
             return Redirect::route("admin.tools.data-sources.delete", $toolId)
                 ->with("error", Lang::get("controllers/admin/tools/data_sources.destroy.error"));
         }
-    }
-
-    public function findTool($route, $request)
-    {
-        $this->tool = $this->tool->find($route->getParameter("tools"));
-    }
-
-    public function findToolWithAssociatedData($route, $request)
-    {
-        $toolId = $route->getParameter("tools");
-        $this->tool = $this->tool->with(array("user", "dataSources.data" => function($query) use($toolId) {
-            $query->where("data.tool_id", "=", $toolId);
-        }, "dataSources.data.user", "dataSources.data.dataType"))->find($toolId);
-    }
-
-    public function getDataSources()
-    {
-        return $this->dataSource->orderBy("name", "ASC")->lists("name", "id");
     }
 }

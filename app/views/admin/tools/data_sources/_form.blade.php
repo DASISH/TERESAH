@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    {{ Form::model($dataSource, $options) }}
+    {{ FormHelper::open($model, $options) }}
         <div class="panel-body">
             <div class="form-group">
                 {{ Form::label("data_source_id", Lang::get("views/admin/tools/data_sources/form.select_data_source.label")) }}
