@@ -8,6 +8,7 @@
             @include("shared._error_messages")
             @include("admin.tools.data_sources.data._form", array(
                 $action = "edit",
+                $model = $data,
                 $options = array(
                   "route" => array("admin.tools.data-sources.data.update", $tool->id, $dataSource->id, $data->id),
                   "method" => "put",

@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    {{ Form::model($data, $options) }}
+    {{ FormHelper::open($model, $options) }}
         <div class="panel-body">
             <div class="form-group">
                 {{ Form::label("data_type_id", Lang::get("views/admin/tools/data_sources/data/form.data_type.label")) }}

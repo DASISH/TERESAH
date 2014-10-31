@@ -1,9 +1,5 @@
 <?php namespace Admin\Tools\DataSources;
 
-use Data;
-use DataSource;
-use DataType;
-use Tool;
 use Admin\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -12,6 +8,10 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
+use Services\DataServiceInterface as DataService;
+use Services\DataSourceServiceInterface as DataSourceService;
+use Services\DataTypeServiceInterface as DataTypeService;
+use Services\ToolServiceInterface as ToolService;
 
 class DataController extends AdminController
 {
@@ -19,25 +19,19 @@ class DataController extends AdminController
         "administrator" => array("*")
     );
 
-    protected $tool;
-    protected $dataSource;
-    protected $data;
-    protected $user;
+    protected $toolService;
+    protected $dataSourceService;
+    protected $dataTypeService;
+    protected $dataService;
 
-    public function __construct(Tool $tool, DataSource $dataSource, DataType $dataType, Data $data)
+    public function __construct(ToolService $toolService, DataSourceService $dataSourceService, DataTypeService $dataTypeService, DataService $dataService)
     {
         parent::__construct();
 
-        $this->tool = $tool;
-        $this->dataSource = $dataSource;
-        $this->dataType = $dataType;
-        $this->data = $data;
-        $this->user = Auth::user();
-
-        $this->beforeFilter("@findToolAndDataSource");
-        $this->beforeFilter("@findData", array(
-            "only" => array("edit", "update", "destroy")
-        ));
+        $this->toolService = $toolService;
+        $this->dataSourceService = $dataSourceService;
+        $this->dataTypeService = $dataTypeService;
+        $this->dataService = $dataService;
     }
 
     /**
@@ -52,11 +46,12 @@ class DataController extends AdminController
      */
     public function create($toolId, $dataSourceId)
     {
+        # TODO: Abort the app (with error 404) if the tool or
+        # data source cannot be found.
         return View::make("admin.tools.data_sources.data.create")
-            ->with("tool", $this->tool)
-            ->with("dataSource", $this->dataSource)
-            ->with("dataTypes", $this->getDataTypes())
-            ->with("data", $this->data);
+            ->with("tool", $this->toolService->find($toolId))
+            ->with("dataSource", $this->dataSourceService->find($dataSourceId))
+            ->with("dataTypes", $this->dataTypeService->getDataTypes());
     }
 
     /**
@@ -69,17 +64,18 @@ class DataController extends AdminController
      */
     public function store($toolId, $dataSourceId)
     {
-        $this->data->fill(Input::all());
-        $this->data->dataSource()->associate($this->dataSource);
-        $this->data->dataType()->associate($this->dataType->find(Input::get("data_type_id")));
-        $this->data->tool()->associate($this->tool);
+        $associations = array(
+            "data_source_id" => $dataSourceId,
+            "tool_id" => $toolId,
+            "user_id" => Auth::user()->id
+        );
 
-        if ($this->user->data()->save($this->data)) {
+        if ($this->dataService->create(array_merge(Input::all(), $associations))) {
             return Redirect::route("admin.tools.data-sources.index", $toolId)
                 ->with("success", Lang::get("controllers/admin/tools/data_sources/data.store.success"));
         } else {
             return Redirect::route("admin.tools.data-sources.data.create", array($toolId, $dataSourceId))
-                ->withErrors($this->data->getErrors())->withInput();
+                ->withErrors($this->dataService->errors())->withInput();
         }
     }
 
@@ -97,10 +93,10 @@ class DataController extends AdminController
     public function edit($toolId, $dataSourceId, $id)
     {
         return View::make("admin.tools.data_sources.data.edit")
-            ->with("tool", $this->tool)
-            ->with("dataSource", $this->dataSource)
-            ->with("dataTypes", $this->getDataTypes())
-            ->with("data", $this->data);
+            ->with("tool", $this->toolService->find($toolId))
+            ->with("dataSource", $this->dataSourceService->find($dataSourceId))
+            ->with("dataTypes", $this->dataTypeService->getDataTypes())
+            ->with("data", $this->dataService->find($id));
     }
 
     /**
@@ -116,18 +112,18 @@ class DataController extends AdminController
      */
     public function update($toolId, $dataSourceId, $id)
     {
+        $data = array(
+            "data_source_id" => $dataSourceId,
+            "tool_id" => $toolId,
+            "user_id" => Auth::user()->id
+        );
+
         if (Request::ajax()) {
             $input = Input::all();
-            $this->data->$input["name"] = $input["value"];
-        } else {
-            $this->data->fill(Input::all());
+            $data[$input["name"]] = $input["value"];
         }
 
-        $this->data->dataSource()->associate($this->dataSource);
-        $this->data->tool()->associate($this->tool);
-        $this->data->user()->associate($this->user);
-
-        if ($this->data->update()) {
+        if ($this->dataService->update($id, array_merge(Input::all(), $data))) {
             if (Request::ajax()) {
                 return Response::json(array("status" => 200), 200);
             }
@@ -136,11 +132,11 @@ class DataController extends AdminController
                 ->with("success", Lang::get("controllers/admin/tools/data_sources/data.update.success"));
         } else {
             if (Request::ajax()) {
-                return Response::json($this->data->getErrors(), 400);
+                return Response::json($this->dataService->errors(), 400);
             }
 
             return Redirect::route("admin.tools.data-sources.data.edit", array($toolId, $dataSourceId, $id))
-                ->withErrors($this->data->getErrors())->withInput();
+                ->withErrors($this->dataService->errors())->withInput();
         }
     }
 
@@ -157,29 +153,12 @@ class DataController extends AdminController
      */
     public function destroy($toolId, $dataSourceId, $id)
     {
-        if ($this->data->delete()) {
+        if ($this->dataService->destroy($id)) {
             return Redirect::route("admin.tools.data-sources.show", array($toolId, $dataSourceId))
                 ->with("success", Lang::get("controllers/admin/tools/data_sources/data.destroy.success"));
         } else {
             return Redirect::route("admin.tools.data-sources.show", array($toolId, $dataSourceId))
                 ->with("error", Lang::get("controllers/admin/tools/data_sources/data.destroy.error"));
         }
-    }
-
-    public function getDataTypes()
-    {
-        return $this->dataType->orderBy("label", "ASC")->lists("label", "id");
-    }
-
-    public function findData($route, $request)
-    {
-        $this->data = $this->data->find($route->getParameter("data"));
-    }
-
-    public function findToolAndDataSource($route, $request)
-    {
-        $this->tool = $this->tool->find($route->getParameter("tools"));
-        $this->dataSource = $this->tool->dataSources()
-            ->wherePivot("data_source_id", $route->getParameter("data_sources"))->first();
     }
 }
