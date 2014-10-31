@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    {{ Form::model($tool, $options) }}
+    {{ FormHelper::open($model, $options) }}
         <div class="panel-body">
             <div class="form-group">
                 {{ Form::label("name", Lang::get("views/admin/tools/form.name.label")) }}

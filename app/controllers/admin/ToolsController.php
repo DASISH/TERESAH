@@ -1,11 +1,10 @@
 <?php namespace Admin;
 
-use Tool;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Services\ToolServiceInterface as ToolService;
 
 class ToolsController extends AdminController
 {
@@ -17,14 +16,12 @@ class ToolsController extends AdminController
     );
 
     protected $tool;
-    protected $user;
 
-    public function __construct(Tool $tool)
+    public function __construct(ToolService $toolService)
     {
         parent::__construct();
 
-        $this->tool = $tool;
-        $this->user = Auth::user();
+        $this->toolService = $toolService;
     }
 
     /**
@@ -36,12 +33,8 @@ class ToolsController extends AdminController
      */
     public function index()
     {
-        $tools = $this->tool->with("user")
-            ->orderBy("id", "DESC")
-            ->orderBy("updated_at", "DESC")
-            ->paginate(20);
-
-        return View::make("admin.tools.index", compact("tools"));
+        return View::make("admin.tools.index")
+            ->with("tools", $this->toolService->all($with = array("user"), $perPage = 20));
     }
 
     /**
@@ -55,7 +48,7 @@ class ToolsController extends AdminController
     public function show($id)
     {
         return View::make("admin.tools.show")
-            ->with("tool", $this->tool->find($id));
+            ->with("tool", $this->toolService->find($id));
     }
 
     /**
@@ -67,7 +60,7 @@ class ToolsController extends AdminController
      */
     public function create()
     {
-        return View::make("admin.tools.create")->with("tool", $this->tool);
+        return View::make("admin.tools.create");
     }
 
     /**
@@ -79,14 +72,12 @@ class ToolsController extends AdminController
      */
     public function store()
     {
-        $tool = $this->tool->fill(Input::all());
-
-        if ($this->user->tools()->save($tool)) {
+        if ($this->toolService->create($this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.tools.index")
                 ->with("success", Lang::get("controllers/admin/tools.store.success"));
         } else {
             return Redirect::route("admin.tools.create")
-                ->withErrors($tool->getErrors())->withInput();
+                ->withErrors($this->toolService->errors())->withInput();
         }
     }
 
@@ -101,7 +92,7 @@ class ToolsController extends AdminController
     public function edit($id)
     {
         return View::make("admin.tools.edit")
-            ->with("tool", $this->tool->find($id));
+            ->with("tool", $this->toolService->find($id));
     }
 
     /**
@@ -114,14 +105,12 @@ class ToolsController extends AdminController
      */
     public function update($id)
     {
-        $tool = $this->tool->find($id);
-
-        if ($tool->update(Input::all())) {
+        if ($this->toolService->update($id, $this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.tools.index")
                 ->with("success", Lang::get("controllers/admin/tools.update.success"));
         } else {
             return Redirect::route("admin.tools.edit", $id)
-                ->withErrors($tool->getErrors())->withInput();
+                ->withErrors($this->toolService->errors())->withInput();
         }
     }
 
@@ -135,9 +124,7 @@ class ToolsController extends AdminController
      */
     public function destroy($id)
     {
-        $tool = $this->tool->find($id);
-
-        if ($tool->delete()) {
+        if ($this->toolService->destroy($id)) {
             return Redirect::route("admin.tools.index")
                 ->with("success", Lang::get("controllers/admin/tools.destroy.success"));
         } else {
