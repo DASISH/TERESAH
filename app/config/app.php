@@ -133,6 +133,7 @@ return array(
         "Illuminate\View\ViewServiceProvider",
         "Illuminate\Workbench\WorkbenchServiceProvider",
         "Repositories\RepositoryServiceProvider",
+        "Services\ServicesServiceProvider",
         "Artdarek\OAuth\OAuthServiceProvider",
         "Barryvdh\Debugbar\ServiceProvider",
         "Codesleeve\AssetPipeline\AssetPipelineServiceProvider",
