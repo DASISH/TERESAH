@@ -132,6 +132,7 @@ return array(
         "Illuminate\Validation\ValidationServiceProvider",
         "Illuminate\View\ViewServiceProvider",
         "Illuminate\Workbench\WorkbenchServiceProvider",
+        "Repositories\RepositoryServiceProvider",
         "Artdarek\OAuth\OAuthServiceProvider",
         "Barryvdh\Debugbar\ServiceProvider",
         "Codesleeve\AssetPipeline\AssetPipelineServiceProvider",
