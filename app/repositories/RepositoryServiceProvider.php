@@ -6,7 +6,8 @@ class RepositoryServiceProvider extends ServiceProvider
 {
     protected $repositories = array(
         "Repositories\ActivityRepositoryInterface" => "Repositories\Eloquent\ActivityRepository",
-        "Repositories\ApiKeyRepositoryInterface" => "Repositories\Eloquent\ApiKeyRepository"
+        "Repositories\ApiKeyRepositoryInterface" => "Repositories\Eloquent\ApiKeyRepository",
+        "Repositories\DataSourceRepositoryInterface" => "Repositories\Eloquent\DataSourceRepository"
     );
 
     /**
