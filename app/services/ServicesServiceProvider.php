@@ -7,7 +7,8 @@ class ServicesServiceProvider extends ServiceProvider
     protected $services = array(
         "Services\ActivityServiceInterface" => "Services\ActivityService",
         "Services\ApiKeyServiceInterface" => "Services\ApiKeyService",
-        "Services\DataSourceServiceInterface" => "Services\DataSourceService"
+        "Services\DataSourceServiceInterface" => "Services\DataSourceService",
+        "Services\DataTypeServiceInterface" => "Services\DataTypeService"
     );
 
     /**
