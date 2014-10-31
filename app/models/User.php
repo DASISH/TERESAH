@@ -19,13 +19,13 @@ class User extends Eloquent implements UserInterface
     protected $fillable = array(
         "email_address",
         "password",
-        "password_confirmation",
         "name",
-        "locale"
+        "locale",
+        "active",
+        "user_level"
     );
     protected $hidden = array(
         "password",
-        "password_confirmation",
         "active",
         "user_level",
         "remember_token",
@@ -35,11 +35,12 @@ class User extends Eloquent implements UserInterface
 
     /**
      * Validation rules for the model
+     *
+     * TODO: Review and test the validation rules for the User model
      */
     protected $rules = array(
         "email_address" => "required|unique:users|email|max:255",
-        "password" => "required|confirmed|min:8",
-        "password_confirmation" => "required|min:8",
+        "password" => "sometimes|confirmed|min:8",
         "name" => "required|max:255",
         # "locale": validation rule specified in boot()
         "active" => "required|boolean",
@@ -66,8 +67,8 @@ class User extends Eloquent implements UserInterface
 
             if ($model->isValid()) {
                 $model->hashPassword();
-                $model->disablePasswordValidation();
-                $model->purgeRedundantAttributes();
+                # $model->disablePasswordValidation();
+                # $model->purgeRedundantAttributes();
             }
         });
 
@@ -322,7 +323,6 @@ class User extends Eloquent implements UserInterface
     public function disablePasswordValidation()
     {
         unset($this->rules["password"]);
-        unset($this->rules["password_confirmation"]);
     }
 
     /**
@@ -343,6 +343,7 @@ class User extends Eloquent implements UserInterface
      * being saved to database.
      *
      * @return void
+     * @deprecated
      */
     public function purgeRedundantAttributes()
     {
