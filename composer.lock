@@ -239,7 +239,7 @@
             ],
             "authors": [
                 {
-                    "name": "Kelt Dockins",
+                    "name": "Kelt",
                     "email": "kelt@codesleeve.com"
                 }
             ],
@@ -606,7 +606,7 @@
             "authors": [
                 {
                     "name": "Anthony Ferrara",
-                    "email": "ircmaxell@php.net",
+                    "email": "ircmaxell@ircmaxell.com",
                     "homepage": "http://blog.ircmaxell.com"
                 }
             ],
@@ -3481,17 +3481,12 @@
             "time": "2014-10-01 05:50:18"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "codesleeve/asset-pipeline": 20
     },
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "prefer-stable": false,
+    "platform": [],
+    "platform-dev": []
 }
