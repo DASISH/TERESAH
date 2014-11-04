@@ -119,14 +119,14 @@
                   @if (count($similarTools) > 0)
                     <h3>{{ Lang::get("views/tools/data_sources/show.similar_tools") }}</h3>
                     <ul class="list-group">
-                    @foreach($similarTools as $tool)
-                        <li class="list-group-item">{{ link_to_route("tools.show", e($tool->name), $tool->slug, array("title" => e($tool->name))) }}</li>
+                    @foreach($similarTools as $similarTool)
+                        <li class="list-group-item">{{ link_to_route("tools.show", e($similarTool->name), $similarTool->slug, array("title" => e($similarTool->name))) }}</li>
                     @endforeach
                     </ul>
                   @endif
                   <h3>{{ Lang::get("views/tools/data_sources/show.share") }}</h3>
                   @include("shared._share")
-                  
+
                   <h3>{{ Lang::get("views/tools/data_sources/show.export") }}</h3>
                   @if(in_array("XML", $rdf_formats))
                   {{ link_to_route('tools.export', "RDF/XML", array($tool->slug, "rdfxml"), array("class" => "btn btn-default btn-sm", "role" => "button")) }}
