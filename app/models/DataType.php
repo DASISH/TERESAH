@@ -60,6 +60,11 @@ class DataType extends Eloquent
     public function scopeIsLinkable($query)
     {
         return $query->where("linkable", true);
+    }
+
+    public function scopeHaveData($query)
+    {
+        return $query->has("data", ">", 0);
     }    
     
     /**

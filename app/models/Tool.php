@@ -82,6 +82,11 @@ class Tool extends Eloquent
         
         return $linked;
     }
+ 
+    public function scopeHaveData($query)
+    {
+        return $query->has("data", ">", 0);
+    }    
     
     public function scopeHaveDataValueLike($query, $value)
     {
