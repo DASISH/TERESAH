@@ -40,7 +40,7 @@ class User extends Eloquent implements UserInterface
      */
     protected $rules = array(
         "email_address" => "required|unique:users|email|max:255",
-        "password" => "sometimes|confirmed|min:8",
+        "password" => "sometimes|min:8",
         "name" => "required|max:255",
         # "locale": validation rule specified in boot()
         "active" => "required|boolean",

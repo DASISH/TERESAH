@@ -8,7 +8,7 @@ class UsersTableSeeder extends Seeder
             array(
                 "email_address" => "teresah@dasish.eu",
                 "password" => "password",
-                "password_confirmation" => "password",
+                # "password_confirmation" => "password",
                 "name" => "TERESAH",
                 "locale" => "en",
                 "active" => true,
@@ -21,7 +21,9 @@ class UsersTableSeeder extends Seeder
         DB::table("users")->delete();
 
         foreach ($users as $user) {
-            Signup::create($user);
+            $s = Signup::create($user);
+            print $s;
+            print $s->getErrors();
         }
     }
 }

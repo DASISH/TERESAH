@@ -85,7 +85,7 @@ class DataController extends BaseController {
         }
                 
         usort($return, function($a, $b){
-            return $a["weight"] - $b["weight"];
+            return $b["weight"] - $a["weight"];
         });
         
         array_splice($return, Config::get("teresah.word_cloud_count"));
