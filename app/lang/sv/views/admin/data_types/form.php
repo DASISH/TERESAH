@@ -2,16 +2,22 @@
 
 return array(
     "label" => array(
-        "label" => "Label", 
-        "placeholder" => "Label"
+        #"label" => "Label", 
+	"label" => "Etikett",
+        #"placeholder" => "Label"
+	"placeholder" => "Etikett"
     ),
     "description" => array(
-        "label" => "Description", 
-        "placeholder" => "Description"
+        #"label" => "Description", 
+	"label" => "Beskriving",
+        #"placeholder" => "Description"
+	"placeholder" => "Beskrivning"
     ),
     "rdf_mapping" => array(
-        "label" => "RDF mapping", 
-        "placeholder" => "RDF mapping"
+        #"label" => "RDF mapping", 
+	"label" => "RDF-mappning",
+        #"placeholder" => "RDF mapping"
+	"placeholder" => "RDF-mappning"
     ),
     "linkable" => array(
         "label" => "Linkable", 

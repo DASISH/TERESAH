@@ -2,11 +2,15 @@
 
 return array(
     "tool" => array(
-        "name" => "Tool",
-        "title" => "Show Tool"
+        #"name" => "Tool",
+	"name" => "Verktyg",
+        #"title" => "Show Tool"
+	"title" => "Visa verktyg"
     ),
     "data_sources" => array(
-        "name" => "Data Sources",
-        "title" => "Show Data Sources"
+        #"name" => "Data Sources",
+	"name" => "Datakällor",
+        #"title" => "Show Data Sources"
+	"title" => "Visa datakällor"
     )
 );

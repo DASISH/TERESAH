@@ -2,7 +2,9 @@
 
 return array(
     "name" => array(
-        "label" => "Name", 
-        "placeholder" => "Name"
+        #"label" => "Name", 
+	"label" => "Namn",
+        #"placeholder" => "Name"
+	"placeholder" => "Namn"
     )
 );

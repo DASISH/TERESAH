@@ -2,23 +2,33 @@
 
 return array(
     "name" => array(
-        "label" => "Name", 
-        "placeholder" => "Name"
+        #"label" => "Name", 
+	"label" => "Namn"
+        #"placeholder" => "Name"
+	"placeholder" => "Namn"
     ),
     "locale" => array(
-        "label" => "Locale", 
-        "placeholder" => "Select locale..."
+        #"label" => "Locale", 
+	"label" => "Plats"
+        #"placeholder" => "Select locale..."
+	"placeholder" => "Välj din plats..."
     ),
     "email_address" => array(
-        "label" => "Email address", 
-        "placeholder" => "Email address"
+        #"label" => "Email address", 
+	"label" => "Epostadress"
+        #"placeholder" => "Email address"
+	"placeholder" => "Epostadress"
     ),
     "password" => array(
-        "label" => "Password", 
-        "placeholder" => "Password"
+        #"label" => "Password",
+	"label" => "Lösenord" 
+        #"placeholder" => "Password"
+	"placeholder" => "Lösenord"
     ),
     "password_confirmation" => array(
-        "label" => "Password confirmation", 
-        "placeholder" => "Repeat password"
+        #"label" => "Password confirmation", 
+	"label" => "Bekräfta lösenord"
+        #"placeholder" => "Repeat password"
+	"placeholder" => "Upprepa lösenord"
     )
 );
