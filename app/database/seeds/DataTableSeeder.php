@@ -37,13 +37,15 @@ class DataTableSeeder extends Seeder
                 unset($d["tool"]);
                 $d["data_type_id"] = $types[$d["type"]];
                 unset($d["type"]);
-                if(array_key_exists("source", $d)){
-                    $d["data_source_id"] = $sources[$d["source"]];
+                
+                $d["data_source_id"] = $sources[$d["source"]];
+                $t = Tool::find($d["tool_id"]);
+                if(! in_array($d["data_source_id"], $t->dataSources()->lists('data_source_id'))){
                     Tool::find($d["tool_id"])->dataSources()->attach($d["data_source_id"]);
-                    unset($d["source"]);
-                }else{
-                    $d["data_source_id"] = $sources["TERESAH"]; 
                 }
+                
+                unset($d["source"]);
+                
                 $d["user_id"] = $userId; 
                 $d["created_at"] = new DateTime;
                 $d["updated_at"] = new DateTime;
