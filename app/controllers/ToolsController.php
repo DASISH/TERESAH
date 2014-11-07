@@ -1,17 +1,20 @@
 <?php
 use Illuminate\Support\Facades\Input;
+use Services\DataSourceServiceInterface as DataSourceService;
+use Services\ToolServiceInterface as ToolService;
 
 class ToolsController extends BaseController {
 
     protected $skipAuthentication = array("index", "show", "export", "byAlphabet", "listFacetTypes", "listFacetValues", "byFacet", "listByAlphabet", "search", "quicksearch");
-    protected $tool;
-    protected $dataSource;
 
-    public function __construct(Tool $tool, DataSource $dataSource) {
+    protected $toolService;
+    protected $dataSourceService;    
+    
+    public function __construct(ToolService $toolService, DataSourceService $dataSourceService) {
         parent::__construct();
 
-        $this->tool = $tool;
-        $this->dataSource = $dataSource;
+        $this->toolService = $toolService;
+        $this->dataSourceService = $dataSourceService;
     }
 
     /**
@@ -21,7 +24,8 @@ class ToolsController extends BaseController {
      * 
      * @return View
      */
-    public function index() {
+    public function index() 
+    {
         $sortBy = strtolower(Input::get("sortBy", "name"));
         $order  = strtolower(Input::get("order", "asc"));
         
@@ -35,8 +39,7 @@ class ToolsController extends BaseController {
             $sortBy = "name";
         }
         
-        
-        $tools = $this->tool->has("data", ">", 0)
+        $tools = Tool::haveData()
                 ->orderBy($sortBy, $order)
                 ->paginate(Config::get("teresah.browse_pager_size"));
         
@@ -52,25 +55,25 @@ class ToolsController extends BaseController {
      * @param  mixed $id
      * @return Redirect
      */
-    public function show($id) {
-        if (is_numeric($id)) {
-            $this->tool = $this->tool->find($id);
-        } else {
-            $this->tool = $this->tool->where("slug", "=", $id)->first();
-        }
+    public function show($id) 
+    {
+        $tool = $this->toolService->find($id);
 
-        $this->dataSource = $this->tool->dataSources()
+        $dataSource = $tool->dataSources()
                         ->orderBy("data_sources.name", "ASC")->first();
 
         //Hack to fix breadcrumb
         if(Session::has("breadcrumb"))
         {
-            Session::push("breadcrumb", e($this->tool->name));
+            Session::push("breadcrumb", e($tool->name));
         }
         
-        if (isset($this->dataSource)) {
-            return Redirect::route("tools.data-sources.show", array($this->tool->id, $this->dataSource->id));
-        } else {
+        if (isset($dataSource)) 
+        {
+            return Redirect::route("tools.data-sources.show", array($tool->id, $dataSource->id));
+        } 
+        else 
+        {
             return Redirect::route("tools.index")
                             ->with("info", Lang::get("controllers/tools.show.no_data_sources_available"));
         }
@@ -83,16 +86,10 @@ class ToolsController extends BaseController {
      * @return type View
      */
     public function byFacet($type, $value) {
-                
-        $dataType = DataType::where("slug", $type)->first();
+        $dataType = DataType::where("slug", $type)->first();        
         $data = Data::where("slug", $value)->first();
         
-        $tools = $this->tool
-                ->whereHas("data", function($query) use($dataType, $value) {
-                    $query->where("slug", $value)
-                          ->where("data_type_id",$dataType->id);
-                })
-                ->orderBy("name", "ASC")->paginate(Config::get("teresah.browse_pager_size"));    
+        $tools = $this->toolService->byFacet($type, $value);
         
         //Hack to solve breadcrumb issue
         Session::put("breadcrumb", array(
@@ -114,10 +111,7 @@ class ToolsController extends BaseController {
      * @return view
      */
     public function byAlphabet($startsWith) {
-        $tools = $this->tool
-                ->has("data", ">", 0)
-                ->where("name", "LIKE" ,"$startsWith%")
-                ->orderBy("name", "ASC")->paginate(Config::get("teresah.browse_pager_size"));
+        $tools = $this->toolService->byAlphabet($startsWith);
 
         return View::make("tools.by-alphabet.index", compact("tools"))
                 ->with("alphaList", $this->listByAlphabet($startsWith))
@@ -131,7 +125,7 @@ class ToolsController extends BaseController {
      * @return View
      */
     public function listByAlphabet($selected = null) {
-        $caracters = $this->tool->select(DB::raw("LEFT(UCASE(name), 1) AS caracter"))->has('data', '>', 0)
+        $caracters = Tool::select(DB::raw("LEFT(UCASE(name), 1) AS caracter"))->has('data', '>', 0)
                       ->groupBy(DB::raw("caracter"))
                       ->orderBy("caracter", "ASC")->lists('caracter');
         
@@ -149,11 +143,10 @@ class ToolsController extends BaseController {
         $query = Input::get("query", $query);
         $tool_ids = array();
 
-        $tool_id_query = Tool::has("data", ">", 0);
+        $tool_id_query = Tool::haveData();
         
-        $types = DataType::select("id", "slug", "Label", "description")
-                    ->where("linkable", true)
-                    ->has("data", ">", 0)->get();
+        $types = DataType::IsLinkable()
+                    ->haveData()->get();
         
         foreach($types as $type) {
             if(Input::has($type->slug)){
@@ -170,7 +163,7 @@ class ToolsController extends BaseController {
             if(count($tool_ids) > 0) {
                 $string_match_query = Tool::whereIn("id", $tool_ids);
             }else{
-                $string_match_query = Tool::has("data", ">", 0);
+                $string_match_query = Tool::haveData();
             }
             if(str_contains($query, " ")) {
                 $parts = explode(" ", $query);
@@ -189,7 +182,9 @@ class ToolsController extends BaseController {
         }
 
         if(count($tool_ids) > 0) {
-            $tools = $this->tool->whereIn("id", $tool_ids)->orderBy("name", "ASC")->paginate(Config::get("teresah.search_pager_size"));
+            $tools = Tool::whereIn("id", $tool_ids)
+                           ->orderBy("name", "ASC")
+                           ->paginate(Config::get("teresah.search_pager_size"));
         }else{
             $tools = array();
         }
@@ -198,18 +193,20 @@ class ToolsController extends BaseController {
         
         foreach($types as $type) {
             $result =  Data::select("value", "slug", DB::raw("count(tool_id) as total"))
-                                    ->where("data_type_id", $type->id);
+                             ->where("data_type_id", $type->id);
             if(count($tool_ids) > 0) {
                 $result->whereIn("tool_id", $tool_ids);           
             }
             $limit = Input::get($type->slug."-limit", Config::get("teresah.search_facet_count"));
-            $type->values = $result->groupBy("value")->orderBy("total", "DESC")->paginate($limit);
+            $type->values = $result->groupBy("value")
+                                   ->orderBy("total", "DESC")
+                                   ->paginate($limit);
             $facetList[] = $type;
         }
         
         return View::make("tools.search.index", compact("tools"))
-                ->with("facetList", $facetList)
-                ->with("query", $query);
+                     ->with("facetList", $facetList)
+                     ->with("query", $query);
     }
     
     
@@ -219,21 +216,8 @@ class ToolsController extends BaseController {
      * @param type $query string to match in tool name
      * @return Array
      */
-    public function quicksearch($query) {
-        $matches = $this->tool
-                    ->select("name", "slug")
-                    ->has("data", ">", 0)
-                    ->where("name", "LIKE" ,"%$query%")
-                    ->orderBy("name", "ASC")
-                    ->take(Config::get("teresah.quicksearch_size"))->get();       
-        $result = array();
-        foreach($matches as $match) {
-            $obj = new stdClass();
-            $obj->name = $match->name;
-            $obj->id = $match->id;
-            $obj->url = url("/")."/tools/".$match->slug;
-            $result[] = $obj;
-        }
-        return $result;
+    public function quicksearch($query) 
+    {
+        return $this->toolService->quicksearch($query);
     }
 }

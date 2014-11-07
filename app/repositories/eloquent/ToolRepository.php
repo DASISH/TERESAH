@@ -1,6 +1,8 @@
 <?php namespace Repositories\Eloquent;
 
 use Tool;
+use DataType;
+Use Illuminate\Support\Facades\Config;
 use Repositories\ToolRepositoryInterface;
 use Repositories\Eloquent\AbstractRepository;
 
@@ -11,6 +13,15 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
     public function __construct(Tool $tool)
     {
         $this->model = $tool;
+    }
+    
+    public function find($id){
+        if (is_numeric($id)) {
+            $this->model = $this->model->find($id);
+        } else {
+            $this->model = $this->model->where("slug", "=", $id)->first();
+        }
+        return $this->model;
     }
 
     public function attachDataSource($id, $dataSourceId)
@@ -26,4 +37,40 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
 
         return $this->model->dataSources()->detach($dataSourceId);
     }
+
+    public function byAlphabet($startsWith) {
+        return $this->model->haveData()
+                ->where("name", "LIKE" ,"$startsWith%")
+                ->orderBy("name", "ASC")
+                ->paginate(Config::get("teresah.browse_pager_size"));
+    }
+    
+    public function byFacet($type, $value) 
+    {
+        $dataType = DataType::where("slug", $type)->first();
+        
+        return $this->model
+                ->whereHas("data", function($query) use($dataType, $value) {
+                    $query->where("slug", $value)
+                          ->where("data_type_id", $dataType->id);
+                })
+                ->orderBy("name", "ASC")
+                ->paginate(Config::get("teresah.browse_pager_size"));    
+    }
+    
+    public function quicksearch($query) {
+        $matches = $this->model
+                    ->select("name", "slug", "id")
+                    ->haveData()
+                    ->where("name", "LIKE" ,"%$query%")
+                    ->orderBy("name", "ASC")
+                    ->take(Config::get("teresah.quicksearch_size"))->get();       
+        $result = array();
+        foreach($matches as $match) {
+            $match->url = url("/")."/tools/".$match->slug;
+            $result[] = $match;
+        }
+        return $result;        
+    }
+
 }
