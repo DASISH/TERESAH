@@ -21,9 +21,7 @@ class UsersTableSeeder extends Seeder
         DB::table("users")->delete();
 
         foreach ($users as $user) {
-            $s = Signup::create($user);
-            print $s;
-            print $s->getErrors();
+            Signup::create($user);
         }
     }
 }
