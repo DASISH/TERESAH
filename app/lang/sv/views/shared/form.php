@@ -8,7 +8,7 @@ return array(
     #"email_missing" => "Email address is mandatory",
     "email_missing" => "E-postadress är obligatoriskt",
     #"cancel" => "cancel",
-    "cancel" => "avbryt"
+    "cancel" => "avbryt",
     #"or" => "or",
     "or" => "eller",
     #"select_locale" => "Select a locale",    

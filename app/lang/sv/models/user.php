@@ -21,7 +21,7 @@ return array(
         #"logins" => "Logins",
 	"logins" => "Inloggningar",
         #"created_at" => "Created at",
-	"created_at" => "Skapad den"
+	"created_at" => "Skapad den",
         #"updated_at" => "Updated at",
 	"updated_at" => "Uppdaterad den",
         #"deleted_at" => "Deleted at"

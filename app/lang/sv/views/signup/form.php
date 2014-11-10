@@ -3,31 +3,31 @@
 return array(
     "name" => array(
         #"label" => "Name", 
-	"label" => "Namn"
+	"label" => "Namn",
         #"placeholder" => "Name"
-	"placeholder" => "Namn"
+	"placeholder" => "Namn",
     ),
     "locale" => array(
         #"label" => "Locale", 
-	"label" => "Plats"
+	"label" => "Plats",
         #"placeholder" => "Select locale..."
 	"placeholder" => "Välj din plats..."
     ),
     "email_address" => array(
         #"label" => "Email address", 
-	"label" => "Epostadress"
+	"label" => "Epostadress",
         #"placeholder" => "Email address"
 	"placeholder" => "Epostadress"
     ),
     "password" => array(
         #"label" => "Password",
-	"label" => "Lösenord" 
+	"label" => "Lösenord", 
         #"placeholder" => "Password"
-	"placeholder" => "Lösenord"
+	"placeholder" => "Lösenord",
     ),
     "password_confirmation" => array(
         #"label" => "Password confirmation", 
-	"label" => "Bekräfta lösenord"
+	"label" => "Bekräfta lösenord",
         #"placeholder" => "Repeat password"
 	"placeholder" => "Upprepa lösenord"
     )

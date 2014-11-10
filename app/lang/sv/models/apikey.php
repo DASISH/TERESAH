@@ -12,7 +12,7 @@ return array(
         #"enabled" => "Enabled",
 	"enabled" => "Aktiverad",
         #"created_at" => "Created at",
-	"created_at" => "Skapad den,"
+	"created_at" => "Skapad den",
         #"updated_at" => "Updated at",
         "updated_at" => "Uppdaterad den",
 	#"deleted_at" => "Deleted at"

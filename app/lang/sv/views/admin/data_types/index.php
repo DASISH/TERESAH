@@ -2,7 +2,7 @@
 
 return array(
     #"heading" => "Data Types",
-    "heading" => "Datatyper"
+    "heading" => "Datatyper",
     "listing_results" => "Listing Data Types from <span class=\"badge\">:from</span> to <span class=\"badge\">:to</span> of <span class=\"badge\">:total</span> available.",
     "actions" => array(
         #"name" => "Actions",

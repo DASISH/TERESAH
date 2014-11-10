@@ -44,7 +44,9 @@ class SessionsController extends BaseController
         # if the authentication succeeds.
         if (Auth::attempt($credentials, true)) {
             Login::log(Auth::user(), Auth::viaRemember());
-
+            
+            Session::put("locale", Auth::user()->locale);
+            
             if(Session::get("previous_url") !== null){
                 return Redirect::intended(SESSION::pull("previous_url"))
                     ->with("success", Lang::get("controllers/sessions.store.success"));
@@ -83,6 +85,8 @@ class SessionsController extends BaseController
     public function destroy()
     {
         Auth::logout();
+        
+        Session::forget("locale");
 
         return Redirect::to(URL::previous())
             ->with("success", Lang::get("controllers/sessions.destroy.success"));

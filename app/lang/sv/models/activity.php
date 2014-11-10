@@ -17,7 +17,7 @@ return array(
 	"ip_address" => "IP-adress",
         "user_agent" => "User Agent",
         #"referer" => "Referer",
-	"referer" => ""
+	"referer" => "",
         #"created_at" => "Created at",
 	"created_at" => "Skapad den",
         #"updated_at" => "Updated at"

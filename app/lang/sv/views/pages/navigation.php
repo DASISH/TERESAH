@@ -3,7 +3,7 @@
 return array(
     "teresah" => array(
         "name" => "TERESAH",
-        "title" => "Home"
+        "title" => "Hem"
     ),
     "admin" => array(
         "home" => array(
@@ -109,8 +109,8 @@ return array(
         "href" => "http://dasish.eu/"
     ),
     "home" => array(
-        "name" => "Home", 
-        "title" => "Home"
+        "name" => "Hem", 
+        "title" => "Hem"
     ),
     "browse" => array(
         "name" => "Browse", 
