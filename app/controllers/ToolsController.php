@@ -60,7 +60,7 @@ class ToolsController extends BaseController {
         $tool = $this->toolService->find($id);
 
         $dataSource = $tool->dataSources()
-                        ->orderBy("data_sources.name", "ASC")->first();
+                        ->orderBy("data_sources.created_at", "ASC")->first();
 
         //Hack to fix breadcrumb
         if(Session::has("breadcrumb"))
