@@ -13,7 +13,15 @@
 
 App::before(function($request)
 {
-    App::setLocale(Session::get("locale", "en"));
+    if(Session::has("locale")){
+        App::setLocale(Session::get("locale", "en"));
+    }else{
+        $browser_lang = substr(Request::server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+        
+        if(in_array($browser_lang, Config::get('app.available_locales'))){
+             App::setLocale($browser_lang);
+        }
+    }
 });
 
 
