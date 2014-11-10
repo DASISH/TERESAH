@@ -435,7 +435,7 @@ Afloat;homepage;http://infinite-labs.net/afloat/;TERESAH
 Afloat;developer;Infinite Labs;TERESAH
 Afloat;platform;osX;TERESAH
 Afloat;tool-type;Task management;TERESAH
-All Our Ideas;description;"All Our Ideas is a research project that seeks to develop a new form of social data collection by combining the best features of quantitative and qualitative methods. Using the power of the web, we are creating a data collection tool that has the scale, speed, and quantification of a survey while still allowing for new information to \""bubble up\"" from respondents as happens in interviews, participant observation, and focus groups.";BambooDirt
+All Our Ideas;description;"All Our Ideas is a research project that seeks to develop a new form of social data collection by combining the best features of quantitative and qualitative methods. Using the power of the web, we are creating a data collection tool that has the scale, speed, and quantification of a survey while still allowing for new information to ""bubble up"" from respondents as happens in interviews, participant observation, and focus groups.";BambooDirt
 All Our Ideas;developer;Google;TERESAH
 All Our Ideas;homepage;http://www.allourideas.org/;TERESAH
 All Our Ideas;tool-type;Scholarly and social networking;TERESAH
@@ -507,8 +507,8 @@ Annie ;keyword;Both;TERESAH
 Annie ;keyword;Single purpose;TERESAH
 Annie ;tool-type;Text mining;TERESAH
 ANNIS;keyword;Active;TERESAH
-ANNIS;description;"ANNIS2 is an open source, versatile web browser-based search and visualization architecture for complex multilevel linguistic corpora with diverse types of annotation. ANNIS, which stands for ANNotation of Information Structure, has been designed to provide access to the data of the SFB 632 (\""Information Structure: The Linguistic Means for Structuring Utterances, Sentences and Texts\""). Since information structure interacts with linguistic phenomena on many levels, ANNIS2 addresses the SFB's need to concurrently annotate, query and visualize data from such varied areas as syntax, semantics, morphology, prosody, referentiality, lexis and more. For projects working with spoken language, support for audio / video annotations is also required.
-In the SFB, a number of different projects collect and annotate data according to the common SFB Annotation Standard. This data, which is annotated using both automatic taggers/parsers and a small set of manual annotation tools (EXMARaLDA, ELAN, annotate/Synpathy, MMAX, RSTTool), is mapped onto the encoding standard of the SFB, PAULA (Potsdamer Austauschformat fÃ¼r Linguistische Annotation / Potsdam Interchange Format for Linguistic Annotation), a stand-off multilevel XML format, which serves as the basis for further processing. ANNIS2 provides the means for visualizing and retrieving this data. The diagram below illustrates the data flow from multiple annotation tools into the merged XML format and the ANNIS application.";BambooDirt
+ANNIS;description;"ANNIS2 is an open source, versatile web browser-based search and visualization architecture for complex multilevel linguistic corpora with diverse types of annotation. ANNIS, which stands for ANNotation of Information Structure, has been designed to provide access to the data of the SFB 632 (""Information Structure: The Linguistic Means for Structuring Utterances, Sentences and Texts""). Since information structure interacts with linguistic phenomena on many levels, ANNIS2 addresses the SFB's need to concurrently annotate, query and visualize data from such varied areas as syntax, semantics, morphology, prosody, referentiality, lexis and more. For projects working with spoken language, support for audio / video annotations is also required.
+In the SFB, a number of different projects collect and annotate data according to the common SFB Annotation Standard. This data, which is annotated using both automatic taggers/parsers and a small set of manual annotation tools (EXMARaLDA, ELAN, annotate/Synpathy, MMAX, RSTTool), is mapped onto the encoding standard of the SFB, PAULA (Potsdamer Austauschformat für Linguistische Annotation / Potsdam Interchange Format for Linguistic Annotation), a stand-off multilevel XML format, which serves as the basis for further processing. ANNIS2 provides the means for visualizing and retrieving this data. The diagram below illustrates the data flow from multiple annotation tools into the merged XML format and the ANNIS application.";BambooDirt
 ANNIS;keyword;Apache;TERESAH
 ANNIS;license;Apache License;TERESAH
 ANNIS;developer;Apache Software Foundation;TERESAH
@@ -534,12 +534,12 @@ Annotator;keyword;Javascript;TERESAH
 Annotator;developer;Open Knowledge Foundation;TERESAH
 Annotator;platform;Web;TERESAH
 Annotator;tool-type;Web development;TERESAH
-Annotator´s Workbench;developer;Ethnographic Video for Instruction & Analysis (EVIA) Digital Archive Project;TERESAH
-Annotator´s Workbench;description;The Annotator´s Workbench is a software tool that enables users to create a collection from a set of existing video files, segment that collection, create annotations and assign vocabulary terms to the segments, and control access. This tool is part of the Ethnographic Video for Institution and Analysis (EVIA) Digital Archive Project at Indiana University and the University of Michigan.;BambooDirt
-Annotator´s Workbench;tool-type;Annotation;TERESAH
-Annotator´s Workbench;homepage;http://www.eviada.org/element.cfm?mc=6&ctID=31&eID=1;TERESAH
-Annotator´s Workbench;platform;Linux;TERESAH
-Annotator´s Workbench;keyword;video;TERESAH
+Annotator�s Workbench;developer;Ethnographic Video for Instruction & Analysis (EVIA) Digital Archive Project;TERESAH
+Annotator�s Workbench;description;The Annotator�s Workbench is a software tool that enables users to create a collection from a set of existing video files, segment that collection, create annotations and assign vocabulary terms to the segments, and control access. This tool is part of the Ethnographic Video for Institution and Analysis (EVIA) Digital Archive Project at Indiana University and the University of Michigan.;BambooDirt
+Annotator�s Workbench;tool-type;Annotation;TERESAH
+Annotator�s Workbench;homepage;http://www.eviada.org/element.cfm?mc=6&ctID=31&eID=1;TERESAH
+Annotator�s Workbench;platform;Linux;TERESAH
+Annotator�s Workbench;keyword;video;TERESAH
 Annotorious;description;A Web-based image annotation tool, built specifically for integration with existing Web pages or portal environments. Annotorious is also available as a plugin to the Annotator Web annotation system by the Open Knowledge Foundation.;BambooDirt
 Annotorious;developer;AIT Austrian Institute of Technology;TERESAH
 Annotorious;tool-type;Annotation;TERESAH
@@ -643,7 +643,7 @@ ArcGis;keyword;2d modelling - raster;TERESAH
 ArcGis;keyword;2d modelling - vector;TERESAH
 ArcGis;keyword;3d modelling - interactive;TERESAH
 ArcGis;keyword;3d modelling - vector;TERESAH
-ArcGis;description;A system for collecting, visualising and analysing geographical information, including the creation of maps and mapping applications. Multiple data types can be imported, provided they are geographical. Â Cloud-based and desktop (Windows only) interfaces are available.Â Some functionality is available to a free, non-commercial account, but full functionality requires an organizational licence, see:Â http://www.esri.com/software/arcgis/arcgisonline/features/comparison-table.Â A free trial of the full product is available.;HistoryOnline
+ArcGis;description;A system for collecting, visualising and analysing geographical information, including the creation of maps and mapping applications. Multiple data types can be imported, provided they are geographical.  Cloud-based and desktop (Windows only) interfaces are available. Some functionality is available to a free, non-commercial account, but full functionality requires an organizational licence, see: http://www.esri.com/software/arcgis/arcgisonline/features/comparison-table. A free trial of the full product is available.;HistoryOnline
 ArcGis;keyword;Active development;TERESAH
 ArcGis;keyword;analysis;TERESAH
 ArcGis;description;"ArcGIS is a suite of software that comprises of Desktop GIS, Server GIS, Mobile GIS, and Online GIS. ArcGIS is a platform for building a complete geographic information system (GIS) that lets you easily create, edit, and analyse geographic  knowledge on the desktop; publish data, maps, globes and models to a GIS server and/or share them online; and use them on the desktop, on the Web, or in the field.";ArtsHumanities
@@ -750,15 +750,15 @@ ArcView;standard;SVG;TERESAH
 ArcView;standard;TIFF;TERESAH
 ArcView;platform;Windows;TERESAH
 ArcView;keyword;Windows Enhanced MetaFile (EMF);TERESAH
-ARTFL Encyclopédie Project;developer;ARTFL;TERESAH
-ARTFL Encyclopédie Project;keyword;encyclopedia;TERESAH
-ARTFL Encyclopédie Project;homepage;http://encyclopedie.uchicago.edu/;TERESAH
-ARTFL Encyclopédie Project;keyword;Philomine;TERESAH
-ARTFL Encyclopédie Project;tool-type;Text collections;TERESAH
-ARTFL Encyclopédie Project;description;The ARTFL Encyclopédie Project has digitized the Encyclopédie ou Dictionnaire raisonnÃ© des sciences, des arts et des mÃ©tiers, par une SociÃ©tÃ© de Gens de lettres (published under the direction of Diderot and d'Alembert between 1751 and 1772, containing 74,000 articles written by more than 130 contributors) and made it available online for scholars to use with the Philologic text retrieval engine and the Philomine text mining tools.;BambooDirt
-ARTFL Encyclopédie Project;platform;Web;TERESAH
+ARTFL Encyclop�die Project;developer;ARTFL;TERESAH
+ARTFL Encyclop�die Project;keyword;encyclopedia;TERESAH
+ARTFL Encyclop�die Project;homepage;http://encyclopedie.uchicago.edu/;TERESAH
+ARTFL Encyclop�die Project;keyword;Philomine;TERESAH
+ARTFL Encyclop�die Project;tool-type;Text collections;TERESAH
+ARTFL Encyclop�die Project;description;The ARTFL Encyclop�die Project has digitized the Encyclop�die ou Dictionnaire raisonné des sciences, des arts et des métiers, par une Société de Gens de lettres (published under the direction of Diderot and d'Alembert between 1751 and 1772, containing 74,000 articles written by more than 130 contributors) and made it available online for scholars to use with the Philologic text retrieval engine and the Philomine text mining tools.;BambooDirt
+ARTFL Encyclop�die Project;platform;Web;TERESAH
 ARTISAN;keyword;analysis;TERESAH
-ARTISAN;description;"ARTISAN (Automatic Retrieval of Trademark Images by Shape Analysis) is a software tool for the analysis and comparison of still image files. It uses a Content-based image retrieval (CBIR) technique to analyse the visual content of an image, contrasting against alternative methods that involve searching of associated metadata. The software builds upon the principles of Gestalt psychology, analysing an image in its entirety and locating images to which it has a broad resemblance. The cross-matching activity may be described as a form of \""fuzzy searchingâ€™, retrieving images on the basis that they look similar to a human observer.";ArtsHumanities
+ARTISAN;description;"ARTISAN (Automatic Retrieval of Trademark Images by Shape Analysis) is a software tool for the analysis and comparison of still image files. It uses a Content-based image retrieval (CBIR) technique to analyse the visual content of an image, contrasting against alternative methods that involve searching of associated metadata. The software builds upon the principles of Gestalt psychology, analysing an image in its entirety and locating images to which it has a broad resemblance. The cross-matching activity may be described as a form of ""fuzzy searching’, retrieving images on the basis that they look similar to a human observer.";ArtsHumanities
 ARTISAN;keyword;cbir;TERESAH
 ARTISAN;keyword;Content-based image retrieval;TERESAH
 ARTISAN;keyword;Image comparison;TERESAH
@@ -900,7 +900,7 @@ Bamboo Content Interoperability Hub;keyword;No longer supported;TERESAH
 Bamboo Content Interoperability Hub;developer;Project Bamboo;TERESAH
 Bamboo Content Interoperability Hub;keyword;repository;TERESAH
 Bamboo Content Interoperability Hub;description;"The Bamboo Content Interoperability Hub (CI gub) is an effort to largely automate the time-consuming process of downloading and compiling data from different repositories and archives and standardizing some of the format differences.
-When scholars browse the repositories whose content they want (and have rights to) use, they can bookmark it at the proper level of granularity in Zotero, and import those Zotero bookmarks into a workspace integrated with the CI hub. The CI hub then retrieves the data, and normalizes it to a certain extent so that data from different sources can be used together. The CI hub also offers a \""preview\"" tool to see what data has been ingested, before that data is handed off to the environment where the scholar will use it. 
+When scholars browse the repositories whose content they want (and have rights to) use, they can bookmark it at the proper level of granularity in Zotero, and import those Zotero bookmarks into a workspace integrated with the CI hub. The CI hub then retrieves the data, and normalizes it to a certain extent so that data from different sources can be used together. The CI hub also offers a ""preview"" tool to see what data has been ingested, before that data is handed off to the environment where the scholar will use it. 
 The CI hub currently has adaptors to draw data from TCP-EEBO/ECO, Hathi Trust, Perseus, and AustLit.";BambooDirt
 Bamboo Content Interoperability Hub;platform;Web;TERESAH
 Bamboo HUBzero Work Space;keyword;Bamboo Content Interoperability Hub;TERESAH
@@ -1114,7 +1114,7 @@ brat rapid annotation tool;keyword;collaboration;TERESAH
 brat rapid annotation tool;homepage;http://brat.nlplab.org/;TERESAH
 brat rapid annotation tool;keyword;Java;TERESAH
 brat rapid annotation tool;description;"This online tool can be used for a wide variety of annotation tasks, including visualization and collaboration. 
-brat is designed in particular for structured annotation, where the notes are not freeform text but have a fixed form that can be automatically processed and \""interpreted\"" by a computer. brat also supports the annotation of n-ary associations that can link together any number of other annotations participating in specific roles. brat also implements a number of features relying on natural language processing techniques to support human annotation efforts.
+brat is designed in particular for structured annotation, where the notes are not freeform text but have a fixed form that can be automatically processed and ""interpreted"" by a computer. brat also supports the annotation of n-ary associations that can link together any number of other annotations participating in specific roles. brat also implements a number of features relying on natural language processing techniques to support human annotation efforts.
 Other applications include entity mention detection, event extraction, coreference resolution, chunking, dependency syntax, meta-knowledge, and corpora annotation.";BambooDirt
 brat rapid annotation tool;developer;Tomoko Ohta;TERESAH
 brat rapid annotation tool;platform;Web;TERESAH
@@ -1153,7 +1153,7 @@ Camtasia;platform;osX;TERESAH
 Camtasia;keyword;Paid;TERESAH
 Camtasia;keyword;screencast;TERESAH
 Camtasia;tool-type;Video;TERESAH
-capella-scan;description;"capella-scan can \""OCR\"" music scores from PDF or common image formats and output the results in MusicXML for use with common music editing software.";BambooDirt
+capella-scan;description;"capella-scan can ""OCR"" music scores from PDF or common image formats and output the results in MusicXML for use with common music editing software.";BambooDirt
 capella-scan;tool-type;Data conversion;TERESAH
 capella-scan;homepage;http://www.capella-software.com/capella-scan.cfm;TERESAH
 capella-scan;keyword;Paid;TERESAH
@@ -1181,7 +1181,7 @@ Casual;homepage;http://nualart.com/casual/;TERESAH
 Casual;keyword;text;TERESAH
 Casual;platform;Web;TERESAH
 Casual;tool-type;Visual search;TERESAH
-CATMA: Computer Aided Textual Markup & Analysis;description;"CATMA provides a visual interface for text markup and analysis using a \""query builder\"" and more powerful query language. A number of statistical and non-statistical analyses are built-in.";BambooDirt
+CATMA: Computer Aided Textual Markup & Analysis;description;"CATMA provides a visual interface for text markup and analysis using a ""query builder"" and more powerful query language. A number of statistical and non-statistical analyses are built-in.";BambooDirt
 CATMA: Computer Aided Textual Markup & Analysis;homepage;http://www.catma.de/;TERESAH
 CATMA: Computer Aided Textual Markup & Analysis;platform;osX;TERESAH
 CATMA: Computer Aided Textual Markup & Analysis;tool-type;Text mining;TERESAH
@@ -1205,7 +1205,7 @@ Cheshire3;keyword;Offline;TERESAH
 Cheshire3;tool-type;Semantic markup;TERESAH
 Cheshire3;tool-type;Text mining;TERESAH
 CHET-C;keyword;Active;TERESAH
-CHET-C;description;CHET-C, or Chapel Hill Electronic Text-Converter, is a software tool designed to convert digital texts that employ standard typographic editorial conventions into EpiDoc-compliant XML files. A series of regular expressions are applied to the source document and the results are placed into a â€œshell fileâ€ (i.e., a template), which can be customised in advance. The regular expressions are stored in a separate configuration file to permit customisation, but this file is generated from regular expressions embedded in the EpiDoc Guidelines source files. This arrangement permits robust automated and user-driven self-tests within the EpiDoc webapp and facilitates a high degree of coordination across EpiDoc tools. Prior versions exist (MSAccess + VBA and Java, both now deprecated), but more recent development has focused on a JavaScript version that will run without plugins in a modern web browser.;BambooDirt
+CHET-C;description;CHET-C, or Chapel Hill Electronic Text-Converter, is a software tool designed to convert digital texts that employ standard typographic editorial conventions into EpiDoc-compliant XML files. A series of regular expressions are applied to the source document and the results are placed into a “shell file” (i.e., a template), which can be customised in advance. The regular expressions are stored in a separate configuration file to permit customisation, but this file is generated from regular expressions embedded in the EpiDoc Guidelines source files. This arrangement permits robust automated and user-driven self-tests within the EpiDoc webapp and facilitates a high degree of coordination across EpiDoc tools. Prior versions exist (MSAccess + VBA and Java, both now deprecated), but more recent development has focused on a JavaScript version that will run without plugins in a modern web browser.;BambooDirt
 CHET-C;developer;EpiDoc Collaborative;TERESAH
 CHET-C;license;GNU GPL;TERESAH
 CHET-C;homepage;http://wiki.digitalclassicist.org/Chapel_Hill_Electronic_Text_Converter_(CHETC);TERESAH
@@ -1223,7 +1223,7 @@ CHET-C (Chapel Hill Electronic Text-Converter);platform;osX;TERESAH
 CHET-C (Chapel Hill Electronic Text-Converter);keyword;Papyrology;TERESAH
 CHET-C (Chapel Hill Electronic Text-Converter);tool-type;Publishing;TERESAH
 CHET-C (Chapel Hill Electronic Text-Converter);standard;RTF;TERESAH
-CHET-C (Chapel Hill Electronic Text-Converter);description;Software tool designed to convert digital texts that employ standard typographic editorial conventions into EpiDoc-compliant XML files. A series of regular expressions are applied to the source document and the results are placed into a â€œshell fileâ€ (i.e., a template), which can be customised in advance. The regular expressions are stored in a separate configuration file to permit customisation, but this file is generated from regular expressions embedded in the EpiDoc Guidelines source files. This arrangement permits robust automated and user-driven self-tests within the EpiDoc webapp and facilitates a high degree of coordination across EpiDoc tools. Prior versions exist (MSAccess + VBA and Java, both now deprecated), but more recent development has focused on a JavaScript version that will run without plugins in a modern web browser.;ArtsHumanities
+CHET-C (Chapel Hill Electronic Text-Converter);description;Software tool designed to convert digital texts that employ standard typographic editorial conventions into EpiDoc-compliant XML files. A series of regular expressions are applied to the source document and the results are placed into a “shell file” (i.e., a template), which can be customised in advance. The regular expressions are stored in a separate configuration file to permit customisation, but this file is generated from regular expressions embedded in the EpiDoc Guidelines source files. This arrangement permits robust automated and user-driven self-tests within the EpiDoc webapp and facilitates a high degree of coordination across EpiDoc tools. Prior versions exist (MSAccess + VBA and Java, both now deprecated), but more recent development has focused on a JavaScript version that will run without plugins in a modern web browser.;ArtsHumanities
 CHET-C (Chapel Hill Electronic Text-Converter);keyword;structuring;TERESAH
 CHET-C (Chapel Hill Electronic Text-Converter);standard;TEI;TERESAH
 CHET-C (Chapel Hill Electronic Text-Converter);keyword;text encoding;TERESAH
@@ -1272,18 +1272,18 @@ Click2map ;keyword;Online;TERESAH
 Click2map ;keyword;Single purpose;TERESAH
 Click2map ;tool-type;Visualisation;TERESAH
 Collin\'s Parser;developer;Michael Collins;TERESAH
-Collin´s Parser;description;A statistical natural language parser capable of analysing a text to determine its grammatical structure.;ArtsHumanities
-Collin´s Parser;keyword;analysis;TERESAH
-Collin´s Parser;platform;Cross-platform;TERESAH
-Collin´s Parser;license;GNU GPL;TERESAH
-Collin´s Parser;platform;Linux;TERESAH
-Collin´s Parser;keyword;Natural language;TERESAH
-Collin´s Parser;platform;osX;TERESAH
-Collin´s Parser;keyword;parse;TERESAH
-Collin´s Parser;keyword;parsing standards;TERESAH
-Collin´s Parser;keyword;Statistical analysis;TERESAH
-Collin´s Parser;platform;Windows;TERESAH
-Concordance;description;A software tool for performing concordance “ the analysis of a set of words within its immediate context - on a body of text. The tool performs full concordance, reading and analysing each and every word in a text. It was initially written for the analysis of English texts, but has since been extended to cater for other Western languages. Limited support is also provided for text in East Asian scripts, such as Chinese and Korean.;ArtsHumanities
+Collin�s Parser;description;A statistical natural language parser capable of analysing a text to determine its grammatical structure.;ArtsHumanities
+Collin�s Parser;keyword;analysis;TERESAH
+Collin�s Parser;platform;Cross-platform;TERESAH
+Collin�s Parser;license;GNU GPL;TERESAH
+Collin�s Parser;platform;Linux;TERESAH
+Collin�s Parser;keyword;Natural language;TERESAH
+Collin�s Parser;platform;osX;TERESAH
+Collin�s Parser;keyword;parse;TERESAH
+Collin�s Parser;keyword;parsing standards;TERESAH
+Collin�s Parser;keyword;Statistical analysis;TERESAH
+Collin�s Parser;platform;Windows;TERESAH
+Concordance;description;A software tool for performing concordance � the analysis of a set of words within its immediate context - on a body of text. The tool performs full concordance, reading and analysing each and every word in a text. It was initially written for the analysis of English texts, but has since been extended to cater for other Western languages. Limited support is also provided for text in East Asian scripts, such as Chinese and Korean.;ArtsHumanities
 Concordance;keyword;analysis;TERESAH
 Concordance;license;commercial;TERESAH
 Concordance;keyword;concordance;TERESAH
@@ -1314,7 +1314,7 @@ DR2 Server;keyword;Advanced;TERESAH
 DR2 Server;tool-type;Linked data;TERESAH
 DR2 Server;keyword;Online;TERESAH
 DR2 Server;keyword;Single purpose;TERESAH
-DR2 Server;description;The DR2 server provides a mechanism for publishing relational databases in a way which is searchable by semantic web tools, such as RDF (Resource Description Framework) browsers and SPARQL queries. This is done by having the semantic web queries translated into SQL queries on the fly. It is recommended that the DR2 Server is deployed in a servlet, a Java program which runs within a server. The DR2 Server is part of the DR2 Platform:Â http://d2rq.org/.;HistoryOnline
+DR2 Server;description;The DR2 server provides a mechanism for publishing relational databases in a way which is searchable by semantic web tools, such as RDF (Resource Description Framework) browsers and SPARQL queries. This is done by having the semantic web queries translated into SQL queries on the fly. It is recommended that the DR2 Server is deployed in a servlet, a Java program which runs within a server. The DR2 Server is part of the DR2 Platform: http://d2rq.org/.;HistoryOnline
 Dropbox;keyword;Active development;TERESAH
 Dropbox;keyword;Beginner;TERESAH
 Dropbox;keyword;Both;TERESAH
@@ -1377,7 +1377,7 @@ EpiDoc XSLT;platform;Linux;TERESAH
 EpiDoc XSLT;platform;osX;TERESAH
 EpiDoc XSLT;keyword;Papyrology;TERESAH
 EpiDoc XSLT;tool-type;Publishing;TERESAH
-EpiDoc XSLT;description;"Set of parameterised and customisable XSLT stylesheets for the display of EpiDoc XML in HTML, text, or other display output; they perform the necessary conversions to produce the human-readable versions of EpiDoc, using Leiden conventions. These stylesheets form the basis of almost all EpiDoc projectsâ€™ web output.";ArtsHumanities
+EpiDoc XSLT;description;"Set of parameterised and customisable XSLT stylesheets for the display of EpiDoc XML in HTML, text, or other display output; they perform the necessary conversions to produce the human-readable versions of EpiDoc, using Leiden conventions. These stylesheets form the basis of almost all EpiDoc projects’ web output.";ArtsHumanities
 EpiDoc XSLT;keyword;structuring;TERESAH
 EpiDoc XSLT;standard;TEI;TERESAH
 EpiDoc XSLT;keyword;text encoding;TERESAH
@@ -1489,7 +1489,7 @@ Firebug;homepage;http://getfirebug.com/;TERESAH
 Firebug;developer;Mozilla;TERESAH
 Firebug;platform;Web;TERESAH
 Firebug;tool-type;Web development;TERESAH
-Flare;description;"\""ActionScript library for creating visualizations that run in the Adobe Flash Player\""";BambooDirt
+Flare;description;"""ActionScript library for creating visualizations that run in the Adobe Flash Player""";BambooDirt
 Flare;license;BSD;TERESAH
 Flare;keyword;data visualization;TERESAH
 Flare;homepage;http://flare.prefuse.org/;TERESAH
@@ -1567,7 +1567,7 @@ FocusOPEN Digital Asset Manager;keyword;Video post production;TERESAH
 FocusOPEN Digital Asset Manager;platform;Windows;TERESAH
 FocusOPEN Digital Asset Manager;description;Windows .NET based open source Digital Asset Management solution designed for medium size preservation, cataloguing, media archiving and batch transcoding.;BambooDirt
 FocusOPEN Digital Asset Manager;keyword;XML;TERESAH
-FOLKER;developer;Archiv fÃ¼r Gesprochenes Deutsch;TERESAH
+FOLKER;developer;Archiv für Gesprochenes Deutsch;TERESAH
 FOLKER;keyword;audio recording;TERESAH
 FOLKER;description;FOLKER is an editor for the transcription of audio recorded multiparty dialogue.;BambooDirt
 FOLKER;homepage;http://agd.ids-mannheim.de/folker_en.shtml;TERESAH
@@ -1845,7 +1845,7 @@ Google chart tools ;keyword;Active development;TERESAH
 Google chart tools ;keyword;Beginner;TERESAH
 Google chart tools ;keyword;Online;TERESAH
 Google chart tools ;keyword;Single purpose;TERESAH
-Google chart tools ;description;Using the Google chart API (Application Programming Interface) a large number of charts can be made, from simple bar charts to map charts with pin markers, zoomed in to specified latitudes and longitudes. The charts can be made from data entered directly into HTML code or by pointing the API at an appropriate data source, such as a Google docs worksheet. Because this is an API the charts will not work offline. Basic charts can be made by simply manipulating the values given in Googleâ€™s templates or using the Chart Wizard, while more and more complex charts can be created by delving more deeply into the code.;HistoryOnline
+Google chart tools ;description;Using the Google chart API (Application Programming Interface) a large number of charts can be made, from simple bar charts to map charts with pin markers, zoomed in to specified latitudes and longitudes. The charts can be made from data entered directly into HTML code or by pointing the API at an appropriate data source, such as a Google docs worksheet. Because this is an API the charts will not work offline. Basic charts can be made by simply manipulating the values given in Google’s templates or using the Chart Wizard, while more and more complex charts can be created by delving more deeply into the code.;HistoryOnline
 Google chart tools ;tool-type;Visualisation;TERESAH
 Google Chrome;keyword;Active;TERESAH
 Google Correlate;tool-type;Data analysis;TERESAH
@@ -1874,7 +1874,7 @@ Google Drive;tool-type;Cloud computing;TERESAH
 Google Drive;keyword;cloud storage;TERESAH
 Google Drive;developer;Google;TERESAH
 Google Drive;keyword;Google Account;TERESAH
-Google Drive;description;Google Drive is a storage platform which allows users to upload and access data from any mobile device, desktop PC, laptop, or the web. Users can store anything in their drive and are able to open many file Â types within Google Drive. It is also possible to allow other users to access and edit the files on your drive simulaneously, making collaboration on projects easy. Storage of up to 5GB is free.;HistoryOnline
+Google Drive;description;Google Drive is a storage platform which allows users to upload and access data from any mobile device, desktop PC, laptop, or the web. Users can store anything in their drive and are able to open many file  types within Google Drive. It is also possible to allow other users to access and edit the files on your drive simulaneously, making collaboration on projects easy. Storage of up to 5GB is free.;HistoryOnline
 Google Drive;homepage;http://drive.google.com;TERESAH
 Google Drive;keyword;Online;TERESAH
 Google Drive;tool-type;Organization;TERESAH
@@ -1904,7 +1904,7 @@ Google Earth;keyword;Portable Anymap (PNM);TERESAH
 Google Earth;tool-type;Publishing;TERESAH
 Google Earth;keyword;Web Mapping Service (WMS);TERESAH
 Google Earth;platform;Windows;TERESAH
-Google fusion tables ;description;"A cloud-based data service which can produce data visualisation from data tables that have been uploaded: maps, charts and timelines of various types. These can be embedded into web pages and will update automatically when the data is updated (this can be managed with the Fusion Tables API). Also available from Google Docs under \""Data\"" (currently beta) - presumably this will migrate to Google Drive, which is pending at the time of writing.";HistoryOnline
+Google fusion tables ;description;"A cloud-based data service which can produce data visualisation from data tables that have been uploaded: maps, charts and timelines of various types. These can be embedded into web pages and will update automatically when the data is updated (this can be managed with the Fusion Tables API). Also available from Google Docs under ""Data"" (currently beta) - presumably this will migrate to Google Drive, which is pending at the time of writing.";HistoryOnline
 Google fusion tables ;keyword;Active development;TERESAH
 Google fusion tables ;keyword;Beginner;TERESAH
 Google fusion tables ;tool-type;Cloud computing;TERESAH
@@ -2047,8 +2047,8 @@ Heritrix;description;Heritrix is web crawler used by the Internet Archive, which
 Heritrix;homepage;http://crawler.archive.org/;TERESAH
 Heritrix;developer;Internet Archive;TERESAH
 Heritrix;platform;Linux;TERESAH
-Heurist Reference Database;description;"\""Heurist captures and manages web bookmarks, bibliographic references, personal notes and a host of other specialised data types (expandable) in a simple, searchable web interface, available anywhere.
-Researchers can easily and quickly find, capture and share relevant information, organise information resources and publish teaching/research project web site content automatically using Heurist.\""";BambooDirt
+Heurist Reference Database;description;"""Heurist captures and manages web bookmarks, bibliographic references, personal notes and a host of other specialised data types (expandable) in a simple, searchable web interface, available anywhere.
+Researchers can easily and quickly find, capture and share relevant information, organise information resources and publish teaching/research project web site content automatically using Heurist.""";BambooDirt
 Heurist Reference Database;tool-type;Data collection;TERESAH
 Heurist Reference Database;homepage;http://heuristscholar.org/heurist/;TERESAH
 Heurist Reference Database;keyword;research;TERESAH
@@ -2087,7 +2087,7 @@ HyperImage;description;The HyperImage platform supports the linking of (audio)-v
 HyperPo;homepage;http://stefansinclair.name/cv/#software;TERESAH
 HyperPo;description;HyperPo is a user-friendly text exploration and analysis program that allows users to import texts or use texts available online (in English or French), and provides frequency lists of characters, words and series of words, color-coding to indicate repetition, KWIC, co-occurrence and distribution lists, and the ability to simultaneously compare data from multiple texts.;BambooDirt
 HyperPo;keyword;No longer supported;TERESAH
-HyperPo;developer;StÃ©fan Sinclair;TERESAH
+HyperPo;developer;Stéfan Sinclair;TERESAH
 HyperPo;tool-type;Text mining;TERESAH
 HyperPo;keyword;text mining;TERESAH
 HyperPo;platform;Web;TERESAH
@@ -2297,7 +2297,7 @@ IssueLab;tool-type;Scholarly and social networking;TERESAH
 iTunesCyrFix;tool-type;Data conversion;TERESAH
 iTunesCyrFix;homepage;http://prokhorenko.us/itunescyrfix/;TERESAH
 iTunesCyrFix;keyword;ID3 tags;TERESAH
-iTunesCyrFix;description;iTunesCyrFix can convert jibberish text in the title, artist, artist, or other ID3 tags in iTunes (e.g. Ã‘Ã¯Ã«Ã¨Ã­) into readable UTF-8 Cyrillic text.;BambooDirt
+iTunesCyrFix;description;iTunesCyrFix can convert jibberish text in the title, artist, artist, or other ID3 tags in iTunes (e.g. Ñïëèí) into readable UTF-8 Cyrillic text.;BambooDirt
 iTunesCyrFix;platform;osX;TERESAH
 iWrite;keyword;Active;TERESAH
 iWrite;homepage;http://app.iwriteassistant.co.uk/login.asp;TERESAH
@@ -2372,7 +2372,7 @@ Juxta;license;Apache License;TERESAH
 Juxta;keyword;collation;TERESAH
 Juxta;homepage;http://www.juxtasoftware.org/;TERESAH
 Juxta;description;"Juxta is an open-source cross-platform tool for comparing and collating multiple witnesses to a single textual work. The software allows users to set any of the witnesses as the base text, to add or remove witness texts, to switch the base text at will, and to annotate Juxta-revealed comparisons and save the results.
-Juxta comes with several kinds of analytic visualizations. The primary collation gives a split frame comparison of a base text with a witness text, along with a display of the digital images from which the base text is derived. Juxta displays a heat map of all textual variants and allows the user to locate â€” at the level of any textual unit â€” all witness variations from the base text. A histogram of Juxta collations is particularly useful for long documents. This visualization displays the density of all variation from the base text and serves as a useful finding aid for specific variants. Juxta can also output a lemmatized schedule (in HTML format) of the textual variants in any set of comparisons.";BambooDirt
+Juxta comes with several kinds of analytic visualizations. The primary collation gives a split frame comparison of a base text with a witness text, along with a display of the digital images from which the base text is derived. Juxta displays a heat map of all textual variants and allows the user to locate — at the level of any textual unit — all witness variations from the base text. A histogram of Juxta collations is particularly useful for long documents. This visualization displays the density of all variation from the base text and serves as a useful finding aid for specific variants. Juxta can also output a lemmatized schedule (in HTML format) of the textual variants in any set of comparisons.";BambooDirt
 Juxta;platform;Linux;TERESAH
 Juxta;tool-type;Visualization;TERESAH
 Kaleidoscope 2.0;keyword;Beta;TERESAH
@@ -2408,19 +2408,19 @@ Korbo;keyword;Active;TERESAH
 Korbo;tool-type;Data collection;TERESAH
 Korbo;license;GNU GPL;TERESAH
 Korbo;homepage;http://korbo.muruca.org/demo.php;TERESAH
-Korbo;description;"Korbo is a powerful aggregation platform for gathering Linked Data objects relevant to your area of research into single workspaces or â€œbasketsâ€.
+Korbo;description;"Korbo is a powerful aggregation platform for gathering Linked Data objects relevant to your area of research into single workspaces or “baskets”.
 Korbo is targeted primarily at developers who want to build applications on top of its API and make full use of the linked cultural data from sources such as Europeana, FreeBase and DBPedia.
 Korbo is currently in the early stages of development, but you can already try out a demo version of the platform.";BambooDirt
 Korbo;keyword;linked data;TERESAH
 Korbo;developer;Semlib;TERESAH
 Korbo;platform;Web;TERESAH
 KwMap;homepage;http://www.kwmap.net/;TERESAH
-KwMap;description;"KwMap is a search engine that functions as a \""keyword map\"" across the web. KwMap utilizes a keyword generator with a graphical interface that allows you to navigate from your initial query to results for related topics.";BambooDirt
+KwMap;description;"KwMap is a search engine that functions as a ""keyword map"" across the web. KwMap utilizes a keyword generator with a graphical interface that allows you to navigate from your initial query to results for related topics.";BambooDirt
 KwMap;keyword;research;TERESAH
 KwMap;platform;Web;TERESAH
 KwMap;tool-type;Visual search;TERESAH
 LATtice;homepage;http://winedarksea.org/?p=1285;TERESAH
-LATtice;description;LATtice lets you explore and compare texts across entire corpora but also allows you to â€œdrill downâ€ to the level of individual LATs to ask exactly what rhetorical categories make texts similar or different.;BambooDirt
+LATtice;description;LATtice lets you explore and compare texts across entire corpora but also allows you to “drill down” to the level of individual LATs to ask exactly what rhetorical categories make texts similar or different.;BambooDirt
 LATtice;platform;Linux;TERESAH
 LATtice;tool-type;Text collections;TERESAH
 LC Newspaper Viewer;homepage;http://sourceforge.net/apps/trac/loc-ndnp/;TERESAH
@@ -2463,7 +2463,7 @@ Lexomics;keyword;Active;TERESAH
 Lexomics;homepage;http://wheatoncollege.edu/lexomics/;TERESAH
 Lexomics;developer;Mark LeBlanc;TERESAH
 Lexomics;tool-type;Text mining;TERESAH
-Lexomics;description;"The term \""lexomics\"" was originally coined to describe the computer-assisted detection of \""words\"" (short sequences of bases) in genomes. When applied to literature as we do here, lexomics is the analysis of the frequency, distribution, and arrangement of words in large-scale patterns. The current suite of lexomics tools are:
+Lexomics;description;"The term ""lexomics"" was originally coined to describe the computer-assisted detection of ""words"" (short sequences of bases) in genomes. When applied to literature as we do here, lexomics is the analysis of the frequency, distribution, and arrangement of words in large-scale patterns. The current suite of lexomics tools are:
 scrubber -- strips tags, removes stop words, applies lemma lists, and prepares texts for diviText
 diviText -- cuts texts into chunks in one of three ways, count words, exports the results
 treeView -- builds dendrograms and saves the output as .pdf or xml in phyloXML format
@@ -2472,7 +2472,7 @@ Note: Most of the functionality of the three Lexomics tools has now been combine
 Lexomics;platform;Web;TERESAH
 Lexos;keyword;Active;TERESAH
 Lexos;homepage;http://lexos.wheatoncollege.edu/;TERESAH
-Lexos;description;"Lexos is an online tool that enables you to \""scrub\"" (clean) your text(s), cut a text(s) into various size chunks, manage chunks and chunk sets, and choose from a suite of analysis tools for investigating those texts. Functionality includes building dendrograms, making graphs of rolling averages of word frequencies or ratios of words or letters, and playing with visualizations of word frequencies including word clouds and bubble visualizations. To facilitate subsequent text mining analyses beyond the scope of this site, users can also transpose and download their matricies of word counts or relative proportions as comma- or tab-separated files (.csv, .tsv).
+Lexos;description;"Lexos is an online tool that enables you to ""scrub"" (clean) your text(s), cut a text(s) into various size chunks, manage chunks and chunk sets, and choose from a suite of analysis tools for investigating those texts. Functionality includes building dendrograms, making graphs of rolling averages of word frequencies or ratios of words or letters, and playing with visualizations of word frequencies including word clouds and bubble visualizations. To facilitate subsequent text mining analyses beyond the scope of this site, users can also transpose and download their matricies of word counts or relative proportions as comma- or tab-separated files (.csv, .tsv).
 Lexos is part of the Lexomics Project (http://wheatoncollege.edu/lexomics/) and partially replaces the earlier Lexomics tools. See the Bamboo DiRT entry from Lexomics.";BambooDirt
 Lexos;developer;Mark LeBlanc;TERESAH
 Lexos;license;open source;TERESAH
@@ -2514,7 +2514,7 @@ LimeSurvey;keyword;data collection;TERESAH
 LimeSurvey;license;GPL3;TERESAH
 LimeSurvey;homepage;http://www.limesurvey.org/;TERESAH
 LimeSurvey;description;Online web survey tool written in PHP using MySQL, MSSQL or Postgres database. Multilingual site with demo, feature list, documentation [Open Source, GPL3];BambooDirt
-Linguistic Inquiry and Word Count (LIWC);description;"\""Linguistic Inquiry and Word Count (LIWC) is a text analysis software program...LIWC is able to calculate the degree to which people use different categories of words across a wide array of texts.\"" Free and limited web analysis available.";BambooDirt
+Linguistic Inquiry and Word Count (LIWC);description;"""Linguistic Inquiry and Word Count (LIWC) is a text analysis software program...LIWC is able to calculate the degree to which people use different categories of words across a wide array of texts."" Free and limited web analysis available.";BambooDirt
 Linguistic Inquiry and Word Count (LIWC);homepage;http://www.liwc.net/index.php;TERESAH
 Linguistic Inquiry and Word Count (LIWC);keyword;Paid;TERESAH
 Linguistic Inquiry and Word Count (LIWC);tool-type;Text mining;TERESAH
@@ -2537,7 +2537,7 @@ LitBlitz v1.0 is currently available as a Google Chrome extension.
 How LitBlitz Is Different
 LitBlitz was designed from the ground-up to solve problems other annotation and notetaking services haven't looked at or have solved poorly. It's is different from popular notetaking and archiving software like Evernote in that it allows users to:
 (1) Take text and image snippets from their document/webpage sources rather than forcing the user to archive entire documents
-(2) Write \""Own Notes\"" (personal insights) related to snippets to enable rapid draft writing and context building
+(2) Write ""Own Notes"" (personal insights) related to snippets to enable rapid draft writing and context building
 (3) Manage these snippets in themed digital notebooks for fast, easy reference 
 Note from founder: We are very open to improving through suggestions from librarians, academics and Ed Tech professionals - feel free to contact us via our website litblitz.net";BambooDirt
 LitBlitz Literature Notes Manager;developer;Skyhatch;TERESAH
@@ -2665,7 +2665,7 @@ MantisBT;tool-type;Web development;TERESAH
 MantisBT;standard;XLS;TERESAH
 Many Eyes ;keyword;Active development;TERESAH
 Many Eyes ;keyword;Beginner;TERESAH
-Many Eyes ;description;"Many Eyes is an IBM project described as an \""experiment\"". Registered users can upload a dataset and then choose a visualisation from the following categories: \""Analyze a text\"" (Word Tree, Tag Cloud, Phrase Net, Word Cloud Generator); \""Compare a set of values\"" (Bar Chart, Block Histogram, Bubble Chart); \""See relationships among values\"" (Scatterplot, Matrix Chart, Network Diagram); \""See the parts of a whole\"" (Pie Chart, Tree Map, Tree Map for Comparisons); \""See the world\"" (country maps, supporting 14 countries and more fine-grained US maps at present); \""Track rises and falls over time\"" (Line Graph, Stack Graph, Stack Graph for Categories). Visualisations, which must be shared openly, can be organised into topics. A live version of a visualisation can be embedded into a website.";HistoryOnline
+Many Eyes ;description;"Many Eyes is an IBM project described as an ""experiment"". Registered users can upload a dataset and then choose a visualisation from the following categories: ""Analyze a text"" (Word Tree, Tag Cloud, Phrase Net, Word Cloud Generator); ""Compare a set of values"" (Bar Chart, Block Histogram, Bubble Chart); ""See relationships among values"" (Scatterplot, Matrix Chart, Network Diagram); ""See the parts of a whole"" (Pie Chart, Tree Map, Tree Map for Comparisons); ""See the world"" (country maps, supporting 14 countries and more fine-grained US maps at present); ""Track rises and falls over time"" (Line Graph, Stack Graph, Stack Graph for Categories). Visualisations, which must be shared openly, can be organised into topics. A live version of a visualisation can be embedded into a website.";HistoryOnline
 Many Eyes ;keyword;Online;TERESAH
 Many Eyes ;keyword;Single purpose;TERESAH
 Many Eyes ;tool-type;Visualisation;TERESAH
@@ -2744,7 +2744,7 @@ MediaWiki;license;Creative Commons Attribution-Share Alike;TERESAH
 MediaWiki;homepage;https://www.mediawiki.org/wiki/MediaWiki;TERESAH
 MediaWiki;developer;MediaWiki;TERESAH
 MediaWiki;description;"MediaWiki is a free software open source wiki for the documentation, discussion, and development of the MediaWiki software, which powers Wikipedia and other Wikimedia Foundation projects. 
-A wiki is a website where users can add or modify content via a web browser. System administrators can install and configure MediaWiki. Developers can become a \""MediaWiki hacker\"" and learn to use the API and write extensions.";BambooDirt
+A wiki is a website where users can add or modify content via a web browser. System administrators can install and configure MediaWiki. Developers can become a ""MediaWiki hacker"" and learn to use the API and write extensions.";BambooDirt
 MediaWiki;platform;osX;TERESAH
 MediaWiki;keyword;PHP 5.2.3+;TERESAH
 MediaWiki;tool-type;Web development;TERESAH
@@ -2894,7 +2894,7 @@ MMax2;keyword;Texture design and mapping;TERESAH
 MMax2;tool-type;Visualization;TERESAH
 MMax2;standard;XML;TERESAH
 Mnemomap;homepage;http://www.mnemo.org/;TERESAH
-Mnemomap;description;"Mnemomap is a flash interactive search engine that generates a visual \""Atomic-Tree\"", sends your queries to a  Query List, and delivers the search results. The Atomic-Tree allows you to improve your query mid-search. The Query List allows you to customize your search query.";BambooDirt
+Mnemomap;description;"Mnemomap is a flash interactive search engine that generates a visual ""Atomic-Tree"", sends your queries to a  Query List, and delivers the search results. The Atomic-Tree allows you to improve your query mid-search. The Query List allows you to customize your search query.";BambooDirt
 Mnemomap;platform;Web;TERESAH
 Mnemomap;tool-type;Visual search;TERESAH
 Mnemomap;keyword;visualization;TERESAH
@@ -2971,7 +2971,7 @@ MuseScore;developer;musescore.org;TERESAH
 MuseScore;keyword;music notation;TERESAH
 Music Encoding Initiative (MEI);keyword;Active;TERESAH
 Music Encoding Initiative (MEI);description;"From the web site:
-\""The Music Encoding Initiative (MEI) is a community-driven effort to create a commonly-accepted, digital, symbolic representation of music notation documents. We strive to establish the design principles and the technological and representational requirements that will enable the discipline of musicology to take full advantage of digital technologies. We are working to provide guidelines and tools that can be widely used by libraries, museums, and individual scholars to encode musical scores for research, teaching, and preservation activities.\""
+""The Music Encoding Initiative (MEI) is a community-driven effort to create a commonly-accepted, digital, symbolic representation of music notation documents. We strive to establish the design principles and the technological and representational requirements that will enable the discipline of musicology to take full advantage of digital technologies. We are working to provide guidelines and tools that can be widely used by libraries, museums, and individual scholars to encode musical scores for research, teaching, and preservation activities.""
 Tutorials are provided on the site: http://music-encoding.org/support/MEI1st
 Info on MEI-L listserv is available: http://music-encoding.org/support/mailingList";BambooDirt
 Music Encoding Initiative (MEI);homepage;http://music-encoding.org/home;TERESAH
@@ -2980,7 +2980,7 @@ Music Encoding Initiative (MEI);keyword;XML;TERESAH
 music21;keyword;Active;TERESAH
 music21;description;"From the web site:
 music21: A toolkit for computer-aided musicology
-\""Music21 is a set of tools for helping scholars and other active listeners answer questions about music quickly and simply. If youâ€™ve ever asked yourself a question like, â€œI wonder how often Bach does thatâ€ or â€œI wish I knew which band was the first to use these chords in this order,â€ or â€œIâ€™ll bet weâ€™d know more about Renaissance counterpoint (or Indian ragas or post-tonal pitch structures or the form of minuets) if I could write a program to automatically write more of them,â€ then music21 can help you with your work.\""
+""Music21 is a set of tools for helping scholars and other active listeners answer questions about music quickly and simply. If you’ve ever asked yourself a question like, “I wonder how often Bach does that” or “I wish I knew which band was the first to use these chords in this order,” or “I’ll bet we’d know more about Renaissance counterpoint (or Indian ragas or post-tonal pitch structures or the form of minuets) if I could write a program to automatically write more of them,” then music21 can help you with your work.""
 Web site includes links to documentation and authors, tutorials, FAQs, and mailing list.";BambooDirt
 music21;homepage;http://mit.edu/music21/;TERESAH
 music21;keyword;music analysis;TERESAH
@@ -3032,7 +3032,7 @@ nanoc;developer;Denis Defreyne;TERESAH
 nanoc;keyword;http://nanoc.stoneship.org/docs/;TERESAH
 nanoc;homepage;http://nanoc.ws/;TERESAH
 nanoc;license;MIT License;TERESAH
-nanoc;description;nanoc is a tool that runs on your local computer and compiles documents written in formats such as Markdown, Textile, Hamlâ€¦ into a static web site consisting of simple HTML files, ready for uploading to any web server.;BambooDirt
+nanoc;description;nanoc is a tool that runs on your local computer and compiles documents written in formats such as Markdown, Textile, Haml… into a static web site consisting of simple HTML files, ready for uploading to any web server.;BambooDirt
 nanoc;platform;osX;TERESAH
 nanoc;keyword;Ruby;TERESAH
 Natural Language Toolkit;keyword;Active;TERESAH
@@ -3077,10 +3077,10 @@ NewRadial (INKE);license;GNU GPL (v3);TERESAH
 NewRadial (INKE);homepage;http://inke.acadiau.ca/newradial/;TERESAH
 NewRadial (INKE);keyword;INKE;TERESAH
 NewRadial (INKE);developer;INKE Modelling and Prototyping Team;TERESAH
-NewRadial (INKE);description;"NewRadial is an interactive visualization environment that uses an adapter system to display and combine content from remotely-served or locally situated databases.  Although initially designed for use with image-based databases, NewRadial´s capabilities have been extended to handle the manipulation and annotation, in a visual field, of text-based databases.  This  adaptive ability makes it ideal for use with literary works, and ”given its web-based functionality--ideal for collecting, associating and displaying independent databases together in the same visual field for use by a particular knowledge community.
+NewRadial (INKE);description;"NewRadial is an interactive visualization environment that uses an adapter system to display and combine content from remotely-served or locally situated databases.  Although initially designed for use with image-based databases, NewRadial�s capabilities have been extended to handle the manipulation and annotation, in a visual field, of text-based databases.  This  adaptive ability makes it ideal for use with literary works, and �given its web-based functionality--ideal for collecting, associating and displaying independent databases together in the same visual field for use by a particular knowledge community.
 The NewRadial prototype encourages three types of work:
 1.	 A simple search, sorting and manipulation of database objects in a visual field for the purposes of early scholarly inquiry and curiosity-based research
-2.	Initial, raw and in-process commentary on connections and associations between database objects.  Within the database´s visual field, scholars can add comments on such correlations, thus starting conversations, discussions and debates relating to such ideas.  These discussions are hosted and archived by the NewRadial server.
+2.	Initial, raw and in-process commentary on connections and associations between database objects.  Within the database�s visual field, scholars can add comments on such correlations, thus starting conversations, discussions and debates relating to such ideas.  These discussions are hosted and archived by the NewRadial server.
 3.	Larger edition projects in which a community is able to centralize and sort specific selections from a larger database.  NewRadial can be used to construct these curated environments, browse such environments, and (if desired) encourage secondary scholarship to proliferate in and around such projects.
 Source code: http://sourceforge.net/projects/newradial-inke/";BambooDirt
 NewRadial (INKE);platform;Web;TERESAH
@@ -3211,7 +3211,7 @@ Omeka.net;keyword;JSON;TERESAH
 Omeka.net;platform;Linux;TERESAH
 Omeka.net;keyword;museum;TERESAH
 Omeka.net;keyword;Omeka;TERESAH
-Omeka.net;description;Omeka is a free, flexible, and open source web-publishing platform for the display of library, museum, archives, and scholarly collections and exhibitions. Omeka falls at a crossroads of Web Content Management, Collections Management, and Archival Digital Collections Systems. Omeka is designed with non-IT specialists in mind, allowing users to focus on content and interpretation rather than programming. It brings Web 2.0 technologies and approaches to academic and cultural websites to foster user interaction and participation. It makes top-shelf design easy with a simple and flexible templating system. Its robust open-source developer and user communities underwrite Omekaâ€™s stability and sustainability.Omeka allows users to publish cultural heritage objects, extend its functionality with themes and plugins, and curate online exhibits with digital objects.;ArtsHumanities
+Omeka.net;description;Omeka is a free, flexible, and open source web-publishing platform for the display of library, museum, archives, and scholarly collections and exhibitions. Omeka falls at a crossroads of Web Content Management, Collections Management, and Archival Digital Collections Systems. Omeka is designed with non-IT specialists in mind, allowing users to focus on content and interpretation rather than programming. It brings Web 2.0 technologies and approaches to academic and cultural websites to foster user interaction and participation. It makes top-shelf design easy with a simple and flexible templating system. Its robust open-source developer and user communities underwrite Omeka’s stability and sustainability.Omeka allows users to publish cultural heritage objects, extend its functionality with themes and plugins, and curate online exhibits with digital objects.;ArtsHumanities
 Omeka.net;description;"Omeka.net provides free and paid hosting for Omeka sites, with different degrees of flexibility depending on the hosting plan.
 
 Users can contact the Omeka Team to request a zip file with the files and MySQL database of their Omeka.net site to migrate it to another hosting environment.";BambooDirt
@@ -3512,7 +3512,7 @@ pachyderm;keyword;web development;TERESAH
 Padlet;keyword;Active;TERESAH
 Padlet;tool-type;Brainstorming;TERESAH
 Padlet;homepage;http://padlet.com/;TERESAH
-Padlet;description;What is Padlet? It is an online environmentally friendly online sticky note spot! This tool allows you to create a wall to collaborate with students, teachers, parents and others in the community. Go to http://padlet.com/ to build your own wall. Add sticky note like electronic messages including text, websites, images and videos. Now you may be asking â€œWhat can you do with Padlet?â€ well, you can brainstorm on any topic, plan and organize a collaborative project and list websites to use for research,;BambooDirt
+Padlet;description;What is Padlet? It is an online environmentally friendly online sticky note spot! This tool allows you to create a wall to collaborate with students, teachers, parents and others in the community. Go to http://padlet.com/ to build your own wall. Add sticky note like electronic messages including text, websites, images and videos. Now you may be asking “What can you do with Padlet?” well, you can brainstorm on any topic, plan and organize a collaborative project and list websites to use for research,;BambooDirt
 Painter;developer;Corel;TERESAH
 Painter;description;Corel Paint is design software with a focus on drawing, including a variety of tools and brushes.;BambooDirt
 Painter;homepage;http://www.corel.com/corel/product/index.jsp?pid=prod5090087&cid=catalog20038&se...;TERESAH
@@ -3524,7 +3524,7 @@ PAIR (Pairwise Alignment for Intertextual Relations);keyword;algorithm;TERESAH
 PAIR (Pairwise Alignment for Intertextual Relations);developer;ARTFL;TERESAH
 PAIR (Pairwise Alignment for Intertextual Relations);license;GNU GPL;TERESAH
 PAIR (Pairwise Alignment for Intertextual Relations);homepage;http://code.google.com/p/text-pair/;TERESAH
-PAIR (Pairwise Alignment for Intertextual Relations);description;"PAIR is a sequence alignment algorithm for humanities text analysis designed to identify \""similar passages\"" in large collections of texts. In addition to a Philologic add-on, PAIR is available as Text::Pair, a generalized Perl module that supports one-against-many comparisons. A corpus is indexed and incoming texts are compared against the entire corpus for text reuse.";BambooDirt
+PAIR (Pairwise Alignment for Intertextual Relations);description;"PAIR is a sequence alignment algorithm for humanities text analysis designed to identify ""similar passages"" in large collections of texts. In addition to a Philologic add-on, PAIR is available as Text::Pair, a generalized Perl module that supports one-against-many comparisons. A corpus is indexed and incoming texts are compared against the entire corpus for text reuse.";BambooDirt
 PAIR (Pairwise Alignment for Intertextual Relations);tool-type;Text mining;TERESAH
 PAIR (Pairwise Alignment for Intertextual Relations);platform;Web;TERESAH
 Pandoc;tool-type;Data storage;TERESAH
@@ -3670,7 +3670,7 @@ PhiloLine;keyword;algorithm;TERESAH
 PhiloLine;developer;ARTFL;TERESAH
 PhiloLine;license;GNU GPL;TERESAH
 PhiloLine;homepage;http://code.google.com/p/text-pair/;TERESAH
-PhiloLine;description;"PhiloLine is an add-on for the Philologic text retrieval engine that provides a sequence alignment algorithm for humanities text analysis designed to identify \""similar passages\"" in large collections of texts.";BambooDirt
+PhiloLine;description;"PhiloLine is an add-on for the Philologic text retrieval engine that provides a sequence alignment algorithm for humanities text analysis designed to identify ""similar passages"" in large collections of texts.";BambooDirt
 PhiloLine;keyword;Philologic;TERESAH
 PhiloLine;tool-type;Text mining;TERESAH
 PhiloLine;platform;Web;TERESAH
@@ -3754,7 +3754,7 @@ Pinboard;tool-type;Bookmarking;TERESAH
 Pinboard;homepage;http://pinboard.in;TERESAH
 Pinboard;developer;Nine Fives Software;TERESAH
 Pinboard;keyword;Paid;TERESAH
-Pinboard;description;"Pinboard is a basic social bookmarking website that describes itself as being \""for introverted people in a hurry.\"" The focus of the site is less on social side and more on the side of providing a quick easy to use and functional bookmarking site. There is a one time fee of under $10.00.";BambooDirt
+Pinboard;description;"Pinboard is a basic social bookmarking website that describes itself as being ""for introverted people in a hurry."" The focus of the site is less on social side and more on the side of providing a quick easy to use and functional bookmarking site. There is a one time fee of under $10.00.";BambooDirt
 Pinboard;keyword;social bookmarking;TERESAH
 Pinboard;platform;Web;TERESAH
 Pipes;tool-type;Data collection;TERESAH
@@ -3908,7 +3908,7 @@ Pro Tools;standard;MPEG-1 Audio Layer 3 (MP3);TERESAH
 Pro Tools;keyword;Music recognition;TERESAH
 Pro Tools;platform;osX;TERESAH
 Pro Tools;keyword;Paid;TERESAH
-Pro Tools;description;Pro Tools is an audio creation and production software. With Pro Tools it is possible to compose, record, edit, and mix music or sound for picture â€” all within one system.;ArtsHumanities
+Pro Tools;description;Pro Tools is an audio creation and production software. With Pro Tools it is possible to compose, record, edit, and mix music or sound for picture — all within one system.;ArtsHumanities
 Pro Tools;description;"Pro Tools is audio creation and production software. With Pro Tools it is possible to compose, record, edit, and mix music or sound for pictures and video with out havingto use a variety of software.
 Features: 
 over 70 groundbreaking virtual instruments, effects, and utility plug-ins
@@ -3934,7 +3934,7 @@ Processing;tool-type;Visualization;TERESAH
 Project Pad;tool-type;Annotation;TERESAH
 Project Pad;homepage;http://dewey.at.northwestern.edu/ppad2/;TERESAH
 Project Pad;developer;Northwestern University;TERESAH
-Project Pad;description;"Project Pad is web-based system for media annotation and collaboration for teaching and learning and scholarly applications. Project Pad provides tools for browsing and working with audio, video, and images from digital repositories. The user may organize and annotate excerpts within their own \""online notebook.\""";BambooDirt
+Project Pad;description;"Project Pad is web-based system for media annotation and collaboration for teaching and learning and scholarly applications. Project Pad provides tools for browsing and working with audio, video, and images from digital repositories. The user may organize and annotate excerpts within their own ""online notebook.""";BambooDirt
 Project Pad;platform;Web;TERESAH
 Project Pad;keyword;writing;TERESAH
 Project Quincy;tool-type;Data analysis;TERESAH
@@ -3947,38 +3947,38 @@ Projects;developer;Digital Science;TERESAH
 Projects;homepage;https://projects.ac/;TERESAH
 Projects;platform;osX;TERESAH
 Projects;keyword;Paid;TERESAH
-Projects;description;Projects allows researchers to organise and manage all their research outputs in a safe, simple and structured way. Itâ€™s designed to help academics, at any stage of their career, keep track and stay on top of all their results. Itâ€™s a light, useful and slick application that integrates into a researcherâ€™s existing workflow to help them work more efficiently and ensure they have more time for making discoveries.;BambooDirt
+Projects;description;Projects allows researchers to organise and manage all their research outputs in a safe, simple and structured way. It’s designed to help academics, at any stage of their career, keep track and stay on top of all their results. It’s a light, useful and slick application that integrates into a researcher’s existing workflow to help them work more efficiently and ensure they have more time for making discoveries.;BambooDirt
 Projects;tool-type;Task management;TERESAH
 Proofread Page;homepage;https://www.mediawiki.org/wiki/Extension:Proofread_Page;TERESAH
 Proofread Page;keyword;mediawiki;TERESAH
 Proofread Page;description;Proofread Page is an extension for MediaWiki which allows you to edit transcriptions side by side with the page images. It is used on WikiSource for manuscript and early print transcription projects. Proofread Page supports workflow, but no markup.;BambooDirt
 Proofread Page;tool-type;Transcription;TERESAH
 Proofread Page;platform;Web;TERESAH
-Protégé;description;"\""Protégé is a free, open source ontology editor and knowledge-base framework
-The Protégé platform supports two main ways of modeling ontologies via the Protégé-Frames and Protégé-OWL editors. Protégé ontologies can be exported into a variety of formats including RDF(S), OWL, and XML Schema.\"" -- Protege Home Page (viewed 30 October 2012)";BambooDirt
-Protégé;keyword;Active;TERESAH
-Protégé;keyword;Active development;TERESAH
-Protégé;keyword;Both;TERESAH
-Protégé;homepage;http://protege.stanford.edu/;TERESAH
-Protégé;keyword;Intermediate;TERESAH
-Protégé;tool-type;Linked data;TERESAH
-Protégé;license;Mozilla Public License V. 1.1;TERESAH
-Protégé;description;Protégé is an open-source ontology editor, allowing users to construct and edit their own ontology for the semantic web, giving the opportunity to link this new ontology more effectively with others that are available online. Additionally the site offers downloads of existing OWL (Web Ontology Language) ontologies. A beta version of a web editor is available, but the downloaded versions have more functionality. Training and consulation are also available for a fee.;HistoryOnline
-Protégé;keyword;Single purpose;TERESAH
-Protégé;developer;Stanford Center for Biomedical Informatics Research;TERESAH
-Protégé;tool-type;Text collections;TERESAH
-Protégé;keyword;thesauri;TERESAH
+Prot�g�;description;"""Prot�g� is a free, open source ontology editor and knowledge-base framework
+The Prot�g� platform supports two main ways of modeling ontologies via the Prot�g�-Frames and Prot�g�-OWL editors. Prot�g� ontologies can be exported into a variety of formats including RDF(S), OWL, and XML Schema."" -- Protege Home Page (viewed 30 October 2012)";BambooDirt
+Prot�g�;keyword;Active;TERESAH
+Prot�g�;keyword;Active development;TERESAH
+Prot�g�;keyword;Both;TERESAH
+Prot�g�;homepage;http://protege.stanford.edu/;TERESAH
+Prot�g�;keyword;Intermediate;TERESAH
+Prot�g�;tool-type;Linked data;TERESAH
+Prot�g�;license;Mozilla Public License V. 1.1;TERESAH
+Prot�g�;description;Prot�g� is an open-source ontology editor, allowing users to construct and edit their own ontology for the semantic web, giving the opportunity to link this new ontology more effectively with others that are available online. Additionally the site offers downloads of existing OWL (Web Ontology Language) ontologies. A beta version of a web editor is available, but the downloaded versions have more functionality. Training and consulation are also available for a fee.;HistoryOnline
+Prot�g�;keyword;Single purpose;TERESAH
+Prot�g�;developer;Stanford Center for Biomedical Informatics Research;TERESAH
+Prot�g�;tool-type;Text collections;TERESAH
+Prot�g�;keyword;thesauri;TERESAH
 Protovis;homepage;http://mbostock.github.io/protovis/;TERESAH
 Protovis;keyword;Javascript;TERESAH
 Protovis;description;"Protovis composes custom views of data with simple marks such as bars and dots. Unlike low-level graphics libraries that quickly become tedious for visualization, Protovis defines marks through dynamic properties that encode data, allowing inheritance, scales and layouts to simplify construction.
 Protovis is free and open-source, provided under the BSD License. It uses JavaScript and SVG for web-native visualizations; no plugin required (though you will need a modern web browser)! Although programming experience is helpful, Protovis is mostly declarative and designed to be learned by example.";BambooDirt
 Protovis;platform;Web;TERESAH
 Protovis;tool-type;Visualization;TERESAH
-Proxémie;description;A French-developed Java application that displays the lexical relations of a word in a 3D environment.;BambooDirt
-Proxémie;developer;Centre National de Ressources Textuelles et Lexicales (CNRTL);TERESAH
-Proxémie;homepage;http://www.cnrtl.fr/proxemie/;TERESAH
-Proxémie;platform;Web;TERESAH
-Proxémie;keyword;visual search;TERESAH
+Prox�mie;description;A French-developed Java application that displays the lexical relations of a word in a 3D environment.;BambooDirt
+Prox�mie;developer;Centre National de Ressources Textuelles et Lexicales (CNRTL);TERESAH
+Prox�mie;homepage;http://www.cnrtl.fr/proxemie/;TERESAH
+Prox�mie;platform;Web;TERESAH
+Prox�mie;keyword;visual search;TERESAH
 Publish or Perish;developer;Anne-Wil Harzing;TERESAH
 Publish or Perish;homepage;http://www.harzing.com/pop.htm;TERESAH
 Publish or Perish;platform;Linux;TERESAH
@@ -4077,13 +4077,13 @@ Qnotero;description;Desktop application to quickly search Zotero references and 
 Qnotero;homepage;http://www.cogsci.nl/software/qnotero;TERESAH
 Qnotero;platform;Linux;TERESAH
 Qnotero;tool-type;Search;TERESAH
-Qnotero;developer;Sebastiaan MathÃ´t;TERESAH
+Qnotero;developer;Sebastiaan Mathôt;TERESAH
 Quadrigram;keyword;Active;TERESAH
 Quadrigram;developer;Bestiario;TERESAH
 Quadrigram;keyword;data analysis;TERESAH
 Quadrigram;homepage;http://www.quadrigram.com/;TERESAH
 Quadrigram;keyword;Paid;TERESAH
-Quadrigram;description;"Quadrigram describes itself as a \""visual programming environment\"" for living data. It is primarily a tool for data visualization that allows the user to create custom, interactive visualizations of a range of different types of data.";BambooDirt
+Quadrigram;description;"Quadrigram describes itself as a ""visual programming environment"" for living data. It is primarily a tool for data visualization that allows the user to create custom, interactive visualizations of a range of different types of data.";BambooDirt
 Quadrigram;platform;Web;TERESAH
 Quadrigram;tool-type;Visualization;TERESAH
 Qualrus;tool-type;Data analysis;TERESAH
@@ -4297,9 +4297,9 @@ SARIT;platform;Android;TERESAH
 SARIT;license;Creative Commons Attribution-Share Alike;TERESAH
 SARIT;developer;Dominik Wujastyk;TERESAH
 SARIT;description;"General description:
-SARIT, \""Search and Retrieval of Indic Texts\"", is a Sanskrit word meaning a river, and is commonly used in literary metaphors about short stories (rivers) combining into larger chronicles (oceans), etc. The SARIT project is building a digital library of Sanskrit and other Indian language etexts. The inspiration for the project comes directly from the Thesaurus Linguae Graecae and the Perseus Project. SARIT provides Indologists with machine readable texts and digital instruments for philological research.
-SARIT displays Indological texts marked up according to Text Encoding Initiative (TEI) guidelines. It uses a modified version of PhiloLogicâ„¢, a platform developed by the ARTFL Project and Digital Library Development Center at the University of Chicago. PhiloLogicâ„¢ is widely deployed in the digital humanities as a full-text search, retrieval and analysis tool for large TEI document collections. Notable installations include Perseus Project Texts Loaded under PhiloLogicâ„¢ and the Digital Dictionaries of South Asia.
-Copyright information: Copyright Â© 2008 Dominik WUJASTYK. All rights reserved.  eTexts under the CC A-SA licence.
+SARIT, ""Search and Retrieval of Indic Texts"", is a Sanskrit word meaning a river, and is commonly used in literary metaphors about short stories (rivers) combining into larger chronicles (oceans), etc. The SARIT project is building a digital library of Sanskrit and other Indian language etexts. The inspiration for the project comes directly from the Thesaurus Linguae Graecae and the Perseus Project. SARIT provides Indologists with machine readable texts and digital instruments for philological research.
+SARIT displays Indological texts marked up according to Text Encoding Initiative (TEI) guidelines. It uses a modified version of PhiloLogic™, a platform developed by the ARTFL Project and Digital Library Development Center at the University of Chicago. PhiloLogic™ is widely deployed in the digital humanities as a full-text search, retrieval and analysis tool for large TEI document collections. Notable installations include Perseus Project Texts Loaded under PhiloLogic™ and the Digital Dictionaries of South Asia.
+Copyright information: Copyright © 2008 Dominik WUJASTYK. All rights reserved.  eTexts under the CC A-SA licence.
 Financial Support: The British Association for South Asian Studies
 Contact:
 Dr Dominik Wujastyk
@@ -4334,7 +4334,7 @@ SAXON;keyword;XQuery;TERESAH
 SAXON;standard;XSLT;TERESAH
 Scalar;developer;Alliance for Networking Visual Culture;TERESAH
 Scalar;homepage;http://scalar.usc.edu/anvc/?page_id=6;TERESAH
-Scalar;description;Scalar is an authoring and publishing platform thatâ€™s designed to make it easy for authors to write long-form scholarship online.;BambooDirt
+Scalar;description;Scalar is an authoring and publishing platform that’s designed to make it easy for authors to write long-form scholarship online.;BambooDirt
 Scalar;platform;Web;TERESAH
 Scalar;tool-type;Writing;TERESAH
 Scanner for Zotero;keyword;Active;TERESAH
@@ -4478,7 +4478,7 @@ Search-Cube;tool-type;Visual search;TERESAH
 Search-Cube;keyword;visual search;TERESAH
 SearchTeam;homepage;http://searchteam.com/;TERESAH
 SearchTeam;keyword;search;TERESAH
-SearchTeam;description;"SearchTeam allows users to curate search results in a public or shared \""space\"".";BambooDirt
+SearchTeam;description;"SearchTeam allows users to curate search results in a public or shared ""space"".";BambooDirt
 SearchTeam;platform;Web;TERESAH
 SEASR;homepage;http://seasr.org/;TERESAH
 SEASR;platform;Linux;TERESAH
@@ -4555,7 +4555,7 @@ Sharepoint;keyword;XSLT;TERESAH
 SharpEye;tool-type;Data conversion;TERESAH
 SharpEye;homepage;http://www.visiv.co.uk/;TERESAH
 SharpEye;keyword;Paid;TERESAH
-SharpEye;description;"SharpEye is music scanning/\""OCR\"" software that can convert an image of a score into an editable format such as MusicXML.";BambooDirt
+SharpEye;description;"SharpEye is music scanning/""OCR"" software that can convert an image of a score into an editable format such as MusicXML.";BambooDirt
 SharpEye;platform;Windows;TERESAH
 Sibelius;homepage;http://www.sibelius.com/;TERESAH
 Sibelius;platform;osX;TERESAH
@@ -4572,7 +4572,7 @@ Sigil;tool-type;Writing;TERESAH
 Silk;keyword;Active;TERESAH
 Silk;homepage;http://www.silkapp.com;TERESAH
 Silk;developer;Silk;TERESAH
-Silk;description;"Silk is a platform for sites that contain collections of information. It's like the Tumblr for websites that have structured content “like software reviews, information about designers, a site with UN datasets, and more.
+Silk;description;"Silk is a platform for sites that contain collections of information. It's like the Tumblr for websites that have structured content �like software reviews, information about designers, a site with UN datasets, and more.
 When you have created your site (manually or by uploading one or more datasets), you can visualize and filter your data in a few ways. You can create graphs if your pages contain numbers, maps if you have locations, and filtered tables for just about anything. These visualizations and tables are interactive: anyone can play around with the variables to get the answer they need from the data.";BambooDirt
 Silk;platform;Web;TERESAH
 Silk;tool-type;Visualization;TERESAH
@@ -4632,7 +4632,7 @@ Snap Pro X;developer;Ambrosia Software Inc.;TERESAH
 Snap Pro X;homepage;http://www.ambrosiasw.com/utilities/snapzprox/;TERESAH
 Snap Pro X;platform;osX;TERESAH
 Snap Pro X;keyword;Paid;TERESAH
-Snap Pro X;description;Snapz Pro X allows you to record anything on your computer screen. You can save audio or video as a QuickTimeÂ® movie or screenshot that can be shared.;BambooDirt
+Snap Pro X;description;Snapz Pro X allows you to record anything on your computer screen. You can save audio or video as a QuickTime® movie or screenshot that can be shared.;BambooDirt
 Snap Pro X;tool-type;Video;TERESAH
 Snap Pro X;keyword;video;TERESAH
 Snipshot;description;A browser bookmarklet that-- when used-- allows a user to select any of the images on the page to edit (basic color enhancement, cropping, etc.). Allows users to save the resulting image in a variety of formats, or email the image.;BambooDirt
@@ -4718,7 +4718,7 @@ Audio playback via installed audio codecs (e.g. Wav, MP3)
  
 Variable speed playback
  
-'Walking' support “ playback of a small stretch of an audio stream several times to ensure accurate transcription is made, followed by an advancement to a new section of audio.";BambooDirt
+'Walking' support � playback of a small stretch of an audio stream several times to ensure accurate transcription is made, followed by an advancement to a new section of audio.";BambooDirt
 SoundScriber;keyword;audio;TERESAH
 SoundScriber;keyword;audio playback;TERESAH
 SoundScriber;keyword;creation;TERESAH
@@ -4750,7 +4750,7 @@ Springpad;tool-type;Annotation;TERESAH
 Springpad;homepage;http://springpadit.com/;TERESAH
 Springpad;keyword;social media;TERESAH
 Springpad;developer;Spring Partners;TERESAH
-Springpad;description;"Springpad allows you to create, organize and share annotations and notes. You may bookmark web pages, search online products, use tags to better organize your information, create your own digital cork-board, and share your information by making your pages \""public.\""";BambooDirt
+Springpad;description;"Springpad allows you to create, organize and share annotations and notes. You may bookmark web pages, search online products, use tags to better organize your information, create your own digital cork-board, and share your information by making your pages ""public.""";BambooDirt
 Springpad;platform;Web;TERESAH
 SPSS Statistics;keyword;analysis;TERESAH
 SPSS Statistics;tool-type;Data analysis;TERESAH
@@ -4919,7 +4919,7 @@ Swoogle;description;Swoogle is a semantic web search engine for searching ontolo
 Tabula;keyword;Active;TERESAH
 Tabula;tool-type;Data conversion;TERESAH
 Tabula;homepage;https://github.com/jazzido/tabula;TERESAH
-Tabula;developer;Manuel AristarÃ¡n;TERESAH
+Tabula;developer;Manuel Aristarán;TERESAH
 Tabula;license;MIT License;TERESAH
 Tabula;description;Tabula lets you upload a (text-based) PDF file into a simple web interface and magically pull tabular data into CSV format.;BambooDirt
 Tabula;platform;Web;TERESAH
@@ -4951,7 +4951,7 @@ TEI Roma;keyword;Online;TERESAH
 TEI Roma;tool-type;Semantic markup;TERESAH
 TEI Roma;keyword;Single purpose;TERESAH
 TEI Roma;description;TEI Roma is a tool for generating a bespoke TEI schema, DTD or Relax NG. Users can choose which TEI elements they require, starting either from the smallest possible set of elements, or starting from a template element set designed for a particular purpose, such as manuscript description.;HistoryOnline
-TemaTres  Controlled Vocabulary Server;description;"\""TemaTres is an open source vocabulary server, web application to manage and exploit vocabularies, thesauri, taxonomies and formal representations of knowledge.\"" -- TemaTres home page (viewed 30 October 2012)";BambooDirt
+TemaTres  Controlled Vocabulary Server;description;"""TemaTres is an open source vocabulary server, web application to manage and exploit vocabularies, thesauri, taxonomies and formal representations of knowledge."" -- TemaTres home page (viewed 30 October 2012)";BambooDirt
 TemaTres  Controlled Vocabulary Server;keyword;Active;TERESAH
 TemaTres  Controlled Vocabulary Server;license;GNU GPL;TERESAH
 TemaTres  Controlled Vocabulary Server;homepage;http://www.vocabularyserver.com/;TERESAH
@@ -5023,7 +5023,7 @@ TextExpander;developer;LLC;TERESAH
 TextExpander;platform;Mac OS X 10.6;TERESAH
 TextExpander;platform;osX;TERESAH
 TextExpander;keyword;Paid;TERESAH
-TextExpander;description;"TextExpander allows you to customize abbreviations to insert \""snippets\"" for your frequently used text strings or images. This helps you save time typing repeated words or sentences whether on email signatures or several paragraphs of a standard response. TextExpander can organize snippets into groups, sync snippets via Dropbox, or add common typos to your snippet library, which TextExpander will automatically correct.";BambooDirt
+TextExpander;description;"TextExpander allows you to customize abbreviations to insert ""snippets"" for your frequently used text strings or images. This helps you save time typing repeated words or sentences whether on email signatures or several paragraphs of a standard response. TextExpander can organize snippets into groups, sync snippets via Dropbox, or add common typos to your snippet library, which TextExpander will automatically correct.";BambooDirt
 TextExpander;tool-type;Writing;TERESAH
 TextExpander;keyword;writing;TERESAH
 TexTexture;keyword;Beta;TERESAH
@@ -5066,24 +5066,24 @@ Change tracking";BambooDirt
 TextPad;tool-type;Web development;TERESAH
 TextPad;platform;Windows;TERESAH
 TextPad;standard;XML;TERESAH
-textpresso;description;"\""a text-mining system for scientific literature. Textpresso's two major elements are (1) access to full text, so that entire articles can be searched, and (2) introduction of categories of biological concepts and classes that relate two objects (e.g., association, regulation, etc.) or describe one (e.g., methods, etc)\""";BambooDirt
+textpresso;description;"""a text-mining system for scientific literature. Textpresso's two major elements are (1) access to full text, so that entire articles can be searched, and (2) introduction of categories of biological concepts and classes that relate two objects (e.g., association, regulation, etc.) or describe one (e.g., methods, etc)""";BambooDirt
 textpresso;homepage;http://www.textpresso.org/;TERESAH
 textpresso;keyword;linked data;TERESAH
 textpresso;tool-type;Text mining;TERESAH
-TextSTAT- Simple Text Analysis Tool;description;"\""TextSTAT is a simple programme for the analysis of texts. It reads plain text files (in different encodings) and HTML files (directly from the internet) and it produces word frequency lists and concordances from these files. This version includes a web-spider which reads as many pages as you want from a particular website and puts them in a TextSTAT-corpus. The new news-reader, too, puts news messages in a TextSTAT-readable corpus file.
+TextSTAT- Simple Text Analysis Tool;description;"""TextSTAT is a simple programme for the analysis of texts. It reads plain text files (in different encodings) and HTML files (directly from the internet) and it produces word frequency lists and concordances from these files. This version includes a web-spider which reads as many pages as you want from a particular website and puts them in a TextSTAT-corpus. The new news-reader, too, puts news messages in a TextSTAT-readable corpus file.
 TextSTAT reads MS Word and OpenOffice files. No conversion needed, just add the files to your corpus...
-In TextSTAT you can use regular expression which provides you with powerful search possibilities. The programme is multilingual. Because it uses Unicode internally, TextSTAT can cope with many different languages and file encodings. \""";BambooDirt
+In TextSTAT you can use regular expression which provides you with powerful search possibilities. The programme is multilingual. Because it uses Unicode internally, TextSTAT can cope with many different languages and file encodings. """;BambooDirt
 TextSTAT- Simple Text Analysis Tool;homepage;http://neon.niederlandistik.fu-berlin.de/en/textstat/;TERESAH
 TextSTAT- Simple Text Analysis Tool;tool-type;Text mining;TERESAH
 TextSTAT- Simple Text Analysis Tool;keyword;web spider;TERESAH
 TextSTAT- Simple Text Analysis Tool;platform;Windows;TERESAH
-The Field Linguist´s Toolbox;homepage;http://www.sil.org/computing/catalog/show_software.asp?id=79;TERESAH
-The Field Linguist´s Toolbox;keyword;interlinear analysis;TERESAH
-The Field Linguist´s Toolbox;tool-type;Linguistic research;TERESAH
-The Field Linguist´s Toolbox;license;SIL Language Freeware;TERESAH
-The Field Linguist´s Toolbox;description;The Field Linguist's Toolbox is Windows software for maintaining lexical data, and for parsing and interlinearizing text.;BambooDirt
-The Field Linguist´s Toolbox;platform;Windows;TERESAH
-The Field Linguistâ€™s Toolbox;developer;SIL International;TERESAH
+The Field Linguist�s Toolbox;homepage;http://www.sil.org/computing/catalog/show_software.asp?id=79;TERESAH
+The Field Linguist�s Toolbox;keyword;interlinear analysis;TERESAH
+The Field Linguist�s Toolbox;tool-type;Linguistic research;TERESAH
+The Field Linguist�s Toolbox;license;SIL Language Freeware;TERESAH
+The Field Linguist�s Toolbox;description;The Field Linguist's Toolbox is Windows software for maintaining lexical data, and for parsing and interlinearizing text.;BambooDirt
+The Field Linguist�s Toolbox;platform;Windows;TERESAH
+The Field Linguist’s Toolbox;developer;SIL International;TERESAH
 The Observer XT;keyword;Active;TERESAH
 The Observer XT;homepage;http://www.noldus.com/human-behavior-research/products/the-observer-xt;TERESAH
 The Observer XT;developer;Noldus Information Technology;TERESAH
@@ -5156,8 +5156,7 @@ TileMill;platform;Linux;TERESAH
 TileMill;keyword;map tiles;TERESAH
 TileMill;developer;MapBox;TERESAH
 TileMill;tool-type;Mapping;TERESAH
-TileMill;description;"Open source map design studio for creating custom web tile maps that use MapBox's data.
- Sushi";BambooDirt
+TileMill;description;"Open source map design studio for creating custom web tile maps that use MapBox's data. Sushi";BambooDirt
 TileMill;keyword;Paid;TERESAH
 Timeflow;homepage;http://flowingmedia.com/timeflow.html;TERESAH
 Timeflow;description;Time Flow is an open-source timeline built to help journalists analyze temporal data. The application offers several view modes--timelime, calendar, list, table--to help explore thousands of data points.;BambooDirt
@@ -5166,7 +5165,7 @@ Timeflow;tool-type;Visualization;TERESAH
 TimeGlider;keyword;data visualization;TERESAH
 TimeGlider;homepage;http://timeglider.com/;TERESAH
 TimeGlider;keyword;JQuery;TERESAH
-TimeGlider;description;"TimeGlider is a data-driven interactive timeline application built using JavaScript. You can \""grab\"" the timeline and drag it left and right, and zoom in and out to view centuries at a time or just hours. TimeGlider allows you to create event-spans so that you can see durations and how they overlap. Being web-based, TimeGlider lets you collaborate and share easily.";BambooDirt
+TimeGlider;description;"TimeGlider is a data-driven interactive timeline application built using JavaScript. You can ""grab"" the timeline and drag it left and right, and zoom in and out to view centuries at a time or just hours. TimeGlider allows you to create event-spans so that you can see durations and how they overlap. Being web-based, TimeGlider lets you collaborate and share easily.";BambooDirt
 TimeGlider;platform;Web;TERESAH
 TimeGlider;tool-type;Visualization;TERESAH
 Timeline JS;keyword;Active;TERESAH
@@ -5256,8 +5255,8 @@ T-PEN (Transcription for Paleographical and Editorial Notation);license;Educatio
 T-PEN (Transcription for Paleographical and Editorial Notation);description;"Extensive set of tools to allow collaborative transcription of manuscript pages in TEI-compliant XML.
 Features of T-PEN through version 1.2 [from project blog]
 Zoom Tool in Transcription User Interface: Holding CTRL+SHIFT will result in a magnified image of the current line being transcribed.
-Magnifying Tool in Full Page View: Click on \""Magnify\"" button at the top right of the browser window and a magnifying glass tool will appear as the mouse pointer. Click on the same button to dismiss the tool. The magnifying tool is also available in the Compare Page feature.
-Create a Project â€œPipelineâ€ to the outer world: In partnership with The Carolingian Canon Law Project (CCL), T-PEN developed a model for enabling users working on transcription projects in T-PEN to export their work to a larger, external project. In this instance, the CCL prepared for T-PEN an XML-markup template (XML button set) that may be used for all transcriptions destined for the CCL database. Users identify their T-PEN projects as destined for the CCL, and when the transcription is complete, they can submit it from T-PEN to the CCL project. The CCL receives notification of the stable URL in T-PEN that the CCL can (either manually or by automation) use to extract the designated transcription from T-PENâ€™s data store. Other projects interested in creating their own pipeline should contact T-PEN via t-pen.org
+Magnifying Tool in Full Page View: Click on ""Magnify"" button at the top right of the browser window and a magnifying glass tool will appear as the mouse pointer. Click on the same button to dismiss the tool. The magnifying tool is also available in the Compare Page feature.
+Create a Project “Pipeline” to the outer world: In partnership with The Carolingian Canon Law Project (CCL), T-PEN developed a model for enabling users working on transcription projects in T-PEN to export their work to a larger, external project. In this instance, the CCL prepared for T-PEN an XML-markup template (XML button set) that may be used for all transcriptions destined for the CCL database. Users identify their T-PEN projects as destined for the CCL, and when the transcription is complete, they can submit it from T-PEN to the CCL project. The CCL receives notification of the stable URL in T-PEN that the CCL can (either manually or by automation) use to extract the designated transcription from T-PEN’s data store. Other projects interested in creating their own pipeline should contact T-PEN via t-pen.org
 T-PEN Administration: T-PEN administrator can clear registration requests that have not been approved (ones that were mostly generated through internal testing).
 Transcription UI: The previous line text will scale to the size of the screen. When on the first line of the page, available text from the last line of the previous page will be shown.
 Visual Cue for Closing Tag Proximity (Transcription UI): Closing tags originating on previous pages are faded to indicate their distance from the current line of transcription.
@@ -5271,7 +5270,7 @@ T-PEN (Transcription for Paleographical and Editorial Notation);platform;Web;TER
 Trailfire;keyword;annotation;TERESAH
 Trailfire;tool-type;Bookmarking;TERESAH
 Trailfire;homepage;http://trailfire.com/;TERESAH
-Trailfire;description;"Trailfire allows you to create \""trails\"" -- or guides -- that link together web sites, add notes, and find content via other people's trails.";BambooDirt
+Trailfire;description;"Trailfire allows you to create ""trails"" -- or guides -- that link together web sites, add notes, and find content via other people's trails.";BambooDirt
 Trailfire;platform;Web;TERESAH
 Transana;keyword;data visualization;TERESAH
 Transana;homepage;http://www.transana.org/about/index.htm;TERESAH
@@ -5434,9 +5433,9 @@ UVic Image Markup Tool;homepage;http://tapor.uvic.ca/~mholmes/image_markup/index
 UVic Image Markup Tool;tool-type;Image editing;TERESAH
 UVic Image Markup Tool;platform;Linux;TERESAH
 UVic Image Markup Tool;developer;TAPoR;TERESAH
-UVic Image Markup Tool;description;"The Image Markup Tool allows you to \""describe and annotate images, and store the resulting data in TEI XML files,\"" all within a \""simple enough interface that it can be used by people with little or no experience in editing XML code.\"" Designed to be Windows-only, but can be successfully run on Linux using Wine.
+UVic Image Markup Tool;description;"The Image Markup Tool allows you to ""describe and annotate images, and store the resulting data in TEI XML files,"" all within a ""simple enough interface that it can be used by people with little or no experience in editing XML code."" Designed to be Windows-only, but can be successfully run on Linux using Wine.
 Features:
-Supports \""a wide variety of image formats\""
+Supports ""a wide variety of image formats""
 Saves markup information in conformant TEI P5 XML files
 Create simple web output to display the annotated image in an interactive format
 Simple, graphical interface lets you see the image and the fields for entering your markup notes
@@ -5451,7 +5450,7 @@ Program checks XML for well-formedness and provides some basic assistance in aut
 Menu command for creating zip packages (containing image file, XML markup file, and associated schema files) provides an easy solution for moving projects
 This tool also allows you to easily create thumbnails of a whole image or one annotated part of an image--one less task to perform in a separate image editing tool
 Disadvantages:
-Editing done to Image Markup's XML files in an external editor may not be preserved: Image Markup Tool \""will not guarantee to preserve XML code which is added to one of its files in an external editor (although it will try)\"" 
+Editing done to Image Markup's XML files in an external editor may not be preserved: Image Markup Tool ""will not guarantee to preserve XML code which is added to one of its files in an external editor (although it will try)"" 
 Web output provides only a starting place for web display, and is not a one-stop shop for a finished web product
 Tips:
 Although the program documentation states that little or no user experience with XML markup is needed, it would be advisable to have, at the minimum, some familiarity with the basic concepts of markup (an introductory understanding of HTML, for instance).
@@ -5527,7 +5526,7 @@ Wavesurfer;platform;Windows;TERESAH
 WEAVE;keyword;data visualization;TERESAH
 WEAVE;homepage;http://oicweave.org/;TERESAH
 WEAVE;developer;Open Indicators Consortium;TERESAH
-WEAVE;description;Weave (BETA 1.0) is a new web-based visualization platform designed to enable visualization of any available data by anyone for any purpose. Weave is an application development platform supporting multiple levels of user proficiency â€“ novice to advanced â€“ as well as the ability to integrate, disseminate and visualize data at â€œnestedâ€ levels of geography.;BambooDirt
+WEAVE;description;Weave (BETA 1.0) is a new web-based visualization platform designed to enable visualization of any available data by anyone for any purpose. Weave is an application development platform supporting multiple levels of user proficiency – novice to advanced – as well as the ability to integrate, disseminate and visualize data at “nested” levels of geography.;BambooDirt
 WEAVE;platform;Web;TERESAH
 WEAVE;tool-type;Visualization;TERESAH
 WebClust;homepage;http://www.webclust.com/;TERESAH
@@ -5550,8 +5549,8 @@ WebLicht;tool-type;Linguistic research;TERESAH
 WebLicht;platform;Web;TERESAH
 WebLicht;description;"WebLicht is a service-oriented architecture (SOA) for creating annotated text corpora. Development started in October 2008 as part of CLARIN-D's predecessor project D-SPIN, and further development and enhancement of WebLicht is an important goal of CLARIN-D, aiming to make WebLicht a fully-functional virtual research environment.
 WebLicht employs chains of RESTful web services. Each web service encapsulates a certain linguistic tool. For example, users can access as a web service the query component of a corpus, a format converter, a tokenizer, a tagger, or a parser. Translation between the input format specific to some tool and the WebLicht information interchange format TCF (see below) is performed by a web service wrapper. Each web service adds at least one layer of annotation encompassing the work of the tool encapsulated by that service. The output of a chain of WebLicht services is an automatically analyzed corpus in the form of an XML document.
-To do this, each WebLicht service must be able to use a common interchange format that all the other services can also process. CLARIN-D's Text Corpus Format (TCF), serves this purpose. It is broadly compatible with existing related interchange formats like Negra, Paula, or TÃ¼Ba-D/Z, and format-specific converters allow interchange between them.
-WebLicht can be accessed only with a valid DFN-AAI/Shibboleth-based account or a local TÃ¼bingen account.";BambooDirt
+To do this, each WebLicht service must be able to use a common interchange format that all the other services can also process. CLARIN-D's Text Corpus Format (TCF), serves this purpose. It is broadly compatible with existing related interchange formats like Negra, Paula, or TüBa-D/Z, and format-specific converters allow interchange between them.
+WebLicht can be accessed only with a valid DFN-AAI/Shibboleth-based account or a local Tübingen account.";BambooDirt
 WebSlides;developer;Diigo Inc.;TERESAH
 WebSlides;keyword;Diligo;TERESAH
 WebSlides;homepage;http://slides.diigo.com/help.html;TERESAH
@@ -5577,7 +5576,7 @@ Weka;developer;University of Waikato;TERESAH
 Weka;platform;Web;TERESAH
 Weka;description;"Weka offers a suite of algorithms for machine learning. Common data mining tasks covered include pre-processing, classification and clustering. The project also offers a selection of datasets for download. It is possible to use CSV data but there are certain limitations compared to the default Weka file format of ARFF (Attribute Relation File Format); conversion to ARFF using Java or Python is discussed in the project documentation. There is also a book by project members: Data Mining: Practical Machine Learning Tools and Techniques, which covers data mining in general and using Weka for practical examples.";HistoryOnline
 Weka;description;Weka provides machine learning algorithms in Java for data mining and predictive modeling tasks. These algorithms can either be incorporated into other Java code or called from the Weka Workbench, a GUI environment.;BambooDirt
-Versioning Machine;description;"\""The Versioning Machine is a framework and an interface for displaying multiple versions of text encoded according to the Text Encoding Initiative (TEI) Guidelines... While the VM provides for features typically found in critical editions, such as annotation and introductory material, it also takes advantage of the opportunities afforded by electronic publication to allow for the comparison diplomatic versions of witnesses, and the ability to easily compare an image of the manuscript with a diplomatic version\""";BambooDirt
+Versioning Machine;description;"""The Versioning Machine is a framework and an interface for displaying multiple versions of text encoded according to the Text Encoding Initiative (TEI) Guidelines... While the VM provides for features typically found in critical editions, such as annotation and introductory material, it also takes advantage of the opportunities afforded by electronic publication to allow for the comparison diplomatic versions of witnesses, and the ability to easily compare an image of the manuscript with a diplomatic version""";BambooDirt
 Versioning Machine;homepage;http://v-machine.org/;TERESAH
 Versioning Machine;tool-type;Text collections;TERESAH
 Versioning Machine;platform;Web;TERESAH
@@ -5648,7 +5647,7 @@ Virtual Lightbox;tool-type;Image collections;TERESAH
 Virtual Lightbox;description;The Virtual Lightbox enables online image comparison, with features like an image-centric whiteboard.;BambooDirt
 Virtual Lightbox;platform;Web;TERESAH
 Virtual Lightbox;keyword;whiteboard;TERESAH
-Virtual Lightbox for Museums and Archives;description;"\""The Virtual Lightbox for Museums and Archives (VLMA) is an educational tool for collecting and reusing in a structured fashion the online contents of museums and archives with visual components. With VLMA, you can browse and search collections, construct personal collections, export these collections to xml or Impress presentation format, annotate them, and share your collections with other VLMA users.\""";BambooDirt
+Virtual Lightbox for Museums and Archives;description;"""The Virtual Lightbox for Museums and Archives (VLMA) is an educational tool for collecting and reusing in a structured fashion the online contents of museums and archives with visual components. With VLMA, you can browse and search collections, construct personal collections, export these collections to xml or Impress presentation format, annotate them, and share your collections with other VLMA users.""";BambooDirt
 Virtual Lightbox for Museums and Archives;tool-type;Data collection;TERESAH
 Virtual Lightbox for Museums and Archives;homepage;http://www.jisc.ac.uk/whatwedo/programmes/edistributed/vl.aspx;TERESAH
 Virtual Lightbox for Museums and Archives;developer;JISC;TERESAH
@@ -5713,7 +5712,7 @@ VoodooPad;platform;Mac OS X 10.5+;TERESAH
 VoodooPad;keyword;organization;TERESAH
 VoodooPad;keyword;Paid;TERESAH
 VoodooPad;description;VoodooPad is an annotation and organization tool. You may drag and drop folders, PDF files, applications, and URLs into VoodooPad, while maintaining the links. VoodooPad provides full screen editing, the ability to export your pages as HTML documents, and search capabilities.;BambooDirt
-Word Hoard;description;"\""In the WordHoard environment, texts are annotated or tagged by morphological, lexical, prosodic, and narratological criteria. They are mediated through a 'digital page' or user interface that lets scholarly but non-technical users explore the greatly increased query potential of textual data kept in such a form.\""";BambooDirt
+Word Hoard;description;"""In the WordHoard environment, texts are annotated or tagged by morphological, lexical, prosodic, and narratological criteria. They are mediated through a 'digital page' or user interface that lets scholarly but non-technical users explore the greatly increased query potential of textual data kept in such a form.""";BambooDirt
 Word Hoard;license;GNU GPL;TERESAH
 Word Hoard;homepage;http://wordhoard.northwestern.edu/userman/index.html;TERESAH
 Word Hoard;platform;osX;TERESAH
@@ -5731,7 +5730,7 @@ WordCruncher;homepage;http://www.wordcruncher.com/;TERESAH
 WordCruncher;platform;Windows;TERESAH
 WordCruncher;tool-type;Visualization;TERESAH
 WordCruncher;description;WordCruncher is a text retrieval and analysis program that allows users to index or use a text, including very large multilingual Unicode documents.  It supports the addition of tags (such as part of speech, definitions, lemma, etc), graphics, and hyperlinks to text or multimedia files.  In addition to supporting contextual and tag searching, WordCruncher also includes many analytical reports, including collocation, vocabulary dispersion, frequency distribution, vocabulary usage, and various other reports.;BambooDirt
-WordFreak;description;"\""WordFreak is a java-based linguistic annotation tool designed to support human, and automatic annotation of linguistic data as well as employ active-learning for human correction of automatically annotated data.\"" (text taken from http://wordfreak.sourceforge.net/)";BambooDirt
+WordFreak;description;"""WordFreak is a java-based linguistic annotation tool designed to support human, and automatic annotation of linguistic data as well as employ active-learning for human correction of automatically annotated data."" (text taken from http://wordfreak.sourceforge.net/)";BambooDirt
 WordFreak;keyword;Active;TERESAH
 WordFreak;keyword;automatic annotation;TERESAH
 WordFreak;homepage;http://wordfreak.sourceforge.net/;TERESAH
@@ -5822,15 +5821,15 @@ VoxcribeCC;developer;Voxcribe Technologies;TERESAH
 VoxcribeCC;description;"VoxcribeCC has the most accurate speaker-independent and topic-independent desktop speech recognition technology. It is used for media (audiovideo) transcription and video-captioning.
 Please watch VoxcribeCC Usage Video to learn using VoxcribeCC just in 2 minutes.
 VoxcribeCC offers:
-â€¢ An unmatched ability for audio transcription and subtitle creation and editing,
-â€¢ Outstanding levels of productivity and quality at incredibly low costs. 
+• An unmatched ability for audio transcription and subtitle creation and editing,
+• Outstanding levels of productivity and quality at incredibly low costs. 
 Features:
-â€¢ Direct media-speech-recognition.
-â€¢ Auto time stamping
-â€¢ Interactive time-line with audio energy display
-â€¢ Spell-check and auto text formatting
-â€¢ Subtitle splitting and merging with automatic audio synchronization
-â€¢ Visual subtitles with graphically adjustable start and end points 
+• Direct media-speech-recognition.
+• Auto time stamping
+• Interactive time-line with audio energy display
+• Spell-check and auto text formatting
+• Subtitle splitting and merging with automatic audio synchronization
+• Visual subtitles with graphically adjustable start and end points 
 Click here to Download VoxcribeCC";BambooDirt
 Voyant Tools;keyword;Active;TERESAH
 Voyant Tools;homepage;http://voyant-tools.org/;TERESAH
@@ -5871,7 +5870,7 @@ Wufoo;platform;Web;TERESAH
 Wufoo;description;Wufoo is an online form builder with built-in analytics. Free users are allowed to create up to three forms with up to 10 fields.;BambooDirt
 VUVOX;keyword;music;TERESAH
 VUVOX;platform;Web;TERESAH
-VUVOX;description;"VUVOX (\""visual voice\"") is an easy to use production and sharing service that allows you to instantly create and share stories. You can create, mix, and personalize media - videos, photos and music - to share with others.";BambooDirt
+VUVOX;description;"VUVOX (""visual voice"") is an easy to use production and sharing service that allows you to instantly create and share stories. You can create, mix, and personalize media - videos, photos and music - to share with others.";BambooDirt
 Xalan;keyword;analysis;TERESAH
 Xalan;license;Apache;TERESAH
 Xalan;license;Apache License;TERESAH
@@ -5932,12 +5931,12 @@ XMLSpy;keyword;Beginner;TERESAH
 XMLSpy;keyword;Offline;TERESAH
 XMLSpy;tool-type;Semantic markup;TERESAH
 XMLSpy;keyword;Single purpose;TERESAH
-xMod;description;"A tool capable of transforming a collection of TEI encoded XML records into a web site. To perform the process, the tool requires a set of valid XML files, a configuration script that indicates the relationship between files and a \""personality packâ€™ (CSS and image files) that determine its visual appearance.
+xMod;description;"A tool capable of transforming a collection of TEI encoded XML records into a web site. To perform the process, the tool requires a set of valid XML files, a configuration script that indicates the relationship between files and a ""personality pack’ (CSS and image files) that determine its visual appearance.
 Features:
 Batch file processing
 Modular XSLT structure, with special libraries for different transformation scenarios
 Ability to group files for generation of indices at document and intra-document level";BambooDirt
-xMod;description;"A tool capable of transforming a collection of TEI encoded XML records into a web site. To perform the process, the tool requires a set of valid XML files, a configuration script that indicates the relationship between files and a \""personality packâ€™ (CSS and image files) that determine its visual appearance.";ArtsHumanities
+xMod;description;"A tool capable of transforming a collection of TEI encoded XML records into a web site. To perform the process, the tool requires a set of valid XML files, a configuration script that indicates the relationship between files and a ""personality pack’ (CSS and image files) that determine its visual appearance.";ArtsHumanities
 xMod;developer;Centre for Computing in the Humanities, King's College London;TERESAH
 xMod;platform;Cross-platform;TERESAH
 xMod;standard;docbook;TERESAH
@@ -6012,7 +6011,7 @@ Yana;homepage;http://osc.hul.harvard.edu/yana/;TERESAH
 Yana;platform;Linux;TERESAH
 Yana;license;MIT License;TERESAH
 Yana;tool-type;Web development;TERESAH
-Yana;description;YÄna provides a free, open-source template that open access journals can use as the basis of their own multi-platform mobile applications. The YÄna template provides the basic functionality required by any journal operating on a mobile platform.;BambooDirt
+Yana;description;Yāna provides a free, open-source template that open access journals can use as the basis of their own multi-platform mobile applications. The Yāna template provides the basic functionality required by any journal operating on a mobile platform.;BambooDirt
 yED Graph;keyword;data visualization;TERESAH
 yED Graph;homepage;http://www.yworks.com/en/index.html;TERESAH
 yED Graph;platform;Web;TERESAH
@@ -6113,3 +6112,152 @@ Zotpress;platform;Web;TERESAH
 Zotpress;keyword;web publishing;TERESAH
 Zotpress;keyword;WordPress;TERESAH
 Zotpress;description;Zotpress enables users to easily add Zotero citations to a WordPress site by using a special syntax that turns a Zotero citation key into a well-formatted inline citation and bibliography, based on the data stored in Zotero.;BambooDirt
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
+;;;
