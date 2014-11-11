@@ -120,14 +120,14 @@ return array(
             "title" => "Alla verktyg"
         ), 
         "facets" => array(
-            "name" => "Alla facetter", 
-            "title" => "Alla facetter"
+            "name" => "Facetter", 
+            "title" => "Facetter"
         ),
         "by-alphabet" => array(
             "name" => "Alfabetiskt"
         ),
         "by-facet" => array(
-            "name" => "Facetterat"
+            "name" => "Facetter"
         ),
         "popular" => array(
             "name" => "Mest populära verktygen",
