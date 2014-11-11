@@ -15,7 +15,7 @@
 
         <div class="small-5 columns">
             <ul class="inline-list">
-                @foreach (range("a", "z") as $character)
+                @foreach (array_merge(range(0, 9), range("a", "z")) as $character)
                     <li><a href="{{ URL::to("/tools/by-alphabets/" . $character) }}" title="{{ strtoupper($character) }}">{{ strtoupper($character) }}</a></li>
                 @endforeach
             </ul>

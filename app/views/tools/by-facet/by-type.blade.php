@@ -6,35 +6,37 @@
     $dataType->label
 )))
 
-@section("content")
+@section("master-head")
     <div class="row">
-        <div class="col-sm-12">
+        <div class="small-12 columns">
             <h1>{{ $dataType->label }}</h1>
 
             <p>{{ Lang::get("views/tools/by-facet/index.listing_results", array("from" => $dataValues->getFrom(), "to" => $dataValues->getTo(), "total" => $dataValues->getTotal())) }}</p>
-
-            @include("shared._error_messages")
         </div>
-        <!-- /col-sm-12 -->
+        <!-- /small-12.columns -->
     </div>
     <!-- /row -->
+@stop
 
-    <div class="listing">
-        @foreach ($dataValues as $value)
-        <!-- row -->
-        <article class="row">
-            <div class="col-sm-11">
-                <h4>{{ link_to_route("tools.by-facet", e($value->value), array($dataType->slug, $value->slug), array("title" => e($value->value))) }}</h4>
-            </div>
-        </article>
-        <!-- /row -->
-        @endforeach
-    </div>
-    
-    <div class="row">
-        <div class="col-sm-12">
+@section("content")
+    <section class="row">
+        <div class="small-12 columns">
+            <h1 class="hide">{{ $dataType->label }}</h1>
+
+            <ul class="small-block-grid-4">
+                @foreach ($dataValues as $value)
+                    <li>
+                        <article class="card">
+                            <h2>{{ link_to_route("tools.by-facet", e($value->value), array($dataType->slug, $value->slug), array("title" => e($value->value))) }}</h2>
+                        </article>
+                        <!-- /card -->
+                    </li>
+                @endforeach
+            </ul>
+
             {{ $dataValues->links() }}
         </div>
-        <!-- /col-sm-12 -->
-    </div>
+        <!-- /small-12.columns -->
+    </section>
+    <!-- /row -->
 @stop
