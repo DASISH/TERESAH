@@ -2,30 +2,28 @@
 
 @section("breadcrumb", BreadcrumbHelper::render(array(
     link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
-    Lang::get("views/pages/navigation.browse.by-facet.name")   
+    Lang::get("views/pages/navigation.browse.by-facet.name")
 )))
 
 @section("content")
-    <div class="row">
-        <div class="col-sm-12">
+    <section class="row">
+        <div class="small-12 columns">
             <h1>{{ Lang::get("views/tools/by-facet/index.heading") }}</h1>
 
-            @include("shared._error_messages")
-        </div>
-        <!-- /col-sm-12 -->
-    </div>
-    <!-- /row -->
+            <ul class="small-block-grid-4">
+                @foreach ($dataTypes as $type)
+                    <li>
+                        <article class="card">
+                            <h2>{{ link_to_route("data.by-type", e($type->label), $type->slug, array("title" => e($type->label))) }}</h2>
 
-    <div class="listing">
-        @foreach ($dataTypes as $type)
-        <!-- row -->
-        <article class="row">
-            <div class="col-sm-11">
-                <h4>{{ link_to_route("data.by-type", e($type->label), $type->slug, array("title" => e($type->label))) }}</h4>
-                <p>{{ $type->description }}</p>
-            </div>
-        </article>
-        <!-- /row -->
-        @endforeach
-    </div>
+                            <p>{{ $type->description }}</p>
+                        </article>
+                        <!-- /card -->
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+        <!-- /small-12.columns -->
+    </section>
+    <!-- /row -->
 @stop

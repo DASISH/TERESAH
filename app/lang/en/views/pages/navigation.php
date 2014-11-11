@@ -113,25 +113,29 @@ return array(
         "title" => "Home"
     ),
     "browse" => array(
-        "name" => "Browse", 
-        "title" => "Browse",
+        "name" => "Browse Tools by", 
+        "title" => "Browse Tools by",
         "all" => array(
-            "name" => "Browse all", 
-            "title" => "Browse all"
+            "name" => "Browse All", 
+            "title" => "Browse All"
         ), 
         "facets" => array(
-            "name" => "Browse facets", 
-            "title" => "Browse facets"
+            "name" => "Browse Facets", 
+            "title" => "Browse Facets"
         ),
         "by-alphabet" => array(
-            "name" => "By alphabet"
+            "name" => "By Alphabet"
         ),
         "by-facet" => array(
-            "name" => "By facet"
+            "name" => "By Facet"
         ),
         "popular" => array(
-            "name" => "Most popular tools",
-            "title" => "Most popular"
+            "name" => "Most Popular Tools",
+            "title" => "Most Popular"
+        ),
+        "search" => array(
+            "name" => "Search", 
+            "title" => "Search"
         )
     ),
     "contribute" => array(
@@ -165,6 +169,10 @@ return array(
             "name" => "RDF", 
             "title" => "RDF"
         )
+    ),
+    "contribute" => array(
+        "name" => "Contribute",
+        "title" => "Contribute"
     ),
     "edit_user_profile" => array(
         "name" => "Edit Profile",

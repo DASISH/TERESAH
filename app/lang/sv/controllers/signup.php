@@ -2,6 +2,6 @@
 
 return array(
     "store" => array(
-        "success" => "Användarkonto har framgångsrikt skapats."
+        "success" => "Användarkonto har skapats."
     ),
 );

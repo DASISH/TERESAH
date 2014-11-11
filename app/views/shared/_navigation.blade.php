@@ -11,9 +11,10 @@
                 <li>{{ Link_to("/", Lang::get("views/pages/navigation.teresah.title")) }}</li>
                 <li>{{ link_to_route("pages.show", Lang::get("views/pages/navigation.about.name"), array("path" => "about"), array("title" => Lang::get("views/pages/navigation.about.title"))) }}</li>
                 <li class="has-dropdown">
-                    <a href="#" title="Browse Tools by">{{ Lang::get("views/pages/navigation.browse.title") }}</a>
+                    {{ link_to_route("tools.index", Lang::get("views/pages/navigation.browse.title"), null, array("title" => Lang::get("views/pages/navigation.browse..title"))) }}
 
                     <ul class="dropdown">
+                        <li>{{ link_to_route("tools.search", Lang::get("views/pages/navigation.browse.search.title"), null, array("title" => Lang::get("views/pages/navigation.browse.search.title"))) }}</li>
                         <li>{{ link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.title"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))) }}</li>
                         <li>{{ link_to_route("by-facet", Lang::get("views/pages/navigation.browse.facets.title"), null, array("title" => Lang::get("views/pages/navigation.browse.facets.title"))) }}</li>
                         <li>{{ link_to_route("tools.popular", Lang::get("views/pages/navigation.browse.popular.title"), null, array("title" => Lang::get("views/pages/navigation.browse.popular.title"))) }}</li>

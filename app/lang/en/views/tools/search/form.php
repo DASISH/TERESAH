@@ -2,6 +2,6 @@
 return array(
     "search" => array(
         "label" => "Search", 
-        "placeholder" => "Search"
+        "placeholder" => "Find tools, services, methodologies and more..."
     )
 );

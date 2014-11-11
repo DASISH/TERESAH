@@ -253,35 +253,41 @@ dl {
     font-weight: 600; /* Semi-Bold */
 }
 
-#header #master-head #banner .search input[type="text"] {
+/* Search */
+
+#header #master-head .search input[type="text"] {
     background-color: #47ba73;
     background: url(/assets/icons/search.png) 1.25rem 50% no-repeat rgba(71, 186, 115, 0.85);
     border: none;
     box-shadow: none;
     color: #fff;
+    font-size: 1.125rem; /* = 18px */
+    padding: 1.875rem 1.25rem 1.875rem 5rem; /* = 30px 20px 30px 80px */
+}
+
+#header #master-head #banner .search input[type="text"] {
     font-size: 1.5rem; /* = 24px */
     margin: 2.5rem 0 1rem 0; /* = 40px 0 16px 0 */
-    padding: 1.875rem 1.25rem 1.875rem 5rem; /* = 30px 20px 30px 80px */
 }
 
 /* Placeholder overrides for the search input */
 
-#header #master-head #banner .search input[type="text"]:--moz-placeholder {
+#header #master-head .search input[type="text"]:--moz-placeholder {
     color: #fff;
     font-style: italic;
 }
 
-#header #master-head #banner .search input[type="text"]:--ms-input-placeholder {
+#header #master-head .search input[type="text"]:--ms-input-placeholder {
     color: #fff;
     font-style: italic;
 }
 
-#header #master-head #banner .search input[type="text"]::--moz-placeholder {
+#header #master-head .search input[type="text"]::--moz-placeholder {
     color: #fff;
     font-style: italic;
 }
 
-#header #master-head #banner .search input[type="text"]::-webkit-input-placeholder {
+#header #master-head .search input[type="text"]::-webkit-input-placeholder {
     color: #fff;
     font-style: italic;
 }
@@ -469,6 +475,11 @@ dl {
     text-decoration: none;
 }
 
+#content .card {
+    background-color: #f5f5f5;
+    padding: 0.9375rem; /* = 15px */
+}
+
 /* Content icons */
 
 #content .icon {
@@ -536,6 +547,34 @@ dl {
 #content .symbol.large:hover, 
 #content .symbol.large:visited:hover {
     background-color: #47ba73;
+}
+
+/* Content accordion */
+
+#content .accordion {
+    clear: both;
+    margin-bottom: 1.5625rem; /* = 25px */
+}
+
+#content .accordion .accordion-navigation > a, 
+#content .accordion dd > a {
+    background-color: #f5f5f5;
+    border-bottom: 3px solid #47ba73;
+    color: #5d47ba;
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#content .accordion .accordion-navigation.active > a, 
+#content .accordion .accordion-navigation > a:hover, 
+#content .accordion .accordion-navigation > a:visited:hover {
+    background-color: #47ba73;
+    border-bottom: none;
+    color: #fff;
+    text-decoration: none;
+}
+
+#content .accordion .accordion-navigation.active {
+    border-bottom: 3px solid #47ba73;
 }
 
 /* Content tabs (Data Sources etc.) */
@@ -614,6 +653,38 @@ dl {
     font-size: 0.75rem; /* = 12px */
     line-height: 1rem;
     margin: 0;
+}
+
+/* Search Results */
+
+/* TODO: Change the "namespace" for the search results (from filter to search?) */
+
+#content #filter li {
+    line-height: 1em;
+    margin-bottom: 0.1875rem; /* = 3px */
+}
+
+#content #filter p {
+    font-size: 0.8125rem; /* = 13px */
+}
+
+#content #filter .label {
+    background-color: #5d47ba;
+    color: #fff;
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#content #filter .selected, 
+#content #filter .selected a:link, 
+#content #filter .selected a:visited {
+    color: #47ba73;
+    font-weight: bold;
+    font-weight: 600; /* Semi-Bold */
+}
+
+#content #filter .selected .label {
+    background-color: #47ba73;
+    color: #fff;
 }
 
 /* Footer
