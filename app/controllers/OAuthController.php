@@ -161,7 +161,8 @@ class OAuthController extends BaseController {
             $user->email_address = $email;
             $user->name = $name;
             $user->password = $password;
-            $user->password_confirmation = $password;
+            ///TODO: sort out the logic behind user model password_confirmation
+            //$user->password_confirmation = $password;
             $user->active = true;
             $user->user_level = User::AUTHENTICATED_USER;
             $user->locale = $locale;
