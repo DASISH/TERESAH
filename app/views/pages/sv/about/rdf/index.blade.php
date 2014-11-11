@@ -2,13 +2,13 @@
 
 @section("content")
     <div>
-        <h1>RDF Representations</h1>
-        <p>TERESAH suports full export of all tool metadata via RDF</p>
+        <h1>RDF Format</h1>
+        <p>TERESAH erbjuder full export av verktygens metadata vi RDF</p>
         
-        <h2>Datasources</h2>
-        <p>A tool can have several sources for the metadata. These sources are described in this export.</p>
+        <h2>Informationskällor</h2>
+        <p>Ett verktyg kan ha flera informationskällor för sin metadata. Dessa exporteras i följande dokument.</p>
         <dl>
-            <dt>Datasources</dt>
+            <dt>Informationskällor</dt>
             @if(in_array("XML", Config::get("teresah.tool_rdf_formats")))
             <dd>{{ link_to_action("RdfController@datasources", "RDF/XML", "rdfxml") }}</dd>
             @endif
@@ -24,14 +24,13 @@
             @if(in_array("nTriples", Config::get("teresah.tool_rdf_formats")))
             <dd>{{ link_to_action("RdfController@datasources", "RDF/N-Triples", "ntriples") }}</dd>
             @endif 
-        </dl>        
+        </dl>
         
-        <h2>Datatypes</h2>
-        <p>The list of datatypes used for the facets. These are in most vases mapped
-        a common property in a external rdf-vocabulary.</p>
+        <h2>Datatyper</h2>
+        <p>Beskriver tillgängliga datatyper och mappning och externa rdf-vokabulär.</p>
         
         <dl>
-            <dt>Datatypes</dt>
+            <dt>Datatyper</dt>
             @if(in_array("XML", Config::get("teresah.tool_rdf_formats")))
             <dd>{{ link_to_action("RdfController@datatypes", "RDF/XML", "rdfxml") }}</dd>
             @endif
@@ -48,8 +47,8 @@
             <dd>{{ link_to_action("RdfController@datatypes", "RDF/N-Triples", "ntriples") }}</dd>
             @endif
         </dl>
-        <h2>Tools</h2>
-        <p>List of name and indetifiers of tools in this registry and source link to a complete rdf presentaitons of the tool.</p>
+        <h2>Verktyg</h2>
+        <p>Lista över identifierare och länk till den fulla rdf-representationen för varje verktyg.</p>
         <dl>
             <dt>Tool index</dt>
             

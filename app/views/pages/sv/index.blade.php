@@ -2,9 +2,9 @@
 
 @section("content")
     <div class="jumbotron">
-        <h1>Wälkommen till TERESAH</h1>
+        <h1>Välkommen till TERESAH</h1>
 
-        <p>TERESAH (Tools E-Registry for E-Social science, Arts and Humanities) is a cross-community tools knowledge registry aimed at researchers in the Social Sciences and Humanities (SSH). It aims to provide an authoritative listing of the software tools currently in use in those domains, and to allow their users to make transparent the methods and applications behind them.</p>
+        <p>TERESAH (Tools E-Registry for E-Social science, Arts and Humanities) är ett tvärvetenskapligt verktygsregister riktar sig till forskare inom samhällsvetenskap och humaniora (SSH). Syftet är att ge en auktoritativ notering av mjukvaruverktyg som för närvarande används i dessa områden, och att låta sina användare beskriva metoder och tillämpningar som verktygen möjliggör.</p>
     </div>
     <!-- /jumbotron -->
 

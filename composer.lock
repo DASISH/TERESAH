@@ -161,12 +161,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/CodeSleeve/asset-pipeline.git",
-                "reference": "3699ba337e383b49c61d004284174546afa8d624"
+                "reference": "b2de0660a6505375b1cbbffe7d5c6e03ae6c08dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CodeSleeve/asset-pipeline/zipball/3699ba337e383b49c61d004284174546afa8d624",
-                "reference": "3699ba337e383b49c61d004284174546afa8d624",
+                "url": "https://api.github.com/repos/CodeSleeve/asset-pipeline/zipball/b2de0660a6505375b1cbbffe7d5c6e03ae6c08dc",
+                "reference": "b2de0660a6505375b1cbbffe7d5c6e03ae6c08dc",
                 "shasum": ""
             },
             "require": {
@@ -204,7 +204,7 @@
                 }
             ],
             "description": "A very simple and easy to use asset pipeline for laravel 4.",
-            "time": "2014-11-04 16:31:34"
+            "time": "2014-11-07 16:41:56"
         },
         {
             "name": "codesleeve/sprockets",
@@ -1366,16 +1366,16 @@
         },
         {
             "name": "patchwork/utf8",
-            "version": "v1.1.25",
+            "version": "v1.1.26",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nicolas-grekas/Patchwork-UTF8.git",
-                "reference": "2d43bd047b120279511d45e76e61c5a9812d9a83"
+                "url": "https://github.com/tchwork/utf8.git",
+                "reference": "6b8e46603b49ee87ad6bceb314da94cc04ffcdce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nicolas-grekas/Patchwork-UTF8/zipball/2d43bd047b120279511d45e76e61c5a9812d9a83",
-                "reference": "2d43bd047b120279511d45e76e61c5a9812d9a83",
+                "url": "https://api.github.com/repos/tchwork/utf8/zipball/6b8e46603b49ee87ad6bceb314da94cc04ffcdce",
+                "reference": "6b8e46603b49ee87ad6bceb314da94cc04ffcdce",
                 "shasum": ""
             },
             "require": {
@@ -1406,32 +1406,32 @@
             "authors": [
                 {
                     "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com",
-                    "role": "Developer"
+                    "email": "p@tchwork.com"
                 }
             ],
-            "description": "Extensive, portable and performant handling of UTF-8 and grapheme clusters for PHP",
-            "homepage": "https://github.com/nicolas-grekas/Patchwork-UTF8",
+            "description": "Portable and performant UTF-8, Unicode and Grapheme Clusters for PHP",
+            "homepage": "https://github.com/tchwork/utf8",
             "keywords": [
+                "grapheme",
                 "i18n",
                 "unicode",
                 "utf-8",
                 "utf8"
             ],
-            "time": "2014-08-05 08:00:32"
+            "time": "2014-11-08 10:13:25"
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "0.3.8",
+            "version": "0.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "5085202f1f37769aae59f9711c423f28159c9b29"
+                "reference": "c6e88ca6e81bc5a2d7161658e16a95b7ef8d6ad1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/5085202f1f37769aae59f9711c423f28159c9b29",
-                "reference": "5085202f1f37769aae59f9711c423f28159c9b29",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/c6e88ca6e81bc5a2d7161658e16a95b7ef8d6ad1",
+                "reference": "c6e88ca6e81bc5a2d7161658e16a95b7ef8d6ad1",
                 "shasum": ""
             },
             "require": {
@@ -1516,7 +1516,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2014-09-13 02:42:45"
+            "time": "2014-11-10 03:08:59"
         },
         {
             "name": "predis/predis",
