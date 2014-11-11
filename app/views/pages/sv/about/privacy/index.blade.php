@@ -1,7 +1,8 @@
 @extends("layouts.default")
 
 @section("content")
-<div>
+<section class="row">
+    <div class="small-10 columns small-centered">
     <h1>Integritetspolicy</h1>
     <h2>Allmänt</h2>
     <p>TERESAH respekterar den enskildes integritet och samlar inte in eller hanterar några personliga uppgifter om dessa inte lämnats frivilligt till oss av den berörda individen. Om du inte accepterar denna integritetspolicy ska du inte använda den här webbplatsen.</p>
@@ -18,5 +19,6 @@
     <p>En cookie är en liten textfil som sparas på din dator av webbplatsen du besöker. Cookies används av många webbplatser för att ge besökaren åtkomst till olika funktioner. Informationen i en cookie kan användas för att övervaka användarens beteende på nätet. Det finns två typer av cookies. En typ av cookie sparar en fil under en längre tid på din dator och används till exempel tillsammans med funktioner som beskriver vilken information som är ny sedan du besökte just den sidan. Den andra typen av cookie, som även kallas för ”sessionscookie”, sparas tillfälligt i datorns minne under tiden som du besöker webbplatsen. En sessionscookie kan till exempel hålla reda på vilket språk du har valt på webbplatsen. Sessionscookies sparas inte någon längre tid, utan försvinner när du stänger webbläsaren. TERESAH använder cookies för att till exempel hantera inloggade användare.</p>
 
     <p>Du kan ställa in datorn så att den blockerar cookies. Det innebär dock att TERESAH inte kan garantera att alla områden på vår webbplats fungerar som avsett. Hur du bär dig åt för att blockera cookies beror på vilken webbläsare du använder. Läs mer om de här funktionerna i instruktionerna eller på hjälpskärmen för webbläsaren.</p>
-</div>
+    </div>
+</section>
 @stop

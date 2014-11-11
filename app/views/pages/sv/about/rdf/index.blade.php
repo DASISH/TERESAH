@@ -1,7 +1,8 @@
 @extends("layouts.default")
 
 @section("content")
-    <div>
+<section class="row">
+    <div class="small-10 columns small-centered">
         <h1>RDF Format</h1>
         <p>TERESAH erbjuder full export av verktygens metadata vi RDF</p>
         
@@ -70,6 +71,6 @@
         </dl>
         
     </div>
-    <!-- /jumbotron -->
+</section>
 @stop
 
