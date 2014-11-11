@@ -2,13 +2,13 @@
 
 return array(
     "update" => array(
-        "success" => "Datatypen uppdaterades framgångsrikt."
+        "success" => "Datatypen uppdaterades."
     ),
     "destroy" => array(
         "error" => "Ett fel uppstod när datatypen skulle raderas. Var vänlig och försök igen senare.",
-        "success" => "Datatypen raderades framgångsrikt."
+        "success" => "Datatypen raderades."
     ),
     "store" => array(
-        "success" => "Datatypen skapades framgångsrikt."
+        "success" => "Datatypen skapades."
     ),
 );
