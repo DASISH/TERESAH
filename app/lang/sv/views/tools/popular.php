@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    "heading" => "Most popular tools",    
+    "heading" => "Mest populära verktyg",    
 );

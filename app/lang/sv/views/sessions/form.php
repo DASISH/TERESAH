@@ -2,26 +2,26 @@
 
 return array(
     "email_address" => array(
-        "label" => "Email address", 
-        "placeholder" => "Email address"
+        "label" => "Epostadress", 
+        "placeholder" => "Epostadress"
     ),
     "password" => array(
-        "label" => "Password", 
-        "placeholder" => "Password"
+        "label" => "Lösenord", 
+        "placeholder" => "Lösenord"
     ),
-    "submit" => "Sign in",
+    "submit" => "Logga in",
     "forgot_password" => array(
-        "name" => "Forgot password",
-        "title" => "Forgot password"
+        "name" => "Glömt bort lösenord",
+        "title" => "Glömt bort lösenord"
     ),
     "sign_up" => array(
-        "not_a_user" => "Not a user?",
-        "name" => "Sign up",
-        "title" => "Sign up"
+        "not_a_user" => "Är du inte användare?",
+        "name" => "Gå med",
+        "title" => "Gå med"
     ),
     "sign_in" => array(
-        "facebook" => "Sign in via Facebook",
-        "googleplus" => "Sign in via Google Plus",
-        "linkedin" => "Sign in via Linked In"
+        "facebook" => "Logga in via acebook",
+        "googleplus" => "Logga in via Google Plus",
+        "linkedin" => "Logga in via Linked In"
     )
 );

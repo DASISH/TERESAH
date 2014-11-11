@@ -9,9 +9,9 @@ return array(
     ),
     "locale" => array(
         #"label" => "Locale", 
-	"label" => "Plats",
+	"label" => "Språk",
         #"placeholder" => "Select locale..."
-	"placeholder" => "Välj din plats..."
+	"placeholder" => "Välj språk..."
     ),
     "email_address" => array(
         #"label" => "Email address", 

@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    "heading" => "Sign in"
+    "heading" => "Logga in"
 );

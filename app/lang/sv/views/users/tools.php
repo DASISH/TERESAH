@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    "heading" => "My tools",   
-    "name" => "My tools",
-    "empty" => "You have not added any tools to this list",
+    "heading" => "Mina verktyg",   
+    "name" => "Mina verktyg",
+    "empty" => "Du har inte laggt till några verktyg i listan",
     "actions" => array(
-        "name" => "Actions",
+        "name" => "Handlingar",
         "remove" => array(
-            "title" => "Remove from list",
-            "confirm" => "Are you sure you want to remove the tool from the list?"
+            "title" => "Ta bort från listan",
+            "confirm" => "Är du säker på att du vill ta bort verktyget från listan?"
         )
     )    
 );

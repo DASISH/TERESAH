@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    "heading" => "Tools",
-    "listing_results" => "Listing Tools from <span class=\"badge\">:from</span> to <span class=\"badge\">:to</span> of <span class=\"badge\">:total</span> available.",
-    "accending" => "accending",
-    "descending" => "descending"
+    "heading" => "Verktyg",
+    "listing_results" => "Listar verktyg från <span class=\"badge\">:from</span> till <span class=\"badge\">:to</span> av <span class=\"badge\">:total</span> tillgängliga.",
+    "accending" => "stigande",
+    "descending" => "fallande"
 );

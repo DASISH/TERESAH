@@ -2,7 +2,7 @@
 
 return array(
     "form" => array(
-        "submit" => "Update profile"
+        "submit" => "Uppdatera profil"
     ),   
-    "heading" => "Edit Profile"
+    "heading" => "Editera profil"
 );

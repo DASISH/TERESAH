@@ -9,14 +9,14 @@ return array(
 	    "message" => "Du är i en administrativ del av TERESAH."
         )
     ),
-    "close" => "Close",
+    "close" => "Stäng",
     "current_version" => array(
         "commit_id" => array(
             #"error" => "Error: Unable to retrieve the current commit ID.",
 	    "error" => "Fel: kan inte hämta ID för nuvarande commit.",
 	    #TODO: vad är den korrekta svenska översättningen av "commit"
             #"message" => "version (current commit ID):"
-	    "message" => "version (current commit ID):",
+	    "message" => "version (nuvarande commit ID):",
         ),
         "commit_date" => array(
             #"error" => "Error: Unable to retrieve the current commit date."

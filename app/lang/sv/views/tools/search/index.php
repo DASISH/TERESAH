@@ -1,4 +1,4 @@
 <?php
 return array(
-    "list_more" => "List :num more",
+    "list_more" => "Visa :num till",
 );

@@ -9,12 +9,12 @@ return array(
     #"description" => "Description",
     #"description-empty" => "Click to add description",
     "actions" => array(
-        "name" => "Actions",
+        "name" => "Handlingar",
         "remove" => array(
-            "title" => "Remove API key",
-            "confirm" => "Are you sure you want to remove the API key?"
+            "title" => "Ta bort API-nyckeln",
+            "confirm" => "Är du säker på att du vill ta bort API-nyckeln?"
         )
     ),
-    "apply" => "Apply for API key"
+    "apply" => "Ansök om API-nyckel"
     
 );

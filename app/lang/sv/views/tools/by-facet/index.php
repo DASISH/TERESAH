@@ -1,6 +1,6 @@
 <?php
 
 return array(
-    "heading" => "By facet",
-    "listing_results" => "Listing facets from <span class=\"badge\">:from</span> to <span class=\"badge\">:to</span> of <span class=\"badge\">:total</span> available."
+    "heading" => "Facetterat",
+    "listing_results" => "Visar värden från <span class=\"badge\">:from</span> till <span class=\"badge\">:to</span> av <span class=\"badge\">:total</span> tillgängliga."
 );

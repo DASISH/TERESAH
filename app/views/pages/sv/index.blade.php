@@ -5,7 +5,7 @@
         <div class="content align">
             <div class="row">
                 <div class="small-8 columns small-centered">
-                    <h1>Verktygsresiter för forskare</h1>
+                    <h1>Verktygsregister för forskare</h1>
 
                     {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "row search")) }}
                         <div class="small-12 columns">

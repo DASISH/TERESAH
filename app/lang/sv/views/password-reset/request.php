@@ -2,9 +2,9 @@
 
 return array(
     "form" => array(
-        "submit" => "Reset my password"
+        "submit" => "Återställ mitt lösenord"
     ),
-    "heading" => "Forgot your password?",
-    "email_sent" => "Email with password reset information sent to ",
-    "invalid_token" => "Invalid password reset link. Please try again. If the error persists, please contact an administrator."    
+    "heading" => "Glömt lösenordet?",
+    "email_sent" => "Mail med information för att återställa lösenordet skickat till ",
+    "invalid_token" => "Ej giltlig länk för att återställa lösenordet. Vag god försök igen. Om problemet kvarstår, kontakta en administratör."    
 );

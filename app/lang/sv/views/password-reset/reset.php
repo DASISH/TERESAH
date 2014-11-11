@@ -2,9 +2,9 @@
 
 return array(
     "form" => array(
-        "submit" => "Update password"
+        "submit" => "Uppdatera lösenord"
     ),
-    "heading" => "Update your password",  
-    "invalid_token" => "Invalid password reset link. Please try again. If the error persists, please contact an administrator.",
-    "password_updated" => "New password set"
+    "heading" => "Uppdatera ditt lösenord",  
+    "invalid_token" => "Ej giltlig länk för att återställa lösenordet. Vag god försök igen. Om problemet kvarstår, kontakta en administratör.",
+    "password_updated" => "Lösenordet uppdaterat"
 );

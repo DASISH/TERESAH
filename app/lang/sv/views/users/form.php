@@ -3,22 +3,22 @@
 return array(
     "heading" => "Profile details",
     "name" => array(
-        "label" => "Name", 
-        "placeholder" => "Name"
+        "label" => "Namn", 
+        "placeholder" => "Namn"
     ),
     "locale" => array(
-        "label" => "Locale"
+        "label" => "Språk"
     ),
     "email_address" => array(
-        "label" => "Email address", 
-        "placeholder" => "Email address"
+        "label" => "E-post address", 
+        "placeholder" => "E-post"
     ),
     "password" => array(
-        "label" => "New password", 
-        "placeholder" => "New password"
+        "label" => "Nytt lösenord", 
+        "placeholder" => "Nytt lösenord"
     ),
     "password_confirmation" => array(
-        "label" => "New password confirmation", 
-        "placeholder" => "Repeat new password"
+        "label" => "Upprepa nytt lösenord", 
+        "placeholder" => "Upprepa nytt lösenord"
     )
 );

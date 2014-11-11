@@ -1,7 +1,7 @@
 <?php
 return array(
     "search" => array(
-        "label" => "Search", 
-        "placeholder" => "Search"
+        "label" => "Sök", 
+        "placeholder" => "Sök"
     )
 );

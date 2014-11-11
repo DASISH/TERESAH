@@ -4,18 +4,18 @@ return array(
     "heading" => array(
         "available_data" => "Available Data"
     ),
-    "on" => "on",
+    "on" => "via",
     "messages" => array(
-        "no_data" => "No Data available on Data Source.",
-        "no_data_sources" => "No Data Sources attached to Tool."
+        "no_data" => "Inga data tillgängliga från informationskällan.",
+        "no_data_sources" => "Inga informationskällor kopplade till verktyget."
     ),
     "use" => array(
-        "title" => "Add to 'My Tools'"
+        "title" => "Lägg till i 'Mina verktyg'"
     ),
     "unuse" => array(
-        "title" => "Remove from 'My Tools'"
+        "title" => "Radera från 'Mina verktyg'"
     ),
-    "similar_tools" => "Similar Tools",
-    "share" => "Share",
-    "export" => "Export"
+    "similar_tools" => "Liknande verktyg",
+    "share" => "Dela",
+    "export" => "Exportera"
 );
