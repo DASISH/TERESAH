@@ -206,6 +206,11 @@ Route::get("login/linkedin", array(
     "uses" => "OAuthController@linkedin"
 ));
 
+Route::get("/", array(
+    "as" => "pages.root",
+    "uses" => "PagesController@index"
+));
+
 # Catch all route for the static pages
 Route::get("{path?}", array(
     "as" => "pages.show", 

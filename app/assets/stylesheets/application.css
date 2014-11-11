@@ -9,10 +9,9 @@
  * gets included (e.g. say you have require_tree . then the code will appear after all the directories 
  * but before any files alphabetically greater than 'application.css' 
  *
- *= require bootstrap
+ *= require normalize
+ *= require foundation
  *= require editable
- *= require font-awesome
- *= require fontello
- *= require jqcloud
- *= require_tree .
+ *= require shared/typography
+ *= require screen/master
  */

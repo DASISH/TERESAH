@@ -4,46 +4,43 @@
     Lang::get("views/pages/navigation.browse.all.name")
 )))
 
-@section("content")
+@section("master-head")
     <div class="row">
-        <div class="col-sm-12">
+        <div class="small-7 columns">
             <h1>{{ Lang::get("views/tools/index.heading") }}</h1>
 
             <p>{{ Lang::get("views/tools/index.listing_results", array("from" => $tools->getFrom(), "to" => $tools->getTo(), "total" => $tools->getTotal())) }}</p>
-            <div class="dropdown inline-block">
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                {{ucwords(Input::get("sortBy", "name"))}} {{ Input::get("order", "asc") == "asc" ? Lang::get("accending") : Lang::get("descending") }}
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li role="presentation">{{ link_to_action("ToolsController@index", "Name ".Lang::get("descending"), ArgumentsHelper::setValues(array("sortBy"=>"name", "order"=>"desc")), array("class"=>"active")) }}</li>
-                <li role="presentation">{{ link_to_action("ToolsController@index", "Name ".Lang::get("accending"), ArgumentsHelper::setValues(array("sortBy"=>"name", "order"=>"asc"))) }}</li>
-              </ul>
-            </div>          
-            
-             <div>
-                {{ $alphaList }}
-            </div>
-            
-            @include("shared._error_messages")
         </div>
+        <!-- /small-7.columns -->
 
-        <!-- /col-sm-12 -->
+        <div class="small-5 columns">
+            <ul class="inline-list">
+                @foreach (range("a", "z") as $character)
+                    <li><a href="{{ URL::to("/tools/by-alphabets/" . $character) }}" title="{{ strtoupper($character) }}">{{ strtoupper($character) }}</a></li>
+                @endforeach
+            </ul>
+            <!-- /inline-list -->
+        </div>
+        <!-- /small-5.columns -->
     </div>
     <!-- /row -->
+@stop
 
-    <div class="listing">
-        @foreach ($tools as $tool)
-            @include("tools._tool", compact("tool"))
-        @endforeach
-    </div>
-    <!-- /listing -->
+@section("content")
+    <section class="row">
+        <div class="small-12 columns">
+            <h1 class="hide">{{ Lang::get("views/tools/index.heading") }}</h1>
 
-    <div class="row">
-        <div class="col-sm-12">
+            <ul class="small-block-grid-4">
+                @foreach ($tools as $tool)
+                    @include("tools._tool", array($tool, "type" => "block-grid"))
+                @endforeach
+            </ul>
+            <!-- /small-block-grid-4 -->
+
             {{ $tools->links() }}
         </div>
-        <!-- /col-sm-12 -->
-    </div>
+        <!-- /small-12.columns -->
+    </section>
     <!-- /row -->
 @stop

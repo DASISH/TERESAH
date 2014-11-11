@@ -12,9 +12,11 @@
 //
 //= require jquery
 //= require jquery.autosize
-//= require bootstrap
+//= require foundation
+//= require foundation.tab
+//= require foundation.topbar
+//= require modernizr
 //= require editable
-//= require jqcloud
 //= require typeahead.jquery
 //= require bloodhound
 //= require_tree .

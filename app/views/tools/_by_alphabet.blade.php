@@ -1,9 +1,10 @@
-<div class="btn-group">
-  @foreach ($caracters as $c)
-    @if($selected === $c)
-        <span class="btn btn-primary">{{ $c }}</span>
-    @else
-        <a type="button" class="btn btn-default" href="{{ URL::to("/tools/by-alphabets/" . $c) }}">{{ $c }}</a>
-    @endif
-  @endforeach
-</div>
+<ul class="inline-list">
+    @foreach ($caracters as $character)
+        @if($selected === $character)
+            <li>{{ $character }}</li>
+        @else
+            <li><a href="{{ URL::to("/tools/by-alphabets/" . $character) }}" title="{{ $character }}">{{ $character }}</a></li>
+        @endif
+    @endforeach
+</ul>
+<!-- /inline-list -->

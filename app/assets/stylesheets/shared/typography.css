@@ -1,0 +1,161 @@
+/* TERESAH typography styles
+---------------------------------------------------------------------------- */
+
+/* Typeface definitions
+---------------------------------------------------------------------------- */
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Extra-Light */
+    src: url("/assets/source-sans-pro-extralight-webfont.eot");
+    src: url("/assets/source-sans-pro-extralight-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-extralight-webfont.svg#source_sans_proextralight") format("svg"),
+         url("/assets/source-sans-pro-extralight-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-extralight-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-extralight-webfont.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Extra-Light Italic */
+    src: url("/assets/source-sans-pro-extralight-italic-webfont.eot");
+    src: url("/assets/source-sans-pro-extralight-italic-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-extralight-italic-webfont.svg#source_sans_proXLtIt") format("svg"),
+         url("/assets/source-sans-pro-extralight-italic-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-extralight-italic-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-extralight-italic-webfont.ttf") format("truetype");
+    font-style: italic;
+    font-weight: normal;
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Light */
+    src: url("/assets/source-sans-pro-light-webfont.eot");
+    src: url("/assets/source-sans-pro-light-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-light-webfont.svg#source_sans_prolight") format("svg"),
+         url("/assets/source-sans-pro-light-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-light-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-light-webfont.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Light Italic */
+    src: url("/assets/source-sans-pro-light-italic-webfont.eot");
+    src: url("/assets/source-sans-pro-light-italic-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-light-italic-webfont.svg#source_sans_prolight_italic") format("svg"),
+         url("/assets/source-sans-pro-light-italic-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-light-italic-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-light-italic-webfont.ttf") format("truetype");
+    font-style: italic;
+    font-weight: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Regular */
+    src: url("/assets/source-sans-pro-regular-webfont.eot");
+    src: url("/assets/source-sans-pro-regular-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-regular-webfont.svg#source_sans_proregular") format("svg"),
+         url("/assets/source-sans-pro-regular-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-regular-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-regular-webfont.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Italic */
+    src: url("/assets/source-sans-pro-italic-webfont.eot");
+    src: url("/assets/source-sans-pro-italic-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-italic-webfont.svg#source_sans_proitalic") format("svg"),
+         url("/assets/source-sans-pro-italic-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-italic-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-italic-webfont.ttf") format("truetype");
+    font-style: italic;
+    font-weight: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Semi-Bold */
+    src: url("/assets/source-sans-pro-semibold-webfont.eot");
+    src: url("/assets/source-sans-pro-semibold-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-semibold-webfont.svg#source_sans_prosemibold") format("svg"),
+         url("/assets/source-sans-pro-semibold-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-semibold-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-semibold-webfont.ttf") format("truetype");
+    font-style: normal;
+    font-weight: bold;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Semi-Bold Italic */
+    src: url("/assets/source-sans-pro-semibold-italic-webfont.eot");
+    src: url("/assets/source-sans-pro-semibold-italic-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-semibold-italic-webfont.svg#source_sans_proSBdIt") format("svg"),
+         url("/assets/source-sans-pro-semibold-italic-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-semibold-italic-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-semibold-italic-webfont.ttf") format("truetype");
+    font-style: italic;
+    font-weight: bold;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Bold */
+    src: url("/assets/source-sans-pro-bold-webfont.eot");
+    src: url("/assets/source-sans-pro-bold-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-bold-webfont.svg#source_sans_probold") format("svg"),
+         url("/assets/source-sans-pro-bold-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-bold-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-bold-webfont.ttf") format("truetype");
+    font-style: normal;
+    font-weight: bold;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Bold Italic */
+    src: url("/assets/source-sans-pro-bold-italic-webfont.eot");
+    src: url("/assets/source-sans-pro-bold-italic-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-bold-italic-webfont.svg#source_sans_probold_italic") format("svg"),
+         url("/assets/source-sans-pro-bold-italic-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-bold-italic-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-bold-italic-webfont.ttf") format("truetype");
+    font-style: italic;
+    font-weight: bold;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Black / Ultra-Bold */
+    src: url("/assets/source-sans-pro-black-webfont.eot");
+    src: url("/assets/source-sans-pro-black-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-black-webfont.svg#source_sans_problack") format("svg"),
+         url("/assets/source-sans-pro-black-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-black-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-black-webfont.ttf") format("truetype");
+    font-style: normal;
+    font-weight: bold;
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "Source Sans Pro"; /* Black Italic / Ultra-Bold Italic */
+    src: url("/assets/source-sans-pro-black-italic-webfont.eot");
+    src: url("/assets/source-sans-pro-black-italic-webfont.eot?iefix") format("embedded-opentype"),
+         url("/assets/source-sans-pro-black-italic-webfont.svg#source_sans_problack_italic") format("svg"),
+         url("/assets/source-sans-pro-black-italic-webfont.woff2") format("woff2"),
+         url("/assets/source-sans-pro-black-italic-webfont.woff") format("woff"),
+         url("/assets/source-sans-pro-black-italic-webfont.ttf") format("truetype");
+    font-style: italic;
+    font-weight: bold;
+    font-weight: 900;
+}

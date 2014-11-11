@@ -14,6 +14,9 @@ function handleMethod(link) {
 }
 
 $(document).ready(function() {
+    // Initialize the Foundation framework
+    $(document).foundation();
+
     // Initialize the jQuery Autosize
     $("textarea").autosize();
 

@@ -17,5 +17,6 @@ return array(
     ),
     "similar_tools" => "Similar Tools",
     "share" => "Share",
-    "export" => "Export"
+    "export" => "Export",
+    "available_data_formats" => "Available Data Formats"
 );

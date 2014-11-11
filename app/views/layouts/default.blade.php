@@ -3,12 +3,10 @@
 <body>
     @include("shared._header")
 
-    <main id="content" class="container" role="main">
-        @include("shared._messages")
-        @yield("breadcrumb")
+    <main id="content" role="main">
         @yield("content")
     </main>
-    <!-- /content.container -->
+    <!-- /content -->
 
     @include("shared._footer")
 </body>
