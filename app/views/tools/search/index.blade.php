@@ -4,74 +4,89 @@
     Lang::get("views/pages/navigation.search.name")
 )))
 
+@section("master-head")
+    <div class="row">
+        <div class="small-6 columns">
+            <h1>{{ Lang::get("views/tools/search/index.heading") }}</h1>
+
+            <p>{{ Lang::get("views/tools/index.listing_results", array("from" => $tools->getFrom(), "to" => $tools->getTo(), "total" => $tools->getTotal())) }}</p>
+        </div>
+        <!-- /small-6.columns -->
+
+        <div class="small-6 columns">
+            {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "row search")) }}
+                @foreach ($facetList as $facet)
+                    @if (Input::has($facet->slug))
+                        {{ Form::hidden($facet->slug, Input::get($facet->slug)) }}
+                    @endif
+                @endforeach
+
+                <div class="small-12 columns">
+                    {{ Form::text("query", $query, array("placeholder" => Lang::get("views/tools/search/form.search.placeholder"))) }}
+                </div>
+                <!-- /small-12.columns -->
+            {{ Form::close() }}
+            <!-- /row.search -->
+        </div>
+        <!-- /small-6.columns -->
+    </div>
+    <!-- /row -->
+@stop
+
 @section("content")
-<div class="row">
-    
-    <div class="col-md-3">
-        @foreach ($facetList as $facet)
-            @if(count($facet->values) > 0)
-            
-            <h3{{empty($facet->description) ? '' : ' title="'.$facet->description.'"'}}>{{ $facet->label }}</h3>
-            <p class="description hidden">{{$facet->description}}</p>
-            <ul class="list-group facets">
-                @foreach ($facet->values as $value)
-                  @if(ArgumentsHelper::keyValueActive($facet->slug, $value->slug)) 
-                    <li class="list-group-item text-primary active">{{ link_to_route("tools.search", "", ArgumentsHelper::removeKeyValue($facet->slug, $value->slug), array("class" => "btn btn-default btn-xs glyphicon glyphicon-remove", "rel" => "nofollow")) }}<span class="badge"><strong>{{ $value->total }}</span>{{ $value->value }}</strong></li>
-                  @else
-                    <li class="list-group-item"><span class="badge">{{ $value->total }}</span>{{ link_to_route('tools.search', $value->value, ArgumentsHelper::addKeyValue($facet->slug, $value->slug), array("rel" => "nofollow")) }}</li>
-                  @endif
-                @endforeach
-                @if($facet->values->getTotal() > $facet->values->getPerPage())
-                    {{ link_to_route("tools.search", Lang::get("views/tools/search/index.list_more", array("num" => 5)), ArgumentsHelper::setValues(array($facet->slug."-limit" => ($facet->values->getPerPage() + 5))), array("rel" => "nofollow")) }}
-                @endif
-            </ul>
-            @endif
-        @endforeach
-        
-    </div>
-    <div class="col-md-8">
-        {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "form-inline")) }}
-          <div class="form-group">
-            {{ Form::text("query", $query, array("class" => "form-control", "placeholder" => Lang::get("views/tools/search/form.search.placeholder"))) }}
-            @foreach ($facetList as $facet)
-              @if(Input::has($facet->slug))
-                {{ Form::hidden($facet->slug, Input::get($facet->slug)) }}
-              @endif
-            @endforeach            
-            {{ Form::submit(Lang::get("views/tools/search/form.search.label"), array("class"=>"btn btn-primary glyphicon glyphicon-search")) }}
-          </div>
-        {{ Form::close() }}
-        
-        <div class="row">
-            <div class="col-sm-12">
-                @if (count($tools) > 0)
-                <p>{{ Lang::get("views/tools/index.listing_results", array("from" => $tools->getFrom(), "to" => $tools->getTo(), "total" => $tools->getTotal())) }}</p>
-                @endif
-                @include("shared._error_messages")
-            </div>
-            <!-- /col-sm-12 -->
-        </div>
-        <!-- /row -->
+    <section class="row">
+        <div class="small-12 columns">
+            <dl class="accordion" data-accordion>
+                <dd class="accordion-navigation">
+                    <a href="#filter">Filter Search Results</a>
 
-        <div class="listing">
+                    <div id="filter" class="content">
+                        <ul class="small-block-grid-6">
+                            @foreach ($facetList as $facet)
+                                @if (count($facet->values) > 0)
+                                    <li>
+                                        <h2{{empty($facet->description) ? '' : ' title="'.$facet->description.'"'}}>{{ $facet->label }}</h2>
+
+                                      <p class="hide">{{$facet->description}}</p>
+
+                                      <ul class="no-bullet">
+                                          @foreach ($facet->values as $value)
+                                              @if (ArgumentsHelper::keyValueActive($facet->slug, $value->slug))
+                                                  <li class="selected"><span class="label round">{{ $value->total }}</span> {{ link_to_route("tools.search", $value->value, ArgumentsHelper::removeKeyValue($facet->slug, $value->slug), array("rel" => "nofollow")) }}</li>
+                                              @else
+                                                  <li><span class="label round">{{ $value->total }}</span> {{ link_to_route('tools.search', $value->value, ArgumentsHelper::addKeyValue($facet->slug, $value->slug), array("rel" => "nofollow")) }}</li>
+                                              @endif
+                                          @endforeach
+
+                                          @if ($facet->values->getTotal() > $facet->values->getPerPage())
+                                              <li>{{ link_to_route("tools.search", Lang::get("views/tools/search/index.list_more", array("num" => 5)), ArgumentsHelper::setValues(array($facet->slug."-limit" => ($facet->values->getPerPage() + 5))), array("rel" => "nofollow")) }}</li>
+                                          @endif
+                                      </ul>
+                                      <!-- /no-bullet -->
+                                  </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                        <!-- /small-block-grid-6 -->
+                    </div>
+                    <!-- /filter.content -->
+                </dd>
+                <!-- /accordion-navigation -->
+            </dl>
+            <!-- /accordion -->
+
             @if (count($tools) > 0)
-                @foreach ($tools as $tool)
-                    @include("tools._tool", compact("tool"))
-                @endforeach
+                <ul class="small-block-grid-4">
+                    @foreach ($tools as $tool)
+                        @include("tools._tool", array($tool, "type" => "block-grid"))
+                    @endforeach
+                </ul>
+                <!-- /small-block-grid-4 -->
+
+                {{ $tools->appends(Input::all())->links() }}
             @endif
         </div>
-        <!-- /listing -->
-
-        <div class="row">
-            <div class="col-sm-12">
-                @if (count($tools) > 0)
-                {{ $tools->appends(Input::all())->links() }}
-                @endif
-            </div>
-            <!-- /col-sm-12 -->
-        </div>
-        <!-- /row -->        
-        
-    </div>
-</div>
+        <!-- /small-12.columns -->
+    </section>
+    <!-- /row -->
 @stop

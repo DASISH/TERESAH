@@ -1,40 +1,39 @@
 <?php
 
 return array(
-    
     /*
     |--------------------------------------------------------------------------
     | Search result pager size
     |--------------------------------------------------------------------------
     |
     | Specification of the number of items to show per page in search results
-    | 
+    |
     */
 
-    "search_pager_size" => 10,
-    
+    "search_pager_size" => 24,
+
     /*
     |--------------------------------------------------------------------------
     | Search facet count
     |--------------------------------------------------------------------------
     |
     | Specification of the number of facets to show when searching
-    | 
+    |
     */
 
-    "search_facet_count" => 5,    
-    
+    "search_facet_count" => 5,
+
     /*
     |--------------------------------------------------------------------------
     | Quicksearch result size
     |--------------------------------------------------------------------------
     |
     | Specification of the number of items to show when using quick search
-    | 
+    |
     */
 
     "quicksearch_size" => 5,
-    
+
     /*
     |--------------------------------------------------------------------------
     | Browse pager size
@@ -42,22 +41,22 @@ return array(
     |
     | Specification of the number of items to show per page in browse tools 
     | pages
-    | 
+    |
     */
 
     "browse_pager_size" => 24,
-        
+
     /*
     |--------------------------------------------------------------------------
     | Most popular tools count
     |--------------------------------------------------------------------------
     |
     | Specification of the number of tools to show on the Most popular page
-    | 
+    |
     */
 
     "popular_count" => 10,
-    
+
     /*
     |--------------------------------------------------------------------------
     | Similar tools count
@@ -66,22 +65,22 @@ return array(
     | Specification of the number of similar tools to show on a tool page. 
     | Manually linked similar tools will always be shown. Calculated similar
     | tools will be added up to this specified number.
-    | 
+    |
     */
 
     "similar_count" => 5,
-    
+
     /*
     |--------------------------------------------------------------------------
     | Word cloud count
     |--------------------------------------------------------------------------
     |
     | Specification of the number of items to show in word cloud
-    | 
+    |
     */
 
     "word_cloud_count" => 50,
-    
+
     /*
     |--------------------------------------------------------------------------
     | Word cloud threshold
@@ -89,11 +88,11 @@ return array(
     |
     | Specification of the threshold of occurances of items to show in 
     | word cloud
-    | 
+    |
     */
 
     "word_cloud_threshold" => 1,
-    
+
     /*
     |--------------------------------------------------------------------------
     | Tools page RDF formats

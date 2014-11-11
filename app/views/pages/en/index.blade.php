@@ -9,7 +9,7 @@
 
                     {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "row search")) }}
                         <div class="small-12 columns">
-                            <input type="text" name="query" placeholder="Find tools, services, methodologies and more..." />
+                            <input type="text" name="query" placeholder="{{ Lang::get("views/tools/search/form.search.placeholder") }}" />
                         </div>
                         <!-- /small-12.columns -->
                     {{ Form::close() }}

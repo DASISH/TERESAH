@@ -132,6 +132,10 @@ return array(
         "popular" => array(
             "name" => "Most Popular Tools",
             "title" => "Most Popular"
+        ),
+        "search" => array(
+            "name" => "Search", 
+            "title" => "Search"
         )
     ),
     "search" => array(
@@ -162,6 +166,10 @@ return array(
             "name" => "RDF", 
             "title" => "RDF"
         )
+    ),
+    "contribute" => array(
+        "name" => "Contribute",
+        "title" => "Contribute"
     ),
     "edit_user_profile" => array(
         "name" => "Edit Profile",

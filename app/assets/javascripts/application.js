@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.autosize
 //= require foundation
+//= require foundation.accordion
 //= require foundation.tab
 //= require foundation.topbar
 //= require modernizr
