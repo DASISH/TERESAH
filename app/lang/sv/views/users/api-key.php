@@ -10,7 +10,7 @@ return array(
     #"description" => "Description",
     "description" => "Beskrivning",
     #"description-empty" => "Click to add description",
-    "description-empty" => "Klicka för att lägga till beskrivning"
+    "description-empty" => "Klicka för att lägga till beskrivning",
     "actions" => array(
         "name" => "Handlingar",
         "remove" => array(
