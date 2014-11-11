@@ -5,7 +5,7 @@ return array(
         "success" => "Informationskällan uppdaterades."
     ),
     "destroy" => array(
-        "error" => "Ett fel uppstod när informationskällan skulle raderas. Var vänlig och försök igen senare.",
+        "error" => "Ett fel uppstod när informationskällan skulle raderas. Var vänlig försök igen senare.",
         "success" => "Informationskällan raderades."
     ),
     "store" => array(

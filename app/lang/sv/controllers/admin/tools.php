@@ -8,7 +8,7 @@ return array(
         "success" => "Verktyget uppdaterades."
     ),
     "destroy" => array(
-        "error" => "Ett fel uppstod när verktyget skulle raderas. Var vänlig och försök igen senare.",
+        "error" => "Ett fel uppstod när verktyget skulle raderas. Var vänlig försök igen senare.",
         "success" => "Verktyget raderades."
     )
 );

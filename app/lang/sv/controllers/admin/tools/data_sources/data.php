@@ -8,7 +8,7 @@ return array(
 	"success" => "Informationsposten uppdaterad för informationskällan"
     ),
     "destroy" => array(
-	"error" => "Ett fel uppstod när informationsposten skulle raderas från informationskällan. Var vänlig och försök igen senare.",
+	"error" => "Ett fel uppstod när informationsposten skulle raderas från informationskällan. Var vänlig försök igen senare.",
 	"success" => "Informationsposten raderades från informationskällan."
     )
 );

@@ -20,7 +20,7 @@ return array(
         "title" => "Gå med"
     ),
     "sign_in" => array(
-        "facebook" => "Logga in via acebook",
+        "facebook" => "Logga in via Facebook",
         "googleplus" => "Logga in via Google Plus",
         "linkedin" => "Logga in via Linked In"
     )

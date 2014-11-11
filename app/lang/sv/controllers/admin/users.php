@@ -8,7 +8,7 @@ return array(
         "success" => "Användarkonto uppdaterat."
     ),
     "destroy" => array(
-        "error" => "Ett fel uppstod när användarkontot skulle raderas. Var vänlig och försök igen senare.",
+        "error" => "Ett fel uppstod när användarkontot skulle raderas. Var vänlig försök igen senare.",
         "success" => "Användarkontot är raderat."
     )
 );
