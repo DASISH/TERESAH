@@ -3,12 +3,12 @@
 return array(
     "attributes" => array(
         "id" => "ID",
-        "name" => "Name",
-        "slug" => "Slug",
-        "user" => "User",
-        "user_id" => "User ID",
-        "created_at" => "Created at",
-        "updated_at" => "Updated at",
-        "deleted_at" => "Deleted at"
+        "name" => "Namn",
+        "slug" => "Alias",
+        "user" => "Användare",
+        "user_id" => "Användar-ID",
+        "created_at" => "Skapad den",
+        "updated_at" => "Uppdaterad den",
+        "deleted_at" => "Raderad den"
     )
 );

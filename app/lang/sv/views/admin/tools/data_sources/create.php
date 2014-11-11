@@ -2,9 +2,7 @@
 
 return array(
     "form" => array(
-        #"submit" => "Attach Data Source"
-	"submit" => "Anslut datakälla"
+	"submit" => "Anslut informationskälla"
     ),
-    #"heading" => "Attach a Data Source"
-    "heading" => "Anslut en datakälla"
+    "heading" => "Anslut en informationskälla"
 );

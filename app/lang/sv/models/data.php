@@ -3,21 +3,17 @@
 return array(
     "attributes" => array(
         "id" => "ID",
-        #"data_source" => "Data Source",
-	"data_source" => "Datakälla",
-        #"data_source_id" => "Data Source ID",
-	"data_source_id" => "ID för datakälla",
-        #"tool" => "Tool",
-        #"tool_id" => "Tool ID",
-        #"user" => "User",
-        #"user_id" => "User ID",
-        #"data_type" => "Data Type",
-        #"data_type_id" => "Data Type ID",
-        #"value" => "Value",
-        #"created_at" => "Created at",
-        #"updated_at" => "Updated at",
-	"updated_at" => "",
-        #"deleted_at" => "Deleted at"
+	"data_source" => "Informationskälla",
+	"data_source_id" => "ID för informationskälla",
+        "tool" => "Verktyg",
+        "tool_id" => "ID för verktyg",
+        "user" => "Användare",
+        "user_id" => "Användar-ID",
+        "data_type" => "Datatyp",
+        "data_type_id" => "ID för datatyp",
+        "value" => "Värde",
+        "created_at" => "Skapad den",
+	"updated_at" => "Uppdaterad den",
 	"deleted_at" => "Raderad den"
     )
 );

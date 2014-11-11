@@ -2,13 +2,13 @@
 
 return array(
     "update" => array(
-        "success" => "Data Source was successfully updated."
+        "success" => "Informationskällan uppdaterades framgångsrikt."
     ),
     "destroy" => array(
-        "error" => "An error occured while deleting the requested Data Source. Please try again later.",
-        "success" => "Data Source was successfully deleted."
+        "error" => "Ett fel uppstod när informationskällan skulle raderas. Var vänlig och försök igen senare.",
+        "success" => "Informationskällan raderades framgångsrikt."
     ),
     "store" => array(
-        "success" => "Data Source was successfully registered."
+        "success" => "Informationskällan skapades framgångsrikt."
     ),
 );

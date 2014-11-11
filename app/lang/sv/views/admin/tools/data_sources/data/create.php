@@ -2,9 +2,7 @@
 
 return array(
     "form" => array(
-        #"submit" => "Add Data"
-	"submit" => "Lägg till data"
+	"submit" => "Skapa informationspost"
     ),
-    #"heading" => "Add Data to Data Source"
-    "heading" => "Lägg till data till datakälla"
+    "heading" => "Skapa informationspost för informationskälla"
 );

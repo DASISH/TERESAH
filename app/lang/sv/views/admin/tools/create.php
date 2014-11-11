@@ -2,7 +2,7 @@
 
 return array(
     "form" => array(
-        "submit" => "Add Tool"
+        "submit" => "Skapa verktyg"
     ),
-    "heading" => "Add a Tool"
+    "heading" => "Skapa verktyg"
 );

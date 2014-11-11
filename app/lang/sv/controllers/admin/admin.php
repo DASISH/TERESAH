@@ -2,6 +2,6 @@
 
 return array(
     "authorize" => array(
-        "warning" => "Unauthorized request. Insufficient privileges to access the administrative section of TERESAH."
+        "warning" => "Ogiltig begäran. Du har otillräckliga behörigheter för att komma åt den adminstrative sektionen av TERESAH."
     ),
 );

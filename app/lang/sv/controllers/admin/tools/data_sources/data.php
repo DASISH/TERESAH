@@ -2,17 +2,13 @@
 
 return array(
     "store" => array(
-        #"success" => "Data entry was successfully created for the Data Source."
-	"success" => "Uppgiften skapades i datakällan"
+	"success" => "Informationsposten framgångsrikt skapad för informationskällan"
     ),
     "update" => array(
-        #"success" => "Data entry was successfully updated for the Data Source."
-	"success" => "Uppgift uppdaterad i datakällan"
+	"success" => "Informationsposten framgångsrikt uppdaterad för informationskällan"
     ),
     "destroy" => array(
-        #"error" => "An error occured while deleting the requested Data entry from the Data Source. Please try again later.",
-	"error" => "Ett fel uppstod när uppgiften skulle raderas från datakällan. Försök igen senare.",
-        #"success" => "Data entry was successfully deleted from the Data Source."
-	"success" => "Uppgiften raderades från datakällan."
+	"error" => "Ett fel uppstod när informationsposten skulle raderas från informationskällan. Var vänlig och försök igen senare.",
+	"success" => "Informationsposten raderades från informationskällan."
     )
 );

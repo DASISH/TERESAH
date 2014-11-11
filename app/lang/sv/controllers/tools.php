@@ -2,6 +2,6 @@
 
 return array(
     "show" => array(
-        "no_data_sources_available" => "Unfortunately the Tool requested doesn't have any Data Sources currently available. Please try again later."
+        "no_data_sources_available" => "Tyvärr har inte det begärda verktyget några informationskällor tillgängliga. Var vänlig och försök igen senare."
     )
 );

@@ -2,7 +2,7 @@
 
 return array(
     "form" => array(
-        "submit" => "Update Data Source" 
+        "submit" => "Uppdatera informationskälla" 
     ),
-    "heading" => "Edit Data Source"
+    "heading" => "Uppdatera informationskälla"
 );

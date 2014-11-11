@@ -2,9 +2,7 @@
 
 return array(
     "form" => array(
-        #"submit" => "Update User Account" 
-	"submit" => "Updatera användarkonto"
+	"submit" => "Uppdatera användarkonto"
     ),
-    #"heading" => "Edit User Account"
-    "heading" => "Redigera användarkonto"
+    "heading" => "Uppdatera användarkonto"
 );

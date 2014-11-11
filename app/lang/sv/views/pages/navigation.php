@@ -7,100 +7,100 @@ return array(
     ),
     "admin" => array(
         "home" => array(
-            "name" => "Admin home",
-            "title" => "Admin home"
+            "name" => "Admin hem",
+            "title" => "Admin hem"
         ),
         "dashboard" => array(
-            "name" => "Dashboard",
-            "title" => "Dashboard"
+            "name" => "Kontrollpanel",
+            "title" => "Kontrollpanel"
         ),
         "activities" => array(
-            "name" => "Activities",
-            "title" => "Activities"
+            "name" => "Aktiviteter",
+            "title" => "Aktiviteter"
         ),
         "data_sources" => array(
-            "name" => "Data Sources",
-            "title" => "Data Sources",
+            "name" => "Informationskällor",
+            "title" => "Informationskällor",
             "show" => array(
-                "name" => "View Data Source",
-                "title" => "View Data Source"
+                "name" => "Visa informationskälla",
+                "title" => "Visa informationskälla"
             ),
             "create" => array(
-                "name" => "Add a Data Source",
-                "title" => "Add a Data Source"
+                "name" => "Skapa informationskälla",
+                "title" => "Skapa informationskälla"
             ),
             "edit" => array(
-                "name" => "Edit Data Source",
-                "title" => "Edit Data Source"
+                "name" => "Uppdatera informationskälla",
+                "title" => "Uppdatera informationskälla"
             ),
             "index" => array(
-                "name" => "Manage Data Sources",
-                "title" => "Manage Data Sources"
+                "name" => "Hantera informationskällor",
+                "title" => "Hantera informationskällor"
             )
         ),
         "data_types" => array(
-            "name" => "Data Types",
-            "title" => "Data Types",
+            "name" => "Datatyper",
+            "title" => "Datatyper",
             "show" => array(
-                "name" => "View Data Type",
-                "title" => "View Data Type"
+                "name" => "Visa datatyper",
+                "title" => "Visa datatyper"
             ),
             "create" => array(
-                "name" => "Add a Data Type",
-                "title" => "Add a Data Type"
+                "name" => "Skapa datatyp",
+                "title" => "Skapa datatyp"
             ),
             "edit" => array(
-                "name" => "Edit Data Type",
-                "title" => "Edit Data Type"
+                "name" => "Uppdatera datatyp",
+                "title" => "Uppdatera datatyp"
             ),
             "index" => array(
-                "name" => "Manage Data Types",
-                "title" => "Manage Data Types"
+                "name" => "Hantera datatyper",
+                "title" => "Hantera datatyper"
             )
         ),
         "tools" => array(
-            "name" => "Tools",
-            "title" => "Tools",
+            "name" => "Verktyg",
+            "title" => "Verktyg",
             "show" => array(
-                "name" => "View Tool",
-                "title" => "View Tool"
+                "name" => "Visa verktyg",
+                "title" => "Visa verktyg"
             ),
             "create" => array(
-                "name" => "Add a Tool",
-                "title" => "Add a Tool"
+                "name" => "Skapa verktyg",
+                "title" => "Skapa verktyg"
             ),
             "edit" => array(
-                "name" => "Edit Tool",
-                "title" => "Edit Tool"
+                "name" => "Uppdatera verktyg",
+                "title" => "Uppdatera verktyg"
             ),
             "index" => array(
-                "name" => "Manage Tools",
-                "title" => "Manage Tools"
+                "name" => "Hantera verktyg",
+                "title" => "Hantera verktyg"
             )
         ),
         "users" => array(
-            "name" => "Users",
-            "title" => "Users",
+            "name" => "Användare",
+            "title" => "Användare",
             "show" => array(
-                "name" => "View User Account",
-                "title" => "View User Account"
+                "name" => "Visa användarkonton",
+                "title" => "Visa användarkonton"
             ),
             "create" => array(
-                "name" => "Create a new User Account",
-                "title" => "Create a new User Account"
+                "name" => "Skapa användarkonto",
+                "title" => "Skapa användarkonto"
             ),
             "edit" => array(
-                "name" => "Edit User Account",
-                "title" => "Edit User Account"
+                "name" => "Uppdatera användarkonto",
+                "title" => "Uppdatera användarkonto"
             ),
             "index" => array(
-                "name" => "Manage User Accounts",
-                "title" => "Manage User Accounts"
+                "name" => "Hantera användarkonton",
+                "title" => "Hantera användarkonton"
             )
         ),
         "switch" => array(
-            "name" => "Browse TERESAH",
-            "title" => "Switch to browse TERESAH"
+            "name" => "Byt till publika delen av TERESAH",
+            "title" => "Byt till publika TERESAH"
         )
     ),
     "dasish" => array(
@@ -113,46 +113,46 @@ return array(
         "title" => "Hem"
     ),
     "browse" => array(
-        "name" => "Browse", 
-        "title" => "Browse",
+        "name" => "Bläddra", 
+        "title" => "Bläddra",
         "all" => array(
-            "name" => "Browse all", 
-            "title" => "Browse all"
+            "name" => "Alla verktyg", 
+            "title" => "Alla verktyg"
         ), 
         "facets" => array(
-            "name" => "Browse facets", 
-            "title" => "Browse facets"
+            "name" => "Alla facetter", 
+            "title" => "Alla facetter"
         ),
         "by-alphabet" => array(
-            "name" => "By alphabet"
+            "name" => "Alfabetiskt"
         ),
         "by-facet" => array(
-            "name" => "By facet"
+            "name" => "Facetterat"
         ),
         "popular" => array(
-            "name" => "Most popular tools",
-            "title" => "Most popular"
+            "name" => "Mest populära verktygen",
+            "title" => "Mest populära"
         )
     ),
     "search" => array(
-        "name" => "Search", 
-        "title" => "Search",
-        "placeholder" => "Search...",
+        "name" => "Sök", 
+        "title" => "Sök",
+        "placeholder" => "Sök...",
         "faceted" => array(
-            "name" => "Faceted", 
-            "title" => "Faceted"
+            "name" => "Facetterat", 
+            "title" => "Facetterat"
         ),
         "general" => array(
-            "name" => "General", 
-            "title" => "General"
+            "name" => "Generell", 
+            "title" => "Generell"
         )
     ),
     "about" => array(
-        "name" => "About", 
-        "title" => "About",
+        "name" => "Om", 
+        "title" => "Om",
         "teresah" => array(
             "name" => "TERESAH", 
-            "title" => "About TERESAH"
+            "title" => "Om TERESAH"
         ),
         "api" => array(
             "name" => "API", 
@@ -164,27 +164,27 @@ return array(
         )
     ),
     "edit_user_profile" => array(
-        "name" => "Edit Profile",
-        "title" => "Edit Profile"
+        "name" => "Uppdatera användarprofil",
+        "title" => "Uppdatera användarprofil"
     ),
     "edit_user_api_keys" => array(
-        "name" => "Manage API Keys",
-        "title" => "Manage API Keys"
+        "name" => "Hantera API-nycklar",
+        "title" => "Hantera API-nycklar"
     ),
     "edit_user_tools" => array(
-        "name" => "My Tools",
-        "title" => "My Tools"
+        "name" => "Mina verktyg",
+        "title" => "Mina verktyg"
     ),
     "switch" => array(
-        "name" => "Manage TERESAH",
-        "title" => "Switch to administrative section of TERESAH"
+        "name" => "Hantera TERESAH",
+        "title" => "Byt till administrationssidorna för TERESAH"
     ),
     "login" => array(
-        "name" => "Sign in", 
-        "title" => "Login"
+        "name" => "Logga in", 
+        "title" => "Logga in"
     ),
     "logout" => array(
-        "name" => "Logout",
-        "title" => "Logout"
+        "name" => "Logga ut",
+        "title" => "Logga ut"
     ),
 );

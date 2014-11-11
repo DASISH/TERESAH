@@ -2,6 +2,6 @@
 
 return array(
     "update" => array(
-        "success" => "Profile was successfully updated."
+        "success" => "Användarprofilen uppdaterades framgångsrikt."
     ),
 );

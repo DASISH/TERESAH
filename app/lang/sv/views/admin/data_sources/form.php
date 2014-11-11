@@ -2,15 +2,15 @@
 
 return array(
     "name" => array(
-        "label" => "Name", 
-        "placeholder" => "Name"
+        "label" => "Namn", 
+        "placeholder" => "Namn"
     ),
     "description" => array(
-        "label" => "Description", 
-        "placeholder" => "Description"
+        "label" => "Beskrivning", 
+        "placeholder" => "Beskrivning"
     ),
     "homepage" => array(
-        "label" => "Homepage", 
-        "placeholder" => "Homepage"
+        "label" => "Hemsida", 
+        "placeholder" => "Hemsida"
     )
 );

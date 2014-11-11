@@ -2,13 +2,13 @@
 
 return array(
     "store" => array(
-        "success" => "User Account was successfully created."
+        "success" => "Användarkonto framgångsrikt skapat."
     ),
     "update" => array(
-        "success" => "User Account was successfully updated."
+        "success" => "Användarkonto framgångsrikt uppdaterat."
     ),
     "destroy" => array(
-        "error" => "An error occured while deleting the requested User Account. Please try again later.",
-        "success" => "User Account was successfully deleted."
+        "error" => "Ett fel uppstod när användarkontot skulle raderas. Var vänlig och försök igen senare.",
+        "success" => "Användarkontot framgångsrikt raderat."
     )
 );

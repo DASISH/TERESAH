@@ -3,14 +3,14 @@
 return array(
     "attributes" => array(
         "id" => "ID",
-        "user" => "User",
-        "user_id" => "User ID",
-        "ip_address" => "IP Address",
-        "user_agent" => "User Agent",
-        "referer" => "Referer",
-        "via_remember" => "Via Remember",
-        "created_at" => "Created at",
-        "updated_at" => "Updated at",
-        "deleted_at" => "Deleted at"
+        "user" => "Användare",
+        "user_id" => "Användar-ID",
+        "ip_address" => "IP-adress",
+        "user_agent" => "Webbläsare",
+        "referer" => "Refererad från",
+        "via_remember" => "Via sparad token",
+        "created_at" => "Skapad den",
+        "updated_at" => "Uppdaterad den",
+        "deleted_at" => "Raderad den"
     )
 );

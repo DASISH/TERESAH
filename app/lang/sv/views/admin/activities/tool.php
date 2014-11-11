@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    "created" => "added a tool <a href=\":target_link\" title=\"Show Tool\">:target_name</a>",
-    "created_but_since_deleted" => "added a tool :target_name which has since been deleted",
-    "updated" => "updated tool <a href=\":target_link\" title=\"Show Tool\">:target_name</a>",
-    "updated_and_name_changed" => "updated tool <a href=\":target_link\" title=\"Show Tool\">:target_previous_name</a> and renamed tool to <a href=\":target_link\" title=\"Show Tool\">:target_name</a>",
-    "updated_but_since_deleted" => "updated tool :target_name which has since been deleted",
-    "deleted" => "deleted tool :target_name",
-    "deleted_but_since_restored" => "deleted tool <a href=\":target_link\" title=\"Show Tool\">:target_name</a> (since been restored)",
-    "restored" => "restored tool <a href=\":target_link\" title=\"Show Tool\">:target_name</a>",
-    "restored_but_since_deleted" => "restored tool :target_name which has since been deleted again"
+    "created" => "Skapade verktyg <a href=\":target_link\" title=\"Visa verktyg\">:target_name</a>",
+    "created_but_since_deleted" => "Skapade verktyg :target_name, men denna har sedan raderats",
+    "updated" => "Uppdaterade verktyg <a href=\":target_link\" title=\"Visa verktyg\">:target_name</a>",
+    "updated_and_name_changed" => "Uppdaterade verktyg <a href=\":target_link\" title=\"Visa verktyg\">:target_previous_name</a> och ändrade namnet till <a href=\":target_link\" title=\"Visa verktyg\">:target_name</a>",
+    "updated_but_since_deleted" => "Uppdaterade verktyg :target_name, men denna har sedan raderats",
+    "deleted" => "Raderade verktyg :target_name",
+    "deleted_but_since_restored" => "Raderade verktyg <a href=\":target_link\" title=\"Visa verktyg\">:target_name</a> (har sedan återställts)",
+    "restored" => "Återställde verktyg <a href=\":target_link\" title=\"Visa verktyg\">:target_name</a>",
+    "restored_but_since_deleted" => "Återställde verktyg :target_name, men denna har sedan återigen raderats"
 );

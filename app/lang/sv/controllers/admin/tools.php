@@ -2,13 +2,13 @@
 
 return array(
     "store" => array(
-        "success" => "Tool was successfully created."
+        "success" => "Verktyget skapades framgångsrikt."
     ),
     "update" => array(
-        "success" => "Tool was successfully updated."
+        "success" => "Verktyget uppdaterades framgångsrikt."
     ),
     "destroy" => array(
-        "error" => "An error occured while deleting the requested Tool. Please try again later.",
-        "success" => "Tool was successfully deleted."
+        "error" => "Ett fel uppstod när verktyget skulle raderas. Var vänlig och försök igen senare.",
+        "success" => "Verktyget raderades framgångsrikt."
     )
 );

@@ -2,13 +2,13 @@
 
 return array(
     "update" => array(
-        "success" => "Data Type was successfully updated."
+        "success" => "Datatypen uppdaterades framgångsrikt."
     ),
     "destroy" => array(
-        "error" => "An error occured while deleting the requested Data Type. Please try again later.",
-        "success" => "Data Type was successfully deleted."
+        "error" => "Ett fel uppstod när datatypen skulle raderas. Var vänlig och försök igen senare.",
+        "success" => "Datatypen raderades framgångsrikt."
     ),
     "store" => array(
-        "success" => "Data Type was successfully registered."
+        "success" => "Datatypen skapades framgångsrikt."
     ),
 );

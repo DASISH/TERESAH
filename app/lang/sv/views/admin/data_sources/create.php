@@ -2,7 +2,7 @@
 
 return array(
     "form" => array(
-        "submit" => "Add Data Source"
+        "submit" => "Skapa informationskälla"
     ),
-    "heading" => "Add a Data Source"
+    "heading" => "Skapa informationskälla"
 );

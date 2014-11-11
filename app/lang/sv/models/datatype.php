@@ -3,20 +3,20 @@
 return array(
     "attributes" => array(
         "id" => "ID",
-        "label" => "Label",
-        "slug" => "Slug",
-        "description" => "Description",
-        "rdf_mapping" => "RDF mapping",
-        "linkable" => "Linkable",
+        "label" => "Etikett",
+        "slug" => "Alias",
+        "description" => "Beskrivning",
+        "rdf_mapping" => "RDF-mappning",
+        "linkable" => "Länkbar",
 
-        "user" => "User",
-        "user_id" => "User ID",
-        "created_at" => "Created at",
-        "updated_at" => "Updated at",
-        "deleted_at" => "Deleted at"
+        "user" => "Användare",
+        "user_id" => "Användar-ID",
+        "created_at" => "Skapad den",
+        "updated_at" => "Uppdaterad den",
+        "deleted_at" => "Raderad den"
     ),
     "linkable" => array(
-        "yes" => "Yes",
-        "no" => "No"
+        "yes" => "Ja",
+        "no" => "Nej"
     ),
 );

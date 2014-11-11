@@ -2,11 +2,11 @@
 
 return array(
     "store" => array(
-        "error" => "An error occured while attaching the requested Data Source to Tool. Please try again later.",
-        "success" => "Data Source was successfully attached to Tool."
+        "error" => "Ett fel uppstod när informationskällan skulle kopplas till verktyget. Var vänlig och försök igen senare.",
+        "success" => "Informationskällan kopplades framgångsrikt till verktyget."
     ),
     "destroy" => array(
-        "error" => "An error occured while detaching the requested Data Source from Tool. Please try again later.",
-        "success" => "Data Source was successfully detached from Tool."
+        "error" => "Ett fel uppstod när informationskällan skulle frånkopplas från verktyget. Var vänlig och försök igen senare.",
+        "success" => "Informationskällan frånkopplades framgångsrikt från verktyget."
     )
 );
