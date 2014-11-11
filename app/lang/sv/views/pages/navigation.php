@@ -134,6 +134,9 @@ return array(
             "title" => "Mest populära"
         )
     ),
+    "contribute" => array(
+        "title" => "Bidra"
+    ),
     "search" => array(
         "name" => "Sök", 
         "title" => "Sök",

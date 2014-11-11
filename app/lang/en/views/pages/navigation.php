@@ -134,6 +134,9 @@ return array(
             "title" => "Most popular"
         )
     ),
+    "contribute" => array(
+        "title" => "Constribute"
+    ),
     "search" => array(
         "name" => "Search", 
         "title" => "Search",
