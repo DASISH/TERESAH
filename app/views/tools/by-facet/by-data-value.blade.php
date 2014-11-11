@@ -7,31 +7,33 @@
     $data->value
 )))
 
-@section("content")
+@section("master-head")
     <div class="row">
-        <div class="col-sm-12">
+        <div class="small-12 columns">
             <h1>{{ $data->value }}</h1>
 
             <p>{{ Lang::get("views/tools/index.listing_results", array("from" => $tools->getFrom(), "to" => $tools->getTo(), "total" => $tools->getTotal())) }}</p>
-
-            @include("shared._error_messages")
         </div>
-        <!-- /col-sm-12 -->
+        <!-- /small-12.columns -->
     </div>
     <!-- /row -->
+@stop
 
-    <div class="listing">
-        @foreach ($tools as $tool)
-            @include("tools._tool", compact("tool"))
-        @endforeach
-    </div>
-    <!-- /listing -->
+@section("content")
+    <section class="row">
+        <div class="small-12 columns">
+            <h1 class="hide">{{ $dataType->label }}</h1>
 
-    <div class="row">
-        <div class="col-sm-12">
+            <ul class="small-block-grid-4">
+                @foreach ($tools as $tool)
+                    @include("tools._tool", array($tool, "type" => "block-grid"))
+                @endforeach
+            </ul>
+            <!-- /small-block-grid-4 -->
+
             {{ $tools->links() }}
         </div>
-        <!-- /col-sm-12 -->
-    </div>
+        <!-- /small-12.columns -->
+    </section>
     <!-- /row -->
 @stop
