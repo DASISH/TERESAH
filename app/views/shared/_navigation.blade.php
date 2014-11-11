@@ -8,10 +8,10 @@
 
         <section class="top-bar-section">
             <ul class="right">
-                <li><a href="#" title="Home">Home</a></li>
+                <li>{{ Link_to("/", Lang::get("views/pages/navigation.teresah.title")) }}</li>
                 <li>{{ link_to_route("pages.show", Lang::get("views/pages/navigation.about.name"), array("path" => "about"), array("title" => Lang::get("views/pages/navigation.about.title"))) }}</li>
                 <li class="has-dropdown">
-                    <a href="#" title="Browse Tools by">Browse Tools by</a>
+                    <a href="#" title="Browse Tools by">{{ Lang::get("views/pages/navigation.browse.title") }}</a>
 
                     <ul class="dropdown">
                         <li>{{ link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.title"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))) }}</li>
@@ -19,7 +19,7 @@
                         <li>{{ link_to_route("tools.popular", Lang::get("views/pages/navigation.browse.popular.title"), null, array("title" => Lang::get("views/pages/navigation.browse.popular.title"))) }}</li>
                     </ul>
                 </li>
-                <li><a href="#" title="Contribute">Contribute</a></li>
+                <li><a href="#" title="Contribute">{{ Lang::get("views/pages/navigation.contribute.title") }}</a></li>
                 @if (Auth::check())
                     <li class="has-dropdown">
                         <a href="#" title="{{{ Auth::user()->name }}}">{{{ Auth::user()->name }}}</a>
