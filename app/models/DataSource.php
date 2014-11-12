@@ -78,4 +78,9 @@ class DataSource extends Eloquent
             ->orderBy("data.updated_at", "DESC")
             ->pluck("value");
     }
+    
+    public function scopeHaveData($query)
+    {
+        return $query->has("data", ">", 0);
+    }     
 }

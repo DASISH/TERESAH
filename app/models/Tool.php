@@ -69,7 +69,7 @@ class Tool extends Eloquent
     }
 
     public function allSimilarTools(){  
-                
+            
         $linked = $this->similarTools()->get();
         $computed = $this->computedMatch()->get();
         $counter = 0;
@@ -104,14 +104,14 @@ class Tool extends Eloquent
     
     public function scopeComputedMatch($query)
     {
-        $computed = Tool::select("tools.id", "tools.name", "tools.slug", DB::raw("COUNT(*) AS matches"))
+        $computed = Tool::haveData()->select("tools.id", "tools.name", "tools.slug", DB::raw("COUNT(*) AS matches"))
                     ->join("data", "data.tool_id", "=", "tools.id")
                     ->whereRaw("CONCAT(data.data_type_id, data.slug) IN(SELECT CONCAT(d.data_type_id, d.slug) FROM data d WHERE d.tool_id = $this->id)")
                     ->groupBy("tools.id")
                     ->orderBy("matches", "DESC")
                     ->where("tools.id", "!=", $this->id)
                     ->get();
-        
+
         $similar = array();
         foreach($computed as $c) {
             if($c["matches"] > 1) {
@@ -119,7 +119,9 @@ class Tool extends Eloquent
             }
         }
         
-        $query->whereIn("id", $similar);
+        if(count($similar) > 0){
+            $query->whereIn("id", $similar);
+        }
     }
 
 

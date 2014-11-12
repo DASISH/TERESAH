@@ -28,12 +28,12 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
     {
         # TODO: Add support for ordering with multiple columns
         # TODO: Extract/remove the pagination?
-
+        
         if (isset($perPage) && is_numeric($perPage)) {
             return $this->make($with)->haveData()->orderBy("created_at", "DESC")->paginate($perPage);
         }
-
-        return $this->make($with)->orderBy("created_at", "DESC");
+        
+        return $this->make($with)->haveData()->orderBy("created_at", "DESC");
     }    
 
     public function attachDataSource($id, $dataSourceId)
