@@ -131,7 +131,7 @@ class ToolsController extends BaseController {
         
         return View::make("tools._by_alphabet", compact("caracters"))->with('selected', $selected);
     }
-    
+
     /**
      * Search for tool and facet filter
      * GET /tools/search
@@ -144,10 +144,10 @@ class ToolsController extends BaseController {
         $tool_ids = array();
 
         $tool_id_query = Tool::haveData();
-        
+
         $types = DataType::IsLinkable()
                     ->haveData()->get();
-        
+
         foreach($types as $type) {
             if(Input::has($type->slug)){
                 $values = ArgumentsHelper::getArgumentValues($type->slug);
@@ -156,10 +156,10 @@ class ToolsController extends BaseController {
                 }
             }
         }
-        
+
         if($query != null) {
             $tool_ids = $tool_id_query->lists("id");
-            
+
             if(count($tool_ids) > 0) {
                 $string_match_query = Tool::whereIn("id", $tool_ids);
             }else{
@@ -170,32 +170,32 @@ class ToolsController extends BaseController {
             }else{
                 $parts = array($query);
             }
-            
+
             foreach ($parts as $q) {
                 $string_match_query->matchingString($q);
             }
-            
+
             $string_matched_tool_ids = $string_match_query->lists("id");
             $tool_ids = array_intersect($string_matched_tool_ids, $tool_ids);
         }else{
             $tool_ids = $tool_id_query->lists("id");
         }
 
-        if(count($tool_ids) > 0) {
-            $tools = Tool::whereIn("id", $tool_ids)
+        if (empty($tool_ids)) {
+          $tool_ids = array(0);
+        }
+
+        $tools = Tool::whereIn("id", $tool_ids)
                            ->orderBy("name", "ASC")
                            ->paginate(Config::get("teresah.search_pager_size"));
-        }else{
-            $tools = array();
-        }
-        
+
         $facetList = array();
-        
+
         foreach($types as $type) {
             $result =  Data::select("value", "slug", DB::raw("count(tool_id) as total"))
                              ->where("data_type_id", $type->id);
             if(count($tool_ids) > 0) {
-                $result->whereIn("tool_id", $tool_ids);           
+                $result->whereIn("tool_id", $tool_ids);
             }
             $limit = Input::get($type->slug."-limit", Config::get("teresah.search_facet_count"));
             $type->values = $result->groupBy("value")
@@ -203,13 +203,12 @@ class ToolsController extends BaseController {
                                    ->paginate($limit);
             $facetList[] = $type;
         }
-        
+
         return View::make("tools.search.index", compact("tools"))
                      ->with("facetList", $facetList)
                      ->with("query", $query);
     }
-    
-    
+
     /**
      * Search tool name for quicksearch
      * 
