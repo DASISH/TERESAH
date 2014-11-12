@@ -138,9 +138,6 @@ return array(
             "title" => "Search"
         )
     ),
-    "contribute" => array(
-        "title" => "Constribute"
-    ),
     "search" => array(
         "name" => "Search", 
         "title" => "Search",
@@ -168,6 +165,10 @@ return array(
         "rdf" => array(
             "name" => "RDF", 
             "title" => "RDF"
+        ),
+        "privacy_policy" => array(
+            "name" => "Privacy Policy", 
+            "title" => "Privacy Policy"
         )
     ),
     "contribute" => array(
