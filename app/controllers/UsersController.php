@@ -41,6 +41,7 @@ class UsersController extends BaseController
         
 
         if ($user->save()) {
+            Session::put("locale", $this->user->locale);
             return Redirect::route("users.edit")
                 ->with("success", Lang::get("controllers/users.update.success"));
         } else {

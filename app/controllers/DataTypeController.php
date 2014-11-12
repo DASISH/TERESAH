@@ -16,8 +16,9 @@ class DataTypeController extends BaseController {
      * @return type
      */
     public function index(){
-        $dataTypes = DataType::isLinkable()->has('data', '>', 0)
-                ->orderBy("label", "ASC")->get();
+        $dataTypes = DataType::isLinkable()
+                                ->haveData()
+                                ->orderBy("label", "ASC")->get();
         
         return View::make("tools.by-facet.index", compact("dataTypes"));
     }
