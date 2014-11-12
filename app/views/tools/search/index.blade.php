@@ -37,10 +37,10 @@
     <section class="row">
         <div class="small-12 columns">
             <dl class="accordion" data-accordion>
-                <dd class="accordion-navigation">
+                <dd class="accordion-navigation active">
                     <a href="#filter">Filter Search Results</a>
 
-                    <div id="filter" class="content">
+                    <div id="filter" class="content active">
                         <ul class="small-block-grid-6">
                             @foreach ($facetList as $facet)
                                 @if (count($facet->values) > 0)
@@ -69,9 +69,9 @@
                         </ul>
                         <!-- /small-block-grid-6 -->
                     </div>
-                    <!-- /filter.content -->
+                    <!-- /filter.content.active -->
                 </dd>
-                <!-- /accordion-navigation -->
+                <!-- /accordion-navigation.active -->
             </dl>
             <!-- /accordion -->
 
