@@ -55,6 +55,8 @@ class DataSourcesController extends BaseController
         
         return View::make("tools.data_sources.show")
             ->with("tool", $this->tool)
+            ->with("preTitle", $this->tool->name)
+            ->with("toolSlug", $this->tool->slug)
             ->with("similarTools", $this->tool->allSimilarTools())
             ->with("rdf_formats", Config::get("teresah.tool_rdf_formats"));
     }  

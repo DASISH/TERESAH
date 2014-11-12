@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
 
 <!-- Title -->
-    <title>{{ Lang::get("views/pages/meta.title") }}</title>
+    <title>@if (isset($preTitle)) {{$preTitle}} - @endif{{ Lang::get("views/pages/meta.title") }}</title>
 
 <!-- Meta -->
     <meta name="author" content="{{ Lang::get("views/pages/meta.author") }}" />
@@ -20,19 +20,19 @@
     {{ PageHelper::robotsMetaTag() }}
     <meta name="viewport" content="width = device-width, initial-scale = 1.0" />
 
-@if (isset($tool))
+@if (isset($toolSlug))
 <!-- RDF alternatives -->
     @if(in_array("XML", Config::get("teresah.tool_rdf_formats")))
-    <link rel="alternate" type="application/rdf+xml" href="{{ URL::to("/tools/" . $tool->slug . ".rdfxml") }}" title="Structured Descriptor Document (RDF/XML format)" />
+    <link rel="alternate" type="application/rdf+xml" href="{{ URL::to("/tools/" . $toolSlug . ".rdfxml") }}" title="Structured Descriptor Document (RDF/XML format)" />
     @endif
     @if(in_array("Turtle", Config::get("teresah.tool_rdf_formats")))    
-    <link rel="alternate" type="text/rdf+n3" href="{{ URL::to("/tools/" . $tool->slug . ".n3") }}" title="Structured Descriptor Document (N3/Turtle format)" />
+    <link rel="alternate" type="text/rdf+n3" href="{{ URL::to("/tools/" . $toolSlug . ".n3") }}" title="Structured Descriptor Document (N3/Turtle format)" />
     @endif
     @if(in_array("NTriples", Config::get("teresah.tool_rdf_formats")))  
-    <link rel="alternate" type="text/plain" href="{{ URL::to("/tools/" . $tool->slug . ".ntriples") }}" title="Structured Descriptor Document (N-Triples format)" />
+    <link rel="alternate" type="text/plain" href="{{ URL::to("/tools/" . $toolSlug . ".ntriples") }}" title="Structured Descriptor Document (N-Triples format)" />
     @endif
     @if(in_array("JsonLD", Config::get("teresah.tool_rdf_formats")))     
-    <link rel="alternate" type="application/ld+json" href="{{ URL::to("/tools/" . $tool->slug . ".jsonld") }}" title="Structured Descriptor Document (JSON-LD format)" />
+    <link rel="alternate" type="application/ld+json" href="{{ URL::to("/tools/" . $toolSlug . ".jsonld") }}" title="Structured Descriptor Document (JSON-LD format)" />
     @endif
 @endif
     
