@@ -11,7 +11,7 @@
                 <li>{{ Link_to("/", Lang::get("views/pages/navigation.teresah.title")) }}</li>
                 <li>{{ link_to_route("pages.show", Lang::get("views/pages/navigation.about.name"), array("path" => "about"), array("title" => Lang::get("views/pages/navigation.about.title"))) }}</li>
                 <li class="has-dropdown">
-                    {{ link_to_route("tools.index", Lang::get("views/pages/navigation.browse.title"), null, array("title" => Lang::get("views/pages/navigation.browse..title"))) }}
+                    {{ link_to_route("tools.index", Lang::get("views/pages/navigation.browse.title"), null, array("title" => Lang::get("views/pages/navigation.browse.title"))) }}
 
                     <ul class="dropdown">
                         <li>{{ link_to_route("tools.search", Lang::get("views/pages/navigation.browse.search.title"), null, array("title" => Lang::get("views/pages/navigation.browse.search.title"))) }}</li>

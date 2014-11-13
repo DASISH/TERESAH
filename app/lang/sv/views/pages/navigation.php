@@ -132,6 +132,10 @@ return array(
         "popular" => array(
             "name" => "Mest populära verktygen",
             "title" => "Mest populära"
+        ),
+        "search" => array(
+            "name" => "Sök", 
+            "title" => "Sök"
         )
     ),
     "contribute" => array(
