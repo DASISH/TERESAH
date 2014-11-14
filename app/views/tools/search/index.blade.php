@@ -84,6 +84,8 @@
                 <!-- /small-block-grid-4 -->
 
                 {{ $tools->appends(Input::all())->links() }}
+            @else
+                {{Lang::get("views/tools/index.not_found")}}
             @endif
         </div>
         <!-- /small-12.columns -->
