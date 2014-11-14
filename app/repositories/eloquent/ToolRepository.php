@@ -85,4 +85,11 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
         return $result;        
     }
 
+    public function random()
+    {
+        $all = $this->all()->get()->toArray();
+        $rand = array_rand($all, 1);
+        
+        return Tool::find($all[$rand]["id"]);
+    }
 }

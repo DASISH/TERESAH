@@ -28,6 +28,7 @@ class PagesController extends BaseController
 
         # TODO: Review the actual data retrieval
         return View::make("pages/{$locale}/index")
+            ->with("randomTool", $this->toolService->random())
             ->with("latestTools", $this->toolService->all($with = array(), $perPage = 3))
             ->with("mostPopularTools", $this->toolService->all($with = array(), $perPage = 3))
             ->with("mostUsedTools", $this->toolService->all($with = array(), $perPage = 3));

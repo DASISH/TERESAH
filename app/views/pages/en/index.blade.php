@@ -50,25 +50,25 @@
 
             <div class="row">
                 <div class="small-7 columns">
-                    <h2><a href="#" title="Ruby on Rails">Ruby on Rails</a></h2>
+                    <h2><a href="{{ URL::route("tools.show", $randomTool->id) }}" title="{{ $randomTool->name }}">{{ $randomTool->name }} </a></h2>
 
-                    <p>Ruby on Rails, often simply referred to as Rails, is an open source web application framework which runs via the Ruby programming language. It is a full-stack framework: it allows creating pages and applications that gather information from the web server, talk to or query the database, and render templates out of the box. As a result, Rails features a routing system that is independent of the web server.</p>
+                    <p>{{ $randomTool->description }}</p>
 
-                    <p><a href="#" class="more" title="Read more">Read more about Ruby on Rails</a></p>
+                    <p><a href="{{ URL::route("tools.show", $randomTool->id) }}" class="more" title="Read more">Read more about {{ $randomTool->name }}</a></p>
                 </div>
                 <!-- /small-7.columns -->
 
                 <div class="small-5 columns">
                     <article class="tool align row collapse" itemscope itemtype="http://schema.org/SoftwareApplication">
                         <div class="small-6 columns">
-                            <a href="#" class="symbol large" title="Ruby on Rails"><abbr title="Ruby on Rails">RoR</abbr></a>
+                            <a href="{{ URL::route("tools.show", $randomTool->id) }}" class="symbol large" title="{{ $randomTool->name }}"><abbr title="{{ $randomTool->name }}">{{ $randomTool->abbreviation }}</abbr></a>
                         </div>
                         <!-- /small-3.columns -->
 
                         <div class="small-6 columns">
-                            <h1 itemprop="name"><a href="#" title="Ruby on Rails">Ruby on Rails</a></h1>
+                            <h1 itemprop="name"><a href="{{ URL::route("tools.show", $randomTool->id) }}" title="{{ $randomTool->name }}">{{ $randomTool->name }}</a></h1>
 
-                            <p>updated about 2 days ago</p>
+                            <p>{{ $randomTool->updated_at->diffForHumans() }}</p>
                         </div>
                         <!-- /small-9.columns -->
                     </article>

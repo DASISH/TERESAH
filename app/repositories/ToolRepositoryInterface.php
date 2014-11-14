@@ -9,4 +9,6 @@ interface ToolRepositoryInterface extends RepositoryInterface
     public function detachDataSource($id, $dataSourceId);
     
     public function byAlphabet($startsWith);
+    
+    public function random();
 }
