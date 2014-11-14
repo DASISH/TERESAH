@@ -5,6 +5,7 @@ use DataType;
 Use Illuminate\Support\Facades\Config;
 use Repositories\ToolRepositoryInterface;
 use Repositories\Eloquent\AbstractRepository;
+use Illuminate\Support\Facades\DB as DB;
 
 class ToolRepository extends AbstractRepository implements ToolRepositoryInterface
 {
@@ -87,9 +88,6 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
 
     public function random()
     {
-        $all = $this->all()->get()->toArray();
-        $rand = array_rand($all, 1);
-        
-        return Tool::find($all[$rand]["id"]);
+        return $this->model->haveData()->orderBy(DB::raw('RAND()'))->first();
     }
 }
