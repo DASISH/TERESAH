@@ -1,32 +1,41 @@
 @extends("layouts.default")
 
-@section("content")
+@section("breadcrumb", BreadcrumbHelper::render(array(
+    Lang::get("views/users/tools.heading")
+)))
+
+@section("master-head")
     <div class="row">
-        <div class="col-sm-10 col-centered">
-            <h1 class="text-center">{{ Lang::get("views/users/tools.heading") }}</h1>
+        <div class="small-7 columns">
+            <h1><span itemprop="name">{{ Lang::get("views/users/tools.heading") }}</span></h1>
 
             @include("shared._error_messages")
-                      
-            @include("users._navigation")    
-            
-             <div class="tab-content">
-                <div class="tab-pane active">            
-                        @if(count($tools) != 0)
-                            <div class="listing">
-                                @foreach ($tools as $tool)
-                                    @include("tools._tool", compact("tool"))
-                                @endforeach
-                            </div>
-                        @else
-                            <div>
-                                <h4 class="text-center">{{ Lang::get("views/users/tools.empty") }}</h4>
-                            </div>
-                        @endif
-                        <!-- /listing -->
-                </div>
-             </div>
         </div>
-        <!-- /col-sm-10.col-centered -->
     </div>
-    <!-- /row -->
+@stop
+
+@section("content") 
+    <section class="row">
+            <article class="small-12 columns" itemscope>
+                @include("users._navigation")    
+
+                 <div class="tabs-content">
+                    <div class="content active">
+
+                        @if (count($tools) > 0)
+                            <ul class="small-block-grid-4">
+                                @foreach ($tools as $tool)
+                                    @include("tools._tool", array($tool, "type" => "block-grid"))
+                                @endforeach
+                            </ul>
+                            <!-- /small-block-grid-4 -->
+
+                        @else
+                            {{Lang::get("views/users/tools.empty")}}
+                        @endif
+
+                    </div>
+                 </div>
+            </article>
+    </section>
 @stop
