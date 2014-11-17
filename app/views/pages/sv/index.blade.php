@@ -52,7 +52,7 @@
                 <div class="small-7 columns">
                     <h2><a href="{{ URL::route("tools.show", $randomTool->id) }}" title="{{ $randomTool->name }}">{{ $randomTool->name }} </a></h2>
 
-                    <p>{{ $randomTool->description }}</p>
+                    <p>{{ $randomTool->getDescription() }}</p>
 
                     <p><a href="{{ URL::route("tools.show", $randomTool->id) }}" class="more" title="Läs mer">Läs mer om {{ $randomTool->name }}</a></p>
                 </div>

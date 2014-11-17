@@ -136,4 +136,20 @@ class Tool extends Eloquent
     {
         return substr(preg_replace("~\b(\w)|.~", "$1", $this->name), 0, 4);
     }
+    
+    /*
+     * Returns first found description for this tool
+     */
+    public function getDescription()
+    {
+        foreach ($this->dataSources as $data_source)     
+        {
+            $description = $data_source->getLatestToolDataFor($this->id, "description");
+            if(!empty($description))
+            {
+                return $description;                
+            }
+        }
+        return null;
+    }
 }
