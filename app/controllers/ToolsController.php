@@ -70,7 +70,7 @@ class ToolsController extends BaseController {
         
         if (isset($dataSource)) 
         {
-            return Redirect::route("tools.data-sources.show", array($tool->id, $dataSource->id));
+            return Redirect::route("tools.data-sources.show", array($tool->slug, $dataSource->slug));
         } 
         else 
         {

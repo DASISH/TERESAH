@@ -60,7 +60,7 @@
 
             <div class="tabs-content">
                 @foreach ($tool->dataSources as $dataSource)
-                    <div class="content{{ Active::path(ltrim(parse_url(URL::route("tools.data-sources.show", array($tool->id, $dataSource->id)))["path"], "/"), " active") }}">
+                    <div class="content{{ Active::path(ltrim(parse_url(URL::route("tools.data-sources.show", array($tool->slug, $dataSource->slug)))["path"], "/"), " active") }}">
                         <div class="row">
                             <div class="small-8 columns">
                                 @if (!$dataSource->data->isEmpty())

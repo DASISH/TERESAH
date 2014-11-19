@@ -29,7 +29,8 @@ class DataSource extends Eloquent
     public static function boot()
     {
         self::observe(new ActivityObserver);
-
+        self::observe(new DataSourceObserver);
+        
         parent::boot();
     }
 

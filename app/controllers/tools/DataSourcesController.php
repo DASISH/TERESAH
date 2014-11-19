@@ -34,10 +34,14 @@ class DataSourcesController extends BaseController
     {
         if (!is_numeric($toolId)) {
             $toolId = Tool::where("slug", $toolId)->first()->id;
-            //dd($toolId);
         }
+
+        
+        if (!is_numeric($id)) {
+            $id = DataSource::where("slug", $id)->first()->id;
+        }        
+        
         $this->tool = $this->tool->with(array("user", "dataSources.data" => function($query) use($toolId) {
-            //dd($toolId);
             $query->where("data.tool_id", "=", $toolId)->orderBy("data.value", "ASC");
         }, "dataSources.data.user", "dataSources.data.dataType"))->find($toolId);
         

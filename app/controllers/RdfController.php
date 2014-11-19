@@ -30,9 +30,9 @@ class RdfController extends BaseController {
             $t->set("dc:title", $tool->name);
 
             foreach ($tool->dataSources as $data_source) {
-                $t->addResource("dc:hasPart", URL::route("tools.data-sources.show", array($tool->id, $data_source->id)));
+                $t->addResource("dc:hasPart", URL::route("tools.data-sources.show", array($tool->slug, $data_source->slug)));
                 
-                $ds = $graph->resource(URL::route("tools.data-sources.show", array($tool->id, $data_source->id)), "http://schema.org/provider");
+                $ds = $graph->resource(URL::route("tools.data-sources.show", array($tool->slug, $data_source->slug)), "http://schema.org/provider");
                 $ds->addResource("dc:source", $data_source->homepage);
                 
                 $data = $tool->data()
@@ -117,6 +117,7 @@ class RdfController extends BaseController {
         foreach ($data_soruces as $data_source) {
             $ds = $graph->resource($data_source->homepage);
             $ds->set("rdfs:label", $data_source->name);
+            $ds->set("dc:identifier", $data_source->slug);
             $ds->set("dc:description", $data_source->description);
         }
 

@@ -56,7 +56,7 @@ $(document).ready(function() {
     data.initialize();
     
 
-    $('#quicksearch').typeahead({
+    $('input[name="query"]').typeahead({
             highlight: true
         },
         {
