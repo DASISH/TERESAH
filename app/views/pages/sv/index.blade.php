@@ -7,13 +7,16 @@
                 <div class="small-8 columns small-centered">
                     <h1>Verktygsregister för forskare</h1>
 
-                    {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "row search")) }}
+                    {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "row")) }}
                         <div class="small-12 columns">
-                            <input type="text" name="query" placeholder="Hitta verktyg, tjänster, metoder och mer..." />
+                            <div class="search">
+                                <input type="text" name="query" placeholder="Hitta verktyg, tjänster, metoder och mer..." />
+                            </div>
+                            <!-- /search -->
                         </div>
                         <!-- /small-12.columns -->
                     {{ Form::close() }}
-                    <!-- /row.search -->
+                    <!-- /row -->
                 </div>
                 <!-- /small-8.columns.small-centered -->
             </div>

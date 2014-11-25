@@ -14,7 +14,7 @@
         <!-- /small-6.columns -->
 
         <div class="small-6 columns">
-            {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "row search")) }}
+            {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "row")) }}
                 @foreach ($facetList as $facet)
                     @if (Input::has($facet->slug))
                         {{ Form::hidden($facet->slug, Input::get($facet->slug)) }}
@@ -22,11 +22,14 @@
                 @endforeach
 
                 <div class="small-12 columns">
-                    {{ Form::text("query", $query, array("placeholder" => Lang::get("views/tools/search/form.search.placeholder"))) }}
+                    <div class="search">
+                        {{ Form::text("query", $query, array("placeholder" => Lang::get("views/tools/search/form.search.placeholder"))) }}
+                    </div>
+                    <!-- /search -->
                 </div>
                 <!-- /small-12.columns -->
             {{ Form::close() }}
-            <!-- /row.search -->
+            <!-- /row -->
         </div>
         <!-- /small-6.columns -->
     </div>

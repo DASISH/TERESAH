@@ -51,7 +51,6 @@ dl {
         display: -webkit-flex;
     display: flex;
     justify-content: center;
-    overflow: auto;
 }
 
 .symbol {
@@ -170,6 +169,29 @@ dl {
     text-transform: none;
 }
 
+/* Twitter typeahead.js overrides */
+
+#header .twitter-typeahead {
+    display: block !important;
+}
+
+#header .twitter-typeahead .tt-dropdown-menu {
+    background-color: #1f0844;
+    background-color: rgba(31, 8, 68, 0.90);
+    border-bottom: 3px solid #47ba73;
+    width: 100%;
+    z-index: 1000;
+}
+
+#header .twitter-typeahead .tt-dropdown-menu .tt-suggestions .tt-suggestion a:link {
+    color: #fff;
+    padding: 0.1875rem 0.3125rem; /* = 3px 5px */
+}
+
+#header .twitter-typeahead .tt-dropdown-menu .tt-suggestions .tt-suggestion.tt-cursor {
+    background-color: #47ba73;
+}
+
 /* Master-head */
 
 #header #master-head {
@@ -255,19 +277,27 @@ dl {
 
 /* Search */
 
-#header #master-head .search input[type="text"] {
-    background-color: #47ba73;
+#header #master-head .search {
     background: url(/assets/icons/search.png) 1.25rem 50% no-repeat rgba(71, 186, 115, 0.85);
+    padding: 0.625rem 1.25rem 0.625rem 5rem; /* = 10px 20px 10px 80px */
+}
+
+#header #master-head #banner .search {
+    margin: 2.5rem 0 1rem 0; /* = 40px 0 16px 0 */
+}
+
+#header #master-head .search input[type="text"] {
+    background-color: transparent;
     border: none;
     box-shadow: none;
     color: #fff;
     font-size: 1.125rem; /* = 18px */
-    padding: 1.875rem 1.25rem 1.875rem 5rem; /* = 30px 20px 30px 80px */
+    margin: 0;
+    padding: 0;
 }
 
 #header #master-head #banner .search input[type="text"] {
     font-size: 1.5rem; /* = 24px */
-    margin: 2.5rem 0 1rem 0; /* = 40px 0 16px 0 */
 }
 
 /* Placeholder overrides for the search input */
