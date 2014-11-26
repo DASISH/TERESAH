@@ -6,25 +6,29 @@
 
 @section("master-head")
     <div class="row">
-        <div class="small-7 columns">
-            <h1><span itemprop="name">{{ Lang::get("views/users/api-key.heading") }}</span></h1>
-
-            @include("shared._error_messages")
+        <div class="small-12 columns">
+            <h1>{{ Lang::get("views/users/api-key.heading") }}</h1>
         </div>
+        <!-- /small-12.columns -->
     </div>
+    <!-- /row -->
 @stop
 
-@section("content") 
+@section("content")
     <section class="row">
-            <article class="small-12 columns" itemscope>
-                @include("users._navigation")    
+        <div class="small-12 columns">
+            @include("users._navigation")
 
-                 <div class="tabs-content">
-                    <div class="content active">            
-                        @include("users._key_list")
-                    </div>
-                 </div>
-            </article>
+            <div class="tabs-content">
+                <div class="content active">
+                    @include("shared._error_messages")
+                    @include("users._key_list")
+                </div>
+                <!-- /content.active -->
+            </div>
+            <!-- /tabs.content -->
+        </div>
+        <!-- /small-12.columns -->
     </section>
+    <!-- /row -->
 @stop
-

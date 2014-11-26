@@ -1,18 +1,15 @@
-<div class="panel panel-default">
+<div class="panel">
     {{ Form::model($options) }}
-        <div class="panel-body">
-            <div class="form-group">
+        <div class="row">
+            <div class="small-12 columns">
                 {{ Form::label("email_address", Lang::get("views/users/form.email_address.label")) }}
                 {{ Form::text("email_address", null, array("class" => "form-control", "placeholder" => Lang::get("views/users/form.email_address.placeholder"))) }}
             </div>
-            <!-- /form-group -->
+            <!-- /small-12.columns -->
         </div>
-        <!-- /panel-body -->
+        <!-- /row -->
 
-        <div class="panel-footer">
-            {{ Form::submit(Lang::get("views/password-reset/request.form.submit"), array("class" => "btn btn-primary")) }}
-        </div>
-        <!-- /panel-footer -->
+        {{ Form::submit(Lang::get("views/password-reset/request.form.submit"), array("class" => "button")) }}
     {{ Form::close() }}
 </div>
-<!-- /panel.panel-default -->
+<!-- /panel -->

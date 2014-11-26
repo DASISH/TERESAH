@@ -64,7 +64,7 @@
                         <div class="row">
                             <div class="small-8 columns">
                                 @if (!$dataSource->data->isEmpty())
-                                    @if ($name = $dataSource->getLatestToolDataFor($tool->id, "name") && $description = $dataSource->getLatestToolDataFor($tool->id, "description"))
+                                    @if (($name = $dataSource->getLatestToolDataFor($tool->id, "name")) && ($description = $dataSource->getLatestToolDataFor($tool->id, "description")))
                                         <h2>{{{ $name }}}</h2>
 
                                         <p property="description">{{{ $description }}}</p>

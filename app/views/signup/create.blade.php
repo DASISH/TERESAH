@@ -1,9 +1,9 @@
 @extends("layouts.default")
 
 @section("content")
-    <div class="row">
-        <div class="col-sm-8 col-centered">
-            <h1 class="text-center">{{ Lang::get("views/signup/create.heading") }}</h1>
+    <section class="row">
+        <div class="small-6 columns small-centered">
+            <h1>{{ Lang::get("views/signup/create.heading") }}</h1>
 
             @include("shared._error_messages")
             @include("signup._form", array(
@@ -14,7 +14,7 @@
                 )
             ))
         </div>
-        <!-- /col-sm-8.col-centered -->
-    </div>
+        <!-- /small-6.columns.small-centered -->
+    </section>
     <!-- /row -->
 @stop
