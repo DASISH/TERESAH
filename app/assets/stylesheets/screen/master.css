@@ -93,6 +93,7 @@ dl {
     font-size: 1.125rem; /* = 18px */
     font-style: italic;
     font-weight: bold;
+    margin: 0 auto;
     text-align: center;
 }
 
