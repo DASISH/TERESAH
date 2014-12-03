@@ -44,6 +44,16 @@ abstract class AbstractRepositoryService implements RepositoryServiceInterface
         return $this->repository->find($id, $with);
     }
 
+    public function getFirstBy($key, $operator = "=", $value, array $with = array())
+    {
+        return $this->repository->getFirstBy($key, $operator, $value, $with);
+    }
+
+    public function getManyBy($key, $operator = "=", $value, array $with = array())
+    {
+        return $this->repository->getManyBy($key, $operator, $value, $with);
+    }
+
     public function update($id, $input)
     {
         if ($this->repository->update($id, $input)) {

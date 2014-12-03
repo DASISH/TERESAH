@@ -12,5 +12,9 @@ interface RepositoryServiceInterface
 
     public function find($id);
 
+    public function getFirstBy($key, $operator, $value);
+
+    public function getManyBy($key, $operator, $value);
+
     public function update($id, $input);
 }
