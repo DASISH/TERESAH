@@ -3,7 +3,7 @@
         <div class="row">
             <div class="small-12 columns">
                 {{ Form::label("password", Lang::get("views/users/form.password.label")) }}
-                {{ Form::password("password", array("class" => "form-control", "placeholder" => Lang::get("views/users/form.password.placeholder"))) }}
+                {{ Form::password("password", array("placeholder" => Lang::get("views/users/form.password.placeholder"))) }}
             </div>
             <!-- /small-12.columns -->
         </div>
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="small-12 columns">
                 {{ Form::label("password_confirmation", Lang::get("views/users/form.password_confirmation.label")) }}
-                {{ Form::password("password_confirmation", array("class" => "form-control", "placeholder" => Lang::get("views/users/form.password_confirmation.placeholder"))) }}
+                {{ Form::password("password_confirmation", array("placeholder" => Lang::get("views/users/form.password_confirmation.placeholder"))) }}
             </div>
             <!-- /small-12.columns -->
         </div>

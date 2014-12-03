@@ -4,6 +4,7 @@
     @include("shared._header")
 
     <main id="content" role="main">
+        @include("shared._messages")
         @yield("content")
     </main>
     <!-- /content -->

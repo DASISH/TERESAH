@@ -8,8 +8,8 @@ class ToolsController extends BaseController {
     protected $skipAuthentication = array("index", "show", "export", "byAlphabet", "listFacetTypes", "listFacetValues", "byFacet", "listByAlphabet", "search", "quicksearch");
 
     protected $toolService;
-    protected $dataSourceService;    
-    
+    protected $dataSourceService;
+
     public function __construct(ToolService $toolService, DataSourceService $dataSourceService) {
         parent::__construct();
 
@@ -21,28 +21,28 @@ class ToolsController extends BaseController {
      * Returns all tool records.
      *
      * GET /tools
-     * 
+     *
      * @return View
      */
-    public function index() 
+    public function index()
     {
         $sortBy = strtolower(Input::get("sortBy", "name"));
         $order  = strtolower(Input::get("order", "asc"));
-        
+
         $sortableFields = array("name");
-        
-        if($order != "asc" && $order != "desc") {
+
+        if ($order != "asc" && $order != "desc") {
             $order = "asc";
         }
-        
-        if(in_array($sortBy, $sortableFields) == false){
+
+        if (in_array($sortBy, $sortableFields) == false) {
             $sortBy = "name";
         }
-        
+
         $tools = Tool::haveData()
                 ->orderBy($sortBy, $order)
                 ->paginate(Config::get("teresah.browse_pager_size"));
-        
+
         return View::make("tools.index", compact("tools"))
                 ->with("alphaList", $this->listByAlphabet());
     }
@@ -55,25 +55,21 @@ class ToolsController extends BaseController {
      * @param  mixed $id
      * @return Redirect
      */
-    public function show($id) 
+    public function show($id)
     {
-        $tool = $this->toolService->find($id);
+        $tool = $this->toolService->getFirstBy("slug", "=", $id);
 
         $dataSource = $tool->dataSources()
                         ->orderBy("data_sources.created_at", "ASC")->first();
 
-        //Hack to fix breadcrumb
-        if(Session::has("breadcrumb"))
-        {
+        // Hack to fix breadcrumb
+        if (Session::has("breadcrumb")) {
             Session::push("breadcrumb", e($tool->name));
         }
-        
-        if (isset($dataSource)) 
-        {
+
+        if (isset($dataSource)) {
             return Redirect::route("tools.data-sources.show", array($tool->slug, $dataSource->slug));
-        } 
-        else 
-        {
+        } else {
             return Redirect::route("tools.index")
                             ->with("info", Lang::get("controllers/tools.show.no_data_sources_available"));
         }
@@ -86,27 +82,27 @@ class ToolsController extends BaseController {
      * @return type View
      */
     public function byFacet($type, $value) {
-        $dataType = DataType::where("slug", $type)->first();        
+        $dataType = DataType::where("slug", $type)->first();
         $data = Data::where("slug", $value)->first();
-        
+
         $tools = $this->toolService->byFacet($type, $value);
-        
-        //Hack to solve breadcrumb issue
+
+        // Hack to solve breadcrumb issue
         Session::put("breadcrumb", array(
             link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
             link_to_route("by-facet", Lang::get("views/pages/navigation.browse.by-facet.name")),
             link_to_route("data.by-type", $dataType->label, $dataType->slug),
             link_to_route("tools.by-facet", $data->value, array($dataType->slug, $data->value))
-        ));             
-        
+        ));
+
         return View::make("tools.by-facet.by-data-value", compact("tools"))
                 ->with("dataType", $dataType)
-                ->with("data", $data);                    
+                ->with("data", $data);
     }
-    
+
     /**
      * Lists all tools starting with a specified caracter
-     * 
+     *
      * @param char $startsWith the caracter the name of the tool start with
      * @return view
      */
@@ -115,27 +111,28 @@ class ToolsController extends BaseController {
 
         return View::make("tools.by-alphabet.index", compact("tools"))
                 ->with("alphaList", $this->listByAlphabet($startsWith))
-                ->with("startsWith", $startsWith);        
+                ->with("startsWith", $startsWith);
     }
-       
+
     /**
      * Generates a list with unique first caracters for all tools
-     * 
+     *
      * @param char selected selected character
      * @return View
      */
     public function listByAlphabet($selected = null) {
-        $caracters = Tool::select(DB::raw("LEFT(UCASE(name), 1) AS caracter"))->has('data', '>', 0)
+        $caracters = Tool::select(DB::raw("LEFT(UCASE(name), 1) AS caracter"))->has("data", ">", 0)
                       ->groupBy(DB::raw("caracter"))
-                      ->orderBy("caracter", "ASC")->lists('caracter');
-        
-        return View::make("tools._by_alphabet", compact("caracters"))->with('selected', $selected);
+                      ->orderBy("caracter", "ASC")->lists("caracter");
+
+        return View::make("tools._by_alphabet", compact("caracters"))->with("selected", $selected);
     }
 
     /**
      * Search for tool and facet filter
+     *
      * GET /tools/search
-     * 
+     *
      * @param type $query search query to match against tool name and data vales
      * @return type View
      */
@@ -148,26 +145,28 @@ class ToolsController extends BaseController {
         $types = DataType::IsLinkable()
                     ->haveData()->get();
 
-        foreach($types as $type) {
-            if(Input::has($type->slug)){
+        foreach ($types as $type) {
+            if (Input::has($type->slug)){
                 $values = ArgumentsHelper::getArgumentValues($type->slug);
-                foreach($values as $value){
+
+                foreach ($values as $value){
                     $tool_id_query->haveFacet($type->id, $value);
                 }
             }
         }
 
-        if($query != null) {
+        if ($query != null) {
             $tool_ids = $tool_id_query->lists("id");
 
-            if(count($tool_ids) > 0) {
+            if (count($tool_ids) > 0) {
                 $string_match_query = Tool::whereIn("id", $tool_ids);
-            }else{
+            } else {
                 $string_match_query = Tool::haveData();
             }
-            if(str_contains($query, " ")) {
+
+            if (str_contains($query, " ")) {
                 $parts = explode(" ", $query);
-            }else{
+            } else{
                 $parts = array($query);
             }
 
@@ -177,12 +176,12 @@ class ToolsController extends BaseController {
 
             $string_matched_tool_ids = $string_match_query->lists("id");
             $tool_ids = array_intersect($string_matched_tool_ids, $tool_ids);
-        }else{
+        } else {
             $tool_ids = $tool_id_query->lists("id");
         }
 
         if (empty($tool_ids)) {
-          $tool_ids = array(0);
+            $tool_ids = array(0);
         }
 
         $tools = Tool::whereIn("id", $tool_ids)
@@ -191,12 +190,14 @@ class ToolsController extends BaseController {
 
         $facetList = array();
 
-        foreach($types as $type) {
+        foreach ($types as $type) {
             $result =  Data::select("value", "slug", DB::raw("count(tool_id) as total"))
                              ->where("data_type_id", $type->id);
-            if(count($tool_ids) > 0) {
+
+            if (count($tool_ids) > 0) {
                 $result->whereIn("tool_id", $tool_ids);
             }
+
             $limit = Input::get($type->slug."-limit", Config::get("teresah.search_facet_count"));
             $type->values = $result->groupBy("value")
                                    ->orderBy("total", "DESC")
@@ -211,11 +212,11 @@ class ToolsController extends BaseController {
 
     /**
      * Search tool name for quicksearch
-     * 
+     *
      * @param type $query string to match in tool name
      * @return Array
      */
-    public function quicksearch($query) 
+    public function quicksearch($query)
     {
         return $this->toolService->quicksearch($query);
     }

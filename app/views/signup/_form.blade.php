@@ -3,7 +3,7 @@
         <div class="row">
             <div class="small-12 columns">
                 {{ Form::label("name", Lang::get("views/signup/form.name.label")) }}
-                {{ Form::text("name", null, array("class" => "form-control", "placeholder" => Lang::get("views/signup/form.name.placeholder"))) }}
+                {{ Form::text("name", null, array("placeholder" => Lang::get("views/signup/form.name.placeholder"))) }}
             </div>
             <!-- /small-12.columns -->
         </div>
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="small-12 columns">
                 {{ Form::label("locale", Lang::get("views/signup/form.locale.label")) }}
-                {{ Form::select("locale", BaseHelper::mapAvailableLocalesForSelect(), null, array("class" => "form-control")) }}
+                {{ Form::select("locale", BaseHelper::mapAvailableLocalesForSelect()) }}
             </div>
             <!-- /small-12.columns -->
         </div>
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="small-12 columns">
                 {{ Form::label("email_address", Lang::get("views/signup/form.email_address.label")) }}
-                {{ Form::text("email_address", null, array("class" => "form-control", "placeholder" => Lang::get("views/signup/form.email_address.placeholder"))) }}
+                {{ Form::text("email_address", null, array("placeholder" => Lang::get("views/signup/form.email_address.placeholder"))) }}
             </div>
             <!-- /small-12.columns -->
         </div>
@@ -30,17 +30,17 @@
         <hr />
 
         <div class="row">
-            <div class="small-12 columns">
+            <div class="small-6 columns">
                 {{ Form::label("password", Lang::get("views/signup/form.password.label")) }}
-                {{ Form::password("password", array("class" => "form-control", "placeholder" => Lang::get("views/signup/form.password.placeholder"))) }}
+                {{ Form::password("password", array("placeholder" => Lang::get("views/signup/form.password.placeholder"))) }}
             </div>
-            <!-- /small-12.columns -->
+            <!-- /small-6.columns -->
 
-            <div class="small-12 columns">
+            <div class="small-6 columns">
                 {{ Form::label("password_confirmation", Lang::get("views/signup/form.password_confirmation.label")) }}
-                {{ Form::password("password_confirmation", array("class" => "form-control", "placeholder" => Lang::get("views/signup/form.password_confirmation.placeholder"))) }}
+                {{ Form::password("password_confirmation", array("placeholder" => Lang::get("views/signup/form.password_confirmation.placeholder"))) }}
             </div>
-            <!-- /small-12.columns -->
+            <!-- /small-6.columns -->
         </div>
         <!-- /row -->
 

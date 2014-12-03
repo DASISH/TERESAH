@@ -23,31 +23,35 @@ class ToolService extends AbstractRepositoryService implements ToolServiceInterf
     {
         return $this->toolRepository->detachDataSource($id, $dataSourceId);
     }
-    
+
     public function byAlphabet($startsWith)
     {
         return $this->toolRepository->byAlphabet($startsWith);
     }
-    
-    public function byFacet($type, $value) 
+
+    public function byFacet($type, $value)
     {
         return $this->toolRepository->byFacet($type, $value);
     }
-    
-    public function quicksearch($query) 
+
+    public function quicksearch($query)
     {
         return $this->toolRepository->quicksearch($query);
     }
 
     public function findWithAssociatedData($id)
     {
+        if (!is_numeric($id)) {
+            $id = $this->toolRepository->getFirstBy("slug", "=", $id)->id;
+        }
+
         $with = array("user", "dataSources.data" => function($query) use($id) {
             $query->where("data.tool_id", "=", $id);
         }, "dataSources.data.user", "dataSources.data.dataType");
 
         return $this->toolRepository->find($id, $with);
     }
-    
+
     public function random()
     {
         return $this->toolRepository->random();

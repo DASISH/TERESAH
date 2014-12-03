@@ -50,7 +50,7 @@ abstract class AbstractRepository implements RepositoryInterface
     {
         return $this->make($with)->where($key, $operator, $value)->first();
     }
- 
+
     public function getManyBy($key, $operator = "=", $value, array $with = array())
     {
         return $this->make($with)->where($key, $operator, $value)->get();
