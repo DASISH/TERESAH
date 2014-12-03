@@ -5,15 +5,17 @@
     Lang::get("views/pages/navigation.admin.tools.show.name")
 )))
 
-@section("content")
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>{{{ $tool->name }}} {{ link_to_route("admin.tools.edit", Lang::get("views/pages/navigation.admin.tools.edit.name"), array("id" => $tool->id), array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/pages/navigation.admin.tools.edit.title"))) }}</h1>
+@section("master-head")
+    @include("admin.tools._master_head")
+@stop
 
+@section("content")
+    <section class="row">
+        <div class="small-12 columns">
             @include("admin.tools._navigation")
 
-            <div class="tab-content">
-                <div class="tab-pane active">
+            <div class="tabs-content">
+                <div class="content active">
                     <dl>
                         <dt>{{ Lang::get("models/tool.attributes.name") }}</dt>
                         <dd>{{{ $tool->name }}}</dd>
@@ -31,11 +33,12 @@
                         <dd>{{{ $tool->updated_at }}}</dd>
                     </dl>
                 </div>
-                <!-- /tab-pane.active -->
+                <!-- /content.active -->
             </div>
-            <!-- /tab-content -->
+            <!-- /tabs-content -->
         </div>
-        <!-- /col-sm-12 -->
-    </div>
+        <!-- /small-12.columns -->
+    </section>
     <!-- /row -->
 @stop
+

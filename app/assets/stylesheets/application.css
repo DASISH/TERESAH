@@ -12,6 +12,9 @@
  *= require normalize
  *= require foundation
  *= require editable
+ *= require glyphicons
+ *= require halflings
  *= require shared/typography
+ *= require shared/forms
  *= require screen/master
  */

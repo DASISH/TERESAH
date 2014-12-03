@@ -1,0 +1,23 @@
+/* TERESAH form styles
+---------------------------------------------------------------------------- */
+
+/* Form related definitions (overrides the Foundation framework)
+---------------------------------------------------------------------------- */
+
+.button {
+    background: transparent;
+    border: 2px solid #1f0844;
+    color: #1f0844;
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem; /* = 14px */
+    padding: 0.5rem; /* = 8px */
+    text-transform: uppercase;
+}
+
+.button:hover, 
+.button:visited:hover {
+    background-color: #5d47ba;
+    border: 2px solid #fff;
+    color: #fff;
+    text-decoration: none;
+}

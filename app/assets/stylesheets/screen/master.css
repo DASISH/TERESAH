@@ -53,6 +53,21 @@ dl {
     justify-content: center;
 }
 
+.glyphicons, 
+.halflings {
+    color: inherit;
+    padding: 0;
+    vertical-align: inherit;
+}
+
+.glyphicons:before, 
+.halflings:before {
+    color: inherit;
+    font-size: inherit;
+    /* margin: 0; */
+    position: inherit;
+}
+
 .symbol {
     /* Use CSS3 Flexbox to vertically align the content */
         -ms-flex-align: center;
@@ -104,6 +119,20 @@ dl {
     border-top: 3px solid #47ba73;
     background: url(/assets/header_bg.jpg) 50% bottom no-repeat #5d47ba;
     background-size: cover;
+}
+
+#header .alert-box {
+    border: none;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+#header .alert-box p {
+    margin-bottom: 0;
+}
+
+#header .alert-box .close {
+    color: #fff;
 }
 
 /* Navigation */
@@ -206,6 +235,7 @@ dl {
     font-weight: bold;
     font-weight: 600; /* Semi-bold */
     line-height: 1em;
+    margin-bottom: 1.25rem;
 }
 
 #header #master-head h1 small {
@@ -215,8 +245,21 @@ dl {
     font-weight: 300; /* Light */
 }
 
+#header #master-head h1 + p {
+    margin-top: -0.75rem; /* = -12px */
+}
+
 #header #master-head p {
-    color: #fff
+    color: #fff;
+}
+
+#header #master-head .button {
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+#header #master-head .label {
+    background-color: #5d47ba;
 }
 
 #header #master-head .symbol {
@@ -476,7 +519,7 @@ dl {
     padding-bottom: 35px;
 }
 
-#content section:first-child, 
+#content section:first-of-type, 
 #content section.first {
     border-top: none;
 }
@@ -486,12 +529,88 @@ dl {
     padding-bottom: 70px;
 }
 
-#content .pagination {
+/* Content pagination */
+
+#content ul.pagination {
     margin-top: 15px;
+}
+
+#content ul.pagination li {
+    margin: 0;
+}
+
+#content ul.pagination li, 
+#content ul.pagination li.disabled {
+    color: #999;
+}
+
+#content ul.pagination li.disabled {
+    padding: 0.0625rem 0.625rem 0.0625rem;
+}
+
+#content ul.pagination li.active {
+    background-color: #47ba73;
+    border-radius: 3px;
+    color: #fff;
+    padding: 0.0625rem 0.625rem 0.0625rem;
+}
+
+#content ul.pagination li a, 
+#content ul.pagination li button {
+    background: none;
+    color: #5d47ba;
+    padding: 0.0625rem 0.625rem 0.0625rem;
+}
+
+#content ul.pagination li a:hover {
+    background-color: #5d47ba;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Content table */
+
+#content table {
+    border: 1px solid #f5f5f5;
+    width: 100%;
+}
+
+#content table thead {
+    background-color: #1f0844;
+}
+
+#content table thead tr th, 
+#content table thead tr td {
+    color: #fff;
+}
+
+#content table tr th, 
+#content table tr td {
+    color: #999;
+}
+
+#content table tr.even, 
+#content table tr.alt, 
+#content table tr:nth-of-type(even) {
+    background-color: #f5f5f5;
+}
+
+#content table tr:hover {
+    background-color: #5d47ba;
+}
+
+#content table tr:hover th, 
+#content table tr:hover td, 
+#content table tr:hover th a:link, 
+#content table tr:hover th a:visited, 
+#content table tr:hover td a:link, 
+#content table tr:hover td a:visited {
+    color: #fff;
 }
 
 #content .button.data-format {
     background-color: #5d47ba;
+    border: none;
     color: #fff;
     font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.875rem; /* = 14px */
@@ -548,6 +667,11 @@ dl {
 
 #content .icon.similar-tools {
     background-image: url(/assets/icons/similar_tools.png);
+}
+
+#content .information {
+    display: block;
+    font-size: 0.75rem; /* = 12px */
 }
 
 /* Tool symbol & tool (listing) */
@@ -620,8 +744,7 @@ dl {
     margin-left: 10px;
 }
 
-#content .tabs dd > a, 
-#content .tabs .tab-title > a {
+#content .tabs dd > a {
     background: none;
     border-left: 2px solid #fff;
     color: #fff;
@@ -635,13 +758,11 @@ dl {
     padding: 0 1rem;
 }
 
-#content .tabs dd:first-child > a, 
-#content .tabs .tab-title:first-child > a {
+#content .tabs dd:first-child > a {
     border-left: none;
 }
 
 #content .tabs dd > a:hover, 
-#content .tabs .tab-title > a:hover, 
 #content .tabs .active a:link, 
 #content .tabs .active a:visited {
     background-color: #fff;
@@ -651,6 +772,32 @@ dl {
     margin-bottom: 0;
     padding: 1rem;
     text-decoration: none;
+}
+
+#content .tabs dd > a.dropdown, 
+#content .tabs .active a.dropdown:link, 
+#content .tabs .active a.dropdown:visited {
+    position: relative;
+    padding-right: 2.1875rem; /* = 35px */
+}
+
+#content .tabs dd > a.dropdown::after {
+    border-color: #fff transparent transparent transparent;
+    border-style: solid;
+    border-width: 0.375rem;
+    content: "";
+    display: block;
+    height: 0;
+    margin-top: -0.15625rem;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    width: 0;
+}
+
+#content .tabs dd > a.dropdown:hover::after, 
+#content .tabs .active a.dropdown::after {
+    border-color: #5d47ba transparent transparent transparent;
 }
 
 #content .tabs .source {

@@ -15,6 +15,7 @@
 //= require foundation
 //= require foundation.accordion
 //= require foundation.alert
+//= require foundation.dropdown
 //= require foundation.tab
 //= require foundation.topbar
 //= require modernizr

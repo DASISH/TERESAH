@@ -159,3 +159,13 @@
     font-weight: bold;
     font-weight: 900;
 }
+
+/* Label related definitions (overrides the Foundation framework)
+---------------------------------------------------------------------------- */
+
+.label {
+    background-color: #1f0844;
+    color: #fff;
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: inherit;
+}

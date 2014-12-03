@@ -1,69 +1,72 @@
-<div class="panel panel-default">
+<div class="panel">
     {{ FormHelper::open($model, $options) }}
-        <div class="panel-body">
-            <div class="form-group">
+        <div class="row">
+            <div class="small-12 columns">
                 {{ Form::label("name", Lang::get("views/admin/users/form.name.label")) }}
-                {{ Form::text("name", null, array("class" => "form-control", "placeholder" => Lang::get("views/admin/users/form.name.placeholder"))) }}
+                {{ Form::text("name", null, array("placeholder" => Lang::get("views/admin/users/form.name.placeholder"))) }}
             </div>
-            <!-- /form-group -->
+            <!-- /small-12.columns -->
+        </div>
+        <!-- /row -->
 
-            <div class="form-group">
+        <div class="row">
+            <div class="small-12 columns">
                 {{ Form::label("locale", Lang::get("views/admin/users/form.locale.label")) }}
-                {{ Form::select("locale", BaseHelper::mapAvailableLocalesForSelect(), null, array("class" => "form-control")) }}
+                {{ Form::select("locale", BaseHelper::mapAvailableLocalesForSelect()) }}
             </div>
-            <!-- /form-group -->
+            <!-- /small-12.columns -->
+        </div>
+        <!-- /row -->
 
-            <div class="form-group">
+        <div class="row">
+            <div class="small-12 columns">
                 {{ Form::label("email_address", Lang::get("views/admin/users/form.email_address.label")) }}
-                {{ Form::text("email_address", null, array("class" => "form-control", "placeholder" => Lang::get("views/admin/users/form.email_address.placeholder"))) }}
+                {{ Form::text("email_address", null, array("placeholder" => Lang::get("views/admin/users/form.email_address.placeholder"))) }}
             </div>
-            <!-- /form-group -->
+            <!-- /small-12.columns -->
+        </div>
+        <!-- /row -->
 
-            <hr />
+        <hr />
 
-            @if ($action == "create")
-                <div class="row">
-                    <div class="col-sm-6 form-group">
-                        {{ Form::label("password", Lang::get("views/admin/users/form.password.label")) }}
-                        {{ Form::password("password", array("class" => "form-control", "placeholder" => Lang::get("views/admin/users/form.password.placeholder"))) }}
-                    </div>
-                    <!-- /col-sm-6.form-group -->
-
-                    <div class="col-sm-6 form-group">
-                        {{ Form::label("password_confirmation", Lang::get("views/admin/users/form.password_confirmation.label")) }}
-                        {{ Form::password("password_confirmation", array("class" => "form-control", "placeholder" => Lang::get("views/admin/users/form.password_confirmation.placeholder"))) }}
-                    </div>
-                    <!-- /col-sm-6.form-group -->
-                </div>
-                <!-- /row -->
-            @endif
-
+        @if ($action == "create")
             <div class="row">
-                <div class="col-sm-6 form-group">
-                    {{ Form::label("user_level", Lang::get("views/admin/users/form.user_level.label")) }}
-                    {{ Form::select("user_level", array("select" => "--- ".Lang::get("views/admin/users/form.user_level.select_user_level")." ---", "1" => Lang::get("models/user.user_level.authenticated_user.name"), "2" => Lang::get("models/user.user_level.collaborator.name"), "3" => Lang::get("models/user.user_level.supervisor.name"), "4" => Lang::get("models/user.user_level.administrator.name")), null, array("class" => "form-control")) }}
+                <div class="small-6 columns">
+                    {{ Form::label("password", Lang::get("views/admin/users/form.password.label")) }}
+                    {{ Form::password("password", array("placeholder" => Lang::get("views/admin/users/form.password.placeholder"))) }}
                 </div>
-                <!-- /col-sm-6.form-group -->
+                <!-- /small-6.columns -->
 
-                <div class="col-sm-6">
-                    <p>{{ Form::label("active", Lang::get("views/admin/users/form.active.label")) }}</p>
-
-                    <div class="checkbox">
-                        {{ Form::hidden("active", 0) }}
-                        <label>{{ Form::checkbox("active", true) }} {{ Lang::get("views/admin/users/form.active.name") }}</label>
-                    </div>
-                    <!-- /checkbox -->
+                <div class="small-6 columns">
+                    {{ Form::label("password_confirmation", Lang::get("views/admin/users/form.password_confirmation.label")) }}
+                    {{ Form::password("password_confirmation", array("placeholder" => Lang::get("views/admin/users/form.password_confirmation.placeholder"))) }}
                 </div>
-                <!-- /col-sm-6 -->
+                <!-- /small-6.columns -->
             </div>
             <!-- /row -->
-        </div>
-        <!-- /panel-body -->
+        @endif
 
-        <div class="panel-footer">
-            {{ Form::submit(Lang::get("views/admin/users/{$action}.form.submit"), array("class" => "btn btn-primary")) }}
+        <div class="row">
+            <div class="small-12 columns">
+                {{ Form::label("user_level", Lang::get("views/admin/users/form.user_level.label")) }}
+                {{ Form::select("user_level", array("select" => "--- ".Lang::get("views/admin/users/form.user_level.select_user_level")." ---", "1" => Lang::get("models/user.user_level.authenticated_user.name"), "2" => Lang::get("models/user.user_level.collaborator.name"), "3" => Lang::get("models/user.user_level.supervisor.name"), "4" => Lang::get("models/user.user_level.administrator.name"))) }}
+            </div>
+            <!-- /small-12 columns -->
         </div>
-        <!-- /panel-footer -->
+        <!-- /row -->
+
+        <div class="row">
+            <div class="small-12 columns">
+                {{ Form::hidden("active", 0) }}
+
+                <p>{{ Form::label("active", Lang::get("views/admin/users/form.active.label")) }}
+                  <label>{{ Form::checkbox("active", true) }} {{ Lang::get("views/admin/users/form.active.name") }}</label></p>
+            </div>
+            <!-- /small-12.columns -->
+        </div>
+        <!-- /row -->
+
+        {{ Form::submit(Lang::get("views/admin/users/{$action}.form.submit"), array("class" => "button")) }} &ndash; {{ Lang::get("views/shared/form.or") }} {{ link_to_route("admin.users.index", Lang::get("views/shared/form.cancel"), null, array("title" => Lang::get("views/pages/navigation.admin.users.title"))) }}
     {{ Form::close() }}
 </div>
-<!-- /panel.panel-default -->
+<!-- /panel -->

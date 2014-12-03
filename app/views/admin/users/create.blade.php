@@ -5,11 +5,19 @@
     Lang::get("views/pages/navigation.admin.users.create.name")
 )))
 
-@section("content")
+@section("master-head")
     <div class="row">
-        <div class="col-sm-8 col-centered">
-            <h1 class="text-center">{{ Lang::get("views/admin/users/create.heading") }}</h1>
+        <div class="small-12 columns">
+            <h1>{{ Lang::get("views/admin/users/create.heading") }}</h1>
+        </div>
+        <!-- /small-12.columns -->
+    </div>
+    <!-- /row -->
+@stop
 
+@section("content")
+    <section class="row">
+        <div class="small-6 columns small-centered">
             @include("shared._error_messages")
             @include("admin.users._form", array(
                 $action = "create",
@@ -21,7 +29,7 @@
                 )
             ))
         </div>
-        <!-- /col-sm-8.col-centered -->
-    </div>
+        <!-- /small-6.columns.small-centered -->
+    </section>
     <!-- /row -->
 @stop

@@ -1,10 +1,18 @@
 @extends("layouts.admin")
 
-@section("content")
+@section("master-head")
     <div class="row">
-        <div class="col-sm-8 col-centered">
-            <h1 class="text-center">{{ Lang::get("views/admin/tools/data_sources/create.heading") }}</h1>
+        <div class="small-12 columns">
+            <h1>{{ Lang::get("views/admin/tools/data_sources/create.heading") }}</h1>
+        </div>
+        <!-- /small-12.columns -->
+    </div>
+    <!-- /row -->
+@stop
 
+@section("content")
+    <section class="row">
+        <div class="small-6 columns small-centered">
             @include("shared._error_messages")
             @include("admin.tools.data_sources._form", array(
                 $action = "create",
@@ -16,7 +24,7 @@
                 )
             ))
         </div>
-        <!-- /col-sm-8.col-centered -->
-    </div>
+        <!-- /small-6.columns.small-centered -->
+    </section>
     <!-- /row -->
 @stop

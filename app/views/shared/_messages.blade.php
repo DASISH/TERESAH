@@ -1,31 +1,39 @@
-@if ($message = Session::get("error"))
-    <div class="alert alert-danger">
-        <button type="button" class="close" aria-hidden="true" data-dismiss="alert">&times;</button>
-        <p>{{ $message }}</p>
-    </div>
-    <!-- /alert.alert-danger -->
-@endif
+@if (Session::has("error") || Session::has("info") || Session::has("success") || Session::has("warning"))
+    <div class="row">
+        <div class="small-12 columns">
+            @if ($message = Session::get("error"))
+                <div class="alert-box alert" data-alert>
+                    {{ $message }}
+                    <a href="#" class="close">&times;</a>
+                </div>
+                <!-- /alert-box.alert -->
+            @endif
 
-@if ($message = Session::get("info"))
-    <div class="alert alert-info">
-        <button type="button" class="close" aria-hidden="true" data-dismiss="alert">&times;</button>
-        <p>{{ $message }}</p>
-    </div>
-    <!-- /alert.alert-info -->
-@endif
+            @if ($message = Session::get("info"))
+                <div class="alert-box info" data-alert>
+                    {{ $message }}
+                    <a href="#" class="close">&times;</a>
+                </div>
+                <!-- /alert-box.info -->
+            @endif
 
-@if ($message = Session::get("success"))
-    <div class="alert alert-success">
-        <button type="button" class="close" aria-hidden="true" data-dismiss="alert">&times;</button>
-        <p>{{ $message }}</p>
-    </div>
-    <!-- /alert.alert-success -->
-@endif
+            @if ($message = Session::get("success"))
+                <div class="alert-box success" data-alert>
+                    {{ $message }}
+                    <a href="#" class="close">&times;</a>
+                </div>
+                <!-- /alert-box.success -->
+            @endif
 
-@if ($message = Session::get("warning"))
-    <div class="alert alert-warning">
-        <button type="button" class="close" aria-hidden="true" data-dismiss="alert">&times;</button>
-        <p>{{ $message }}</p>
+            @if ($message = Session::get("warning"))
+                <div class="alert-box warning" data-alert>
+                    {{ $message }}
+                    <a href="#" class="close">&times;</a>
+                </div>
+                <!-- /alert-box.warning -->
+            @endif
+        </div>
+        <!-- /small-12.columns -->
     </div>
-    <!-- /alert.alert-warning -->
+    <!-- /row -->
 @endif

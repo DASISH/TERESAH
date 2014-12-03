@@ -2,7 +2,7 @@
 
 return array(
     "heading" => "Users",
-    "listing_results" => "Listing users from <span class=\"badge\">:from</span> to <span class=\"badge\">:to</span> of <span class=\"badge\">:total</span> available.",
+    "listing_results" => "Listing users from <span class=\"label round\">:from</span> to <span class=\"label round\">:to</span> of <span class=\"label round\">:total</span> available.",
     "actions" => array(
         "name" => "Actions",
         "show" => array(

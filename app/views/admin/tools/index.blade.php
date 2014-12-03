@@ -4,14 +4,22 @@
     Lang::get("views/pages/navigation.admin.tools.name")
 )))
 
-@section("content")
+@section("master-head")
     <div class="row">
-        <div class="col-sm-12">
-            <h1>{{ Lang::get("views/admin/tools/index.heading") }} {{ link_to_route("admin.tools.create", Lang::get("views/pages/navigation.admin.tools.create.name"), null, array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/pages/navigation.admin.tools.create.title"))) }}</h1>
+        <div class="small-12 columns">
+            <h1>{{ Lang::get("views/admin/tools/index.heading") }} <a href="{{ URL::route("admin.tools.create") }}" class="button right" title="{{ Lang::get("views/pages/navigation.admin.tools.create.title") }}" role="button"><span class="glyphicons circle_plus"></span> {{ Lang::get("views/pages/navigation.admin.tools.create.name") }}</a></h1>
 
             <p>{{ Lang::get("views/admin/tools/index.listing_results", array("from" => $tools->getFrom(), "to" => $tools->getTo(), "total" => $tools->getTotal())) }}</p>
+        </div>
+        <!-- /small-12.columns -->
+    </div>
+    <!-- /row -->
+@stop
 
-            <table class="table table-bordered table-hover table-striped">
+@section("content")
+    <section class="row">
+        <div class="small-12 columns">
+            <table>
                 <thead>
                     <tr>
                         <th>{{ Lang::get("models/tool.attributes.id") }}</th>
@@ -30,11 +38,10 @@
                     @endforeach
                 </tbody>
             </table>
-            <!-- /table.table-bordered.table-hover.table-striped -->
 
             {{ $tools->links() }}
         </div>
-        <!-- /col-sm-12 -->
-    </div>
+        <!-- /small-12.columns -->
+    </section>
     <!-- /row -->
 @stop

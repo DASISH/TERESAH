@@ -5,8 +5,8 @@
     <td>{{{ $dataSource->created_at }}}</td>
     <td>{{{ $dataSource->updated_at }}}</td>
     <td>
-        <a href="{{ URL::route("admin.data-sources.show", array("id" => $dataSource->id)) }}" title="{{ Lang::get("views/admin/data_sources/index.actions.show.title") }}"><span class="glyphicon glyphicon-info-sign"></span></a> 
-        <a href="{{ URL::route("admin.data-sources.edit", array("id" => $dataSource->id)) }}" title="{{ Lang::get("views/admin/data_sources/index.actions.edit.title") }}"><span class="glyphicon glyphicon-pencil"></span></a> 
-        <a href="{{ URL::route("admin.data-sources.destroy", array("id" => $dataSource->id)) }}" data-method="delete" data-confirm="{{ e(Lang::get("views/admin/data_sources/index.actions.delete.confirm", array("name" => $dataSource->name))) }}" rel="nofollow" title="{{ Lang::get("views/admin/data_sources/index.actions.delete.title") }}"><span class="glyphicon glyphicon-remove"></span></a>
+        <a href="{{ URL::route("admin.data-sources.show", array("id" => $dataSource->id)) }}" title="{{ Lang::get("views/admin/data_sources/index.actions.show.title") }}"><span class="glyphicons circle_info"></span></a> 
+        <a href="{{ URL::route("admin.data-sources.edit", array("id" => $dataSource->id)) }}" title="{{ Lang::get("views/admin/data_sources/index.actions.edit.title") }}"><span class="glyphicons pencil"></span></a> 
+        <a href="{{ URL::route("admin.data-sources.destroy", array("id" => $dataSource->id)) }}" data-method="delete" data-confirm="{{ e(Lang::get("views/admin/data_sources/index.actions.delete.confirm", array("name" => $dataSource->name))) }}" rel="nofollow" title="{{ Lang::get("views/admin/data_sources/index.actions.delete.title") }}"><span class="glyphicons remove"></span></a>
     </td>
 </tr>

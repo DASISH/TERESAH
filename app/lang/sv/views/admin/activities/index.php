@@ -2,5 +2,5 @@
 
 return array(
     "heading" => "Senaste aktiviteter",
-    "listing_results" => "Listar senaste aktiviteter från <span class=\"badge\">:from</span> till <span class=\"badge\">:to</span> av <span class=\"badge\">:total</span> tillgängliga."
+    "listing_results" => "Listar senaste aktiviteter från <span class=\"label round\">:from</span> till <span class=\"label round\">:to</span> av <span class=\"label round\">:total</span> tillgängliga."
 );

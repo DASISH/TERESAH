@@ -4,14 +4,22 @@
     Lang::get("views/pages/navigation.admin.data_sources.name")
 )))
 
-@section("content")
+@section("master-head")
     <div class="row">
-        <div class="col-sm-12">
-            <h1>{{ Lang::get("views/admin/data_sources/index.heading") }} {{ link_to_route("admin.data-sources.create", Lang::get("views/pages/navigation.admin.data_sources.create.name"), null, array("class" => "btn btn-default pull-right", "role" => "button", "title" => Lang::get("views/pages/navigation.admin.data_sources.create.title"))) }}</h1>
+        <div class="small-12 columns">
+            <h1>{{ Lang::get("views/admin/data_sources/index.heading") }} <a href="{{ URL::route("admin.data-sources.create") }}" class="button right" title="{{ Lang::get("views/pages/navigation.admin.data_sources.create.title") }}" role="button"><span class="glyphicons circle_plus"></span> {{ Lang::get("views/pages/navigation.admin.data_sources.create.name") }}</a></h1>
 
             <p>{{ Lang::get("views/admin/data_sources/index.listing_results", array("from" => $dataSources->getFrom(), "to" => $dataSources->getTo(), "total" => $dataSources->getTotal())) }}</p>
+        </div>
+        <!-- /small-12.columns -->
+    </div>
+    <!-- /row -->
+@stop
 
-            <table class="table table-bordered table-hover table-striped">
+@section("content")
+    <section class="row">
+        <div class="small-12 columns">
+            <table>
                 <thead>
                     <tr>
                         <th>{{ Lang::get("models/datasource.attributes.id") }}</th>
@@ -29,11 +37,10 @@
                     @endforeach
                 </tbody>
             </table>
-            <!-- /table.table-bordered.table-hover.table-striped -->
 
             {{ $dataSources->links() }}
         </div>
-        <!-- /col-sm-12 -->
-    </div>
+        <!-- /small-12.columns -->
+    </section>
     <!-- /row -->
 @stop
