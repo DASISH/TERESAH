@@ -90,10 +90,10 @@ class DataSourcesController extends AdminController
             $this->toolService->attachDataSource($toolId, $dataSourceId);
 
             return Redirect::route("admin.tools.data-sources.show", array($toolId, $dataSourceId))
-                ->with("success", Lang::get("controllers/admin/tools/data_sources.store.success"));
+                ->with("success", Lang::get("controllers.admin.tools.data_sources.store.success"));
         } catch(\Exception $exception) {
             return Redirect::route("admin.tools.data-sources.create", $toolId)
-                ->with("error", Lang::get("controllers/admin/tools/data_sources.store.error"));
+                ->with("error", Lang::get("controllers.admin.tools.data_sources.store.error"));
         }
     }
 
@@ -113,10 +113,10 @@ class DataSourcesController extends AdminController
             $this->toolService->detachDataSource($toolId, $id);
 
             return Redirect::route("admin.tools.data-sources.index", $toolId)
-                ->with("success", Lang::get("controllers/admin/tools/data_sources.destroy.success"));
+                ->with("success", Lang::get("controllers.admin.tools.data_sources.destroy.success"));
         } catch(\Exception $exception) {
             return Redirect::route("admin.tools.data-sources.delete", $toolId)
-                ->with("error", Lang::get("controllers/admin/tools/data_sources.destroy.error"));
+                ->with("error", Lang::get("controllers.admin.tools.data_sources.destroy.error"));
         }
     }
 }

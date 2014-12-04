@@ -71,12 +71,13 @@ class ToolsController extends BaseController {
             return Redirect::route("tools.data-sources.show", array($tool->slug, $dataSource->slug));
         } else {
             return Redirect::route("tools.index")
-                            ->with("info", Lang::get("controllers/tools.show.no_data_sources_available"));
+                            ->with("info", Lang::get("controllers.tools.show.no_data_sources_available"));
         }
     }
 
     /**
      * Lists all Tools linked to a specific data value and data type
+     *
      * @param type $type data_type slug
      * @param type $value data value
      * @return type View
@@ -89,8 +90,8 @@ class ToolsController extends BaseController {
 
         // Hack to solve breadcrumb issue
         Session::put("breadcrumb", array(
-            link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
-            link_to_route("by-facet", Lang::get("views/pages/navigation.browse.by-facet.name")),
+            link_to_route("tools.index", Lang::get("views.shared.navigation.browse.all.name"), null, array("title" => Lang::get("views.shared.navigation.browse.all.title"))),
+            link_to_route("by-facet", Lang::get("views.shared.navigation.browse.by_facet.name")),
             link_to_route("data.by-type", $dataType->label, $dataType->slug),
             link_to_route("tools.by-facet", $data->value, array($dataType->slug, $data->value))
         ));

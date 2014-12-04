@@ -20,14 +20,14 @@ class AdminController extends BaseController
     /**
      * Restrict access to administrative section by using 
      * access control lists (ACL).
-     * 
+     *
      * Allow access to resources by specifying the required 
      * user level and allowed methods inside of each controller 
      * (which extends the AdminController). By specifying the
      * wildcard character (*) as an allowed method for the 
      * user level, you can allow access to all methods under 
      * the controller.
-     * 
+     *
      * Please note that, by default the access for all resources 
      * is restricted.
      */
@@ -39,7 +39,7 @@ class AdminController extends BaseController
             !(in_array(action_name(), $this->accessControlList[$userLevel]) || 
             in_array("*", $this->accessControlList[$userLevel]))) {
             return Redirect::route("pages.show", array("path" => "/"))
-                ->with("warning", Lang::get("controllers/admin/admin.authorize.warning"));
+                ->with("warning", Lang::get("controllers.admin.authorize.warning"));
         }
     }
 

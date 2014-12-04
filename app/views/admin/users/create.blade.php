@@ -1,14 +1,14 @@
 @extends("layouts.admin")
 
 @section("breadcrumb", BreadcrumbHelper::renderAdmin(array(
-    link_to_route("admin.users.index", Lang::get("views/pages/navigation.admin.users.name"), array(), array("title" => Lang::get("views/pages/navigation.admin.users.title"))),
-    Lang::get("views/pages/navigation.admin.users.create.name")
+    link_to_route("admin.users.index", Lang::get("views.shared.navigation.admin.users.name"), array(), array("title" => Lang::get("views.shared.navigation.admin.users.title"))),
+    Lang::get("views.shared.navigation.admin.users.create.name")
 )))
 
 @section("master-head")
     <div class="row">
         <div class="small-12 columns">
-            <h1>{{ Lang::get("views/admin/users/create.heading") }}</h1>
+            <h1>{{ Lang::get("views.admin.users.create.heading") }}</h1>
         </div>
         <!-- /small-12.columns -->
     </div>

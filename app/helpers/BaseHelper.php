@@ -46,11 +46,11 @@ class BaseHelper
     public static function mapAvailableLocalesForSelect()
     {
         $availableLocales = array(
-            "select" => "--- ".Lang::get("views/shared/form.select_locale")." ---"
+            "select" => "--- ".Lang::get("views.shared.form.select_locale")." ---"
         );
 
         foreach (Config::get("app.available_locales") as $locale) {
-            $availableLocales[$locale] = Lang::get("views/shared/locales.{$locale}");
+            $availableLocales[$locale] = Lang::get("views.shared.locales.{$locale}");
         }
 
         return $availableLocales;
@@ -67,7 +67,7 @@ class BaseHelper
     {
         return str_shuffle(str_random($length));
     }
-    
+
     public static function getContentType($format)
     {
         switch ($format) {
@@ -79,7 +79,7 @@ class BaseHelper
                 break;
             case "turtle":
                 return "text/turtle";
-                break;            
+                break;
             case "svg" :
                 return "image/svg+xml";
                 break;

@@ -28,7 +28,7 @@ class DataTypesController extends AdminController
      * Display a listing of available Data Types.
      *
      * GET /admin/data-types
-     * 
+     *
      * @return View
      */
     public function index()
@@ -55,7 +55,7 @@ class DataTypesController extends AdminController
      * Show the form for creating a new Data Type.
      *
      * GET /admin/data-types/create
-     * 
+     *
      * @return View
      */
     public function create()
@@ -67,14 +67,14 @@ class DataTypesController extends AdminController
      * Store a newly created Data Type in storage.
      *
      * POST /admin/data-types
-     * 
+     *
      * @return Redirect
      */
     public function store()
     {
         if ($this->dataTypeService->create($this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.data-types.index")
-                ->with("success", Lang::get("controllers/admin/data_types.store.success"));
+                ->with("success", Lang::get("controllers.admin.data_types.store.success"));
         } else {
             return Redirect::route("admin.data-types.create")
                 ->withErrors($this->dataTypeService->errors())->withInput();
@@ -107,7 +107,7 @@ class DataTypesController extends AdminController
     {
         if ($this->dataTypeService->update($id, $this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.data-types.index")
-                ->with("success", Lang::get("controllers/admin/data_types.update.success"));
+                ->with("success", Lang::get("controllers.admin.data_types.update.success"));
         } else {
             return Redirect::route("admin.data-types.edit", $id)
                 ->withErrors($this->dataTypeService->errors())->withInput();
@@ -126,10 +126,10 @@ class DataTypesController extends AdminController
     {
         if ($this->dataTypeService->destroy($id)) {
             return Redirect::route("admin.data-types.index")
-                ->with("success", Lang::get("controllers/admin/data_types.destroy.success"));
+                ->with("success", Lang::get("controllers.admin.data_types.destroy.success"));
         } else {
             return Redirect::route("admin.data-types.index")
-                ->with("error", Lang::get("controllers/admin/data_types.destroy.error"));
+                ->with("error", Lang::get("controllers.admin.data_types.destroy.error"));
         }
     }
 }

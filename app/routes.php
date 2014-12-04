@@ -106,7 +106,7 @@ Route::get("rdf/datasources.{format}", array(
 Route::get("tools/by-alphabets/{caracter}", "ToolsController@byAlphabet");
 
 #Browse facet
-Route::get("tools/by-facet", array( 
+Route::get("tools/by-facet", array(
     "as" => "by-facet",
     "uses" => "DataTypeController@index"
 ));
@@ -157,11 +157,15 @@ Route::resource("tools", "ToolsController", array(
 Route::group(array("namespace" => "Tools"), function() {
     Route::resource("tools.data-sources", "DataSourcesController", array(
         "only" => array("show")
-    ));   
+    ));
 });
 
 # Routing for the administrative section
 Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
+    Route::resource("api", "ApiKeysController", array(
+        "only" => array("index", "create", "store", "edit", "update", "destroy")
+    ));
+
     Route::resource("data-types", "DataTypesController");
     Route::resource("data-sources", "DataSourcesController");
     Route::resource("tools", "ToolsController");
@@ -180,7 +184,7 @@ Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
         });
     });
 
-    Route::resource("users", "UsersController");    
+    Route::resource("users", "UsersController");
     Route::resource("activities", "ActivitiesController");
     Route::resource("harvest", "HarvestController");
 

@@ -6,6 +6,6 @@ class UsersHelper
 {
     public static function getTranslatedUserLevel($user)
     {
-        return Lang::get("models/user.user_level.{$user->userLevelName()}.name");
+        return Lang::get("models.user.user_level.{$user->userLevelName()}.name");
     }
 }

@@ -1,13 +1,13 @@
 @extends("layouts.default")
 
 @section("breadcrumb", BreadcrumbHelper::render(array(
-    Lang::get("views/users/api-key.heading")
+    Lang::get("views.users.api_key.heading")
 )))
 
 @section("master-head")
     <div class="row">
         <div class="small-12 columns">
-            <h1>{{ Lang::get("views/users/api-key.heading") }}</h1>
+            <h1>{{ Lang::get("views.users.api_key.heading") }}</h1>
         </div>
         <!-- /small-12.columns -->
     </div>

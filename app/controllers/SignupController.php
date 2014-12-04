@@ -16,7 +16,7 @@ class SignupController extends BaseController
      * Show the form for creating a new user.
      *
      * GET /signup
-     * 
+     *
      * @return View
      */
     public function create()
@@ -28,7 +28,7 @@ class SignupController extends BaseController
      * Store a newly created user in storage.
      *
      * POST /signup
-     * 
+     *
      * @return Redirect
      */
     public function store()
@@ -39,7 +39,7 @@ class SignupController extends BaseController
 
         if ($user->save()) {
             return Redirect::route("pages.show", array("path" => "/"))
-                ->with("success", Lang::get("controllers/signup.store.success"));
+                ->with("success", Lang::get("controllers.signup.store.success"));
         } else {
             return Redirect::route("signup.create")
                 ->withErrors($user->getErrors())->withInput();

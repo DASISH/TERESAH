@@ -1,8 +1,7 @@
 <?php
 
-class UserTest extends TestCase {
-    
-    
+class UserTest extends TestCase
+{
     /**
      * Name is required
      */
@@ -25,8 +24,8 @@ class UserTest extends TestCase {
 
         // There should be 1 error
         $this->assertCount(1, $errors);
-        
+
         // The username error should be set
-        $this->assertEquals($errors[0], str_replace(":attribute", Lang::get("models/user.attributes.name"), Lang::get("validation.required")));
+        $this->assertEquals($errors[0], str_replace(":attribute", Lang::get("models.user.attributes.name"), Lang::get("validation.required")));
     }
 }

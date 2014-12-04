@@ -1,7 +1,7 @@
 <?php
 
-class PasswordResetController extends BaseController {
-
+class PasswordResetController extends BaseController
+{
     protected $skipAuthentication = array("request", "send", "validate");
     protected $user;
 
@@ -10,13 +10,13 @@ class PasswordResetController extends BaseController {
         parent::__construct();
 
         $this->user = Auth::user();
-    }    
+    }
 
     /**
      * Show the form for request a token for new password
      *
      * GET /request-password
-     * 
+     *
      * @return View
      */
     public function request()
@@ -28,58 +28,53 @@ class PasswordResetController extends BaseController {
      * Send an email to user to reset password
      *
      * POST /request-password
-     * 
+     *
      * @return Redirect
      */
     public function send()
     {
         $email = Input::get("email_address");
-     
+
         $validator = Validator::make(
             array(
-                'email_address' => $email
+                "email_address" => $email
             ),
-            array(               
-                'email_address' => 'required|email'
+            array(
+                "email_address" => "required|email"
             )
         );
-                
-        if ($validator->fails()) 
-        {
+
+        if ($validator->fails()) {
             return Redirect::route("request-password.request")
-                ->withErrors($validator->messages())->withInput();            
-        
-        } else 
-        {
+                ->withErrors($validator->messages())->withInput();
+        } else {
             $user = User::getUserByEmail($email);
-            
-            if($user == null)
-            {
+
+            if($user == null) {
                 return Redirect::route("sessions.store")
-                    ->with("success", Lang::get("views/password-reset/reset.email_sent").$email);        
+                    ->with("success", Lang::get("views/password-reset/reset.email_sent").$email);
             } else {
-               
                 $current_time = date("Y-m-d H:i:s");
                 $token = hash("sha256", Config::get("app.key").$email.$current_time);
                 $url = url("/")."/request-password/".$token;
-                
-                //Save token to database
+
+                # Save token to database
                 $user->password_reset_token = $token;
-                $user->password_reset_sent_at = $current_time;   
+                $user->password_reset_sent_at = $current_time;
                 $user->save();
-                
+
                 $locale = App::getLocale();
 
                 # TODO: Use queue when sending e-mail messages
-                Mail::send(array("text"=> "mailers.password-reset.request_{$locale}"), 
+                Mail::send(array("text"=> "mailers.password-reset.request_{$locale}"),
                     array("url" => $url, "user" => $user), function($message) use ($user) {
                     $message->to($user->email_address, $user->name);
-                    $message->subject("[TERESAH] ".Lang::get("mailers/password-reset.request.subject"));
+                    $message->subject("[TERESAH] ".Lang::get("mailers.password_reset.request.subject"));
                 });
-                
+
                 return Redirect::route("sessions.store")
                     ->with("success", Lang::get("views/password-reset/request.email_sent").$email);
-            } 
+            }
         }
     }
 
@@ -87,24 +82,24 @@ class PasswordResetController extends BaseController {
      * Validate a request to reset password and show form for resetting
      *
      * GET /reset-password/{token}
-     * 
+     *
      * @return Redirect
      */
     public function validate($token)
     {
         $user = User::getUserByResetToken($token);
-        
-        if($user == null) {
+
+        if ($user == null) {
             return Redirect::route("sessions.store")
-                    ->withErrors(Lang::get("views/password-reset/reset.invalid_token"));        
+                    ->withErrors(Lang::get("views/password-reset/reset.invalid_token"));
         } else {
-            
-            //Remove token from database
+            # Remove token from database
             $user->password_reset_token = null;
-            $user->password_reset_sent_at = null;   
+            $user->password_reset_sent_at = null;
             $user->save();
-            
+
             Auth::login($user);
+
             return Redirect::route("reset-password.reset");
         }
     }
@@ -113,7 +108,7 @@ class PasswordResetController extends BaseController {
      * Show the form for resetting a password.
      *
      * GET /reset-password
-     * 
+     *
      * @return View
      */
     public function reset()
@@ -125,14 +120,13 @@ class PasswordResetController extends BaseController {
      * Update password for a user
      *
      * PUT/PATCH /reset-password
-     * 
+     *
      * @return Redirect
      */
     public function update()
     {
-
         $user = $this->user->fill(Input::only("password", "password_confirmation"));
-                
+
         if ($user->save()) {
             return Redirect::route("pages.show", array("path" => "/"))
                 ->with("success", Lang::get("views/password-reset/reset.password_updated"));

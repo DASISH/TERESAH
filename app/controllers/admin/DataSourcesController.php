@@ -28,7 +28,7 @@ class DataSourcesController extends AdminController
      * Display a listing of available Data Sources.
      *
      * GET /admin/data-sources
-     * 
+     *
      * @return View
      */
     public function index()
@@ -55,7 +55,7 @@ class DataSourcesController extends AdminController
      * Show the form for creating a new Data Source.
      *
      * GET /admin/data-sources/create
-     * 
+     *
      * @return View
      */
     public function create()
@@ -67,14 +67,14 @@ class DataSourcesController extends AdminController
      * Store a newly created Data Source in storage.
      *
      * POST /admin/data-sources
-     * 
+     *
      * @return Redirect
      */
     public function store()
     {
         if ($this->dataSourceService->create($this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.data-sources.index")
-                ->with("success", Lang::get("controllers/admin/data_sources.store.success"));
+                ->with("success", Lang::get("controllers.admin.data_sources.store.success"));
         } else {
             return Redirect::route("admin.data-sources.create")
                 ->withErrors($this->dataSourceService->errors())->withInput();
@@ -107,7 +107,7 @@ class DataSourcesController extends AdminController
     {
         if ($this->dataSourceService->update($id, $this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.data-sources.index")
-                ->with("success", Lang::get("controllers/admin/data_sources.update.success"));
+                ->with("success", Lang::get("controllers.admin.data_sources.update.success"));
         } else {
             return Redirect::route("admin.data-sources.edit", $id)
                 ->withErrors($this->dataSourceService->errors())->withInput();
@@ -126,10 +126,10 @@ class DataSourcesController extends AdminController
     {
         if ($this->dataSourceService->destroy($id)) {
             return Redirect::route("admin.data-sources.index")
-                ->with("success", Lang::get("controllers/admin/data_sources.destroy.success"));
+                ->with("success", Lang::get("controllers.admin.data_sources.destroy.success"));
         } else {
             return Redirect::route("admin.data-sources.delete", $id)
-                ->with("error", Lang::get("controllers/admin/data_sources.destroy.error"));
+                ->with("error", Lang::get("controllers.admin.data_sources.destroy.error"));
         }
     }
 }

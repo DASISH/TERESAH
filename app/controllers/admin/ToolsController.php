@@ -28,7 +28,7 @@ class ToolsController extends AdminController
      * Display a listing of available Tools.
      *
      * GET /admin/tools
-     * 
+     *
      * @return View
      */
     public function index()
@@ -55,7 +55,7 @@ class ToolsController extends AdminController
      * Show the form for creating a new Tool.
      *
      * GET /admin/tools/create
-     * 
+     *
      * @return View
      */
     public function create()
@@ -67,14 +67,14 @@ class ToolsController extends AdminController
      * Store a newly created Tool in storage.
      *
      * POST /admin/tools
-     * 
+     *
      * @return Redirect
      */
     public function store()
     {
         if ($this->toolService->create($this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.tools.index")
-                ->with("success", Lang::get("controllers/admin/tools.store.success"));
+                ->with("success", Lang::get("controllers.admin.tools.store.success"));
         } else {
             return Redirect::route("admin.tools.create")
                 ->withErrors($this->toolService->errors())->withInput();
@@ -107,7 +107,7 @@ class ToolsController extends AdminController
     {
         if ($this->toolService->update($id, $this->inputWithAuthenticatedUserId(Input::all()))) {
             return Redirect::route("admin.tools.index")
-                ->with("success", Lang::get("controllers/admin/tools.update.success"));
+                ->with("success", Lang::get("controllers.admin.tools.update.success"));
         } else {
             return Redirect::route("admin.tools.edit", $id)
                 ->withErrors($this->toolService->errors())->withInput();
@@ -126,10 +126,10 @@ class ToolsController extends AdminController
     {
         if ($this->toolService->destroy($id)) {
             return Redirect::route("admin.tools.index")
-                ->with("success", Lang::get("controllers/admin/tools.destroy.success"));
+                ->with("success", Lang::get("controllers.admin.tools.destroy.success"));
         } else {
             return Redirect::route("admin.tools.delete", $id)
-                ->with("error", Lang::get("controllers/admin/tools.destroy.error"));
+                ->with("error", Lang::get("controllers.admin.tools.destroy.error"));
         }
     }
 }

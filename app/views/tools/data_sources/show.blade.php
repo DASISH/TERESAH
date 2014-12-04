@@ -2,7 +2,7 @@
 
 @if (str_contains(URL::previous(), "search"))
     @section("breadcrumb", BreadcrumbHelper::render(array(
-        link_to(URL::previous(), Lang::get("views/pages/navigation.search.name")),
+        link_to(URL::previous(), Lang::get("views.shared.navigation.search.name")),
         e($tool->name)
     )))
 @elseif (str_contains(URL::previous(), "by-facet"))
@@ -10,19 +10,19 @@
         @section("breadcrumb", BreadcrumbHelper::render(Session::get("breadcrumb")))
     @else
         @section("breadcrumb", BreadcrumbHelper::render(array(
-            link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
-            link_to(URL::previous(), Lang::get("views/pages/navigation.browse.by-facet.name")),
+            link_to_route("tools.index", Lang::get("views.shared.navigation.browse.all.name"), null, array("title" => Lang::get("views.shared.navigation.browse.all.title"))),
+            link_to(URL::previous(), Lang::get("views.shared.navigation.browse.by_facet.name")),
             e($tool->name)
         )))
     @endif
 @elseif (str_contains(URL::previous(), "my-tools"))
     @section("breadcrumb", BreadcrumbHelper::render(array(
-        link_to(URL::previous(), Lang::get("views/users/tools.name")),
+        link_to(URL::previous(), Lang::get("views.users.tools.name")),
         e($tool->name)
-    )))    
+    )))
 @else
     @section("breadcrumb", BreadcrumbHelper::render(array(
-        link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
+        link_to_route("tools.index", Lang::get("views.shared.navigation.browse.all.name"), null, array("title" => Lang::get("views.shared.navigation.browse.all.title"))),
         e($tool->name)
     )))
 @endif
@@ -35,7 +35,7 @@
             </div>
             <!-- /symbol -->
 
-            <h1><span itemprop="name">{{{ $tool->name }}}</span> <small>{{ Lang::get("views/tools/data_sources/show.on") }}</small></h1>
+            <h1><span itemprop="name">{{{ $tool->name }}}</span> <small>{{ Lang::get("views.tools.data_sources.show.on") }}</small></h1>
         </div>
         <!-- /small-7.columns -->
 
@@ -72,7 +72,7 @@
                                         <hr />
                                     @endif
 
-                                    <h3>{{ Lang::get("views/tools/data_sources/show.heading.available_data") }}</h3>
+                                    <h3>{{ Lang::get("views.tools.data_sources.show.heading.available_data") }}</h3>
 
                                     <dl class="data">
                                         @foreach ($dataSource->groupedData as $label => $dataList)
@@ -94,7 +94,7 @@
                                     </dl>
                                     <!-- /data -->
 
-                                    <h3>{{ Lang::get("views/tools/data_sources/show.available_data_formats") }}</h3>
+                                    <h3>{{ Lang::get("views.tools.data_sources.show.available_data_formats") }}</h3>
 
                                     @if (in_array("JsonLD", $rdf_formats))
                                         {{ link_to_route('tools.export', "RDF/JsonLD", array($tool->slug, "jsonld"), array("class" => "button data-format", "role" => "button")) }}
@@ -110,7 +110,7 @@
                                     @endif
                                 @else
                                     <div class="alert alert-info">
-                                        <p class="text-center">{{ Lang::get("views/tools/data_sources/show.messages.no_data") }}</p>
+                                        <p class="text-center">{{ Lang::get("views.tools.data_sources.show.messages.no_data") }}</p>
                                     </div>
                                     <!-- /alert.alert-info -->
                                 @endif
@@ -138,7 +138,7 @@
     @if (count($similarTools) > 0)
         <section class="row">
             <div class="small-12 columns">
-                <h1 class="icon similar-tools">{{ Lang::get("views/tools/data_sources/show.similar_tools") }}</h1>
+                <h1 class="icon similar-tools">{{ Lang::get("views.tools.data_sources.show.similar_tools") }}</h1>
 
                 <ul class="small-block-grid-4">
                     @foreach($similarTools as $similarTool)

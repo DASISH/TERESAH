@@ -59,7 +59,7 @@ class DataController extends AdminController
      * Data Source and Tool in storage.
      *
      * POST /admin/tools/{toolId}/data-sources/{dataSourceId}/data
-     * 
+     *
      * @return Redirect
      */
     public function store($toolId, $dataSourceId)
@@ -72,7 +72,7 @@ class DataController extends AdminController
 
         if ($this->dataService->create(array_merge(Input::all(), $associations))) {
             return Redirect::route("admin.tools.data-sources.index", $toolId)
-                ->with("success", Lang::get("controllers/admin/tools/data_sources/data.store.success"));
+                ->with("success", Lang::get("controllers.admin.tools.data_sources.data.store.success"));
         } else {
             return Redirect::route("admin.tools.data-sources.data.create", array($toolId, $dataSourceId))
                 ->withErrors($this->dataService->errors())->withInput();
@@ -129,7 +129,7 @@ class DataController extends AdminController
             }
 
             return Redirect::route("admin.tools.data-sources.show", array($toolId, $dataSourceId))
-                ->with("success", Lang::get("controllers/admin/tools/data_sources/data.update.success"));
+                ->with("success", Lang::get("controllers.admin.tools.data_sources.data.update.success"));
         } else {
             if (Request::ajax()) {
                 return Response::json($this->dataService->errors(), 400);
@@ -155,10 +155,10 @@ class DataController extends AdminController
     {
         if ($this->dataService->destroy($id)) {
             return Redirect::route("admin.tools.data-sources.show", array($toolId, $dataSourceId))
-                ->with("success", Lang::get("controllers/admin/tools/data_sources/data.destroy.success"));
+                ->with("success", Lang::get("controllers.admin.tools.data_sources.data.destroy.success"));
         } else {
             return Redirect::route("admin.tools.data-sources.show", array($toolId, $dataSourceId))
-                ->with("error", Lang::get("controllers/admin/tools/data_sources/data.destroy.error"));
+                ->with("error", Lang::get("controllers.admin.tools.data_sources.data.destroy.error"));
         }
     }
 }

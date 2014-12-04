@@ -50,11 +50,11 @@ class SessionsController extends BaseController
 
             if(Session::get("previous_url") !== null){
                 return Redirect::intended(SESSION::pull("previous_url"))
-                    ->with("success", Lang::get("controllers/sessions.store.success"));
+                    ->with("success", Lang::get("controllers.sessions.store.success"));
             }
             else{
                 return Redirect::intended("/")
-                    ->with("success", Lang::get("controllers/sessions.store.success"));
+                    ->with("success", Lang::get("controllers.sessions.store.success"));
             }
         }
         else #check if user is blocked
@@ -65,14 +65,14 @@ class SessionsController extends BaseController
                 if(!$user->active)
                 {
                     return Redirect::route("sessions.create")
-                        ->withErrors(array(Lang::get("controllers/sessions.store.blocked")))
+                        ->withErrors(array(Lang::get("controllers.sessions.store.blocked")))
                         ->with("simple_error_message", true)->withInput();
                 }
             }
         }
 
         return Redirect::route("sessions.create")
-            ->withErrors(array(Lang::get("controllers/sessions.store.error")))
+            ->withErrors(array(Lang::get("controllers.sessions.store.error")))
             ->with("simple_error_message", true)->withInput();
     }
 
@@ -90,6 +90,6 @@ class SessionsController extends BaseController
         Session::forget("locale");
 
         return Redirect::to(URL::previous())
-            ->with("success", Lang::get("controllers/sessions.destroy.success"));
+            ->with("success", Lang::get("controllers.sessions.destroy.success"));
     }
 }

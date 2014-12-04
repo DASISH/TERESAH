@@ -3,7 +3,7 @@
 @section("master-head")
     <div class="row">
         <div class="small-12 columns">
-            <h1>{{ Lang::get("views/admin/tools/data_sources/data/create.heading") }}</h1>
+            <h1>{{ Lang::get("views.admin.tools.data_sources.data.create.heading") }}</h1>
         </div>
         <!-- /small-12.columns -->
     </div>

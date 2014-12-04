@@ -8,7 +8,7 @@ class PageHelper
             return date($format, strtotime(exec("git log -1 --format=%cD")));
         }
 
-        return Lang::get("views/shared/messages.current_version.commit_date.error");
+        return Lang::get("views.shared.messages.current_version.commit_date.error");
     }
 
     public static function getCurrentCommitId()
@@ -17,7 +17,7 @@ class PageHelper
             return exec("git rev-parse --short HEAD");
         }
 
-        return Lang::get("views/shared/messages.current_version.commit_id.error");
+        return Lang::get("views.shared.messages.current_version.commit_id.error");
     }
 
     public static function robotsMetaTag()

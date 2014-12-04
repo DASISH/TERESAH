@@ -1,12 +1,12 @@
-<h3>{{ Lang::get("views/users/api-key.heading") }}</h3>
+<h3>{{ Lang::get("views.users.api_key.heading") }}</h3>
 
 <div class="panel">
     <table>
         <thead>
             <tr>
-                <th width="250">{{ Lang::get("views/users/api-key.api-key") }}</th>
-                <th width="600">{{ Lang::get("views/users/api-key.description") }}</th>
-                <th width="75">{{ Lang::get("views/users/api-key.actions.name") }}</th>
+                <th width="250">{{ Lang::get("views.users.api_key.api-key") }}</th>
+                <th width="600">{{ Lang::get("views.users.api_key.description") }}</th>
+                <th width="75">{{ Lang::get("views.users.api_key.actions.name") }}</th>
             </tr>
         </thead>
 
@@ -17,6 +17,6 @@
         </tbody>
     </table>
 
-    <a href="{{ URL::route("api-key.create") }}" class="button tiny" title="{{ Lang::get("views/users/api-key.apply") }}" role="button">{{ Lang::get("views/users/api-key.apply") }}</a>
+    <a href="{{ URL::route("api-key.create") }}" class="button tiny" title="{{ Lang::get("views.users.api_key.apply") }}" role="button">{{ Lang::get("views.users.api_key.apply") }}</a>
 </div>
 <!-- /panel -->

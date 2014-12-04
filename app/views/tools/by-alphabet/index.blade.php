@@ -1,16 +1,16 @@
 @extends("layouts.default")
 
 @section("breadcrumb", BreadcrumbHelper::render(array(
-    link_to_route("tools.index", Lang::get("views/pages/navigation.browse.all.name"), null, array("title" => Lang::get("views/pages/navigation.browse.all.title"))),
-    Lang::get("views/pages/navigation.browse.by-alphabet.name")." - ".$startsWith
+    link_to_route("tools.index", Lang::get("views.shared.navigation.browse.all.name"), null, array("title" => Lang::get("views.shared.navigation.browse.all.title"))),
+    Lang::get("views.shared.navigation.browse.by_alphabet.name")." - ".$startsWith
 )))
 
 @section("master-head")
     <div class="row">
         <div class="small-7 columns">
-            <h1>{{ Lang::get("views/tools/index.heading") }}</h1>
+            <h1>{{ Lang::get("views.tools.index.heading") }}</h1>
 
-            <p>{{ Lang::get("views/tools/index.listing_results", array("from" => $tools->getFrom(), "to" => $tools->getTo(), "total" => $tools->getTotal())) }}</p>
+            <p>{{ Lang::get("views.tools.index.listing_results", array("from" => $tools->getFrom(), "to" => $tools->getTo(), "total" => $tools->getTotal())) }}</p>
         </div>
         <!-- /small-7.columns -->
 
@@ -30,7 +30,7 @@
 @section("content")
     <section class="row">
         <div class="small-12 columns">
-            <h1 class="hide">{{ Lang::get("views/tools/index.heading") }}</h1>
+            <h1 class="hide">{{ Lang::get("views.tools.index.heading") }}</h1>
 
             <ul class="small-block-grid-4">
                 @foreach ($tools as $tool)

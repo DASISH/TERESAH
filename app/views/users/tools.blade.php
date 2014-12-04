@@ -1,13 +1,13 @@
 @extends("layouts.default")
 
 @section("breadcrumb", BreadcrumbHelper::render(array(
-    Lang::get("views/users/tools.heading")
+    Lang::get("views.users.tools.heading")
 )))
 
 @section("master-head")
     <div class="row">
         <div class="small-12 columns">
-            <h1>{{ Lang::get("views/users/tools.heading") }}</h1>
+            <h1>{{ Lang::get("views.users.tools.heading") }}</h1>
         </div>
         <!-- /small-12.columns -->
     </div>
@@ -31,7 +31,7 @@
                         </ul>
                         <!-- /small-block-grid-4 -->
                     @else
-                        <p>{{ Lang::get("views/users/tools.empty") }}</p>
+                        <p>{{ Lang::get("views.users.tools.empty") }}</p>
                     @endif
                 </div>
                 <!-- /content.active -->

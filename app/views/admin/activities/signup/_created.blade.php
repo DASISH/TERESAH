@@ -1,1 +1,1 @@
-{{ Lang::get("views/admin/activities/signup.created") }}
+{{ Lang::get("views.admin.activities.signup.created") }}

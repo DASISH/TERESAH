@@ -28,7 +28,7 @@ class UsersController extends AdminController
      * Returns all User Account records.
      *
      * GET /admin/users
-     * 
+     *
      * @return View
      */
     public function index()
@@ -55,7 +55,7 @@ class UsersController extends AdminController
      * Show the form for creating a new User Account.
      *
      * GET /admin/users/create
-     * 
+     *
      * @return View
      */
     public function create()
@@ -67,14 +67,14 @@ class UsersController extends AdminController
      * Store a newly created User Account in storage.
      *
      * POST /admin/users
-     * 
+     *
      * @return Redirect
      */
     public function store()
     {
         if ($this->userService->create(Input::all())) {
             return Redirect::route("admin.users.index")
-                ->with("success", Lang::get("controllers/admin/users.store.success"));
+                ->with("success", Lang::get("controllers.admin.users.store.success"));
         } else {
             return Redirect::route("admin.users.create")
                 ->withErrors($this->userService->errors())->withInput();
@@ -107,7 +107,7 @@ class UsersController extends AdminController
     {
         if ($this->userService->update($id, Input::all())) {
             return Redirect::route("admin.users.index")
-                ->with("success", Lang::get("controllers/admin/users.update.success"));
+                ->with("success", Lang::get("controllers.admin.users.update.success"));
         } else {
             return Redirect::route("admin.users.edit", $id)
                 ->withErrors($this->userService->errors())->withInput();
@@ -126,10 +126,10 @@ class UsersController extends AdminController
     {
         if ($this->userService->destroy($id)) {
             return Redirect::route("admin.users.index")
-                ->with("success", Lang::get("controllers/admin/users.destroy.success"));
+                ->with("success", Lang::get("controllers.admin.users.destroy.success"));
         } else {
             return Redirect::route("admin.users.delete", $id)
-                ->with("error", Lang::get("controllers/admin/users.destroy.error"));
+                ->with("error", Lang::get("controllers.admin.users.destroy.error"));
         }
     }
 }

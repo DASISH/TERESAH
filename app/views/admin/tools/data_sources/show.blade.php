@@ -26,15 +26,15 @@
                                             <hr />
                                         @endif
 
-                                        <h3>{{ Lang::get("views/admin/tools/data_sources/show.heading.available_data") }} <a href="{{ URL::route("admin.tools.data-sources.data.create", array($tool->id, $dataSource->id)) }}" class="button right" title="{{ Lang::get("views/admin/tools/data_sources/navigation.data.create.title") }}" role="button"><span class="glyphicons circle_plus"></span> {{ Lang::get("views/admin/tools/data_sources/navigation.data.create.name") }}</a></h3>
+                                        <h3>{{ Lang::get("views.admin.tools.data_sources.show.heading.available_data") }} <a href="{{ URL::route("admin.tools.data-sources.data.create", array($tool->id, $dataSource->id)) }}" class="button right" title="{{ Lang::get("views.admin.tools.data_sources.navigation.data.create.title") }}" role="button"><span class="glyphicons circle_plus"></span> {{ Lang::get("views.admin.tools.data_sources.navigation.data.create.name") }}</a></h3>
 
                                         <table>
                                             <thead
                                                 <tr>
-                                                    <th>{{ Lang::get("models/data.attributes.data_type") }}</th>
-                                                    <th>{{ Lang::get("models/data.attributes.value") }}</th>
-                                                    <th>{{ Lang::get("models/data.attributes.user") }}</th>
-                                                    <th>{{ Lang::get("views/admin/tools/data_sources/show.actions.name") }}</th>
+                                                    <th>{{ Lang::get("models.data.attributes.data_type") }}</th>
+                                                    <th>{{ Lang::get("models.data.attributes.value") }}</th>
+                                                    <th>{{ Lang::get("models.data.attributes.user") }}</th>
+                                                    <th>{{ Lang::get("views.admin.tools.data_sources.show.actions.name") }}</th>
                                                 </tr>
                                             </thead>
 
@@ -46,7 +46,7 @@
                                         </table>
                                     @else
                                         <div class="alert-box info">
-                                            <p class="text-center">{{ Lang::get("views/admin/tools/data_sources/show.messages.no_data") }} {{ link_to_route("admin.tools.data-sources.data.create", Lang::get("views/admin/tools/data_sources/navigation.data.create.name"), array($tool->id, $dataSource->id), array("title" => Lang::get("views/admin/tools/data_sources/navigation.data.create.title"))) }}?</p>
+                                            <p class="text-center">{{ Lang::get("views.admin.tools.data_sources.show.messages.no_data") }} {{ link_to_route("admin.tools.data-sources.data.create", Lang::get("views.admin.tools.data_sources.navigation.data.create.name"), array($tool->id, $dataSource->id), array("title" => Lang::get("views.admin.tools.data_sources.navigation.data.create.title"))) }}?</p>
                                         </div>
                                         <!-- /alert-box.info -->
                                     @endif
@@ -57,7 +57,7 @@
                         <!-- /tabs-content -->
                     @else
                         <div class="alert-box info">
-                            <p class="text-center">{{ Lang::get("views/admin/tools/data_sources/show.messages.no_data_sources") }} {{ link_to_route("admin.tools.data-sources.create", Lang::get("views/admin/tools/data_sources/navigation.create.name"), array($tool->id), array("title" => Lang::get("views/admin/tools/data_sources/navigation.create.title"))) }}?</p>
+                            <p class="text-center">{{ Lang::get("views.admin.tools.data_sources.show.messages.no_data_sources") }} {{ link_to_route("admin.tools.data-sources.create", Lang::get("views.admin.tools.data_sources.navigation.create.name"), array($tool->id), array("title" => Lang::get("views.admin.tools.data_sources.navigation.create.title"))) }}?</p>
                         </div>
                         <!-- /alert-box.info -->
                     @endif
