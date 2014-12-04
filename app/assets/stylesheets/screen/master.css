@@ -213,7 +213,8 @@ dl {
     z-index: 1000;
 }
 
-#header .twitter-typeahead .tt-dropdown-menu .tt-suggestions .tt-suggestion a:link {
+#header .twitter-typeahead .tt-dropdown-menu .tt-suggestions .tt-suggestion a:link, 
+#header .twitter-typeahead .tt-dropdown-menu .tt-suggestions .tt-suggestion a:visited {
     color: #fff;
     padding: 0.1875rem 0.3125rem; /* = 3px 5px */
 }

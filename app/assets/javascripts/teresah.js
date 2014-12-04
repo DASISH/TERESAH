@@ -69,7 +69,7 @@ $(document).ready(function() {
                 "</div>"
             ].join("\n"),
             suggestion: function(data) {
-                return "<a href=\"" + data.url + "\" title=\"" + data.type + ": " + data.name + "\">" + data.name + "</a>";
+                return "<a href=\"" + data.url + "\" title=\"" + data.type + ": " + data.name + "\"><span class=\"glyphicons wrench\"></span>" + data.name + "</a>";
             }
         }
     }, {
@@ -83,7 +83,7 @@ $(document).ready(function() {
                 "</div>"
             ].join("\n"),
             suggestion: function(data) {
-                return "<a href=\"" + data.url + "\" title=\"" + data.type + ": " + data.name + "\">" + data.name + "</a>";
+                return "<a href=\"" + data.url + "\" title=\"" + data.type + ": " + data.name + "\"><span class=\"glyphicons tag\"></span>" + data.name + "</a>";
             }
         }
     }
