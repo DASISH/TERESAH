@@ -74,7 +74,7 @@ return array(
             "id" => Lang::get("shared.id"),
             "label" => "Label",
             "slug" => Lang::get("shared.slug"),
-            "description" => "Description",
+            "description" => Lang::get("shared.description"),
             "rdf_mapping" => "RDF mapping",
             "linkable" => "Linkable",
             "user" => Lang::get("shared.user"),
