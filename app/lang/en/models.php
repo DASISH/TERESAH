@@ -3,31 +3,31 @@
 return array(
     "activity" => array(
         "attributes" => array(
-            "id" => "ID",
+            "id" => Lang::get("shared.id"),
             "target_type" => "Target Type",
             "target_id" => "Target ID",
             "action" => "Action",
-            "user" => "User",
-            "user_id" => "User ID",
+            "user" => Lang::get("shared.user"),
+            "user_id" => Lang::get("shared.user_id"),
             "metadata" => "Metadata",
             "ip_address" => "IP Address",
             "user_agent" => "User Agent",
             "referer" => "Referer",
-            "created_at" => "Created at",
-            "updated_at" => "Updated at"
+            "created_at" => Lang::get("shared.created_at"),
+            "updated_at" => Lang::get("shared.updated_at")
         )
     ),
 
     "apikey" => array(
         "attributes" => array(
-            "id" => "ID",
-            "user" => "User",
-            "user_id" => "User ID",
+            "id" => Lang::get("shared.id"),
+            "user" => Lang::get("shared.user"),
+            "user_id" => Lang::get("shared.user_id"),
             "token" => "Access token",
             "enabled" => "Enabled",
-            "created_at" => "Created at",
-            "updated_at" => "Updated at",
-            "deleted_at" => "Deleted at"
+            "created_at" => Lang::get("shared.created_at"),
+            "updated_at" => Lang::get("shared.updated_at"),
+            "deleted_at" => Lang::get("shared.deleted_at")
         ),
         "enabled" => array(
             "yes" => "Yes",
@@ -37,49 +37,51 @@ return array(
 
     "data" => array(
         "attributes" => array(
-            "id" => "ID",
+            "id" => Lang::get("shared.id"),
             "data_source" => "Data Source",
             "data_source_id" => "Data Source ID",
             "tool" => "Tool",
             "tool_id" => "Tool ID",
-            "user" => "User",
-            "user_id" => "User ID",
+            "user" => Lang::get("shared.user"),
+            "user_id" => Lang::get("shared.user_id"),
             "data_type" => "Data Type",
             "data_type_id" => "Data Type ID",
             "value" => "Value",
-            "created_at" => "Created at",
-            "updated_at" => "Updated at",
-            "deleted_at" => "Deleted at"
+            "slug" => Lang::get("shared.slug"),
+            "created_at" => Lang::get("shared.created_at"),
+            "updated_at" => Lang::get("shared.updated_at"),
+            "deleted_at" => Lang::get("shared.deleted_at")
         )
     ),
 
     "datasource" => array(
         "attributes" => array(
-            "id" => "ID",
-            "name" => "Name",
-            "description" => "Description",
+            "id" => Lang::get("shared.id"),
+            "name" => Lang::get("shared.name"),
+            "slug" => Lang::get("shared.slug"),
+            "description" => Lang::get("shared.description"),
             "homepage" => "Homepage",
-            "user" => "User",
-            "user_id" => "User ID",
-            "created_at" => "Created at",
-            "updated_at" => "Updated at",
-            "deleted_at" => "Deleted at"
+            "user" => Lang::get("shared.user"),
+            "user_id" => Lang::get("shared.user_id"),
+            "created_at" => Lang::get("shared.created_at"),
+            "updated_at" => Lang::get("shared.updated_at"),
+            "deleted_at" => Lang::get("shared.deleted_at")
         )
     ),
 
     "datatype" => array(
         "attributes" => array(
-            "id" => "ID",
+            "id" => Lang::get("shared.id"),
             "label" => "Label",
-            "slug" => "Slug",
+            "slug" => Lang::get("shared.slug"),
             "description" => "Description",
             "rdf_mapping" => "RDF mapping",
             "linkable" => "Linkable",
-            "user" => "User",
-            "user_id" => "User ID",
-            "created_at" => "Created at",
-            "updated_at" => "Updated at",
-            "deleted_at" => "Deleted at"
+            "user" => Lang::get("shared.user"),
+            "user_id" => Lang::get("shared.user_id"),
+            "created_at" => Lang::get("shared.created_at"),
+            "updated_at" => Lang::get("shared.updated_at"),
+            "deleted_at" => Lang::get("shared.deleted_at")
         ),
         "linkable" => array(
             "yes" => "Yes",
@@ -89,47 +91,47 @@ return array(
 
     "login" => array(
         "attributes" => array(
-            "id" => "ID",
-            "user" => "User",
-            "user_id" => "User ID",
+            "id" => Lang::get("shared.id"),
+            "user" => Lang::get("shared.user"),
+            "user_id" => Lang::get("shared.user_id"),
             "ip_address" => "IP Address",
             "user_agent" => "User Agent",
             "referer" => "Referer",
             "via_remember" => "Via Remember",
-            "created_at" => "Created at",
-            "updated_at" => "Updated at",
-            "deleted_at" => "Deleted at"
+            "created_at" => Lang::get("shared.created_at"),
+            "updated_at" => Lang::get("shared.updated_at"),
+            "deleted_at" => Lang::get("shared.deleted_at")
         )
     ),
 
     "tool" => array(
         "attributes" => array(
-            "id" => "ID",
-            "name" => "Name",
-            "slug" => "Slug",
-            "user" => "User",
-            "user_id" => "User ID",
-            "created_at" => "Created at",
-            "updated_at" => "Updated at",
-            "deleted_at" => "Deleted at"
+            "id" => Lang::get("shared.id"),
+            "name" => Lang::get("shared.name"),
+            "slug" => Lang::get("shared.slug"),
+            "user" => Lang::get("shared.user"),
+            "user_id" => Lang::get("shared.user_id"),
+            "created_at" => Lang::get("shared.created_at"),
+            "updated_at" => Lang::get("shared.updated_at"),
+            "deleted_at" => Lang::get("shared.deleted_at")
         )
     ),
 
     "user" => array(
         "attributes" => array(
-            "id" => "ID",
+            "id" => Lang::get("shared.id"),
             "email_address" => "Email address",
             "password" => "Password",
             "password_confirmation" => "Password Confirmation",
-            "name" => "Name",
+            "name" => Lang::get("shared.name"),
             "locale" => "Locale",
             "active" => "Active",
             "user_level" => "User Level",
             "remember_token" => "Remember Token",
             "logins" => "Logins",
-            "created_at" => "Created at",
-            "updated_at" => "Updated at",
-            "deleted_at" => "Deleted at"
+            "created_at" => Lang::get("shared.created_at"),
+            "updated_at" => Lang::get("shared.updated_at"),
+            "deleted_at" => Lang::get("shared.deleted_at")
         ),
         "active" => array(
             "yes" => "Yes",
