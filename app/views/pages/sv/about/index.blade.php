@@ -9,5 +9,7 @@
 
             <p>TERESAH has been developed as part of the Data Service Infrastructure for the Social Sciences and Humanities (DASISH), a Seventh Framework Programme funded project. DASISH collaborates with the five ESFRI Infrastructures in the field of Social Science and Humanities (CESSDA, CLARIN, DARIAH, ESS, and SHARE). The tools and knowledge registry is aimed at researchers from all disciplines and sectors, research infrastructure builders and users, as well as IT personnel. It includes information about tools, services, methodologies, and current standards and makes use of existing social media for dissemination and discussions.</p>
         </div>
-    </section>>
+        <!-- /small-10.columns.small-centered -->
+    </section>
+    <!-- /row -->
 @stop
