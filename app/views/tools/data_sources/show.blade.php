@@ -29,7 +29,7 @@
 
 @section("master-head")
     <div class="row">
-        <div class="small-7 columns">
+        <div class="small-12 medium-7 columns">
             <div class="symbol">
                 <abbr title="{{{ $tool->name }}}">{{{ $tool->abbreviation }}}</abbr>
             </div>
@@ -37,9 +37,9 @@
 
             <h1><span itemprop="name">{{{ $tool->name }}}</span> <small>{{ Lang::get("views.tools.data_sources.show.on") }}</small></h1>
         </div>
-        <!-- /small-7.columns -->
+        <!-- /small-12.medium-7.columns -->
 
-        <div class="small-5 columns">
+        <div class="small-12 medium-5 columns">
             <ul class="toolbar">
                 <li>Share This Tool on</li>
                 <li><a href="#" class="addthis_button_facebook" title="Facebook">{{ image_tag("icons/share/facebook.png", array("alt" => "Facebook")) }}</a></li>
@@ -48,7 +48,7 @@
             </ul>
             <!-- /toolbar -->
         </div>
-        <!-- /small-5.columns -->
+        <!-- /small-12.medium-5.columns -->
     </div>
     <!-- /row -->
 @stop
@@ -62,7 +62,7 @@
                 @foreach ($tool->dataSources as $dataSource)
                     <div class="content{{ Active::path(ltrim(parse_url(URL::route("tools.data-sources.show", array($tool->slug, $dataSource->slug)))["path"], "/"), " active") }}">
                         <div class="row">
-                            <div class="small-8 columns">
+                            <div class="small-12 medium-8 columns">
                                 @if (!$dataSource->data->isEmpty())
                                     @if (($name = $dataSource->getLatestToolDataFor($tool->id, "name")) && ($description = $dataSource->getLatestToolDataFor($tool->id, "description")))
                                         <h2>{{{ $name }}}</h2>
@@ -79,7 +79,7 @@
                                             <dt>{{{ $label }}}</dt>
                                             <dd>
                                                 @foreach ($dataList as $index => $data)
-                                                    @if ($data->dataType) 
+                                                    @if ($data->dataType)
                                                         @if (filter_var($data->value, FILTER_VALIDATE_URL))
                                                             {{ link_to($data->value, $data->value, array("property" => $data->dataType->rdf_mapping)) }}{{ ($index < count($dataList) - 1) ? "," : null }}
                                                         @elseif ($data->dataType->linkable)
@@ -115,14 +115,14 @@
                                     <!-- /alert.alert-info -->
                                 @endif
                             </div>
-                            <!-- /small-8.columns -->
+                            <!-- /small-12.medium-8.columns -->
 
-                            <aside class="small-4 columns">
+                            <aside class="small-12 medium-4 columns">
                                 <h3 class="icon info small">About the Data Source</h3>
 
                                 <p>{{{ nl2br($dataSource->description) }}}</p>
                             </aside>
-                            <!-- /small-4.columns -->
+                            <!-- /small-12.medium-4.columns -->
                         </div>
                         <!-- /row -->
                     </div>
@@ -140,12 +140,12 @@
             <div class="small-12 columns">
                 <h1 class="icon similar-tools">{{ Lang::get("views.tools.data_sources.show.similar_tools") }}</h1>
 
-                <ul class="small-block-grid-4">
+                <ul class="small-block-grid-1 medium-block-grid-4">
                     @foreach($similarTools as $similarTool)
                         @include("tools._tool", array("tool" => $similarTool, "type" => "block-grid"))
                     @endforeach
                 </ul>
-                <!-- /small-block-grid-4 -->
+                <!-- /small-block-grid-1.medium-block-grid-4 -->
             </div>
             <!-- /small-12.columns -->
         </section>

@@ -24,12 +24,12 @@
         <div class="small-12 columns">
             <h1 class="hide">{{ $dataType->label }}</h1>
 
-            <ul class="small-block-grid-4">
+            <ul class="small-block-grid-1 medium-block-grid-4">
                 @foreach ($tools as $tool)
                     @include("tools._tool", array($tool, "type" => "block-grid"))
                 @endforeach
             </ul>
-            <!-- /small-block-grid-4 -->
+            <!-- /small-block-grid-1.medium-block-grid-4 -->
 
             {{ $tools->links() }}
         </div>

@@ -2,7 +2,7 @@
 
 @section("content")
     <section class="row">
-        <div class="small-10 columns small-centered">
+        <div class="small-12 medium-10 columns small-centered">
             <h1>Integritetspolicy</h1>
 
             <h2>Allmänt</h2>
@@ -25,7 +25,7 @@
 
             <p>Du kan ställa in datorn så att den blockerar cookies. Det innebär dock att TERESAH inte kan garantera att alla områden på vår webbplats fungerar som avsett. Hur du bär dig åt för att blockera cookies beror på vilken webbläsare du använder. Läs mer om de här funktionerna i instruktionerna eller på hjälpskärmen för webbläsaren.</p>
         </div>
-        <!-- /small-10.columns.small-centered -->
+        <!-- /small-12.medium-10.columns.small-centered -->
     </section>
     <!-- /row -->
 @stop

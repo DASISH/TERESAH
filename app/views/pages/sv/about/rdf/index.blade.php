@@ -2,7 +2,7 @@
 
 @section("content")
     <section class="row">
-        <div class="small-10 columns small-centered">
+        <div class="small-12 medium-10 columns small-centered">
             <h1>RDF Format</h1>
 
             <p>TERESAH erbjuder full export av verktygens metadata vi RDF</p>
@@ -76,7 +76,7 @@
                 @endif
             </dl>
         </div>
-        <!-- /small-10.columns.small-centered -->
+        <!-- /small-12.medium-10.columns.small-centered -->
     </section>
     <!-- /row -->
 @stop

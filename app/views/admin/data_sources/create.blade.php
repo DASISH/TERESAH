@@ -17,7 +17,7 @@
 
 @section("content")
     <section class="row">
-        <div class="small-6 columns small-centered">
+        <div class="small-12 medium-6 columns small-centered">
             @include("shared._error_messages")
             @include("admin.data_sources._form", array(
                 $action = "create",
@@ -29,7 +29,7 @@
                 )
             ))
         </div>
-        <!-- /small-6.columns.small-centered -->
+        <!-- /small-12.medium-6.columns.small-centered -->
     </section>
     <!-- /row -->
 @stop

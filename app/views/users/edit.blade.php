@@ -16,7 +16,7 @@
 
 @section("content")
     <section class="row">
-        <div class="small-8 columns">
+        <div class="small-12 medium-8 columns">
             @include("users._navigation")
 
             <div class="tabs-content">
@@ -35,7 +35,7 @@
             </div>
             <!-- /tabs-content -->
         </div>
-        <!-- /small-8.columns -->
+        <!-- /small-12.medium-8.columns -->
     </section>
     <!-- /row -->
 @stop

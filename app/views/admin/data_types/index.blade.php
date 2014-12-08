@@ -19,7 +19,7 @@
 @section("content")
     <section class="row">
         <div class="small-12 columns">
-            <table>
+            <table class="responsive">
                 <thead>
                     <tr>
                         <th>{{ Lang::get("models.datatype.attributes.id") }}</th>
@@ -40,6 +40,7 @@
                     @endforeach
                 </tbody>
             </table>
+            <!-- /responsive -->
 
             {{ $dataTypes->links() }}
         </div>

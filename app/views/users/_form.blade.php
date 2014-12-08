@@ -30,17 +30,17 @@
         <!-- /row -->
 
         <div class="row">
-            <div class="small-6 columns">
+            <div class="small-12 medium-6 columns">
                 {{ Form::label("password", Lang::get("views.users.form.password.label")) }}
                 {{ Form::password("password", array("placeholder" => Lang::get("views.users.form.password.placeholder"))) }}
             </div>
-            <!-- /small-6.columns -->
+            <!-- /small-12.medium-6.columns -->
 
-            <div class="small-6 columns">
+            <div class="small-12 medium-6 columns">
                 {{ Form::label("password_confirmation", Lang::get("views.users.form.password_confirmation.label")) }}
                 {{ Form::password("password_confirmation", array("placeholder" => Lang::get("views.users.form.password_confirmation.placeholder"))) }}
             </div>
-            <!-- /small-6.columns -->
+            <!-- /small-12.medium-6.columns -->
         </div>
         <!-- /row -->
 

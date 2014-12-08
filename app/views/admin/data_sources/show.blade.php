@@ -17,7 +17,7 @@
 
 @section("content")
     <section class="row">
-        <div class="small-8 columns">
+        <div class="small-12 medium-8 columns">
             <div class="panel">
                 <dl>
                     <dt>{{ Lang::get("models.datasource.attributes.name") }}</dt>
@@ -38,7 +38,7 @@
             </div>
             <!-- /panel -->
         </div>
-        <!-- /small-8.columns -->
+        <!-- /small-12.medium-8.columns -->
     </section>
     <!-- /row -->
 @stop

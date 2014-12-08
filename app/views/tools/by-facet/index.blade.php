@@ -10,7 +10,7 @@
         <div class="small-12 columns">
             <h1>{{ Lang::get("views.tools.by_facet.index.heading") }}</h1>
 
-            <ul class="small-block-grid-4">
+            <ul class="small-block-grid-1 medium-block-grid-4">
                 @foreach ($dataTypes as $type)
                     <li>
                         <article class="card">
@@ -22,6 +22,7 @@
                     </li>
                 @endforeach
             </ul>
+            <!-- /small-block-grid-1.medium-block-grid-4 -->
         </div>
         <!-- /small-12.columns -->
     </section>

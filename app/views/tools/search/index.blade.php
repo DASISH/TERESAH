@@ -6,14 +6,14 @@
 
 @section("master-head")
     <div class="row">
-        <div class="small-6 columns">
+        <div class="small-12 medium-6 columns">
             <h1>{{ Lang::get("views.tools.search.index.heading") }}</h1>
 
             <p>{{ Lang::get("views.tools.index.listing_results", array("from" => $tools->getFrom(), "to" => $tools->getTo(), "total" => $tools->getTotal())) }}</p>
         </div>
-        <!-- /small-6.columns -->
+        <!-- /small-12.medium-6.columns -->
 
-        <div class="small-6 columns">
+        <div class="small-12 medium-6 columns">
             {{ Form::open(array("action" => "ToolsController@search", "method" => "get", "class" => "row")) }}
                 @foreach ($facetList as $facet)
                     @if (Input::has($facet->slug))
@@ -31,7 +31,7 @@
             {{ Form::close() }}
             <!-- /row -->
         </div>
-        <!-- /small-6.columns -->
+        <!-- /small-12.medium-6.columns -->
     </div>
     <!-- /row -->
 @stop
@@ -44,7 +44,7 @@
                     <a href="#filter">Filter Search Results</a>
 
                     <div id="filter" class="content active">
-                        <ul class="small-block-grid-6">
+                        <ul class="small-block-grid-1 medium-block-grid-6">
                             @foreach ($facetList as $facet)
                                 @if (count($facet->values) > 0)
                                     <li>
@@ -70,7 +70,7 @@
                                 @endif
                             @endforeach
                         </ul>
-                        <!-- /small-block-grid-6 -->
+                        <!-- /small-block-grid-1.medium-block-grid-6 -->
                     </div>
                     <!-- /filter.content.active -->
                 </dd>
@@ -79,12 +79,12 @@
             <!-- /accordion -->
 
             @if (count($tools) > 0)
-                <ul class="small-block-grid-4">
+                <ul class="small-block-grid-1 medium-block-grid-4">
                     @foreach ($tools as $tool)
                         @include("tools._tool", array($tool, "type" => "block-grid"))
                     @endforeach
                 </ul>
-                <!-- /small-block-grid-4 -->
+                <!-- /small-block-grid-1.medium-block-grid-4 -->
 
                 {{ $tools->appends(Input::all())->links() }}
             @else

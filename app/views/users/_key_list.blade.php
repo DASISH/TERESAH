@@ -1,7 +1,7 @@
 <h3>{{ Lang::get("views.users.api_key.heading") }}</h3>
 
 <div class="panel">
-    <table>
+    <table class="responsive">
         <thead>
             <tr>
                 <th width="250">{{ Lang::get("views.users.api_key.api-key") }}</th>
@@ -16,6 +16,7 @@
             @endforeach
         </tbody>
     </table>
+    <!-- /responsive -->
 
     <a href="{{ URL::route("api-key.create") }}" class="button tiny" title="{{ Lang::get("views.users.api_key.apply") }}" role="button">{{ Lang::get("views.users.api_key.apply") }}</a>
 </div>

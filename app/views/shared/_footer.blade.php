@@ -1,5 +1,5 @@
 <footer id="footer" class="row" role="contentinfo">
-    <div class="small-6 columns">
+    <div class="small-12 medium-6 columns">
         <ul class="creative-commons">
             <li>{{ image_tag("icons/creative_commons_cc.png", array("alt" => "Creative Commons CC")) }}</li>
             <li>{{ image_tag("icons/creative_commons_by.png", array("alt" => "Creative Commons BY")) }}</li>
@@ -13,9 +13,9 @@
 
         @include("shared._version_information")
     </div>
-    <!-- /small-6.columns -->
+    <!-- /small-12.medium-6.columns -->
 
-    <div class="small-2 columns">
+    <div class="small-12 medium-2 columns">
         <h1>TERESAH</h1>
 
         <nav role="navigation">
@@ -28,9 +28,9 @@
             </ul>
         </nav>
     </div>
-    <!-- /small-2.columns -->
+    <!-- /small-12.medium-2.columns -->
 
-    <div class="small-2 columns">
+    <div class="small-12 medium-2 columns">
         <h1>{{ Lang::get("views.shared.navigation.browse.title") }}</h1>
 
         <nav role="navigation">
@@ -42,9 +42,9 @@
             </ul>
         </nav>
     </div>
-    <!-- /small-2.columns -->
+    <!-- /small-12.medium-2.columns -->
 
-    <div class="small-2 columns end">
+    <div class="small-12 medium-2 columns end">
         <h1>{{ Lang::get("views.shared.navigation.contribute.title") }}</h1>
 
         <nav role="navigation">

@@ -2,7 +2,7 @@
 
 @section("content")
     <section class="row">
-        <div class="small-10 columns small-centered">
+        <div class="small-12 medium-10 columns small-centered">
             <h1>Privacy Policy</h1>
 
             <h2>General</h2>
@@ -25,7 +25,7 @@
 
             <p>You can set your computer to block cookies. However, this means that TERESAH can not guarantee that all areas of our website functions as intended. How do you do it to block cookies depends on what browser you use. Learn more about these features in the instructions or help screen to the browser.
         </div>
-        <!-- /small-10.columns.small-centered -->
+        <!-- /small-12.medium-10.columns.small-centered -->
     </section>
     <!-- /row -->
 @stop

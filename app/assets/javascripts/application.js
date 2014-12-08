@@ -18,6 +18,7 @@
 //= require foundation.dropdown
 //= require foundation.tab
 //= require foundation.topbar
+//= require responsive-tables
 //= require modernizr
 //= require editable
 //= require typeahead.jquery
