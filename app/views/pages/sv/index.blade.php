@@ -53,23 +53,23 @@
 
             <div class="row">
                 <div class="small-12 medium-7 columns">
-                    <h2><a href="{{ URL::route("tools.show", $randomTool->id) }}" title="{{ $randomTool->name }}">{{ $randomTool->name }} </a></h2>
+                    <h2><a href="{{ URL::route("tools.show", $randomTool->slug) }}" title="{{ $randomTool->name }}">{{ $randomTool->name }} </a></h2>
 
                     <p>{{ $randomTool->getDescription() }}</p>
 
-                    <p><a href="{{ URL::route("tools.show", $randomTool->id) }}" class="more" title="Läs mer">Läs mer om {{ $randomTool->name }}</a></p>
+                    <p><a href="{{ URL::route("tools.show", $randomTool->slug) }}" class="more" title="Läs mer">Läs mer om {{ $randomTool->name }}</a></p>
                 </div>
                 <!-- /small-12.medium-7.columns -->
 
                 <div class="small-12 medium-5 columns">
                     <article class="tool align row collapse" itemscope itemtype="http://schema.org/SoftwareApplication">
                         <div class="small-6 columns">
-                            <a href="{{ URL::route("tools.show", $randomTool->id) }}" class="symbol large" title="{{ $randomTool->name }}"><abbr title="{{ $randomTool->name }}">{{ $randomTool->abbreviation }}</abbr></a>
+                            <a href="{{ URL::route("tools.show", $randomTool->slug) }}" class="symbol large" title="{{ $randomTool->name }}"><abbr title="{{ $randomTool->name }}">{{ $randomTool->abbreviation }}</abbr></a>
                         </div>
                         <!-- /small-6.columns -->
 
                         <div class="small-6 columns">
-                            <h1 itemprop="name"><a href="{{ URL::route("tools.show", $randomTool->id) }}" title="{{ $randomTool->name }}">{{ $randomTool->name }}</a></h1>
+                            <h1 itemprop="name"><a href="{{ URL::route("tools.show", $randomTool->slug) }}" title="{{ $randomTool->name }}">{{ $randomTool->name }}</a></h1>
 
                             <p>{{ $randomTool->updated_at->diffForHumans() }}</p>
                         </div>
