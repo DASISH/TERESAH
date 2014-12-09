@@ -39,7 +39,14 @@ class DataTypesTableSeeder extends Seeder
             array("label" => "Tool Type", 
                   "rdf_mapping" => "http://purl.org/dc/elements/1.1/type",
                   "description" => "General type of the tool"
+                 ),
+            array("label" => "Article", 
+                  "rdf_mapping" => "http://schema.org/Article",
+                  "description" => "Link to articles mentioning the tool",
+                  "linkable" => false
                  )
+            
+            
         );
 
         DB::table("data_types")->delete();
