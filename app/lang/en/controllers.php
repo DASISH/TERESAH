@@ -138,5 +138,7 @@ return array(
         "update" => array(
             "success" => "Profile was successfully updated."
         )
-    )
+    ),
+    
+    "license" => "License"
 );

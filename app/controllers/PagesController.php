@@ -50,12 +50,21 @@ class PagesController extends BaseController
         if (Request::is("about/api")) {
             $apiDocumentationPath = rtrim(base_path(), "/") . "/documentation/api/v1";
             $outputOrder = array("readme.md"); # Ensure that the "readme.md" gets rendered first
-
+            
             return $this->matchStaticView(
                 array("content" => $this->convertMarkdown($apiDocumentationPath, $outputOrder))
             );
         }
-
+        else if(Request::is("about/license/source")) {
+            return $this->matchStaticView(
+                array(
+                    "title" => Lang::get("controllers.license"),
+                    "content" => Markdown::render(file_get_contents(base_path() . "/LICENSE.md"))
+                ),
+                "pages/index"
+            );
+        }        
+        
         return $this->matchStaticView();
     }
 
@@ -87,14 +96,14 @@ class PagesController extends BaseController
      * @param  array $parameters Optional parameters for the View
      * @return View
      */
-    private function matchStaticView($parameters = array())
+    private function matchStaticView($parameters = array(), $view = null)
     {
         $locale = App::getLocale();
         $appPath = rtrim(app_path(), "/");
         $requestPath = rtrim(mb_strtolower(Request::path()), "/");
         $fullStaticViewPath = "{$appPath}/views/pages/{$locale}/{$requestPath}";
         $staticViewFilename = "pages/{$locale}/{$requestPath}";
-
+        
         if (is_dir($fullStaticViewPath)) {
             $staticViewFilename .= "/index";
         }
@@ -103,6 +112,12 @@ class PagesController extends BaseController
             return View::make($staticViewFilename, $parameters);
         }
 
+        if(isset($view)) {
+            if(View::exists($view)) {
+                return View::make($view, $parameters);
+            }                
+        }
+        
         # Otherwise return the 404 response
         return App::abort(404);
     }

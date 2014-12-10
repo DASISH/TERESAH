@@ -125,5 +125,7 @@ return array(
         "update" => array(
             "success" => "Användarprofilen uppdaterades."
         )
-    )
+    ),
+    
+    "license" => "Licens"
 );
