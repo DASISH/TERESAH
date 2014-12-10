@@ -534,12 +534,12 @@ Annotator;keyword;Javascript;TERESAH
 Annotator;developer;Open Knowledge Foundation;TERESAH
 Annotator;platform;Web;TERESAH
 Annotator;tool-type;Web development;TERESAH
-Annotator´s Workbench;developer;Ethnographic Video for Instruction & Analysis (EVIA) Digital Archive Project;TERESAH
-Annotator´s Workbench;description;The Annotator´s Workbench is a software tool that enables users to create a collection from a set of existing video files, segment that collection, create annotations and assign vocabulary terms to the segments, and control access. This tool is part of the Ethnographic Video for Institution and Analysis (EVIA) Digital Archive Project at Indiana University and the University of Michigan.;BambooDirt
-Annotator´s Workbench;tool-type;Annotation;TERESAH
-Annotator´s Workbench;homepage;http://www.eviada.org/element.cfm?mc=6&ctID=31&eID=1;TERESAH
-Annotator´s Workbench;platform;Linux;TERESAH
-Annotator´s Workbench;keyword;video;TERESAH
+Annotatorï¿½s Workbench;developer;Ethnographic Video for Instruction & Analysis (EVIA) Digital Archive Project;TERESAH
+Annotatorï¿½s Workbench;description;The Annotatorï¿½s Workbench is a software tool that enables users to create a collection from a set of existing video files, segment that collection, create annotations and assign vocabulary terms to the segments, and control access. This tool is part of the Ethnographic Video for Institution and Analysis (EVIA) Digital Archive Project at Indiana University and the University of Michigan.;BambooDirt
+Annotatorï¿½s Workbench;tool-type;Annotation;TERESAH
+Annotatorï¿½s Workbench;homepage;http://www.eviada.org/element.cfm?mc=6&ctID=31&eID=1;TERESAH
+Annotatorï¿½s Workbench;platform;Linux;TERESAH
+Annotatorï¿½s Workbench;keyword;video;TERESAH
 Annotorious;description;A Web-based image annotation tool, built specifically for integration with existing Web pages or portal environments. Annotorious is also available as a plugin to the Annotator Web annotation system by the Open Knowledge Foundation.;BambooDirt
 Annotorious;developer;AIT Austrian Institute of Technology;TERESAH
 Annotorious;tool-type;Annotation;TERESAH
@@ -750,13 +750,13 @@ ArcView;standard;SVG;TERESAH
 ArcView;standard;TIFF;TERESAH
 ArcView;platform;Windows;TERESAH
 ArcView;keyword;Windows Enhanced MetaFile (EMF);TERESAH
-ARTFL Encyclopédie Project;developer;ARTFL;TERESAH
-ARTFL Encyclopédie Project;keyword;encyclopedia;TERESAH
-ARTFL Encyclopédie Project;homepage;http://encyclopedie.uchicago.edu/;TERESAH
-ARTFL Encyclopédie Project;keyword;Philomine;TERESAH
-ARTFL Encyclopédie Project;tool-type;Text collections;TERESAH
-ARTFL Encyclopédie Project;description;The ARTFL Encyclopédie Project has digitized the Encyclopédie ou Dictionnaire raisonnÃ© des sciences, des arts et des mÃ©tiers, par une SociÃ©tÃ© de Gens de lettres (published under the direction of Diderot and d'Alembert between 1751 and 1772, containing 74,000 articles written by more than 130 contributors) and made it available online for scholars to use with the Philologic text retrieval engine and the Philomine text mining tools.;BambooDirt
-ARTFL Encyclopédie Project;platform;Web;TERESAH
+ARTFL Encyclopï¿½die Project;developer;ARTFL;TERESAH
+ARTFL Encyclopï¿½die Project;keyword;encyclopedia;TERESAH
+ARTFL Encyclopï¿½die Project;homepage;http://encyclopedie.uchicago.edu/;TERESAH
+ARTFL Encyclopï¿½die Project;keyword;Philomine;TERESAH
+ARTFL Encyclopï¿½die Project;tool-type;Text collections;TERESAH
+ARTFL Encyclopï¿½die Project;description;The ARTFL Encyclopï¿½die Project has digitized the Encyclopï¿½die ou Dictionnaire raisonnÃ© des sciences, des arts et des mÃ©tiers, par une SociÃ©tÃ© de Gens de lettres (published under the direction of Diderot and d'Alembert between 1751 and 1772, containing 74,000 articles written by more than 130 contributors) and made it available online for scholars to use with the Philologic text retrieval engine and the Philomine text mining tools.;BambooDirt
+ARTFL Encyclopï¿½die Project;platform;Web;TERESAH
 ARTISAN;keyword;analysis;TERESAH
 ARTISAN;description;"ARTISAN (Automatic Retrieval of Trademark Images by Shape Analysis) is a software tool for the analysis and comparison of still image files. It uses a Content-based image retrieval (CBIR) technique to analyse the visual content of an image, contrasting against alternative methods that involve searching of associated metadata. The software builds upon the principles of Gestalt psychology, analysing an image in its entirety and locating images to which it has a broad resemblance. The cross-matching activity may be described as a form of ""fuzzy searchingâ€™, retrieving images on the basis that they look similar to a human observer.";ArtsHumanities
 ARTISAN;keyword;cbir;TERESAH
@@ -1272,18 +1272,18 @@ Click2map ;keyword;Online;TERESAH
 Click2map ;keyword;Single purpose;TERESAH
 Click2map ;tool-type;Visualisation;TERESAH
 Collin\'s Parser;developer;Michael Collins;TERESAH
-Collin´s Parser;description;A statistical natural language parser capable of analysing a text to determine its grammatical structure.;ArtsHumanities
-Collin´s Parser;keyword;analysis;TERESAH
-Collin´s Parser;platform;Cross-platform;TERESAH
-Collin´s Parser;license;GNU GPL;TERESAH
-Collin´s Parser;platform;Linux;TERESAH
-Collin´s Parser;keyword;Natural language;TERESAH
-Collin´s Parser;platform;osX;TERESAH
-Collin´s Parser;keyword;parse;TERESAH
-Collin´s Parser;keyword;parsing standards;TERESAH
-Collin´s Parser;keyword;Statistical analysis;TERESAH
-Collin´s Parser;platform;Windows;TERESAH
-Concordance;description;A software tool for performing concordance “ the analysis of a set of words within its immediate context - on a body of text. The tool performs full concordance, reading and analysing each and every word in a text. It was initially written for the analysis of English texts, but has since been extended to cater for other Western languages. Limited support is also provided for text in East Asian scripts, such as Chinese and Korean.;ArtsHumanities
+Collinï¿½s Parser;description;A statistical natural language parser capable of analysing a text to determine its grammatical structure.;ArtsHumanities
+Collinï¿½s Parser;keyword;analysis;TERESAH
+Collinï¿½s Parser;platform;Cross-platform;TERESAH
+Collinï¿½s Parser;license;GNU GPL;TERESAH
+Collinï¿½s Parser;platform;Linux;TERESAH
+Collinï¿½s Parser;keyword;Natural language;TERESAH
+Collinï¿½s Parser;platform;osX;TERESAH
+Collinï¿½s Parser;keyword;parse;TERESAH
+Collinï¿½s Parser;keyword;parsing standards;TERESAH
+Collinï¿½s Parser;keyword;Statistical analysis;TERESAH
+Collinï¿½s Parser;platform;Windows;TERESAH
+Concordance;description;A software tool for performing concordance ï¿½ the analysis of a set of words within its immediate context - on a body of text. The tool performs full concordance, reading and analysing each and every word in a text. It was initially written for the analysis of English texts, but has since been extended to cater for other Western languages. Limited support is also provided for text in East Asian scripts, such as Chinese and Korean.;ArtsHumanities
 Concordance;keyword;analysis;TERESAH
 Concordance;license;commercial;TERESAH
 Concordance;keyword;concordance;TERESAH
@@ -1749,6 +1749,10 @@ Gephi;homepage;http://gephi.org/;TERESAH
 Gephi;platform;Linux;TERESAH
 Gephi;keyword;network analysis;TERESAH
 Gephi;tool-type;Visualization;TERESAH
+Gephi;publication;http://www.aaai.org/ocs/index.php/ICWSM/09/paper/viewFile/154Forum/1009;TERESAH
+Gephi;publication;http://dl.acm.org/citation.cfm?id=2464487;TERESAH
+Gephi;publication;http://books.google.com.cy/books?hl=en&lr=&id=-bP4AAAAQBAJ&oi=fnd&pg=PT6&dq=Gephi&ots=tFvoJQ17K0&sig=jLg_vjM4feBBSWXXrRH1OSE_ICc;TERESAH
+Gephi;publication;http://www.tandfonline.com/doi/abs/10.1080/19409419.2013.824401?journalCode=rrjc20;TERESAH
 GIMP (GNU Image Manipulation Program);description;GIMP is image editing software, much like Photoshop. It is a multi-platform software application primarily used for image composition and editing. The basic tool may be augmented by plug-ins and extensions that allow the use of new file formats, effects filters and batch processing capabilities. GIMP was initially created to manipulate raster images, but has been extended to provide limited vector image and moving image support. A number of free extensions are available in the plugin registry.;BambooDirt
 GIMP (GNU Image Manipulation Program);developer;GIMP Team;TERESAH
 GIMP (GNU Image Manipulation Program);license;GNU GPL;TERESAH
@@ -1917,6 +1921,9 @@ Google Maps;description;Google Maps is a web mapping service application that in
 Google Maps;homepage;http://maps.google.com/;TERESAH
 Google Maps;tool-type;Mapping;TERESAH
 Google Maps;platform;Web;TERESAH
+Google Maps;publication;http://www.sciencedirect.com/science/article/pii/S030544031100015X;TERESAH
+Google Maps;publication;http://www.sciencedirect.com/science/article/pii/S1296207411000069;TERESAH
+Google Maps;publication;http://www.saa.org/Portals/0/SAA/Publications/thesaaarchrec/Jan2013.pdf#page=22;TERESAH
 Google Notebook;tool-type;Annotation;TERESAH
 Google Notebook;developer;Google;TERESAH
 Google Notebook;description;"Google Notebook helps you collect notes and information from the web for research or planning. You can use Google's bookmarklet to add text and images to any page of your notebooks, access your notebooks from any computer or your mobile phone, and also share your notebooks with others. 
@@ -3077,10 +3084,10 @@ NewRadial (INKE);license;GNU GPL (v3);TERESAH
 NewRadial (INKE);homepage;http://inke.acadiau.ca/newradial/;TERESAH
 NewRadial (INKE);keyword;INKE;TERESAH
 NewRadial (INKE);developer;INKE Modelling and Prototyping Team;TERESAH
-NewRadial (INKE);description;"NewRadial is an interactive visualization environment that uses an adapter system to display and combine content from remotely-served or locally situated databases.  Although initially designed for use with image-based databases, NewRadial´s capabilities have been extended to handle the manipulation and annotation, in a visual field, of text-based databases.  This  adaptive ability makes it ideal for use with literary works, and ”given its web-based functionality--ideal for collecting, associating and displaying independent databases together in the same visual field for use by a particular knowledge community.
+NewRadial (INKE);description;"NewRadial is an interactive visualization environment that uses an adapter system to display and combine content from remotely-served or locally situated databases.  Although initially designed for use with image-based databases, NewRadialï¿½s capabilities have been extended to handle the manipulation and annotation, in a visual field, of text-based databases.  This  adaptive ability makes it ideal for use with literary works, and ï¿½given its web-based functionality--ideal for collecting, associating and displaying independent databases together in the same visual field for use by a particular knowledge community.
 The NewRadial prototype encourages three types of work:
 1.	 A simple search, sorting and manipulation of database objects in a visual field for the purposes of early scholarly inquiry and curiosity-based research
-2.	Initial, raw and in-process commentary on connections and associations between database objects.  Within the database´s visual field, scholars can add comments on such correlations, thus starting conversations, discussions and debates relating to such ideas.  These discussions are hosted and archived by the NewRadial server.
+2.	Initial, raw and in-process commentary on connections and associations between database objects.  Within the databaseï¿½s visual field, scholars can add comments on such correlations, thus starting conversations, discussions and debates relating to such ideas.  These discussions are hosted and archived by the NewRadial server.
 3.	Larger edition projects in which a community is able to centralize and sort specific selections from a larger database.  NewRadial can be used to construct these curated environments, browse such environments, and (if desired) encourage secondary scholarship to proliferate in and around such projects.
 Source code: http://sourceforge.net/projects/newradial-inke/";BambooDirt
 NewRadial (INKE);platform;Web;TERESAH
@@ -3357,6 +3364,9 @@ OpenLayers;keyword;markers;TERESAH
 OpenLayers;developer;Open Source Geospatial Foundation;TERESAH
 OpenLayers;description;OpenLayers is a Javascript library that can display map tiles and markers loaded from any source.;BambooDirt
 OpenLayers;platform;Web;TERESAH
+OpenLayers;publication;http://www.e-perimetron.org/vol_4_2/Henrie.pdf;TERESAH
+OpenLayers;publication;http://proceedings.asmedigitalcollection.asme.org/proceeding.aspx?articleid=1614910;TERESAH
+OpenLayers;publication;http://dl.acm.org/citation.cfm?id=1823894;TERESAH
 OpenOffice;license;Apache License;TERESAH
 OpenOffice;developer;Apache Software Foundation;TERESAH
 OpenOffice;homepage;http://www.openoffice.org;TERESAH
@@ -3954,31 +3964,31 @@ Proofread Page;keyword;mediawiki;TERESAH
 Proofread Page;description;Proofread Page is an extension for MediaWiki which allows you to edit transcriptions side by side with the page images. It is used on WikiSource for manuscript and early print transcription projects. Proofread Page supports workflow, but no markup.;BambooDirt
 Proofread Page;tool-type;Transcription;TERESAH
 Proofread Page;platform;Web;TERESAH
-Protégé;description;"""Protégé is a free, open source ontology editor and knowledge-base framework
-The Protégé platform supports two main ways of modeling ontologies via the Protégé-Frames and Protégé-OWL editors. Protégé ontologies can be exported into a variety of formats including RDF(S), OWL, and XML Schema."" -- Protege Home Page (viewed 30 October 2012)";BambooDirt
-Protégé;keyword;Active;TERESAH
-Protégé;keyword;Active development;TERESAH
-Protégé;keyword;Both;TERESAH
-Protégé;homepage;http://protege.stanford.edu/;TERESAH
-Protégé;keyword;Intermediate;TERESAH
-Protégé;tool-type;Linked data;TERESAH
-Protégé;license;Mozilla Public License V. 1.1;TERESAH
-Protégé;description;Protégé is an open-source ontology editor, allowing users to construct and edit their own ontology for the semantic web, giving the opportunity to link this new ontology more effectively with others that are available online. Additionally the site offers downloads of existing OWL (Web Ontology Language) ontologies. A beta version of a web editor is available, but the downloaded versions have more functionality. Training and consulation are also available for a fee.;HistoryOnline
-Protégé;keyword;Single purpose;TERESAH
-Protégé;developer;Stanford Center for Biomedical Informatics Research;TERESAH
-Protégé;tool-type;Text collections;TERESAH
-Protégé;keyword;thesauri;TERESAH
+Protï¿½gï¿½;description;"""Protï¿½gï¿½ is a free, open source ontology editor and knowledge-base framework
+The Protï¿½gï¿½ platform supports two main ways of modeling ontologies via the Protï¿½gï¿½-Frames and Protï¿½gï¿½-OWL editors. Protï¿½gï¿½ ontologies can be exported into a variety of formats including RDF(S), OWL, and XML Schema."" -- Protege Home Page (viewed 30 October 2012)";BambooDirt
+Protï¿½gï¿½;keyword;Active;TERESAH
+Protï¿½gï¿½;keyword;Active development;TERESAH
+Protï¿½gï¿½;keyword;Both;TERESAH
+Protï¿½gï¿½;homepage;http://protege.stanford.edu/;TERESAH
+Protï¿½gï¿½;keyword;Intermediate;TERESAH
+Protï¿½gï¿½;tool-type;Linked data;TERESAH
+Protï¿½gï¿½;license;Mozilla Public License V. 1.1;TERESAH
+Protï¿½gï¿½;description;Protï¿½gï¿½ is an open-source ontology editor, allowing users to construct and edit their own ontology for the semantic web, giving the opportunity to link this new ontology more effectively with others that are available online. Additionally the site offers downloads of existing OWL (Web Ontology Language) ontologies. A beta version of a web editor is available, but the downloaded versions have more functionality. Training and consulation are also available for a fee.;HistoryOnline
+Protï¿½gï¿½;keyword;Single purpose;TERESAH
+Protï¿½gï¿½;developer;Stanford Center for Biomedical Informatics Research;TERESAH
+Protï¿½gï¿½;tool-type;Text collections;TERESAH
+Protï¿½gï¿½;keyword;thesauri;TERESAH
 Protovis;homepage;http://mbostock.github.io/protovis/;TERESAH
 Protovis;keyword;Javascript;TERESAH
 Protovis;description;"Protovis composes custom views of data with simple marks such as bars and dots. Unlike low-level graphics libraries that quickly become tedious for visualization, Protovis defines marks through dynamic properties that encode data, allowing inheritance, scales and layouts to simplify construction.
 Protovis is free and open-source, provided under the BSD License. It uses JavaScript and SVG for web-native visualizations; no plugin required (though you will need a modern web browser)! Although programming experience is helpful, Protovis is mostly declarative and designed to be learned by example.";BambooDirt
 Protovis;platform;Web;TERESAH
 Protovis;tool-type;Visualization;TERESAH
-Proxémie;description;A French-developed Java application that displays the lexical relations of a word in a 3D environment.;BambooDirt
-Proxémie;developer;Centre National de Ressources Textuelles et Lexicales (CNRTL);TERESAH
-Proxémie;homepage;http://www.cnrtl.fr/proxemie/;TERESAH
-Proxémie;platform;Web;TERESAH
-Proxémie;keyword;visual search;TERESAH
+Proxï¿½mie;description;A French-developed Java application that displays the lexical relations of a word in a 3D environment.;BambooDirt
+Proxï¿½mie;developer;Centre National de Ressources Textuelles et Lexicales (CNRTL);TERESAH
+Proxï¿½mie;homepage;http://www.cnrtl.fr/proxemie/;TERESAH
+Proxï¿½mie;platform;Web;TERESAH
+Proxï¿½mie;keyword;visual search;TERESAH
 Publish or Perish;developer;Anne-Wil Harzing;TERESAH
 Publish or Perish;homepage;http://www.harzing.com/pop.htm;TERESAH
 Publish or Perish;platform;Linux;TERESAH
@@ -4572,7 +4582,7 @@ Sigil;tool-type;Writing;TERESAH
 Silk;keyword;Active;TERESAH
 Silk;homepage;http://www.silkapp.com;TERESAH
 Silk;developer;Silk;TERESAH
-Silk;description;"Silk is a platform for sites that contain collections of information. It's like the Tumblr for websites that have structured content “like software reviews, information about designers, a site with UN datasets, and more.
+Silk;description;"Silk is a platform for sites that contain collections of information. It's like the Tumblr for websites that have structured content ï¿½like software reviews, information about designers, a site with UN datasets, and more.
 When you have created your site (manually or by uploading one or more datasets), you can visualize and filter your data in a few ways. You can create graphs if your pages contain numbers, maps if you have locations, and filtered tables for just about anything. These visualizations and tables are interactive: anyone can play around with the variables to get the answer they need from the data.";BambooDirt
 Silk;platform;Web;TERESAH
 Silk;tool-type;Visualization;TERESAH
@@ -4718,7 +4728,7 @@ Audio playback via installed audio codecs (e.g. Wav, MP3)
  
 Variable speed playback
  
-'Walking' support “ playback of a small stretch of an audio stream several times to ensure accurate transcription is made, followed by an advancement to a new section of audio.";BambooDirt
+'Walking' support ï¿½ playback of a small stretch of an audio stream several times to ensure accurate transcription is made, followed by an advancement to a new section of audio.";BambooDirt
 SoundScriber;keyword;audio;TERESAH
 SoundScriber;keyword;audio playback;TERESAH
 SoundScriber;keyword;creation;TERESAH
@@ -5077,12 +5087,12 @@ TextSTAT- Simple Text Analysis Tool;homepage;http://neon.niederlandistik.fu-berl
 TextSTAT- Simple Text Analysis Tool;tool-type;Text mining;TERESAH
 TextSTAT- Simple Text Analysis Tool;keyword;web spider;TERESAH
 TextSTAT- Simple Text Analysis Tool;platform;Windows;TERESAH
-The Field Linguist´s Toolbox;homepage;http://www.sil.org/computing/catalog/show_software.asp?id=79;TERESAH
-The Field Linguist´s Toolbox;keyword;interlinear analysis;TERESAH
-The Field Linguist´s Toolbox;tool-type;Linguistic research;TERESAH
-The Field Linguist´s Toolbox;license;SIL Language Freeware;TERESAH
-The Field Linguist´s Toolbox;description;The Field Linguist's Toolbox is Windows software for maintaining lexical data, and for parsing and interlinearizing text.;BambooDirt
-The Field Linguist´s Toolbox;platform;Windows;TERESAH
+The Field Linguistï¿½s Toolbox;homepage;http://www.sil.org/computing/catalog/show_software.asp?id=79;TERESAH
+The Field Linguistï¿½s Toolbox;keyword;interlinear analysis;TERESAH
+The Field Linguistï¿½s Toolbox;tool-type;Linguistic research;TERESAH
+The Field Linguistï¿½s Toolbox;license;SIL Language Freeware;TERESAH
+The Field Linguistï¿½s Toolbox;description;The Field Linguist's Toolbox is Windows software for maintaining lexical data, and for parsing and interlinearizing text.;BambooDirt
+The Field Linguistï¿½s Toolbox;platform;Windows;TERESAH
 The Field Linguistâ€™s Toolbox;developer;SIL International;TERESAH
 The Observer XT;keyword;Active;TERESAH
 The Observer XT;homepage;http://www.noldus.com/human-behavior-research/products/the-observer-xt;TERESAH
@@ -5156,7 +5166,8 @@ TileMill;platform;Linux;TERESAH
 TileMill;keyword;map tiles;TERESAH
 TileMill;developer;MapBox;TERESAH
 TileMill;tool-type;Mapping;TERESAH
-TileMill;description;"Open source map design studio for creating custom web tile maps that use MapBox's data. Sushi";BambooDirt
+TileMill;description;"Open source map design studio for creating custom web tile maps that use MapBox's data.
+ Sushi";BambooDirt
 TileMill;keyword;Paid;TERESAH
 Timeflow;homepage;http://flowingmedia.com/timeflow.html;TERESAH
 Timeflow;description;Time Flow is an open-source timeline built to help journalists analyze temporal data. The application offers several view modes--timelime, calendar, list, table--to help explore thousands of data points.;BambooDirt

@@ -35,7 +35,7 @@
             </div>
             <!-- /symbol -->
 
-            <h1><span itemprop="name">{{{ $tool->name }}}</span> <small>{{ Lang::get("views.tools.data_sources.show.on") }}</small></h1>
+            <h1><span itemprop="name">{{{ $tool->name }}}</span></h1>
         </div>
         <!-- /small-12.medium-7.columns -->
 
