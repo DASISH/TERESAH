@@ -11,7 +11,7 @@
 
             <h2>Personal Information</h2>
 
-            TERESAH will not collect any personally identifiable information about you through this site, such as name or email address, unless you have provided it to us voluntarily. In order to answer your questions or fulfill a request by you, it may be necessary to ask for personal information, such as name and email address. TERESAH can use this information to respond to a request from you, or to contact you via email in order to fulfill your request. TERESAH has no intention now or in the future, sell, rent, or market your personal information to third parties.</p>
+            <p>TERESAH will not collect any personally identifiable information about you through this site, such as name or email address, unless you have provided it to us voluntarily. In order to answer your questions or fulfill a request by you, it may be necessary to ask for personal information, such as name and email address. TERESAH can use this information to respond to a request from you, or to contact you via email in order to fulfill your request. TERESAH has no intention now or in the future, sell, rent, or market your personal information to third parties.</p>
 
             <h2>Information collected automatically</h2>
 
