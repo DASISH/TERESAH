@@ -787,6 +787,10 @@ return array(
                 "privacy_policy" => array(
                     "name" => "Privacy Policy",
                     "title" => "Privacy Policy"
+                ),
+                "license" => array(
+                    "name" => "License and Citing",
+                    "title" => "License and Citing"
                 )
             ),
 

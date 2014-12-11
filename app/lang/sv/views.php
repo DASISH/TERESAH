@@ -697,6 +697,14 @@ return array(
                 "rdf" => array(
                     "name" => "RDF",
                     "title" => "RDF"
+                ),
+                "privacy_policy" => array(
+                    "name" => "Integritetspolicy",
+                    "title" => "Integritetspolicy"
+                ),
+                "license" => array(
+                    "name" => "Licens och Citering",
+                    "title" => "Licens och Citering"
                 )
             ),
             "edit_user_profile" => array(

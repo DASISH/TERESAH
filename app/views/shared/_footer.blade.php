@@ -24,7 +24,7 @@
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.name"), array("path" => "about"), array("title" => Lang::get("views.shared.navigation.about.title"))) }}</li>
                 <li><a href="#" title="Terms of Service">Terms of Service</a></li>
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.privacy_policy.name"), array("path" => "about/privacy"), array("title" => Lang::get("views.shared.navigation.about.privacy_policy.title"))) }}</li>
-                <li><a href="#" title="Licenses">Licenses</a></li>
+                <li>{{ Link_to("about/license", Lang::get("views.shared.navigation.about.license.name")) }}</li>
             </ul>
         </nav>
     </div>

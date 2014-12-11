@@ -58,7 +58,7 @@ class PagesController extends BaseController
             case "about/license/source":
                 return $this->matchStaticView(
                     array(
-                        "title" => Lang::get("controllers.license"),
+                        "title" => Lang::get("controllers.license.source"),
                         "content" => Markdown::render(file_get_contents(base_path() . "/LICENSE.md"))
                     ),
                     "pages/index"
@@ -66,6 +66,17 @@ class PagesController extends BaseController
 
                 break;
 
+            case "about/license/content":
+                return $this->matchStaticView(
+                    array(
+                        "title" => Lang::get("controllers.license.content"),
+                        "content" => Markdown::render(file_get_contents(base_path() . "/LICENSE_CONTENT.md"))
+                    ),
+                    "pages/index"
+                );
+
+                break;
+            
             default:
                 return $this->matchStaticView();
 
