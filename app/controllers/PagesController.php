@@ -19,7 +19,7 @@ class PagesController extends BaseController
      * Display the front page.
      *
      * GET /
-     * 
+     *
      * @return View
      */
     public function index()
@@ -38,34 +38,39 @@ class PagesController extends BaseController
      * Display the specified static view.
      *
      * GET /{path}
-     * 
+     *
      * @return View
      */
     public function show()
     {
-        # TODO: Extract the rendering of the API documentation 
-        # to it's own route/function?
-        #
-        # TODO: Extract the static documentation path to configurable constant?
-        if (Request::is("about/api")) {
-            $apiDocumentationPath = rtrim(base_path(), "/") . "/documentation/api/v1";
-            $outputOrder = array("readme.md"); # Ensure that the "readme.md" gets rendered first
-            
-            return $this->matchStaticView(
-                array("content" => $this->convertMarkdown($apiDocumentationPath, $outputOrder))
-            );
+        switch (Request::path()) {
+            # TODO: Extract the static documentation path to configurable constant?
+            case "about/api":
+                $apiDocumentationPath = rtrim(base_path(), "/") . "/documentation/api/v1";
+                $outputOrder = array("readme.md"); # Ensure that the "readme.md" gets rendered first
+
+                return $this->matchStaticView(
+                    array("content" => $this->convertMarkdown($apiDocumentationPath, $outputOrder))
+                );
+
+                break;
+
+            case "about/license/source":
+                return $this->matchStaticView(
+                    array(
+                        "title" => Lang::get("controllers.license"),
+                        "content" => Markdown::render(file_get_contents(base_path() . "/LICENSE.md"))
+                    ),
+                    "pages/index"
+                );
+
+                break;
+
+            default:
+                return $this->matchStaticView();
+
+                break;
         }
-        else if(Request::is("about/license/source")) {
-            return $this->matchStaticView(
-                array(
-                    "title" => Lang::get("controllers.license"),
-                    "content" => Markdown::render(file_get_contents(base_path() . "/LICENSE.md"))
-                ),
-                "pages/index"
-            );
-        }        
-        
-        return $this->matchStaticView();
     }
 
     /* TODO: Clean up and refactor */
@@ -92,8 +97,9 @@ class PagesController extends BaseController
      * the Laravel framework already filter the "Request::path()" or 
      * "View::make()" methods, or do we need to filter out possible 
      * directory traversal attacks from the "requestPath" variable?
-     * 
+     *
      * @param  array $parameters Optional parameters for the View
+     * @param  string $view Render the content with the specific view template
      * @return View
      */
     private function matchStaticView($parameters = array(), $view = null)
@@ -103,7 +109,7 @@ class PagesController extends BaseController
         $requestPath = rtrim(mb_strtolower(Request::path()), "/");
         $fullStaticViewPath = "{$appPath}/views/pages/{$locale}/{$requestPath}";
         $staticViewFilename = "pages/{$locale}/{$requestPath}";
-        
+
         if (is_dir($fullStaticViewPath)) {
             $staticViewFilename .= "/index";
         }
@@ -112,12 +118,10 @@ class PagesController extends BaseController
             return View::make($staticViewFilename, $parameters);
         }
 
-        if(isset($view)) {
-            if(View::exists($view)) {
-                return View::make($view, $parameters);
-            }                
+        if (isset($view) && View::exists($view)) {
+            return View::make($view, $parameters);
         }
-        
+
         # Otherwise return the 404 response
         return App::abort(404);
     }
