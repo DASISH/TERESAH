@@ -50,7 +50,6 @@
         <nav role="navigation">
             <ul>
                 <li><a href="{{ URL::route("sessions.create") }}" title="{{ Lang::get("views.shared.navigation.login.title") }}" title="{{ Lang::get("views.shared.navigation.login.title") }}">{{ Lang::get("views.shared.navigation.login.name") }}</a></li>
-                <li><a href="#" title="Submit Tool Data">Submit Tool Data</a></li>
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.api.name"), array("path" => "about/api"), array("title" => Lang::get("views.shared.navigation.about.api.title"))) }}</li>
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.rdf.name"), array("path" => "about/rdf"), array("title" => Lang::get("views.shared.navigation.about.rdf.title"))) }}</li>
                 <li>{{ link_to("https://github.com/DASISH/TERESAH", Lang::get("views.shared.navigation.fork.name"))}}</li>
