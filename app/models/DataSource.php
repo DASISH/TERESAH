@@ -22,7 +22,7 @@ class DataSource extends BaseModel
     protected $rules = array(
         "name" => "required|unique:data_sources|max:255",
         "description" => "sometimes|max:1024",
-        "homepage" => "sometimes|url",
+        "homepage" => "required|unique:data_sources|url",
         "user_id" => "required|integer|exists:users,id,deleted_at,NULL"
     );
 
