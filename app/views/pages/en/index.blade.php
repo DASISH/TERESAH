@@ -69,7 +69,7 @@
                         <!-- /small-6.columns -->
 
                         <div class="small-6 columns">
-                            <h1 itemprop="name"><a href="{{ URL::route("tools.show", $randomTool->id) }}" title="{{ $randomTool->name }}">{{ $randomTool->name }}</a></h1>
+                            <h1 itemprop="name"><a href="{{ URL::route("tools.show", $randomTool->slug) }}" title="{{ $randomTool->name }}">{{ $randomTool->name }}</a></h1>
 
                             <p>{{ BaseHelper::diffForHumans($randomTool->updated_at) }}</p>
                         </div>
