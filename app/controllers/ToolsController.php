@@ -57,7 +57,11 @@ class ToolsController extends BaseController {
      */
     public function show($id)
     {
-        $tool = $this->toolService->getFirstBy("slug", "=", $id);
+        if(is_numeric($id)){
+            $tool = $this->toolService->find($id)->first();
+        }else{
+            $tool = $this->toolService->getFirstBy("slug", "=", $id);
+        }
 
         $dataSource = $tool->dataSources()
                         ->orderBy("data_sources.created_at", "ASC")->first();
