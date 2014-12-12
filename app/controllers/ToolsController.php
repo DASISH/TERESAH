@@ -137,78 +137,13 @@ class ToolsController extends BaseController {
      * @param type $query search query to match against tool name and data vales
      * @return type View
      */
-    public function search($query = null) {
-        $query = Input::get("query", $query);
-        $tool_ids = array();
+    public function search() {
+        $results = $this->toolService->search(Input::all());
 
-        $tool_id_query = Tool::haveData();
-
-        $types = DataType::IsLinkable()
-                    ->haveData()->get();
-
-        foreach ($types as $type) {
-            if (Input::has($type->slug)){
-                $values = ArgumentsHelper::getArgumentValues($type->slug);
-
-                foreach ($values as $value){
-                    $tool_id_query->haveFacet($type->id, $value);
-                }
-            }
-        }
-
-        if ($query != null) {
-            $tool_ids = $tool_id_query->lists("id");
-
-            if (count($tool_ids) > 0) {
-                $string_match_query = Tool::whereIn("id", $tool_ids);
-            } else {
-                $string_match_query = Tool::haveData();
-            }
-
-            if (str_contains($query, " ")) {
-                $parts = explode(" ", $query);
-            } else{
-                $parts = array($query);
-            }
-
-            foreach ($parts as $q) {
-                $string_match_query->matchingString($q);
-            }
-
-            $string_matched_tool_ids = $string_match_query->lists("id");
-            $tool_ids = array_intersect($string_matched_tool_ids, $tool_ids);
-        } else {
-            $tool_ids = $tool_id_query->lists("id");
-        }
-
-        if (empty($tool_ids)) {
-            $tool_ids = array(0);
-        }
-
-        $tools = Tool::whereIn("id", $tool_ids)
-                           ->orderBy("name", "ASC")
-                           ->paginate(Config::get("teresah.search_pager_size"));
-
-        $facetList = array();
-
-        foreach ($types as $type) {
-            $result =  Data::select("value", "slug", DB::raw("count(tool_id) as total"))
-                             ->where("data_type_id", $type->id);
-
-            if (count($tool_ids) > 0) {
-                $result->whereIn("tool_id", $tool_ids);
-            }
-
-            $limit = Input::get($type->slug."-limit", Config::get("teresah.search_facet_count"));
-            $type->values = $result->groupBy("value")
-                                   ->orderBy("total", "DESC")
-                                   ->paginate($limit);
-            $facetList[] = $type;
-        }
-
-        return View::make("tools.search.index", compact("tools"))
-                     ->with("facetList", $facetList)
-                     ->with("query", $query);
+        return View::make("tools.search.index")
+                    ->with("tools", $results["tools"])
+                    ->with("facetList", $results["facets"])
+                    ->with("query", Input::get("query", null));
     }
 
     /**
