@@ -24,7 +24,7 @@
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.name"), array("path" => "about"), array("title" => Lang::get("views.shared.navigation.about.title"))) }}</li>
                 <li><a href="#" title="Terms of Service">Terms of Service</a></li>
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.privacy_policy.name"), array("path" => "about/privacy"), array("title" => Lang::get("views.shared.navigation.about.privacy_policy.title"))) }}</li>
-                <li>{{ Link_to("about/license", Lang::get("views.shared.navigation.about.license.name")) }}</li>
+                <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.license.name"), array("path" => "about/license"), array("title" => Lang::get("views.shared.navigation.about.license.title"))) }}</li>
             </ul>
         </nav>
     </div>
@@ -51,8 +51,8 @@
             <ul>
                 <li><a href="{{ URL::route("sessions.create") }}" title="{{ Lang::get("views.shared.navigation.login.title") }}" title="{{ Lang::get("views.shared.navigation.login.title") }}">{{ Lang::get("views.shared.navigation.login.name") }}</a></li>
                 <li><a href="#" title="Submit Tool Data">Submit Tool Data</a></li>
-                <li>{{ link_to("/about/api", Lang::get("views.shared.navigation.about.api.documentation"))}}</li>
-                <li>{{ link_to("/about/rdf", Lang::get("views.shared.navigation.about.rdf.documentation"))}}</li>
+                <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.api.name"), array("path" => "about/api"), array("title" => Lang::get("views.shared.navigation.about.api.title"))) }}</li>
+                <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.rdf.name"), array("path" => "about/rdf"), array("title" => Lang::get("views.shared.navigation.about.rdf.title"))) }}</li>
                 <li>{{ link_to("https://github.com/DASISH/TERESAH", Lang::get("views.shared.navigation.fork.name"))}}</li>
             </ul>
         </nav>

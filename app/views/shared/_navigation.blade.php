@@ -9,7 +9,15 @@
         <section class="top-bar-section">
             <ul class="right">
                 <li>{{ Link_to("/", Lang::get("views.shared.navigation.teresah.title")) }}</li>
-                <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.name"), array("path" => "about"), array("title" => Lang::get("views.shared.navigation.about.title"))) }}</li>
+                <li class="has-dropdown">{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.name"), array("path" => "about"), array("title" => Lang::get("views.shared.navigation.about.title"))) }}
+                    <ul class="dropdown">
+                        <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.teresah.name"), array("path" => "about"), array("title" => Lang::get("views.shared.navigation.teresah.title"))) }}</li>
+                        <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.privacy_policy.name"), array("path" => "about/privacy"), array("title" => Lang::get("views.shared.navigation.about.privacy_policy.title"))) }}</li>
+                        <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.license.name"), array("path" => "about/license"), array("title" => Lang::get("views.shared.navigation.about.license.title"))) }}</li>
+                        <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.api.name"), array("path" => "about/api"), array("title" => Lang::get("views.shared.navigation.about.api.title"))) }}</li>
+                        <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.rdf.name"), array("path" => "about/rdf"), array("title" => Lang::get("views.shared.navigation.about.rdf.title"))) }}</li>
+                    </ul>
+                </li>
                 <li class="has-dropdown">
                     {{ link_to_route("tools.index", Lang::get("views.shared.navigation.browse.title"), null, array("title" => Lang::get("views.shared.navigation.browse.title"))) }}
 
@@ -20,7 +28,6 @@
                         <li>{{ link_to_route("tools.popular", Lang::get("views.shared.navigation.browse.popular.title"), null, array("title" => Lang::get("views.shared.navigation.browse.popular.title"))) }}</li>
                     </ul>
                 </li>
-                <li><a href="#" title="Contribute">{{ Lang::get("views.shared.navigation.contribute.title") }}</a></li>
                 @if (Auth::check())
                     <li class="has-dropdown">
                         <a href="#" title="{{{ Auth::user()->name }}}">{{{ Auth::user()->name }}}</a>
