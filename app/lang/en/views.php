@@ -795,7 +795,7 @@ return array(
             ),
 
             "fork" => array(
-                "name" => "Fork TERESAH on GitHub"
+                "name" => "TERESAH on GitHub"
             ),
 
             "contribute" => array(
