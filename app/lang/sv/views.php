@@ -692,11 +692,13 @@ return array(
                 ),
                 "api" => array(
                     "name" => "API",
-                    "title" => "API"
+                    "title" => "API",
+                    "documentation" => "API Dokumentation"
                 ),
                 "rdf" => array(
                     "name" => "RDF",
-                    "title" => "RDF"
+                    "title" => "RDF",
+                    "documentation" => "RDF Dokumentation"
                 ),
                 "privacy_policy" => array(
                     "name" => "Integritetspolicy",
@@ -706,6 +708,9 @@ return array(
                     "name" => "Licens och Citering",
                     "title" => "Licens och Citering"
                 )
+            ),
+            "fork" => array(
+                "name" => "Fork TERESAH på GitHub"
             ),
             "edit_user_profile" => array(
                 "name" => "Uppdatera användarprofil",

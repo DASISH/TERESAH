@@ -597,7 +597,7 @@ return array(
                 "name" => "TERESAH",
                 "title" => "Home"
             ),
-
+            
             "admin" => array(
                 "home" => array(
                     "name" => "Admin home",
@@ -778,11 +778,13 @@ return array(
                 ),
                 "api" => array(
                     "name" => "API",
-                    "title" => "API"
+                    "title" => "API",
+                    "documentation" => "API Documentation"
                 ),
                 "rdf" => array(
                     "name" => "RDF",
-                    "title" => "RDF"
+                    "title" => "RDF",
+                    "documentation" => "RDF Documentation"
                 ),
                 "privacy_policy" => array(
                     "name" => "Privacy Policy",
@@ -792,6 +794,10 @@ return array(
                     "name" => "License and Citing",
                     "title" => "License and Citing"
                 )
+            ),
+
+            "fork" => array(
+                "name" => "Fork TERESAH on GitHub"
             ),
 
             "contribute" => array(
