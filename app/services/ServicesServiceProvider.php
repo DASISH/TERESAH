@@ -10,6 +10,7 @@ class ServicesServiceProvider extends ServiceProvider
         "Services\DataServiceInterface" => "Services\DataService",
         "Services\DataSourceServiceInterface" => "Services\DataSourceService",
         "Services\DataTypeServiceInterface" => "Services\DataTypeService",
+        "Services\LoginServiceInterface" => "Services\LoginService",
         "Services\ToolServiceInterface" => "Services\ToolService",
         "Services\UserServiceInterface" => "Services\UserService"
     );

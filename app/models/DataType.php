@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Watson\Validating\ValidatingTrait;
 
-class DataType extends Eloquent
+class DataType extends BaseModel
 {
     use SoftDeletingTrait;
     use ValidatingTrait;
@@ -21,7 +21,7 @@ class DataType extends Eloquent
      * Validation rules for the model
      */
     protected $rules = array(
-        "user_id" => "required|integer",
+        "user_id" => "required|integer|exists:users,id,deleted_at,NULL",
         "label" => "required|unique:data_types|max:255",
         "slug" => "required|unique:data_types|max:255",
         "description" => "sometimes|max:1024",
@@ -65,8 +65,8 @@ class DataType extends Eloquent
     public function scopeHaveData($query)
     {
         return $query->has("data", ">", 0);
-    }    
-    
+    }
+
     /**
      * Normalize the data type label.
      *

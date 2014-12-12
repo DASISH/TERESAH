@@ -13,6 +13,11 @@ class ApiKeyService extends AbstractRepositoryService implements ApiKeyServiceIn
         $this->apiKeyRepository = $this->setRepository($apiKeyRepository);
     }
 
+    public function findByToken($token)
+    {
+        return $this->apiKeyRepository->getFirstBy("token", "=", $token);
+    }
+
     public function generateToken($length = 32)
     {
         # TODO: Extract the API key token generation from

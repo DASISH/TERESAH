@@ -15,7 +15,7 @@ class ToolsController extends AdminController
         "administrator" => array("*")
     );
 
-    protected $tool;
+    protected $toolService;
 
     public function __construct(ToolService $toolService)
     {

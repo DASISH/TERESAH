@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Watson\Validating\ValidatingTrait;
 
-class DataSource extends Eloquent
+class DataSource extends BaseModel
 {
     use SoftDeletingTrait;
     use ValidatingTrait;
@@ -23,14 +23,14 @@ class DataSource extends Eloquent
         "name" => "required|unique:data_sources|max:255",
         "description" => "sometimes|max:1024",
         "homepage" => "sometimes|url",
-        "user_id" => "required|integer"
+        "user_id" => "required|integer|exists:users,id,deleted_at,NULL"
     );
 
     public static function boot()
     {
         self::observe(new ActivityObserver);
         self::observe(new DataSourceObserver);
-        
+
         parent::boot();
     }
 
@@ -79,9 +79,9 @@ class DataSource extends Eloquent
             ->orderBy("data.updated_at", "DESC")
             ->pluck("value");
     }
-    
+
     public function scopeHaveData($query)
     {
         return $query->has("data", ">", 0);
-    }     
+    }
 }

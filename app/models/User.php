@@ -4,7 +4,7 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Watson\Validating\ValidatingTrait;
 
-class User extends Eloquent implements UserInterface
+class User extends BaseModel implements UserInterface
 {
     use SoftDeletingTrait;
     use ValidatingTrait;
@@ -25,12 +25,12 @@ class User extends Eloquent implements UserInterface
         "user_level"
     );
     protected $hidden = array(
+        "email_address",
         "password",
         "active",
         "user_level",
         "remember_token",
-        "password_reset_token",
-        "password_reset_sent_at"
+        "password_reset_token"
     );
 
     /**
@@ -114,7 +114,7 @@ class User extends Eloquent implements UserInterface
     {
         return $this->hasMany("Tool");
     }
-    
+
     public function toolUsages()
     {
         return $this->belongsToMany("Tool")->withTimestamps();;
@@ -220,7 +220,7 @@ class User extends Eloquent implements UserInterface
     {
         $this->password_reset_token = $value;
     }
-    
+
     /**
      * Get the token value for password reset.
      *
@@ -241,7 +241,7 @@ class User extends Eloquent implements UserInterface
     {
         $this->password_reset_sent_at = $value;
     }
-    
+
     /**
      * Check if the user is an authenticated user.
      *
@@ -281,7 +281,7 @@ class User extends Eloquent implements UserInterface
     {
         return $this->user_level == self::ADMINISTRATOR;
     }
-    
+
     /**
      * Check if the user is of sufficient level to access Admin section
      *
@@ -369,8 +369,8 @@ class User extends Eloquent implements UserInterface
         if(count($users) == 0) {
             return null;
         } else if(time() - strtotime($users[0]->password_reset_sent_at) > 604800) {
-            return null; //Check so token is not older than a week 
-        } else {            
+            return null; # Check so token is not older than a week
+        } else {
             return $users[0];
         }
     }

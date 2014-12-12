@@ -1,7 +1,14 @@
 <?php
 
+use Carbon\Carbon;
+
 class BaseHelper
 {
+    public static function diffForHumans($timestamp)
+    {
+        return Carbon::createFromTimeStamp(strtotime($timestamp))->diffForHumans();
+    }
+
     public static function generateSlug($string, $replace = array("'"), $delimiter = "-")
     {
         setlocale(LC_ALL, "en_US.UTF8");

@@ -445,6 +445,31 @@ dl {
     padding-left: 0.5rem; /* = 8px */
 }
 
+#content pre {
+    border-left: 3px solid #47ba73;
+    margin-bottom: 1em;
+    padding: 0.9375rem; /* = 15px */
+    white-space: pre-wrap;
+}
+
+#content pre code {
+    background-color: #fff;
+    border: none;
+    color: #999;
+    display: block;
+    font-size: 0.8125rem; /* = 13px */
+    line-height: 1em;
+    overflow: visible;
+    padding: 0;
+}
+
+#content p code {
+    background-color: #5d47ba;
+    border: none;
+    color: #fff;
+    font-size: inherit;
+}
+
 #content h1, 
 #content h2, 
 #content h3 {
@@ -466,7 +491,7 @@ dl {
 }
 
 #content h3 {
-    font-size: 1.25rem; /* = 20px */
+    font-size: 1.125rem; /* = 18px */
     font-weight: normal;
 }
 

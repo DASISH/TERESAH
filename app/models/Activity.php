@@ -1,6 +1,6 @@
 <?php
 
-class Activity extends Eloquent
+class Activity extends BaseModel
 {
     const CREATED = 1;
     const UPDATED = 2;

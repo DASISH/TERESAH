@@ -160,6 +160,70 @@ Route::group(array("namespace" => "Tools"), function() {
     ));
 });
 
+Route::group(array("prefix" => "api", "namespace" => "Api"), function() {
+    Route::group(array("prefix" => "v1", "namespace" => "V1"), function() {
+        $namespace = "api.v1";
+
+        # Routing for the application programming interface (API)
+        Route::pattern("format", ".(json)");
+
+        # Activities
+        Route::get("activities{format}", array("as" => "{$namespace}.activities.index", "uses" => "ActivitiesController@index"));
+        Route::get("activities/{id}{format}", array("as" => "{$namespace}.activities.show", "uses" => "ActivitiesController@show"));
+
+        # Data Sources
+        Route::get("data-sources{format}", array("as" => "{$namespace}.data-sources.index", "uses" => "DataSourcesController@index"));
+        Route::get("data-sources/{id}{format}", array("as" => "{$namespace}.data-sources.show", "uses" => "DataSourcesController@show"));
+        Route::post("data-sources{format}", array("as" => "{$namespace}.data-sources.store", "uses" => "DataSourcesController@store"));
+        Route::put("data-sources/{id}{format}", array("as" => "{$namespace}.data-sources.update", "uses" => "DataSourcesController@update"));
+        Route::patch("data-sources/{id}{format}", array("as" => "{$namespace}.data-sources.update", "uses" => "DataSourcesController@update"));
+        Route::delete("data-sources/{id}{format}", array("as" => "{$namespace}.data-sources.destroy", "uses" => "DataSourcesController@destroy"));
+
+        # Data Types
+        Route::get("data-types{format}", array("as" => "{$namespace}.data-types.index", "uses" => "DataTypesController@index"));
+        Route::get("data-types/{id}{format}", array("as" => "{$namespace}.data-types.show", "uses" => "DataTypesController@show"));
+        Route::post("data-types{format}", array("as" => "{$namespace}.data-types.store", "uses" => "DataTypesController@store"));
+        Route::put("data-types/{id}{format}", array("as" => "{$namespace}.data-types.update", "uses" => "DataTypesController@update"));
+        Route::patch("data-types/{id}{format}", array("as" => "{$namespace}.data-types.update", "uses" => "DataTypesController@update"));
+        Route::delete("data-types/{id}{format}", array("as" => "{$namespace}.data-sources.destroy", "uses" => "DataTypesController@destroy"));
+
+        # Logins
+        Route::get("logins{format}", array("as" => "{$namespace}.logins.index", "uses" => "LoginsController@index"));
+        Route::get("logins/{id}{format}", array("as" => "{$namespace}.logins.show", "uses" => "LoginsController@show"));
+
+        # Tools
+        Route::get("tools{format}", array("as" => "{$namespace}.tools.index", "uses" => "ToolsController@index"));
+        Route::get("tools/search{format}", array("as" => "{$namespace}.tools.search", "uses" => "ToolsController@search"));
+        Route::get("tools/{id}{format}", array("as" => "{$namespace}.tools.show", "uses" => "ToolsController@show"));
+        Route::post("tools{format}", array("as" => "{$namespace}.tools.store", "uses" => "ToolsController@store"));
+        Route::put("tools/{id}{format}", array("as" => "{$namespace}.tools.update", "uses" => "ToolsController@update"));
+        Route::patch("tools/{id}{format}", array("as" => "{$namespace}.tools.update", "uses" => "ToolsController@update"));
+        Route::delete("tools/{id}{format}", array("as" => "{$namespace}.tools.destroy", "uses" => "ToolsController@destroy"));
+
+        # Route grouping for the Api\V1\Tools namespace
+        Route::group(array("namespace" => "Tools"), function() use($namespace) {
+            Route::post("tools/{tools}/data-sources{format}", array("as" => "{$namespace}.tools.data-sources.store", "uses" => "DataSourcesController@store"));
+            Route::delete("tools/{tools}/data-sources/{id}{format}", array("as" => "{$namespace}.tools.data-sources.destroy", "uses" => "DataSourcesController@destroy"));
+
+            # Route grouping for the Api\V1\Tools\DataSources namespace
+            Route::group(array("namespace" => "DataSources"), function() use($namespace) {
+                Route::post("tools/{tools}/data-sources/{data_sources}/data{format}", array("as" => "{$namespace}.tools.data-sources.data.store", "uses" => "DataController@store"));
+                Route::put("tools/{tools}/data-sources/{data_sources}/data/{id}{format}", array("as" => "{$namespace}.tools.data-sources.data.update", "uses" => "DataController@update"));
+                Route::patch("tools/{tools}/data-sources/{data_sources}/data/{id}{format}", array("as" => "{$namespace}.tools.data-sources.data.update", "uses" => "DataController@update"));
+                Route::delete("tools/{tools}/data-sources/{data_sources}/data/{id}{format}", array("as" => "{$namespace}.tools.data-sources.data.destroy", "uses" => "DataController@destroy"));
+            });
+        });
+
+        # Users
+        Route::get("users{format}", array("as" => "{$namespace}.users.index", "uses" => "UsersController@index"));
+        Route::get("users/{id}{format}", array("as" => "{$namespace}.users.show", "uses" => "UsersController@show"));
+        Route::post("users{format}", array("as" => "{$namespace}.users.store", "uses" => "UsersController@store"));
+        Route::put("users/{id}{format}", array("as" => "{$namespace}.users.update", "uses" => "UsersController@update"));
+        Route::patch("users/{id}{format}", array("as" => "{$namespace}.users.update", "uses" => "UsersController@update"));
+        Route::delete("users/{id}{format}", array("as" => "{$namespace}.users.destroy", "uses" => "UsersController@destroy"));
+    });
+});
+
 # Routing for the administrative section
 Route::group(array("prefix" => "admin", "namespace" => "Admin"), function() {
     Route::resource("api", "ApiKeysController", array(

@@ -10,6 +10,7 @@ class RepositoryServiceProvider extends ServiceProvider
         "Repositories\DataRepositoryInterface" => "Repositories\Eloquent\DataRepository",
         "Repositories\DataSourceRepositoryInterface" => "Repositories\Eloquent\DataSourceRepository",
         "Repositories\DataTypeRepositoryInterface" => "Repositories\Eloquent\DataTypeRepository",
+        "Repositories\LoginRepositoryInterface" => "Repositories\Eloquent\LoginRepository",
         "Repositories\ToolRepositoryInterface" => "Repositories\Eloquent\ToolRepository",
         "Repositories\UserRepositoryInterface" => "Repositories\Eloquent\UserRepository"
     );

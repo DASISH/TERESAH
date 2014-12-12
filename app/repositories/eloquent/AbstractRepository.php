@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Repositories\RepositoryInterface;
 
+# TODO: AbstractRepository: Handle record not found cases
 abstract class AbstractRepository implements RepositoryInterface
 {
     protected $model;
@@ -51,8 +52,12 @@ abstract class AbstractRepository implements RepositoryInterface
         return $this->make($with)->where($key, $operator, $value)->first();
     }
 
-    public function getManyBy($key, $operator = "=", $value, array $with = array())
+    public function getManyBy($key, $operator = "=", $value, array $with = array(), $perPage = null)
     {
+        if (isset($perPage) && is_numeric($perPage)) {
+            return $this->make($with)->where($key, $operator, $value)->paginate($perPage);
+        }
+
         return $this->make($with)->where($key, $operator, $value)->get();
     }
 

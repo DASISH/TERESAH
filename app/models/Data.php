@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Watson\Validating\ValidatingTrait;
 
-class Data extends Eloquent
+class Data extends BaseModel
 {
     use SoftDeletingTrait;
     use ValidatingTrait;
@@ -15,10 +15,10 @@ class Data extends Eloquent
      * Validation rules for the model
      */
     protected $rules = array(
-        "data_source_id" => "required|integer",
-        "tool_id" => "required|integer",
-        "user_id" => "required|integer",
-        "data_type_id" => "required|integer",
+        "data_source_id" => "required|integer|exists:data_sources,id,deleted_at,NULL",
+        "tool_id" => "required|integer|exists:tools,id,deleted_at,NULL",
+        "user_id" => "required|integer|exists:users,id,deleted_at,NULL",
+        "data_type_id" => "required|integer|exists:data_types,id,deleted_at,NULL",
         "slug" => "required|max:255",
         # TODO: Review the validation rule for the
         # value (is 2048 characters too much / enough?)

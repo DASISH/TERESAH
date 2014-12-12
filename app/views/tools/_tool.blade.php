@@ -10,7 +10,7 @@
         <div class="small-9 columns">
             <h1 itemprop="name"><a href="{{ URL::route("tools.show", $tool->slug) }}" title="{{{ $tool->name }}}">{{{ $tool->name }}}</a></h1>
 
-            <p>about {{{ $tool->updated_at->diffForHumans() }}}</p>
+            <p>about {{{ BaseHelper::diffForHumans($tool->updated_at) }}}</p>
         </div>
         <!-- /small-9.columns -->
     </article>

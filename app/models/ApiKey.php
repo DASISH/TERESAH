@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Watson\Validating\ValidatingTrait;
 
-class ApiKey extends Eloquent
+class ApiKey extends BaseModel
 {
     use SoftDeletingTrait;
     use ValidatingTrait;
@@ -15,7 +15,7 @@ class ApiKey extends Eloquent
      * Validation rules for the model
      */
     protected $rules = array(
-        "user_id" => "required|integer",
+        "user_id" => "required|integer|exists:users,id,deleted_at,NULL",
         "token" => "required|unique:api_keys|alpha_dash|min:16|max:64",
         "enabled" => "required|boolean",
         "description" => "sometimes|max:255"

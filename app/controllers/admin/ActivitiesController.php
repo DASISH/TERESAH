@@ -25,7 +25,8 @@ class ActivitiesController extends AdminController
      * Returns all activity records.
      *
      * GET /admin
-     * 
+     * GET /activities
+     *
      * @return View
      */
     public function index()

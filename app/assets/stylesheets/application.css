@@ -12,6 +12,7 @@
  *= require normalize
  *= require foundation
  *= require editable
+ *= require highlight
  *= require glyphicons
  *= require halflings
  *= require responsive-tables

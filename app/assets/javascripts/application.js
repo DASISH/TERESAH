@@ -21,6 +21,7 @@
 //= require responsive-tables
 //= require modernizr
 //= require editable
+//= require highlight
 //= require typeahead.jquery
 //= require bloodhound
 //= require_tree .

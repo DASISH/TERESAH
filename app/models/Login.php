@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Login extends Eloquent
+class Login extends BaseModel
 {
     use SoftDeletingTrait;
 

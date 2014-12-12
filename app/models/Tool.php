@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Watson\Validating\ValidatingTrait;
 
-class Tool extends Eloquent
+class Tool extends BaseModel
 {
     use SoftDeletingTrait;
     use ValidatingTrait;
@@ -17,7 +17,7 @@ class Tool extends Eloquent
     protected $rules = array(
         "name" => "required|unique:tools|max:255",
         "slug" => "required|unique:tools|max:255",
-        "user_id" => "required|integer"
+        "user_id" => "required|integer|exists:users,id,deleted_at,NULL"
     );
 
     public static function boot()
@@ -57,51 +57,51 @@ class Tool extends Eloquent
     {
         return $this->belongsTo("User");
     }
-    
+
     public function users()
     {
         return $this->belongsToMany("User")->withTimestamps();
     }
-    
+
     public function similarTools()
     {
         return $this->belongsToMany("Tool", "similar_tools", "tool_id")->withTimestamps();
     }
 
-    public function allSimilarTools(){  
-            
+    public function allSimilarTools(){
+
         $linked = $this->similarTools()->get();
         $computed = $this->computedMatch()->get();
         $counter = 0;
-        
+
         while(count($linked) < Config::get("teresah.similar_count") && $counter < count($computed))
         {
             $linked[] = $computed[$counter];
             $counter++;
         }
-        
+
         return $linked;
     }
- 
+
     public function scopeHaveData($query)
     {
         return $query->has("data", ">", 0);
-    }    
-    
+    }
+
     public function scopeHaveDataValueLike($query, $value)
     {
         return $query->whereHas("data", function($query) use($value){
             $query->where("value", "like", "%$value%");
         });
     }
-    
+
     public function scopeMatchingString($query, $value)
     {
         return $query->where("name", "LIKE", "%$value%")->orWhereHas("data", function($query) use($value){
             $query->where("value", "LIKE", "%$value%");
         });
     }
-    
+
     public function scopeComputedMatch($query)
     {
         $computed = Tool::haveData()->select("tools.id", "tools.name", "tools.slug", DB::raw("COUNT(*) AS matches"))
@@ -118,7 +118,7 @@ class Tool extends Eloquent
                 $similar[] = $c["id"];
             }
         }
-        
+
         if(count($similar) > 0){
             $query->whereIn("id", $similar);
         }
@@ -130,24 +130,24 @@ class Tool extends Eloquent
         return $query->whereHas("data", function($query) use($value, $data_type_id){
             $query->where("slug", $value)->where("data_type_id", $data_type_id);
         });
-    }    
-    
+    }
+
     public function getAbbreviationAttribute()
     {
         return substr(preg_replace("~\b(\w)|.~", "$1", $this->name), 0, 4);
     }
-    
+
     /*
      * Returns first found description for this tool
      */
     public function getDescription()
     {
-        foreach ($this->dataSources as $data_source)     
+        foreach ($this->dataSources as $data_source)
         {
             $description = $data_source->getLatestToolDataFor($this->id, "description");
             if(!empty($description))
             {
-                return $description;                
+                return $description;
             }
         }
         return null;

@@ -20,6 +20,11 @@ $(document).ready(function() {
     // Initialize the jQuery Autosize
     $("textarea").autosize();
 
+    // Initialize Highlight.js
+    $("pre code").each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+
     // Initialize the X-editable
     $.fn.editable.defaults.mode = "inline";
     $(".editable").editable({

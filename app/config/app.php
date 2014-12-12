@@ -60,12 +60,12 @@ return array(
     |--------------------------------------------------------------------------
     |
     | The application available locales determines the available translations
-    | for the translation service provider. Include all of the locales which 
+    | for the translation service provider. Include all of the locales which
     | will be supported by the application.
     |
     */
 
-    "available_locales" => array("en", "sv"), 
+    "available_locales" => array("en", "sv"),
 
     /*
     |--------------------------------------------------------------------------
@@ -197,7 +197,7 @@ return array(
         "Redirect"        => "Illuminate\Support\Facades\Redirect",
         "Redis"           => "Illuminate\Support\Facades\Redis",
         "Request"         => "Illuminate\Support\Facades\Request",
-        "Response"        => "Illuminate\Support\Facades\Response",
+        "Response"        => "Teresah\Support\Facades\Response",
         "Route"           => "Illuminate\Support\Facades\Route",
         "Schema"          => "Illuminate\Support\Facades\Schema",
         "Seeder"          => "Illuminate\Database\Seeder",

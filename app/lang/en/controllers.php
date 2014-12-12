@@ -96,6 +96,14 @@ return array(
         )
     ),
 
+    "api" => array(
+        "insufficient_privileges" => "Insufficient privileges. Access forbidden.",
+        "invalid_content_type_header" => "Invalid Content-Type. Please, make sure you sent requests with Content-Type: application/json; charset=utf-8.",
+        "invalid_user_agent_header" => "Invalid User-Agent. Please, make sure your request has a proper User-Agent header.",
+        "rate_limit_exceeded" => "API rate limit exceeded for IP address :ip_address.",
+        "unauthorized_request" => "Unauthorized request, please authenticate your request."
+    ),
+
     "api_key" => array(
         "apply" => array(
             "success" => "API Key application successfully created. An adminstrator needs to approve of your application before the key can be used.",
@@ -139,7 +147,7 @@ return array(
             "success" => "Profile was successfully updated."
         )
     ),
-    
+
     "license" => array(
         "source" => "License for source code",
         "content" => "License for content"
