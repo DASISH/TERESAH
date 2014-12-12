@@ -76,7 +76,7 @@ class PagesController extends BaseController
                 );
 
                 break;
-            
+
             default:
                 return $this->matchStaticView();
 

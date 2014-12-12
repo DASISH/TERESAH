@@ -274,6 +274,18 @@ Route::get("login/linkedin", array(
     "uses" => "OAuthController@linkedin"
 ));
 
+# Temporary routes to showcase new user interface:
+Route::get("/showcases/login", array(
+    "as" => "showcases.login",
+    "uses" => "ShowcasesController@login"
+));
+
+Route::get("/showcases/signup", array(
+    "as" => "showcases.signup",
+    "uses" => "ShowcasesController@signup"
+));
+# End of temporary routes
+
 Route::get("/", array(
     "as" => "pages.root",
     "uses" => "PagesController@index"
