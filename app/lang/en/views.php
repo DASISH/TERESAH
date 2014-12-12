@@ -778,13 +778,11 @@ return array(
                 ),
                 "api" => array(
                     "name" => "API",
-                    "title" => "API",
-                    "documentation" => "API Documentation"
+                    "title" => "API"
                 ),
                 "rdf" => array(
                     "name" => "RDF",
-                    "title" => "RDF",
-                    "documentation" => "RDF Documentation"
+                    "title" => "RDF"
                 ),
                 "privacy_policy" => array(
                     "name" => "Privacy Policy",

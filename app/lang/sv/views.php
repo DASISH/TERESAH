@@ -692,13 +692,11 @@ return array(
                 ),
                 "api" => array(
                     "name" => "API",
-                    "title" => "API",
-                    "documentation" => "API Dokumentation"
+                    "title" => "API"
                 ),
                 "rdf" => array(
                     "name" => "RDF",
-                    "title" => "RDF",
-                    "documentation" => "RDF Dokumentation"
+                    "title" => "RDF"
                 ),
                 "privacy_policy" => array(
                     "name" => "Integritetspolicy",
@@ -710,7 +708,7 @@ return array(
                 )
             ),
             "fork" => array(
-                "name" => "Fork TERESAH på GitHub"
+                "name" => "Forka TERESAH på GitHub"
             ),
             "edit_user_profile" => array(
                 "name" => "Uppdatera användarprofil",
