@@ -39,7 +39,7 @@ class ToolsController extends ApiController
     /**
      * Search and display a listing of available Tools matching search criteria.
      *
-     * GET /api/v1/tools/search.json(?q={keyword}|?limit=20)
+     * GET /api/v1/tools/search.json(?{parameters}|?limit=20)
      *
      * @api
      * @example documentation/api/v1/tools.md
@@ -47,7 +47,11 @@ class ToolsController extends ApiController
      */
     public function search()
     {
-        return Response::jsonWithStatus(200, array("tools" => $this->toolService->getManyBy("name", "LIKE", "%" . Input::get("q") . "%", $with = array("user", "dataSources"), $perPage = Input::get("limit", 20))->toArray()));
+        $results = $this->toolService->search(Input::all());
+
+        return Response::jsonWithStatus(200, array(
+            "tools" => $results["tools"]->toArray(),
+            "facets" => $results["facets"]));
     }
 
     /**

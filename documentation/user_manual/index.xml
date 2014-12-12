@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="http://www.docbook.org/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.docbook.org/xml/5.0/xsd/docbook.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+
+<book xmlns="http://docbook.org/ns/docbook"
+  xmlns:xl="http://www.w3.org/1999/xlink"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  version="5.0" xml:lang="en">
+    
+  <info>
+    <title>Manual for TERESAH</title>
+    
+    <date>2014-12-08</date>
+    <releaseinfo>Version 0</releaseinfo>    
+    <author>
+      <personname>Akira Olsbänning</personname>
+    </author>          
+    <orgname>Swedish National Data Service</orgname>
+    <abstract>
+      <para>
+        Simple manual for the TERESAH web app.
+      </para>
+    </abstract>
+    <keywordset>
+      <keyword>TERESAH, Manual</keyword>
+    </keywordset>
+  </info>
+  
+  <xi:include href="includes/intro.xml" />  
+  <xi:include href="includes/signing_up.xml" />
+  <xi:include href="includes/toolview.xml" />
+  <xi:include href="includes/reference.xml" />
+
+</book>

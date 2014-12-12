@@ -34,6 +34,11 @@ class ToolService extends AbstractRepositoryService implements ToolServiceInterf
         return $this->toolRepository->byFacet($type, $value);
     }
 
+    public function search($parameters)
+    {
+        return $this->toolRepository->search($parameters);
+    }
+
     public function quicksearch($query)
     {
         return $this->toolRepository->quicksearch($query);

@@ -1,8 +1,10 @@
 <?php namespace Repositories\Eloquent;
 
+use ArgumentsHelper;
 use Tool;
+use Data;
 use DataType;
-Use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Config;
 use Repositories\ToolRepositoryInterface;
 use Repositories\Eloquent\AbstractRepository;
 use Illuminate\Support\Facades\DB as DB;
@@ -82,5 +84,87 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
     public function random()
     {
         return $this->model->haveData()->orderBy(DB::raw("RAND()"))->first();
+    }
+
+    public function search($parameters = array())
+    {
+        $tool_ids = array();
+
+        $tool_id_query = $this->model->haveData();
+
+        $types = DataType::IsLinkable()->haveData()->get();
+
+        foreach ($types as $type) {
+            if (array_key_exists($type->slug, $parameters)) {
+                $values = ArgumentsHelper::getArgumentValues($type->slug);
+
+                foreach ($values as $value){
+                    $tool_id_query->haveFacet($type->id, $value);
+                }
+            }
+        }
+
+        if (!empty($parameters["query"])) {
+            $query = $parameters["query"];
+            $tool_ids = $tool_id_query->lists("id");
+
+            if (count($tool_ids) > 0) {
+                $string_match_query = $this->model->whereIn("id", $tool_ids);
+            } else {
+                $string_match_query = $this->model->haveData();
+            }
+
+            if (str_contains($query, " ")) {
+                $parts = explode(" ", $query);
+            } else{
+                $parts = array($query);
+            }
+
+            foreach ($parts as $q) {
+                $string_match_query->matchingString($q);
+            }
+
+            $string_matched_tool_ids = $string_match_query->lists("id");
+            $tool_ids = array_intersect($string_matched_tool_ids, $tool_ids);
+        } else {
+            $tool_ids = $tool_id_query->lists("id");
+        }
+
+        if (empty($tool_ids)) {
+            $tool_ids = array(0);
+        }
+
+        $facetList = array();
+
+        foreach ($types as $type) {
+            $result =  Data::select("value", "slug", DB::raw("count(tool_id) as total"))
+                             ->where("data_type_id", $type->id);
+
+            if (count($tool_ids) > 0) {
+                $result->whereIn("tool_id", $tool_ids);
+            }
+
+            if (array_key_exists($type->slug."-limit", $parameters)) {
+                $limit = $parameters[$type->slug."-limit"];
+            } else {
+                $limit = Config::get("teresah.search_facet_count");
+            }
+
+            $type->values = $result->groupBy("value")
+                                   ->orderBy("total", "DESC")
+                                   ->paginate($limit);
+            $facetList[] = $type;
+        }
+
+        $tools = $this->model->whereIn("id", $tool_ids)
+                   ->orderBy("name", "ASC")
+                   ->paginate(Config::get("teresah.search_pager_size"));
+
+        $results = array(
+            "tools" => $tools,
+            "facets" => $facetList
+        );
+
+        return $results;
     }
 }

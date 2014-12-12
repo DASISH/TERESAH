@@ -7,4 +7,6 @@ interface ToolServiceInterface extends RepositoryServiceInterface
     public function detachDataSource($id, $dataSourceId);
 
     public function findWithAssociatedData($id);
+
+    public function search($parameters);
 }
