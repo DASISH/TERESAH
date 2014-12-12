@@ -21,7 +21,7 @@ Documentation for the Laravel PHP framework can be found on the [Laravel website
 To ensure consistency throughout the source code, follow the coding conventions defined by the [PHP Framework Interop Group](http://www.php-fig.org/) (especially [PSR-1](http://www.php-fig.org/psr/psr-1/) and [PSR-2](http://www.php-fig.org/psr/psr-2/)) for the PHP.
 
 # Install
-[Install instructions in](documentation/install.md)
+[Install instructions for TERESAH](documentation/install.md)
 
 # API Documentation
 * [Introduction](documentation/api/v1/readme.md)
@@ -32,5 +32,5 @@ To ensure consistency throughout the source code, follow the coding conventions 
 * [Users](documentation/api/v1/users.md)
 
 # Licence
-[License for the software (TERESAH)](LICENSE.md)
-[License for the conent](LICENSE_CONTENT.md)
+* [License for the software (TERESAH)](LICENSE.md)
+* [License for the conent](LICENSE_CONTENT.md)
