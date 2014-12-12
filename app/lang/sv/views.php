@@ -708,7 +708,7 @@ return array(
                 )
             ),
             "fork" => array(
-                "name" => "Forka TERESAH på GitHub"
+                "name" => "TERESAH på GitHub"
             ),
             "edit_user_profile" => array(
                 "name" => "Uppdatera användarprofil",
