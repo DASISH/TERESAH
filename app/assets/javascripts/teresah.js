@@ -104,21 +104,21 @@ $(document).ready(function() {
             url:link.attr("data-callback"),
             dataType: "json",
             success: function(data){
+                                
                 link.attr("data-action", data.action);
                 link.attr("data-callback", data.callback);
-                link.attr("title", data.title);
-
-                var button = link.children().first();
-                button.text(data.title);
+                link.attr("title", data.title);                
+                link.text(data.title);
+                
                 if(data.action === "GET")
                 {
-                    button.removeClass("btn-success");
-                    button.addClass("btn-primary");
+                    link.removeClass("starred");
+                    link.addClass("unstarred");
                 }
                 else
                 {
-                    button.removeClass("btn-primary");
-                    button.addClass("btn-success");
+                    link.removeClass("unstarred");
+                    link.addClass("starred");
                 }
             }
         });
