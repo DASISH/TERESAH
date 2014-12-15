@@ -908,67 +908,67 @@ dl {
 /* Dialog (overrides relative content styling)
 ---------------------------------------------------------------------------- */
 
-body.dialog {
+#dialog {
     background-color: #f5f5f5;
     color: #1f0844;
 }
 
-body.dialog a:link,
-body.dialog a:visited {
+#dialog a:link,
+#dialog a:visited {
     color: #1f0844;
     font-weight: bold;
     font-weight: 600; /* Semi-Bold */
     text-decoration: none;
 }
 
-body.dialog a:hover,
-body.dialog a:visited:hover {
+#dialog a:hover,
+#dialog a:visited:hover {
     color: #47ba73;
     text-decoration: none;
 }
 
-body.dialog #header {
+#dialog #header {
     background: none;
 }
 
-body.dialog #header #logo {
+#dialog #header #logo {
     float: left;
     font-size: 1rem; /* = 16px */
     margin: 20px;
 }
 
-body.dialog #header .cancel, 
-body.dialog #header .close {
+#dialog #header .cancel, 
+#dialog #header .close {
     float: right;
     font-size: 0.9375rem; /* = 15px */
     margin: 20px;
     text-transform: uppercase;
 }
 
-body.dialog #header .cancel .glyphicons, 
-body.dialog #header .close .glyphicons {
+#dialog #header .cancel .glyphicons, 
+#dialog #header .close .glyphicons {
     font-size: 1.875rem; /* = 30px */
 }
 
-body.dialog #content {
+#content #dialog {
     background: none;
     margin-top: 150px;
 }
 
-body.dialog #content h1, 
-body.dialog #content h2, 
-body.dialog #content h3 {
+#content #dialog h1, 
+#content #dialog h2, 
+#content #dialog h3 {
     color: #1f0844;
     margin-bottom: 0;
 }
 
-body.dialog #content h1 {
+#content #dialog h1 {
     margin-top: 0.75em;
     margin-bottom: 0.25em;
 }
 
-body.dialog #content form input[type="text"], 
-body.dialog #content form input[type="password"] {
+#content #dialog form input[type="text"], 
+#content #dialog form input[type="password"] {
     background-color: #e5e5e5;
     border: none;
     box-shadow: none;
@@ -976,11 +976,11 @@ body.dialog #content form input[type="password"] {
     font-size: 0.875rem; /* = 14px */
 }
 
-body.dialog #content form input[type="submit"] {
+#content #dialog form input[type="submit"] {
     float: right;
 }
 
-body.dialog #content form select {
+#content #dialog form select {
     background-color: #e5e5e5;
     border: none;
     font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -989,7 +989,7 @@ body.dialog #content form select {
 
 /* Content tabs (dialog navigation) */
 
-body.dialog #content .tabs {
+#content #dialog .tabs {
     background: url(/assets/dialog_tabs_bg.png) 0 50% repeat-x transparent;
     color: #1f0844;
     padding :0;
@@ -997,24 +997,24 @@ body.dialog #content .tabs {
 
 @media only screen and (max-width: 640px) {
 
-    body.dialog #content .tabs {
+    #content #dialog .tabs {
         background: none;
     }
 }
 
-body.dialog #content .tabs dd {
+#content #dialog .tabs dd {
     margin-left: 0;
     margin-right: 20px;
     padding-top: 22px;
     padding-right: 50px;
 }
 
-body.dialog #content .tabs dd:last-child {
+#content #dialog .tabs dd:last-child {
     margin: 0;
     padding-right: 0;
 }
 
-body.dialog #content .tabs dd > a {
+#content #dialog .tabs dd > a {
     background-color: #f5f5f5;
     border: none;
     color: #1f0844;
@@ -1025,18 +1025,18 @@ body.dialog #content .tabs dd > a {
     padding: 0 15px;
 }
 
-body.dialog #content .tabs dd:first-child > a {
+#content #dialog .tabs dd:first-child > a {
     padding-left: 0 !important;
 }
 
 @media only screen and (max-width: 640px) {
 
-    body.dialog #content .tabs dd > a {
+    #content #dialog .tabs dd > a {
         padding-left: 0 !important;
     }
 }
 
-body.dialog #content .tabs dd a:link span {
+#content #dialog .tabs dd a:link span {
     /* Use CSS3 Flexbox to vertically align the content */
         -ms-flex-align: center;
         -moz-box-align: center; /* Old syntax */
@@ -1072,51 +1072,51 @@ body.dialog #content .tabs dd a:link span {
     width: 51px;
 }
 
-body.dialog #content .tabs dd a:hover span, 
-body.dialog #content .tabs .active a:link span, 
-body.dialog #content .tabs .completed a:link span {
+#content #dialog .tabs dd a:hover span, 
+#content #dialog .tabs .active a:link span, 
+#content #dialog .tabs .completed a:link span {
     background-color: #47ba73;
     border: 3px solid #47ba73;
     color: #fff;
 }
 
-body.dialog #content .tabs dd > a:hover, 
-body.dialog #content .tabs .active a:link, 
-body.dialog #content .tabs .active a:visited,
-body.dialog #content .tabs .completed a:link, 
-body.dialog #content .tabs .completed a:visited {
+#content #dialog .tabs dd > a:hover, 
+#content #dialog .tabs .active a:link, 
+#content #dialog .tabs .active a:visited,
+#content #dialog .tabs .completed a:link, 
+#content #dialog .tabs .completed a:visited {
     background-color: #f5f5f5;
     color: #47ba73;
     margin: 0;
     padding: 0 15px;
 }
 
-body.dialog #content .tabs-content, 
-body.dialog #content .tabs-content .content {
+#content #dialog .tabs-content, 
+#content #dialog .tabs-content .content {
     padding: 0;
 }
 
-body.dialog #content aside {
+#content #dialog aside {
     border-left: 1px solid #e5e5e5;
     padding-top: 50px;
     padding-bottom: 25px;
 }
 
-body.dialog #content .services {
+#content #dialog .services {
     text-align: center;
 }
 
-body.dialog #content .services a:link,
-body.dialog #content .services a:visited {
+#content #dialog .services a:link,
+#content #dialog .services a:visited {
     font-weight: normal;
 }
 
-body.dialog #content .services h2 {
+#content #dialog .services h2 {
     font-size: 1.125rem; /* = 18px */
     margin-top: 15px;
 }
 
-body.dialog #content .services .service {
+#content #dialog .services .service {
     clear: both;
     color: #fff;
     display: block;
@@ -1126,19 +1126,19 @@ body.dialog #content .services .service {
     width: 120px;
 }
 
-body.dialog #content .services .teresah {
+#content #dialog .services .teresah {
     background: url(/assets/services/teresah.png) 50% 50% no-repeat #47ba73;
 }
 
-body.dialog #content .services .facebook {
+#dialog .services .facebook {
     background: url(/assets/services/facebook.png) 50% 50% no-repeat #3b5999;
 }
 
-body.dialog #content .services .google {
+#content #dialog .services .google {
     background: url(/assets/services/google.png) 50% 50% no-repeat #dd4b39;
 }
 
-body.dialog #content .services .linkedin {
+#content #dialog .services .linkedin {
     background: url(/assets/services/linkedin.png) 50% 50% no-repeat #007bb6;
 }
 
