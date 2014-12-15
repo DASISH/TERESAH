@@ -22,7 +22,7 @@ class SessionsController extends BaseController
     public function create()
     {
         Session::put("previous_url", URL::previous());
-        return View::make("sessions.create");
+        return View::make("users.login");
     }
 
     /**
