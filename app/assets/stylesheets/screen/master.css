@@ -432,6 +432,20 @@ dl {
     margin-left: 0;
 }
 
+#header #master-head .toolbar a {
+    color: #fff;
+}
+
+.unstarred {
+    background: url(/assets/icons/unstar.png) no-repeat right;
+    padding-right: 35px;
+}
+
+.starred {
+    background: url(/assets/icons/star.png) no-repeat right;
+    padding-right: 35px;
+}
+
 /* Content
 ---------------------------------------------------------------------------- */
 

@@ -45,7 +45,7 @@ class ToolUsageController extends \BaseController {
             "status" => 200, 
             "action" => "DELETE",
             "callback" => URL::route("tools.unuse", array("toolID" => $toolID)),
-            "title" => Lang::get("views/tools/data_sources/show.unuse.title")
+            "title" => Lang::get("views.tools.data_sources.show.unuse.title")
             ), 200);
     }
 
@@ -64,7 +64,7 @@ class ToolUsageController extends \BaseController {
             "status" => 200, 
             "action" => "GET",
             "callback" => URL::route("tools.use", array("toolID" => $toolID)),
-            "title" => Lang::get("views/tools/data_sources/show.use.title")
+            "title" => Lang::get("views.tools.data_sources.show.use.title")
             ), 200);
     }
 }
