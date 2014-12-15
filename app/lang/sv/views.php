@@ -728,7 +728,8 @@ return array(
             ),
             "login" => array(
                 "name" => "Logga in",
-                "title" => "Logga in"
+                "title" => "Logga in",
+                "login_via" => "Logga in med"
             ),
             "logout" => array(
                 "name" => "Logga ut",

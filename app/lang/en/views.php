@@ -825,7 +825,8 @@ return array(
 
             "login" => array(
                 "name" => "Sign in",
-                "title" => "Login"
+                "title" => "Login",
+                "login_via" => "Login via"
             ),
 
             "logout" => array(

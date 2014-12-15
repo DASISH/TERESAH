@@ -1124,6 +1124,10 @@ body.dialog #content .services .google {
     background: url(/assets/services/google.png) 50% 50% no-repeat #dd4b39;
 }
 
+body.dialog #content .services .linkedin {
+    background: url(/assets/services/linkedin.png) 50% 50% no-repeat #007bb6;
+}
+
 /* Footer
 ---------------------------------------------------------------------------- */
 
