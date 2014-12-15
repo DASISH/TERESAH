@@ -13,11 +13,7 @@ XSLT_FO_TEMPLATE = docbook-xsl-ns-1.78.1/fo/docbook.xsl
 XSLT_PDF_ARGS = --stringparam paper.type A4 --stringparam fop1.extensions 1 --xinclude
 
 # Gemensamma filer
-NEEDED_FILES = index.xml \
-    includes/intro.xml \
-    includes/reference.xml \
-    includes/signing_up.xml \
-    includes/toolview.xml
+NEEDED_FILES = index.xml
 
 # =================================
 # Docbook XML --> XHTML single page
