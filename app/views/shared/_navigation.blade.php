@@ -43,7 +43,7 @@
                         </ul>
                     </li>
                 @else
-                    <li><a href="{{ URL::route("sessions.create") }}" title="{{ Lang::get("views.shared.navigation.login.title") }}" title="{{ Lang::get("views.shared.navigation.login.title") }}">{{ Lang::get("views.shared.navigation.login.name") }}</a></li>
+                    <li><a href="{{ URL::route("sessions.create") }}" title="{{ Lang::get("views.shared.navigation.login.title") }}" data-reveal-id="myModal" data-reveal-ajax="{{ URL::route("sessions.create.dialog") }}" title="{{ Lang::get("views.shared.navigation.login.title") }}">{{ Lang::get("views.shared.navigation.login.name") }}</a></li>
                 @endif
             </ul>
         </section>
@@ -52,3 +52,5 @@
     <!-- /top-bar -->
 </div>
 <!-- /contain-to-grid -->
+
+<div id="myModal" class="reveal-modal" data-reveal></div>

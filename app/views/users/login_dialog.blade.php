@@ -1,18 +1,4 @@
-@extends("layouts.default")
-
-@section("breadcrumb", BreadcrumbHelper::render(array(
-    Lang::get("views.shared.navigation.login.name")
-)))
-
-@section("master-head")
-    <div class="row">
-        <div class="small-12 columns">
-            <h1>{{ Lang::get("views.shared.navigation.login.name") }}</h1>
-        </div>
-        <!-- /small-12.columns -->
-    </div>
-    <!-- /row -->
-@stop
+@extends("layouts.dialog")
 
 @section("content")
     <h1 class="text-center">{{ Lang::get("views.shared.navigation.login.login_via") }}</h1>

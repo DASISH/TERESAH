@@ -16,6 +16,11 @@ Route::get("login", array(
     "uses" => "SessionsController@create"
 ));
 
+Route::get("login/dialog", array(
+    "as" => "sessions.create.dialog",
+    "uses" => "SessionsController@dialog"
+));
+
 Route::post("login", array(
     "as" => "sessions.store",
     "uses" => "SessionsController@store"
