@@ -46,6 +46,24 @@
                 <li><a href="#" class="addthis_button_google_plusone_share" title="Google+">{{ image_tag("icons/share/google_plus.png", array("alt" => "Google+")) }}</a></li>
                 <li><a href="#" class="addthis_button_twitter" title="Twitter">{{ image_tag("icons/share/twitter.png", array("alt" => "Twitter")) }}</a></li>
             </ul>
+                                        
+            @if (Auth::user() != null)
+             <ul class="toolbar">
+                @if (Auth::user()->toolUsages()->where("tool_id", "=", $tool->id)->count() != 0)                                        
+                    <li>
+                        <a class="starred" data-callback="{{ URL::route("tools.unuse", array("toolID" => $tool->id)) }}" data-action="DELETE" title="{{ Lang::get("views.tools.data_sources.show.unuse.title") }}" id="toolUsageButton">
+                            {{ Lang::get("views.tools.data_sources.show.unuse.title") }}
+                        </a>
+                    </li>
+                @else
+                    <li>
+                        <a class="unstarred" data-callback="{{ URL::route("tools.use", array("toolID" => $tool->id)) }}" data-action="GET" title="{{ Lang::get("views.tools.data_sources.show.use.title") }}" id="toolUsageButton">
+                            {{ Lang::get("views.tools.data_sources.show.use.title") }}
+                        </a>    
+                    </li>
+                @endif
+             </ul>
+            @endif
             <!-- /toolbar -->
         </div>
         <!-- /small-12.medium-5.columns -->

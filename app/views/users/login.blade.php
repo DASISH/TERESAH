@@ -1,9 +1,23 @@
-@extends("layouts.dialog")
+@extends("layouts.default")
+
+@section("breadcrumb", BreadcrumbHelper::render(array(
+    Lang::get("views.shared.navigation.login.name")
+)))
+
+@section("master-head")
+    <div class="row">
+        <div class="small-12 columns">
+            <h1>{{ Lang::get("views.shared.navigation.login.name") }}</h1>
+        </div>
+        <!-- /small-12.columns -->
+    </div>
+    <!-- /row -->
+@stop
 
 @section("content")
     <h1 class="text-center">{{ Lang::get("views.shared.navigation.login.login_via") }}</h1>
 
-    <section class="row">
+    <section id="dialog" class="row">
         <div class="small-12 medium-6 columns">
             {{ Form::open(array("route" => "sessions.store", "role" => "form")) }}
                 <div class="small-12 medium-8 medium-offset-3 columns">
@@ -30,10 +44,18 @@
                     <!-- /row -->
 
                     {{ Form::submit(Lang::get("views.sessions.form.submit"), array("class" => "button")) }}
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <p>&ndash; {{ link_to_route("request-password.request", Lang::get("views.sessions.form.forgot_password.name"), null, array("title" => Lang::get("views.sessions.form.forgot_password.title"))) }}</p>
+                            <p>&ndash; {{ Lang::get("views.sessions.form.sign_up.not_a_user") }} {{ link_to_route("signup.create", Lang::get("views.sessions.form.sign_up.name"), null, array("title" => Lang::get("views.sessions.form.sign_up.title"))) }}</p>              
+                        </div>
+                    </div>                    
                 </div>
                 <!-- /small-12.medium-8.medium-offset-3.columns -->
             {{ Form::close() }}
             <!-- /row -->
+            &ndash; {{ link_to_route("request-password.request", Lang::get("views.sessions.form.forgot_password.name"), null, array("title" => Lang::get("views.sessions.form.forgot_password.title"))) }}
+            &ndash; {{ Lang::get("views.sessions.form.sign_up.not_a_user") }} {{ link_to_route("signup.create", Lang::get("views.sessions.form.sign_up.name"), null, array("title" => Lang::get("views.sessions.form.sign_up.title"))) }}
         </div>
         <!-- /small-12.medium-6.columns -->
 

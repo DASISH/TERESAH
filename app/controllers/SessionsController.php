@@ -2,7 +2,7 @@
 
 class SessionsController extends BaseController
 {
-    protected $skipAuthentication = array("create", "store", "destroy");
+    protected $skipAuthentication = array("create", "store", "destroy", "dialog");
     protected $user;
 
     public function __construct(User $user)
@@ -22,8 +22,22 @@ class SessionsController extends BaseController
     public function create()
     {
         Session::put("previous_url", URL::previous());
-        return View::make("sessions.create");
+        return View::make("users.login");
     }
+    
+    /**
+     * Show the form for creating a new session.
+     *
+     * GET /login
+     *
+     * @return View
+     */
+    public function dialog()
+    {
+        Session::put("previous_url", URL::previous());
+        return View::make("users.login_dialog");
+    }
+    
 
     /**
      * Create/store a new session for the user.
