@@ -11,7 +11,7 @@
     
             <ul class="small-block-grid-1 medium-block-grid-4">
                 @foreach ($tools as $tool)
-                    @include("tools._tool", compact("tool"))
+                    @include("tools._tool", array($tool, "type" => "block-grid"))
                 @endforeach
             </ul>
             <!-- /small-block-grid-1 medium-block-grid-4 -->
