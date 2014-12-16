@@ -102,6 +102,11 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
         }
         return $return;
     }
+    
+    public function latest()
+    {
+        return $this->model->haveData()->orderBy(DB::raw("created_at"), "DESC")->take(3)->get();
+    }
 
     public function search($parameters = array())
     {

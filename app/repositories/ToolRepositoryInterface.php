@@ -13,6 +13,8 @@ interface ToolRepositoryInterface extends RepositoryInterface
     public function random();
     
     public function popular();
+    
+    public function latest();
 
     public function search($parameters);
 }
