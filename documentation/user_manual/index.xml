@@ -6,7 +6,7 @@
   xmlns:xl="http://www.w3.org/1999/xlink"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   version="5.0" xml:lang="en">
-    
+  
   <info>
     <title>Manual for TERESAH</title>
     
@@ -26,7 +26,7 @@
     </keywordset>
   </info>
   
-  <!--  <xi:include href="includes/intro.xml" /> -->  
+  
   <chapter xml:id="chapter_intro">
     
     <title>Introduction to TERESAH</title>
@@ -45,12 +45,11 @@
     
     <section xml:id="license">
       <title>The license of this document</title>
-      <para>This manual (like TERESAH itself) is licensed under the Creative Commons CC-BY-SA 4.0 license</para>  
+      <para>This manual (like the contents of TERESAH itself) is licensed under the <link xl:href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons CC-BY-SA 4.0 license.</link></para>  
     </section>
     
   </chapter>
   
-  <!--  <xi:include href="includes/signing_up.xml" />-->  
   <chapter xml:id="chapter_signing_up">
     
     <title>Signing up and logging in</title>
@@ -108,11 +107,10 @@
       </para>
       
       <para>Once your application has been processed, you will get a confirmation mail to the address you used in the previous step.</para>
-
+      
     </section>
   </chapter>
   
-  <!--  <xi:include href="includes/toolview.xml" />-->
   <chapter xml:id="chapter_toolview">
     
     <title>Viewing tools</title>
@@ -180,14 +178,39 @@
         </mediaobject>
       </screenshot> 
       
-      
-      
-      
+      <para>
+        <itemizedlist>
+          <listitem><para>1) The name of the tool. As you can see, each tool has one or more initials inside the cicle to the left. Tools with a name made up from more than one word has more letters in the circle.</para></listitem>
+          <listitem><para>2) Data sources. In this screenshot, TERESAH's own source is selected. You can also get data from dirtdirectory.org, and more sources may be added in the future.</para></listitem>          
+          <listitem><para>3) Data about this tool, from the source choosen above.</para></listitem>
+          <listitem><para>4) Information about the currently selected data source.</para></listitem>
+          <listitem><para>5) Data export. Here you can get the data for the tool in the format of your choice.</para></listitem>
+          <listitem><para>6) Similar tools. Tools similar to the current one that you also might find interesting/relevant.</para></listitem>          
+        </itemizedlist>        
+      </para>
     </section>
     
-    <section xml:id="adding_a_tool">
-      <title>Adding a new tool to TERESAH</title>
-      <para>So far we have only looked at tools put into TERESAH by other people. Now we will create one ourselves</para>          
+    <section xml:id="exporting_tool_rdf_info">
+      <title>Exporting tool RDF info</title>
+      <para>When viewing a tool in TERESAH, you can export information about it in RDF format. Depending of what you want to use the RDF for, you can export it in different languages.</para>
+      
+      <itemizedlist>
+        <listitem><para>RDF/JSONLD - A JSON dialect for exchange of links</para></listitem>
+        <listitem><para>RDF/TURTLE - Terse RDF Triple Language</para></listitem>
+        <listitem><para>RDF/XML - Plain XML</para></listitem>
+      </itemizedlist>
+      
+      <para>Just click on the format you want, and your browser should either show it in a separate page or let you download and save it in a file.</para>                  
+    </section>
+    
+  </chapter>
+  
+  <chapter xml:id="chapter_adding_or_removing_a_tool">      
+    <title>Adding or removing tools</title>     
+    <section xml:id="adding_a_new_tool">
+      <title>Adding a new tool</title>
+      <para>So far we have only looked at tools put into TERESAH by other people, or taken from external data sources. Now we will create one ourselves.</para>
+      <para>Important note: in order to actually add a tool, you need to have a user type of Collaborator, Supervisor or Administrator. See the <link linkend="user_types">reference section on user types</link> for more info</para>      
     </section>
     
     <section xml:id="removing_a_tool">
@@ -195,12 +218,13 @@
       <para>Removing an existing tool is, quite understandably, even easier than adding a new one.</para>          
     </section>
     
-    
-    
-    
+  </chapter> 
+  
+  <chapter xml:id="chapter_api">
+    <title>The TERESAH API</title>
+    <para>Since the TERESAH API is still under implementation, this manual is not currently covering it. For up-to-date information regarding the API, se the folder TERESAH/documentation/api/v1/ in the git repository. </para>
   </chapter>
-
-  <!--  <xi:include href="includes/reference.xml" />-->
+  
   <chapter xml:id="chapter_reference">
     
     <title>Reference</title>
@@ -249,7 +273,7 @@
         
         <varlistentry>
           <term>TURTLE</term>
-          <listitem><para><emphasis>Terse RDF Triple Language</emphasis></para></listitem>
+          <listitem><para><emphasis>Terse RDF Triple Language</emphasis> a language/format designed for describing RDF triples. See <link xl:href="https://en.wikipedia.org/wiki/Turtle_%28syntax%29"> (Wikipedia article here</link></para></listitem>
         </varlistentry>
         
         <varlistentry>
