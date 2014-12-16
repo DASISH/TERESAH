@@ -19,7 +19,7 @@
 
             <h2>License for content</h2>
 
-            <p>The license for the content of TERESAH is <strong>Creative Commons Attribution-ShareAlike 4.0 International</strong>. More information about this license can be found <a href="license/content">here</a>.</p>
+            <p>The license for the content of TERESAH is <strong>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</strong>. More information about this license can be found <a href="license/content">here</a>.</p>
 
             <h2>Citing TERESAH in publications</h2>
 
