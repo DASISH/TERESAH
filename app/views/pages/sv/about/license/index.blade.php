@@ -19,7 +19,7 @@
 
             <h2>License for content</h2>
 
-            <p>Licensen TERESAH använder sig av för källkod är <strong>Creative Commons Attribution-ShareAlike 4.0 International</strong>. Mer information om licensen kan hittas <a href="license/content">här</a>.</p>
+            <p>Licensen TERESAH använder sig av för källkod är <strong>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</strong>. Mer information om licensen kan hittas <a href="license/content">här</a>.</p>
             
             <h2>Citera TERESAH i publikationer</h2>
 
