@@ -11,6 +11,8 @@ interface ToolRepositoryInterface extends RepositoryInterface
     public function byAlphabet($startsWith);
 
     public function random();
+    
+    public function popular();
 
     public function search($parameters);
 }

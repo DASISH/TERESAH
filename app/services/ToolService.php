@@ -61,4 +61,9 @@ class ToolService extends AbstractRepositoryService implements ToolServiceInterf
     {
         return $this->toolRepository->random();
     }
+    
+    public function popular()
+    {
+        return $this->toolRepository->popular();
+    }
 }

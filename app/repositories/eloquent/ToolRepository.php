@@ -85,6 +85,23 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
     {
         return $this->model->haveData()->orderBy(DB::raw("RAND()"))->first();
     }
+    
+    public function popular()
+    {
+        $result = DB::table("tool_user")
+                    ->select("tool_id", DB::raw("COUNT(tool_id) AS weight"))
+                    ->groupBy("tool_id")
+                    ->orderBy("weight", "DESC")
+                    ->take(3)
+                    ->get();
+        
+        $return = array();
+        foreach($result as $value)
+        {
+            $return[] = Tool::find($value->tool_id);
+        }
+        return $return;
+    }
 
     public function search($parameters = array())
     {
