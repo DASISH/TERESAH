@@ -115,5 +115,5 @@ return array(
     |
     */
 
-    "tool_view_timeout" => array("XML", "Turtle", "JsonLD"),    
+    "tool_view_timeout" => 30,    
 );

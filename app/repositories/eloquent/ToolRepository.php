@@ -107,6 +107,10 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
     {
         return $this->model->haveData()->orderBy(DB::raw("created_at"), "DESC")->take(3)->get();
     }
+    
+    public function mostViwed(){
+        return $this->model->haveData()->orderBy("views", "DESC")->take(3)->get();
+    }
 
     public function search($parameters = array())
     {
