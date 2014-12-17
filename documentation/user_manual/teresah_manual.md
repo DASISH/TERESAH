@@ -41,10 +41,10 @@ Next you will be taken to the login page. Since we are assuming that you don't h
 
 Now we need some basic information about you: 
 
-- (1) Your name
-- (2) Your prefered locale (currently English and Swedish are available)
-- (3) A mail adress 
-- (4) The password you want to use. Repeat the password. 
+- 1) Your name
+- 2) Your prefered locale (currently English and Swedish are available)
+- 3) A mail adress 
+- 4) The password you want to use. Repeat the password. 
 
 Once you have filled out the fields correctly, click on "Sign Up".
 
@@ -75,7 +75,7 @@ Lets look around the tools already in the TERESAH listings
 ![The search page](./images/search_page.png)
 *The search page*
 
-- 1) The number of tools, on the current page and the total amount of tools matching your currently selected search filters (3)
+- 1) The number of tools on the current page and the total amount of tools matching your currently selected search filters (3)
 - 2) General search box.
 - 3) Search filters. By selecting one or more of these, only tools matching those specific categories are shown
 - 4) Alphabetical listing of all tools matching your selected search filters from (3)
@@ -125,12 +125,27 @@ Just click on the format you want, and your browser should either show it in a s
 Adding or removing tools
 ========================
 
+Entering and leaving admin mode
+-------------------------------
+
+In order to actually add or remove a tool, you need to enter "Admin Mode". To do this, you need to have a user type of Collaborator, Supervisor or Administrator. See the [reference section on user types](#types of users) for more info. 
+
+First, go to the administrative section of TERESAH. Choose "Manage TERESAH" from the user menu.
+
+![Going to the administrative section of TERESAH from the user menu](./images/going_to_admin_mode.png)
+*Going to the administrative section of TERESAH from the user menu*
+
+![The TERESAH administrative section tool listing](./images/administrative_section_tool_listing.png)
+*The TERESAH administrative section tool listing*
+
+As the banner across the top of the page now says, *please do be careful*. Use your administrative powers responsibly.
+
+
 Adding a new tool
 -----------------
 
 So far we have only looked at tools put into TERESAH by other people, or taken from external data sources. Now we will create one ourselves.
 
-Important note: in order to actually add a tool, you need to have a user type of Collaborator, Supervisor or Administrator. See the [reference section on user types](#user_types) for more info
 
 Removing an existing tool
 -------------------------
@@ -140,7 +155,7 @@ Removing an existing tool is, quite understandably, even easier than adding a ne
 The TERESAH API
 ===============
 
-Since the TERESAH API is still under implementation, this manual is not currently covering it. For up-to-date information regarding the API, se the folder TERESAH/documentation/api/v1/ in the git repository.
+Since this manual is aimed at non-programmers, this manual is not currently covering the TERESAH API. For up-to-date information regarding the API, se the folder TERESAH/documentation/api/v1/ in the git repository.
 
 Reference
 =========
@@ -172,7 +187,7 @@ XML
 :   *eXtensible Markup Language*
 
 TURTLE
-:   *Terse RDF Triple Language* a language/format designed for describing RDF triples. See [(Wikipedia article here](https://en.wikipedia.org/wiki/Turtle_%28syntax%29)
+:   *Terse RDF Triple Language* a language/format designed for describing RDF triples. See [Wikipedia article here](https://en.wikipedia.org/wiki/Turtle_%28syntax%29)
 
 JSONLD
 :   *JSON for Linking Data*
@@ -185,6 +200,9 @@ DiRT
 
 dirtdirecory.org
 :   One of the external data sources used in TERESAH
+
+Federated Login
+:   Logging in to a web page (or other net service) using a third party, such as Google or Facebook
 
 Types of users
 --------------
