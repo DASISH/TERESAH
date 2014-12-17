@@ -77,7 +77,7 @@ Lets look around the tools already in the TERESAH listings
 
 - 1) The number of tools on the current page and the total amount of tools matching your currently selected search filters (3)
 - 2) General search box.
-- 3) Search filters. By selecting one or more of these, only tools matching those specific categories are shown
+- 3) Facet search filters. By selecting one or more of these facets, only tools matching those specific facets are shown
 - 4) Alphabetical listing of all tools matching your selected search filters from (3)
 - 5) Page switcher, showing how many full pages are needed to show the listings in (4).
 
@@ -118,7 +118,7 @@ When viewing a tool in TERESAH, you can export information about it in RDF forma
 
 - RDF/JSONLD - A JSON dialect for exchange of links
 - RDF/TURTLE - Terse RDF Triple Language
-- RDF/XML - Plain XML
+- RDF/XML - Plain XML (using the RDF namespace)
 
 Just click on the format you want, and your browser should either show it in a separate page or let you download and save it in a file.
 
@@ -128,7 +128,7 @@ Adding or removing tools
 Entering and leaving admin mode
 -------------------------------
 
-In order to actually add or remove a tool, you need to enter "Admin Mode". To do this, you need to have a user type of Collaborator, Supervisor or Administrator. See the [reference section on user types](#types of users) for more info. 
+In order to actually add or remove a tool, you need to enter "Admin Mode". To do this, you need to have a user type of *Collaborator*, *Supervisor* or *Administrator*. See the [reference section on user types](#types of users) for more info. 
 
 First, go to the administrative section of TERESAH. Choose "Manage TERESAH" from the user menu.
 
@@ -140,11 +140,30 @@ First, go to the administrative section of TERESAH. Choose "Manage TERESAH" from
 
 As the banner across the top of the page now says, *please do be careful*. Use your administrative powers responsibly.
 
+In order to leave admin mode and go back to just browsing TERESAH, click on "Browse TERESAH" in the user menu. You will be back in non-admin broser mode, and the banner across the top of the screen will go away.
+
+![Going back to browsing mode](./images/leaving_admin_mode.png)
+*Going back to browsing mode in the user menu*
 
 Adding a new tool
 -----------------
 
 So far we have only looked at tools put into TERESAH by other people, or taken from external data sources. Now we will create one ourselves.
+
+First, go to the administrative section as described above.
+
+![The TERESAH administrative section tool listing](./images/administrative_section_tool_listing.png)
+*The TERESAH administrative section tool listing*
+
+Click on "Add new tool"
+
+![The button "Add new tool"](./images/add_new_tool_button.png)
+*The button "Add new tool"*
+
+You will see the "Add new tool" dialog.
+
+![The dialog "Add new tool"](./images/add_a_tool_dialog.png)
+*The dialog for adding a new tool*
 
 
 Removing an existing tool
