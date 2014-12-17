@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Config;
 use Services\ToolServiceInterface as ToolService;
+use Illuminate\Support\Facades\Cookie;
 
 class DataSourcesController extends BaseController
 {
@@ -41,6 +42,11 @@ class DataSourcesController extends BaseController
 
         $this->tool = $this->toolService->findWithAssociatedData($toolId);
 
+        if(empty(Cookie::get($this->tool->slug."_counter"))){
+            $this->tool->incrementViews();
+            Cookie::queue($this->tool->slug."_counter", "true", Config::get("teresah.tool_view_timeout"));
+        }
+        
         foreach ($this->tool->dataSources as $dataSourceId => $dataSource) {
             $groupedData = array();
 
