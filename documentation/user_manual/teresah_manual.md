@@ -157,7 +157,7 @@ First, go to the administrative section as described above.
 
 Click on "Add new tool"
 
-![The button "Add new tool"](./images/add_new_tool_button.png)
+![The button "Add new tool"](./images/add_a_tool_button.png)
 *The button "Add new tool"*
 
 You will see the "Add new tool" dialog.
