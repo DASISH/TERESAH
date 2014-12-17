@@ -174,7 +174,7 @@ Removing an existing tool is, quite understandably, even easier than adding a ne
 The TERESAH API
 ===============
 
-Since this manual is aimed at non-programmers, this manual is not currently covering the TERESAH API. For up-to-date information regarding the API, se the folder TERESAH/documentation/api/v1/ in the git repository.
+Since this manual is aimed at non-programmers, we will not cover the TERESAH API here. For up-to-date information regarding the API, se the folder TERESAH/documentation/api/v1/ in the git repository.
 
 Reference
 =========
