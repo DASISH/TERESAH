@@ -13,14 +13,14 @@ science, Arts and Humanities*) is a web based application for the
 collection and organisation of data research tools. It was created using
 funds from the Seventh Framework Programme.
 
+![*The TERESAH front page*](./images/front_page_scroll_1.png")
 *The TERESAH front page*
 
 The license of this document
 ----------------------------
 
 This manual (like the contents of TERESAH itself) is licensed under the
-[Creative Commons CC-BY-SA 4.0
-license.](http://creativecommons.org/licenses/by-sa/4.0/)
+[Creative Commons CC-BY-SA 4.0 license.](http://creativecommons.org/licenses/by-sa/4.0/)
 
 Signing up and logging in
 =========================
@@ -28,31 +28,27 @@ Signing up and logging in
 Creating an account for TERESAH
 -------------------------------
 
-Before starting to use TERESAH, you need an account. It is also possible
-to log in using so-called federated login providers such as linked-in,
-but for now, lets create a dedicated account.
+Before starting to use TERESAH, you need an account. It is also possible to log in using so-called federated login providers such as linked-in, but for now, lets create a dedicated account.
 
-On the front page, click on "sign in" in the upper right corner. *The
-top bar (no user currently logged in)*
+On the front page, click on "sign in" in the upper right corner. 
 
-Next you will be taken to the login page. Since we are assuming that you
-don't have an account yet, click on "Sign up" below the "Password"
-field.
+![*The top bar (no user currently logged in)*](./images/top_bar_logged_out.png)
+*The top bar (no user currently logged in)*
 
-*The sign in form. The link to sign up for a new account is
-highlighted.*
+Next you will be taken to the login page. Since we are assuming that you don't have an account yet, click on "Sign up" below the "Password" field.
 
-Now we need some basic information about you: (1) Your name, (2) Your
-prefered locale (currently English and Swedish are available), (3) A
-mail adress (4) The password you want to use. Repeat the password. Once
-you have filled out the fields correctly, click on "Sign Up".
+![*The sign in form. The link to sign up for a new account is highlighted.*](./images/sign_in_no_text.png)
+*The sign in form. The link to sign up for a new account is highlighted.*
 
+![*The sign up form for creating a new user account*](./images/sign_up.png)
 *The sign up form for creating a new user account*
 
+Now we need some basic information about you: (1) Your name, (2) Your prefered locale (currently English and Swedish are available), (3) A mail adress (4) The password you want to use. Repeat the password. Once you have filled out the fields correctly, click on "Sign Up".
+
+![*The mail sent to new users.*](./images/welcome_mail.png)
 *The mail sent to new users.*
 
-Once your application has been processed, you will get a confirmation
-mail to the address you used in the previous step.
+Once your application has been processed, you will get a confirmation mail to the address you used in the previous step.
 
 Viewing tools
 =============
@@ -62,21 +58,25 @@ Finding and looking at a tool
 
 Lets look around the tools already in the TERESAH listings
 
-![*The TERESAH front page search
-box*](./images/front_page_search_box.png)
+![*The TERESAH front page search box*](./images/front_page_search_box.png)
+*The TERESAH front page search box*
 
 ![*The top bar tool browsing menu.*](./images/browse_tools_menu.png)
+*The top bar tool browsing menu.*
 
 ​1) Search for a tool by its name 2) Browse for a tool in the
 
 ![*The search page*](./images/search_page.png)
+*The search page*
 
-![*Browsing the alphabetical listing of all
-tools*](./images/browse_all_tools_page.png)
+![*Browsing the alphabetical listing of all tools*](./images/browse_all_tools_page.png)
+*Browsing the alphabetical listing of all tools*
 
 ![*Browsing tools by Facet*](./images/browse_tools_by_facet_page.png)
+*Browsing tools by Facet*
 
 ![*Viewing a specific tool*](./images/viewing_a_tool.png)
+*Viewing a specific tool*
 
 -   ​1) The name of the tool. As you can see, each tool has one or more
     initials inside the cicle to the left. Tools with a name made up
@@ -99,9 +99,7 @@ tools*](./images/browse_all_tools_page.png)
 Exporting tool RDF info
 -----------------------
 
-When viewing a tool in TERESAH, you can export information about it in
-RDF format. Depending of what you want to use the RDF for, you can
-export it in different languages.
+When viewing a tool in TERESAH, you can export information about it in RDF format. Depending of what you want to use the RDF for, you can export it in different languages.
 
 -   RDF/JSONLD - A JSON dialect for exchange of links
 
@@ -109,8 +107,7 @@ export it in different languages.
 
 -   RDF/XML - Plain XML
 
-Just click on the format you want, and your browser should either show
-it in a separate page or let you download and save it in a file.
+Just click on the format you want, and your browser should either show it in a separate page or let you download and save it in a file.
 
 Adding or removing tools
 ========================
@@ -118,25 +115,19 @@ Adding or removing tools
 Adding a new tool
 -----------------
 
-So far we have only looked at tools put into TERESAH by other people, or
-taken from external data sources. Now we will create one ourselves.
+So far we have only looked at tools put into TERESAH by other people, or taken from external data sources. Now we will create one ourselves.
 
-Important note: in order to actually add a tool, you need to have a user
-type of Collaborator, Supervisor or Administrator. See the [reference
-section on user types](#user_types) for more info
+Important note: in order to actually add a tool, you need to have a user type of Collaborator, Supervisor or Administrator. See the [reference section on user types](#user_types) for more info
 
 Removing an existing tool
 -------------------------
 
-Removing an existing tool is, quite understandably, even easier than
-adding a new one.
+Removing an existing tool is, quite understandably, even easier than adding a new one.
 
 The TERESAH API
 ===============
 
-Since the TERESAH API is still under implementation, this manual is not
-currently covering it. For up-to-date information regarding the API, se
-the folder TERESAH/documentation/api/v1/ in the git repository.
+Since the TERESAH API is still under implementation, this manual is not currently covering it. For up-to-date information regarding the API, se the folder TERESAH/documentation/api/v1/ in the git repository.
 
 Reference
 =========
@@ -144,8 +135,7 @@ Reference
 Special terms and assorted acronyms
 -----------------------------------
 
-TERESAH uses some specific terminology and technical words that you may
-or may not be familiar with. Here we will attempt to clarify things.
+TERESAH uses some specific terminology and technical words that you may or may not be familiar with. Here we will attempt to clarify things.
 
 TERESAH
 :   *Tools E-Registry for E-Social science, Arts and Humanities*
@@ -158,9 +148,7 @@ API-key
 :   -
 
 Facette
-:   A *facette* is a category that is used to sort different tools.
-    Facets include (for example) the developer of the tool, or the
-    platform it runs on.
+:   A *facette* is a category that is used to sort different tools. Facettes include (for example) the developer of the tool, or the platform it runs on.
 
 Tool
 :   In TERESAH, a *tool* refers to a specific piece of software (and its
