@@ -87,7 +87,12 @@ class Tool extends BaseModel
     {
         return $query->has("data", ">", 0);
     }
-
+    
+    public function scopeHasUsers($query)
+    {
+        return $query->has("users", ">", 0);
+    }    
+    
     public function scopeHaveDataValueLike($query, $value)
     {
         return $query->whereHas("data", function($query) use($value){
@@ -132,6 +137,11 @@ class Tool extends BaseModel
         });
     }
 
+    public function getNumberOfUsers()
+    {
+        return count($this->users());
+    }
+    
     public function getAbbreviationAttribute()
     {
         return substr(preg_replace("~\b(\w)|.~", "$1", $this->name), 0, 4);

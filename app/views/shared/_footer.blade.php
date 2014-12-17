@@ -3,11 +3,12 @@
         <ul class="creative-commons">
             <li>{{ image_tag("icons/creative_commons_cc.png", array("alt" => "Creative Commons CC")) }}</li>
             <li>{{ image_tag("icons/creative_commons_by.png", array("alt" => "Creative Commons BY")) }}</li>
+            <li>{{ image_tag("icons/creative_commons_nc.png", array("alt" => "Creative Commons NC")) }}</li>
             <li>{{ image_tag("icons/creative_commons_sa.png", array("alt" => "Creative Commons SA")) }}</li>
         </ul>
         <!-- /creative-commons -->
 
-        <p>Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/" title="Creative Commons Attribution-ShareAlike 4.0 International license">Creative Commons Attribution-ShareAlike 4.0 International license</a>.</p>
+        <p>Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license</a>.</p>
 
         <p>TERESAH has been developed as part of the Data Service Infrastructure for the Social Sciences and Humanities (DASISH), a Seventh Framework Programme funded project.</p>
 
@@ -22,7 +23,6 @@
             <ul>
                 <li>{{ Link_to("/", Lang::get("views.shared.navigation.home.title")) }}</li>
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.name"), array("path" => "about"), array("title" => Lang::get("views.shared.navigation.about.title"))) }}</li>
-                <li><a href="#" title="Terms of Service">Terms of Service</a></li>
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.privacy_policy.name"), array("path" => "about/privacy"), array("title" => Lang::get("views.shared.navigation.about.privacy_policy.title"))) }}</li>
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.license.name"), array("path" => "about/license"), array("title" => Lang::get("views.shared.navigation.about.license.title"))) }}</li>
             </ul>

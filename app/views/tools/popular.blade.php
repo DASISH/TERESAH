@@ -5,23 +5,19 @@
 )))
 
 @section("content")
-    <div class="row">
-        <div class="col-sm-12">
+    <section class="row">
+        <div class="small-12 columns">
             <h1>{{ Lang::get("views.tools.popular.heading") }}</h1>
-
-            @include("shared._error_messages")
+    
+            <ul class="small-block-grid-1 medium-block-grid-4">
+                @foreach ($tools as $tool)
+                    @include("tools._tool", array($tool, "type" => "block-grid"))
+                @endforeach
+            </ul>
+            <!-- /small-block-grid-1 medium-block-grid-4 -->
+        
         </div>
-
-        <!-- /col-sm-12 -->
-    </div>
-    <!-- /row -->
-
-    <div class="listing">
-        @foreach ($tools as $tool)
-            @include("tools._tool", compact("tool"))
-        @endforeach
-    </div>
-    <!-- /listing -->
-
-    <!-- /row -->
+        <!-- /small-12.columns -->
+    </section>
+    <!-- /section -->
 @stop
