@@ -29,6 +29,15 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
 
         return $this->make($with)->haveData()->orderBy("created_at", "DESC");
     }
+    
+    public function allIncludingSourceLess(array $with = array(), $perPage = null)
+    {
+        if (isset($perPage) && is_numeric($perPage)) {
+            return $this->make($with)->orderBy("name", "ASC")->paginate($perPage);
+        }
+
+        return $this->make($with)->orderBy("name", "ASC");
+    }
 
     public function attachDataSource($id, $dataSourceId)
     {

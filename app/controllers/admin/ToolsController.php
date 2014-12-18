@@ -34,7 +34,7 @@ class ToolsController extends AdminController
     public function index()
     {
         return View::make("admin.tools.index")
-            ->with("tools", $this->toolService->all($with = array("user"), $perPage = 20));
+            ->with("tools", $this->toolService->allIncludingSourceLess($with = array("user"), $perPage = 20));
     }
 
     /**

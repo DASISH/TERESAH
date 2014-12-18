@@ -9,4 +9,6 @@ interface ToolServiceInterface extends RepositoryServiceInterface
     public function findWithAssociatedData($id);
 
     public function search($parameters);
+    
+    public function allIncludingSourceLess(array $with, $perPage);
 }

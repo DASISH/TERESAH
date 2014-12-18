@@ -19,4 +19,6 @@ interface ToolRepositoryInterface extends RepositoryInterface
     public function mostViwed();
 
     public function search($parameters);
+    
+    public function allIncludingSourceLess(array $with, $perPage);
 }
