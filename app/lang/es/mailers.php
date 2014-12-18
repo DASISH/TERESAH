@@ -3,16 +3,16 @@
 return array(
     "password_reset" => array(
         "request" => array(
-            "subject" => "Password reset information for TERESAH"
+            "subject" => "Información de reestablecimiento de contaseña para TERESAH"
         )
     ),
 
     "signup" => array(
         "reset" => array(
-            "subject" => "Password reset information for TERESAH"
+            "subject" => "Información de reestablecimiento de contaseña para TERESAH"
         ),
         "welcome" => array(
-            "subject" => "Welcome to TERESAH!"
+            "subject" => "Bienvenido a TERESAH!"
         )
     )
 );
