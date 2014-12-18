@@ -168,10 +168,10 @@ You will see the "Add new tool" dialog.
 - 1) Fill out the name of the tool..
 - 2) ..and click "add tool"
 
+The new tool will be created, and you will be taken to its page. Note that this only creates an "empty" tool - there in no information in it, and no data sources connected to it. That will be added in the next step.
+
 !["Tool successfully added" message](./images/newly_created_tool.png)
 *The message informing you of a new tool beeing successfully added*
-
-You will be taken to the page of the newly added tool. Note that this only creates an "empty" tool - there in no information in it, and no data sources connected to it. That will be added in the next step.
 
 As you can see, there are no data sources connected to this tool. Now we will add one.
 
@@ -180,6 +180,15 @@ As you can see, there are no data sources connected to this tool. Now we will ad
 
 You can either use the "Add Data Source" link, or pick "Add Data Source" in the "Data Sources" menu. Later, once you have added a data source, only the menu will be available.
 
+![The "Attach a data source" dialog](./images/attach_a_data_source.png)
+*The "Attach a data source" dialog*
+
+Just pick a data source from the menu and click "Attach data source"...
+
+![Data source successfully attached](./images/new_data_source_attached.png)
+*Data source successfully attached*
+
+...and you have added a new source.
 
 Editing an existing tool
 ------------------------
