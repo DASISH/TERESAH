@@ -51,20 +51,21 @@
              <ul class="toolbar">
                 @if (Auth::user()->toolUsages()->where("tool_id", "=", $tool->id)->count() != 0)                                        
                     <li>
-                        <a class="starred" data-callback="{{ URL::route("tools.unuse", array("toolID" => $tool->id)) }}" data-action="DELETE" title="{{ Lang::get("views.tools.data_sources.show.unuse.title") }}" id="toolUsageButton">
-                            {{ Lang::get("views.tools.data_sources.show.unuse.title") }}
-                        </a>
+                        <a id="toolUsageButton" class="starred button right" data-callback="{{ URL::route("tools.unuse", array("toolID" => $tool->id)) }}" data-action="DELETE" title="{{ Lang::get("views.tools.data_sources.show.unuse.title") }}" role="button"></a>
                     </li>
                 @else
+                    <li>                        
+                        <a id="toolUsageButton" class="unstarred button right" data-callback="{{ URL::route("tools.use", array("toolID" => $tool->id)) }}" data-action="GET" title="{{ Lang::get("views.tools.data_sources.show.use.title") }}" role="button"></a>
+                    </li>
+                @endif     
+                @if (Auth::user()->hasAdminAccess())                                        
                     <li>
-                        <a class="unstarred" data-callback="{{ URL::route("tools.use", array("toolID" => $tool->id)) }}" data-action="GET" title="{{ Lang::get("views.tools.data_sources.show.use.title") }}" id="toolUsageButton">
-                            {{ Lang::get("views.tools.data_sources.show.use.title") }}
-                        </a>    
+                        <a href="{{ URL::route("admin.tools.edit", array("id" => $tool->id)) }}" class="button right" title="{{ Lang::get("views.shared.navigation.admin.tools.edit.title") }}" role="button"><span class="glyphicons pencil"></span></a>
                     </li>
                 @endif
              </ul>
-            @endif
             <!-- /toolbar -->
+            @endif            
         </div>
         <!-- /small-12.medium-5.columns -->
     </div>
