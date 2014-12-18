@@ -212,7 +212,7 @@ Either click on the link "Add tool data" or pick "Add tool data" in the menu for
 
 If we look at the tool (first leaving adminin mode), we can se our newly added data.
 
-![Viewing a newly added data field](./images/viewing_new_data_field.png)
+![Viewing a newly added data field](./images/viewing_a_new_data_field.png)
 *Viewing our newly added data*
 
 
