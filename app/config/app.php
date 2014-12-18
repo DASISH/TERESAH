@@ -65,7 +65,7 @@ return array(
     |
     */
 
-    "available_locales" => array("en", "sv"),
+    "available_locales" => array("en", "sv", "es"),
 
     /*
     |--------------------------------------------------------------------------

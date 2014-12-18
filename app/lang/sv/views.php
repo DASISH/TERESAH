@@ -500,7 +500,8 @@ return array(
 
         "locales" => array(
             "en" => "English",
-            "sv" => "Svenska"
+            "sv" => "Svenska",
+            "es" => "Spanska"
         ),
 
         "messages" => array(
