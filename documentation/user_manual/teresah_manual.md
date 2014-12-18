@@ -165,11 +165,23 @@ You will see the "Add new tool" dialog.
 ![The dialog "Add new tool"](./images/add_a_tool_dialog.png)
 *The dialog for adding a new tool*
 
+Name the tool, and it should now be added.
 
 Removing an existing tool
 -------------------------
 
-Removing an existing tool is, quite understandably, even easier than adding a new one.
+Removing an existing tool is, quite understandably, even easier than adding a new one. First, make sure you are in admin mode:
+
+![The TERESAH administrative section tool listing](./images/administrative_section_tool_listing.png)
+*The TERESAH administrative section tool listing*
+
+Find the tool you want to delete and click on the small "x" icon in the rightmost column
+
+![The TERESAH administrative section tool listing](./images/deleting_a_tool.png)
+*The "delete tool" button*
+
+The tool will now be deleted.
+
 
 The TERESAH API
 ===============
@@ -184,35 +196,11 @@ Special terms and assorted acronyms
 
 TERESAH uses some specific terminology and technical words that you may or may not be familiar with. Here we will attempt to clarify things.
 
-TERESAH
-:   *Tools E-Registry for E-Social science, Arts and Humanities*
-
 API
 :   *Application Programming Interface* - a defined way for programs to "speak" to each other.
 
 API-key
 :   A "password" or authentication that allows you to use the TERESAH API.
-
-Facette
-:   A *facette* is a category that is used to sort different tools. Facettes include (for example) the developer of the tool, or the platform it runs on.
-
-Tool
-:   In TERESAH, a *tool* refers to a specific piece of software (and its page in TERESAH) that might be useful to researchers.
-
-RDF
-:   *Resource Description Framework*
-
-XML
-:   *eXtensible Markup Language*
-
-TURTLE
-:   *Terse RDF Triple Language* a language/format designed for describing RDF triples. See [Wikipedia article here](https://en.wikipedia.org/wiki/Turtle_%28syntax%29)
-
-JSONLD
-:   *JSON for Linking Data*
-
-JSON
-:   *JavaScript Object Notation*
 
 DiRT
 :   *Digital Research Tools*. See also "dirtdirectory.org"
@@ -220,8 +208,33 @@ DiRT
 dirtdirecory.org
 :   One of the external data sources used in TERESAH
 
+Facette
+:   A *facette* is a category that is used to sort different tools. Facettes include (for example) the developer of the tool, or the platform it runs on.
+
 Federated Login
 :   Logging in to a web page (or other net service) using a third party, such as Google or Facebook
+
+JSON
+:   *JavaScript Object Notation*
+
+JSONLD
+:   *JSON for Linking Data*
+
+RDF
+:   *Resource Description Framework*
+
+TERESAH
+:   *Tools E-Registry for E-Social science, Arts and Humanities*
+
+TURTLE
+:   *Terse RDF Triple Language* a language/format designed for describing RDF triples. See [Wikipedia article here](https://en.wikipedia.org/wiki/Turtle_%28syntax%29)
+
+Tool
+:   In TERESAH, a *tool* refers to a specific piece of software (and its page in TERESAH) that might be useful to researchers.
+
+XML
+:   *eXtensible Markup Language*
+
 
 Types of users
 --------------
