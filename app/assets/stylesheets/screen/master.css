@@ -437,13 +437,13 @@ dl {
 }
 
 .unstarred {
-    background: url(/assets/icons/unstar.png) no-repeat right;
-    padding-right: 35px;
+    background: url(/assets/icons/unstar.png) no-repeat center;
+    padding: 17px;
 }
 
 .starred {
-    background: url(/assets/icons/star.png) no-repeat right;
-    padding-right: 35px;
+    background: url(/assets/icons/star.png) no-repeat center;
+    padding: 17px;
 }
 
 /* Content

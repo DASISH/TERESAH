@@ -108,8 +108,7 @@ $(document).ready(function() {
                 link.attr("data-action", data.action);
                 link.attr("data-callback", data.callback);
                 link.attr("title", data.title);                
-                link.text(data.title);
-                
+                                
                 if(data.action === "GET")
                 {
                     link.removeClass("starred");
