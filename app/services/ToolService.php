@@ -13,6 +13,11 @@ class ToolService extends AbstractRepositoryService implements ToolServiceInterf
         $this->toolRepository = $this->setRepository($toolRepository);
     }
 
+    public function create($input)
+    {        
+        return $this->repository->create($input);        
+    }
+    
     public function attachDataSource($id, $dataSourceId)
     {
         # TODO: Check for the existing relationship
@@ -45,7 +50,7 @@ class ToolService extends AbstractRepositoryService implements ToolServiceInterf
     }
 
     public function findWithAssociatedData($id)
-    {
+    {        
         if (!is_numeric($id)) {
             $id = $this->toolRepository->getFirstBy("slug", "=", $id)->id;
         }

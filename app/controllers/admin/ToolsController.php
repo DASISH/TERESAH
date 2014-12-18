@@ -72,12 +72,14 @@ class ToolsController extends AdminController
      */
     public function store()
     {
-        if ($this->toolService->create($this->inputWithAuthenticatedUserId(Input::all()))) {
-            return Redirect::route("admin.tools.index")
+        $response = $this->toolService->create($this->inputWithAuthenticatedUserId(Input::all()));
+          
+        if ($response["success"]) {
+            return Redirect::route("admin.tools.data-sources.index", array("toolId" => $response["id"]))                
                 ->with("success", Lang::get("controllers.admin.tools.store.success"));
         } else {
             return Redirect::route("admin.tools.create")
-                ->withErrors($this->toolService->errors())->withInput();
+                ->withErrors($response["errors"])->withInput();
         }
     }
 
