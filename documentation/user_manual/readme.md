@@ -175,12 +175,12 @@ You will be returned to the admin section tool listing, and shown a message bar 
 Adding information to a new tool
 --------------------------------
 
-First you need to find the the tool in the admin section listings. Here we will use "WordVenture" as an example.
+First you need to find the the tool in the admin section listings. Here we will use the classical "foobar" as an example.
 
 ![Editing a tool in the admin section listing](./images/selecting_a_tool_in_the_admin_section_listing.png)
 *To view/edit a tool, just click on its name in the admin section listing*
 
-You should se a very "bare-bones" tool, like this:
+You should se a very "bare-bones" tool page, like this:
 
 ![A recently created tool, without data sources](./images/bare_tool.png)
 *A recently created tool, without data sources*
