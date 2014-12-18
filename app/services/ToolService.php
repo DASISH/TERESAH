@@ -76,4 +76,9 @@ class ToolService extends AbstractRepositoryService implements ToolServiceInterf
     {
         return $this->repository->allIncludingSourceLess($with, $perPage);
     }
+    
+    public function mostViwed()
+    {
+        return $this->toolRepository->mostViwed();
+    }
 }

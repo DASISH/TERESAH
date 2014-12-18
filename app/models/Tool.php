@@ -68,8 +68,8 @@ class Tool extends BaseModel
         return $this->belongsToMany("Tool", "similar_tools", "tool_id")->withTimestamps();
     }
 
-    public function allSimilarTools(){
-
+    public function allSimilarTools()
+    {
         $linked = $this->similarTools()->get();
         $computed = $this->computedMatch()->get();
         $counter = 0;
@@ -81,6 +81,12 @@ class Tool extends BaseModel
         }
 
         return $linked;
+    }
+    
+    public function incrementViews()
+    {
+        $this->views += 1;
+        $this->save();
     }
 
     public function scopeHaveData($query)
