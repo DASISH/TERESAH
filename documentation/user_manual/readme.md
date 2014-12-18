@@ -193,10 +193,14 @@ Just pick a data source from the menu and click "Attach data source"...
 Editing an existing tool
 ------------------------
 
-First you need to find the the tool in the admin section listings. Here we will use the classical "foobar" as an example.
+First you need to find the the tool in the admin section listings. Here we will use the tool we added earlier as an example.
 
 ![Editing a tool in the admin section listing](./images/selecting_a_tool_in_the_admin_section_listing.png)
 *To view/edit a tool, just click on its name in the admin section listing*
+
+- 1) Click on the name of the tool to view it...
+- 2) ...or you can click on the "i" symbol
+- 3) To change the name of the tool, click on the "pen" symbol
 
 Removing an existing tool
 -------------------------
