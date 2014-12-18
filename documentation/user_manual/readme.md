@@ -145,8 +145,8 @@ In order to leave admin mode and go back to just browsing TERESAH, click on "Bro
 ![Going back to browsing mode](./images/leaving_admin_mode.png)
 *Going back to browsing mode in the user menu*
 
-Adding a new tool
------------------
+Adding a new tool 1: Create the tool
+------------------------------------
 
 So far we have only looked at tools put into TERESAH by other people, or taken from external data sources. Now we will create one ourselves.
 
@@ -175,6 +175,9 @@ The new tool will be created, and you will be taken to its page. Note that this 
 
 As you can see, there are no data sources connected to this tool. Now we will add one.
 
+Adding a new tool 2: Add a data source
+--------------------------------------
+
 ![The data sources menu of a recently created tool](./images/data_source_menu.png)
 *The data sources menu of a recently created tool*
 
@@ -189,6 +192,24 @@ Just pick a data source from the menu and click "Attach data source"...
 *Data source successfully attached*
 
 ...and you have added a new source.
+
+Adding a new tool 3: Add data to a source
+-----------------------------------------
+
+Now let's add some data to the new source
+
+![Add data to empty data source](./images/add_data_to_empty_source.png)
+*Add data to empty data source*
+
+Either click on the link "Add tool data" or pick "Add tool data" in the menu for the data source in question. Once you have added some data, only the menu will be available.
+
+![Adding a piece of data to a data source](./images/add_data_field_to_data_source.png)
+*Adding a piece of data to a data source*
+
+- 1) Pick the kind of data you want to add (eg. description, developer or platform)
+- 2) Fill out the data
+- 3) Click "Add data" to save
+
 
 Editing an existing tool
 ------------------------
