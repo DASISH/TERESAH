@@ -165,7 +165,8 @@ You will see the "Add new tool" dialog.
 ![The dialog "Add new tool"](./images/add_a_tool_dialog.png)
 *The dialog for adding a new tool*
 
-Fill out the name of the tool and click on "add tool"
+- 1) Fill out the name of the tool..
+- 2) ..and click "add tool"
 
 !["Tool successfully added" message](./images/tool_successfully_added_message.png)
 *The message informing you of a new tool beeing successfully added*
