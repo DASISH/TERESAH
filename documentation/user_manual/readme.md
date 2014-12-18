@@ -168,29 +168,26 @@ You will see the "Add new tool" dialog.
 - 1) Fill out the name of the tool..
 - 2) ..and click "add tool"
 
-!["Tool successfully added" message](./images/tool_successfully_added_message.png)
+!["Tool successfully added" message](./images/newly_created_tool.png)
 *The message informing you of a new tool beeing successfully added*
 
-You will be returned to the admin section tool listing, and shown a message bar informing you that the new tool has been added. Note that this only creates an "empty" tool - there in no information in it, and no data sources connected to it. That will be added in the next step.
-
-Adding information to a new tool
---------------------------------
-
-First you need to find the the tool in the admin section listings. Here we will use the classical "foobar" as an example.
-
-![Editing a tool in the admin section listing](./images/selecting_a_tool_in_the_admin_section_listing.png)
-*To view/edit a tool, just click on its name in the admin section listing*
-
-You should se a very "bare-bones" tool page, like this:
-
-![A recently created tool, without data sources](./images/bare_tool.png)
-*A recently created tool, without data sources*
+You will be taken to the page of the newly added tool. Note that this only creates an "empty" tool - there in no information in it, and no data sources connected to it. That will be added in the next step.
 
 As you can see, there are no data sources connected to this tool. Now we will add one.
 
 ![The data sources menu of a recently created tool](./images/data_source_menu.png)
 *The data sources menu of a recently created tool*
 
+You can either use the "Add Data Source" link, or pick "Add Data Source" in the "Data Sources" menu. Later, once you have added a data source, only the menu will be available.
+
+
+Editing an existing tool
+------------------------
+
+First you need to find the the tool in the admin section listings. Here we will use the classical "foobar" as an example.
+
+![Editing a tool in the admin section listing](./images/selecting_a_tool_in_the_admin_section_listing.png)
+*To view/edit a tool, just click on its name in the admin section listing*
 
 Removing an existing tool
 -------------------------
