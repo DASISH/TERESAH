@@ -182,13 +182,13 @@ First you need to find the the tool in the admin section listings. Here we will 
 
 You should se a very "bare-bones" tool, like this:
 
-![A recently created tool, without data sources](./images/bare_tools.png)
+![A recently created tool, without data sources](./images/bare_tool.png)
 *A recently created tool, without data sources*
 
 As you can see, there are no data sources connected to this tool. Now we will add one.
 
-![A recently created tool, without data sources](./images/bare_tools.png)
-*A recently created tool, without data sources*
+![The data sources menu of a recently created tool](./images/data_source_menu.png)
+*The data sources menu of a recently created tool*
 
 
 Removing an existing tool
