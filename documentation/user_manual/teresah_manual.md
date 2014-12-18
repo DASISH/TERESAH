@@ -165,7 +165,20 @@ You will see the "Add new tool" dialog.
 ![The dialog "Add new tool"](./images/add_a_tool_dialog.png)
 *The dialog for adding a new tool*
 
-Name the tool, and it should now be added.
+Fill out the name of the tool and click on "add tool"
+
+!["Tool successfully added" message](./images/tool_successfully_added_message.png)
+*The message informing you of a new tool beeing successfully added*
+
+You will be returned to the admin section tool listing, and shown a message bar informing you that the new tool has been added. Note that this only creates an "empty" tool - there in no information in it, and no data sources connected to it. That will be added in the next step.
+
+Adding information to a new tool
+--------------------------------
+
+First you need to find the the tool in the admin section listings. Here we will use "WordVenture" as an example.
+
+![Editing a tool in the admin section listing](./images/selecting_a_tool_in_the_admin_section_listing.png)
+
 
 Removing an existing tool
 -------------------------
