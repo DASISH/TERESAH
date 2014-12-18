@@ -165,31 +165,42 @@ You will see the "Add new tool" dialog.
 ![The dialog "Add new tool"](./images/add_a_tool_dialog.png)
 *The dialog for adding a new tool*
 
-Fill out the name of the tool and click on "add tool"
+- 1) Fill out the name of the tool..
+- 2) ..and click "add tool"
 
-!["Tool successfully added" message](./images/tool_successfully_added_message.png)
+The new tool will be created, and you will be taken to its page. Note that this only creates an "empty" tool - there in no information in it, and no data sources connected to it. That will be added in the next step.
+
+!["Tool successfully added" message](./images/newly_created_tool.png)
 *The message informing you of a new tool beeing successfully added*
-
-You will be returned to the admin section tool listing, and shown a message bar informing you that the new tool has been added. Note that this only creates an "empty" tool - there in no information in it, and no data sources connected to it. That will be added in the next step.
-
-Adding information to a new tool
---------------------------------
-
-First you need to find the the tool in the admin section listings. Here we will use the classical "foobar" as an example.
-
-![Editing a tool in the admin section listing](./images/selecting_a_tool_in_the_admin_section_listing.png)
-*To view/edit a tool, just click on its name in the admin section listing*
-
-You should se a very "bare-bones" tool page, like this:
-
-![A recently created tool, without data sources](./images/bare_tool.png)
-*A recently created tool, without data sources*
 
 As you can see, there are no data sources connected to this tool. Now we will add one.
 
 ![The data sources menu of a recently created tool](./images/data_source_menu.png)
 *The data sources menu of a recently created tool*
 
+You can either use the "Add Data Source" link, or pick "Add Data Source" in the "Data Sources" menu. Later, once you have added a data source, only the menu will be available.
+
+![The "Attach a data source" dialog](./images/attach_a_data_source.png)
+*The "Attach a data source" dialog*
+
+Just pick a data source from the menu and click "Attach data source"...
+
+![Data source successfully attached](./images/new_data_source_attached.png)
+*Data source successfully attached*
+
+...and you have added a new source.
+
+Editing an existing tool
+------------------------
+
+First you need to find the the tool in the admin section listings. Here we will use the tool we added earlier as an example.
+
+![Editing a tool in the admin section listing](./images/selecting_a_tool_in_the_admin_section_listing.png)
+*To view/edit a tool, just click on its name in the admin section listing*
+
+- 1) Click on the name of the tool to view it...
+- 2) ...or you can click on the "i" symbol
+- 3) To change the name of the tool, click on the "pen" symbol
 
 Removing an existing tool
 -------------------------
