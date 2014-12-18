@@ -52,7 +52,7 @@ class PasswordResetController extends BaseController
 
             if($user == null) {
                 return Redirect::route("sessions.store")
-                    ->with("success", Lang::get("views/password-reset/reset.email_sent").$email);
+                    ->with("success", Lang::get("views.password-reset.reset.email_sent").$email);
             } else {
                 $current_time = date("Y-m-d H:i:s");
                 $token = hash("sha256", Config::get("app.key").$email.$current_time);
@@ -73,7 +73,7 @@ class PasswordResetController extends BaseController
                 });
 
                 return Redirect::route("sessions.store")
-                    ->with("success", Lang::get("views/password-reset/request.email_sent").$email);
+                    ->with("success", Lang::get("views.password-reset.request.email_sent").$email);
             }
         }
     }
@@ -91,7 +91,7 @@ class PasswordResetController extends BaseController
 
         if ($user == null) {
             return Redirect::route("sessions.store")
-                    ->withErrors(Lang::get("views/password-reset/reset.invalid_token"));
+                    ->withErrors(Lang::get("views.password-reset.reset.invalid_token"));
         } else {
             # Remove token from database
             $user->password_reset_token = null;
@@ -129,7 +129,7 @@ class PasswordResetController extends BaseController
 
         if ($user->save()) {
             return Redirect::route("pages.show", array("path" => "/"))
-                ->with("success", Lang::get("views/password-reset/reset.password_updated"));
+                ->with("success", Lang::get("views.password-reset.reset.password_updated"));
         } else {
             return Redirect::route("reset-password.reset")
                 ->withErrors($user->getErrors())->withInput();
