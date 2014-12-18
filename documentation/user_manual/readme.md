@@ -204,7 +204,15 @@ Find the tool you want to delete and click on the small "x" icon in the rightmos
 ![The TERESAH administrative section tool listing](./images/deleting_a_tool.png)
 *The "delete tool" button*
 
-The tool will now be deleted.
+You will be asked if you really want to delete the tool. Click "OK".
+
+![Tool deletion warning dialog](./images/tool_deletion_warning.png)
+*The tool deletion warning dialog*
+
+A message bar will show that the tool has been deleted.
+
+![Tool deletion confirmation](./images/tool_successfully_deleted.png)
+*Confirmation of tool deletion*
 
 
 The TERESAH API
