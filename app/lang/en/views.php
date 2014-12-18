@@ -563,8 +563,8 @@ return array(
 
         "locales" => array(
             "en" => "English",
-            "sv" => "Svenska",
-            "es" => "Spanish"
+            "es" => "Español",
+            "sv" => "Svenska"
         ),
 
         "messages" => array(
