@@ -5,12 +5,12 @@
 
 return array(
     "id" => "ID",
-    "name" => "Name",
-    "description" => "Description",
-    "slug" => "Slug",
-    "user" => "User",
-    "user_id" => "User ID",
-    "created_at" => "Created at",
-    "updated_at" => "Updated at",
-    "deleted_at" => "Deleted at"
+    "name" => "Nombre",
+    "description" => "Descripción",
+    "slug" => "Alias",
+    "user" => "Usuario",
+    "user_id" => "Usuario ID",
+    "created_at" => "Creado en",
+    "updated_at" => "Actializado en",
+    "deleted_at" => "Eliminado en"
 );
