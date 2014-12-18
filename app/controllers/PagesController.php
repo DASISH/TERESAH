@@ -31,7 +31,7 @@ class PagesController extends BaseController
             ->with("randomTool", $this->toolService->random())
             ->with("latestTools", $this->toolService->latest())
             ->with("mostPopularTools", $this->toolService->popular())
-            ->with("mostUsedTools", $this->toolService->all($with = array(), $perPage = 3));
+            ->with("mostUsedTools", $this->toolService->mostViwed());
     }
 
     /**

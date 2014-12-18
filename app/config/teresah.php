@@ -104,4 +104,16 @@ return array(
     */
 
     "tool_rdf_formats" => array("XML", "Turtle", "JsonLD"),
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Tool view counter
+    |--------------------------------------------------------------------------
+    |
+    | Set the number of minutes for the tool page view counter to last.
+    | The value is set in minutes
+    |
+    */
+
+    "tool_view_timeout" => 30,    
 );

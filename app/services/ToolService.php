@@ -71,4 +71,9 @@ class ToolService extends AbstractRepositoryService implements ToolServiceInterf
     {
         return $this->toolRepository->latest();
     }
+    
+    public function mostViwed()
+    {
+        return $this->toolRepository->mostViwed();
+    }
 }

@@ -15,6 +15,8 @@ interface ToolRepositoryInterface extends RepositoryInterface
     public function popular();
     
     public function latest();
+    
+    public function mostViwed();
 
     public function search($parameters);
 }

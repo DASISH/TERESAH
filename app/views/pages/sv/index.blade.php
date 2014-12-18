@@ -107,7 +107,7 @@
                 <!-- /small-12.medium-4.columns -->
 
                 <div class="small-12 medium-4 columns">
-                    <h1 class="icon most-used"><a href="#" title="Most Used">Mest använda</a></h1>
+                    <h1 class="icon most-used"><a href="#" title="Most Used">Mest visade</a></h1>
 
                     @foreach ($mostUsedTools as $tool)
                         @include("tools._tool", compact("tool"))
