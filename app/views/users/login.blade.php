@@ -54,8 +54,6 @@
                 <!-- /small-12.medium-8.medium-offset-3.columns -->
             {{ Form::close() }}
             <!-- /row -->
-            &ndash; {{ link_to_route("request-password.request", Lang::get("views.sessions.form.forgot_password.name"), null, array("title" => Lang::get("views.sessions.form.forgot_password.title"))) }}
-            &ndash; {{ Lang::get("views.sessions.form.sign_up.not_a_user") }} {{ link_to_route("signup.create", Lang::get("views.sessions.form.sign_up.name"), null, array("title" => Lang::get("views.sessions.form.sign_up.title"))) }}
         </div>
         <!-- /small-12.medium-6.columns -->
 
