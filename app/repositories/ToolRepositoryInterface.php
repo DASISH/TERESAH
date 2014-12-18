@@ -17,4 +17,6 @@ interface ToolRepositoryInterface extends RepositoryInterface
     public function latest();
 
     public function search($parameters);
+    
+    public function allIncludingSourceLess(array $with, $perPage);
 }
