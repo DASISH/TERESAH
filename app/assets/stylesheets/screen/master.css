@@ -1130,7 +1130,7 @@ dl {
     background: url(/assets/services/teresah.png) 50% 50% no-repeat #47ba73;
 }
 
-#dialog .services .facebook {
+#content #dialog .services .facebook {
     background: url(/assets/services/facebook.png) 50% 50% no-repeat #3b5999;
 }
 
