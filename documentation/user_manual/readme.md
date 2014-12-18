@@ -210,6 +210,11 @@ Either click on the link "Add tool data" or pick "Add tool data" in the menu for
 - 2) Fill out the data
 - 3) Click "Add data" to save
 
+If we look at the tool (first leaving adminin mode), we can se our newly added data.
+
+![Viewing a newly added data field](./images/viewing_new_data_field.png)
+*Viewing our newly added data*
+
 
 Editing an existing tool
 ------------------------
