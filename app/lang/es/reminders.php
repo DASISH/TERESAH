@@ -16,5 +16,5 @@ return array(
     "password" => "La contraseña debe incluir al menos seis carácteres y coincidir con la confirmación.",
     "user" => "No encontramos un usuario con este correo electrónico.",
     "token" => "Este reestablecimiento de contaseña es inválido.",
-    "sent" => "Enviado el recordatorio de la contraseña!",
+    "sent" => "¡Enviado el recordatorio de la contraseña!",
 );
