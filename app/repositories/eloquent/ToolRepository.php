@@ -18,6 +18,18 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
         $this->model = $tool;
     }
 
+    public function create($input)
+    {
+        if($this->model->fill($input)->save())
+        {            
+            return array("success" => true, "id" => $this->model->id);
+        }
+        else
+        {
+            return array("success" => false, "errors" => $this->model->getErrors());
+        }
+    }
+    
     public function all(array $with = array(), $perPage = null)
     {
         # TODO: Add support for ordering with multiple columns
