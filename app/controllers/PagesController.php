@@ -56,10 +56,12 @@ class PagesController extends BaseController
                 break;
   
             case "about/help":
+                $content = file_get_contents(base_path() . "/documentation/user_manual/readme.md");
+                $content = str_replace("./../../app/assets/images/user_manual/", "/assets/user_manual/", $content);
                 return $this->matchStaticView(
                     array(
                         "title" => Lang::get("controllers.license.source"),
-                        "content" => Markdown::render(file_get_contents(base_path() . "/documentation/user_manual/readme.md"))
+                        "content" => Markdown::render($content)
                     ),
                     "pages/index"
                 );
