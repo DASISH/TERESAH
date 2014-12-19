@@ -735,6 +735,13 @@ return array(
             "logout" => array(
                 "name" => "Logga ut",
                 "title" => "Logga ut"
+            ),
+            "footer" => array(
+                "license" => array(
+                    "prefix" => "Om ej annat anges, så är innehållet i TERESAH licensierat under ",
+                    "suffix" => "licens"
+                ),
+                "dasish" => "TERESAH har utvecklats som en del i projektet Data Service Infrastructure for the Social Sciences and Humanities (DASISH), finansierat av Seventh Framework Programme."
             )
         )
     ),
