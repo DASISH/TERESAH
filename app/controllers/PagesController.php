@@ -102,7 +102,9 @@ class PagesController extends BaseController
         $output = array();
 
         foreach (glob("{$path}/*.md") as $filename) {
-            $output[basename($filename)] = Markdown::render(file_get_contents($filename));
+            $content = file_get_contents($filename);
+            $content = str_replace("http://teresah.dasish.eu", URL::to('/'), $content);
+            $output[basename($filename)] = Markdown::render($content);
         }
 
         if (is_array($outputOrder) && !empty($outputOrder)) {
