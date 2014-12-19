@@ -25,17 +25,17 @@
 
             <p>För att citera TERESAH i publikationer använd:</p>
             
-            <p><strong>DASISH (2014). TERESAH: Tools E-registry for E-Social Sciences And Humanities. URL: http://teresah.dasish.eu.</strong></p>
+            <p><strong>King's College London, Swedish National Data Service, Finnish Social Science Data Archive, University of Tartu, Universitat Pompeu Fabra and CentERdata (2014). TERESAH: Tools E-registry for E-Social Sciences And Humanities. URL: https://github.com/DASISH/TERESAH.</strong></p>
             
             <p>BibTex:</p>
             
             <p><strong>
             @Manual{,
                 title = {TERESAH: Tools E-registry for E-Social Sciences And Humanities},
-                author = {DASISH},
-                organization = {DASISH},
+                author = {King's College London, Swedish National Data Service, Finnish Social Science Data Archive, University of Tartu, Universitat Pompeu Fabra and CentERdata},
+                organization = {King's College London, Swedish National Data Service, Finnish Social Science Data Archive, University of Tartu, Universitat Pompeu Fabra and CentERdata},
                 year = 2014,
-                url = {http://teresah.dasish.eu}
+                url = {https://github.com/DASISH/TERESAH}
             }
             </strong></p>
         </div>
