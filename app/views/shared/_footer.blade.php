@@ -8,9 +8,9 @@
         </ul>
         <!-- /creative-commons -->
 
-        <p>Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license</a>.</p>
+        <p>{{ Lang::get("views.shared.footer.license.prefix") }}<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> {{ Lang::get("views.shared.footer.license.suffix") }}.</p>
 
-        <p>TERESAH has been developed as part of the Data Service Infrastructure for the Social Sciences and Humanities (DASISH), a Seventh Framework Programme funded project.</p>
+        <p>{{ Lang::get("views.shared.footer.dasish") }}</p>
 
         @include("shared._version_information")
     </div>
