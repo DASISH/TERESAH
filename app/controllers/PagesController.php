@@ -54,6 +54,16 @@ class PagesController extends BaseController
                 );
 
                 break;
+  
+            case "about/help":
+                return $this->matchStaticView(
+                    array(
+                        "title" => Lang::get("controllers.license.source"),
+                        "content" => Markdown::render(file_get_contents(base_path() . "/documentation/user_manual/readme.md"))
+                    ),
+                    "pages/index"
+                );
+                break;            
 
             case "about/license/source":
                 return $this->matchStaticView(
