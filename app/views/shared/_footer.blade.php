@@ -25,6 +25,7 @@
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.name"), array("path" => "about"), array("title" => Lang::get("views.shared.navigation.about.title"))) }}</li>
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.privacy_policy.name"), array("path" => "about/privacy"), array("title" => Lang::get("views.shared.navigation.about.privacy_policy.title"))) }}</li>
                 <li>{{ link_to_route("pages.show", Lang::get("views.shared.navigation.about.license.name"), array("path" => "about/license"), array("title" => Lang::get("views.shared.navigation.about.license.title"))) }}</li>
+                <li>{{ link_to("/help", Lang::get("controllers.help"))}}</li>
             </ul>
         </nav>
     </div>
