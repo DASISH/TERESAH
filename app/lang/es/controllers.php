@@ -151,5 +151,7 @@ return array(
     "license" => array(
         "source" => "Licencia para el código fuente",
         "content" => "Licencia para el contenido"
-    )
+    ),
+    
+    "help" => "Help",
 );

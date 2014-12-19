@@ -1,22 +1,8 @@
----
-author:
-- Akira Olsbänning
-date: '2014-12-08'
-title: Manual for TERESAH
-...
-
-Introduction to TERESAH
-=======================
 
 Welcome to TERESAH. TERESAH (standing for *Tools E-Registry for E-Social science, Arts and Humanities*) is a web based application for the collection and organisation of data research tools. It was created using funds from the Seventh Framework Programme.
 
 ![The TERESAH front page](./../../app/assets/images/user_manual/front_page_scroll_1.png)
 *The TERESAH front page*
-
-The license of this document
-----------------------------
-
-This manual (like the contents of TERESAH itself) is licensed under the [Creative Commons CC-BY-SA 4.0 license.](http://creativecommons.org/licenses/by-sa/4.0/)
 
 Signing up and logging in
 =========================

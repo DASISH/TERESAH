@@ -130,5 +130,7 @@ return array(
     "license" => array(
         "source" => "Licens för källkod",
         "content" => "Licens för innehåll"
-    )
+    ),
+    
+    "help" => "Hjälp",
 );
