@@ -270,16 +270,16 @@ Federated Login
 :   Logging in to a web page (or other net service) using a third party, such as Google or Facebook
 
 JSON
-:   *JavaScript Object Notation*
+:   *JavaScript Object Notation* - a standardized file format for storage and exchange of data. Intentionally simpler than XML.
 
 JSONLD
-:   *JSON for Linking Data*
+:   *JSON for Linking Data* - a standard using JSON for transporting Linked Data. 
 
 RDF
 :   *Resource Description Framework*
 
 TERESAH
-:   *Tools E-Registry for E-Social science, Arts and Humanities*
+:   *Tools E-Registry for E-Social science, Arts and Humanities* - in case you missed what the acronym itself means.
 
 TURTLE
 :   *Terse RDF Triple Language* a language/format designed for describing RDF triples. See [Wikipedia article here](https://en.wikipedia.org/wiki/Turtle_%28syntax%29)
@@ -288,7 +288,7 @@ Tool
 :   In TERESAH, a *tool* refers to a specific piece of software (and its page in TERESAH) that might be useful to researchers.
 
 XML
-:   *eXtensible Markup Language*
+:   *eXtensible Markup Language* - a standardized and widely used file format for storage and exchange of data.
 
 
 Types of users
