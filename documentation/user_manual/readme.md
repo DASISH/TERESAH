@@ -39,10 +39,10 @@ Once you have filled out the fields correctly, click on "Sign Up".
 
 Once your application has been processed, you will get a confirmation mail to the address you used in the previous step.
 
-An important note regading AdBlock
-----------------------------------
+An important note regarding AdBlock
+-----------------------------------
 
-If you (like many people) are using AdBlock, you might want to disable it when using THERESA. It seems AdBlock interprets the login icons for Google, Facebook etc as ads, and hide some of them. Just disable AdBlock for the THERESA webpage itself (the best solution), or temporarily turn off AdBlock in full.
+If you (like many people) are using AdBlock, you might want to disable it when using TERESAH. It seems AdBlock interprets the login icons for Google, Facebook etc as ads, and hides some of them. Just disable AdBlock for the TERESAH webpage itself (the best solution), or temporarily turn off AdBlock in full.
 
 Viewing tools
 =============
