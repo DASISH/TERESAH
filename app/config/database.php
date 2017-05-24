@@ -26,7 +26,7 @@ return array(
     |
     */
 
-    "default" => "mysql",
+    "default" => $_ENV["DATABASE_DRIVER"],
 
     /*
     |--------------------------------------------------------------------------
@@ -53,7 +53,7 @@ return array(
 
         "mysql" => array(
             "driver"    => "mysql",
-            "host"      => "localhost",
+            "host"      => $_ENV["DATABASE_HOST"],
             "database"  => $_ENV["DATABASE_NAME"],
             "username"  => $_ENV["DATABASE_USERNAME"],
             "password"  => $_ENV["DATABASE_PASSWORD"],
@@ -64,7 +64,7 @@ return array(
 
         "pgsql" => array(
             "driver"   => "pgsql",
-            "host"     => "localhost",
+            "host"     => $_ENV["DATABASE_HOST"],
             "database" => $_ENV["DATABASE_NAME"],
             "username" => $_ENV["DATABASE_USERNAME"],
             "password" => $_ENV["DATABASE_PASSWORD"],

@@ -104,7 +104,11 @@ class ToolRepository extends AbstractRepository implements ToolRepositoryInterfa
 
     public function random()
     {
-        return $this->model->haveData()->orderBy(DB::raw("RAND()"))->first();
+        if(Config::get("DATABASE_DRIVER") == 'pgsql'){
+            return $this->model->haveData()->orderBy(DB::raw("RANDOM()"))->first();
+        }else{
+            return $this->model->haveData()->orderBy(DB::raw("RAND()"))->first();
+        }
     }
     
     public function popular()
